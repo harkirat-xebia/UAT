@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Quality_Score__c</fullName>
+    <externalId>false</externalId>
+    <formula>/* initial formula
+IF( ISPICKVAL(Industry,&quot;&quot;), 0,20) + IF( ISPICKVAL(Rating,&quot;&quot;), 0,20) + IF( LEN(BillingCity) = 0, 0,20) + IF(LEN(Phone) = 0, 0,20) + IF( ISPICKVAL(Type,&quot;&quot;), 0,20) */
+
+IF(LEN(BillingCity)=0,0,27.2727272727273) + IF(AND(NOT(ISPICKVAL(ER_Local_Merchant_Segmentation__c,&quot;&quot;)),ISPICKVAL(ER_Global_Segmentation__c,&quot;&quot;)),0,9.09090909090909) + IF(AND(ISPICKVAL(ER_Local_Merchant_Segmentation__c,&quot;&quot;),ISPICKVAL(ER_Segment__c,&quot;&quot;)),0,27.2727272727273) + IF(LEN(ER_NaceList__c)=0,0,9.09090909090909) + IF(LEN(ER_Registration_Number__c&amp;ER_VAT_Number__c&amp;ER_Other_Fiscal_ID__c)=0,0,27.2727272727273)</formula>
+    <label>Data Quality Score</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

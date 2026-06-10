@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER_Competitor_Asset</fullName>
+    <active>true</active>
+    <description>The IsCompetitor checkbox should be checked for Competitor assets only</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ((RecordType.DeveloperName = &apos;ER_Competitor_solution&apos; &amp;&amp; IsCompetitorProduct = False)
+				|| (RecordType.DeveloperName &lt;&gt; &apos;ER_Competitor_solution&apos; &amp;&amp; IsCompetitorProduct = true))</errorConditionFormula>
+    <errorMessage>Competitor Solution shall be checked for competitor only.</errorMessage>
+</ValidationRule>

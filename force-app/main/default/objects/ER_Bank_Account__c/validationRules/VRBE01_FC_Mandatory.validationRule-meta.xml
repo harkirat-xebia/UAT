@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE01_FC_Mandatory</fullName>
+    <active>true</active>
+    <description>FC should be mandatory on Bank Account creation - for Benelux</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; TEXT($User.UserType) != &apos;AutomatedProcess&apos;
+&amp;&amp; ER_Business_Unit__c = &apos;BENELUX&apos;
+&amp;&amp; ISBLANK(ER_Financial_Center__c)</errorConditionFormula>
+    <errorMessage>Financial Center is mandatory on Bank Account creation</errorMessage>
+</ValidationRule>

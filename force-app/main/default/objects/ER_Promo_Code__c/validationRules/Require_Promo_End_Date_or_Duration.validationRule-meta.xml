@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Promo_End_Date_or_Duration</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c), ISBLANK(Promo_End_Date__c),
+ISBLANK(Promo_Duration_in_Days__c)
+)</errorConditionFormula>
+    <errorMessage>Either Promo End Date or Promo Duration in Days must be populated.</errorMessage>
+</ValidationRule>

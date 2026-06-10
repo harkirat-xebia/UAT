@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Context__c</fullName>
+    <defaultValue>if(
+            ISPICKVAL($User.ER_Business_Unit__c, &apos;FR&apos;),&apos;Smarter&apos;,&apos;Legacy&apos;)</defaultValue>
+    <label>Context</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Legacy</fullName>
+                <default>false</default>
+                <label>Legacy</label>
+            </value>
+            <value>
+                <fullName>Smarter</fullName>
+                <default>false</default>
+                <label>Smarter</label>
+            </value>
+            <value>
+                <fullName>Smarter/Legacy</fullName>
+                <default>false</default>
+                <label>Smarter/Legacy</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

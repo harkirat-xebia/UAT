@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Local_Merchant_Segmentation__c</fullName>
+    <label>Local Merchant Segmentation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Big retail chains</fullName>
+                <default>false</default>
+                <label>Big retail chains</label>
+            </value>
+            <value>
+                <fullName>Global brands</fullName>
+                <default>false</default>
+                <label>Global brands</label>
+            </value>
+            <value>
+                <fullName>Independent restaurants</fullName>
+                <default>false</default>
+                <label>Independent restaurants</label>
+            </value>
+            <value>
+                <fullName>Independent food stores</fullName>
+                <default>false</default>
+                <label>Independent food stores</label>
+            </value>
+            <value>
+                <fullName>e-Merchants</fullName>
+                <default>false</default>
+                <label>e-Merchants</label>
+            </value>
+            <value>
+                <fullName>Other merchants</fullName>
+                <default>false</default>
+                <label>Other merchants</label>
+            </value>
+            <value>
+                <fullName>LNA</fullName>
+                <default>false</default>
+                <label>LNA</label>
+            </value>
+            <value>
+                <fullName>SME</fullName>
+                <default>false</default>
+                <label>SME</label>
+            </value>
+            <value>
+                <fullName>PYME</fullName>
+                <default>false</default>
+                <label>PYME</label>
+            </value>
+            <value>
+                <fullName>Food Chain</fullName>
+                <default>false</default>
+                <label>Food Chain</label>
+            </value>
+            <value>
+                <fullName>Local Store</fullName>
+                <default>false</default>
+                <label>Local Store</label>
+            </value>
+            <value>
+                <fullName>Large Retail</fullName>
+                <default>false</default>
+                <label>Large Retail</label>
+            </value>
+            <value>
+                <fullName>Catering</fullName>
+                <default>false</default>
+                <label>Catering</label>
+            </value>
+            <value>
+                <fullName>MME</fullName>
+                <default>false</default>
+                <label>MME</label>
+            </value>
+            <value>
+                <fullName>LME</fullName>
+                <default>false</default>
+                <label>LME</label>
+            </value>
+            <value>
+                <fullName>Restaurant</fullName>
+                <default>false</default>
+                <label>Restaurant</label>
+            </value>
+            <value>
+                <fullName>E-commerce</fullName>
+                <default>false</default>
+                <label>E-commerce</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>SME</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>MME</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>LME</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Restaurant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>E-commerce</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>LNA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <valueName>PYME</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Big retail chains</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Global brands</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Independent restaurants</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Independent food stores</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>e-Merchants</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Other merchants</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Food Chain</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Local Store</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Large Retail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Catering</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

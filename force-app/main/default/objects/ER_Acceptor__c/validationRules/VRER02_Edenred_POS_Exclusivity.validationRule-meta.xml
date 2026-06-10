@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Edenred_POS_Exclusivity</fullName>
+    <active>true</active>
+    <description>Acceptors with record type “Edenred POS” can be created only it is linked to a Digital Store</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp;  ER_Store__r.ER_Digital_Store__c = false
+&amp;&amp;  TEXT(ER_Status__c) != &apos;Inactive&apos;</errorConditionFormula>
+    <errorMessage>Edenred POS can only be created on Stores set as Digital Store</errorMessage>
+</ValidationRule>

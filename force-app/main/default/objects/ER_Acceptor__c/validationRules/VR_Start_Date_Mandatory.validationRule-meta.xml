@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Start_Date_Mandatory</fullName>
+    <active>true</active>
+    <description>Start Date field is mandatory for acceptor sync</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+    &amp;&amp; ISBLANK(ER_Creation_date_in_OS__c )
+    &amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+    &amp;&amp; ISBLANK(ER_Start_Date__c)</errorConditionFormula>
+    <errorMessage>Start Date field is mandatory for account sync</errorMessage>
+</ValidationRule>

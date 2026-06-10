@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_Enrolment_Opportunity__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the Opportunity was created through the Auto Enrolment process. If checked, the Opportunity was automatically generated rather than manually created.</description>
+    <label>Auto Enrolment Opportunity</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

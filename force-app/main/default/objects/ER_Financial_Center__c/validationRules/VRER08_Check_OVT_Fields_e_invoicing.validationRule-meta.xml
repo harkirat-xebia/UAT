@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER08_Check_OVT_Fields_e_invoicing</fullName>
+    <active>true</active>
+    <description>VR for Finland to check if the OVT fields are filled in case of E-invoicing</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT( ER_SmartER_Context__c )
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)
+            &amp;&amp; NOT( ISPICKVAL($User.UserType , &apos;AutomatedProcess&apos;))
+            &amp;&amp; ISPICKVAL(ER_Preferred_Invoicing_Method__c , &apos;E-invoice&apos;)
+            &amp;&amp; ER_SmartER_Original_Lead_Id__c == null
+            &amp;&amp; (ERFI_OVT_Operator__c == null || ERFI_OVT_Code__c == null)</errorConditionFormula>
+    <errorMessage>Both the fields OVT Code and OVT Operator have to be filled when the preferred method is e-invoicing.</errorMessage>
+</ValidationRule>

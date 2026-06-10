@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Invalid_Beneficiary_Selection</fullName>
+    <active>true</active>
+    <errorConditionFormula>And (
+			NOT($User.ER_BypassVR__c),
+				CONTAINS(Pricebook2.Name , &apos;Engagement&apos;),
+AND(
+				
+    ISPICKVAL( ER_Onboarding_Method__c , &quot;Explicit Only&quot;),
+    OR(
+       ISPICKVAL( ER_Impacted_Beneficiaries__c  , &quot;All&quot;),
+        ISPICKVAL( ER_Impacted_Beneficiaries__c  , &quot;TRE Only&quot;)
+    )
+))</errorConditionFormula>
+    <errorDisplayField>ER_Impacted_Beneficiaries__c</errorDisplayField>
+    <errorMessage>You cannot select &apos;All&apos; or &apos;TRE Only&apos; for Impacted Beneficiaries when the Onboarding Method is set to &apos;Explicit Only.&apos; Please choose a different option.</errorMessage>
+</ValidationRule>

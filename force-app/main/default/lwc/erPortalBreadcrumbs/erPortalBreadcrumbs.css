@@ -1,0 +1,15 @@
+/**
+ * @author: ALK
+ * @date: 31/05/2023
+ * @desc: erPortalBreadcrumbs
+ */
+
+li {
+    font-weight: bolder;
+    font-size: initial;
+    padding-left: 0.3em;
+}
+
+a {
+    color: var(--parent-main-color);
+}

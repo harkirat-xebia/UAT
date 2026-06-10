@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_Store_When_EShopFalse_NeedAddress</fullName>
+    <active>true</active>
+    <description>The address information must be filled for stores that are not E-shops (E-shop=False)</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c),
+NOT(ER_E_Shop__c),
+ISBLANK (ER_Street__c)
+)</errorConditionFormula>
+    <errorDisplayField>ER_Street__c</errorDisplayField>
+    <errorMessage>The address information must be filled for stores that are not E-shops</errorMessage>
+</ValidationRule>

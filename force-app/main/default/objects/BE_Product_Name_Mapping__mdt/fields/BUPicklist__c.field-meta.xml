@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BUPicklist__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>BUPicklist</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BE</fullName>
+                <default>true</default>
+                <label>BE</label>
+            </value>
+            <value>
+                <fullName>LU</fullName>
+                <default>false</default>
+                <label>LU</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

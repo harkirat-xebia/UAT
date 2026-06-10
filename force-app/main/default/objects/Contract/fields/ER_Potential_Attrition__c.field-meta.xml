@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Potential_Attrition__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>To register that a decrease or absence in ordering has been reported.</description>
+    <label>Potential Attrition</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

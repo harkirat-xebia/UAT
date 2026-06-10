@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>For_Autoenrollment__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>this field checks that the pricebook should be use in autoenrollment or not.</description>
+    <label>For Autoenrollment</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

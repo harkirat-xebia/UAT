@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Direct_Debit_Form</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Send Direct Debit Form</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR(IF($Site.prefix == &apos;/s&apos;,&apos;/apex/dfsle__gendocumentgenerator&apos;, $Site.Prefix +&apos;/apex/dfsle__gendocumentgenerator&apos;), null, [sId = ER_Financial_Center__c.Id, templateId = ER_Financial_Center__c.ER_Docusign_Template__c, recordId = ER_Financial_Center__c.Id, title = &apos;ERFR SEPA Mandat Template&apos;])}</url>
+</WebLink>

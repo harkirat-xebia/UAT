@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Prevent_Change_Of_Type</fullName>
+    <active>false</active>
+    <description>Prevent the change of Type for amended opportunities</description>
+    <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            ER_IsAmended__c = true,
+            ISCHANGED( Type)
+            )</errorConditionFormula>
+    <errorMessage>You cannot change the type of amended opportunities.</errorMessage>
+</ValidationRule>

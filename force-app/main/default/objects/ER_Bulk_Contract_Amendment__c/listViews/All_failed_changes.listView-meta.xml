@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_failed_changes</fullName>
+    <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+    <columns>ER_Contract__c</columns>
+    <columns>ER_Type__c</columns>
+    <columns>ER_Contract_Start_Date__c</columns>
+    <columns>ER_Amended_Contract__c</columns>
+    <columns>ER_Amended_Contract_status__c</columns>
+    <columns>ER_Amended_Contract_Sync_Message__c</columns>
+    <columns>Error__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ER_Amended_Contract__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>ER_Amended_Contract_status__c</field>
+        <operation>equals</operation>
+        <value>Draft</value>
+    </filters>
+    <filters>
+        <field>ER_Contract_Start_Date__c</field>
+        <operation>lessOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>All failed changes</label>
+</ListView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This custom metadata stock the translations of the picklist values. Because it&apos;s not possible to get the translation in the translation workbench through api when we are using the guest user.</description>
+    <label>Picklist Value Translation</label>
+    <pluralLabel>Picklist Value Translations</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

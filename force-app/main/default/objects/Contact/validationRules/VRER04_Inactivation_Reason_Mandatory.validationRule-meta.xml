@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Inactivation_Reason_Mandatory</fullName>
+    <active>true</active>
+    <description>When the Contact becomes inactive, the inactive reason becomes mandatory.</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ISPICKVAL( ER_Status__c ,&apos;Inactive&apos; ),
+ISBLANK( TEXT(ER_Inactive_Reason__c) ) 
+)</errorConditionFormula>
+    <errorMessage>The Inactivation Reason should be filled when the contact is Inactive</errorMessage>
+</ValidationRule>

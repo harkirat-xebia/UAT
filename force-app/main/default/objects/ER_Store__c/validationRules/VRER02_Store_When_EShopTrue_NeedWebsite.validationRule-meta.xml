@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Store_When_EShopTrue_NeedWebsite</fullName>
+    <active>true</active>
+    <description>The website information must be filled for E-shops</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c), 
+ER_E_Shop__c=true,
+ISBLANK(ER_Website_URL__c)
+)</errorConditionFormula>
+    <errorDisplayField>ER_Website_URL__c</errorDisplayField>
+    <errorMessage>The website information must be filled for E-shops</errorMessage>
+</ValidationRule>

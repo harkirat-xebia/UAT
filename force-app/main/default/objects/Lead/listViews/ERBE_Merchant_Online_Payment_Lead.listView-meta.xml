@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Merchant_Online_Payment_Lead</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERBE Merchant Online Payment</label>
+    <queue>ERBE_Merchant_Online_Payment</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

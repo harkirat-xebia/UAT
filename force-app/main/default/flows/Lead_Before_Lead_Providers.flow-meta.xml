@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_BE_Product</name>
+        <label>Assign BE Product</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.ERBE_Initial_Product_Of_Interest__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>GET_BE_Product.Id</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_LU_Product</name>
+        <label>Assign LU Product</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.ERBE_Initial_Product_Of_Interest__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>GET_LU_Product.Id</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Business_Unit</name>
+        <label>Business Unit</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Belgium</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ER_BUPicklist__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>BE</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GET_BE_Product</targetReference>
+            </connector>
+            <label>Belgium</label>
+        </rules>
+        <rules>
+            <name>Luxemburg</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ER_BUPicklist__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>LU</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GET_LU_Product</targetReference>
+            </connector>
+            <label>Luxemburg</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_New</name>
+        <label>Is New</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>New_Lead_Providers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>New</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Lead providers</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Product_lead_providers__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ERBE_Initial_Product_Of_Interest__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ER_BUPicklist__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Business_Unit</targetReference>
+            </connector>
+            <label>New Lead Providers</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>BE_Product</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!$Record.Product_lead_providers__c},
+    &quot;Meal Belgium (TRE)&quot;, &quot;TRE&quot;,
+    &quot;Gift Belgium (TCE)&quot;, &quot;TCE&quot;,
+    &quot;Sport and Culture Belgium (SCE)&quot;, &quot;SCE&quot;,
+    &quot;Eco Belgium (ECE)&quot;, &quot;ECE&quot;,
+    &quot;&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>LU_Product</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+  {!$Record.Product_lead_providers__c},
+    &quot;Meal Luxemburg (TRL)&quot;, &quot;TRL&quot;,
+    &quot;Gift Luxemburg (TCL)&quot;, &quot;TCL&quot;,
+    &quot;&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>New</name>
+        <dataType>Boolean</dataType>
+        <expression>Isnew()</expression>
+    </formulas>
+    <interviewLabel>Lead : Before ( Lead Providers) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead : Before ( Lead Providers)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>GET_BE_Product</name>
+        <label>GET BE Product</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_BE_Product</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ProductCode</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>BE_Product</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GET_LU_Product</name>
+        <label>GET LU Product</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_LU_Product</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ProductCode</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>LU_Product</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Is_New</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

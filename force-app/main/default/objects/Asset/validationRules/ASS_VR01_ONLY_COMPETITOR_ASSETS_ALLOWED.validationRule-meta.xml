@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ASS_VR01_ONLY_COMPETITOR_ASSETS_ALLOWED</fullName>
+    <active>true</active>
+    <description>ALK - Only a competitor asset can be added to a competitor</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName != &apos;ER_Competitor_solution&apos;
+&amp;&amp; ER_Competitor__r.RecordType.DeveloperName = &apos;ER_Competitor&apos;</errorConditionFormula>
+    <errorMessage>Only a competitor asset can be added to a competitor</errorMessage>
+</ValidationRule>

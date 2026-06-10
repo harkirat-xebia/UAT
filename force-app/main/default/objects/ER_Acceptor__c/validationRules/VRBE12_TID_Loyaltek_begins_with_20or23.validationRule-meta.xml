@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE12_TID_Loyaltek_begins_with_20or23</fullName>
+    <active>true</active>
+    <description>Terminal ID of Loyaltek needs to start with 20 or 23</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Loyaltek&apos;)
+&amp;&amp; NOT( ( BEGINS(ER_TID_Authorization__c,&quot;20&quot;) || BEGINS(ER_TID_Authorization__c,&quot;23&quot;) ))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Terminal ID of Loyaltek needs to start with 20 or 23</errorMessage>
+</ValidationRule>

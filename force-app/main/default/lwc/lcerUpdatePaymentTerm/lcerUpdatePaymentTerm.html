@@ -1,0 +1,40 @@
+<!--
+ - Created by ALK on 25/10/2021
+ - Description : lcerUpdatePaymentTerm
+ -->
+<!-- Lcer Update Payment Term -->
+<template>
+  <lightning-quick-action-panel title="Update Payment Term">
+    <!-- SPINNER -->
+    <div if:true={showLoadingSpinner}>
+      <lightning-spinner alternative-text={label.PROCESSING} size="large"> </lightning-spinner>
+    </div>
+
+    <div class="page-content">
+      <h1>{label.LAB_UPDATE_PAYMENT_TERM}</h1>
+      <div class="terms">
+        <template if:true={terms.data}>
+          <lightning-combobox
+            name="payment-terms"
+            label={LAB_TERM}
+            options={terms.data.values}
+            placeholder="--None--"
+            value={selectedValue}
+            onchange={handleTermChange}
+          >
+          </lightning-combobox>
+        </template>
+      </div>
+    </div>
+
+    <div slot="footer">
+      <lightning-button class="slds-m-left_x-small" label={label.LAB_CANCEL} onclick={closeAction}></lightning-button>
+      <lightning-button
+        class="slds-m-left_x-small"
+        variant="brand"
+        label={label.LAB_SAVE}
+        onclick={saveBA}
+      ></lightning-button>
+    </div>
+  </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Sales_Action__c</fullName>
+    <label>Expected Sales Action</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Check Task</fullName>
+                <default>false</default>
+                <label>Check Task</label>
+            </value>
+            <value>
+                <fullName>Information Task</fullName>
+                <default>false</default>
+                <label>Information Task</label>
+            </value>
+            <value>
+                <fullName>Call Task</fullName>
+                <default>false</default>
+                <label>Call Task</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

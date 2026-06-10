@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Awesome_Companct_Layout</fullName>
+    <fields>Name</fields>
+    <fields>AccountId</fields>
+    <fields>VAT_Number__c</fields>
+    <fields>StageName</fields>
+    <fields>CloseDate</fields>
+    <fields>ER_Solutions__c</fields>
+    <fields>OwnerId</fields>
+    <fields>RecordTypeId</fields>
+    <fields>Type</fields>
+    <fields>ER_Reason__c</fields>
+    <label>New Awesome Compact Layout</label>
+</CompactLayout>

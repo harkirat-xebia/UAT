@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_Affiliation_Type_Check</fullName>
+    <active>true</active>
+    <description>Affiliation code type &quot;Federation&quot; can only be linked to a referral contract type and reciprocally
+Affiliation code type &quot;Franchisee&quot; can only be linked to a referral contract type and reciprocally</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+	&amp;&amp; $RecordType.DeveloperName = &apos;ER_Affiliation_Code&apos;
+	&amp;&amp; ER_Contract__r.ER_Contract_Type__c = &apos;Referral agreement&apos;
+	&amp;&amp; NOT((ISPICKVAL(ER_Affiliation_Type__c, &apos;Federation&apos;)) 
+								|| (ISPICKVAL(ER_Affiliation_Type__c, &apos;Franchiser&apos;)))</errorConditionFormula>
+    <errorMessage>VRER06 - Affiliation code type &quot;Federation&quot; and &quot;Franchiser&quot; can only be linked to a referral contract type and reciprocally</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE09_TID_Ingenicopymntservice_6or12</fullName>
+    <active>true</active>
+    <description>Ingenico payment services need to start with 6 or 12</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Ingenico Payment Services&apos;)  
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;6&quot;)
+ || BEGINS(ER_TID_Authorization__c,&quot;12&quot;) )
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Terminal ID of Ingenico Payment Services needs to start with 6 or 12</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERSK_Public_Tender_Specialist_Queue_Task</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERSK Public Tender Specialist Queue</label>
+    <queue>ERSK_Public_Tender_Specialist_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

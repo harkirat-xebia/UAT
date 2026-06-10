@@ -1,0 +1,408 @@
+<apex:page controller="PDF_Contract_Controller"
+    renderAs="pdf"
+    applyBodyTag="false"
+    showHeader="false"
+    standardStylesheets="false"
+    cache="true"
+    language="EN">
+<!-- Wrapper (inline styles only) -->
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000;">
+
+  <!-- Title (no <h1>) -->
+   <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+    <div style="flex: 0 0 auto;">
+      <a href="http://www.edenred.be">
+        <apex:image url="{!URLFOR($Resource.EdenredLogo)}" width="100" alt="Edenred"/>
+      </a>
+    </div>
+    
+    <div style="flex: 1; text-align: center; font-size:16px; font-weight:bold;">
+      SALES CONTRACT - {!IF(businessUnit = 'BE', 'Belgium', 'Luxembourg')}
+    </div>
+  </div>
+
+  <!-- ======================= 1. BETWEEN ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:8px 0 4px 0;">1.&nbsp;&nbsp;BETWEEN</div>
+
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:22%; font-weight:bold;">The “ Parties ”</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:39%; font-weight:bold;">{!IF(businessUnit = 'BE', 'Edenred Belgium SA/NV', 'Edenred Luxembourg S.A.')}</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:39%; font-weight:bold; ">
+        <apex:outputText value="{!accName}"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">Registered office</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">{!IF(businessUnit = 'BE', 'Boulevard du Souverain/ Vorstlaan 165 b9 - 1160 BRUSSELS', '6D, Route de Trèves- L-2633 SENNINGERBERG')}</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; ">
+        <apex:outputText value="{!billingStreet}"/><apex:outputText value="{!IF(NOT(ISBLANK(billingStreet)), ', ', '')}"/><apex:outputText value="{!billingPostalCode}"/> <apex:outputText value="{!billingCity}"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">VAT Number</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">{!IF(businessUnit = 'BE', "BE 0407 034 269", 'LU15477706')}</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; ">
+        <apex:outputText value="{!vatNumber}"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">{!IF(businessUnit = 'BE', "Registration Number", 'Matricule number')}</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">{!IF(businessUnit = 'BE', "1992 2212 549", 'B42434')}</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; ">
+        <apex:outputText value="{!enterpriseNumber}"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">Represented by</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">Bart Verbeeck, Sales Director BeLux</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; ">
+        <span style="font-size:10px;"><apex:outputText value="{!main_fullName}"/></span><br/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; text-align:center; font-style:italic;">&nbsp;</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; text-align:center; font-style:italic;">« Edenred » or « Party »</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; text-align:center; font-style:italic;">« Client » or « Party »</td>
+    </tr>
+  </table>
+
+  <!-- ======================= 2. SERVICES & PRICE ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">2.&nbsp;&nbsp;SERVICES &amp; PRICE</div>
+
+  <!-- Layout A: merged left labels, delivery tiers under Card, place of delivery within same block -->
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;">
+    <tr>
+      <td rowspan="5" style="border:0.5pt solid #000; padding:4px 5px; width:16%; text-align:center; vertical-align:middle; font-weight:bold;">
+        Edenred Card
+      </td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:21%; font-weight:bold;">Price card:</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:21%;">
+        <apex:outputText value="{!cardCost}"/> €/ card
+      </td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:21%; font-weight:bold;">Price replacement card:</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:21%; ">
+        <apex:outputText value="{!cardReplacement}"/> €/ card
+      </td>
+    </tr>
+    
+    <!-- Rows 2-5: Delivery costs (dynamic or static) -->
+    <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(deliveries))}">
+      <!-- First delivery row -->
+      <tr>
+        <td rowspan="3" style="border:0.5pt solid #000; padding:4px 5px; width:19.5%; vertical-align:top; font-weight:bold;">Delivery costs:</td>
+        <apex:repeat value="{!deliveries}" var="d" first="0" rows="1">
+          <td style="border:0.5pt solid #000; padding:4px 5px; width:19.5%;">
+            <apex:outputText value="{!d.Name}"/>
+          </td>
+          <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; width:39%;">
+            <apex:outputText value="{!d.Price}"/> €/
+            <apex:outputText value="{!IF(NOT(ISBLANK(d.CardLoadingCost)), d.CardLoadingCost, 'delivery')}"/>
+          </td>
+        </apex:repeat>
+      </tr>
+      <!-- Remaining delivery rows -->
+      <apex:repeat value="{!deliveries}" var="d" first="1">
+        <tr>
+          <td style="border:0.5pt solid #000; padding:4px 5px;">
+            <apex:outputText value="{!d.Name}"/>
+          </td>
+          <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;">
+            <apex:outputText value="{!d.Price}"/> €/
+            <apex:outputText value="{!IF(NOT(ISBLANK(d.CardLoadingCost)), d.CardLoadingCost, 'delivery')}"/>
+          </td>
+        </tr>
+      </apex:repeat>
+    </apex:outputPanel>
+    
+    <!-- Fallback: Static delivery rows if no dynamic data -->
+    <apex:outputPanel layout="none" rendered="{!deliveries == null || deliveries.size == 0}">
+      <tr>
+        <td rowspan="3" style="border:0.5pt solid #000; padding:4px 5px; vertical-align:top; font-weight:bold;">Delivery costs:</td>
+        <td style="border:0.5pt solid #000; padding:4px 5px;">1 to 3 cards (by mail)</td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;">€/ card</td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;">3 to 15 cards (by mail)</td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;">€/ delivery</td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;">+ 15 cards (by courier)</td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;">€/ delivery</td>
+      </tr>
+    </apex:outputPanel>
+    
+    <!-- Row 6: Place of delivery (last row of Edenred Card rowspan) -->
+    
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; font-weight:bold;">Place of delivery:</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px;">
+        <apex:outputText value="{!shippingStreet}"/>, 
+        <apex:outputText value="{!shippingPostalCode}"/>,  
+        <apex:outputText value="{!shippingCity}"/>
+      </td>
+    </tr>
+    
+    <!-- Product rows (Edenred Meal, Eco, Gift, etc.) - OUTSIDE the Edenred Card rowspan -->
+    <apex:outputPanel layout="none" rendered="{!rates != null && rates.size != 0}">
+      <apex:repeat value="{!rates}" var="r">
+        <tr>
+          <td rowspan="2" style="border:0.5pt solid #000; padding:4px 5px; text-align:center; vertical-align:middle; font-weight:bold;">
+            <apex:outputText value="{!r.SolutionName}"/>
+          </td>
+          <td style="border:0.5pt solid #000; padding:4px 5px; font-weight:bold;">Number of Users:</td>
+          <td style="border:0.5pt solid #000; padding:4px 5px;">
+            <apex:outputText value="{!r.NbOfBenef}"/>
+          </td>
+          <td style="border:0.5pt solid #000; padding:4px 5px; font-weight:bold;">Face value:</td>
+          <td style="border:0.5pt solid #000; padding:4px 5px;">
+            <apex:outputText value="{!r.FaceValue}"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="border:0.5pt solid #000; padding:4px 5px; font-weight:bold;">Service fee:</td>
+          <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px;">
+            <apex:outputText value="{!IF( NOT(ISBLANK(r.Percentage)),r.Percentage & ' %',r.Price & ' €')}"/> of the face value of the order
+          </td>
+        </tr>
+      </apex:repeat>
+    </apex:outputPanel>
+  </table>
+
+  <apex:outputPanel layout="none" rendered="{!promoCode != 'Standard'}">
+    <div style="margin-top:6px;page-break-inside: avoid;">
+      <div><span style="font-weight:bold;">Promotional code: </span><span style=""><apex:outputText value="{!promoCode}"/></span></div>
+      <div><span style="font-weight:bold;">General conditions of the offer: </span><span style=""><apex:outputText value="{!promoDescription}"/></span></div>
+    </div>
+  </apex:outputPanel>
+
+  <!-- ======================= 3. CUSTOMER INFORMATION ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">3.&nbsp;&nbsp;CUSTOMER INFORMATION</div>
+
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">{!IF(businessUnit = 'BE', "Registration Number", 'Matricule number')}</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!enterpriseNumber}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Corporate name</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!accName}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Legal form</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!legalForm}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">VAT liable:&nbsp;&nbsp;
+        <apex:image url="{!URLFOR($Resource.CheckBoxCheched)}"
+        rendered="{!isSubjectToVAT}" width="15" height="15"/>
+
+        <apex:image url="{!URLFOR($Resource.CheckBoxUnCheched)}"
+        rendered="{!NOT(isSubjectToVAT)}" width="15" height="15"/>
+      </td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Group</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!relName}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Registered office</td>
+      <td colspan="4" style="border:0.5pt solid #000; padding:4px 5px;">
+        <apex:outputText value="{!billingStreet}"/>
+      </td>
+    </tr>
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Postcode</td><td colspan="4" style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!billingPostalCode}"/></td></tr>
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Municipality</td><td colspan="4" style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!billingCity}"/></td></tr>
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Country</td><td colspan="4" style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!billingCountry}"/></td></tr>
+  </table>
+
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse; margin:12px 0 0 0;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Does your social secretary vouch for orders from Edenred Meal?</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">
+        Yes&nbsp;
+        <apex:image url="{!URLFOR($Resource.CheckBoxCheched)}"
+          rendered="{!socialSecretaryOrders='Yes'}"
+          width="15px" height="15px"/>
+
+        <apex:image url="{!URLFOR($Resource.CheckBoxUnCheched)}"
+          rendered="{!socialSecretaryOrders!='Yes'}"
+          width="15px" height="15px"/>
+      </td>
+
+      <td style="border:0.5pt solid #000; padding:4px 5px;">
+        No&nbsp;
+        <apex:image url="{!URLFOR($Resource.CheckBoxCheched)}"
+          rendered="{!socialSecretaryOrders='No'}"
+          width="15px" height="15px"/>
+
+        <apex:image url="{!URLFOR($Resource.CheckBoxUnCheched)}"
+          rendered="{!socialSecretaryOrders!='No'}"
+          width="15px" height="15px"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Total number of employees</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!numberEmployees}"/></td>
+    </tr>
+  </table>
+
+  <!-- ======================= 4–7. CONTACTS ======================= -->
+
+  <!-- 4 -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">4.&nbsp;&nbsp;DETAILS OF THE RESPONSIBLE PERSON(S) - Primary contact</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Title</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:16%; "><apex:outputText value="{!main_salutation}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Last name</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!main_lastName}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">First name</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!main_firstName}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Tel.</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!main_phone}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Mobile</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!main_mobilePhone}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">E-mail</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!main_email}"/></td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Language</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!main_language}"/></td>
+    </tr>
+  </table>
+
+  <!-- 5 -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">5.&nbsp;&nbsp;PERSON RESPONSIBLE FOR INVOICING</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Title</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:16%; "><apex:outputText value="{!invoice_salutation}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Last name</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!invoice_lastName}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">First name</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!invoice_firstName}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Tel.</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!invoice_phone}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Mobile</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!invoice_mobilePhone}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">E-mail</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!invoice_email}"/></td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Language</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!main_language}"/></td>
+    </tr>
+  </table>
+
+  <!-- 6 -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">6.&nbsp;&nbsp;PERSON RESPONSIBLE FOR ORDERS</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Title</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:16%; "><apex:outputText value="{!order_salutation}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Last name</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!order_lastName}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">First name</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!order_firstName}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Tel.</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!order_phone}"/></td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Mobile</td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!order_mobilePhone}"/></td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">E-mail</td>
+      <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!order_email}"/></td>
+      <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Language</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!order_language}"/></td>
+    </tr>
+  </table>
+
+  <!-- 7 -->
+  <div style="page-break-inside: avoid;">
+    <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">7.&nbsp;&nbsp;PERSON RESPONSIBLE FOR RECEIVING CARD DELIVERIES</div>
+    <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Title</td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; width:16%; "><apex:outputText value="{!delivery_salutation}"/></td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">Last name</td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!delivery_lastName}"/></td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; width:12%;font-weight:bold;">First name</td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; width:24%; "><apex:outputText value="{!delivery_firstName}"/></td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Tel.</td>
+        <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!delivery_phone}"/></td>
+        <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Mobile</td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!delivery_mobilePhone}"/></td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">E-mail</td>
+        <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!delivery_email}"/></td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Language</td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!delivery_language}"/></td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Address</td>
+        <td colspan="7" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!shippingStreet}"/>, <apex:outputText value="{!shippingPostalCode}"/>, <apex:outputText value="{!shippingCity}"/></td>
+      </tr>
+      <tr>
+        <td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Municipality</td>
+        <td colspan="3" style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!shippingCity}"/></td>
+        <td colspan="2" style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Postal code</td>
+        <td style="border:0.5pt solid #000; padding:4px 5px; "><apex:outputText value="{!shippingPostalCode}"/></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ======================= 8. FINANCIAL & DURATION ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">8.&nbsp;&nbsp;FINANCIAL INFORMATION &amp; SERVICE AGREEMENT DURATION</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px; width:40%;font-weight:bold;">Effective Date</td><td style="border:0.5pt solid #000; padding:4px 5px;"><apex:outputText value="{!contractstartDate}"/></td></tr>
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px; width:40%;font-weight:bold;">Contract duration</td><td style="border:0.5pt solid #000; padding:4px 5px;">2 years (standard)</td></tr>
+    <tr><td style="border:0.5pt solid #000; padding:4px 5px;font-weight:bold;">Payment term</td><td style="border:0.5pt solid #000; padding:4px 5px;">Advanced payment</td></tr>
+  </table>
+
+  <!-- ======================= 9. ATTACHMENTS ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">9.&nbsp;&nbsp;ATTACHMENTS</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;">
+    <tr>
+      <td style="border:0.5pt solid #000; padding:4px 5px; font-weight:bold;">Appendix 1</td>
+      <td style="border:0.5pt solid #000; padding:4px 5px;">General Conditions</td>
+    </tr>
+  </table>
+
+  <!-- ======================= 10. SIGNATURE ======================= -->
+  <div style="font-weight:bold; color:#C00000; font-size:14px; margin:12px 0 4px 0;">10.&nbsp;&nbsp;SIGNATURE</div>
+
+  <div style="padding:3px 5px;">Prepared and signed by</div>
+  <table cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;page-break-inside: avoid;">
+    <tr>
+      <td style="border:0.5pt solid #000; font-weight:bold; padding:8px 5px;">For Edenred</td>
+      <td style="border:0.5pt solid #000; font-weight:bold; padding:8px 5px;">For the client</td>
+    </tr>
+    <tr>
+      <td style="border:0.5pt solid #000; padding:8px 5px; vertical-align:top;">
+        <div style="margin-bottom:4px;"><span style="font-weight:bold;">Name: </span> Bart Verbeeck</div>
+        <div style="margin-bottom:8px;"><span style="font-weight:bold;">Title:</span> Sales Director Edenred</div>
+      </td>
+      <td style="border:0.5pt solid #000; padding:8px 5px; vertical-align:top;">
+        <div style="margin-bottom:4px;"><span style="font-weight:bold;">Name: </span><apex:outputText value="{!main_fullName}"/></div>
+        <div style="margin-bottom:8px;"><span style="font-weight:bold;">Title: </span><apex:outputText value="{!main_businessRole}"/></div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin-top:8px; text-align:right; ">
+    This contract was signed on the platform on
+    &nbsp;<apex:outputText value="{!dateAcceptedGeneralConditions}"/> at
+    &nbsp;<apex:outputText value="{!timeAcceptedGeneralConditions}"/>.
+  </div>
+
+</div>
+<apex:outputPanel>
+    <div style="page-break-before:always;"></div>
+    <apex:outputText value="{!appendixHtml}" escape="false"/>
+</apex:outputPanel>
+
+</apex:page>

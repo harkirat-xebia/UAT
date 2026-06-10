@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Sub_Segment__c</fullName>
+    <label>Sub-segment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Local Store TRE</fullName>
+                <default>false</default>
+                <label>Local Store TRE</label>
+            </value>
+            <value>
+                <fullName>Food Chain (Pizza Hut, Exki, Quick,...)</fullName>
+                <default>false</default>
+                <label>Food Chain (Pizza Hut, Exki, Quick,...)</label>
+            </value>
+            <value>
+                <fullName>Large Retail (Aldi, Colruyt, Spar,...)</fullName>
+                <default>false</default>
+                <label>Large Retail (Aldi, Colruyt, Spar,...)</label>
+            </value>
+            <value>
+                <fullName>Catering</fullName>
+                <default>false</default>
+                <label>Catering</label>
+            </value>
+            <value>
+                <fullName>Chain Store</fullName>
+                <default>false</default>
+                <label>Chain Store</label>
+            </value>
+            <value>
+                <fullName>Local Store</fullName>
+                <default>false</default>
+                <label>Local Store</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

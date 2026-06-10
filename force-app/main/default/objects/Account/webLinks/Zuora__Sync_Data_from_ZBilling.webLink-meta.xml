@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Zuora__Sync_Data_from_ZBilling</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>Sync Data from ZBilling</masterLabel>
+    <openType>noSidebar</openType>
+    <page>Zuora__AccountOnDemandSync</page>
+    <protected>false</protected>
+</WebLink>

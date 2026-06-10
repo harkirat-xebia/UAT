@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Service_Category__c</fullName>
+    <label>Service Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>[Other / Specify]</fullName>
+                <default>false</default>
+                <label>[Other / Specify]</label>
+            </value>
+            <value>
+                <fullName>Communication on product</fullName>
+                <default>false</default>
+                <label>Communication on product</label>
+            </value>
+            <value>
+                <fullName>Customer service call</fullName>
+                <default>false</default>
+                <label>Customer service call</label>
+            </value>
+            <value>
+                <fullName>Invoice Layout</fullName>
+                <default>false</default>
+                <label>Invoice Layout</label>
+            </value>
+            <value>
+                <fullName>Invoice Publication</fullName>
+                <default>false</default>
+                <label>Invoice Publication</label>
+            </value>
+            <value>
+                <fullName>Invoice Support</fullName>
+                <default>false</default>
+                <label>Invoice Support</label>
+            </value>
+            <value>
+                <fullName>Invoicing Payment</fullName>
+                <default>false</default>
+                <label>Invoicing Payment</label>
+            </value>
+            <value>
+                <fullName>Invoicing Payment Method</fullName>
+                <default>false</default>
+                <label>Invoicing Payment Method</label>
+            </value>
+            <value>
+                <fullName>Invoicing Payment Term</fullName>
+                <default>false</default>
+                <label>Invoicing Payment Term</label>
+            </value>
+            <value>
+                <fullName>Invoicing Periodicity</fullName>
+                <default>false</default>
+                <label>Invoicing Periodicity</label>
+            </value>
+            <value>
+                <fullName>Invoicing processing</fullName>
+                <default>false</default>
+                <label>Invoicing processing</label>
+            </value>
+            <value>
+                <fullName>Mail Notification</fullName>
+                <default>false</default>
+                <label>Mail Notification</label>
+            </value>
+            <value>
+                <fullName>Partnership</fullName>
+                <default>false</default>
+                <label>Partnership</label>
+            </value>
+            <value>
+                <fullName>POS / terminal</fullName>
+                <default>false</default>
+                <label>POS / terminal</label>
+            </value>
+            <value>
+                <fullName>Promotional Campaign</fullName>
+                <default>false</default>
+                <label>Promotional Campaign</label>
+            </value>
+            <value>
+                <fullName>Reimbursement  Payment</fullName>
+                <default>false</default>
+                <label>Reimbursement  Payment</label>
+            </value>
+            <value>
+                <fullName>Reimbursement Payment Method</fullName>
+                <default>false</default>
+                <label>Reimbursement Payment Method</label>
+            </value>
+            <value>
+                <fullName>Reimbursement Payment Term</fullName>
+                <default>false</default>
+                <label>Reimbursement Payment Term</label>
+            </value>
+            <value>
+                <fullName>Reimbursement processing</fullName>
+                <default>false</default>
+                <label>Reimbursement processing</label>
+            </value>
+            <value>
+                <fullName>Reimbursement Trigger</fullName>
+                <default>false</default>
+                <label>Reimbursement Trigger</label>
+            </value>
+            <value>
+                <fullName>SMS Notification</fullName>
+                <default>false</default>
+                <label>SMS Notification</label>
+            </value>
+            <value>
+                <fullName>Subscription Fee</fullName>
+                <default>false</default>
+                <label>Subscription Fee</label>
+            </value>
+            <value>
+                <fullName>Transaction processing</fullName>
+                <default>false</default>
+                <label>Transaction processing</label>
+            </value>
+            <value>
+                <fullName>Transaction Processing Fee</fullName>
+                <default>false</default>
+                <label>Transaction Processing Fee</label>
+            </value>
+            <value>
+                <fullName>Transaction Statement Layout</fullName>
+                <default>false</default>
+                <label>Transaction Statement Layout</label>
+            </value>
+            <value>
+                <fullName>Transaction Statement Periodicity</fullName>
+                <default>false</default>
+                <label>Transaction Statement Periodicity</label>
+            </value>
+            <value>
+                <fullName>Transaction Statement Publication</fullName>
+                <default>false</default>
+                <label>Transaction Statement Publication</label>
+            </value>
+            <value>
+                <fullName>Transaction Statement Support</fullName>
+                <default>false</default>
+                <label>Transaction Statement Support</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

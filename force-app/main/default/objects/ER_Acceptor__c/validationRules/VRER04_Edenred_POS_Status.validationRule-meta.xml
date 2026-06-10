@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Edenred_POS_Status</fullName>
+    <active>true</active>
+    <description>Status of Acceptors with record type “Edenred POS” cannot go back to “Created” or “Demo”</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp; ISCHANGED( ER_Status__c )
+&amp;&amp; (
+    ( NOT(TEXT(PRIORVALUE(ER_Status__c)) = &apos;Created&apos;) &amp;&amp; !ISBLANK(TEXT(PRIORVALUE(ER_Status__c)))
+     &amp;&amp; TEXT(ER_Status__c) = &apos;Demo&apos; 
+    ) 
+    ||( !ISBLANK(TEXT(PRIORVALUE(ER_Status__c))) &amp;&amp; 
+          TEXT(ER_Status__c) = &apos;Created&apos;  )
+    )</errorConditionFormula>
+    <errorMessage>You cannot go back to “Created” or “Demo” status</errorMessage>
+</ValidationRule>

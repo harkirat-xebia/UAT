@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Object_Lookup_Mandatory</fullName>
+    <active>true</active>
+    <description>One of the related object lookups should be populated</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+                &amp;&amp; ISBLANK(Text__c)
+                &amp;&amp; ISBLANK(Long_Text_Area__c)
+                &amp;&amp; ISBLANK(Text_Area__c)</errorConditionFormula>
+    <errorMessage>Please fill in a the object should be translated</errorMessage>
+</ValidationRule>

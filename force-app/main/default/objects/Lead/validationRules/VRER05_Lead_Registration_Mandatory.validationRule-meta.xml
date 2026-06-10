@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Lead_Registration_Mandatory</fullName>
+    <active>true</active>
+    <description>On the lead creation Salutation and First Name are obligatory</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISPICKVAL(Status,&quot;New&quot;))
+            &amp;&amp; NOT(ISPICKVAL(Status,&quot;Rejected&quot;))
+            &amp;&amp; ER_SmartER_Context__c = FALSE
+            &amp;&amp; (ISBLANK(TEXT(Salutation)) || ISBLANK(FirstName))</errorConditionFormula>
+    <errorMessage>The fields Salutation and First Name must be filled in order to save the Lead</errorMessage>
+</ValidationRule>

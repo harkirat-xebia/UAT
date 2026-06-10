@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Inactive_Reason__c</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <label>Inactive Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Left the company</fullName>
+                <default>false</default>
+                <label>Left the company</label>
+            </value>
+            <value>
+                <fullName>Maternity Leave</fullName>
+                <default>false</default>
+                <label>Maternity Leave</label>
+            </value>
+            <value>
+                <fullName>Other Reason</fullName>
+                <default>false</default>
+                <label>Other Reason</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

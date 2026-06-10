@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OnboardingMethodRequiredforEngagement</fullName>
+    <active>true</active>
+    <description>Onoarding Method is required for Engagement opportunity</description>
+    <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+    ISBLANK(TEXT(Onboarding_Method__c)),
+    CONTAINS(Pricebook2.Name, &apos;Engagement&apos;),
+    OR(
+    NOT( ISPICKVAL(StageName, &quot;Qualification&quot;) || ISPICKVAL(StageName, &quot;Need Analysis&quot;) ),
+    AND(
+    ISPICKVAL(PRIORVALUE(StageName), &quot;Qualification&quot;) || ISPICKVAL(PRIORVALUE(StageName), &quot;Need Analysis&quot;),
+    ISPICKVAL(StageName, &quot;Proposal&quot;)
+    )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Onboarding_Method__c</errorDisplayField>
+    <errorMessage>Onboarding Method is required when the opportunity is for Engagement. Please select a value before proceeding.</errorMessage>
+</ValidationRule>

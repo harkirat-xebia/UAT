@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BE_General_Condition__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>General Conditions sent to the Client/Merchant. Automatic selection for Mobility when Opportunity Stage = Contract Sent.
+Automatic selection by Webform for other Edenred Solutions.</description>
+    <label>General Condition</label>
+    <referenceTo>BE_General_Condition__c</referenceTo>
+    <relationshipLabel>Opportunities</relationshipLabel>
+    <relationshipName>Opportunities</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

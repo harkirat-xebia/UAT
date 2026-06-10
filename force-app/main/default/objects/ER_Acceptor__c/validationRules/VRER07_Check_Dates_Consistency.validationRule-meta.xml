@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Check_Dates_Consistency</fullName>
+    <active>true</active>
+    <description>End date should always be greater than start date</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+&amp;&amp; NOT(ISBLANK(ER_Start_Date__c))
+&amp;&amp; NOT(ISBLANK(ER_End_Date__c))
+&amp;&amp; ER_End_Date__c &lt; ER_Start_Date__c</errorConditionFormula>
+    <errorMessage>VRER07 - The End Date can&apos;t be lower than Start Date</errorMessage>
+</ValidationRule>

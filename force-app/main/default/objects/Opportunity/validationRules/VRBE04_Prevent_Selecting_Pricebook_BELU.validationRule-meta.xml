@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE04_Prevent_Selecting_Pricebook_BELU</fullName>
+    <active>false</active>
+    <description>11884 - Deactivating VR</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRBE04_Prevent_Selecting_Pricebook_BELU__c = false
+            &amp;&amp; TEXT(ER_BU_Picklist__c) = &apos;BENELUX&apos;
+            &amp;&amp; $RecordType.Name = &apos;Merchant Opportunity&apos;
+&amp;&amp; ( ( LEFT(Account.ER_VAT_Number__c, 2) = &apos;BE&apos; &amp;&amp;
+	( UPPER(Pricebook2.Name) != &apos;ERBE MERCHANT&apos; &amp;&amp; UPPER(Pricebook2.Name) != &apos;ERBE MERCHANT EKIVITA&apos; ) ) ||
+	( LEFT(Account.ER_VAT_Number__c, 2) = &apos;LU&apos; &amp;&amp;
+	( UPPER(Pricebook2.Name) != &apos;ERLU MERCHANT&apos; &amp;&amp; UPPER(Pricebook2.Name) != &apos;ERLU MERCHANT EKIVITA&apos; ) ) ||
+	( LEFT(Account.ER_VAT_Number__c, 2) != &apos;BE&apos; &amp;&amp; LEFT(Account.ER_VAT_Number__c, 2) != &apos;LU&apos; &amp;&amp;
+	( UPPER(Pricebook2.Name) != &apos;ERBE MERCHANT&apos; &amp;&amp; UPPER(Pricebook2.Name) != &apos;ERBE MERCHANT EKIVITA&apos; &amp;&amp;
+	  UPPER(Pricebook2.Name) != &apos;ERLU MERCHANT&apos; &amp;&amp; UPPER(Pricebook2.Name) != &apos;ERLU MERCHANT EKIVITA&apos; ) ) )</errorConditionFormula>
+    <errorMessage>Pricebook not appropriate according to Account VAT country</errorMessage>
+</ValidationRule>

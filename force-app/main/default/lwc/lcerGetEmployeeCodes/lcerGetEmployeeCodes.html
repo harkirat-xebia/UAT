@@ -1,0 +1,142 @@
+<!--
+ - Created by AAZ on 12/03/2023
+ - Description: lcerGetEmployeeCodes
+ -->
+
+<!-- Lcer Get Employee Codes -->
+<template>
+  <lightning-quick-action-panel header="Get Employee Codes">
+    <!-- SPINNER -->
+    <div if:true={showLoadingSpinner}>
+      <lightning-spinner alternative-text={label.processing} size="large"> </lightning-spinner>
+    </div>
+
+    <template if:true={error}>
+      <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
+
+    <template if:false={error}>
+      <!--template if:true={data.length}>
+              <div class="erCodes-table slds-box slds-box_x-small slds-m-around_x-small slds-text-body_small">
+                  <lightning-datatable class="slds-table_striped"
+                                       hide-checkbox-column="true"
+                                       key-field="edenredCodeId"
+                                       data={data}
+                                       columns={columns}
+                                       onrowaction={handleSend}>
+                  </lightning-datatable>
+              </div>
+          </template-->
+
+      <div>
+        <template if:true={data.length}>
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th class="slds-text-align_center" scope="col"><div class="slds-truncate">{label.employeeId}</div></th>
+                <th class="slds-text-align_center" scope="col">
+                  <div class="slds-truncate">{label.edenredCodeId}</div>
+                </th>
+                <th class="slds-text-align_center" scope="col">
+                  <div class="slds-truncate">{label.productClassId}</div>
+                </th>
+                <th class="slds-text-align_center" scope="col"><div class="slds-truncate">{label.userId}</div></th>
+                <th class="slds-text-align_center" scope="col">
+                  <div class="slds-truncate">{label.issuerAccountNumber}</div>
+                </th>
+                <th class="slds-text-align_center" scope="col">
+                  <div class="slds-truncate">{label.isProvisioned}</div>
+                </th>
+                <th class="slds-text-align_center" scope="col"><div class="slds-truncate">{label.isSent}</div></th>
+                <th class="slds-text-align_center" scope="col">
+                  <div class="slds-truncate">{label.lastNotifDate}</div>
+                </th>
+                <th class="slds-text-align_center" scope="col"><div class="slds-truncate"></div></th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={data} for:item="code">
+                <tr class="slds-hint-parent" key={code.edenredCodeId}>
+                  <td class="slds-text-align_right"><div class="slds-truncate">{code.employeeId}</div></td>
+                  <td class="slds-text-align_right"><div class="slds-truncate">{code.edenredCodeId}</div></td>
+                  <td class="slds-text-align_right"><div class="slds-truncate">{code.productClassId}</div></td>
+                  <td class="slds-text-align_right"><div class="slds-truncate">{code.userId}</div></td>
+                  <td class="slds-text-align_right"><div class="slds-truncate">{code.issuerAccountNumber}</div></td>
+                  <td class="slds-text-align_center">
+                    <div class="slds-truncate">
+                      <template if:true={code.isProvisioned}>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <input type="checkbox" name="options" disabled="" checked="" />
+                          </div>
+                        </div>
+                      </template>
+                      <template if:false={code.isProvisioned}>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <input type="checkbox" name="options" disabled="" />
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </td>
+                  <td class="slds-text-align_center">
+                    <div class="slds-truncate">
+                      <template if:true={code.isSent}>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <input type="checkbox" name="options" disabled="" checked="" />
+                          </div>
+                        </div>
+                      </template>
+                      <template if:false={code.isSent}>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <input type="checkbox" name="options" disabled="" />
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </td>
+                  <td class="slds-text-align_right">
+                    <div class="slds-truncate">
+                      <lightning-formatted-date-time
+                        value={code.lastNotifDate}
+                        year="numeric"
+                        month="numeric"
+                        day="numeric"
+                        hour="2-digit"
+                        minute="2-digit"
+                        time-zone-name="short"
+                      ></lightning-formatted-date-time>
+                    </div>
+                  </td>
+                  <td class="slds-text-align_center">
+                    <div class="slds-truncate">
+                      <button
+                        class="slds-button slds-button_outline-brand"
+                        onclick={handleSend}
+                        data-code={code.edenredCodeId}
+                      >
+                        {label.send}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </template>
+        <template if:true={noDataFound}>
+          <div class="slds-box slds-box_x-small slds-m-around_x-small slds-notify_alert slds-alert_warning">
+            {label.noDataFoundLbl}
+          </div>
+        </template>
+      </div>
+    </template>
+
+    <div slot="footer">
+      <lightning-button variant="brand" label={label.close} onclick={handleClose}></lightning-button>
+    </div>
+  </lightning-quick-action-panel>
+</template>

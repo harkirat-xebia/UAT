@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE02_Valid_Phone</fullName>
+    <active>false</active>
+    <description>This rule makes sure the Phone Number field follows a prescribed format.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+		&amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRBE02_Valid_Phone__c = false
+		&amp;&amp; ISPICKVAL(ER_Country_Code__c, &apos;BE&apos;)
+		&amp;&amp; NOT(ISBLANK(Phone))
+		&amp;&amp; NOT(REGEX( Phone ,&quot;(^$)|^[+]?([0-9]*[/\\.\\s\\-\\(\\)]|[0-9]+){3,24}$&quot;))</errorConditionFormula>
+    <errorMessage>Please fill in a valid phone number</errorMessage>
+</ValidationRule>

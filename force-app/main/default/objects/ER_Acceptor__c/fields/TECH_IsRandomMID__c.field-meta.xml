@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TECH_IsRandomMID__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>To flag the acceptors with MID generated randomly (in order to not have an empty MID which causes issues with BENELUX sync)</description>
+    <label>TECH_IsRandomMID</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

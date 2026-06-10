@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Global_Status_Sync__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+            (TEXT(ER_Contract__r.Status) = $Label.LABS_SF_Contract_Status_Draft)
+            &amp;&amp; ((RecordType.DeveloperName = &quot;ER_Account_Line_Item&quot;)
+            ||((TEXT(ER_Status__c) = $Label.LAB_SF_SolutionLineItem_Active)
+            &amp;&amp; (TEXT(ER_Parent_Line_Item__r.ER_Status__c) = $Label.LAB_SF_SolutionLineItem_Active)))
+            &amp;&amp; ((RecordType.DeveloperName &lt;&gt; &quot;ER_Store_Line_Item&quot; &amp;&amp;  RecordType.DeveloperName &lt;&gt; &quot;ER_Acceptor_Line_Item&quot;)
+            || (TEXT(ER_Store__r.ER_Status__c) = $Label.LABS_SF_Store_Active)
+            || (TEXT(ER_Acceptor__r.ER_Status__c) = $Label.LAB_SF_Acceptor_Active))
+            &amp;&amp; ((RecordType.DeveloperName &lt;&gt; &quot;ER_Distribution_Point_Line_Item&quot; &amp;&amp; RecordType.DeveloperName &lt;&gt; &quot;ER_Acceptor_Line_Item&quot;)
+            || (TEXT(ER_Parent_Line_Item__r.ER_Parent_Line_Item__r.ER_Status__c) = $Label.LAB_SF_SolutionLineItem_Active &amp;&amp;
+            (TEXT(ER_Acceptor__r.ER_Store__r.ER_Status__c) = $Label.LAB_SF_Acceptor_Active))
+            || (TEXT(ER_Parent_Line_Item__r.ER_Parent_Line_Item__r.ER_Status__c) = $Label.LAB_SF_Acceptor_Active &amp;&amp; RecordType.DeveloperName =
+            &quot;ER_Distribution_Point_Line_Item&quot;)),
+            &quot;Active&quot;,
+            &quot;Inactive&quot;
+            )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Global Status Sync</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Quality_Score__c</fullName>
+    <externalId>false</externalId>
+    <formula>/*IF( LEN(TEXT(MONTH(StartDate)))=0, 0,20) + IF( LEN(TEXT( ContractTerm ))=0, 0,20) + IF( LEN( BillingCity ) = 0, 0,20) + IF( LEN( CustomerSignedId) = 0, 0,20) + IF( ISPICKVAL(  OwnerExpirationNotice ,&quot;&quot;), 0,20)*/
+
+            IF( RecordType.DeveloperName=&quot;ER_Client_Contract_RT&quot;,
+
+            IF(LEN(CustomerSignedId)=0,0,11.11111112)
+            + IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),0,22.22222222)
+            + IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;), LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),0,22.22222222)
+            + IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;)),0,22.22222222)
+            + IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),0,22.22222222)
+
+            ,
+            IF(LEN(CustomerSignedId)=0,0,11.11111112)
+            + IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),0,22.22222222)
+            + IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;), LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),0,22.22222222)
+            + IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;),ISPICKVAL(ER_ReimbursementTerm2__c,&quot;&quot;)),0,22.22222222)
+            + IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),0,22.22222222)
+
+            )</formula>
+    <label>Data Quality Score</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

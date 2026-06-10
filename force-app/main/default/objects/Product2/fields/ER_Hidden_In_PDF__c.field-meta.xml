@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Hidden_In_PDF__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field define it the product will be displayed in the PDF or not.</description>
+    <label>Is Hidden In PDF</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mono_Multi_Asset</fullName>
+    <fields>Name</fields>
+    <fields>Product2Id</fields>
+    <fields>ER_Asset_Type__c</fields>
+    <fields>Status</fields>
+    <fields>ER_Card_Expiration_Date__c</fields>
+    <label>Mono-Multi Asset</label>
+</CompactLayout>

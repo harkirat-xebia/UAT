@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRPL02_VAT_Number_size</fullName>
+    <active>true</active>
+    <description>For PL the VAT_Number should not be more than 20 characters.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+					&amp;&amp; ER_Business_Unit__c = &apos;PL&apos;
+					&amp;&amp; LEN(ER_VAT_Number__c) &gt; 20</errorConditionFormula>
+    <errorDisplayField>ER_VAT_Number__c</errorDisplayField>
+    <errorMessage>VRPL02 - You cannot input a VAT Number of more than 20 characters.</errorMessage>
+</ValidationRule>

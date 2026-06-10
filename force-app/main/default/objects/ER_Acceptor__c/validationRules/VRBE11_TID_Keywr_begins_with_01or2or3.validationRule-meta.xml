@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE11_TID_Keywr_begins_with_01or2or3</fullName>
+    <active>true</active>
+    <description>TID Keyware needs to start with zeroone or three or two</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Keyware&apos;) 
+&amp;&amp; NOT(  BEGINS(ER_TID_Authorization__c,&quot;3&quot;)
+||BEGINS(ER_TID_Authorization__c,&quot;01&quot;) 
+||BEGINS(ER_TID_Authorization__c,&quot;2&quot;) )</errorConditionFormula>
+    <errorMessage>Operator Provider Keyware needs to start with 01 or 2 or 3</errorMessage>
+</ValidationRule>

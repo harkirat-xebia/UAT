@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER03_ServiceMandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISBLANK(ER_Service_Reference__c )
+&amp;&amp; (ISPICKVAL(ER_Type__c, &apos;UpdatePricing&apos;) 
+				|| ISPICKVAL(ER_Type__c, &apos;Add Service&apos;) 
+				|| ISPICKVAL(ER_Type__c, &apos;Remove Service&apos;))</errorConditionFormula>
+    <errorMessage>Service Reference must be filled for the operation with the types : UpdatePricing, Add Service and Remove Service</errorMessage>
+</ValidationRule>

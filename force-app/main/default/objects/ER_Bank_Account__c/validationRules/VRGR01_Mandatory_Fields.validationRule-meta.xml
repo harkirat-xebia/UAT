@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRGR01_Mandatory_Fields</fullName>
+    <active>true</active>
+    <description>Affi Accounting information required for Won</description>
+    <errorConditionFormula>AND(ER_Business_Unit__c =&apos;GR&apos;,
+            OR(ISBLANK(ER_IBAN__c),
+            ISBLANK(ER_BIC__c),
+            ISBLANK(ER_Bank_Account_Owner__c)))</errorConditionFormula>
+    <errorMessage>VRGR01 - IBAN, Bank Account Owner, BIC are mandatory.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Competitors__c</fullName>
+    <label>Competitors</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Axasoft</fullName>
+                <default>false</default>
+                <label>Axasoft</label>
+            </value>
+            <value>
+                <fullName>Bank</fullName>
+                <default>false</default>
+                <label>Bank</label>
+            </value>
+            <value>
+                <fullName>Benefit System</fullName>
+                <default>false</default>
+                <label>Benefit System</label>
+            </value>
+            <value>
+                <fullName>Canteen</fullName>
+                <default>false</default>
+                <label>Canteen</label>
+            </value>
+            <value>
+                <fullName>Cash</fullName>
+                <default>false</default>
+                <label>Cash</label>
+            </value>
+            <value>
+                <fullName>Catering</fullName>
+                <default>false</default>
+                <label>Catering</label>
+            </value>
+            <value>
+                <fullName>CES ePlatby Slovakia</fullName>
+                <default>false</default>
+                <label>CES ePlatby Slovakia</label>
+            </value>
+            <value>
+                <fullName>DOXX</fullName>
+                <default>false</default>
+                <label>DOXX</label>
+            </value>
+            <value>
+                <fullName>ECOHolding</fullName>
+                <default>false</default>
+                <label>ECOHolding</label>
+            </value>
+            <value>
+                <fullName>GGFS</fullName>
+                <default>false</default>
+                <label>GGFS</label>
+            </value>
+            <value>
+                <fullName>Gifts</fullName>
+                <default>false</default>
+                <label>Gifts</label>
+            </value>
+            <value>
+                <fullName>Monobrands</fullName>
+                <default>false</default>
+                <label>Monobrands</label>
+            </value>
+            <value>
+                <fullName>Multisport</fullName>
+                <default>false</default>
+                <label>Multisport</label>
+            </value>
+            <value>
+                <fullName>No money</fullName>
+                <default>false</default>
+                <label>No money</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Other agency</fullName>
+                <default>false</default>
+                <label>Other agency</label>
+            </value>
+            <value>
+                <fullName>Own solution</fullName>
+                <default>false</default>
+                <label>Own solution</label>
+            </value>
+            <value>
+                <fullName>Sodexo cards</fullName>
+                <default>false</default>
+                <label>Sodexo cards</label>
+            </value>
+            <value>
+                <fullName>Sodexo vouchers</fullName>
+                <default>false</default>
+                <label>Sodexo vouchers</label>
+            </value>
+            <value>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+                <label>Unknown</label>
+            </value>
+            <value>
+                <fullName>upBonus</fullName>
+                <default>false</default>
+                <label>upBonus</label>
+            </value>
+            <value>
+                <fullName>UP Slovensko</fullName>
+                <default>false</default>
+                <label>UP Slovensko</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Bank</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Benefit System</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Canteen</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Cash</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Catering</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Gifts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Monobrands</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Multisport</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>No money</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Other agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Own solution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Sodexo cards</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Sodexo vouchers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>Unknown</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>upBonus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>Axasoft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>CES ePlatby Slovakia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>DOXX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>ECOHolding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>GGFS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>UP Slovensko</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

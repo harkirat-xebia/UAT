@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_FC_CANNOT_FINANCIAL_PAYMENT</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ER_Business_Unit__c == &apos;ES&apos;,
+ER_Invoicing_Site__c,
+ER_Payment_Site__c
+)</errorConditionFormula>
+    <errorMessage>A Financial center cannot be defined as both Invoicing site and Payment site.</errorMessage>
+</ValidationRule>

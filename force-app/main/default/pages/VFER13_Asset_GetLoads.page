@@ -1,0 +1,250 @@
+<apex:page id="VFER13_Asset_GetLoads"
+  standardController="Asset"
+  extensions="VFCER10_Asset_GetLoads"
+  action="{!getLoadsList}"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+>
+  <apex:includeScript value="/support/console/40.0/integration.js" />
+  <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+  <apex:stylesheet value="{!URLFOR($Resource.DataTables, 'DataTables/css/jquery.dataTables.min.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery.dataTables.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/datetime-moment.js')}" />
+
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.min.js')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.css')}" />
+
+  <style>
+    /*SCROLL BAR*/
+
+    /* Track */
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+
+    ::-webkit-scrollbar-thumb {
+      background: #b0c4df;
+    }
+
+    /* Handle on hover */
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #54698d;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+
+    html body.sfdcBody {
+      padding: 0;
+    }
+
+    th {
+      padding-left: 10px !important;
+    }
+
+    .transactionOptions {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .closeButton {
+      float: right;
+    }
+  </style>
+  <apex:form style="background-color: white; margin-left: 0.1%; margin-right: 0.1%">
+    <div class="slds-form-element__control" style="padding-bottom: 10px">
+      <input id="hiddenElement" type="hidden" />
+      <div style="float: right; margin-top: 2px; margin-bottom: 2px">
+        <span>
+          <apex:actionStatus id="getLoadsStatus">
+            <apex:facet name="start">
+              <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                height="25"
+                width="25"
+              />
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="getLoadsButtonId"
+                  styleClass="slds-button slds-button_neutral"
+                  reRender="repeatId,msgErrorId,getMoreButtonId"
+                  status="getLoadsStatus"
+                  action="{!getLoadsList}"
+                  value="{!$Label.LAB_SF_ASSET_GetLoads}"
+                  oncomplete="RefreshTable(); disableLoadsButton();"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+        </span>
+        <span>
+          <apex:actionStatus id="getMoreStatus">
+            <apex:facet name="start">
+              <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                height="25"
+                width="25"
+              />
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="getMoreButtonId"
+                  styleClass="slds-button slds-button_neutral"
+                  reRender="repeatId,msgErrorId,getMoreButtonId"
+                  status="getMoreStatus"
+                  action="{!getMoreLoadsList}"
+                  value="{!$Label.LAB_SF_ASSET_GetMore}"
+                  oncomplete="RefreshTable();"
+                  disabled="{!checkMoreButton}"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+        </span>
+      </div>
+    </div>
+
+    <apex:outputPanel id="repeatId" style="width: 100%">
+      <table id="loadsTable" class="display" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Wallet</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsLoadedAmount}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsRemainingAmount}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsClearedAmount}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsStartDate}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsClearingExpirationDate}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsAuthorizationExpirationDate}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsCurrency}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsCreationDate}</th>
+            <th>{!$Label.LAB_SF_ASSET_loadsStatus}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <apex:repeat value="{!loadlist}" var="load">
+            <tr>
+              <td>{!load.product_code}</td>
+              <td>{!load.loaded_amount}</td>
+              <td>{!load.remaining_amount}</td>
+              <td>{!load.cleared_amount}</td>
+              <td>{!load.start_date}</td>
+              <td>{!load.clearing_expiration_date}</td>
+              <td>{!load.authorization_expiration_date}</td>
+              <td>{!load.ccurrency}</td>
+              <td>{!load.creation_date}</td>
+              <td>{!load.status}</td>
+            </tr>
+          </apex:repeat>
+        </tbody>
+      </table>
+    </apex:outputPanel>
+  </apex:form>
+  <script type="text/javascript">
+       var loadTable;
+       var length = {!$Label.LAB_SF_datatable_Length};
+       window.onload = setFocus
+
+       $(document).ready(function () {
+           controlSolutionField();
+           displaytable();
+       });
+
+    function disableLoadsButton() {
+       	disableElement('getLoadsButtonId');
+       }
+
+       function displaytable() {
+
+           loadTable = $('#loadsTable').DataTable({
+               "initComplete": function () {
+
+                   if (this.api().data().count() > 0) {
+                       $('#loadsTable thead tr').clone(false).appendTo('#loadsTable thead');
+                       $('#loadsTable thead tr:eq(1) th').each(function (i) {
+                           $(this).html('');
+                           $(this).removeClass("sorting sorting_desc sorting_asc");
+                       });
+
+                       this.api().columns([0, 1, 2, 3, 7, 9]).every(function (index) {
+
+                           var column = this;
+                           var select = $('<select onclick="return false;"><option value=""> </option></select>')
+                               .appendTo($('#loadsTable thead tr:eq(1) th:eq(' + index + ')'))
+                               .on('change', function () {
+                                   var val = $.fn.dataTable.util.escapeRegex(
+                                       $(this).val()
+                                   );
+
+                                   column
+                                       .search(val ? '^' + val + '$' : '', true, false)
+                                       .draw();
+                               });
+
+                           column.data().unique().sort().each(function (d, j) {
+                               select.append('<option value="' + d + '">' + d + '</option>')
+                           });
+                       });
+                   }
+               },
+               "rowCallback": function (row, data, index) {
+                   switch (data[2]) {
+                       case "{!$Label.LAB_SF_ASSET_loadFailed}": $(row).css('color', 'Red');
+                           break;
+                   }
+               },
+               "pagingType": "full_numbers",
+               "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "{!$Label.LAB_SF_datatable_All}"]],
+               "pageLength": 10,
+               //"searching": false,
+               //"ordering": false,
+               "order": [[0, "desc"]],
+               "language": {
+                   "lengthMenu": "Show _MENU_ loads",
+                   "info": "{!$Label.LAB_SF_datatable_info}",
+                   "infoEmpty": "{!$Label.LAB_SF_datatable_infoEmpty}",
+                   "infoFiltered": "{!$Label.LAB_SF_datatable_infoFiltered}",
+                   "Search": "{!$Label.LAB_SF_datatable_Search}",
+                   "zeroRecords": "{!$Label.LAB_SF_datatable_zeroRecords}",
+                   "paginate": {
+                       "first": "{!$Label.LAB_SF_datatable_First}",
+                       "last": "{!$Label.LAB_SF_datatable_Last}",
+                       "next": "{!$Label.LAB_SF_datatable_Next}",
+                       "previous": "{!$Label.LAB_SF_datatable_Previous}"
+                   }
+               }
+           });
+       }
+
+       function RefreshTable() {
+           displaytable();
+       }
+
+       function controlSolutionField() {
+           if ('{!Asset.ER_Asset_Type__c}' == '{!$Label.LAB_SF_ASSET_Type}') {
+               disableElement('solutionId');
+           }
+       }
+
+       function enableElement(id) {
+           $("[id$='" + id + "']").removeAttr('disabled');
+       }
+
+       function disableElement(id) {
+           $("[id$='" + id + "']").attr('disabled', 'disabled');
+       }
+
+       function inLightning() {
+
+           return sforce.one != undefined;
+       }
+  </script>
+</apex:page>

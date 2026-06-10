@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Status_Check</fullName>
+    <active>true</active>
+    <description>An affiliation code status cannot move from expired to activated, or activated to draft.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISCHANGED(ER_Status__c)
+&amp;&amp; $RecordType.DeveloperName = &apos;ER_Affiliation_Code&apos;
+&amp;&amp; ( (ISPICKVAL(ER_Status__c,&apos;Activated&apos;) &amp;&amp; (ISPICKVAL(PRIORVALUE(ER_Status__c), &apos;Expired&apos;)))
+				|| (ISPICKVAL(ER_Status__c, &apos;Draft&apos;) &amp;&amp; (ISPICKVAL(PRIORVALUE(ER_Status__c), &apos;Activated&apos;)))
+			)</errorConditionFormula>
+    <errorMessage>VRER04 - An affiliation code status cannot move from expired to activated, or activated to draft.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRPL01_Check_Country_Code</fullName>
+    <active>true</active>
+    <description>The country code is a mandatory data for sync with SAXO and Zuora</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ER_Business_Unit__c = &apos;PL&apos;
+&amp;&amp; ISPICKVAL(ER_Country_Code__c, &apos;&apos;)</errorConditionFormula>
+    <errorDisplayField>ER_Country_Code__c</errorDisplayField>
+    <errorMessage>VRPL01 - Please select a Country Code</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE15_TID_sepay_begins_with_onezero</fullName>
+    <active>true</active>
+    <description>Terminal ID of Sepay starts with one zero</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Sepay&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;10&quot;))</errorConditionFormula>
+    <errorMessage>Terminal ID of Sepay begins with 10</errorMessage>
+</ValidationRule>

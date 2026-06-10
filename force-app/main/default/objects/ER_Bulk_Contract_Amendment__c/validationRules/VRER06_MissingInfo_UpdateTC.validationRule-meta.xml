@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_MissingInfo_UpdateTC</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_Type__c, &apos;UpdateT&amp;C&apos;)
+&amp;&amp; ISBLANK(Text(ER_Payment_Method__c)) 
+&amp;&amp; ISBLANK(Text(ER_Payment_Term__c ))
+&amp;&amp; ISBLANK(Text(ER_Payment_Method__c ))</errorConditionFormula>
+    <errorMessage>Please Fill one of the following fields : &quot;New Invoicing Frequency&quot;, &quot;New Payment Method&quot; or &quot;New Payment Term&quot;</errorMessage>
+</ValidationRule>

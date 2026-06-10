@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>zqu__Mark_for_Delete</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Mark for Delete</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/33.0/connection.js&quot;)}
+            {!REQUIRESCRIPT(&quot;/soap/ajax/33.0/apex.js&quot;)}
+
+            var namespaceRecords=sforce.connection.query(&quot;SELECT Name, NamespacePrefix FROM ApexClass where Name = &apos;ProductListViewSyncController&apos;&quot;);
+            var thisNamespace = namespaceRecords.records.NamespacePrefix;
+            var newRecords = [];
+
+            var p = new sforce.SObject(&quot;Product2&quot;);
+            p.Id =&quot;{!Product2.Id}&quot;;
+            if (thisNamespace != undefined &amp;&amp; thisNamespace != &apos;&apos;)
+            p[thisNamespace + &apos;__Deleted__c&apos;]= true;
+            else
+            p[&apos;Deleted__c&apos;] = true;
+
+            newRecords.push(p);
+            var result = sforce.connection.update(newRecords);
+            if (result[0].success == &apos;true&apos;)
+                alert(&apos;Object successfully marked for deletion.&apos;);
+            else
+                alert(result);
+            window.location.reload();</url>
+</WebLink>

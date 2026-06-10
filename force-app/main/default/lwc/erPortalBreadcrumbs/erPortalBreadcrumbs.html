@@ -1,0 +1,17 @@
+<!--
+ - Created by ALK on 31/05/2023
+ - Description: erPortalBreadcrumbs
+ -->
+
+<!-- Er Portal Breadcrumbs -->
+<template>
+    <nav role="navigation" aria-label="Breadcrumbs">
+        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <template for:each={_crumbs} for:item="crumb">
+                <li class="slds-breadcrumb__item" key={crumb.index}>
+                    <a href={crumb.href} data-page={crumb.href} onclick={handleNavigateTo}>{crumb.label}</a>
+                </li>
+            </template>
+        </ol>
+    </nav>
+</template>

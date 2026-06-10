@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE14_VAT_Not_Blank</fullName>
+    <active>true</active>
+    <description>If Subject to VAT, VAT must be filled.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; IsConverted = true
+&amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRBE14_VAT_Not_Blank__c = False
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;)
+&amp;&amp; ISBLANK(ER_VAT_Number__c)
+&amp;&amp; NOT(ER_Not_Subject_to_VAT__c)</errorConditionFormula>
+    <errorMessage>VRBE14 - The VAT Number must be filled if the Company is subject to VAT.</errorMessage>
+</ValidationRule>

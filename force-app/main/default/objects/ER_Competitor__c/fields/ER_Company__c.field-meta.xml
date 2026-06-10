@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Company__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Company</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <filterItems>
+            <field>Account.RecordType.Name</field>
+            <operation>equals</operation>
+            <value>Company</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.ER_BUPicklist__c</field>
+            <operation>equals</operation>
+            <value>Central</value>
+        </filterItems>
+        <filterItems>
+            <field>$User.ER_Business_Unit__c</field>
+            <operation>equals</operation>
+            <valueField>Account.ER_BUPicklist__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Competitors with Edenred</relationshipLabel>
+    <relationshipName>AccountCompetitors</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

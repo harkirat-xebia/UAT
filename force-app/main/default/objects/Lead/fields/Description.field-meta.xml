@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <inlineHelpText>VISIBLE BY RECIPIENT :Make sure your comments are objective, adequate, and limited to what is strictly necessary. They must not contain sensitive data (e.g., in relation to health/medical, religion, political opinions, racial or ethnic origins, etc.) or data related to the commission of criminal offences. Appropriate and respectful language is expected</inlineHelpText>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+</CustomField>

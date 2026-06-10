@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Solution_Group__c = &quot;Savings&quot;,
+    IF(
+        BEGINS(LOWER(Parent_Product__c), &quot;premium&quot;),
+        &quot;Premium&quot;,
+        IF(
+            CONTAINS(LOWER(Parent_Product__c), &quot;freemium&quot;),
+            &quot;Freemium&quot;,
+            NULL
+        )
+    ),
+    NULL
+)</formula>
+    <label>Product Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

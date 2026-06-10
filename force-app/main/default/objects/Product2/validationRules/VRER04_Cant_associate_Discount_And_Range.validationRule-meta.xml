@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Cant_associate_Discount_And_Range</fullName>
+    <active>true</active>
+    <description>We cannot associate a discount and a ranges under the same service</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ISPICKVAL(ER_Type__c, &quot;Discount&quot;) || RecordType.Name = &apos;Discount&apos;)
+&amp;&amp; ER_Solution__r.ER_Service_Number_of_Ranges__c &gt; 0</errorConditionFormula>
+    <errorMessage>VRER04 - We detected that this service has some active ranges, the discount should be applied on ranges instead of the service</errorMessage>
+</ValidationRule>

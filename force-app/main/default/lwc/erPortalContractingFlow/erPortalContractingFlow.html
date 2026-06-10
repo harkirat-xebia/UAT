@@ -1,0 +1,700 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 06-12-2023
+  @last modified by  : Hassan DAKHCHA
+-->
+<template>
+  <!-- <div style={backgroundImage}> -->
+  <div>
+    <template if:true={isShowHeader}>
+      <c-er-portal-progress-indicator steps={stepList} current-step={phase}> </c-er-portal-progress-indicator>
+    </template>
+
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </template>
+
+    <template if:false={isOnBoarding}>
+      <!--******************************************************-->
+      <!--              Step 1 Company Main infos               -->
+      <!--******************************************************-->
+      <template if:true={isStepOne}>
+        <template if:true={showMsg}>
+          <div class="form">
+            <hgroup class="show-ease">
+              <h2>
+                <lightning-formatted-text value={infoMsg}></lightning-formatted-text>
+              </h2>
+            </hgroup>
+          </div>
+        </template>
+        <template if:false={showMsg}>
+          <template if:true={showWelcomeMsg}>
+            <hgroup class="show-ease">
+              <h2>
+                <lightning-formatted-text value={labels.lb_oa_message1}></lightning-formatted-text>
+              </h2>
+              <h3>
+                <lightning-formatted-text value={labels.lb_oa_message2}></lightning-formatted-text>
+              </h3>
+            </hgroup>
+          </template>
+
+          <!--******************************************************-->
+          <!--                        Step 1                        -->
+          <!--******************************************************-->
+
+          <div class="form show-ease">
+            <div class="left-ribbon"></div>
+
+            <fieldset class="slds-form-element slds-form-element_compound">
+              <div class="slds-form-element__control">
+                <template if:false={uniqueKeyId}>
+                  <!-- hide this block if Web offer use case or On boarding process -->
+                  <div class="slds-form-element__row slds-grid_vertical-align-end slds-p-bottom_large">
+                    <div class="field-form enterprise-nb">
+                      <c-er-portal-input
+                        property-name="enterpriseNb"
+                        place-holder-text={labels.lb_enterprise_nb_format}
+                        input-label={labels.lb_oa_enterprise_nb}
+                        value={companyInfos.enterpriseNb}
+                        required="true"
+                        disabled={onboardingAccount}
+                        onchange={handleCompanyInfos}
+                        onkeyup={handleRegNbLength}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-left_medium search-enterprise">
+                      <c-er-portal-button
+                        label={labels.lb_oa_check_enterprise_nb}
+                        size="small"
+                        alignment="left"
+                        onclick={handleCheckEnterpriseNb}
+                        responsive="x-large"
+                        disabled={disableCheckCompanyBtn}
+                      >
+                      </c-er-portal-button>
+                    </div>
+                  </div>
+
+                  <template if:true={hasCheckedEnterpriseNb}>
+                    <div class="slds-box slds-theme_default form-block-border">
+                      <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                        <div class="field-form slds-m-right_large">
+                          <c-er-portal-input
+                            property-name="legalName"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_step1_enterprise_name}
+                            value={companyInfos.legalName}
+                            required="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                        <div class="field-form slds-m-left_large">
+                          <c-er-portal-input
+                            property-name="numberEmployees"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_number_employees}
+                            value={companyInfos.numberEmployees}
+                            required="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                      </div>
+
+                      <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                        <div class="field-form slds-m-right_large">
+                          <c-er-portal-input
+                            property-name="address"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_step1_street}
+                            value={companyInfos.address}
+                            required="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                        <div class="field-form slds-m-left_large">
+                          <c-er-portal-input
+                            property-name="city"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_step1_city}
+                            value={companyInfos.city}
+                            required="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                      </div>
+
+                      <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                        <div class="field-form slds-m-right_large">
+                          <c-er-portal-input
+                            property-name="postalCode"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_step1_postal_code}
+                            value={companyInfos.postalCode}
+                            required="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                        <div class="field-form slds-m-left_large">
+                          <c-er-portal-picklist
+                            property-name="country"
+                            place-holder-text=""
+                            disabled={isReadOnly}
+                            input-label={labels.lb_step1_country}
+                            value={companyInfos.country}
+                            pk-entries={picklistGroup.country}
+                            required="true"
+                            display-cur-value="true"
+                            onchange={handleCompanyInfos}
+                          >
+                          </c-er-portal-picklist>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </template>
+              </div>
+            </fieldset>
+          </div>
+        </template>
+      </template>
+
+      <!--******************************************************-->
+      <!--                        Step 2                        -->
+      <!--******************************************************-->
+      <template if:true={isStepTwo}>
+        <hgroup class="show-ease">
+          <h3>
+            <lightning-formatted-text value={labels.lb_oa_message3}></lightning-formatted-text>
+          </h3>
+        </hgroup>
+
+        <div class="form show-ease">
+          <div class="left-ribbon"></div>
+
+          <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-box slds-theme_default form-block-border">
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="firstName"
+                    place-holder-text={labels.lb_firstname_place_holder}
+                    input-label={labels.lb_step1_firstname}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={companyInfos.firstName}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="lastName"
+                    place-holder-text={labels.lb_lastname_place_holder}
+                    input-label={labels.lb_lastname}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={companyInfos.lastName}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="email"
+                    place-holder-text={labels.lb_email_place_holder}
+                    input-label={labels.lb_step1_email}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={companyInfos.email}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="contactPhone"
+                    place-holder-text={labels.lb_phone_place_holder}
+                    disabled={isReadOnly}
+                    input-label={labels.lb_phone_nb}
+                    required="true"
+                    value={companyInfos.contactPhone}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </template>
+
+      <!--******************************************************-->
+      <!--                        Step 3                        -->
+      <!--******************************************************-->
+
+      <template if:true={isStepThree}>
+        <hgroup class="show-ease">
+          <h3>
+            <lightning-formatted-text value={labels.lb_oa_message4}></lightning-formatted-text>
+          </h3>
+        </hgroup>
+
+        <div class="form show-ease">
+          <div class="left-ribbon"></div>
+
+          <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-box slds-theme_default form-block-border">
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-picklist
+                    property-name="Invoicing method"
+                    disabled={isReadOnly}
+                    input-label={labels.lb_invoicing_method}
+                    value={defaultInvoicingMethod}
+                    pk-entries={picklistGroup.invoicingMethod}
+                    required="true"
+                    onchange={handleCompanyInfos}
+                    display-cur-value="true"
+                  >
+                  </c-er-portal-picklist>
+                </div>
+              </div>
+              <template if:true={isERFI}>
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form field-form-below-text slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="ovtOperator"
+                      input-label={labels.lb_ovt_operator}
+                      required="true"
+                      disabled={isReadOnly}
+                      value={companyInfos.ovtOperator}
+                      onchange={handleCompanyInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form field-form-below-text slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="ovtCode"
+                      place-holder-text={labels.lb_ovt_code_place_holder}
+                      input-label={labels.lb_ovt_code}
+                      required="true"
+                      disabled={isReadOnly}
+                      value={companyInfos.ovtCode}
+                      onchange={handleCompanyInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+              </template>
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="IBAN"
+                    place-holder-text={labels.lb_iban_place_holder}
+                    input-label={labels.lb_iban}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={companyInfos.IBAN}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form field-form-below-text slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="BIC"
+                    place-holder-text={labels.lb_bic_place_holder}
+                    input-label={labels.lb_bic}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={companyInfos.BIC}
+                    onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </template>
+
+      <!--******************************************************-->
+      <!--           Step Summary                               -->
+      <!--******************************************************-->
+
+      <template if:true={isSummary}>
+        <template if:true={crossSellingMsg}>
+          <div class="form">
+            <hgroup class="show-ease">
+              <h3>
+                <lightning-formatted-rich-text value={crossSellingMsg}></lightning-formatted-rich-text>
+              </h3>
+              <template if:true={crossSellingMsg2}>
+                <h4>
+                  <lightning-formatted-rich-text value={crossSellingMsg2}></lightning-formatted-rich-text>
+                </h4>
+              </template>
+            </hgroup>
+          </div>
+        </template>
+        <template if:false={crossSellingMsg}>
+          <template if:true={cs}>
+            <hgroup class="show-ease">
+              <h3>
+                <lightning-formatted-rich-text value={labels.lb_add_new_products_cs}></lightning-formatted-rich-text>
+              </h3>
+            </hgroup>
+          </template>
+          <div class="form show-ease">
+            <div class="left-ribbon"></div>
+
+            <fieldset class="slds-form-element slds-form-element_compound">
+              <div class="row-spacing prod-list">
+                <template for:each={productList} for:item="product" for:index="index">
+                  <c-er-portal-card
+                    key={product.index}
+                    is-mandatory={product.isMandatory}
+                    labels={product.labels}
+                    options-list={product.optionsList}
+                    is-radio-btn={product.isRadioBtn}
+                    is-selected={product.isSelected}
+                    is-activated={product.isActivated}
+                    onchange={handleOptionChange}
+                    onclick={handleProductOnClick}
+                  >
+                  </c-er-portal-card>
+                </template>
+
+                <!-- <c-er-portal-card is-main="true" labels={""} -->
+                <!--                     
+                    card-name={companyInfos.mainSolutionName} service-name={companyInfos.serviceName} is-selected="true">                  
+                    </c-er-portal-card> -->
+
+                <!-- <c-er-portal-card card-name={companyInfos.mainSolutionName} service-name={companyInfos.serviceName} is-selected="true">                  
+                    </c-er-portal-card>
+                    <c-er-portal-card card-name={companyInfos.mainSolutionName} service-name={companyInfos.serviceName}>                  
+                    </c-er-portal-card>
+                    <c-er-portal-card card-name={companyInfos.mainSolutionName} service-name={companyInfos.serviceName} is-selected="true">                  
+                    </c-er-portal-card>
+                    <c-er-portal-card card-name={companyInfos.mainSolutionName} service-name={companyInfos.serviceName}>                  
+                    </c-er-portal-card> -->
+              </div>
+
+              <div class="row-spacing">
+                <hgroup class="show-ease">
+                  <h3>
+                    <lightning-formatted-text value={labels.lb_my_company_info}></lightning-formatted-text>
+                  </h3>
+                </hgroup>
+
+                <div class="slds-box slds-theme_default form-block-border">
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="legalName"
+                        disabled="true"
+                        input-label={labels.lb_step1_enterprise_name}
+                        value={companyInfos.legalName}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="numberEmployees"
+                        disabled="true"
+                        input-label={labels.lb_number_employees}
+                        value={companyInfos.numberEmployees}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="address"
+                        disabled="true"
+                        input-label={labels.lb_step1_street}
+                        value={companyInfos.address}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="city"
+                        disabled="true"
+                        input-label={labels.lb_step1_city}
+                        value={companyInfos.city}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="postalCode"
+                        disabled="true"
+                        input-label={labels.lb_step1_postal_code}
+                        value={companyInfos.postalCode}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-picklist
+                        property-name="country"
+                        disabled="true"
+                        input-label={labels.lb_step1_country}
+                        value={companyInfos.country}
+                        pk-entries={picklistGroup.country}
+                        display-cur-value="true"
+                      >
+                      </c-er-portal-picklist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row-spacing">
+                <hgroup class="show-ease">
+                  <h3>
+                    <lightning-formatted-text value={labels.lb_main_contact_info}></lightning-formatted-text>
+                  </h3>
+                </hgroup>
+                <div class="slds-box slds-theme_default form-block-border">
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form field-form-below-text slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="firstName"
+                        place-holder-text={labels.lb_firstname_place_holder}
+                        input-label={labels.lb_step1_firstname}
+                        disabled="true"
+                        value={companyInfos.firstName}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form field-form-below-text slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="lastName"
+                        place-holder-text={labels.lb_lastname_place_holder}
+                        input-label={labels.lb_lastname}
+                        disabled="true"
+                        value={companyInfos.lastName}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="email"
+                        place-holder-text={labels.lb_email_place_holder}
+                        input-label={labels.lb_step1_email}
+                        disabled="true"
+                        value={companyInfos.email}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="contactPhone"
+                        place-holder-text={labels.lb_phone_place_holder}
+                        disabled="true"
+                        input-label={labels.lb_phone_nb}
+                        value={companyInfos.contactPhone}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <template if:true={isMerchant}>
+                <div class="row-spacing">
+                  <hgroup class="show-ease">
+                    <h3>
+                      <lightning-formatted-text value={labels.lb_oa_message4}></lightning-formatted-text>
+                    </h3>
+                  </hgroup>
+                  <div class="slds-box slds-theme_default form-block-border">
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form field-form-below-text slds-m-right_large">
+                        <c-er-portal-input
+                          property-name="Invoicing method"
+                          input-label={labels.lb_invoicing_method}
+                          disabled="true"
+                          value={defaultInvoicingMethod}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                    </div>
+                    <template if:true={isERFI}>
+                      <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                        <div class="field-form slds-m-right_large">
+                          <c-er-portal-input
+                            property-name="OVT Operator"
+                            input-label={labels.lb_ovt_operator}
+                            disabled="true"
+                            value={companyInfos.ovtOperator}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                        <div class="field-form slds-m-left_large">
+                          <c-er-portal-input
+                            property-name="OVT Code"
+                            disabled="true"
+                            input-label={labels.lb_ovt_code}
+                            value={companyInfos.ovtCode}
+                          >
+                          </c-er-portal-input>
+                        </div>
+                      </div>
+                    </template>
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-input
+                          property-name="IBAN"
+                          input-label={labels.lb_iban}
+                          disabled="true"
+                          value={companyInfos.IBAN}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                      <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="BIC"
+                          disabled="true"
+                          input-label={labels.lb_bic}
+                          value={companyInfos.BIC}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <div class="row-spacing">
+                <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                  <div class="field-form-large">
+                    <c-er-portal-cbx
+                      input-label={acceptTermsPrice}
+                      is-checked={hasAcceptedConditions}
+                      onchange={handleAcceptConditions}
+                    >
+                    </c-er-portal-cbx>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </template>
+      </template>
+
+      <!--******************************************************-->
+      <!--                       End of flow                    -->
+      <!--******************************************************-->
+      <template if:true={isEndPage}>
+        <div class="slds-m-around_medium show-ease">
+          <hgroup>
+            <h4>
+              <lightning-formatted-rich-text value={endMessage}></lightning-formatted-rich-text>
+            </h4>
+          </hgroup>
+          <template if:false={cs}> <!-- AAM 22.06.23: Do not display button in cross selling context  -->
+            <template if:true={isMerchant}>
+              <c-er-portal-button
+                id="onboardingButton"
+                label={labels.lb_onboarding_button}
+                size="big"
+                alignment="left"
+                onclick={handleInternalOnboarding}
+              >
+              </c-er-portal-button>
+            </template>
+          </template>
+        </div>
+      </template>
+
+      <!--******************************************************-->
+      <!--                  Navigation buttons                  -->
+      <!--******************************************************-->
+      <!-- <template if:false={isReadOnly}> -->
+      <div class="slds-grid slds-gutters navigation-buttons">
+        <div class="slds-col slds-float_left">
+          <template if:true={isEnablePrev}>
+            <c-er-portal-button label={labels.lb_step2b_previous} size="big" alignment="left" onclick={handlePrev}>
+            </c-er-portal-button>
+          </template>
+        </div>
+
+        <div class="slds-col">
+          <!-- TODO refactor the 2 buttons: merge into one with dyn label -->
+          <template if:true={isEnableNext}>
+            <c-er-portal-button
+              id="nextButtonDiv"
+              label={labels.lb_step1_next}
+              size="big"
+              alignment="right"
+              onclick={handleNext}
+            >
+            </c-er-portal-button>
+          </template>
+          <template if:true={isEnableFinish}>
+            <c-er-portal-button
+              id="finishButtonDiv"
+              label={labels.lb_step3_validate}
+              size="big"
+              alignment="right"
+              onclick={handleNext}
+              disabled={isDisabledVaidateBtn}
+            >
+            </c-er-portal-button>
+          </template>
+        </div>
+      </div>
+      <!-- </template> -->
+    </template>
+
+    <!-- <template if:true={isOnBoarding}>
+        <c-er-portal-merchant-on-boarding
+          country={country}
+          lang={lang}
+          locale={locale}
+          solution={solution}
+          unique-key-id={uniqueKeyId}
+          version={version}
+          dbg={dbg}
+          picklist-group-inherit={picklistGroup}
+          labels={labels}
+          labels-all-langs={labelsAllLangs}
+          is-web-offer={isWebOffer}
+          merchant-infos-inherit={companyInfos}
+          current-step={currentStep}
+          is-read-only={isReadOnly}
+          company-infos={companyInfos}
+          stores-list-table-columns={storesListTableColumns}
+          terminals-list-table-columns={terminalsListTableColumns}
+          merchant-users-list-table-columns={merchantUsersListTableColumns}
+        >
+        </c-er-portal-merchant-on-boarding>
+      </template> -->
+  </div>
+</template>

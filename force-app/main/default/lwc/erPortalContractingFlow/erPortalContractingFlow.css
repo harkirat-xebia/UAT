@@ -1,0 +1,474 @@
+/* // Use common library for css */
+/* TODO Check if necessary as the Edenred fonts are already loaded in the Theme settings in Community builder */
+@font-face {
+  font-family: 'edenredlight';
+  src: url('/resource/SRER_Portal/fonts/edenred_light.eot');
+  src: url('/resource/SRER_Portal/fonts/edenred_light.eot?#iefix') format('embedded-opentype'),
+    url('/resource/SRER_Portal/fonts/edenred_light.woff2') format('woff2'),
+    url('/resource/SRER_Portal/fonts/edenred_light.woff') format('woff'),
+    url('/resource/SRER_Portal/fonts/edenred_light.ttf') format('truetype'),
+    url('/resource/SRER_Portal/fonts/edenred_light.svg#edenredlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/resource/SRER_Portal/fonts/Montserrat.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:host {
+  --parent-font-family: 'edenredlight';
+  --parent-main-color: #00859b;
+}
+
+/* body{
+    font-family: 'edenredlight';
+    background-image: url('/file-asset-public/marble.jpg');
+} */
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.navForm {
+  background: white;
+  height: 125px;
+}
+
+.navForm .container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.form-block-border {
+  border-radius: 1rem;
+  width: 94%;
+}
+
+.navigation-buttons {
+  padding: 1.5rem;
+}
+
+.button__right {
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.save-button {
+  padding-right: 3rem;
+}
+
+.left-ribbon {
+  height: auto;
+  width: 2%;
+  background: #ffc72c;
+  border-radius: 60px;
+  margin-right: 3%;
+}
+
+.title-form {
+  width: 70%;
+}
+
+.field-form {
+  width: 48%;
+  padding: 1rem 0;
+}
+
+.field-form-below-text {
+  padding-top: 0.1rem;
+}
+
+.table-form {
+  width: 94%;
+  padding-bottom: 1rem;
+}
+
+.enterprise-nb {
+  width: 36%;
+}
+
+.search-enterprise {
+  padding: 1rem 0;
+}
+
+.name-store_terminals {
+  margin-left: 3rem;
+  border: 1px solid;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  background-color: #ededed;
+  color: var(--parent-main-color);
+  display: inline;
+}
+
+.name-store_terminals-responsive {
+  display: none;
+}
+
+.big-chevron {
+  display: block;
+}
+
+.small-chevron {
+  display: none;
+}
+
+.store-chevron {
+  padding-top: 0.8rem;
+}
+
+.slds-accordion__summary-content {
+  font-size: x-large;
+  font-weight: bolder;
+  color: var(--parent-main-color);
+  padding-left: 1rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+.categorie-li {
+  width: 45%;
+}
+
+.categorie-item__parent {
+  background-color: var(--parent-main-color);
+  color: white;
+  padding: 1rem 2rem;
+  /* width: fit-content; */
+  border-radius: 2rem;
+  font-size: initial;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+}
+
+.categorie-item__child {
+  /* background-color: white; */
+  color: var(--parent-main-color);
+  padding: 1rem 2rem;
+  /* width: fit-content; */
+  font-size: initial;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+}
+
+.categorie-checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  float: left;
+  margin-right: 2rem;
+}
+
+.categorie-p {
+  user-select: none;
+  margin-top: 0.2rem;
+}
+
+.main-categorie-title {
+  font-size: xx-large;
+  font-weight: bolder;
+  color: var(--parent-main-color);
+}
+
+.main-categorie-item {
+  color: var(--parent-main-color);
+  margin-top: 1rem;
+  display: block;
+}
+
+.main-categorie-radio {
+  float: left;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 0.2rem;
+}
+
+.main-categorie-p {
+  user-select: none;
+  font-size: x-large;
+}
+
+.term-condition-div_main {
+  background-color: white;
+  font-size: initial;
+  padding: 0.5rem;
+  /* border-radius: 1rem; */
+  font-family: 'edenredlight';
+  margin-right: 1rem;
+}
+
+.term-condition-div_sub {
+  user-select: none;
+  height: 400px;
+  overflow-y: auto;
+  padding-left: 0.5rem;
+  width: -webkit-fill-available;
+  border: solid 0.1px #d4d4d4;
+  border-radius: 1rem;
+}
+
+.field-form-large {
+  width: 98%;
+  padding: 0.5rem 0;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.show-ease {
+  animation: show 1s ease forwards;
+}
+
+fieldset {
+  width: 95%;
+  padding: 0;
+}
+
+hgroup {
+  margin-bottom: 0.8rem;
+  line-height: 2.5rem;
+  color: #00859b;
+  font-weight: bolder;
+}
+
+hgroup h2 {
+  font-size: 2.2rem;
+}
+hgroup h3 {
+  font-size: 1.8rem;
+}
+hgroup h4 {
+  font-family: 'Montserrat';
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+  font-weight: normal;
+}
+
+.clear {
+  width: 100%;
+  clear: both;
+  float: left;
+  font-family: 'Montserrat';
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.end-message {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.row-spacing {
+  margin-bottom: 2em;
+  margin-top: 0.5em;
+}
+
+.prod-list {
+  width: 95%;
+}
+
+/* ----------------- MEDIA QUERIES ----------------- */
+@media screen and (max-width: 700px) {
+  hgroup h2 {
+    font-size: 1.8rem;
+  }
+  hgroup h3 {
+    font-size: 1.6rem;
+  }
+  hgroup h4 {
+    font-family: 'Montserrat';
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+    font-weight: normal;
+  }
+
+  .left-ribbon {
+    display: none;
+  }
+
+  .navigation-buttons {
+    padding-left: 0rem;
+  }
+
+  .navForm .container {
+    display: grid;
+  }
+
+  .slds-form-element_compound .slds-form-element__row {
+    display: grid;
+    padding-left: 0rem;
+  }
+
+  .slds-form-element_compound .slds-form-element {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .field-form,
+  .slds-size_4-of-12,
+  .title-form,
+  .validate-promocode {
+    width: 95%;
+  }
+
+  .categorie-li {
+    width: 75%;
+  }
+
+  .search-enterprise {
+    width: 95%;
+    /* padding-left: 0.3rem; */
+  }
+
+  .prod-list {
+    display: block;
+  }
+
+  .slds-m-left_large,
+  .slds-m-left--large {
+    margin-left: 0;
+  }
+
+  .slds-m-right_large,
+  .slds-m-right--large {
+    margin-right: 0;
+  }
+
+  .data-table-responsive {
+    margin-left: 0rem;
+  }
+
+  .add-item {
+    width: 100%;
+  }
+
+  .button__right {
+    justify-content: unset;
+  }
+
+  .save-button {
+    padding-right: 0rem;
+    /* padding-left: 0.3rem; */
+  }
+
+  .slds-m-left_medium {
+    margin-left: 0.3rem;
+  }
+
+  hgroup.my-store-acceptor h4.my-store-acceptor {
+    font-size: 0.8rem;
+    margin-top: 0rem;
+  }
+
+  .slds-accordion__summary-action {
+    align-items: initial;
+  }
+
+  .big-chevron {
+    display: none;
+  }
+
+  .small-chevron {
+    /* padding-top: 0.4rem; */
+    padding-left: 0.5rem;
+    display: block;
+  }
+
+  .store-chevron {
+    padding-top: 0.8rem;
+  }
+
+  .name-store_terminals {
+    display: none;
+  }
+
+  .name-store_terminals-responsive {
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 1rem;
+    background-color: #ededed;
+    color: var(--parent-main-color);
+    display: block;
+  }
+
+  .categorie-item__parent,
+  .categorie-item__child {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 100;
+    max-width: 13rem;
+  }
+
+  .categorie-checkbox {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+  }
+
+  .main-categorie-title {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .main-categorie-radio {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .main-categorie-p {
+    user-select: none;
+    font-size: medium;
+  }
+
+  .slds-accordion__section {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .slds-accordion__summary {
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+
+  .main-categorie-radio {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+  }
+}

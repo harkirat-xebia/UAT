@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE10_TID_Keywr_INGENTICO_notcompatible</fullName>
+    <active>true</active>
+    <description>Terminal provider Keyware with model ingenico is not compatible</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Keyware&apos;)
+&amp;&amp; ( ISPICKVAL( ER_Acceptor_Model__c ,&apos;INGENICO ICT 220&apos;) || ISPICKVAL( ER_Acceptor_Model__c ,&apos;INGENICO ICT 250&apos;))</errorConditionFormula>
+    <errorMessage>Keyware Ingenico ICT 220, 250 is not compatible with electoric cheques</errorMessage>
+</ValidationRule>

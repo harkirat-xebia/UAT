@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 10-08-2022
+  @last modified by  : AAM
+-->
+<template>
+  <div class="slds-form-element">
+    <div class="slds-form-element__control">
+      <label class="question">
+        <span class="question-text">{questionLabel}</span>
+        <template if:true={hasTooltip}>
+          <lightning-helptext content={toolTipText} class="er-tooltip"></lightning-helptext>
+        </template>
+      </label>
+      <button value="true" class={btnClassYes} disabled={isDisabled} onclick={handleClick}>{yesLabel}</button>
+      <button value="false" class={btnClassNo} disabled={isDisabled} onclick={handleClick}>{noLabel}</button>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Business_Risk__c</fullName>
+    <complianceGroup>GDPR</complianceGroup>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(ER_BUPicklist__c,&apos;FR&apos;),
+            IF((ER_Credit_Scoring__c &lt; 30), IMAGE(&quot;/resource/BusinessRisk_RedFlag&quot;, &quot;&quot;,20,20), IF(( ER_Credit_Scoring__c &gt;= 30 &amp;&amp; ER_Credit_Scoring__c &lt;= 70), IMAGE(&quot;/resource/BusinessRisk_Orange&quot;, &quot;&quot;,20,20), IF(( ER_Credit_Scoring__c &gt;= 11), IMAGE(&quot;/resource/BusinessRisk_GreenFlag&quot;, &quot;&quot;,20,20), &apos;&apos;))),
+
+            IF((ER_Credit_Scoring__c &lt;= 7), IMAGE(&quot;/resource/BusinessRisk_RedFlag&quot;, &quot;&quot;,20,20), IF(( ER_Credit_Scoring__c &gt;= 8 &amp;&amp; ER_Credit_Scoring__c &lt;= 10), IMAGE(&quot;/resource/BusinessRisk_Orange&quot;, &quot;&quot;,20,20), IF(( ER_Credit_Scoring__c &gt;= 11), IMAGE(&quot;/resource/BusinessRisk_GreenFlag&quot;, &quot;&quot;,20,20), &apos;&apos;)))
+            )</formula>
+    <label>Business Risk</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

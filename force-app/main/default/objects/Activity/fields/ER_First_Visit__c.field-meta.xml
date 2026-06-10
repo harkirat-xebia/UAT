@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_First_Visit__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Field to distinguish if this is a first visit based on the Last Vist on the Account</description>
+    <label>First Visit</label>
+    <type>Checkbox</type>
+</CustomField>

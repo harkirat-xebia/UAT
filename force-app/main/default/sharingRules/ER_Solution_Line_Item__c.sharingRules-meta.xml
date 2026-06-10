@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Stambia_SolutionLineItem_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Stambia SolutionLineItem Sharing Rule</label>
+        <sharedTo>
+            <group>Stambia_Integration_User_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>LPF_Engagement_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>LPF Engagement Rep to self</label>
+        <sharedTo>
+            <role>LPF_Engagement_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>LPF_Engagement_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Luxembourg_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Luxembourg Rep to Self</label>
+        <sharedTo>
+            <role>SME_Luxembourg_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_Luxembourg_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>MM_Farming_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>MM Farming Rep to Self</label>
+        <sharedTo>
+            <role>MM_Farming_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>MM_Farming_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>MM_Hunting_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>MM Hunting Rep to Self</label>
+        <sharedTo>
+            <role>MM_Hunting_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>MM_Hunting_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SME_L2W_Partners_channel_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME L2W/Partners channel Rep to Self</label>
+        <sharedTo>
+            <role>SME_L2W_Partners_channel_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_L2W_Partners_channel_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SME_Telesales_Farming_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME Telesales Farming Rep to Self</label>
+        <sharedTo>
+            <role>SME_Telesales_Farming_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_Telesales_Farming_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SME_Telesales_Hunting_Rep_to_self</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME Telesales Hunting Rep to Self</label>
+        <sharedTo>
+            <role>SME_Telesales_Hunting_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_Telesales_Hunting_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

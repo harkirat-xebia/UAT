@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Search_Depth__c</fullName>
+    <defaultValue>&quot;3&quot;</defaultValue>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>ER_Search_Depth</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>success</fullName>
+                <default>false</default>
+                <label>success</label>
+            </value>
+            <value>
+                <fullName>allExceptExpired</fullName>
+                <default>false</default>
+                <label>allExceptExpired</label>
+            </value>
+            <value>
+                <fullName>all</fullName>
+                <default>false</default>
+                <label>all</label>
+            </value>
+            <value>
+                <fullName>allAffectingBalance</fullName>
+                <default>false</default>
+                <label>allAffectingBalance</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

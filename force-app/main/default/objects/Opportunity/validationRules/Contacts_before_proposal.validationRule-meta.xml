@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contacts_before_proposal</fullName>
+    <active>false</active>
+    <description>Primary and Invoicing contacts must be selected before moving the stage to proposal</description>
+    <errorConditionFormula>AND( NOT($User.ER_BypassVR__c), ISPICKVAL(StageName, &apos;Proposal&apos;), ISCHANGED(StageName) , OR(ISBLANK( Invoicing_Contact__c ), ISBLANK( Primary_Contact__c )  ) )</errorConditionFormula>
+    <errorMessage>You must identify and enter Primary and Invoicing contacts prior to proposal</errorMessage>
+</ValidationRule>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SK_Credit_Note_Frequency__c</fullName>
+    <label>Credit Note Frequency</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>monthly</fullName>
+                <default>false</default>
+                <label>monthly</label>
+            </value>
+            <value>
+                <fullName>quarterly</fullName>
+                <default>false</default>
+                <label>quarterly</label>
+            </value>
+            <value>
+                <fullName>yearly</fullName>
+                <default>false</default>
+                <label>yearly</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>monthly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>quarterly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <valueName>yearly</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

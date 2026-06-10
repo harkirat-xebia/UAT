@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_ParentAffiliation_Contract</fullName>
+    <active>true</active>
+    <description>TSK:14447 A code with the affiliation type &quot;parent&quot; can only be associated to a framework contract</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; $RecordType.DeveloperName = &apos;ER_Affiliation_Code&apos;
+&amp;&amp; ER_Contract__r.ER_Contract_Type__c = &apos;Framework agreement&apos;
+&amp;&amp; NOT(ISPICKVAL(ER_Affiliation_Type__c, &apos;Parent&apos;))</errorConditionFormula>
+    <errorMessage>VRER01: A code with the affiliation type &quot;parent&quot; can only be associated to a framework contract.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Solution__c</fullName>
+    <label>Solution</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ERHU_Edenred_Gift_Card</fullName>
+                <default>false</default>
+                <label>Edenred Gift Card</label>
+            </value>
+            <value>
+                <fullName>ERHU_Edenred_Schooling_Card</fullName>
+                <default>false</default>
+                <label>Edenred Schooling Card</label>
+            </value>
+            <value>
+                <fullName>ERHU_Edenred_Culture_&amp;_Sport_Card</fullName>
+                <default>false</default>
+                <label>Edenred Culture &amp; Sport Card</label>
+            </value>
+            <value>
+                <fullName>ERPL_Gift</fullName>
+                <default>false</default>
+                <label>Gift</label>
+            </value>
+            <value>
+                <fullName>ERPL_Sport and Culture</fullName>
+                <default>false</default>
+                <label>Sport and Culture</label>
+            </value>
+            <value>
+                <fullName>ERPL_TR</fullName>
+                <default>false</default>
+                <label>TR</label>
+            </value>
+            <value>
+                <fullName>ERPL_Incentive</fullName>
+                <default>false</default>
+                <label>Incentive</label>
+            </value>
+            <value>
+                <fullName>ERPL_Spendeo</fullName>
+                <default>false</default>
+                <label>Spendeo</label>
+            </value>
+            <value>
+                <fullName>ERHU_Edenred_Meal_Card</fullName>
+                <default>false</default>
+                <label>Edenred Meal Card</label>
+            </value>
+            <value>
+                <fullName>Electronic Cheque ECO</fullName>
+                <default>false</default>
+                <label>Electronic Cheque ECO</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>ERPL_Gift</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>ERPL_Sport and Culture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>ERPL_TR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>ERPL_Incentive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <valueName>ERPL_Spendeo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>ERHU_Edenred_Gift_Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <valueName>ERHU_Edenred_Schooling_Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <valueName>ERHU_Edenred_Culture_&amp;_Sport_Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>ERHU_Edenred_Meal_Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Electronic Cheque ECO</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

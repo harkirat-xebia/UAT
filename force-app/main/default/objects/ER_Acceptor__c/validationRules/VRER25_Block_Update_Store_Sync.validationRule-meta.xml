@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER25_Block_Update_Store_Sync</fullName>
+    <active>true</active>
+    <description>VRER08 - Account cannot be modified when the financial center is synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISCHANGED(ER_Store__c)
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_Store__c</errorDisplayField>
+    <errorMessage>VRER25 - The store cannot be modified when the acceptor is synchronized</errorMessage>
+</ValidationRule>

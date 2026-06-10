@@ -1,0 +1,41 @@
+<template>
+  <div class="right_screen">
+    <lightning-combobox
+      label="Main Category"
+      placeholder={mainCategory.label}
+      onchange={handleMainCategorySelected}
+      options={mainCategoryOptions}
+    >
+    </lightning-combobox>
+  </div>
+  <div class="left_screen">
+    <lightning-combobox
+      class="main-category-selection"
+      label="Language:"
+      placeholder="Select a Language"
+      onchange={handleLanguageSelected}
+      options={languageOptions}
+    >
+    </lightning-combobox>
+    <br />
+    <span>
+      <!--suppress HtmlUnknownAttribute -->
+      <c-tree items={categoriesGraph} recordid={recordId} header="" onprivateitemclick={handleCategoryClicked}>
+      </c-tree>
+    </span>
+    <br />
+    <div class="spinner">
+      <template if:true={isLoaded}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+      </template>
+    </div>
+    <lightning-button
+      variant="brand"
+      label="Save"
+      title="Save categories"
+      onclick={handleSaveClicked}
+      class="slds-m-left_x-small"
+    >
+    </lightning-button>
+  </div>
+</template>

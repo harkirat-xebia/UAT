@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_upcoming_changes</fullName>
+    <columns>ER_Contract__c</columns>
+    <columns>ER_Type__c</columns>
+    <columns>ER_Contract_Start_Date__c</columns>
+    <columns>ER_Service_Reference__c</columns>
+    <columns>ER_New_Price__c</columns>
+    <columns>ER_Payment_Term__c</columns>
+    <columns>ER_Payment_Method__c</columns>
+    <columns>ER_Invoicing_Frequency__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>All upcoming changes</label>
+</ListView>

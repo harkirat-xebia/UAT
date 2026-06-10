@@ -1,0 +1,23 @@
+<template>
+  <div class="timeline">
+    <div class="container">
+      <ul>
+        <li class={step1.state}>
+          <div class="step">
+            <span class="number">{step1.nb}</span>
+            <span class="title">{step1.label}</span>
+          </div>
+        </li>
+        <template for:each={subsequentSteps} for:item="step">
+          <span class="line" key={step.nb}></span>
+          <li class={step.state} key={step.nb}>
+            <div class="step">
+              <span class="number" key={step.nb}>{step.nb}</span>
+              <span class="title" key={step.nb}>{step.label}</span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_BusinessUnit_Value</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ISCHANGED(ER_BUPicklist__c),
+NOT(
+OR(
+ISPICKVAL(ER_BUPicklist__c, &quot;BE&quot;),
+ISPICKVAL(ER_BUPicklist__c, &quot;LU&quot;)
+)
+)
+)</errorConditionFormula>
+    <errorDisplayField>ER_BUPicklist__c</errorDisplayField>
+    <errorMessage>Please select either &apos;Belgium&apos; or &apos;Luxemburg&apos; as the Business Unit. Other values are not allowed.</errorMessage>
+</ValidationRule>

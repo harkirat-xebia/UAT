@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Sub_Segment__c</fullName>
+    <label>Sub-Segment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SPECIALISES</fullName>
+                <default>false</default>
+                <label>SPECIALISES</label>
+            </value>
+            <value>
+                <fullName>TRANSPORT</fullName>
+                <default>false</default>
+                <label>TRANSPORT</label>
+            </value>
+            <value>
+                <fullName>SERVICE</fullName>
+                <default>false</default>
+                <label>SERVICE</label>
+            </value>
+            <value>
+                <fullName>HORECA</fullName>
+                <default>false</default>
+                <label>HORECA</label>
+            </value>
+            <value>
+                <fullName>GENERAL</fullName>
+                <default>false</default>
+                <label>GENERAL</label>
+            </value>
+            <value>
+                <fullName>FOOD TRUCK</fullName>
+                <default>false</default>
+                <label>FOOD TRUCK</label>
+            </value>
+            <value>
+                <fullName>WEB STORE</fullName>
+                <default>false</default>
+                <label>WEB STORE</label>
+            </value>
+            <value>
+                <fullName>MARCHE</fullName>
+                <default>false</default>
+                <label>MARCHE</label>
+            </value>
+            <value>
+                <fullName>LABO</fullName>
+                <default>false</default>
+                <label>LABO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

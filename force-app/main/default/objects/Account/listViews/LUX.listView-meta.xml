@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LUX</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACCOUNT.SITE</columns>
+    <columns>ACCOUNT.ADDRESS1_STATE</columns>
+    <columns>ACCOUNT.PHONE1</columns>
+    <columns>ACCOUNT.TYPE</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>ER_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ER_BUPicklist__c</field>
+        <operation>equals</operation>
+        <value>LU</value>
+    </filters>
+    <filters>
+        <field>ER_Registration_Number__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>LUX</label>
+</ListView>

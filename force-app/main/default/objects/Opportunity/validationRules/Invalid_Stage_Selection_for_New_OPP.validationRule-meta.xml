@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invalid_Stage_Selection_for_New_OPP</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) &amp;&amp;
+
+ISNEW() &amp;&amp;
+NOT(ISPICKVAL(StageName, &quot;Qualification&quot;)) &amp;&amp;
+OR(
+    $Profile.Name =&quot;Sales Rep&quot;,
+    $Profile.Name =&quot;Sales Operations&quot;,
+				$Profile.Name =&quot;Sales Head&quot;
+)</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>Stage Must be Set to Qualification</errorMessage>
+</ValidationRule>

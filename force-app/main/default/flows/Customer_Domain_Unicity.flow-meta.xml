@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Setp1</name>
+        <label>Setp1</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>NAME</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varStep1</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Name2</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varStep2</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Name3</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varStep3</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_customer_Domain</targetReference>
+        </connector>
+    </assignments>
+    <customErrors>
+        <name>Duplicate_Custom_Domain</name>
+        <label>Duplicate Custom Domain was found</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <customErrorMessages>
+            <errorMessage>Duplicate &quot;Custom Domain&quot; was found in an active contract Please enter a new value.</errorMessage>
+            <fieldSelection>Customer_Domain__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>Customer_Domain</name>
+        <label>Customer Domain</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Setp1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Customer_Domain__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_customer_Domain_from_Active_Contract</targetReference>
+            </connector>
+            <label>exist</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Duplicate</name>
+        <label>Duplicate</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_customer_Domain_from_Active_Contract.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Duplicate_Custom_Domain</targetReference>
+            </connector>
+            <label>Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Engagement</name>
+        <label>Engagement</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Engagement</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Customer_Domain</targetReference>
+            </connector>
+            <label>yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Evaluate_condition</name>
+        <label>Evaluate condition</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Engagement</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>updated</defaultConnectorLabel>
+        <rules>
+            <name>inserted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Isnew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Engagement</targetReference>
+            </connector>
+            <label>inserted</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>Isnew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <formulas>
+        <name>varStep1</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE(
+                  SUBSTITUTE({!$Record.Account.Name}, &quot;/&quot;, &quot;&quot;),
+                &quot;&apos;&quot;, &quot;&quot;),
+              &quot;.&quot;, &quot;&quot;),
+            &quot;(&quot;, &quot;&quot;),
+          &quot;)&quot;, &quot;&quot;),
+        &quot;[&quot;, &quot;&quot;),
+      &quot;]&quot;, &quot;&quot;),
+    &quot;:&quot;, &quot;&quot;),
+  &quot;_&quot;, &quot;&quot;),
+&quot;$&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>varStep2</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!NAME}, &quot;&amp;&quot;, &quot;&quot;),
+              &quot;#&quot;, &quot;&quot;),
+            &quot;@&quot;, &quot;&quot;),
+          &quot;!&quot;, &quot;&quot;),
+        &quot; &quot;, &quot;&quot;),
+      &quot;§&quot;, &quot;&quot;),
+    &quot;{&quot;, &quot;&quot;),
+  &quot;}&quot;, &quot;&quot;),
+&quot;%&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>varStep3</name>
+        <dataType>String</dataType>
+        <expression>LOWER( SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!Name2}, &quot;é&quot;, &quot;e&quot;),
+              &quot;è&quot;, &quot;e&quot;),
+            &quot;ç&quot;, &quot;c&quot;),
+          &quot;à&quot;, &quot;a&quot;),
+        &quot;ù&quot;, &quot;u&quot;),
+      &quot;ä&quot;, &quot;a&quot;),
+    &quot;ë&quot;, &quot;e&quot;),
+  &quot;ü&quot;, &quot;u&quot;),
+&quot;ï&quot;, &quot;i&quot;))</expression>
+    </formulas>
+    <interviewLabel>Duplicate {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>[Opportunity] Customer Domain Unicity</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_customer_Domain_from_Active_Contract</name>
+        <label>Get customer Domain from Active Contract</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Duplicate</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Activated</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ER_Customer_Domain__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Customer_Domain__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.ER_AmendedFromContract__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contract</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_customer_Domain</name>
+        <label>Update customer Domain</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_customer_Domain_from_Active_Contract</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Customer_Domain__c</field>
+            <value>
+                <elementReference>Name3</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Evaluate_condition</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>NAME</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Name2</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Name3</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

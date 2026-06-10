@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Solution_Service_Compact</fullName>
+    <fields>Name</fields>
+    <fields>RecordTypeId</fields>
+    <fields>ER_Type__c</fields>
+    <fields>ProductCode</fields>
+    <fields>IsActive</fields>
+    <fields>ER_BUPicklist__c</fields>
+    <label>ER_Solution_Service_Compact</label>
+</CompactLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER08_Block_Update_Contact_Sync</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ISCHANGED(ER_Contact__c)
+&amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_Contact__c</errorDisplayField>
+    <errorMessage>VRER08 - The contact cannot be modified when the contact role is synchronized</errorMessage>
+</ValidationRule>

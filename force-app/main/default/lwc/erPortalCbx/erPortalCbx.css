@@ -1,0 +1,33 @@
+.erportal-cbx {
+  padding: 0; /* nécessaire pour IE */
+  border-radius: 50%;
+  /* padding-left: 1em; */
+  font-size: 1.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  /*background:  #EDEDED;           /*   sert pour couleur de fond de la zone de déplacement */
+  /* -webkit-appearance: none;    /* nécessaire pour Chrome */
+  /* outline: none; */
+  /* opacity: .8; */
+  /*box-sizing: border-box;       /* même modèle de boîte pour tous */
+  /* transition: opacity .2s; */
+  /* cursor: pointer; */
+}
+
+.slds-form-element__label.erportal-cbxlabel {
+  font-family: 'montserratregular';
+  font-size: 1.3rem;
+  color: var(--parent-main-color);
+}
+
+.er-tooltip {
+  position: relative;
+  top: -0.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .slds-form-element__label.erportal-cbxlabel {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Federation__c</fullName>
+    <label>Federation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Agoria</fullName>
+                <default>false</default>
+                <label>Agoria</label>
+            </value>
+            <value>
+                <fullName>Birecto - Dynamo Retail</fullName>
+                <default>false</default>
+                <label>Birecto - Dynamo Retail</label>
+            </value>
+            <value>
+                <fullName>Boerenbond</fullName>
+                <default>false</default>
+                <label>Boerenbond</label>
+            </value>
+            <value>
+                <fullName>BTV</fullName>
+                <default>false</default>
+                <label>BTV</label>
+            </value>
+            <value>
+                <fullName>BEFEB</fullName>
+                <default>false</default>
+                <label>BEFEB</label>
+            </value>
+            <value>
+                <fullName>CBB</fullName>
+                <default>false</default>
+                <label>CBB</label>
+            </value>
+            <value>
+                <fullName>Coberec</fullName>
+                <default>false</default>
+                <label>Coberec</label>
+            </value>
+            <value>
+                <fullName>CONFEDERATION BELGE DU BOIS</fullName>
+                <default>false</default>
+                <label>CONFEDERATION BELGE DU BOIS</label>
+            </value>
+            <value>
+                <fullName>CREAMODA</fullName>
+                <default>false</default>
+                <label>CREAMODA</label>
+            </value>
+            <value>
+                <fullName>Essenscia</fullName>
+                <default>false</default>
+                <label>Essenscia</label>
+            </value>
+            <value>
+                <fullName>FADB</fullName>
+                <default>false</default>
+                <label>FADB</label>
+            </value>
+            <value>
+                <fullName>Febelgra</fullName>
+                <default>false</default>
+                <label>Febelgra</label>
+            </value>
+            <value>
+                <fullName>Febelhair</fullName>
+                <default>false</default>
+                <label>Febelhair</label>
+            </value>
+            <value>
+                <fullName>Fed. Bouchers</fullName>
+                <default>false</default>
+                <label>Fed. Bouchers</label>
+            </value>
+            <value>
+                <fullName>Federation des boulangers</fullName>
+                <default>false</default>
+                <label>Federation des boulangers</label>
+            </value>
+            <value>
+                <fullName>Federgon</fullName>
+                <default>false</default>
+                <label>Federgon</label>
+            </value>
+            <value>
+                <fullName>Fed. Nat. Négociants Bois</fullName>
+                <default>false</default>
+                <label>Fed. Nat. Négociants Bois</label>
+            </value>
+            <value>
+                <fullName>Fed. Nat. Scieries</fullName>
+                <default>false</default>
+                <label>Fed. Nat. Scieries</label>
+            </value>
+            <value>
+                <fullName>Federprocycle</fullName>
+                <default>false</default>
+                <label>Federprocycle</label>
+            </value>
+            <value>
+                <fullName>Fed. Transport et Logistique</fullName>
+                <default>false</default>
+                <label>Fed. Transport et Logistique</label>
+            </value>
+            <value>
+                <fullName>Fedustria</fullName>
+                <default>false</default>
+                <label>Fedustria</label>
+            </value>
+            <value>
+                <fullName>Fetra</fullName>
+                <default>false</default>
+                <label>Fetra</label>
+            </value>
+            <value>
+                <fullName>FVF</fullName>
+                <default>false</default>
+                <label>FVF</label>
+            </value>
+            <value>
+                <fullName>FWA</fullName>
+                <default>false</default>
+                <label>FWA</label>
+            </value>
+            <value>
+                <fullName>Ho.Re.Ca</fullName>
+                <default>false</default>
+                <label>Ho.Re.Ca</label>
+            </value>
+            <value>
+                <fullName>Horeca BXL</fullName>
+                <default>false</default>
+                <label>Horeca BXL</label>
+            </value>
+            <value>
+                <fullName>Horeca Vlaanderen</fullName>
+                <default>false</default>
+                <label>Horeca Vlaanderen</label>
+            </value>
+            <value>
+                <fullName>Horeca Wallonie</fullName>
+                <default>false</default>
+                <label>Horeca Wallonie</label>
+            </value>
+            <value>
+                <fullName>KUFB</fullName>
+                <default>false</default>
+                <label>KUFB</label>
+            </value>
+            <value>
+                <fullName>Paysans-Artisans</fullName>
+                <default>false</default>
+                <label>Paysans-Artisans</label>
+            </value>
+            <value>
+                <fullName>SNI-NSZ</fullName>
+                <default>false</default>
+                <label>SNI-NSZ</label>
+            </value>
+            <value>
+                <fullName>Traxio</fullName>
+                <default>false</default>
+                <label>Traxio</label>
+            </value>
+            <value>
+                <fullName>UCM</fullName>
+                <default>false</default>
+                <label>UCM</label>
+            </value>
+            <value>
+                <fullName>UNESSA</fullName>
+                <default>false</default>
+                <label>UNESSA</label>
+            </value>
+            <value>
+                <fullName>Unizo</fullName>
+                <default>false</default>
+                <label>Unizo</label>
+            </value>
+            <value>
+                <fullName>UPTR</fullName>
+                <default>false</default>
+                <label>UPTR</label>
+            </value>
+            <value>
+                <fullName>Birecto - Dynamo Ret</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Birecto - Dynamo Ret</label>
+            </value>
+            <value>
+                <fullName>Brafco</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Brafco</label>
+            </value>
+            <value>
+                <fullName>CREAMODA (CP 109)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CREAMODA (CP 109)</label>
+            </value>
+            <value>
+                <fullName>Essencia</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Essencia</label>
+            </value>
+            <value>
+                <fullName>FADB (CP 310)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>FADB (CP 310)</label>
+            </value>
+            <value>
+                <fullName>Federation des boula</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Federation des boula</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

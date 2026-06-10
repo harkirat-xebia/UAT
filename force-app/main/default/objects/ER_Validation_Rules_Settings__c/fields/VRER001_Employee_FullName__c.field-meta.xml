@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER001_Employee_FullName__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This Custom field is used to bypass ER_Employee__c.VRER001_Employee_FullName VR</description>
+    <label>VRER001_Employee_FullName</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

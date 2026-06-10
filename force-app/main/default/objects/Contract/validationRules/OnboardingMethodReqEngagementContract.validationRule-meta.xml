@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OnboardingMethodReqEngagementContract</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+
+    ISBLANK(TEXT(ER_Onboarding_Method__c)),
+
+    CONTAINS(ER_OpportunityId__r.Pricebook2.Name, &quot;Engagement&quot;),
+
+    NOT(
+        ISPICKVAL(ER_OpportunityId__r.StageName, &quot;Qualification&quot;) ||
+        ISPICKVAL(ER_OpportunityId__r.StageName, &quot;Need Analysis&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Please select an Onboarding Method before saving this Contract.</errorMessage>
+</ValidationRule>

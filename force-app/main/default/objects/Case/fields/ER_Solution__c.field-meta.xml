@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Solution__c</fullName>
+    <label>Solution</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ERFI_Edenred card</fullName>
+                <default>false</default>
+                <label>Edenred card</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Lounas card</fullName>
+                <default>false</default>
+                <label>Edenred Lounas card</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Massage card</fullName>
+                <default>false</default>
+                <label>Edenred Massage card</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Virike card</fullName>
+                <default>false</default>
+                <label>Edenred Virike card</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Työmatka card</fullName>
+                <default>false</default>
+                <label>Edenred Työmatka card</label>
+            </value>
+            <value>
+                <fullName>ERFI_Lounasseteli voucher</fullName>
+                <default>false</default>
+                <label>Lounasseteli voucher</label>
+            </value>
+            <value>
+                <fullName>ERFI_Virikeseteli voucher</fullName>
+                <default>false</default>
+                <label>Virikeseteli voucher</label>
+            </value>
+            <value>
+                <fullName>ERFI_Delicard</fullName>
+                <default>false</default>
+                <label>Delicard</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Virike (sport only)</fullName>
+                <default>false</default>
+                <label>Edenred Virike (sport only)</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Regalo</fullName>
+                <default>false</default>
+                <label>Ticket Regalo</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Restaurante</fullName>
+                <default>false</default>
+                <label>Ticket Restaurante</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Corporate</fullName>
+                <default>false</default>
+                <label>Ticket Corporate</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Guardería</fullName>
+                <default>false</default>
+                <label>Ticket Guardería</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Flex</fullName>
+                <default>false</default>
+                <label>Ticket Flex</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Dietas</fullName>
+                <default>false</default>
+                <label>Ticket Dietas</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Gasolina</fullName>
+                <default>false</default>
+                <label>Ticket Gasolina</label>
+            </value>
+            <value>
+                <fullName>ERES_Ticket Transporte</fullName>
+                <default>false</default>
+                <label>Ticket Transporte</label>
+            </value>
+            <value>
+                <fullName>ERES_Myorder</fullName>
+                <default>false</default>
+                <label>Myorder</label>
+            </value>
+            <value>
+                <fullName>ERFI_Edenred Dental</fullName>
+                <default>false</default>
+                <label>Edenred Hammashoito</label>
+            </value>
+            <value>
+                <fullName>My Benefits</fullName>
+                <default>false</default>
+                <label>My Benefits</label>
+            </value>
+            <value>
+                <fullName>MyBenefits Consumer</fullName>
+                <default>false</default>
+                <label>MyBenefits Consumer</label>
+            </value>
+            <value>
+                <fullName>MyBenefits GOV</fullName>
+                <default>false</default>
+                <label>MyBenefits GOV</label>
+            </value>
+            <value>
+                <fullName>Spendeo</fullName>
+                <default>false</default>
+                <label>Spendeo</label>
+            </value>
+            <value>
+                <fullName>Ticket Compliments Gift Card</fullName>
+                <default>false</default>
+                <label>Ticket Compliments Gift Card</label>
+            </value>
+            <value>
+                <fullName>Ticket Restaurant</fullName>
+                <default>false</default>
+                <label>Ticket Restaurant</label>
+            </value>
+            <value>
+                <fullName>Ticket Restaurant Card</fullName>
+                <default>false</default>
+                <label>Ticket Restaurant Card</label>
+            </value>
+            <value>
+                <fullName>Ticket Restaurant Lite</fullName>
+                <default>false</default>
+                <label>Ticket Restaurant Lite</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Regalo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Restaurante</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Corporate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Guardería</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Flex</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Dietas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Gasolina</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Ticket Transporte</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERES_Myorder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Lounas card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Massage card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Virike card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Työmatka card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Lounasseteli voucher</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Virikeseteli voucher</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Delicard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Virike (sport only)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <valueName>ERFI_Edenred Dental</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>My Benefits</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>MyBenefits Consumer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>MyBenefits GOV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>Spendeo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>Ticket Compliments Gift Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>Ticket Restaurant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>Ticket Restaurant Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <valueName>Ticket Restaurant Lite</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

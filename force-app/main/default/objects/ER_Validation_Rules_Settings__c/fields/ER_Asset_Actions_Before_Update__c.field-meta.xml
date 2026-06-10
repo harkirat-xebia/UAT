@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Asset_Actions_Before_Update__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Bypass flow ER_Asset_Actions_Before_Update</description>
+    <label>ER_Asset_Actions_Before_Update</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,103 @@
+<!--
+@description       : 
+@author            : AAM
+@group             : 
+@last modified on  : 05-10-2022
+@last modified by  : AAM
+-->
+<apex:page id="AutoEnrollmentPDFContract"
+  controller="APER30_PDFContractController"
+  language="{!lang}"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  applyBodyTag="false"
+  standardStylesheets="false"
+  renderAs="pdf"
+>
+  <head>
+    <style type="text/css">
+      @page {
+          size: A4;
+          margin: 0mm 0mm 30mm 0mm;
+          padding-top: 135px;
+          @top-center {
+              content: element(header);
+          }
+          @bottom-left {
+              content: element(footer);
+          }
+      }
+      @page:first {
+          @top-center {
+              content: normal;
+          }
+      }
+      div.header {
+          position: running(header);
+      }
+      div.footer {
+          position: running(footer);
+      }
+      .styled-table {
+          overflow: hidden;
+          font-size: 0.9em;
+          font-family: sans-serif;
+          margin: 3% 10%;
+          width: 85%;
+          -fs-table-paginate: paginate;
+          page-break-after:auto;
+          border-collapse: separate;
+      }
+      .styled-table thead tr {
+          background-color: {!mainColor};
+          color: #ffffff;
+          text-align: left;
+      }
+      .styled-table td {
+          text-align: left;
+      }
+      .styled-table th, .styled-table td {
+          padding: 12px 15px;
+          /* border: solid 0.00001px; */
+      }
+      .styled-table th {
+          text-align: center;
+      }
+      .styled-table tbody tr {
+          /* border-bottom: 1px solid #dddddd; */
+      }
+      .styled-table tbody tr {
+          background-color: #efefef;
+      }
+      td span.label{
+          font-weight: bolder;
+      }
+      td span.value{
+          display: block;
+          border-bottom: dotted 0.5px;
+          padding-top: 0.3em;
+      }
+      td span.multi-line{
+          margin-top: -0.7em;
+          padding-top: 0;
+      }
+      .left-ribbon {
+          height: auto;
+          width: 2%;
+          background: {!mainColor};
+          border-radius: 60px;
+          margin-right: 3%;
+      }
+      h1 span{
+          color: {!mainColor};
+      }
+    </style>
+  </head>
+  <body>
+    <apex:repeat value="{!htmlMarkupList}" var="htmlMarkup">
+      <apex:outputText value="{!htmlMarkup}" escape="false" />
+    </apex:repeat>
+  </body>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_Either_Duration_End_Price_Date</fullName>
+    <active>false</active>
+    <description>Populate either the end date or the duration but not both.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ER_Product_Type__c = &apos;Discount&apos;
+&amp;&amp; (
+    (ISBLANK(ER_Duration__c) &amp;&amp;  ISBLANK(ER_Price_End_Date__c))
+    || (NOT(ISBLANK(ER_Duration__c)) &amp;&amp; NOT(ISBLANK(ER_Price_End_Date__c)))
+)</errorConditionFormula>
+    <errorMessage>VRER06 - Enter either Duration or Price End Date, not both.</errorMessage>
+</ValidationRule>

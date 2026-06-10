@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FieldSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>zqu__CustomAccountFields</fullName>
+    <description>Fields in this field set will be included in the account data when quotes for new billing accounts are sent to Zuora.</description>
+    <label>Custom Account Fields</label>
+</FieldSet>

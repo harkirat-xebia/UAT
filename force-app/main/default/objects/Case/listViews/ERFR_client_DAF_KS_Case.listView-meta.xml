@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFR_client_DAF_KS_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFR client DAF KS</label>
+    <queue>ERFR_client_DAF_KS</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

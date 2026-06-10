@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE15_Nr_of_beneficiaries_vs_Nr_of_empl</fullName>
+    <active>true</active>
+    <description>The number of beneficiaries cannot exceed the number of employees</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;))
+&amp;&amp; ER_Number_Of_Beneficiaries__c  &gt;  NumberOfEmployees</errorConditionFormula>
+    <errorMessage>The number of beneficiaries cannot exceed the number of employees.</errorMessage>
+</ValidationRule>

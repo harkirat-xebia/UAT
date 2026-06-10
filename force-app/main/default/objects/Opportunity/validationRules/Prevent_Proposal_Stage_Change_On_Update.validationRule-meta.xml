@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Proposal_Stage_Change_On_Update</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+    Not(Isnew()),
+               ISPICKVAL(StageName, &quot;Qualification&quot;),
+  
+
+            ISPICKVAL(PRIORVALUE(StageName), &quot;Proposal&quot;),
+               
+       
+                    OR(
+    $Profile.Name =&quot;Sales Rep&quot;,
+    $Profile.Name =&quot;Sales Operations&quot;,
+    $Profile.Name =&quot;Sales Head&quot;
+    ))</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>You cannot update the stage from Proposal to Qualification/Need Analysis !!</errorMessage>
+</ValidationRule>

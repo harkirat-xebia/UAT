@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_ContractStatus</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ISCHANGED(Status)
+            &amp;&amp; ((ISPICKVAL(Status, &apos;Terminated&apos;) &amp;&amp; (ISBLANK(ER_Terminated_Date__c)))
+            || (ISPICKVAL(Status, &apos;Activated&apos;) &amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status), &apos;Draft&apos;)))
+            || (ISPICKVAL(Status, &apos;Pending Termination&apos;) &amp;&amp; (NOT(ISPICKVAL(PRIORVALUE(Status), &apos;Activated&apos;))))
+            )</errorConditionFormula>
+    <errorMessage>You cannot perform this Action</errorMessage>
+</ValidationRule>

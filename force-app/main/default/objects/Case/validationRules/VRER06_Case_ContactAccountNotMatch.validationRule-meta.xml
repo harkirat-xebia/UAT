@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_Case_ContactAccountNotMatch</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT($User.ER_BypassVR__c),NOT(ISBLANK(AccountId)),NOT(AccountId==Contact.AccountId))</errorConditionFormula>
+    <errorDisplayField>ContactId</errorDisplayField>
+    <errorMessage>Contact is not related to Account case</errorMessage>
+</ValidationRule>

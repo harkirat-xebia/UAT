@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Zuora_Quote</fullName>
+    <availability>online</availability>
+    <description>Generate New Zuora Quote</description>
+    <displayType>button</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>New Zuora Quote</masterLabel>
+    <openType>sidebar</openType>
+    <page>zqu__QuoteOption</page>
+    <protected>false</protected>
+</WebLink>

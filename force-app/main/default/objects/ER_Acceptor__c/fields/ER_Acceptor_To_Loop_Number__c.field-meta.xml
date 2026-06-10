@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor_To_Loop_Number__c</fullName>
+    <description>Number of loops linked to the acceptor</description>
+    <label>Acceptor To Loop Number</label>
+    <summaryForeignKey>ER_Acceptor_to_Loop__c.ER_Acceptor__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_No_Competitors_winners_on_Close</fullName>
+    <active>true</active>
+    <description>When an competitor opportunitu is closed lost, the number of winning competitors should be greater than 0</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ER_Number_of_competitors_winners__c = 0
+&amp;&amp; TEXT( ER_Lost_Reason__c) == $Label.LAB_SF_Opportunity_Lost_to_Competitor</errorConditionFormula>
+    <errorMessage>If the Opportunity is Lost, please fill in Winning Competitor(s)</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER001_AssetlName_AccountLookup__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Field to bypass the VR VRER001_AssetlName_AccountLookup</description>
+    <label>VRER001_AssetlName_AccountLookup</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE01_BankAccountMandatory</fullName>
+    <active>true</active>
+    <description>VRBE01 - The Bank Account is mandatory when the account is already synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;BENELUX&apos;)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISBLANK(ER_Bank_Account__c)
+            &amp;&amp; NOT(ISBLANK(ER_Account_Name__r.ER_Creation_date_in_OS__c ))</errorConditionFormula>
+    <errorDisplayField>ER_Bank_Account__c</errorDisplayField>
+    <errorMessage>VRBE01 - The Bank Account is mandatory when the account is already synchronized</errorMessage>
+</ValidationRule>

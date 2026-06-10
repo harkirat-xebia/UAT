@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE07_MandatoryTermsConditions</fullName>
+    <active>false</active>
+    <description>Rule for mandatory Terms and Conditions.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &quot;BENELUX&quot;)
+&amp;&amp; NOT(ISPICKVAL( $User.UserType ,&quot;AutomatedProcess&quot;))
+&amp;&amp; (ISBLANK(TEXT(ER_PaymentMethod__c))
+				|| ISBLANK(TEXT(ER_PaymentTerms__c))
+				|| ISBLANK(TEXT(ERBE_Invoicing_Support__c))
+				|| ISBLANK(TEXT(ER_InvoicingFrequency__c))
+				|| ISBLANK(TEXT(ER_ReimbursementTerm__c))
+				|| ISBLANK(TEXT(ERBE_Reimbursement_Statement_Frequency__c))
+				|| ISBLANK(TEXT(ERBE_Reimbursement_Statement_Support__c))
+				|| (ISPICKVAL(ER_InvoicingFrequency__c, &quot;Weekly&quot;) &amp;&amp; ISBLANK(TEXT(ERBE_Invoicing_day_of_week__c)))
+			)</errorConditionFormula>
+    <errorMessage>VRBE07 - Terms and Conditions fields are mandatory.</errorMessage>
+</ValidationRule>

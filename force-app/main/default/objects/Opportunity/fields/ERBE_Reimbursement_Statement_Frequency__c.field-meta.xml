@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Reimbursement_Statement_Frequency__c</fullName>
+    <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;BENELUX&apos;) &amp;&amp; $RecordType.DeveloperName = &apos;ER_Merchant_Opportunity&apos;, &apos;Weekly Tuesday&apos;, &apos;&apos;)</defaultValue>
+    <label>Reimbursement Statement Frequency</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>ERBE_Reimbursement_Statement_Frequency</valueSetName>
+    </valueSet>
+</CustomField>

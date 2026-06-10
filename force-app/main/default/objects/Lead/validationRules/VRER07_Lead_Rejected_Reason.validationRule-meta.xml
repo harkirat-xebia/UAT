@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Lead_Rejected_Reason</fullName>
+    <active>true</active>
+    <description>User should precised lead rejected reason on case of lead status = rejected</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ISPICKVAL(Status,&quot;Rejected&quot;),
+ISBLANK(TEXT(ER_Rejected_Reason__c)))</errorConditionFormula>
+    <errorDisplayField>ER_Rejected_Reason__c</errorDisplayField>
+    <errorMessage>The Rejected Reason must be filled in order to save the record</errorMessage>
+</ValidationRule>

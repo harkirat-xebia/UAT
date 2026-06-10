@@ -1,0 +1,27 @@
+<!--
+ - Created by noorgoolamnabee on 03/02/2022.
+ -->
+
+<!-- Er Account Invoicing -->
+<template>
+  <lightning-quick-action-panel class="slds-modal_large slds-text-body_small" header="Invoicing Information">
+    <lightning-input
+      type="search"
+      onchange={handleKeyChange}
+      class="slds-show slds-is-relative slds-var-m-bottom_small"
+      label="Search"
+    >
+    </lightning-input>
+
+    <lightning-tree-grid
+      columns={gridColumns}
+      data={filteredRecords}
+      key-field="Name"
+      expanded-rows={expandedRows}
+      selected-rows={selectedRows}
+      hide-checkbox-column
+    ></lightning-tree-grid>
+
+    <div slot="footer"></div>
+  </lightning-quick-action-panel>
+</template>

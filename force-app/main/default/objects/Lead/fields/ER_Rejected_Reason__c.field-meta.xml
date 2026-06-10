@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Rejected_Reason__c</fullName>
+    <label>Rejected Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Acceptor added/updated</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Acceptor added/updated</label>
+            </value>
+            <value>
+                <fullName>Already client at Monizze</fullName>
+                <default>false</default>
+                <label>Already client at Monizze</label>
+            </value>
+            <value>
+                <fullName>Already client at Pluxee</fullName>
+                <default>false</default>
+                <label>Already client at Pluxee</label>
+            </value>
+            <value>
+                <fullName>Already client of this solution</fullName>
+                <default>false</default>
+                <label>Already client of this solution</label>
+            </value>
+            <value>
+                <fullName>Company does not exist / Out of business</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Company does not exist / Out of business</label>
+            </value>
+            <value>
+                <fullName>Declare not having given his contact details to be contacted</fullName>
+                <default>false</default>
+                <label>Declare not having given his contact details to be contacted</label>
+            </value>
+            <value>
+                <fullName>Duplicate Lead</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Duplicate Lead</label>
+            </value>
+            <value>
+                <fullName>Duplicates (&lt; 2 weeks)</fullName>
+                <default>false</default>
+                <label>Duplicates (&lt; 2 weeks)</label>
+            </value>
+            <value>
+                <fullName>Edenred user</fullName>
+                <default>false</default>
+                <label>Edenred user</label>
+            </value>
+            <value>
+                <fullName>Employee Request</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Employee Request</label>
+            </value>
+            <value>
+                <fullName>Inability to contact</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inability to contact</label>
+            </value>
+            <value>
+                <fullName>Invalid phone number</fullName>
+                <default>false</default>
+                <label>Invalid phone number</label>
+            </value>
+            <value>
+                <fullName>Language issue</fullName>
+                <default>false</default>
+                <label>Language issue</label>
+            </value>
+            <value>
+                <fullName>Merchant</fullName>
+                <default>false</default>
+                <label>Merchant</label>
+            </value>
+            <value>
+                <fullName>Missing contact information</fullName>
+                <default>false</default>
+                <label>Missing contact information</label>
+            </value>
+            <value>
+                <fullName>Missing Key Information</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Missing Key Information</label>
+            </value>
+            <value>
+                <fullName>Missing VAT</fullName>
+                <default>false</default>
+                <label>Missing VAT</label>
+            </value>
+            <value>
+                <fullName>No budget</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No budget</label>
+            </value>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No interest</label>
+            </value>
+            <value>
+                <fullName>Not a Lead</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not a Lead</label>
+            </value>
+            <value>
+                <fullName>No Terminal</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No Terminal</label>
+            </value>
+            <value>
+                <fullName>Not interested</fullName>
+                <default>false</default>
+                <label>Not interested</label>
+            </value>
+            <value>
+                <fullName>Out of Benefit Target</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Out of Benefit Target</label>
+            </value>
+            <value>
+                <fullName>Spam</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Spam</label>
+            </value>
+            <value>
+                <fullName>Unreachable after all contact attempts</fullName>
+                <default>false</default>
+                <label>Unreachable after all contact attempts</label>
+            </value>
+            <value>
+                <fullName>Unreachable after call back actions</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Unreachable after call back actions</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

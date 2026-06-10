@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Not_Subject_to_VAT__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>For customers that are not subject to VAT.
+Used in a Validation Rule on Lead and Account.</description>
+    <label>Not Subject to VAT</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

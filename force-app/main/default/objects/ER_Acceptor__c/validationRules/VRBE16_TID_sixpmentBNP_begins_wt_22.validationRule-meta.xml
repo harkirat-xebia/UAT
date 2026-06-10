@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE16_TID_sixpmentBNP_begins_wt_22</fullName>
+    <active>true</active>
+    <description>Terminal ID of Six Payment-BNP needs to start with 22</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment - BNP&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;22&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Please replace 23XXXXXX by 22XXXXXX</errorMessage>
+</ValidationRule>

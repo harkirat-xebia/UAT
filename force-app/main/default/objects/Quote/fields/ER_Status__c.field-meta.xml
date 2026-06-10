@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(ISPICKVAL( Status , &quot;Presented&quot;), ER_DocuGen_Presented_By_Docusign__c ),&quot;Envelop Presented&quot;,
+IF(AND(ISPICKVAL( Status , &quot;Presented&quot;), ER_DocuGen_Presented_By_Docusign__c=False ),&quot;Offer&quot;,
+IF(AND(ISPICKVAL( Status , &quot;Accepted&quot;),  ER_DocuGen_Signed_By_Docusign__c ),&quot;Envelop Signed&quot;,
+IF(AND(ISPICKVAL( Status , &quot;Accepted&quot;),ER_DocuGen_Signed_By_Docusign__c=False ),&quot;Accepted Manually&quot;,
+IF(ISPICKVAL(Status,&quot;Draft&quot;),&quot;Draft&quot;,
+IF(ISPICKVAL(Status,&quot;Denied&quot;),&quot;Denied&quot;,&quot;&quot;))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

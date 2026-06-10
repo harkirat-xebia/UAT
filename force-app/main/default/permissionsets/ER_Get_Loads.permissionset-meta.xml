@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>APER06_WebserviceUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VFCER10_Asset_GetLoads</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WSER10_GetLoads</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ER Get Loads</label>
+    <pageAccesses>
+        <apexPage>VFER13_Asset_GetLoads</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+</PermissionSet>

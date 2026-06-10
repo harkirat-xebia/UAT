@@ -1,0 +1,172 @@
+<template>
+    <div class="header-top">
+        <h2>{label.header}</h2>
+        <p>{label.subHeader}</p>
+    </div>
+    <div class="content">
+        <!-- When hasEnterpriseNumber is FALSE -->
+        <template if:false={hasEnterpriseNumber}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- For Luxembourg: Show Enterprise Number (NIF) and RCS fields -->
+                <template if:true={isLuxembourg}>
+                    <!-- Enterprise Number Field (acts as NIF for LU) -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input 
+                            name="enterpriseNumber" 
+                            field-level-help={enterpriseHelp}
+                            label={enterpriseNum} 
+                            value={enterpriseNumber}
+                            placeholder={enterpriseNumPlaceholder} 
+                            onchange={handleInputChange} 
+                            required
+                            data-form-element 
+                            disabled={isWebOffer}>      
+                        </lightning-input>
+                    </div>
+                    
+                    <!-- RCS Number Field -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input 
+                            name="rcsNumber" 
+                            field-level-help={label.rcsHelp}
+                            label={label.rcsNumber} 
+                            value={rcsNumber}
+                            placeholder={label.rcsPlaceholder} 
+                            onchange={handleInputChange} 
+                            required
+                            data-form-element 
+                            disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                    <!-- Registration Number Field -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input
+                            name="registrationNumber"
+                            field-level-help={label.registrationHelp}
+                            label={label.registrationNumber}
+                            value={registrationNumber}
+                            placeholder={label.registrationPlaceholder}
+                            onchange={handleInputChange}
+                            required
+                            data-form-element
+                            disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                </template>
+                
+                <!-- For non-Luxembourg: Show original enterprise number field -->
+                <template if:false={isLuxembourg}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input 
+                            name="enterpriseNumber" 
+                            field-level-help={enterpriseHelp} 
+                            label={enterpriseNum} 
+                            value={enterpriseNumber}
+                            placeholder={enterpriseNumPlaceholder} 
+                            onchange={handleInputChange} 
+                            required
+                            data-form-element 
+                            disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+                <!-- <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning-input name="enterpriseNumber" field-level-help={enterpriseHelp} label={enterpriseNum} value={enterpriseNumber}
+                        placeholder={enterpriseNumPlaceholder} onchange={handleInputChange} required=true
+                        data-form-element disabled={isWebOffer}></lightning-input>
+                </div>
+            </div>
+        </template> -->
+        <template if:true={hasEnterpriseNumber}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- Row 1: Business Number & Business Name -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="enterpriseNumber" label={enterpriseNum} value={enterpriseNumber}
+                        onchange={handleInputChange} read-only=true disabled data-form-element>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="businessName" label={label.companyName}
+                        placeholder={label.companyNamePlaceholder} value={businessName} onchange={handleInputChange}
+                        required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                    </lightning-input>
+                </div>
+                <!-- For Luxembourg: Show RCS Number in read-only mode -->
+                <template if:true={isLuxembourg}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input 
+                            name="rcsNumber" 
+                            label={label.rcsNumber} 
+                            value={rcsNumber}
+                            onchange={handleInputChange} 
+                            read-only 
+                            disabled={lockCompanyFields}
+                            data-form-element>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input 
+                            name="registrationNumber" 
+                            label={label.registrationNumber} 
+                            value={registrationNumber}
+                            onchange={handleInputChange} 
+                            read-only 
+                            disabled={lockCompanyFields}
+                            data-form-element>
+                        </lightning-input>
+                    </div>
+                </template>
+
+                <!-- Row 2: Commercial Name & Code TVA -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="commercialName" label={label.commercialName}
+                        placeholder={label.commercialNamePlaceholder} value={commercialName}
+                        onchange={handleInputChange} required data-form-element>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="codeTVA" label={label.codeTVA} value={codeTVA} onchange={handleInputChange}
+                        data-form-element>
+                    </lightning-input>
+                </div>
+
+                <!-- Row 3: Street Number & City -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="streetNumber" label={label.shippingStreet}
+                        placeholder={label.shippingStreetPlaceholder} value={streetNumber} onchange={handleInputChange}
+                        required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="city" label={label.shippingCity} placeholder={label.shippingCityPlaceholder}
+                        value={city} onchange={handleInputChange} required data-form-element 
+                        disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                    </lightning-input>
+                </div>
+
+                <!-- Row 4: Postal Code & Pays -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="postalCode" label={label.shippingPostalCode}
+                        placeholder={label.shippingPostalCodePlaceholder} value={postalCode}
+                        onchange={handleInputChange} required data-form-element
+                        disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="pays" label={label.shippingCountry}
+                        placeholder={label.shippingCountryPlaceholder} value={pays} onchange={handleInputChange}
+                        required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                    </lightning-input>
+                </div>
+                <!--Row 5: Is Subject to VAT-->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning-input type="checkbox" label={label.subjectToVat} checked={vatCheckbox} name="vatCheckbox"
+                        onchange={handleInputChange} data-form-element></lightning-input>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

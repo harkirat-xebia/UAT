@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER10_EstimatedNumberOfBeneficiaries</fullName>
+    <active>true</active>
+    <description>Opportunity.Estimated_number_of_beneficiaries must be lower than the Account number of Employees.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp;
+RecordType.DeveloperName = &quot;ER_Client_Opportunity_RT&quot;
+&amp;&amp;
+ER_Estimated_Number_Of_Beneficiaries__c &gt; Account.NumberOfEmployees
+&amp;&amp;
+NOT(ISPICKVAL(LeadSource, &apos;Websales&apos;))
+&amp;&amp;
+NOT(ISPICKVAL(LeadSource, &apos;Webform&apos;))</errorConditionFormula>
+    <errorDisplayField>ER_Estimated_Number_Of_Beneficiaries__c</errorDisplayField>
+    <errorMessage>Estimated Number Of Beneficiaries must be lower than the Account number of Employees.</errorMessage>
+</ValidationRule>

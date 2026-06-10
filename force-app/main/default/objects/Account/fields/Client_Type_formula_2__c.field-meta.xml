@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_Type_formula_2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+        TEXT(Federation__c) = &quot;Federgon&quot;, 
+        &quot;Federgon&quot;, 
+        IF(
+            TEXT(ER_Segment__c) = &quot;Public&quot;, 
+            &quot;Public&quot;, 
+            IF(
+            NumberOfEmployees &gt; 1000, 
+            &quot;LNA&quot;, 
+            IF(
+                NumberOfEmployees &gt;= 30, 
+                &quot;MM&quot;, 
+                IF(
+                NumberOfEmployees &lt; 30, 
+                &quot;SME&quot;, 
+                &quot;&quot;
+                )
+            )
+            )
+        )
+        )</formula>
+    <label>Client Type Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

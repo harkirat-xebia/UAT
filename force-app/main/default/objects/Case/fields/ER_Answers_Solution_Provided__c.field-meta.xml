@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Answers_Solution_Provided__c</fullName>
+    <description>Answers / Solutions provided to the client</description>
+    <label>Answers / Solutions provided</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Happy Client / No action</fullName>
+                <default>false</default>
+                <label>Happy Client / No action</label>
+            </value>
+            <value>
+                <fullName>Problem resolved</fullName>
+                <default>false</default>
+                <label>Problem resolved</label>
+            </value>
+            <value>
+                <fullName>Problem escalated</fullName>
+                <default>false</default>
+                <label>Problem escalated</label>
+            </value>
+            <value>
+                <fullName>Claim registered</fullName>
+                <default>false</default>
+                <label>Claim registered</label>
+            </value>
+            <value>
+                <fullName>Information given on procedures</fullName>
+                <default>false</default>
+                <label>Information given on procedures</label>
+            </value>
+            <value>
+                <fullName>Commercial gesture</fullName>
+                <default>false</default>
+                <label>Commercial gesture</label>
+            </value>
+            <value>
+                <fullName>Meeting scheduled</fullName>
+                <default>false</default>
+                <label>Meeting scheduled</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

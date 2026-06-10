@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE21_AcceptorProvider_Obligatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISCHANGED(TECH_AcceptorCreationViaLeadConversion__c))
+            &amp;&amp; NOT(PRIORVALUE(TECH_AcceptorCreationViaLeadConversion__c ) = True)
+            &amp;&amp; TECH_AcceptorCreationViaLeadConversion__c = False
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;BENELUX&apos;) 
+            &amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+            &amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c,&apos;C-TAP&apos;)
+            &amp;&amp; ISBLANK(TEXT(ER_Acceptor_Provider__c))</errorConditionFormula>
+    <errorMessage>The field Acceptor Provider must be filled in order to register the Acceptor</errorMessage>
+</ValidationRule>

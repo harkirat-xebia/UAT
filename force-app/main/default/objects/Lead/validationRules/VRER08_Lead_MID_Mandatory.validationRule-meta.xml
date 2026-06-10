@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER08_Lead_MID_Mandatory</fullName>
+    <active>true</active>
+    <description>When Lead Channel is equal to &quot;Unmatched&quot; --&gt; The MID is mandatory</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c), 
+RecordType.DeveloperName = &quot;ER_Merchant_Lead_RT&quot;, 
+ISBLANK ( ER_MID__c ),
+ISPICKVAL( ER_Lead_Channel__c ,&quot;Unmatched&quot;))</errorConditionFormula>
+    <errorMessage>The field MID must be filled in order to register the Lead</errorMessage>
+</ValidationRule>

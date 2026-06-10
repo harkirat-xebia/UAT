@@ -1,0 +1,9 @@
+<template>
+    <lightning-quick-action-panel>
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+    </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Mid_Auth_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+&amp;&amp; ISBLANK(ER_MID_Authorization__c) 
+&amp;&amp; (
+    ER_Business_Unit__c != &apos;BENELUX&apos; ||
+    (ER_Business_Unit__c = &apos;BENELUX&apos; &amp;&amp; (NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;WEBAuth&quot;)) || NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;MasterCard&quot;)) || NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;C-TAP&quot;))) )
+)</errorConditionFormula>
+    <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+    <errorMessage>The MID Authorization is missing</errorMessage>
+</ValidationRule>

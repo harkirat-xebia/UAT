@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFI01_IBAN_Format</fullName>
+    <active>true</active>
+    <description>This validation rule ensure that the format of the IBAN iscorrectly captured by User, and follow the finnish format. This rule can be bypassed by a User by checking the field &apos;BypassVR&apos; on its account.</description>
+    <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            ISPICKVAL( ER_BUPicklist__c, &apos;FI&apos;),
+            NOT(LEN(ER_IBAN__c) = 0),
+            NOT(
+            OR( 
+            AND(LEN( ER_IBAN__c ) &lt;=  34,  NOT(BEGINS(ER_IBAN__c, &apos;FI&apos;) )) , 
+            REGEX( ER_IBAN__c , &quot;FI[0-9]{16}&quot;) )
+            )
+            )</errorConditionFormula>
+    <errorDisplayField>ER_IBAN__c</errorDisplayField>
+    <errorMessage>The format of Finnish IBAN starts with ‘FI’ and is followed by 16 digits. If the bank account is not from Finland, the IBAN can contain max 34 alphanumeric characters</errorMessage>
+</ValidationRule>

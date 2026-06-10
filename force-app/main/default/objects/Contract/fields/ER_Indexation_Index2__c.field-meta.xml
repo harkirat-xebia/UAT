@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Indexation_Index2__c</fullName>
+    <label>Indexation Index</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Consumer price index</fullName>
+                <default>false</default>
+                <label>Consumer price index</label>
+            </value>
+            <value>
+                <fullName>Agoria index</fullName>
+                <default>false</default>
+                <label>Agoria index</label>
+            </value>
+            <value>
+                <fullName>Health index</fullName>
+                <default>false</default>
+                <label>Health index</label>
+            </value>
+            <value>
+                <fullName>Industrial price index</fullName>
+                <default>false</default>
+                <label>Industrial price index</label>
+            </value>
+            <value>
+                <fullName>Agoria price index</fullName>
+                <default>false</default>
+                <label>Agoria price index</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>MD</controllingFieldValue>
+            <controllingFieldValue>MA</controllingFieldValue>
+            <controllingFieldValue>PE</controllingFieldValue>
+            <controllingFieldValue>PL</controllingFieldValue>
+            <controllingFieldValue>PT</controllingFieldValue>
+            <controllingFieldValue>RO</controllingFieldValue>
+            <controllingFieldValue>RU</controllingFieldValue>
+            <controllingFieldValue>SG</controllingFieldValue>
+            <controllingFieldValue>SK</controllingFieldValue>
+            <controllingFieldValue>ES</controllingFieldValue>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <controllingFieldValue>SE</controllingFieldValue>
+            <controllingFieldValue>AE</controllingFieldValue>
+            <controllingFieldValue>TW</controllingFieldValue>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>TR</controllingFieldValue>
+            <controllingFieldValue>FR</controllingFieldValue>
+            <controllingFieldValue>UK</controllingFieldValue>
+            <controllingFieldValue>DE</controllingFieldValue>
+            <controllingFieldValue>US</controllingFieldValue>
+            <controllingFieldValue>GR</controllingFieldValue>
+            <controllingFieldValue>VE</controllingFieldValue>
+            <controllingFieldValue>HU</controllingFieldValue>
+            <controllingFieldValue>VN</controllingFieldValue>
+            <controllingFieldValue>IT</controllingFieldValue>
+            <controllingFieldValue>PC</controllingFieldValue>
+            <controllingFieldValue>JP</controllingFieldValue>
+            <controllingFieldValue>LB</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>AR</controllingFieldValue>
+            <controllingFieldValue>AT</controllingFieldValue>
+            <controllingFieldValue>BR</controllingFieldValue>
+            <controllingFieldValue>BG</controllingFieldValue>
+            <controllingFieldValue>CL</controllingFieldValue>
+            <controllingFieldValue>CN</controllingFieldValue>
+            <controllingFieldValue>CO</controllingFieldValue>
+            <controllingFieldValue>UTA</controllingFieldValue>
+            <controllingFieldValue>CEN</controllingFieldValue>
+            <controllingFieldValue>MY</controllingFieldValue>
+            <controllingFieldValue>MX</controllingFieldValue>
+            <valueName>Consumer price index</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <valueName>Agoria price index</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

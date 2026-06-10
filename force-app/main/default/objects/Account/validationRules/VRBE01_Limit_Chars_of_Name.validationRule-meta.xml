@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE01_Limit_Chars_of_Name</fullName>
+    <active>true</active>
+    <description>This rule limit the number of char in the standard field Name.</description>
+    <errorConditionFormula>AND(
+								NOT($User.ER_BypassVR__c),
+								ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;),
+                                NOT(Recordtype_Name__c = &apos;Aggregator_Merchant&apos;),
+								LEN(Name) &gt; 50)</errorConditionFormula>
+    <errorMessage>The number of character of the name must be less or equal to 50.</errorMessage>
+</ValidationRule>

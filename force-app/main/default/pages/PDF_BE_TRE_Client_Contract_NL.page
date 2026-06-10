@@ -1,0 +1,1117 @@
+<!--
+/**********************************************************************************************
+ * Description      : PDF_BE_TRE_Client_Contract_FR : Generates contract PDF for TRE client (FR)
+ * @author          : Imalka Hemachandra
+ * @since           : 31 July 2018
+ * Copyright 2018 ABSI. All rights reserved.
+ **********************************************************************************************/
+ -->
+ <apex:page id="PDF_BE_TRE_Client_Contract_NL" controller="PDF_BE_TREContractController" language="NL" showHeader="false" cache="false" sidebar="false" applyhtmltag="false" standardStylesheets="false" renderAs="pdf" >
+
+ <head>
+     <style type="text/css" media="print">
+     @page {
+         size: A4;
+         margin: 0mm 0mm 30mm 0mm;
+         @top-center {
+             content: element(header);
+         }
+
+         @bottom-left {
+             content: element(footer);
+         }
+     }
+     label {
+       font-family: 'Arial Unicode MS';
+     }
+     strong{
+         font-family:Arial !important;
+     }
+     div.header {
+         padding: 15px;
+         position: running(header);
+     }
+
+     div.footer {
+
+         position: running(footer);
+     }
+
+     .pagenumber:before {
+         content: counter(page);
+     }
+
+     .pagecount:before {
+         content: counter(pages);
+     }
+
+     table {
+         border-spacing: 10px;
+     }
+
+     .container {
+         position: relative;
+         top: 110px;
+         font-family: Arial Unicode MS;
+     }
+
+     .topleft {
+         position: absolute;
+         top: 8px;
+         left: 16px;
+         font-size: 18px;
+         width:47%;
+     }
+
+     .topright {
+         position: absolute;
+         top: 8px;
+         right: 16px;
+         font-size: 18px;
+         width:47%;
+     }
+
+ </style>
+ </head>
+ <div class="header">
+     <div style="position: absolute;right: 0px; top:0px">
+         <apex:image url="{!URLFOR($Resource.header_image_blue)}" width="130" height="130"/>
+     </div>
+ </div>
+
+ <div class="footer">
+
+     <table style="width: 100%; margin-left:30px;margin-right: 20px;">
+         <tr>
+             <td width="20%">
+                 <a href="http://www.edenred.be">
+                     <apex:image url="{!URLFOR($Resource.EdenredLogo)}" width="60" alt="Edenred"/>
+                 </a>
+             </td>
+             <td style="font-family: Arial Unicode MS; font-size: 10pt; color: #88898b;" width="60%">
+                 <center>
+                     <p>EDENRED BELGIUM SA - Boulevard du Souverain, <br/>165 boite 9 1160 Bruxelles - RPM Bruxelles - BE <br/>0407 034 269
+                         <br/>www.edenred.be</p>
+                 </center>
+             </td>
+             <td width="20%">
+                 <apex:image url="{!URLFOR($Resource.ISO_9001)}" width="50"/>
+             </td>
+         </tr>
+     </table>
+
+ </div>
+ <br/>
+ <br/>
+
+ <center>
+     <div style="margin-top:85px">
+         <a href="http://www.edenred.be" class="logo">
+             <apex:image url="{!URLFOR($Resource.LogoTicketRestaurant)}" width="250" alt="Ticket EcoCheque"/>
+         </a>
+     </div>
+ </center>
+ <div style="margin-left:15px;margin-right: 20px;">
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-top: none;">
+             <td rowspan="2" valign="bottom"><apex:image url="{!URLFOR($Resource.VerticleBar_Blue)}" width="15" height="170"/></td>
+             <td style="width: 100%;" colspan="2" valign="bottom">
+                 <strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 20pt;">Dienstverleningsovereenkomst</span></strong> &nbsp;&nbsp;
+                 <span style="color:#282554; font-family: Arial Unicode MS; font-size: 18pt;font-style: italic;">"Easy"</span>
+             </td>
+         </tr>
+         <tr>
+             <td colspan="2" style="width: 65%;vertical-align: top; font-family: Arial Unicode MS; font-size: 10pt; color: #88898b;" valign="top">
+                 <p>Overeenkomst tussen: de N.V. EDENRED BELGIUM (afdeling Ticket Restaurant®), waarvan de maatschappelijke
+                     zetel gevestigd is te 1160 Brussel, Vorstlaan 165 b.9-BE 0407.034.269, RPR Brussel, hierna genoemd EDENRED
+                     geldig vertegenwoordigd door <strong>{!$Label.LABS_SF_PDF_CommercialDirectorName}</strong>, en de KLANT, hierna omschreven:</p>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+ </div>
+
+ <apex:form style="margin-left:30px;margin-right: 30px;">
+     <input type="hidden" name="currentlanguage" value="FR"/>
+     <input type="hidden" name="local" value="fr_BE"/>
+     <table style="width: 100%;">
+         <tbody>
+         <tr>
+             <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                 <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">GEGEVENS OVER DE KLANT<wbr /></span>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="border-top: 2px dotted #e6e7e8; margin-bottom:0px;padding-bottom:0px;">
+             <td colspan="2" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Ondernemingsnummer</label><br/>
+                 <strong>{!enterpriseNumber}&nbsp;</strong>
+             </td>
+             <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; align:right;margin-bottom:0px;padding-bottom:0px;" width="60%" height="55" valign="bottom">
+                 <label>Maatschappelijke naam</label><br/>
+                 <strong>{!accName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="5" cellspacing="2px;">
+         <tbody>
+         <tr>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; " width="42%" height="55" valign="bottom">
+                 <label>Rechtsvorm</label><br/>
+                 <strong>{!legalForm}&nbsp;</strong>
+             </td>
+             <td style="border: 3px;font-size: 12pt; color: #88898b; align: right" width="5px" height="55" valign="middle">
+                 <apex:outputPanel rendered="{! !isSubjectToVAT}" style="margin-top:5px">
+                     <apex:image url="{!URLFOR($Resource.CheckBoxUnCheched)}" rendered="{! !isSubjectToVAT }" width="15px" height="15px"/>
+                 </apex:outputPanel>
+                 <apex:outputPanel rendered="{! isSubjectToVAT }"  style="margin-top:10px">
+                     <apex:image url="{!URLFOR($Resource.CheckBoxCheched)}" rendered="{! isSubjectToVAT }" width="15px" height="15px"/>
+                 </apex:outputPanel>
+             </td>
+             <td style="border: 3px;font-size: 12pt; color: #88898b; left:0px" width="16%" height="55" valign="middle">
+                 BTW plichtig
+             </td>
+             <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;" width="44%" height="55" valign="bottom">
+                 <label>Groep</label><br/>
+                 <strong>{!relName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                 <label>Adres (maatschappelijke zetel)</label><br/>
+                 <strong>{!billingStreet}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Postcode</label><br/>
+                 <strong>{!billingPostalCode}&nbsp;</strong>
+             </td>
+             <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="80%" height="55" valign="bottom">
+                 <label>Gemeente</label><br/>
+                 <strong>{!billingCity}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+
+     <!--<table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                 <label>Sociaal secretariaat</label><br/>
+                 <strong>{!socialSecretaryName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>-->
+     <div style="page-break-after:always;"/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                 <label>Staat uw sociaal secretariaat in voor bestellingen van Ticket Restaurant®?</label><br/>
+                 <strong>{!socialSecretaryOrders}</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Totaal aantal werknemers</label><br/>
+                 <strong>{!numberEmployees}&nbsp;</strong>
+             </td>
+             <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Aantal begunstigden voor elektronische Ticket Restaurant®</label><br/>
+                 <strong>{!numberBeneficiaries}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+
+
+     <table style="width: 100%;margin-top:10px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%" height="40" valign="bottom"><center>Contactpersoon</center></td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Gender</label><br/>
+                 <strong>{!main_salutation}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Naam</label><br/>
+                 <strong>{!main_lastName}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                 <label>Voornaam</label><br/>
+                 <strong>{!main_firstName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Tel.</label><br/>
+                 <strong>{!main_phone}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>GSM</label><br/>
+                 <strong>{!main_mobilePhone}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                 <label>Taal</label><br/>
+                 <strong>{!main_language}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                 <label>E-mail</label><br/>
+                 <strong>{!main_email}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <br/>
+     <br/>
+     <table style="width: 100%;">
+         <tbody>
+         <tr>
+             <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                 <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">GEGEVENS OVER DE VERANTWOORDELIJKE(N)<wbr /></span>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;margin-top:10px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                 <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Verantwoordelijke voor de relaties met EDENRED – Primary contact</span></strong></center>
+                 <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Contactpersoon die de toegangen tot uw Klantruimte per e-mail zal ontvangen)</span></center>
+             </td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Gender</label><br/>
+                 <strong>{!main_salutation}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Naam</label><br/>
+                 <strong>{!main_lastName}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                 <label>Voornaam</label><br/>
+                 <strong>{!main_firstName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Tel.</label><br/>
+                 <strong>{!main_phone}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>GSM</label><br/>
+                 <strong>{!main_mobilePhone}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                 <label>Taal</label><br/>
+                 <strong>{!main_language}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                 <label>E-mail</label><br/>
+                 <strong>{!main_email}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <div style="page-break-after:always;"/>
+     <table style="width: 100%;margin-top:120px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                 <br/>
+                 <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Verantwoordelijke voor de facturatie</span></strong></center>
+                 <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Contactpersoon die de facturen en de betalingsverzoeken in functie van de wijze van betaling zal ontvangen)</span></center>
+             </td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Gender</label><br/>
+                 <strong>{!invoice_salutation}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Naam</label><br/>
+                 <strong>{!invoice_lastName}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                 <label>Voornaam</label><br/>
+                 <strong>{!invoice_firstName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Tel.</label><br/>
+                 <strong>{!invoice_phone}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>GSM</label><br/>
+                 <strong>{!invoice_mobilePhone}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                 <label>Taal</label><br/>
+                 <strong>{!invoice_language}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                 <label>E-mail</label><br/>
+                 <strong>{!invoice_email}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <br/>
+     <table style="width: 100%;margin-top:75px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;border-top: 3px solid #e6e7e8;" width="100%">
+                 <br/>
+                 <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Verantwoordelijke voor de bestellingen</span></strong></center>
+                 <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Contactpersoon die alle informatie omtrent het plaatsen en opvolgen van de bestellingen zal ontvangen)</span></center>
+             </td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Gender</label><br/>
+                 <strong>{!order_salutation}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Naam</label><br/>
+                 <strong>{!order_lastName}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                 <label>Voornaam</label><br/>
+                 <strong>{!order_firstName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Tel.</label><br/>
+                 <strong>{!order_phone}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>GSM</label><br/>
+                 <strong>{!order_mobilePhone}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                 <label>Taal</label><br/>
+                 <strong>{!order_language}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                 <label>E-mail</label><br/>
+                 <strong>{!order_email}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <div style="page-break-after:always;"/>
+     <table style="width: 100%;margin-top:100px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                 <br/>
+                 <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Verantwoordelijke voor de ontvangst van de leveringen van kaarten</span></strong></center>
+                 <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Contactpersoon die de verschillende pakjes met daarin de Edenred®-kaarten zal ontvangen)</span></center>
+             </td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Gender</label><br/>
+                 <strong>{!delivery_salutation}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                 <label>Naam</label><br/>
+                 <strong>{!delivery_lastName}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                 <label>Voornaam</label><br/>
+                 <strong>{!delivery_firstName}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>Tel.</label><br/>
+                 <strong>{!delivery_phone}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                 <label>GSM</label><br/>
+                 <strong>{!delivery_mobilePhone}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                 <label>Taal</label><br/>
+                 <strong>{!delivery_language}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                 <label>E-mail</label><br/>
+                 <strong>{!delivery_email}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                 <label>Adres</label><br/>
+                 <strong>{!shippingStreet}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;" cellpadding="10">
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                 <label>Postcode</label><br/>
+                 <strong>{!shippingPostalCode}&nbsp;</strong>
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="80%" height="55" valign="bottom">
+                 <label>Gemeente</label><br/>
+                 <strong>{!shippingCity}&nbsp;</strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <br/>
+     <br/>
+     <div style="page-break-after:always;"/>
+     <table style="width: 100%;margin-top:100px">
+         <tbody>
+         <tr>
+             <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                 <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">FINANCIËLE GEGEVENS &#38; DUUR DIENSTVERLENINGSOVEREENKOMST<wbr /></span>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%;margin-top:10px" cellpadding="10">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                 <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Ticket Restaurant®</span></strong></center>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+
+     <table>
+         <td>
+             <center>
+                 <p style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b;">
+                     <apex:outputText rendered="{!(promoCode != 'Standard')}" value="Promocode : {!promoCode}" />
+                 </p>
+             </center>
+         </td>
+     </table>
+     <apex:outputPanel rendered="{!(promoCode != 'Standard')}" id="promoCodePanelid">
+         <table style="width: 100%;" >
+             <tbody>
+                 <tr style="margin-bottom:0px;padding-bottom:0px;">
+                     <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" valign="top" height="37">
+                         <label>{!promoDescription}</label><br/>
+                     </td>
+                 </tr>
+             </tbody>
+         </table>
+     </apex:outputPanel>
+     <!--<table style="width: 100%;" >
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" width="32%" height="37" valign="top">
+                 <label>Prestatievergoeding</label><br/>
+                 <strong><span style="text-align:right;float:right">{!participationPercentClient}</span></strong>
+             </td>
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                 &nbsp;&nbsp;<br/>
+                 %
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="31%" height="37" valign="top">
+
+                 <label>Zichtwaarde</label><br/>
+
+                 <strong><span style="text-align:right;float:right" >{!faceValue}</span></strong>
+             </td>
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                 &nbsp;&nbsp;<br/>
+                 &euro;
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="31%" height="37" valign="top">
+                 <label>Aanmaak rekening</label><br/>
+                 <strong><span style="text-align:right;float:right" >{!accountCreationCost}</span></strong>
+             </td>
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                 &nbsp;&nbsp;<br/>
+                 &euro;
+             </td>
+         </tr>
+         </tbody>
+     </table>-->
+
+     <table style="width: 100%; border: 1px solid #bcbec0;margin-top:15px;border-collapse: collapse;" cellpadding="0" cellspacing="0">
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Dienstnaam</center></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Bestelvolume</center></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Prestatievergoeding</center></th>
+             </tr>
+             <apex:repeat value="{!rates}" var="item">
+                 <!-- Conditionally render the row based on the Min and Max comparison with rateZone -->
+                 <apex:outputPanel layout="none" rendered="{!OR(isOppFromWebform, AND(item.MinInt <= rateZone, OR(ISBLANK(item.MaxInt), item.MaxInt >= rateZone)))}">
+
+                     <tr style="margin-bottom:0px;padding-bottom:0px;">
+                         <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                             <label class="persoFont"><center>{!item.ParentSolution}</center></label>
+                         </td>
+                         <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                             <label class="persoFont">
+                                 <center>
+                                     {!IF(item.Max == null, '>' + item.Min, item.Min + ' - ' + item.Max)} €
+                                 </center>
+                             </label>
+                         </td>
+                         <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                             <label class="persoFont"><center>
+                                 {!IF(
+                                     item.Percentage != null,
+                                     item.Percentage + ' %',
+                                     item.Price + ' €'
+                                 )}
+                             </center></label>
+                         </td>
+                     </tr>
+                 </apex:outputPanel>
+             </apex:repeat>
+         </table>
+
+     <table style="width: 100%;">
+         <tbody>
+         <tr>
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="top">
+                 <center>Looptijd van het contract :
+                     &nbsp;<apex:image url="{!URLFOR($Resource.CheckBoxCheched)}" width="15px" height="15px" style="vertical-align: text-bottom;"/> 2 jaar (standaard) </center>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <br/>
+     <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Edenred kaart</span></strong></center>
+
+     <table style="width: 100%;" >
+         <tbody>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" width="22%" height="30" valign="top" align="right">
+                 <label>Kost per kaart</label><br/>
+                 <strong><span style="text-align:right;float:right">{!cardCost}</span></strong>
+             </td>
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="15%" height="30" valign="bottom">
+                 &nbsp;&nbsp;<br/>
+                 &euro;x aantal kaarten
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="25%" height="30" valign="top">
+
+                 <label>Kost per vervangkaart</label>
+
+                 <strong><span style="text-align:right;float:right" >{!cardReplacement}</span></strong>
+             </td>
+             <!--<td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="25%" height="30" valign="top">
+                 <label>Kost per Hernieuwbaar</label>
+                 <strong><span style="text-align:right;float:right" >{!cardRenewable}</span></strong>
+                 </td>-->
+             <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="30" valign="bottom">
+                 &nbsp;&nbsp;<br/>
+                 &euro;
+             </td>
+             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="21%" height="30" valign="top">
+                 <label>Betaalwijze</label>
+                 <strong><span>Voorafbetaling</span></strong>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <table style="width: 100%; border: 1px solid #bcbec0;margin-top:0px;border-collapse: collapse;margin-top:30px" cellpadding="0" cellspacing="0">
+         <tr>
+             <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><center>Levering</center></th>
+             <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><center>Prijs levering kaarten</center></th>
+         </tr>
+
+         <apex:repeat value="{!deliveries}" var="item">
+             <tr style="margin-bottom:0px;padding-bottom:0px;">
+                 <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="40%" height="20" valign="middle">
+                     <label><strong><center>
+                         <apex:outputText style="font-family:Arial Unicode MS ;" value=" {!if(not(isnull(item.Max)), 'Tussen ', 'Meer dan  ')}  {!item.Min} {!if(not(isnull(item.Max)), ' '+$Label.Preposition_TO+' ', '')}
+                             {!if(not(isnull(item.Max)), item.Max, '')}  kaarten : {!if(not(isnull(item.Max)), 'per post', ' par koerier ')}">
+                         </apex:outputText>
+
+                     </center></strong></label>
+                 </td>
+                 <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="60%" height="20" valign="middle">
+                     <table style="width: 100%;">
+                         <tr>
+                             <td style="font-size: 10pt; color: #88898b;" width="3%" height="20" valign="bottom">
+                                 &euro;
+                             </td>
+                             <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;" width="60%" height="20" valign="top">
+                                 <strong> {!item.Price}</strong>
+
+                             </td>
+                             <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b;" width="40%" height="20" valign="bottom">
+                                     {! If((item.Min == '1') ,'/ eenheid','/ leveringspunt' ) }
+
+                             </td>
+                         </tr>
+                     </table>
+                 </td>
+             </tr>
+         </apex:repeat>
+     </table>
+     <table style="width: 100%;margin-top: 50px">
+         <tbody>
+         <tr>
+             <td colspan="5" style="font-size: 12pt; color: #88898b; align:center;font-family: Arial Unicode MS;" width="100%">
+                 <center>Opgemaakt te Brussel op {!dateAcceptedGeneralConditions}.</center>
+                 <center>Dit contract werd aangegaan via het online platform van Edenred op {!dateAcceptedGeneralConditions} om {!timeAcceptedGeneralConditions}</center>
+             </td>
+         </tr>
+         <tr style="margin-bottom:0px;padding-bottom:0px;">
+             <td style="font-size: 12pt; color: #88898b;font-family: Arial Unicode MS;" width="70%" valign="top">
+                 Door de wettelijke vertegenwoordiger<br/>
+                 Naam :<br/>
+                 Functie :<br/>
+                 handtekening<br/>
+             </td>
+             <td style="font-size: 12pt; color: #88898b;font-family: Arial Unicode MS;" width="30%" valign="top">
+                 Voor Edenred Belgium,<br/>
+                 <strong>{!$Label.LABS_SF_PDF_CommercialDirectorName}</strong><br/>
+                 {!$Label.LABS_SF_PDF_DirectorTitleNL}<br/>
+                 <apex:image url="{!URLFOR($Resource.TRE_Signature)}" width="60"/>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+     <div style="page-break-after:always;"/>
+
+     <!-- SFR-4433-Terms and agreement updates -->
+         <div class="container" style="width: 100%;margin-top:10px " cellpadding="10">
+         <!--<div class="topleft">-->
+             <p style="font-size: 9pt; color: #282554;text-align:justify;"><strong>VERKOOPCONTRACT - Algemene Voorwaarden - België</strong> </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 De bijzondere verkoopvoorwaarden (“Bijzondere Voorwaarden”) en deze algemene verkoopvoorwaarden (“Algemene Voorwaarden”), waarbij de eerste voorrang hebben op de tweede in geval van
+tegenstrijdigheid, vormen samen het verkoopcontract (“Contract”) dat wordt gesloten tussen Edenred Belgium NV (“Edenred”) en de klant zoals gedefinieerd in de Bijzondere Voorwaarden (“Klant”). De
+definities in de Algemene Voorwaarden zijn eveneens van toepassing op de Bijzondere Voorwaarden en op de bijlagen, en omgekeerd. Het Contract vervangt alle bestaande contracten, overeenkomsten
+of afspraken tussen de Partijen. Het Contract regelt volledig en exclusief de contractuele relatie tussen Edenred en de Klant met betrekking tot het voorwerp ervan. De Klant doet, zonder enig voorbehoud,
+afstand van zijn eigen algemene voorwaarden, onder welke naam dan ook en ongeacht wanneer deze aan Edenred werden overgemaakt. Edenred kan de Algemene Voorwaarden op elk moment wijzigen,
+mits inachtneming van een voorafgaande kennisgeving van 30 dagen aan de Klant. Indien de Klant de nieuwe voorwaarden niet aanvaardt, heeft hij het recht om het Contract ten minste 15 dagen vóór
+de ingangsdatum van de nieuwe voorwaarden schriftelijk op te zeggen. Bij gebreke van een opzegging verstuurd door de Klant ten minste 15 dagen vóór de ingangsdatum van de nieuwe voorwaarden,
+worden deze geacht door de Klant te zijn aanvaard.
+De Klant kan deze Algemene Voorwaarden op elk moment raadplegen op de website van Edenred <strong><span style="color: #00BFFF;">www.edenred.be</span></strong>
+             </p>
+             <p style="font-size: 9pt; color: #282554;text-decoration:underline;"><strong>DEFINITIES</strong></p>
+             
+             <table style="width: 100%; border: 1px solid #bcbec0;margin-top:0px;border-collapse: collapse;" cellpadding="0" cellspacing="0">
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Account »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Een gepersonaliseerde en beveiligde ruimte, per Klant en per Gebruiker, op een Applicatie (bv. MyEdenred).</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Applicatie »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Internetplatforms en mobiele apps ontwikkeld en onderhouden door Edenred en beschikbaar gesteld aan haar klanten en Gebruikers. De Applicaties zijn toe-gankelijk voor de klanten en voor de Gebruikers door middel van gepersonaliseerde toegangscodes. De Applicaties kunnen functioneren als een informatiesite,een Applicatie of een gepersonaliseerde ruimte (bv. MyEdenred).</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Begindatum »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Datum waarop het Contract van kracht wordt, zijnde de datum waarop de Klant het Contract ondertekent, tenzij anders bepaald in de Bijzondere Voorwaarden.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Bestelling »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Alle door de Klant geplaatste bestellingen van Diensten. Alle Bestellingen moeten hetvolgende vermelden: (i) het type Diensten, (ii) het volume, (iii) de datum en plaats van levering en (iv) de Prijs.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Cheques (Systeem) »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Het (Systeem van) elektronische dienstencheques (Edenred Maaltijd, Edenred Eco, Edenred Geschenk, Edenred Sport &#38; Cultuur en Edenred Consumptie en elk nieuw soortgelijk product of dienst die Edenred in de toekomst zou lanceren), waarmee de Gebruikers Transacties met betrekking tot de Producten van de Handelaars kunnen betalen met de Cheques overeenkomstig de Toepasselijke Wetgeving.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Diensten »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Samen of afzonderlijk, de Cheques, Edenred-kaarten en/of Applicaties zoals geselecteerd in de Bijzondere Voorwaarden en/of de Diensten toegevoegd (indien van toepassing) door de Klant na de Ingangsdatum via de website van Edenred.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« (Edenred) Kaart »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Gepersonaliseerde en beveiligde betaalkaart ter beschikking gesteld aan elke Gebruiker van Cheques waarmee Gebruikers de Producten van Handelaars kunnen aankopen. De Edenred Kaart is gekoppeld aan de Account van de Gebruiker die wordt geladen met de waarde van de Chèques.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Edenred Netwerk »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Het geheel van Handelaren die de Cheques aanvaarden als betaalmiddel voor de aankoop van hun Producten.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Gebruiker »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Een natuurlijke persoon (werknemer aangewezen door de Klant) die de uiteindelijke begunstigde is van de Diensten.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Handelaar »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Elke commerciële partner die lid is van het Edenred Netwerk hetgeen de Gebruikers toelaat om de Producten te kopen via Cheques.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« IP Rechten »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Alle intellectuele eigendomsrechten, waaronder logo’s, handelsnamen, handelsmerken, auteursrechten, patenten, technologieën, handelsgeheimen en de Vertrouwelijke Informatie van een Partij.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Overmacht »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Elke gebeurtenis of omstandigheid, met inbegrip van, maar niet beperkt tot, brand, explosie, epidemie, natuurramp, oorlog, oproer, staking door de overheid of haar agenten, of een vergelijkbare oorzaak, buiten de redelijke controle van de Partij die door deze gebeurtenis of omstandigheid wordt getroffen en die de uitvoering van het Contract redelijkerwijs onmogelijk maakt.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Persoonsgegevens »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Alle informatie met betrekking tot een geïdentificeerde of identificeerbare natuurlijke persoon.</th>    
+             </tr> 
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Producten »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">De diensten en/of goederen die door de Handelaar aan consumenten/Gebruikers te koop worden aangeboden.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Prijs »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">De prijs, kosten en vergoeding van de Diensten zoals uiteengezet in de Bijzondere Voorwaarden en in artikel 4 en, in het geval dat de Klant vervolgens de Diensten uitbreidt via de Edenred-website, de prijzen, kosten en vergoedingen die op de Edenred-website worden weergegeven op het moment van de Bestelling voor de uitgebreide Diensten.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Toepasselijke Wetgeving »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Bestaande en toekomstige regels, wetten en regelgeving, onder welke naam dan ook, die van toepassing zijn op de Cheques, de Diensten en dit Contract, en in het bijzonder (maar niet beperkt tot) het Koninklijk Besluit van 28 november 1969 in uitvoering van de Wet van 27 juni 1969 tot herziening van het Koninklijk Besluit van 28 december 1944 betreffende de sociale zekerheid van de werknemers, de CAO nr. 98 en Europese Verordening (EU) 2016/679 – AVG, evenals alle wijzigingen aan deze verschillende wetteksten.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Transactie »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">De aankoop, huur, reservering of enige andere commerciële transactie die door Gebruikers via Cheques wordt aangegaan met de Handelaars met betrekking tot hun Producten.</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Verbonden Onderneming »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">De personen en/of ondernemingen gerelateerd aan de Klant en vermeld en toegevoegd aan het Contract in Bijlage 2, ingevuld voor elke Verbonden Onderneming (Bijlage 2a), 2b), enz.)).</th>    
+             </tr>
+             <tr>
+                 <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Vertrouwelijke Informatie »</strong></th>
+                 <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">alle informatie, in welke vorm dan ook, (i) gecommuniceerd tussen de Partijen in het kader van het Contract, (ii) met betrekking tot de Gebruikers, met inbegrip van de persoonsgegevens, (iii) uitdrukkelijk door de Partijen aangeduid als vertrouwelijke informatie of (iv) die, door hun aard redelijkerwijs als vertrouwelijk dienen te worden behandeld.</th>    
+             </tr>
+             
+             </table>
+             
+             <p style="font-size: 6pt; color: #282554;"><strong>1. VOORWERP</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 Deze Algemene Voorwaarden hebben betrekking op de Diensten. Ze zijn opgesteld overeenkomstig de Toepasselijke Wetgeving. De Diensten die in de Bijzondere Voorwaarden zijn geselecteerd kunnen op elk moment door de Klant worden uitgebreid via de website van Edenred of door een Bestelling te plaatsen op basis van een « prijs volgens het volume van de bestelling op basis van een standaard prijsoverzicht». Voornoemde prijs en de voorwaarden van het Contract gelden dan automatisch voor elke Bestelling.
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>2. VERPLICHTINGEN VAN EDENRED</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;">
+                 Tijdens de duur van het Contract zal EDENRED:
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                 2.1. CHEQUES EN KAARTEN
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.1. een individuele en nominatieve Edenred Kaart aanleveren voor elke Gebruiker aangeduid door de Klant, in overeenstemming met de informatie die eerder door de Klant is gecommuniceerd betreffende de identiteit van elke Gebruiker. De Edenred Kaart kan worden gebruikt voor elk type Cheque dat is geselecteerd in de Bijzondere Voorwaarden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.2. op verzoek van de Klant en binnen de redelijke grenzen van de technische middelen van Edenred, de Edenred Kaarten personaliseren overeenkomstig de aanwijzigingen van de Klant en aanvaard door Edenred. De Klant garandeert Edenred, zonder voorbehoud, dat hij gerechtigd is deze vermeldingen te gebruiken en ontslaat Edenred van elke aansprakelijkheid dienaangaande.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.3. automatisch en in overeenstemming met de voorwaarden van het Contract een Edenred Kaart bestellen voor elke nieuwe Gebruiker die nog geen Edenred Kaart heeft wanneer door de Klant een Bestelling voor Cheques wordt geplaatst voor die Gebruiker.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.4. zorgen voor de automatische overdracht van de Edenred Kaart in geval van verandering van werkgever van de Gebruiker (indien de voormalige en de nieuwe werkgever beide klanten zijn van Edenred) zodat de Gebruiker haar/zijn Edenred Kaart en de toegang tot het resterende saldo van de Cheques (verstrekt door de voormalige werkgever) kan behouden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.5. de Edenred Kaarten leveren aan de Klant, op zijn zetel of op elke andere plaats in België die tussen de Partijen is overeengekomen. Op verzoek van de Klant kunnen de Edenred Kaarten, op eigen risico van de Klant, direct aan het thuisadres van elke Gebruiker worden geleverd. De levering gebeurt door Edenred volgens de leveringsmethode van haar keuze, tenzij anders overeengekomen tussen de Partijen. Edenred Kaarten worden gedesactiveerd geleverd; hun gebruiksvoorwaarden moeten vóór hun eerste gebruik door de Gebruikers worden aanvaard. De Kaarten zijn en blijven eigendom van Edenred.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.6. (i) de Account crediteren met de Cheques zoals door de Klant gedefinieerd via de Applicatie, onder voorwaarde en voor zover de Klant eerder de fondsen heeft geladen en/of de bijbehorende facturen heeft betaald op hun vervaldatum en (ii) de met de Edenred Kaart uitgevoerde Transacties verwerken, door eerst de Cheques met de kortste geldigheidsduur te gebruiken (“first in, first out”).
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.7. automatisch een nieuwe Edenred Kaart uitgeven wanneer (i) drie maanden voor de vervaldatum van een Edenred Kaart de Gebruiker nog steeds door de Klant bestelde Cheques heeft ontvangen en/of (ii) 45 dagen voor de vervaldatum van een Edenred Kaart, de Account nog steeds een positief Cheque-saldo vertoont.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.8. indien nodig, garanderen, in geval van intrekking of verval van de erkenning van Edenred als uitgever van een specifiek type Cheques, dat de genoemde Cheques geldig blijven tot hun vervaldatum.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.9. in geval van verlies of diefstal van de Edenred Kaart: Gebruikers toestaan om hun Edenred Kaart gratis te blokkeren via Card Stop, via een beveiligd extranet of via een interactieve spraakserver (IVS).
+             </p>
+             <div style="page-break-after:always;"/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.10. in geval van verlies, diefstal, defect of beschadiging van de Edenred Kaart: Gebruikers een nieuwe Edenred Kaart bezorgen binnen 10 werkdagen vanaf (i) de datum van blokkering van de gestolen of verloren Edenred Kaart of (ii) ontvangst door Edenred van de beschadigde of defecte Kaart, verzonden per aangetekende brief met ontvangstbewijs.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.1.11. in geval van verlies, diefstal of beschadiging van de Edenred Kaart: de kosten in verband met de vervanging van de Edenred Kaart aan de Klant factureren, in overeenstemming met de Bijzondere Voorwaarden. De Klant mag deze kosten slechts aan Gebruikers doorberekenen tot de maximale nominale waarde van een Edenred Maaltijd Cheque of een bedrag van 5 euro in het geval van de Edenred Eco Cheque, waarbij de eerste voorrang heeft op de tweede indien de Gebruiker geniet van de twee soorten Cheques. In het geval van een defecte Edenred Kaart gebeurt de vervanging gratis.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                 2.2. APPLICATIES
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.2.1. (i) een Account en een gepersonaliseerde toegangscode tot de Applicatie voor de Klant en elke Gebruiker aanmaken op basis van de informatie die eerder door de Klant is gecommuniceerd met betrekking tot de identiteit van elke Gebruiker; (ii) Gebruikers op elk moment toestaan om hun gebruikersnaam en/of wachtwoord online aan te maken en te wijzigen en om toegang te krijgen tot hun Account; (iii) de Klant of Gebruiker de activeringsprocedure van de Edenred Kaart verstrekken. Dankzij deze gepersonaliseerde toegangscodes kunnen de Klant en de Gebruikers verbinding maken met de Applicatie enhun Account en andere informatie die via de Applicatie wordt aangeboden, raadplegen.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.2.2. ervoor zorgen dat Gebruikers de Applicatie te allen tijde kunnen gebruiken en raadplegen. Edenred stelt alles in het werk om op jaarbasis (24 uur per dag, 7 dagen per week) minimaal 97% beschikbaarheid aan te bieden. De Klant aanvaardt echter dat de Applicatie niet beschikbaar is in geval van Overmacht of technisch onderhoud. In geval van onderbreking van de toegang of dienst zal Edenred haar uiterste best doen om zo snel mogelijk een oplossing voor het probleem te vinden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.2.3. de bandbreedte en opslagcapaciteit ter beschikking stellen die nodig zijn voor de goede werking van de Applicatie, ten voordele van de Klant en de Gebruikers.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.2.4. de nodige beveiligingssystemen bieden om de Applicatie, databases, gebruikersgegevens en computerserveromgeving te beschermen.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.2.5. de Gebruikers regelmatig informeren over de omvang van het Edenred Netwerk en de Producten, via de Applicatie en, indien van toepassing, via nieuwsbrieven. Nieuwsbrieven worden alleen verstuurd naar Gebruikers die hier uitdrukkelijk toestemming voor hebben gegeven.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                 2.3. ALGEMEEN
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.3.1. bestellingen aanvaarden die zijn geplaatst in overeenstemming met de voorwaarden van het Contract. Tenzij anders overeengekomen in de Bijzondere Voorwaarden worden Bestellingen pas geleverd na betaling van de Prijs met betrekking tot de Bestelling en/of alle verschuldigde facturen.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.3.2. de Transacties verwerken die zijn uitgevoerd door Gebruikers door het gebruik van de Diensten, op voorwaarde dat ze voldoen aan alle verplichtingen met betrekking tot de Transactie.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.3.3. de Handelaars die in aanmerking komen om de Diensten te aanvaarden en die voldoen aan de door Edenred uitgevaardigde partnerschapsvoorwaarden, uitnodigen om lid te worden van het Edenred Netwerk.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.3.4. beschikbaar zijn voor de Klant en Gebruikers en hen helpen met vragen of klachten, via de klantenservice https://user.edenred.be/hc/nl/requests/new.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 2.3.5. alle andere door de Klant gevraagde diensten verlenen zoals beschreven in de Bijzondere Voorwaarden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 <strong>2.3.6. in het algemeen, zorgen voor de naleving van alle contractuele verplichtingen en alle Toepasselijke Wetgeving in verband met de Diensten of het Contract.</strong>
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>3. VERPLICHTINGEN VAN DE KLANT</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;">
+                 Tijdens de duur van het Contract verbindt de Klant zich ertoe om:
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.1. aan Edenred (i) uiterlijk bij het plaatsen van de Bestelling, de informatie – per Gebruiker – die noodzakelijk is voor de aanmaak van de Edenred Kaart, het aanmaken van een Account en de activering van een gepersonaliseerde toegang tot de Applicatie, hetzij de achternaam, voornaam en e-mailadres, evenals, voor de Chèques, het rijksregisternummer, en dit voor elke Gebruiker aangegeven door de Klant, over te maken, alsook (ii) onmiddellijk, elke wijziging met betrekking tot deze informatie, inclusief informatie over een persoon die de hoedanigheid van Gebruiker heeft verloren (bijvoorbeeld vertrek van werknemers).
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.2. de Edenred Kaarten en/of Applicaties beschikbaar te stellen aan Gebruikers en hen te informeren dat ze, door ze te gebruiken, de hiermee verbonden gebruiksvoorwaarden accepteren (die worden weergegeven en moeten worden geaccepteerd op de Applicatie vóór het eerste gebruik en vervolgens bij eventuele updates). Edenred behoudt zich het recht voor om, van rechtswege, zonder kennisgeving of vergoeding, het gebruik van de Diensten op te schorten in geval van frauduleus of niet-conform gebruik van de genoemde Diensten door de Klant of door de Gebruikers.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.3. tenzij anders overeengekomen in de Bijzondere Voorwaarden, de kosten te dekken voor het uitgeven van Cheques en de Edenred Kaart die ter beschikking wordt gesteld van Gebruikers en de aansprakelijkheid op zich te nemen voor verlies, diefstal of schade aan Edenred Kaarten tussen hun levering aan de Klant en hun levering door de Klant aan de Gebruikers.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.4. de bestelling van de Edenred Kaart in geval van verval, verlies, diefstal, defect of schade te valideren, voor zover en zolang de Gebruiker geldige Cheques op zijn Account heeft, en de vervangingskosten op zich te nemen, in overeenstemming met de Bijzondere Voorwaarden (behalve in het geval van een defecte Edenred Kaart).
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.5. alleen voor Cheques Edenred Maaltijd: te garanderen, enerzijds, dat Gebruikers die toegang hebben tot een bedrijfsrestaurant waar de prijs van de maaltijd lager is dan de kostprijs (zoals bepaald door de Toepasselijke Wetgeving), deze maaltijd uitsluitend betalen met een Edenred Maaltijd Cheque, zonder mogelijkheid tot teruggave in contant geld, en anderzijds, dat de betreffende Handelaar op de hoogte wordt gesteld van de nominale waarde van de Edenred Maaltijd Cheques die door Gebruikers worden gebruikt.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.6. Ervoor te zorgen dat de apparatuur die wordt gebruikt om toegang te krijgen tot de Applicatie (inclusief tablets, smartphones, computers, internettoegang, telefoonnummers, enz.) compatibel is met het gebruik ervan, in het kader van de Diensten.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.7. ervoor te zorgen dat de Klant en de Gebruikers (i) de gebruiksvoorwaarden van de Applicatie en de Edenred Kaart kennen, aanvaarden en naleven, (ii) de Diensten niet gebruiken op een manier die de rechten van Edenred of derden zou kunnen schenden (inclusief IP Rechten); en (iii) de Diensten niet doorverkopen of verhuren of er toegang toe verlenen aan derden. Edenred behoudt zich het recht voor om alle noodzakelijke maatregelen te nemen indien de Klant of een Gebruiker de Diensten, de rechten van Edenred of derden of de relatie tussen Edenred en zijn partners, andere klanten of andere derden in gedrang brengt of compromitteert.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.8. in het algemeen, om te zorgen voor de naleving van alle contractuele verplichtingen en alle Toepasselijke Wetgeving in verband met de Diensten of het Contract;
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 3.9. de Prijs te betalen in overeenstemming met de bepalingen van de artikelen 4 en 5 hieronder.
+             </p>
+         <!--</div>-->
+         <!--<div class="topright">-->
+             <p style="font-size: 6pt; color: #282554;"><strong>4. PRIJS</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 4.1. De Klant betaalt voor de Diensten de Prijs bepaald in de Bijzondere Voorwaarden, vermeerderd met de toepasselijke BTW. Na het einde van het Contract, om welke reden dan ook, blijven alle voorafbetaalde Prijzen verworven door Edenred. Er is geen terugbetaling mogelijk voor ongebruikte Diensten of tegoeden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 4.2. De Klant kan, op elk moment tijdens de duurtijd van het Contract, en binnen de grenzen van de Toepasselijke Wetgeving, Diensten toevoegen en/of de nominale waarde van de Cheques verhogen en/of het aantal Gebruikers aanpassen via de MyEdenred-Applicatie. In dat geval blijven alle overige voorwaarden van het Contract ongewijzigd van toepassing.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 4.3. De Klant kan het door hem bepaalde volume van de Bestelling naar eigen goeddunken aanpassen. Indien het bestelde volume echter met 50% of meer afneemt voor het einde van de voorzien in artikel 7.1. van huidig Contrat, behoudt Edenred zich het recht voor om een forfaitaire schadevergoeding van de Klant te eisen ten bedrage van 10€/Gebruiker voor de 49 eerste Gebruikers, 7,5 €/Gebruiker voor de Gebruikers 50 tot 250, en 5 €/Gebruiker voor de Gebruikers boven de 250. Dit geldt enkel voor de Gebruikers waarvoor de Diensten niet meer worden besteld. Het bestelvolume dat in aanmerking wordt genomen voor deze berekening is het gemiddelde tussen het Bestelvolume van de eerste Bestelling en het Bestelvolume na de eerste 6 maanden (of alleen het Bestelvolume van de eerste Bestelling als dit gebeurt in de eerste zes maanden van het Contract).   
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 4.4. De Prijs is gekoppeld aan opwaartse variaties in de AGORIA loonkostenindex (nationaal gemiddelde). Bij een stijging van de AGORIA-index worden de Prijzen maximaal één keer per kalenderjaar aangepast volgens de volgende formule: P = P0 (0,2 + 0,8 x S/S0), waarbij :  
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;">
+                 <strong>P</strong> = aangepaste Prijs<br/>
+                 <strong>P0</strong>= Prijs vermeld in de Bijzondere Voorwaarden<br/>
+                 <strong>S</strong> =  AGORIA loonkostenindex (nationaal gemiddelde) van kracht op de eerste dag van elk kwartaal<br/>
+                 <strong>S0</strong> =  AGORIA loonkostenindex (nationaal gemiddelde) van kracht op de datum van afsluiting van het Contract.<br/>
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 Indien de AGORIA index niet langer wordt gepubliceerd of belangrijke wijzigingen ondergaat wat betreft de inhoud of de vorm, zal een vergelijkbare index worden gebruikt, mits de Klant hiervan op de hoogte wordt gesteld.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 4.5. Onverminderd de bepalingen van artikel 4.2., behoudt Edenred zich het recht voor om de Prijs op elk moment te wijzigen, maar beperkt tot eenmaal per kalenderjaar, mits voorafgaande kennisgeving van 60 dagen aan de Klant. Indien de Klant de nieuwe Prijs niet aanvaardt, heeft de Klant het recht om het Contract schriftelijk op te zeggen ten minste 15 dagen vóór de ingangsdatum van de nieuwe Prijs en met inachtneming van een opzegtermijn van 90 dagen die begint te lopen vanaf de ingangsdatum van de nieuwe Prijs. Tijdens deze opzegtermijn wordt de laatste tussen de Partijen overeengekomen Prijs toegepast. Bij gebrek aan een kennisgeving van de opzegging uiterlijk 15 dagen voor de ingangsdatum van de nieuwe Prijs, wordt de nieuwe Prijs als aanvaard beschouwd door de KLANT.
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>5. FACTURATIE EN BETALING</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 5.1. Tenzij anders overeengekomen tussen de Partijen, (i) wordt de Prijs voor de Diensten en de Edenred Kaart evenals de nominale waarde van de Cheques maandelijks op voorhand gefactureerd voor de volgende maand (betaling via bankoverschrijving of SEPA-domiciliëring);.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 5.2. Tenzij anders overeengekomen tussen de Partijen, worden de Prijs en de nominale waarden van de Cheques elektronisch gefactureerd. Edenred garandeert de authenticiteit van de herkomst van elektronisch opgemaakte facturen, de integriteit van hun inhoud en hun leesbaarheid. De bewijskracht van elektronische facturatie wordt uitdrukkelijk erkend en aanvaard door de Klant.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 5.3. Bij gebrek aan betaling vóór de geplande leveringsdatum, behoudt Edenred zich het recht voor om de Bestelling zonder voorafgaande kennisgeving te annuleren. Indien van toepassing en bij gebreke aan voorafbetaling of betaling via een SEPA-domiciliëring, zijn facturen betaalbaar binnen de 30 dagen na de datum van ontvangst van de factuur. Elke vertraging in de betaling van facturen op de vervaldag brengt de betaling van verwijlintresten en een forfaitaire schadevergoeding met zich mee, in overeenstemming met de wet van 2 augustus 2002 betreffende de bestrijding van betalingsachterstand bij handelstransacties. In geval van staking van betaling, liquidatie, faillissement of enige andere situatie van samenloop van schuldeisers van of bij de Klant, worden alle facturen en vorderingen van Edenred op de Klant onmiddellijk opeisbaar.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 5.4. Elke betwisting van facturen moet schriftelijk en binnen 14 kalenderdagen na ontvangst van de factuur gebeuren; zoniet wordt de factuur als onbetwist en door de Klant aanvaard beschouwd. Indien slechts bepaalde delen van een factuur worden betwist, dient het onbetwiste deel binnen de normale betalingstermijn te worden voldaan.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 5.5. Edenred behoudt zich het recht voor om een forfaitaire vergoeding van EUR 30,00 per incident aan te rekenen voor specifieke verzoeken of fouten (bv. verkeerd referentienummer,dubbele bestelling, enz.) gemaakt door de Klant.
+             </p>
+             <div style="page-break-after:always;"/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <br/>
+             <p style="font-size: 6pt; color: #282554;"><strong>6. AANSPRAKELIJKHEID</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 6.1. Edenred is aansprakelijk jegens de Klant voor zijn zware fout, opzettelijke fout en grove nalatigheid. Edenred kan echter niet aansprakelijk worden gesteld (i) in geval van Overmacht, (ii) voor de acties, nalatigheden of beslissingen van derden betrokken bij de uitvoering van het Contract, in het bijzonder verstoringen, vertragingen of verliezen van welke aard dan ook veroorzaakt door fraude, hacking of enige andere ongeoorloofde inbraak in het communicatiesysteem van de Edenred-Applicatie; (iii) de onbeschikbaarheid van de Edenred Kaart als gevolg van onderhoudswerkzaamheden of storingen, (iv) het feit dat bepaalde Producten die zijn gekocht met de Cheques, de Edenred Kaart of via de Applicatie ongepast, illegaal, van slechte kwaliteit, defect of anderszins onbevredigend blijken te zijn;. In de gevallen (ii) en (iv) dient de Gebruiker of de Klant rechtstreeks contact op te nemen met de Handelaar of de derde partij. Edenred zal de Klant naar best vermogen bijstaan staan in onderhandelingen met de betrokken Handelaar of derde partij om een aanvaardbare oplossing te vinden.  
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 6.2. De Klant zal Edenred vrijwaren en schadeloos stellen in het geval van een actie of vordering ingesteld tegen Edenred door een derde partij (bv. Gebruikers) die voortvloeit uit (i) een schending door de Klant, zijn werknemers, agenten of vertegenwoordigers, van de verplichtingen van het Contract, inclusief elke schending van de IP Rechten van derden.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 6.3. Behalve in geval van fraude, opzet of grove fout, nalatigheid, lichamelijk letsel of overlijden en voor zover toegestaan door de Toepasselijke Wetgeving :    
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 6.3.1. is de aansprakelijkheid van Edenred beperkt tot het bedrag gelijk aan de Prijs die is gefactureerd gedurende de zes (volledige) maanden voorafgaand aan het voorval dat de schade heeft veroorzaakt.  
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 6.3.2. is geen van de Partijen ten aanzien van de andere Partij aansprakelijk voor enige vorm van bijzondere, indirecte of gevolgschade, met inbegrip van maar niet beperkt tot verlies van inkomsten of winstderving, verlies van gegevens, reputatieschade, enz.    
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>7. DUUR EN BEEINDIGING</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 7.1. Tenzij anders overeengekomen tussen de Partijen in de Bijzondere Voorwaarden, wordt het Contract gesloten voor een periode van 24 maanden vanaf de Ingangsdatum («Initiële Periode») en wordt het Contract vervolgens stilzwijgend verlengd onder dezelfde voorwaarden voor opeenvolgende periodes van 12 maanden («Opeenvolgende Periode»), tenzij een van de Partijen het Contract opzegt per aangetekende brief ten minste 90 dagen voor het verstrijken van de Initiële Periode of enige Opeenvolgende Periode.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 7.2. Elke schending door een Partij (overtredende Partij) van haar verplichtingen onder het Contract die niet door de overtredende Partij wordt verholpen binnen 15 kalenderdagen vanaf de ingebrekestelling aan haar verzonden door de andere Partij, machtigt de andere Partij om het Contract zonder opzegtermijn en zonder schadevergoeding te beëindigen. Elke wijziging in de situatie van een Partij zoals de stopzetting van haar activiteiten, een gerechtelijke reorganisatie, faillissement, vereffening of elke andere gelijkaardige situatie geeft de andere Partij het recht om het Contract te beëindigen zonder opzegtermijn en zonder schadevergoeding.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 7.3. Elke beëindiging van het Contract door een Partij krachtens artikel 7.2. houdt de verplichting voor de Overtredenede Partij in om de andere Partij te vergoeden voor alle schade die deze laatste ondervindt door de vroegtijdige beëindiging. In geval van Vroegtijdige Beëindiging, wordt de schadevergoeding vastgesteld op 50% van de nog te factureren Prijs gedurende de resterende duur van het Contract, berekend op basis van de gemiddelde Prijs die aan de Klant gefactureerd werd gedurende de looptijd van het Contract tot de vroegtijdige beëindiging , onverminderd het recht van Edenred om elke hogere schade die zij kan aantonen bijkomend te vorderen.  
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 7.4. Indien de Klant dit Contract beëindigt vóór de eerste bestelling, behalve in geval van Overmacht, is de Klant verplicht Edenred te vergoeden ten belope van 50€/Gebruiker voor de Gebruikers 1 tot 49, 15€/Gebruiker voor de Gebruikers 50 tot 250 en 5€/Gebruiker voor de Gebruikers die de 250 te boven gaan.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 7.5. In geval van opzegging verbinden de Partijen zich ertoe om tijdens de opzeggingstermijn het Contract verder uit te voeren in overeenstemming met de bepalingen ervan.   
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>8. PRIVACY</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 8.1. Elke Partij verwerkt de Persoonsgegevens ontvangen in het kader van het Contract als een afzonderlijke verwerkingsverantwoordelijke. Niets in het Contract of de beoogde gevolgen ervan kwalificeert een van de Partijen als een verwerker of gezamenlijke verwerkingsverantwoordelijke met betrekking tot de Persoonsgegevens die in het kader van het Contract zijn ontvangen en verwerkt.  
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 8.2. De Partijen verklaren en garanderen dat zij te allen tijde, gedurende de looptijd van het Contract en na beëindiging ervan, zullen voldoen aan de Toepasselijke Wetgeving inzake de bescherming van Persoonsgegevens en in het bijzonder aan de Algemene Verordening Gegevensbescherming (EU) 2016/679 («AVG»).
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 8.3. Elke Partij treft op eigen kosten passende technische en organisatorische maatregelen, zoals met name vereist door artikel 32 van de AVG, tegen verlies of enige vorm van onrechtmatige verwerking (zoals onopzettelijke of onrechtmatige vernietiging, verlies, ongeoorloofde beschadiging, wijziging, toegang tot of bekendmaking van Persoonsgegevens) in verband met de verwerking van Persoonsgegevens. In de mate en voor zover vereist door Toepasselijke Wetgeving, zullen de Partijen de betrokken personen (bijvoorbeeld Gebruikers) informeren over de verwerkingsactiviteiten die in het kader van het Contract worden uitgevoerd.
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 8.4. Het algemeen beleid inzake de verwerking en bescherming van Persoonsgegevens van Edenred is beschikbaar op <strong><span style="color: #00BFFF;">https://www.edenred.be/nl/privacy-policy</span></strong> of op verzoek bij <strong><span style="color: #00BFFF;">dpo.belgium@edenred.com</span></strong>. Bij vragen, verzoeken of klachten over de verwerking van zijn Persoonsgegevens door Edenred kan de Klant of Gebruiker te allen tijde contact opnemen met de verantwoordelijke voor de bescherming van Persoonsgegevens de via het adres <strong><span style="color: #00BFFF;">dpo.belgium@edenred.com</span></strong>. De Klant of Gebruiker kan ook een klacht indienen bij de Gegevensbeschermingsautoriteit.    
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>9. INTELLECTUELE RECHTEN</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 9.1. Elke Partij blijft de exclusieve eigenaar van haar respectievelijke IP Rechten die in het kader van het Contract worden gebruikt.    
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 9.2. Elke Partij kan de andere Partij machtigen om haar IP Rechten te gebruiken voor marketing- en communicatiedoeleinden in verband met het Contract, op voorwaarde dat dit gebruik (i) gebeurt in wederzijds overleg en in overeenstemming met de elementen zoals voorafgaand meegedeeld door de houder van de betrokken IP Rechten; (ii) op geen enkele wijze inbreuk maakt op de IP Rechten en het imago van de andere Partij, noch de openbare orde en de goede zeden en (iii) gebeurt zonder bekendmaking van de inhoud van het Contract. In geen geval heeft deze machtiging betrekking op de IP Rechten van derden die door een van de Partijen (onder een gebruikslicentie) worden gebruikt in het kader van haar activiteiten.   
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 9.3. Elke Partij kan de andere Partij verzoeken elk gebruik van haar IP Rechten te staken dat, naar haar redelijke mening, in strijd is met het voorgaande. De andere Partij zal elk ongeoorloofd gebruik onmiddellijk staken.   
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 9.4. Elke Partij garandeert dat haar logo’s geen inbreuk uitmaken op de IP Rechten van derden en ontslaat de andere Partij van elke aansprakelijkheid en vrijwaart haar tegen elke vordering of aanspraak in deze context.    
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>10. VERTROUWELIJKHEID</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 Gedurende de looptijd van het Contract en 36 maanden na het einde ervan, mag geen van de Partijen de Vertrouwelijke Informatie van de andere Partij gebruiken voor andere doeleinden dan voor de uitvoering van het Contract of voor archiveringsdoeleinden. Elke Partij zorgt ervoor dat de Vertrouwelijke Informatie van de andere Partij niet openbaar wordt gemaakt en dat haar werknemers, personeelsleden of vertegenwoordigers deze niet aan derden bekendmaken. Indien een Partij door een rechtbank of een overheid wordt verplicht om Vertrouwelijke Informatie van de andere Partij bekend te maken of over te maken, zal zij die andere Partij onmiddellijk hierover informeren.
+             </p>
+             <p style="font-size: 6pt; color: #282554;"><strong>11. DIVERSEN</strong></p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 11.1. Voor de toepassing van het Contract en alle gevolgen ervan, kan elke mededeling, kennisgeving van gerechtelijke of buitengerechtelijke handelingen rechtsgeldig gebeuren op het adres vermeld in de Bijzondere Voorwaarden of op de maatschappelijke zetel van elk van de Partijen.       
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 11.2. Het Contract vervangt alle eerdere besprekingen, onderhandelingen, afspraken en overeenkomsten tussen de Partijen en regelt de algemene relatie tussen de Partijen met betrekking tot de Diensten (zoals geselecteerd in de Bijzondere Voorwaarden of via de website van EDENRED door de manier waarop een Bestelling gebaseerd is op een «prijs volgens tot het volume van de bestelling op basis van een standaard prijsraster»).    
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 11.3. Indien enige bepaling of een deel van een bepaling van het Contract ongeldig of niet-afdwingbaar wordt geacht, blijven het geldige of afdwingbare deel daarvan en de overige bepalingen van het Contract onveranderd van kracht. Een afstand (expliciet of impliciet) door een partij van een verzuim of schending van het Contract vormt afstand recht betreffende toekomstige verzuimen of schendingen.    
+             </p>
+             <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                 11.4. Het Contract is onderworpen aan het Belgisch recht. In geval van geschil zullen de Partijen altijd te goeder trouw een minnelijke oplossing voor hun geschil zoeken. EDENRED behoudt zich het recht voor om het Contract op te schorten of te beperken in geval van een geschil. Indien er geen minnelijke oplossing kan worden gevonden, valt elk geschil met betrekking tot de sluiting, de interpretatie of de uitvoering van het Contract onder de exclusieve bevoegdheid van de rechtbanken en hoven van het arrondissement Brussel (eerste kanton van de vrederechter).     
+             </p>
+         <!--</div>-->
+     </div>
+     
+ </apex:form>
+</apex:page>

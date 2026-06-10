@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Source__c</fullName>
+    <label>Lead Source</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Websales</fullName>
+                <default>false</default>
+                <label>Websales</label>
+            </value>
+            <value>
+                <fullName>SEO</fullName>
+                <default>false</default>
+                <label>SEO</label>
+            </value>
+            <value>
+                <fullName>Phone in</fullName>
+                <default>false</default>
+                <label>Phone in</label>
+            </value>
+            <value>
+                <fullName>Paid Social media</fullName>
+                <default>false</default>
+                <label>Paid Social media</label>
+            </value>
+            <value>
+                <fullName>SEA</fullName>
+                <default>false</default>
+                <label>SEA</label>
+            </value>
+            <value>
+                <fullName>Lead providers</fullName>
+                <default>false</default>
+                <label>Lead providers</label>
+            </value>
+            <value>
+                <fullName>Emailing</fullName>
+                <default>false</default>
+                <label>Emailing</label>
+            </value>
+            <value>
+                <fullName>Afspraken makers</fullName>
+                <default>false</default>
+                <label>Afspraken makers</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>L2W</fullName>
+                <default>false</default>
+                <label>L2W</label>
+            </value>
+            <value>
+                <fullName>Manual input</fullName>
+                <default>false</default>
+                <label>Manual input</label>
+            </value>
+            <value>
+                <fullName>Import</fullName>
+                <default>false</default>
+                <label>Import</label>
+            </value>
+            <value>
+                <fullName>Trade Fairs</fullName>
+                <default>false</default>
+                <label>Trade Fairs</label>
+            </value>
+            <value>
+                <fullName>Referral program</fullName>
+                <default>false</default>
+                <label>Referral program</label>
+            </value>
+            <value>
+                <fullName>Outbound call</fullName>
+                <default>false</default>
+                <label>Outbound call</label>
+            </value>
+            <value>
+                <fullName>Zeta</fullName>
+                <default>false</default>
+                <label>Zeta</label>
+            </value>
+            <value>
+                <fullName>Partners</fullName>
+                <default>false</default>
+                <label>Partners</label>
+            </value>
+            <value>
+                <fullName>Organic Social Media</fullName>
+                <default>false</default>
+                <label>Organic Social Media</label>
+            </value>
+            <value>
+                <fullName>Offline</fullName>
+                <default>false</default>
+                <label>Offline</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

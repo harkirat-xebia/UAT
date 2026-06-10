@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFI_Merchant_1st_line_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFI Merchant 1st line</label>
+    <queue>ERFI_Merchant_1st_line</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

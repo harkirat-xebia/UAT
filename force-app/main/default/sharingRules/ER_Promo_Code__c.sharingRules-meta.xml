@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Marketing_Auto_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Marketing Auto Team</label>
+        <sharedTo>
+            <group>Marketing_Auto_Teams</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>ER_Status__c</field>
+            <operation>equals</operation>
+            <value>Draft,Activated,Expired</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

@@ -1,0 +1,60 @@
+<template>
+    <template for:each={productMap.Service} for:item="service">
+        <div key={service.Id} class="product-container slds-m-top_large inner-container" data-id={service.productId}>
+            <div class="header-top">
+                <h2>{service.solutionName}</h2>
+            </div>
+            <div class="benef-div">
+                <p class="counter-label">
+                    {label.beneficiarySubHeader}<span class="text-red">&nbsp;{service.solutionName}</span>
+                </p>
+                <div class="counter-main">
+                    <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease"
+                        variant="border-filled" name="noOfBeneficiaries" onclick={decrease} disabled={isWebOffer}>
+                    </lightning-button-icon>
+            
+                    <lightning-input type="number" value={service.nbOfBeneficiaries} onchange={handleInputChange} min="1"
+                        variant="label-hidden" max={smeSizeLimit} name="noOfBeneficiaries" data-form-element disabled={isWebOffer} style="width:100%;">
+                    </lightning-input>
+            
+                    <lightning-button-icon icon-name="utility:add" alternative-text="Increase"
+                        variant="border-filled" name="noOfBeneficiaries" onclick={increase} disabled={isWebOffer}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <div class="face-value-div">
+                <p class="slds-m-top_large counter-label">
+                    {label.faceValueLabel}
+                </p>
+                <div class="counter-main">
+                    <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease"
+                        onclick={decrease} name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                    </lightning-button-icon>
+            
+                    <lightning-input type="number" name="faceValue" value={service.faceValue} onchange={handleInputChange} min={minFaceValue}
+                        variant="label-hidden" max={maxFaceValue} data-form-element disabled={isWebOffer} required style="width:100%;">
+                    </lightning-input>
+            
+                    <lightning-button-icon icon-name="utility:add" alternative-text="Increase"
+                        onclick={increase} name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <div class="red-box-custom delivery-tbl" data-id={service.productId}>
+                <table class="slds-table tbl-right slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:0"><strong>{label.estimationLabel}</strong></td>
+                            <td style="border-top:0">{service.minValue} - {service.maxValue}€</td>
+                        </tr>
+                        <tr>
+                            <td><strong>{label.orderFee}</strong></td>
+                            <td>{service.percentage}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </template>
+</template>

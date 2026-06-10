@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_CR_PrimaryContactEmail</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT( $User.ER_BypassVR__c ),
+ER_Primary__c,
+ISBLANK(ER_Contact__r.Email)
+)</errorConditionFormula>
+    <errorDisplayField>ER_Contact__c</errorDisplayField>
+    <errorMessage>The Primary contact must have an email address.</errorMessage>
+</ValidationRule>

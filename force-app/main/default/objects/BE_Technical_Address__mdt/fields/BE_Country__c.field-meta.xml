@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BE_Country__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Country</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BELGIUM</fullName>
+                <default>true</default>
+                <label>BELGIUM</label>
+            </value>
+            <value>
+                <fullName>LUXEMBOURG</fullName>
+                <default>false</default>
+                <label>LUXEMBOURG</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

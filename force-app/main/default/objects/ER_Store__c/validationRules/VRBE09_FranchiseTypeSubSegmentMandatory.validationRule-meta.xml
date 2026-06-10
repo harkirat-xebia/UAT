@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE09_FranchiseTypeSubSegmentMandatory</fullName>
+    <active>true</active>
+    <description>Franchise type and Sub-segment should be mandatory for BENELUX</description>
+    <errorConditionFormula>RecordType.DeveloperName = &quot;ER_Merchant_Store&quot; &amp;&amp;
+            NOT($User.ER_BypassVR__c) &amp;&amp;
+            NOT(ISCHANGED(TECH_StoreCreationViaLeadConversion__c))&amp;&amp;
+            NOT(PRIORVALUE(TECH_StoreCreationViaLeadConversion__c) = True)&amp;&amp;
+            TECH_StoreCreationViaLeadConversion__c = False &amp;&amp;
+            ISPICKVAL(ER_BUPicklist__c,&apos;BENELUX&apos;) &amp;&amp;(ISBLANK(TEXT(ER_Franchise_type__c)) ||
+            ISBLANK(TEXT(ERBE_Sub_Segment__c)))</errorConditionFormula>
+    <errorMessage>Franchise type and Sub-segment are mandatory</errorMessage>
+</ValidationRule>

@@ -1,0 +1,82 @@
+<!--
+ - Created by ALK on 23/01/2023
+ - Description: lcerGetIATransactions
+ -->
+
+<!-- Lcer Get IA Transactions -->
+<template>
+  <lightning-quick-action-panel header={label.getTransactionLbl}>
+      <!-- SPINNER -->
+      <div if:true={showLoadingSpinner}>
+          <lightning-spinner alternative-text={label.processing} size="large">
+          </lightning-spinner>
+      </div>
+
+      <template if:true={error}>
+          <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+      </template>
+
+      <template if:false={error}>
+          <div class="slds-box slds-box_x-small slds-m-around_x-small">
+              <div class="slds-grid slds-wrap">
+                  <div class="slds-size_6-of-12"></div>
+                  <div class="slds-size_2-of-12 spacing">
+                      <lightning-input class="fromDate" type="date" label={label.fromCreatedDateLbl} placeholder={label.fromCreatedDateLbl} variant="label-hidden"></lightning-input>
+                  </div>
+                  <div class="slds-size_2-of-12 spacing">
+                      <lightning-input class="toDate" type="date" label={label.toCreatedDateLbl} placeholder={label.toCreatedDateLbl} variant="label-hidden" onchange={handleChnage}></lightning-input>
+                  </div>
+                  <div class="slds-size_2-of-12 spacing align-text__left">
+                      <button class="slds-button slds-button_brand slds-button_stretch" onclick={handleClick}>{label.getTransactionLbl}</button>
+                  </div>
+              </div>
+          </div>
+
+          <template if:true={data.length}>
+              <div class="slds-box slds-box_x-small slds-m-around_x-small slds-text-body_small">
+                  <lightning-datatable class="slds-table_striped"
+                                       hide-checkbox-column="true"
+                                       key-field="id"
+                                       data={recordsToDisplay}
+                                       columns={columns}>
+                  </lightning-datatable>
+              </div>
+
+              <template if:true={displayButtons}>
+                  <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                      <div class="slds-grid slds-wrap">
+                          <div class="slds-size_2-of-12"><button class="previous-btn slds-button slds-button_brand slds-button_stretch" onclick={handlePrevious} disabled>
+                              {label.previousLbl}</button></div>
+                          <div class="slds-size_8-of-12">
+                              <div class="slds-align_absolute-center slds-text-heading_small">Page {pageNumber} / {totalPages}</div>
+                          </div>
+                          <div class="slds-size_2-of-12"><button class="next-btn slds-button slds-button_brand slds-button_stretch" onclick={handleNext}>
+                              {label.nextLbl}</button></div>
+                      </div>
+                  </div>
+              </template>
+              <!--div class="slds-float_right slds-size_1-of-1">
+                  <template if:true={recordsToDisplay}>
+                      <c-pagination totalrecords={recordsToDisplay} page-size={pageSize} onpagination={handlePagination}></c-pagination>
+                  </template>
+              </div-->
+          </template>
+
+          <template if:true={noDataFound}>
+              <div class="slds-box slds-box_x-small slds-m-around_x-small slds-notify_alert slds-alert_warning">{label.noDataFoundLbl}</div>
+          </template>
+
+      </template>
+
+      <!-- THIS DIV SHOULD BE DISPLAYED AFTER THE RELEASE OF Spring 23 INTO PROD -->
+      <!--div slot="footer">
+          <lightning-button
+                  variant="brand"
+                  label={label.close}
+                  onclick={handleClose}
+          ></lightning-button>
+      </div-->
+
+  </lightning-quick-action-panel>
+
+</template>

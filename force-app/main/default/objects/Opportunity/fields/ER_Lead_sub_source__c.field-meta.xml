@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Lead_sub_source__c</fullName>
+    <label>Lead sub-source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>LeadSource</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Econtratonline</fullName>
+                <default>false</default>
+                <label>Econtratonline</label>
+            </value>
+            <value>
+                <fullName>Le Guichet Pro</fullName>
+                <default>false</default>
+                <label>Le Guichet Pro</label>
+            </value>
+            <value>
+                <fullName>Econtratonline Connection</fullName>
+                <default>false</default>
+                <label>Econtratonline Connection</label>
+            </value>
+            <value>
+                <fullName>Internet</fullName>
+                <default>false</default>
+                <label>Internet</label>
+            </value>
+            <value>
+                <fullName>Internet Zeta</fullName>
+                <default>false</default>
+                <label>Internet Zeta</label>
+            </value>
+            <value>
+                <fullName>Appel de Permanence</fullName>
+                <default>false</default>
+                <label>Appel de Permanence</label>
+            </value>
+            <value>
+                <fullName>Email entrant</fullName>
+                <default>false</default>
+                <label>Email entrant</label>
+            </value>
+            <value>
+                <fullName>Statut 35</fullName>
+                <default>false</default>
+                <label>Statut 35</label>
+            </value>
+            <value>
+                <fullName>Customer care</fullName>
+                <default>false</default>
+                <label>Customer care</label>
+            </value>
+            <value>
+                <fullName>Facebook</fullName>
+                <default>false</default>
+                <label>Facebook</label>
+            </value>
+            <value>
+                <fullName>Linkedin</fullName>
+                <default>false</default>
+                <label>Linkedin</label>
+            </value>
+            <value>
+                <fullName>Adwords</fullName>
+                <default>false</default>
+                <label>Adwords</label>
+            </value>
+            <value>
+                <fullName>Bing</fullName>
+                <default>false</default>
+                <label>Bing</label>
+            </value>
+            <value>
+                <fullName>Bobex</fullName>
+                <default>false</default>
+                <label>Bobex</label>
+            </value>
+            <value>
+                <fullName>BizzBooster</fullName>
+                <default>false</default>
+                <label>BizzBooster</label>
+            </value>
+            <value>
+                <fullName>Companeo</fullName>
+                <default>false</default>
+                <label>Companeo</label>
+            </value>
+            <value>
+                <fullName>Manageo</fullName>
+                <default>false</default>
+                <label>Manageo</label>
+            </value>
+            <value>
+                <fullName>HR alert</fullName>
+                <default>false</default>
+                <label>HR alert</label>
+            </value>
+            <value>
+                <fullName>People Sphere</fullName>
+                <default>false</default>
+                <label>People Sphere</label>
+            </value>
+            <value>
+                <fullName>Edenred.be</fullName>
+                <default>false</default>
+                <label>Edenred.be</label>
+            </value>
+            <value>
+                <fullName>Edenred.lu</fullName>
+                <default>false</default>
+                <label>Edenred.lu</label>
+            </value>
+            <value>
+                <fullName>Emailing</fullName>
+                <default>false</default>
+                <label>Emailing</label>
+            </value>
+            <value>
+                <fullName>Afspraken makers</fullName>
+                <default>false</default>
+                <label>Afspraken makers</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>L2W</fullName>
+                <default>false</default>
+                <label>L2W</label>
+            </value>
+            <value>
+                <fullName>Manual input</fullName>
+                <default>false</default>
+                <label>Manual input</label>
+            </value>
+            <value>
+                <fullName>Import</fullName>
+                <default>false</default>
+                <label>Import</label>
+            </value>
+            <value>
+                <fullName>Trade Fairs</fullName>
+                <default>false</default>
+                <label>Trade Fairs</label>
+            </value>
+            <value>
+                <fullName>Webform</fullName>
+                <default>false</default>
+                <label>Webform</label>
+            </value>
+            <value>
+                <fullName>Referral program</fullName>
+                <default>false</default>
+                <label>Referral program</label>
+            </value>
+            <value>
+                <fullName>Outbound call</fullName>
+                <default>false</default>
+                <label>Outbound call</label>
+            </value>
+            <value>
+                <fullName>Internal Webform</fullName>
+                <default>false</default>
+                <label>Internal Webform</label>
+            </value>
+            <value>
+                <fullName>API</fullName>
+                <default>false</default>
+                <label>API</label>
+            </value>
+            <value>
+                <fullName>Editus</fullName>
+                <default>false</default>
+                <label>Editus</label>
+            </value>
+            <value>
+                <fullName>Adhoc Campaign</fullName>
+                <default>false</default>
+                <label>Adhoc Campaign</label>
+            </value>
+            <value>
+                <fullName>Automated Email</fullName>
+                <default>false</default>
+                <label>Automated Email</label>
+            </value>
+            <value>
+                <fullName>Newsletter</fullName>
+                <default>false</default>
+                <label>Newsletter</label>
+            </value>
+            <value>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+                <label>Influencer</label>
+            </value>
+            <value>
+                <fullName>Instagram</fullName>
+                <default>false</default>
+                <label>Instagram</label>
+            </value>
+            <value>
+                <fullName>Youtube</fullName>
+                <default>false</default>
+                <label>Youtube</label>
+            </value>
+            <value>
+                <fullName>Social Selling</fullName>
+                <default>false</default>
+                <label>Social Selling</label>
+            </value>
+            <value>
+                <fullName>Qr-code</fullName>
+                <default>false</default>
+                <label>Qr-code</label>
+            </value>
+            <value>
+                <fullName>Media Partners</fullName>
+                <default>false</default>
+                <label>Media Partners</label>
+            </value>
+            <value>
+                <fullName>Affiliate</fullName>
+                <default>false</default>
+                <label>Affiliate</label>
+            </value>
+            <value>
+                <fullName>Zeta</fullName>
+                <default>false</default>
+                <label>Zeta</label>
+            </value>
+            <value>
+                <fullName>Notifications</fullName>
+                <default>false</default>
+                <label>Notifications</label>
+            </value>
+            <value>
+                <fullName>Abandonned contracting</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Abandonned contracting</label>
+            </value>
+            <value>
+                <fullName>Adwords: Google, Bing</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Adwords: Google, Bing</label>
+            </value>
+            <value>
+                <fullName>Encore</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Encore</label>
+            </value>
+            <value>
+                <fullName>Lead provider</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lead provider</label>
+            </value>
+            <value>
+                <fullName>Other adwords</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other adwords</label>
+            </value>
+            <value>
+                <fullName>Public Register - list of existing companies</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Public Register - list of existing companies</label>
+            </value>
+            <value>
+                <fullName>Public Register - list of new created companies</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Public Register - list of new created companies</label>
+            </value>
+            <value>
+                <fullName>SD Worx</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>SD Worx</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Websales</controllingFieldValue>
+            <valueName>Econtratonline</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Websales</controllingFieldValue>
+            <valueName>Econtratonline Connection</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Phone in</controllingFieldValue>
+            <valueName>Appel de Permanence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Phone in</controllingFieldValue>
+            <valueName>Email entrant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Phone in</controllingFieldValue>
+            <valueName>Statut 35</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Phone in</controllingFieldValue>
+            <valueName>Customer care</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEA</controllingFieldValue>
+            <valueName>Adwords</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEA</controllingFieldValue>
+            <valueName>Bing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>Le Guichet Pro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>Bobex</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>BizzBooster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>Companeo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>Manageo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>HR alert</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>People Sphere</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead providers</controllingFieldValue>
+            <valueName>Editus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Emailing</controllingFieldValue>
+            <valueName>Emailing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Emailing</controllingFieldValue>
+            <valueName>Adhoc Campaign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Emailing</controllingFieldValue>
+            <valueName>Automated Email</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Emailing</controllingFieldValue>
+            <valueName>Newsletter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Emailing</controllingFieldValue>
+            <valueName>Notifications</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Afspraken makers</controllingFieldValue>
+            <valueName>Afspraken makers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>L2W</controllingFieldValue>
+            <valueName>L2W</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>L2W</controllingFieldValue>
+            <valueName>API</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral program</controllingFieldValue>
+            <valueName>Referral program</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outbound call</controllingFieldValue>
+            <valueName>Outbound call</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manual input</controllingFieldValue>
+            <valueName>Manual input</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Import</controllingFieldValue>
+            <valueName>Import</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <controllingFieldValue>Paid Social Media</controllingFieldValue>
+            <valueName>Facebook</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <controllingFieldValue>Paid Social Media</controllingFieldValue>
+            <valueName>Linkedin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <valueName>Influencer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <valueName>Instagram</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <valueName>Youtube</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Organic Social media</controllingFieldValue>
+            <controllingFieldValue>Paid Social Media</controllingFieldValue>
+            <valueName>Social Selling</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Offline</controllingFieldValue>
+            <valueName>Qr-code</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Partners</controllingFieldValue>
+            <valueName>Media Partners</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Partners</controllingFieldValue>
+            <valueName>Affiliate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Zeta</controllingFieldValue>
+            <valueName>Internet Zeta</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEO</controllingFieldValue>
+            <valueName>Internet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEO</controllingFieldValue>
+            <valueName>Webform</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEO</controllingFieldValue>
+            <valueName>Internal Webform</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEO</controllingFieldValue>
+            <valueName>Zeta</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trade Fairs</controllingFieldValue>
+            <valueName>Trade Fairs</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>APER06_WebserviceUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VFCER06_Asset_UnblockCard</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WSER06_UnblockCardDetails</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ER Unblock Card</label>
+    <pageAccesses>
+        <apexPage>VFER06_Asset_UnblockCard</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+</PermissionSet>

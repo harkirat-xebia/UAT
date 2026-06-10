@@ -1,0 +1,2701 @@
+<apex:page controller="VFCSK01_Contract_PDF"
+  renderAs="pdf"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  standardStylesheets="false"
+  contentType="text/html;charset=UTF-8"
+>
+  <head>
+    <style type="text/css" media="print">
+      <!--  TRV - 0 - ALPHA             -->
+      @page {                                      <!--  HC  - 1 - BRAVO             -->
+      size: A4;                                    <!--  TR  - 2 - CHARLIE           -->
+      margin: 10mm 15mm 0mm 15mm;                  <!--  TC  - 3 - DELTA             -->
+      @top-center {                                <!--  TM  - 4 - ECHO              -->
+      content: element(header);                    <!-- To move between docs quickly -->
+      }
+      @bottom-right {
+      content: counter(page);
+      }
+      }
+      label {
+      }
+      strong{
+      }
+      .header {
+      font-family: Arial Unicode MS;
+      margin-top:10px;
+      position: running(header);
+      }
+      .content {
+      font-family: Arial Unicode MS;
+      margin-left:10px;
+      margin-right: 10px;
+      }
+      .pagenumber:before {
+      content: counter(page);
+      }
+      .pagecount:before {
+      content: counter(pages);
+      }
+      .container {
+      font-size: 7,5pt;
+      }
+      .topleft {
+      float:left;
+      width: 48%;
+      }
+      .left {
+      position: absolute;
+      left: 16px;
+      width:46%;
+      }
+      .right {
+      position: absolute;
+      right: 16px;
+      width:46%;
+      }
+      .topright {
+      float:right;
+      width: 48%;
+      }
+      ol.alphabetList {
+      list-style-type: lower-alpha;
+      }
+      li{
+      text-align:justify;
+      font-size: 9px;
+      }
+      p{
+      font-size: 10px;
+      font-family: Arial Unicode MS;
+      }
+      hr {
+      width: 60%;
+      margin-left: 0px;
+      }
+      div{
+      font-family: Arial Unicode MS;
+      }
+      table {
+      border-collapse: collapse;
+      border: 1px solid #FFFFFF;
+      width: 80%;
+      margin-left:10px;
+      columnsWidth:200px;
+      font-family: Arial Unicode MS;
+      }
+      th{
+      padding: 1.5px;
+      text-align: center;
+      font-size: 8.8px;
+      color: #000000;
+      width: 50%;
+      font-family: Arial Unicode MS;
+      }
+      td{
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      padding: 2.5px;
+      font-size: 8px;
+      color: #616161;
+      width: 50%;
+      font-family: Arial Unicode MS;
+      }
+      .block{
+      }
+      .gdiv{
+      padding-top : 5px;
+      padding-bottom : 5px;
+      color: #000000;
+      background-color: #D3D3D3;
+      padding-left: 5px;
+      font-size: 11px;
+      }
+      .row{
+          text-align:justify;
+      }
+      .size_1-of-1 {
+      width:100%;
+      display: inline-block;
+      }
+      .size_1-of-2 {
+      width:49%;
+      display: inline-block;
+      }
+      .size_1-of-3 {
+      width:33%;
+      display: inline-block;
+      }
+      .size_1-of-4 {
+      width:24%;
+      display: inline-block;
+      }
+      .title{
+      color:#000000;
+      font-weight: bold;
+      }
+      .outputField{
+      font-weight: bold;
+      }
+      .footer{
+      font-family: Arial Unicode MS;
+      margin-left: 10px;
+      color: #BDBDBD;
+      font-size: 10px;
+      text-align: left;
+      position: fixed;
+      margin-bottom: 1px;
+      bottom:30px;
+      }
+      .cover{
+      font-size: 11px;
+      }
+      .fakelist{
+      text-align:justify;
+      font-size: 9px;
+      }
+      table.center {
+      margin-left:auto;
+      margin-right:auto;
+      }
+    </style>
+  </head>
+  <!-- COVER -->
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="116.40944882px"
+      height="71.811023622px"
+    />
+  </div>
+  <apex:form styleClass="content">
+    <!--********PAGE : 1*********-->
+    <div class="container">
+      <div class="block cover">
+        <div class="row">
+          <div style="font-size: 20px; font-weight: bold; color: #001133; padding-top: 50px">
+            Zmluva o poskytovaní správy zamestnaneckých benefitov č. {!quotenumber}
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="block cover" style="color: #4a4a4a">
+        (ďalej len “Zmluva“) uzatvorená podl'a § 269 ods. 2 Obchodného zákonníka č. 513/1991 Zb. v znení neskorších
+        predpisov medzi spoločnosťami
+      </div>
+      <br />
+      <div class="block cover" style="color: #4a4a4a">
+        <b style="color: #000000">obchodné meno: Ticket Service, s.r.o.</b> <br /> 
+        <b style="color: #000000">sídlo:</b> Karadžičova 8, 820 15 Bratislava, <br />
+        <b style="color: #000000">IČO:</b> 52 005 551, <b style="color: #000000">DIČ:</b> 2120870653, <b style="color: #000000">IČ DPH:</b> SK2020312294, <br /> 
+        <b style="color: #000000">zápis v registri:</b> Obchodný register Okresného súdu Bratislava I, oddiel: Sro, vložka č.:132404/B.<br /> 
+        <b style="color: #000000">bankové Spojenie:</b> Tatra banka a.s <br /> 
+        <b style="color: #000000">IBAN</b> SK84 1100 0000 0026 7500 0390, <b style="color: #000000">BIC</b> TATRSKBX<br /> 
+        <b style="color: #000000">e-mail:</b> informacie-sk@edenred.com <br /> 
+        <b style="color: #000000">tel. č.:</b> 0800 007 007 <br /> 
+        <b style="color: #000000">tel. č. zo zahraničia:</b> +421 (2)50 70 72 22<br /> 
+        <b style="color: #000000">v mene spoločnosti koná:</b> {!ownerName}; na základe<br />
+        poverenia/splnomocnenia<br /> 
+          (ďalej len "Poskytovatel'" alebo „Ticket Service")<br /><br />
+        a
+        <br /><br />
+        <div class="row">
+          <div class="row">
+              <div class="size_1-of-1"><b style="color: #000000">obchodné meno: <span class="outputField">{!accountName}</span></b></div>
+            <div class="size_1-of-1">
+              <div class="size_1-of-1">
+                  <b style="color: #000000">sídlo:</b>
+                <span class="outputField">{!legalStreet} , {!legalZipCode} , {!legalCity}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="size_1-of-1">
+              <div class="size_1-of-1">
+                  <b style="color: #000000">korešpondenčná adresa</b> (v prípade ak je iná než
+                sídlo):.........................................................................................
+                <br />
+                  <b style="color: #000000">IČO:</b>
+                <span class="outputField">{!companyRegistrationNumber},</span>
+                  <b style="color: #000000">DIČ:</b>
+                <span class="outputField">{!otherFiscalId},</span>
+                  <b style="color: #000000">IČ DPH:</b>
+                <span class="outputField">{!vatNumber}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+              <div class="size_1-of-1"><b style="color: #000000">zápis v registri:</b> <span class="outputField">{!regNumberText}</span></div>
+              <div class="size_1-of-1"><b style="color: #000000">bankové spojenie:</b></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="size_1-of-1">
+              <div class="size_1-of-1">
+                  <b style="color: #000000">IBAN:</b> <span class="outputField">{!iban},</span>
+                  <b style="color: #000000">BIC:</b>
+                <span class="outputField">{!bic}</span>
+              </div>
+              <div class="size_1-of-1">
+                  <b style="color: #000000">kontaktná osoba:</b> ................................................................, <b style="color: #000000">e-mail:</b>
+                  ..............................................., <b style="color: #000000">tel.:</b>..............................................<br />
+                <b style="color: #000000">e-mail pre zasielanie elektronickej
+                    faktúry:</b>............................................................................................
+              </div>
+              <div class="size_1-of-1">
+                  <b style="color: #000000">v mene spoločnosti koná:</b>
+                ..................................................................................
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">(ďalej len "Objednávatel'" alebo "Klient") (alebo spoločne aj ako "Zmluvné strany")</div>
+        <br />
+        <div class="row">
+          <div class="size_1-of-1" style="text-align: justify">
+            Poskytovatel' sa zaväzuje zabezpečiť pre Objednávatel'a sprostredkovanie/poskytovanie nasledovných produktov
+            zamestnaneckých benefitov a Objednávatel' sa za sprostredkovanie/poskytovanie zvolených produktov a
+            súvisiacich služieb zaväzuje zaplatiť Poskytovatel'ovi odmenu a dohodnuté poplatky v súlade s Všeobecnými
+            obchodnými podmienkami – klient v aktuálnom znení (ďalej len „VOP-KLIENT“), príslušnými Sadzobníkmi odmien a
+            poplatkov vydanými Poskytovatel'om. Pojmy uvedené vel'kými začínajúcimi písmenami, ktoré nie sú v tejto
+            Zmluve výslovne definované, majú význam ako je uvedené vo VOP-KLIENT.
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="size_1-of-1" style="font-size: 9px; text-align: justify">
+            (Zaškrtnite, prosím, benefity, ktoré budete používať. Ak budú počas spolupráce Zmluvných strán pridané
+            ďalšie benefity, je ta k možné urobiť na základe písomného dodatku k tejto Zmluve.)
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="size_1-of-1">
+            Karta Edenred („karta Edenred“)<br />
+            <div style="text-align: justify">
+              je neprenosná personalizovaná čipová karta na báze Mastercard umožňujúca realizáciu platieb
+              prostredníctvom POS terminálu, Online platby, SMS platby alebo Smartphone platby. Karta Edenred je
+              multifunkčná predplatená karta na meno, ktorá môže v sebe obsahovať viacero digitálnych peňaženiek: (i)
+              Peňaženku Ticket Restaurant<sup>®</sup> (Stravovacie e-poukážky Ticket Restaurant<sup>®</sup> ) a (ii) Peňaženku Dovolenka
+              (Rekreačný e-poukaz Dovolenka) a (iii) Peňaženku Edenred Benefits (benefitné e-poukazy Edenred Benefits).
+              Karta Edenred je vydaná na základe licencie Mastercard s prideleným osobným identifikačným číslom (PIN) a
+              je možné ju použiť výhradne na území Slovenskej republiky. Karta Edenred je predpokladom na využívanie
+              nasledovných digitálnych peňaženiek:
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="block cover">
+        <div class="row">
+          <div class="size_1-of-1"></div>
+          <div class="size_1-of-1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_TRV'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000"> Peňaženka Ticket Restaurant<sup>®</sup> („Peňaženka TR“)</span>
+                  <br />
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Peňaženka Ticket Restaurant<sup>®</sup> („Peňaženka TR“)</span>
+              <br />
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            je elektronická peňaženka Karty Edenred umožňujúca realizáciu platieb za poskytnuté Stravovacie služby. K
+            Peňaženke TR sú asociované stravovacie e-poukážky TR v príslušnej hodnote, ktoré slúžia ako elektronická
+            forma príspevku na stravovanie na území Slovenskej republiky v súlade s príslušnými právnymi predpismi.
+          </div>
+          <br />
+          <div class="size_1-of-1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_HC'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000"> Peňaženka Edenred Dovolenka („Peňaženka Dovolenka“)</span>
+                  <br />
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Peňaženka Edenred Dovolenka („Peňaženka Dovolenka“)</span>
+              <br />
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            je elektronická peňaženka karty Edenred, umožňujúca realizáciu platieb za poskytnuté Rekreačné služby. K
+            Peňaženke Dovolenka je asociovaný rekreačný e-poukaz Dovolenka v príslušnej hodnote, ktorý slúži ako
+            elektronický rekreačný poukaz poskytnutý ako príspevok zamestnávatel'a na rekreáciu zamestnanca na území
+            Slovenskej republiky v súlade s príslušnými právnymi predpismi.
+          </div>
+          <div style="page-break-after: always" />
+          <div class="size_1-of-1" style="padding-top: 59px">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_EB'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000"> Peňaženka Edenred Benefits („Peňaženka Benefits“)</span>
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Peňaženka Edenred Benefits („Peňaženka Benefits“)</span>
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            je elektronická peňaženka karty Edenred, umožňujúca realizáciu platieb za poskytnuté služby, napr. v
+            športovom, relaxačnom, zdravotnom alebo kultúrnom zariadení, za pobytové alebo poznávacie zájazdy, kúpel'né
+            alebo liečebné pobyty a služby súvisiace s rekreáciou (mimo Rekreačných služieb podl'a Zákonníka práce), za
+            vzdelávacie služby alebo za služby nadštandardnej zdravotnej starostlivosti alebo za tovar v sieti vybraných
+            predajní alebo poskytovatel'ov, napr. športových potrieb, v kníhkupectvách, v nákupných centrách (neslúži na
+            nákup potravinového tovaru). K Peňaženke Benefits je asociovaný benefitný e-poukaz v príslušnej hodnote,
+            ktorý slúži ako elektronická forma príspevku zamestnávatel'a na benefity zamestnanca na území Slovenskej
+            republiky.
+          </div>
+          <br />
+          <div class="size_1-of-1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_TR'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000"> Stravovacie poukážky Ticket Restaurant<sup>®</sup> („TR poukážky“)</span>
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+                style="color: #000000"
+              >
+                Stravovacie poukážky Ticket Restaurant<sup>®</sup> („TR poukážky“)</span
+              >
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            sú stravovacími poukážkami, ktoré slúžia ako papierová forma príspevku na stravovanie na území Slovenskej
+            republiky v súlade s príslušnými právnymi predpismi, prostredníctvom ktorých môže Používatel' uhrádzať
+            Partnerovi cenu alebo jej časť za Stravovacie služby poskytnuté Používatel'ovi Partnerom.
+          </div>
+          <div class="size_1-of-1"></div>
+          <div class="size_1-of-1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_TC'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+                  <span style="color: #000000"> Edenred poukážka Darčeky</span>
+                  <br />
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Edenred poukážka Darčeky</span>
+              <br />
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            je papierová poukážka vystavená Poskytovatel'om, prostredníctvom ktorej môže Používatel' uhrádzať Partnerovi
+            cenu alebo jej časť za tovar darčekového charakteru v sieti vybraných predajní, napr. oblečenia, obuvi,
+            bižutérie, klenotov, galantérie, elektroniky, športových potrieb, ako aj v kníhkupectvách a nákupných
+            centrách (neslúži na nákup potravinového tovaru). Ide o benefitnú poukážku, ktorá umožňuje nákup vybraného
+            tovaru a služieb v sieti obchodných partnerov Ticket Service.
+          </div>
+          <div class="size_1-of-1"></div>
+          <div class="size_1-of-1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERSK_TM'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+                  <span style="color: #000000"> Edenred poukážka Služby </span>
+                  <br />
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Edenred poukážka Služby</span>
+              <br />
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-1" style="color: #4a4a4a; padding-left: 15px">
+            je papierová poukážka vystavená Poskytovatel'om, prostredníctvom ktorej môže Používatel' uhrádzať Partnerovi
+            cenu alebo jej časť za služby poskytnuté v športovom, relaxačnom, zdravotnom alebo kultúrnom zariadení, za
+            pobytové alebo poznávacie zájazdy, kúpel'né alebo liečebné pobyty a služby súvisiace s rekreáciou (mimo
+            Rekreačných služieb podl'a Zákonníka práce), za vzdelávacie služby, alebo za služby nadštandardnej
+            zdravotnej starostlivosti. Ide o benefitnú poukážku, ktorá umožňuje nákup vybraného tovaru a služieb v sieti
+            obchodných partnerov Ticket Service.
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <p>
+        Bližšie informácie o jednotlivých produktoch sú uvedené vo VOP-KLIENT, alebo na stránke
+        <a href="www.edenred.sk.">www.edenred.sk.</a>
+      </p>
+      <br />
+      <div class="block cover">
+        <div class="block cover">
+          <div class="row">
+            <div class="size_1-of-1" style="color: #000000">
+              <b style="color: #000000; font-size: 14px">1. OCHRANA OSOBNÝCH ÚDAJOV</b>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row" style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px">
+          1.1. Zmluvné strany sa dohodli, že akékol'vek osobné údaje, ku ktorých spracúvaniu dôjde počas plnenia tejto
+          zmluvy (vrátane osobných údajov zamestnancov Klienta), budú Zmluvné strany spracúvať v postavení samostatných
+          prevádzkovatel'ov osobných údajov. Vzhl'adom na uvedené, sú zmluvné strany povinné samostatne plniť všetky
+          povinnosti vyplývajúce z Nariadenia Európskeho parlamentu a Rady (EÚ) 2016/679 z 27. apríla 2016 o ochrane
+          fyzických osôb pri spracúvaní osobných údajov a o vol'nom pohybe takýchto údajov, ktorým sa zrušuje smernica
+          95/46/ES a zo zákona č. 18/2018 Z.z. o ochrane osobných údajov a o zmene a doplnení niektorých zákonov v znení
+          neskorších predpisov. Toto ustanovenie zároveň nahrádza akékol'vek prípadné doterajšie zmluvné dojednania
+          uzatvorené do momentu uzatvorenia tejto zmluvy medzi zmluvnými stranami, ktoré upravovali právny vzťah medzi
+          zmluvnými stranami v časti ochrany osobných údajov. Pre úplnosť a pre odstránenie pochybností, toto
+          ustanovenie je zároveň písomným dodatkom k akýmkol'vek zmluvám týkajúcim sa ochrany osobných údajov, zrušuje
+          akékol'vek a všetky doterajšie sprostredkovatel'ské zmluvy medzi zmluvnými stranami, dojednané individuálne
+          alebo prostredníctvom všeobecných obchodných podmienok Poskytovatel' tak, že sa príslušné zmluvné dojednania
+          týkajúce sa ochrany osobných údajov v celosti vypúšťajú a nahrádzajú sa týmto ustanovením. Toto ustanovenie má
+          prednosť pred akýmikol'vek inými ustanoveniami týkajúcimi sa ochrany osobných údajov, obsiahnutými v iných
+          zmluvách uzatvorených medzi Zmluvnými stranami, alebo v akýchkol'vek iných všeobecných obchodných podmienkach,
+          ktoré upravujú vzťah medzi Zmluvnými stranami. Zmluvné strany sa dohodli, že Objednávatel' informuje svojich
+          zamestnancov o skutočnosti, že je Poskytovatel' príjemcom ich osobných údajov a Poskytovatel' bude plniť
+          informačnú povinnosť voči zamestnancom Klienta okrem iného prostredníctvom jeho webového sídla.
+        </div>
+        <br />
+        <div class="row" style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px">
+          1.2. Poskytovatel' má záujem Objednávatel'ovi poskytovať užitočné informácie o produktoch a službách, najmä o
+          novinkách, legislatívnych zmenách, mimoriadnych ponukách, akciách a tipoch pre podnikanie, ktoré zodpovedajú
+          Objednávatel'ovým individuálnym potrebám. Poskytovatel' má záujem uvedené informácie poskytovať poštou,
+          emailom, telefonicky alebo formou SMS správ. Objednávatel' súhlasí so zasielaním informácií:
+        </div>
+        <br />
+        <div class="row">
+          <div class="size_1-of-2" style="text-align: center">
+            <apex:outputPanel rendered="true">
+              <apex:variable var="solutionIsIn" value="true"></apex:variable>
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+              <span style="color: #000000"> Súhlasím </span> <br />
+            </apex:outputPanel>
+          </div>
+          <div class="size_1-of-2" style="text-align: center">
+            <apex:outputPanel rendered="true">
+              <apex:variable var="solutionIsIn" value="true"></apex:variable>
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+              <span style="color: #000000"> Nesúhlasím </span> <br />
+            </apex:outputPanel>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div style="page-break-after: always" />
+      <div class="footer">
+        <div style="font-size: 9px; width: 90%; display: inline-block">OF Klienti 06/2023</div>
+        <div style="display: inline-block; text-align: right">
+          <span class="pagenumber" />/<span class="pagecount" />
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1" style="color: #000000; padding-top: 59px">
+            <b style="color: #000000; font-size: 14px">2. ZÁVEREČNÉ USTANOVENIA</b>
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.1. Neoddelitel'nú súčasť tejto Zmluvy tvoria Všeobecné obchodné podmienky (VOP–KLIENT), Sadzobníky odmien
+            a poplatkov (ďalej len "Sadzobník" alebo „Sadzobníky“), ktorých aktuálne znenie je zverejnené na stránke
+            <a href="www.edenred.sk">www.edenred.sk</a> a/ alebo oznámené Objednávatel'ovi. Objednávatel' podpisom tejto
+            Zmluvy vyhlasuje, že sa oboznámil s obsahom VOP-KLIENT, príslušným Sadzobníkom, a výslovne s ich znením
+            súhlasí. Objednávatel' berie na vedomie, že nesplnenie povinnosti alebo podmienok uvedených vo VOP-KLIENT
+            alebo Sadzobníku môže mať rovnaké právne následky ako nesplnenie povinnosti a podmienok vyplývajúcich zo
+            Zmluvy.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.2. Táto Zmluva sa uzatvára na dobu neurčitú a nadobúda platnosť a účinnosť dňom jej podpisu Zmluvnými
+            stranami. Na platnosť jej zmien a doplnení je potrebná jej písomná forma so súhlasom Zmluvných strán s
+            výnimkou ustanovení VOP-KLIENT a Sadzobníka, ktorých aktuálne znenie je zverejnené na
+            <a href="www.edenred.sk">www.edenred.sk</a> a Poskytovatel' je oprávnený vzhl'adom na zmenu právnej úpravy,
+            zmenu trhovej situácie, zmenu obchodnej politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť
+            alebo nahradiť tieto VOP-KLIENT, a/ alebo Sadzobníky (ďalej len “Zmena podmienok“). Poskytovatel' je povinný
+            Zmenu podmienok s uvedením jej platnosti a účinnosti oznámiť Objednávatel'ovi, a to zverejnením na svojom
+            webovom sídle <a href="www.edenred.sk">www.edenred.sk</a> a zverejnením Zmeny podmienok vo všetkých svojich
+            prevádzkarňach najneskôr 14 dní vopred pred dňom účinnosti Zmeny podmienok. Zmena podmienok nie je
+            skutočnosťou, ktorá by vyžadovala uzavretie písomného dodatku k Zmluve.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.3. V prípade nesúhlasu Objednávatel'a so Zmenou podmienok, má Objednávatel' právo najneskôr v posledný
+            pracovný deň pred dňom účinnosti Zmeny podmienok z uvedeného dôvodu písomne odstúpiť od Zmluvy a súčasne
+            odstúpenie od Zmluvy musí byť najneskôr v posledný pracovný deň pred dňom účinnosti Zmeny doručené
+            Poskytovatel'ovi, inak právo Objednávatel'a na odstúpenie od Zmluvy zaniká. Ak Objednávatel' riadne a včas v
+            zmysle tohto bodu nevyužije právo odstúpiť od Zmluvy, platí, že Objednávatel' so Zmenou podmienok súhlasí.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.4. Objednávatel' alebo Poskytovatel' je oprávnený ukončiť Zmluvu bez uvedenia dôvodu písomnou výpoveďou s
+            výpovednou dobou 2 (dva) mesiace. Výpovedná doba začína plynúť prvým dňom mesiaca nasledujúceho po mesiaci,
+            v ktorom bola výpoveď doručená druhej Zmluvnej strane. Výpoveď sa považuje za doručenú uplynutím tretieho
+            pracovného dňa od jej preukázatel'ného odoslania. Zmluvné strany si dojednávajú možnosť ukončenia Zmluvy
+            vzájomnou písomnou dohodou.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.5. Táto Zmluva je vypracovaná vo dvoch vyhotoveniach, pričom každá zo Zmluvných strán obdrží jedno
+            vyhotovenie. Vzťahy vyplývajúce z tejto Zmluvy budú riešené podl'a slovenského práva. Práva a povinnosti
+            zmluvných strán vyplývajúce z tejto Zmluvy, voči produktom touto Zmluvou zazmluvňovaným, sa nahrádzajú a
+            majú prednosť pred akýmikol'vek skoršími aj písomnými dojednaniami týkajúcimi sa predmetu tejto Zmluvy medzi
+            Zmluvnými stranami.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.6. Práva a povinnosti zmluvných strán sa riadia ustanoveniami zák. č. 513/1991 Zb. Obchodný zákonník v
+            znení neskorších predpisov a ostatnými všeobecne záväznými predpismi právneho poriadku Slovenskej republiky.
+          </div>
+          <br />
+          <div
+            class="row"
+            style="margin-left: 15px; font-family: Arial Unicode MS; text-align: justify; font-size: 10px"
+          >
+            2.7. Zmluvné strany vyhlasujú, že svoju vôl'u v tejto Zmluve prejavili slobodne a vážne, určite a
+            zrozumitel'ne, že Zmluva nebola uzavretá za nápadne nevýhodných podmienok, s jej obsahom súhlasia po
+            prečítaní bez výhrad, doplnkov a iných zmien a na znak súhlasu ju vlastnoručne podpisujú.
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Za Poskytovatel'a/Ticket Service, s.r.o.
+          </div>
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Za Objednávatel'a/ Klienta
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Meno :&nbsp;&nbsp;&nbsp;{!ownerName}
+          </div>
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Meno :____________________
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Pozícia :&nbsp;&nbsp;&nbsp;{!ownerTitle}
+          </div>
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Pozícia :____________________
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Dátum :___________________
+          </div>
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            Dátum:___________________
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="color: #000000; padding-top: 7px; padding-bottom: 7px">
+            Podpis :___________________
+          </div>
+          <div class="size_1-of-2" style="color: #000000; padding-top: 10px; padding-bottom: 10px">
+            <b>Podpis :___________________</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </apex:form>
+  <div style="page-break-after: always" />
+
+  <!-- ALPHA -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[0] == true}">
+    <!-- TRV -->
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 55px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov<br /> karta Edenred – peňaženka Ticket Restaurant<sup>®</sup> - klient
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-family: Arial Unicode MS; color: #404040">
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava, IČO: 52 005 551, DIČ:
+            2120870653,<br />IČ DPH: SK2120870653, zapísaná v Obchodnom registri Okresného súdu Bratislava I, oddiel:
+            Sro, vložka č.:132404/B
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník peňaženka TR“)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          I.<br />Odmena
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <div class="row">
+        <div style="text-align: center; font-size: 10px">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>
+              Klient je povinný uhradiť Ticket Service odmenu za produkty alebo služby poskytnuté v zmysle Zmluvy, ktorá
+              bude vyčíslená osobitne za každú jednu Objednávku na vydanie karty Edenred a stravovacích e-poukážok TR.
+              Suma odmeny bude určená ako súčet sumy poplatku za sprostredkované Stravovacie služby a sumy
+              administratívneho poplatku.
+            </li>
+            <li>
+              Suma poplatku za sprostredkované Stravovacie služby predstavuje
+              <apex:outputPanel layout="none" rendered="{!Docs[0].P01 != null}">
+                {!Docs[0].P01}% a bude vyčíslená ako percentuálny podiel z celkovej hodnoty vydaných stravovacích
+                e-poukážok TR objednaných jednou Objednávkou.</apex:outputPanel><apex:outputPanel layout="none" rendered="{!Docs[0].P02 != null}"> {!Docs[0].P02}EUR.</apex:outputPanel>
+            </li>
+            <li>
+              Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri plnení predmetu
+              Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených v článku II. tohto
+              Sadzobníka peňaženka TR nad rámec poplatku za sprostredkované Stravovacie služby. Suma administratívneho
+              poplatku závisí od celkového súčtu hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou.
+              Ak celkový súčet hodnôt Stravovacích e-poukážok TR objednaných predmetnou Objednávkou je vo výške od 0,01
+              EUR do 325,00 EUR,
+              <apex:outputPanel layout="none" rendered="{!Docs[0].P03 != null}">
+                administratívny poplatok je v sume {!Docs[0].P03}.</apex:outputPanel>
+              Ak celkový súčet hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou je vo výške od
+              325,01 EUR do 644,00 EUR, administratívny poplatok je 2,00 % z celkového súčtu hodnôt stravovacích
+              e-poukážok TR objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt stravovacích e-poukážok TR
+              objednaných predmetnou Objednávkou je vo výške od 644,01 EUR do 1.650,00 EUR, administratívny poplatok je
+              1,80 % z celkového súčtu hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou. Ak celkový
+              súčet hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou je vo výške od 1.650,01 EUR do
+              2.656,00 EUR, administratívny poplatok je 1,30 % z celkového súčtu hodnôt stravovacích e-poukážok TR
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt stravovacích e-poukážok TR objednaných
+              predmetnou Objednávkou je vo výške od 2.656,01 EUR do 3.983,00 EUR, administratívny poplatok je 0,80 % z
+              celkového súčtu hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou. Ak celkový súčet
+              hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou je vo výške od 3.983,01 EUR do
+              9.294,00 EUR, administratívny poplatok je 0,70% z celkového súčtu hodnôt stravovacích e-poukážok TR
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt stravovacích e-poukážok TR objednaných
+              predmetnou Objednávkou je vo výške od 9.294,01 EUR do 13.277,00 EUR, administratívny poplatok je 0,60 % z
+              celkového súčtu hodnôt stravovacích e-poukážok TR objednaných predmetnou Objednávkou. V prípade, ak suma
+              poplatku za sprostredkované Stravovacie služby vyčíslená za jednotlivú Objednávku v zmysle bodu 2. tohto
+              článku je vyššia ako 6,50 EUR bez DPH, Ticket Service poskytne Klientovi 100% zl'avu z administratívneho
+              poplatku podl'a bodu 3. tohto článku.
+            </li>
+            <li>
+              Suma odmeny v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne záväzného
+              právneho predpisu.
+            </li>
+            <li>
+              Ticket Service vyúčtuje odmenu v zmysle tohto článku na základe zálohovej faktúry, faktúry, alebo
+              elektronickej faktúry vystavenej Ticket Service v zmysle bodu 4. článku VI. VOP-KLIENT, pričom odmena bude
+              splatná v deň splatnosti uvedenej zálohovej faktúry, faktúry, alebo elektronickej faktúry.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <table border="1px" class="center">
+        <tr>
+          <th style="font-family: Arial Unicode MS">Poplatok</th>
+          <th style="font-family: Arial Unicode MS">Štandardná výška poplatku bez DPH</th>
+        </tr>
+        <!--visualforce repeat -->
+        <apex:variable var="index" value="{!0}" />
+        <apex:repeat value="{!Docs[0].QuoteServicesFirst}" var="serviceListFirst">
+          <tr>
+            <td style="text-align: left">{!serviceListFirst.name}</td>
+            <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+          </tr>
+        </apex:repeat>
+      </table>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          II.<br />Poplatky
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 12px">
+          <ol style="padding: 0; margin: 1.5em; text-align: justify">
+            <li>Klient sa zaväzuje uhradiť poplatky v nasledovnej výške:</li>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.1 Vydanie karty Edenred</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial Unicode MS">Poplatok</th>
+                <th style="font-family: Arial Unicode MS">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[0].QuoteServicesVydanie}" var="serviceListVyd">
+                <tr>
+                  <td style="text-align: left">{!serviceListVyd.name}</td>
+                  <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.2 Doručenie</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial Unicode MS">Poplatok</th>
+                <th style="font-family: Arial Unicode MS">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[0].QuoteServicesDorucenie}" var="serviceListDoru">
+                <tr>
+                  <td style="text-align: left">{!serviceListDoru.name}</td>
+                  <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+    <!--SECOND PAGE -->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div style="page-break-after: always" />
+    <br /><br /><br /><br />
+    <p style="margin-left: 15px; text-align: left; font-size: 9px">1.3 Iné služby</p>
+    <table border="1px" class="center">
+      <tr>
+        <th style="font-family: Arial Unicode MS">Poplatok</th>
+        <th style="font-family: Arial Unicode MS">Štandardná výška poplatku bez DPH</th>
+      </tr>
+      <apex:repeat value="{!Docs[0].QuoteServicesIne}" var="serviceListIne">
+        <tr>
+          <td style="text-align: left">{!serviceListIne.name}</td>
+          <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+        </tr>
+      </apex:repeat>
+    </table>
+    <apex:outputPanel rendered="{!Docs[0].ThereIsService == true && Docs[0].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <!-- neither ol start attribute nor li value appear to work-->
+          <li style="text-align: left">
+            Zl'avy<br />
+            Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:
+          </li>
+        </ol>
+        <table style="width: 95%" border="1px" class="center">
+          <tr>
+            <th style="width: 25%; font-family: Arial">Poplatok</th>
+            <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+            <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+          </tr>
+          <apex:variable var="index" value="{!0}" />
+          <apex:repeat value="{!Docs[0].QuoteServicesDiscounted}" var="serviceList">
+            <tr>
+              <td style="width: 25%; text-align: left">{!serviceList.name}</td>
+              <td style="width: 25%">{!serviceList.price} {!serviceList.unit}</td>
+              <td style="width: 25%">{!serviceList.discount}</td>
+              <td style="width: 25%">{!serviceList.TotalPrice} {!serviceList.unit}</td>
+            </tr>
+          </apex:repeat>
+        </table>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[0].ThereIsService == true && Docs[0].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li style="hidden"></li>
+          <li style="text-align: left">
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li style="text-align: left">
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, resp. faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[0].ThereIsService == false || Docs[0].Discount == false}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li style="text-align: left">
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl' a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li style="text-align: left">
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, resp. faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+      III.<br />Spoločné ustanovenia
+    </div>
+    <apex:outputPanel rendered="{!show}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em">
+          <li>
+            <div>Splatnosť na faktúru</div>
+            <div>
+              Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+              nasledovnom znení:
+            </div>
+            <div style="font-style: italic">
+              „4. Klient uhradí Ticket Service odmenu za službu a poplatky v zmysle bodu 1. tohto článku a celkovú Cenu
+              za objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket Service a
+              doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru štandardne najneskôr do 3
+              pracovných dní od doručenia objednaného Produktu ER. Faktúra je doručovaná Klientovi najmä elektronicky, a
+              to elektronickou poštou na e-mailovú adresu Klienta. Faktúra bude splatná v lehote {!PaymentTerm} dní odo
+              dňa jej vystavenia. Klient uhradí Cenu bezhotovostným prevodom v prospech bankového účtu Ticket Service
+              alebo v hotovosti, pričom variabilným symbolom bude číslo faktúry. Klient podpisom Zmluvy, respektíve
+              zadaním Objednávky v zmysle týchto VOP-KLIENT a oboznámením Ticket Service so svojou e-mailovou adresou
+              potvrdzuje svoj súhlas s vydávaním a doručovaním elektronickej faktúry vyhotovovanej Ticket Service v
+              zmysle príslušných všeobecne záväzných právnych predpisov v prípade rozhodnutia Ticket Service o
+              vyhotovovaní a doručení elektronickej faktúry pre Klienta."
+            </div>
+          </li>
+          <li>
+            Ustanovenia Sadzobníka peňaženka TR majú prednosť pred ustanoveniami VOP-KLIENT a v prípade odlišností
+            ustanovení VOP-KLIENT a Sadzobníka peňaženka TR, rozhodné sú ustanovenia Sadzobníka peňaženka TR.
+            Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka TR a v prípade odlišností
+            ustanovení Zmluvy a Sadzobníka peňaženka TR, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            TR za podmienok uvedených v Zmluve a VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!show == false}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 10px">
+          <li>
+            Ustanovenia Sadzobníka peňaženka TR majú prednosť pred ustanoveniami VOP-KLIENT a v prípade odlišností
+            ustanovení VOP-KLIENT a Sadzobníka peňaženka TR, rozhodné sú ustanovenia Sadzobníka peňaženka TR.
+            Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka TR a v prípade odlišností
+            ustanovení Zmluvy a Sadzobníka peňaženka TR, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            TR za podmienok uvedených v Zmluve a VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+  </apex:outputPanel>
+  <!-- EB -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[5] == true}">
+    <!-- EB -->
+    <apex:outputPanel layout="none" rendered="{! Docs[5].firstDoc == false}">
+      <div style="page-break-before: always" />
+    </apex:outputPanel>
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov
+            <br />karta Edenred – peňaženka Benefits - klient
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-family: Arial Unicode MS; color: #616161">
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava, IČO: 52 005 551, DIČ:
+            2120870653
+            <br />IČ DPH: SK2120870653, zapísaná v Obchodnom registri Okresného súdu Bratislava I, oddiel: Sro, vložka
+            č.:132404/B
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník peňaženka Benefits")
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+            I.<br />Odmena
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <!-- <div class="row"> -->
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 10px">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>
+              Klient je povinný uhradiť Ticket Service odmenu za produkty a služby poskytnuté v zmysle Zmluvy, ktorá
+              bude vyčíslená osobitne za každú jednu Objednávku na vydanie karty Edenred a benefitných e-poukazov
+              Edenred Benefits. Suma odmeny bude určená ako súčet sumy poplatku za sprostredkované benefity (tovary a
+              služby), a sumy administratívneho poplatku.
+            </li>
+            <li>
+              Suma poplatku za sprostredkované benefity predstavuje
+              <apex:outputPanel layout="none" rendered="{!Docs[5].P01 != null}">
+                {!Docs[5].P01} % a bude vyčíslená ako percentuálny podiel z celkovej hodnoty vydaných benefitných
+                e-poukážok Edenred Benefits objednaných jednou objednávkou.</apex:outputPanel><apex:outputPanel layout="none" rendered="{!Docs[5].P02 != null}"> {!Docs[5].P02} EUR.</apex:outputPanel>
+            </li>
+            <li>
+              Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri plnení predmetu
+              Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených v článku II. tohto
+              Sadzobníka peňaženka Benefits nad rámec poplatku za sprostredkované benefity (tovary a služby). Suma
+              administratívneho poplatku závisí od celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou je vo výške od 0,01 EUR do 325,00 EUR, administratívny poplatok je v
+              sume <apex:outputPanel layout="none" rendered="{!Docs[5].P03 != null}"> {!Docs[5].P03}. </apex:outputPanel>
+              Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou
+              Objednávkou je vo výške od 325,01 EUR do 670,00 EUR, administratívny poplatok je 2,00 % z celkového
+              súčtu hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou. Ak celkový súčet
+              hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou je vo výške od 670,01
+              EUR do 1.660,00 EUR, administratívny poplatok je 1,80 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits 
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov
+              Edenred Benefits objednaných predmetnou Objednávkou je vo výške od 1.660,01 EUR do 2.660,00 EUR,
+              administratívny poplatok je 1,30 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou je vo výške od 2.660,01 EUR do 3.999,99 EUR, administratívny poplatok
+              je 0,80 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou
+              Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou
+              Objednávkou je vo výške od 4.000,00 EUR do 9.299,99 EUR, administratívny poplatok je 0,70 % z celkového
+              súčtu hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou. Ak celkový súčet
+              hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou je vo výške od 9.300,00
+              EUR do 13.299,99 EUR, administratívny poplatok je 0,60 % z celkového súčtu hodnôt benefitných e-poukazov
+              Edenred Benefits objednaných predmetnou Objednávkou. V prípade, ak suma poplatku za sprostredkované
+              benefity vyčíslená za jednotlivú Objednávku v zmysle bodu 2. tohto článku je vyššia ako 6,50 EUR bez DPH,
+              Ticket Service poskytne Klientovi 100% zl'avu z administratívneho poplatku podl'a bodu 3. tohto článku.
+            </li>
+            <li>
+              Suma odmeny v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne záväzného
+              právneho predpisu.
+            </li>
+            <li>
+              Ticket Service vyúčtuje odmenu v zmysle tohto článku na základe zálohovej faktúry, faktúry, alebo
+              elektronickej faktúry vystavenej Ticket Service v zmysle bodu 4, článku VI, VOP-KLIENT, pričom odmena bude
+              splatná v deň splatnosti uvedenej zálohovej faktúry, faktúry, alebo elektronickej faktúry.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <table border="1px" class="center">
+        <tr>
+          <th style="font-family: Arial">Poplatok</th>
+          <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+        </tr>
+        <apex:variable var="index" value="{!5}" />
+        <apex:repeat value="{!Docs[5].QuoteServicesFirst}" var="serviceListFirst">
+          <tr>
+            <td style="text-align: left">{!serviceListFirst.name}</td>
+            <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+          </tr>
+        </apex:repeat>
+      </table>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          II.<br />Poplatky
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 12px">
+          <ol style="padding: 0; margin: 1.5em; text-align: justify">
+            <li>Klient sa zaväzuje uhradiť poplatky v nasledovnej výške:</li>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.1 Vydanie karty Edenred</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial">Poplatok</th>
+                <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[5].QuoteServicesVydanie}" var="serviceListVyd">
+                <tr>
+                  <td style="text-align: left">{!serviceListVyd.name}</td>
+                  <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.2 Doručenie</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial">Poplatok</th>
+                <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[5].QuoteServicesDorucenie}" var="serviceListDoru">
+                <tr>
+                  <td style="text-align: left">{!serviceListDoru.name}</td>
+                  <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+
+    <!--SECOND PAGE -->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div style="page-break-after: always" />
+    <br /><br /><br /><br />
+    <p style="margin-left: 15px; text-align: left; font-size: 9px">1.3 Iné služby</p>
+    <table border="1px" class="center">
+      <tr>
+        <th style="font-family: Arial">Poplatok</th>
+        <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+      </tr>
+      <apex:repeat value="{!Docs[5].QuoteServicesIne}" var="serviceListIne">
+        <tr>
+          <td style="text-align: left">{!serviceListIne.name}</td>
+          <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+        </tr>
+      </apex:repeat>
+    </table>
+    <apex:outputPanel rendered="{!Docs[5].ThereIsService == true && Docs[5].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <!-- neither ol start attribute nor li value appear to work-->
+          <li style="text-align: left">
+            Zl'avy<br />
+            Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:
+          </li>
+        </ol>
+        <table style="width: 95%" border="1px" class="center">
+          <tr>
+            <!-- add a class here or something to make only this th and td 25% width -->
+            <th style="width: 25%; font-family: Arial">Poplatok</th>
+            <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+            <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+          </tr>
+          <apex:repeat value="{!Docs[5].QuoteServicesDiscounted}" var="serviceList">
+            <tr>
+              <td style="width: 25%; text-align: left">{!serviceList.name}</td>
+              <td style="width: 25%">{!serviceList.price} {!serviceList.unit}</td>
+              <td style="width: 25%">{!serviceList.discount}</td>
+              <td style="width: 25%">{!serviceList.totalPrice} {!serviceList.unit}</td>
+            </tr>
+          </apex:repeat>
+        </table>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[5].ThereIsService == true && Docs[5].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li style="hidden"></li>
+          <li>
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li>
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[5].ThereIsService == false || Docs[5].Discount == false}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li>
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li>
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+      III.<br />Spoločné ustanovenia
+    </div>
+    <apex:outputPanel rendered="{!show}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em">
+          <li>
+            <div>Splatnosť na faktúru</div>
+            <div>
+              Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+              nasledovnom znení:
+            </div>
+            <div style="font-style: italic">
+              „4. Klient uhradí Ticket Service odmenu a poplatky v zmysle bodu 1. tohto článku, celkovú Cenu za
+              objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket Service a
+              doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru najneskôr do 3 pracovných dní od
+              doručenia Objednávky. Faktúra je doručovaná Klientovi najmä elektronicky a to elektronickou poštou na
+              e-mailovú adresu Klienta. Faktúra bude splatná v lehote {!PaymentTerm} dní odo dňa jej vystavenia. Klient
+              uhradí Cenu bezhotovostným prevodom v prospech bankového účtu Ticket Service, pričom variabilným symbolom
+              bude číslo faktúry. Klient podpisom Zmluvy, respektíve zadaním Objednávky v zmysle týchto VOP-KLIENT a
+              oboznámením Ticket Service so svojou e-mailovou adresou potvrdzuje svoj súhlas s vydávaním a doručovaním
+              elektronickej faktúry vyhotovovanej Ticket Service v zmysle príslušných všeobecne záväzných právnych
+              predpisov v prípade rozhodnutia Ticket Service o vyhotovovaní a doručení elektronickej faktúry pre
+              Klienta.“
+            </div>
+          </li>
+          <li>
+            Ustanovenia Sadzobníka peňaženka Benefits majú prednosť pred ustanoveniami VOP-KLIENT a v prípade
+            odlišností ustanovení VOP-KLIENT a Sadzobníka peňaženka Benefits, rozhodné sú ustanovenia Sadzobníka
+            peňaženka Benefits. Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka Benefits a v
+            prípade odlišností ustanovení Zmluvy a Sadzobníka peňaženka Benefits, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            Benefits za podmienok uvedených v Zmluve a VOP-KLIENT
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!show == false}">
+      <!--div class="size_1-of-1" style="page-break-before: always"!-->
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li>
+            Ustanovenia Sadzobníka peňaženka Benefits majú prednosť pred ustanoveniami VOP-KLIENT a v prípade
+            odlišností ustanovení VOP-KLIENT a Sadzobníka peňaženka Benefits, rozhodné sú ustanovenia Sadzobníka
+            peňaženka Benefits. Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka Benefits a v
+            prípade odlišností ustanovení Zmluvy a Sadzobníka peňaženka Benefits, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            Benefits za podmienok uvedených v Zmluve a VOP-KLIENT
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <!--/div!-->
+    <!-- </div> -->
+  </apex:outputPanel>
+  <!-- EB -->
+  <!-- BRAVO -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[1] == true}">
+    <!-- HC -->
+    <apex:outputPanel layout="none" rendered="{! Docs[1].firstDoc == false}">
+      <div style="page-break-before: always" />
+    </apex:outputPanel>
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov <br /> karta Edenred – peňaženka Dovolenka - klient
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-family: Arial Unicode MS; color: #616161">
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava, IČO: 52 005
+            551, DIČ: 2120870653,<br />IČ DPH: SK2120870653, zapísaná v Obchodnom registri Okresného súdu Bratislava I,
+            oddiel: Sro, vložka č.:132404/B
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník peňaženka Dovolenka“)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          I.<br />Odmena
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <div class="row">
+        <div style="text-align: center; font-size: 10px">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>
+              Klient je povinný uhradiť Ticket Service odmenu za produkty a služby poskytnuté v zmysle Zmluvy, ktorá
+              bude vyčíslená osobitne za každú jednu Objednávku na vydanie karty Edenred a rekreačných e-poukazov
+              Edenred Dovolenka. Suma odmeny bude určená ako súčet sumy poplatku za sprostredkované Rekreačné služby a
+              sumy administratívneho poplatku.
+            </li>
+            <li>
+              Suma poplatku za sprostredkované Rekreačné služby predstavuje
+              <apex:outputPanel layout="none" rendered="{!Docs[1].P01 != null}">
+                {!Docs[1].P01} % a bude vyčíslená ako percentuálny podiel z celkovej hodnoty vydaných rekreačných
+                e-poukazov Edenred Dovolenka objednaných jednou objednávkou. </apex:outputPanel><apex:outputPanel layout="none" rendered="{!Docs[1].P02 != null}"> {!Docs[1].P02} EUR.</apex:outputPanel>
+            </li>
+            <li>
+              Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri plnení predmetu
+              Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených v článku II. tohto
+              Sadzobníka peňaženka Dovolenka nad rámec poplatku za sprostredkované Rekreačné služby. Suma
+              administratívneho poplatku závisí od celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou je vo výške od 0,01 EUR do 325,00 EUR, administratívny poplatok je v
+              sume
+              <apex:outputPanel layout="none" rendered="{!Docs[1].P03 != null}"> {!Docs[1].P03}.</apex:outputPanel>
+              Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou je vo
+              výške od 325,01 EUR do 644,00 EUR, administratívny poplatok je 2,00 % z celkového súčtu hodnôt rekreačných
+              e-poukazov Edenred Dovolenka objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt rekreačných
+              e-poukazov Edenred Dovolenka objednaných predmetnou Objednávkou je vo výške od 644,01 EUR do 1.650,00 EUR,
+              administratívny poplatok je 1,80 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou je vo výške od 1.650,01 EUR do 2.656,00 EUR, administratívny poplatok
+              je 1,30 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou
+              Objednávkou. Ak celkový súčet hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou
+              Objednávkou je vo výške od 2.656,01 EUR do 3.983,00 EUR, administratívny poplatok je 0,80 % z celkového
+              súčtu hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou. Ak celkový súčet
+              hodnôt benefitných e-poukazov Edenred Benefits objednaných predmetnou Objednávkou je vo výške od 3.983,01
+              EUR do 9.294,00 EUR, administratívny poplatok je 0,70 % z celkového súčtu hodnôt rekreačných e-poukazov
+              Edenred Dovolenka objednaných predmetnou Objednávkou. Ak celkový súčet hodnôt rekreačných e-poukazov
+              Edenred Dovolenka objednaných predmetnou Objednávkou je vo výške od 9.294,01 EUR do 13.277,00 EUR,
+              administratívny poplatok je 0,60 % z celkového súčtu hodnôt benefitných e-poukazov Edenred Benefits
+              objednaných predmetnou Objednávkou. V prípade, ak suma poplatku za sprostredkované Rekreačné služby
+              vyčíslená za jednotlivú Objednávku v zmysle bodu 2. tohto článku je vyššia ako 6,50 EUR bez DPH, Ticket
+              Service poskytne Klientovi 100 % zl'avu z administratívneho poplatku podl'a bodu 3. tohto článku.
+            </li>
+            <li>
+              Suma odmeny v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne záväzného
+              právneho predpisu.
+            </li>
+            <li>
+              Ticket Service vyúčtuje odmenu v zmysle tohto článku na základe zálohovej faktúry, faktúry, alebo
+              elektronickej faktúry vystavenej Ticket Service v zmysle bodu 4, článku VI, VOP-KLIENT, pričom odmena bude
+              splatná v deň splatnosti uvedenej zálohovej faktúry, faktúry, alebo elektronickej faktúry.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <table border="1px" class="center">
+        <tr>
+          <th style="font-family: Arial">Poplatok</th>
+          <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+        </tr>
+        <apex:variable var="index" value="{!0}" />
+        <apex:repeat value="{!Docs[1].QuoteServicesFirst}" var="serviceListFirst">
+          <tr>
+            <td style="text-align: left">{!serviceListFirst.name}</td>
+            <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+          </tr>
+        </apex:repeat>
+      </table>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          II.<br />Poplatky
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div style="text-align: center; font-size: 12px">
+          <ol style="padding: 0; margin: 1.5em; text-align: justify">
+            <li>Klient sa zaväzuje uhradiť poplatky v nasledovnej výške:</li>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.1 Vydanie karty Edenred</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial">Poplatok</th>
+                <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[1].QuoteServicesVydanie}" var="serviceListVyd">
+                <tr>
+                  <td style="text-align: left">{!serviceListVyd.name}</td>
+                  <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.2 Doručenie</p>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial">Poplatok</th>
+                <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[1].QuoteServicesDorucenie}" var="serviceListDoru">
+                <tr>
+                  <td style="text-align: left">{!serviceListDoru.name}</td>
+                  <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+    <!--SECOND PAGE -->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div style="page-break-after: always" />
+    <br /><br /><br /><br />
+    <p style="margin-left: 15px; text-align: left; font-size: 9px">1.3 Iné služby</p>
+    <table border="1px" class="center">
+      <tr>
+        <th style="font-family: Arial">Poplatok</th>
+        <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+      </tr>
+      <apex:repeat value="{!Docs[1].QuoteServicesIne}" var="serviceListIne">
+        <tr>
+          <td style="text-align: left">{!serviceListIne.name}</td>
+          <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+        </tr>
+      </apex:repeat>
+    </table>
+    <apex:outputPanel rendered="{!Docs[1].ThereIsService == true && Docs[1].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <!-- neither ol start attribute nor li value appear to work-->
+          <li style="text-align: left">
+            Zl'avy<br />
+            Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:
+          </li>
+        </ol>
+        <table style="width: 95%" border="1px" class="center">
+          <tr>
+            <!-- add a class here or something to make only this th and td 25% width -->
+            <th style="width: 25%; font-family: Arial">Poplatok</th>
+            <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+            <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+          </tr>
+          <apex:repeat value="{!Docs[1].QuoteServicesDiscounted}" var="serviceList">
+            <tr>
+              <td style="width: 25%; text-align: left">{!serviceList.name}</td>
+              <td style="width: 25%">{!serviceList.price} {!serviceList.unit}</td>
+              <td style="width: 25%">{!serviceList.discount}</td>
+              <td style="width: 25%">{!serviceList.totalPrice} {!serviceList.unit}</td>
+            </tr>
+          </apex:repeat>
+        </table>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[1].ThereIsService == true && Docs[1].Discount == true}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li style="hidden"></li>
+          <li>
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li>
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!Docs[1].ThereIsService == false || Docs[1].Discount == false}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li style="hidden"></li>
+          <li>
+            Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+            záväzného právneho predpisu.
+          </li>
+          <li>
+            Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+            elektronickou faktúrou vystavenou Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+      III.<br />Spoločné ustanovenia
+    </div>
+    <apex:outputPanel rendered="{!show}">
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em">
+          <li>
+            <div>Splatnosť na faktúru</div>
+            <div>
+              Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+              nasledovnom znení:
+            </div>
+            <div style="font-style: italic">
+              „4. Klient uhradí Ticket Service odmenu a poplatky v zmysle bodu 1. tohto článku, celkovú Cenu za
+              objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket Service a
+              doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru najneskôr do 3 pracovných dní od
+              doručenia Objednávky. Faktúra je doručovaná Klientovi najmä elektronicky a to elektronickou poštou na
+              e-mailovú adresu Klienta. Faktúra bude splatná v lehote {!PaymentTerm} dní odo dňa jej vystavenia. Klient
+              uhradí Cenu bezhotovostným prevodom v prospech bankového účtu Ticket Service, pričom variabilným symbolom
+              bude číslo faktúry. Klient podpisom Zmluvy, respektíve zadaním Objednávky v zmysle týchto VOP-KLIENT a
+              oboznámením Ticket Service so svojou e-mailovou adresou potvrdzuje svoj súhlas s vydávaním a doručovaním
+              elektronickej faktúry vyhotovovanej Ticket Service v zmysle príslušných všeobecne záväzných právnych
+              predpisov v prípade rozhodnutia Ticket Service o vyhotovovaní a doručení elektronickej faktúry pre
+              Klienta.“
+            </div>
+          </li>
+          <li>
+            Ustanovenia Sadzobníka peňaženka Dovolenka majú prednosť pred ustanoveniami VOP-KLIENT a v prípade
+            odlišností ustanovení VOP-KLIENT a Sadzobníka peňaženka Dovolenka, rozhodné sú ustanovenia Sadzobníka
+            peňaženka Dovolenka. Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka Dovolenka a v
+            prípade odlišností ustanovení Zmluvy a Sadzobníka peňaženka Dovolenka, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            Dovolenka za podmienok uvedených v Zmluve a VOP-KLIENT
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!show == false}">
+      <!--div class="size_1-of-1" style="page-break-before: always"!-->
+      <div style="text-align: center; font-size: 9px">
+        <ol style="padding: 0; margin: 1.5em; text-align: justify">
+          <li>
+            Ustanovenia Sadzobníka peňaženka Dovolenka majú prednosť pred ustanoveniami VOP-KLIENT a v prípade
+            odlišností ustanovení VOP-KLIENT a Sadzobníka peňaženka Dovolenka, rozhodné sú ustanovenia Sadzobníka
+            peňaženka Dovolenka. Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka peňaženka Dovolenka a v
+            prípade odlišností ustanovení Zmluvy a Sadzobníka peňaženka Dovolenka, rozhodné sú ustanovenia Zmluvy.
+          </li>
+          <li>
+            Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+            politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník peňaženka
+            Dovolenka za podmienok uvedených v Zmluve a VOP-KLIENT
+          </li>
+        </ol>
+      </div>
+    </apex:outputPanel>
+    <!--/div!-->
+  </apex:outputPanel>
+  <!-- CHARLIE -->
+  <!-- TR -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[2] == true}">
+    <!-- TR -->
+    <apex:outputPanel layout="none" rendered="{! Docs[2].firstDoc == false}">
+      <div style="page-break-before: always" />
+    </apex:outputPanel>
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov<br />poukážky Ticket Restaurant<sup>®</sup> – klient
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div
+            style="
+              text-align: center;
+              font-size: 11px;
+              color: #616161;
+              font-weight: bold;
+              font-family: Arial Unicode MS;
+            "
+          >
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava, IČO: 52 005
+            551, DIČ: 2120870653,<br />IČ DPH: SK2120870653, zapísanej v Obchodnom registri Okresného súdu Bratislava I,
+            oddiel: Sro, vložka č.:132404/B
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník TR poukážky“)
+          </div>
+        </div>
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+            <br />I.<br />Poplatok za sprostredkované stravovacie služby a administratívny poplatok
+          </div>
+          <div style="text-align: center; font-size: 10px">
+            <ol style="padding: 0; margin: 1.5em">
+              <li>
+                Klient je povinný uhradiť Ticket Service odmenu za produkty a služby poskytnuté v zmysle Zmluvy, ktorá
+                bude vyčíslená osobitne za každú Objednávku. Suma odmeny bude určená ako súčet sumy poplatku za
+                sprostredkované Stravovacie služby a sumy administratívneho poplatku.
+              </li>
+              <li>
+                Výška poplatku za sprostredkované Stravovacie služby podl'a Zmluvy predstavuje
+                <apex:outputPanel layout="none" rendered="{!Docs[2].P01 != null}">
+                  {!Docs[2].P01}% a bude vyčíslená ako percentuálny podiel z celkovej hodnoty vydaných TR poukážok
+                  objednaných jednou objednávkou. </apex:outputPanel><apex:outputPanel layout="none" rendered="{!Docs[2].P02 != null}">
+                  {!Docs[2].P02} EUR.</apex:outputPanel>
+                <!--apex:outputPanel layout="none" rendered="{!Docs[2].P02 != null}"> {!Docs[2].P02} EUR.</apex:outputPanel!-->
+              </li>
+              <li>
+                Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri poskytnutí
+                služby v zmysle Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených
+                v článku II. tohto Sadzobníka TR poukážky nad rámec poplatku za sprostredkované Stravovacie služby. Suma
+                administratívneho poplatku je určená ako percentuálny podiel z celkového súčtu TR poukážok objednaných
+                príslušnou Objednávkou Klienta. Ak celkový súčet Hodnôt TR poukážok objednaných predmetnou Objednávkou
+                Klienta je vo výške od 0,01 EUR do 325,00 EUR, administratívny poplatok je v sume {!Docs[2].P03} bez DPH,
+                ku ktorej bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení,
+                najmä zákona o DPH. Ak celkový súčet Hodnôt TR poukážok objednaných predmetnou Objednávkou je vo výške
+                od 325,01 EUR do 664 EUR, administratívny poplatok je 2,00 % z celkového súčtu Hodnôt TR poukážok
+                objednaných predmetnou Objednávkou Klienta. Ak celkový súčet Hodnôt TR poukážok objednaných predmetnou
+                Objednávkou Klienta je vo výške od 664,01 EUR do 1.650 EUR, administratívny poplatok je 1,80 % z
+                celkového súčtu Hodnôt TR poukážok objednaných predmetnou Objednávkou Klienta. Ak celkový súčet Hodnôt
+                TR poukážok objednaných predmetnou Objednávkou Klienta je vo výške od 1.650,01 EUR do 2.656 EUR,
+                administratívny poplatok je 1,30 % z celkového súčtu Hodnôt TR poukážok objednaných predmetnou
+                Objednávkou Klienta. Ak celkový súčet Hodnôt TR poukážok objednaných predmetnou Objednávkou Klienta je
+                vo výške od 2.656,01 EUR do 3.983 EUR, administratívny poplatok je 0,80 % z celkového súčtu Hodnôt TR
+                poukážok objednaných predmetnou Objednávkou Klienta. Ak celkový súčet Hodnôt TR poukážok objednaných
+                predmetnou Objednávkou Klienta je vo výške od 3.983,01 EUR do 9.294 EUR, administratívny poplatok je
+                0,70 % z celkového súčtu Hodnôt TR poukážok objednaných predmetnou Objednávkou Klienta. Ak celkový súčet
+                Hodnôt TR poukážok objednaných predmetnou Objednávkou je vo výške od 9.294,01 EUR do 13.277 EUR,
+                administratívny poplatok je 0,60 % z celkového súčtu Hodnôt TR poukážok objednaných predmetnou
+                Objednávkou Klienta. V prípade, ak suma poplatku za sprostredkované Stravovacie služby vyčíslená za
+                jednotlivú Objednávku v zmysle bodu 2. tohto článku je vyššia ako 6,50 EUR bez DPH, Ticket Service
+                poskytne Klientovi 100 % zl'avu z administratívneho poplatku.
+              </li>
+              <li>
+                ECO poplatok za každú objednávku papierových stravných poukážok v sume {!Docs[2].P04} EUR. ECO poplatok
+                Klient neplatí ak sa rozhodne prejsť na elektronické stravné – karta Edenred.
+              </li>
+              <li>
+                Suma odmeny v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+                záväzného právneho predpisu.
+              </li>
+              <li>
+                Ticket Service vyúčtuje odmenu za službu v zmysle tohto článku na základe zálohovej faktúry, faktúry,
+                resp. elektronickej faktúry, vystavenej Ticket Service v zmysle článku VI. bod 4. VOP-KLIENT, pričom
+                odmena za službu bude splatná v deň splatnosti uvedenej zálohovej faktúry, faktúry, alebo elektronickej
+                faktúry.
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="size_1-of-1">
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[2].QuoteServicesFirst}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+        </div>
+      </div>
+      <div class="block" style="padding-top: 10px">
+        <div class="row">
+          <div class="size_1-of-1">
+            <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+              II.<br />Poplatky
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="size_1-of-1">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>V prípade, ak nejde o Štandardnú Objednávku je Klient povinný uhradiť poplatky v nasledovnej výške:</li>
+            <p style="margin-left: 15px; text-align: left; font-size: 9px">1.1 Doručenie</p>
+          </ol>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[2].QuoteServicesVydanie}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+          <p style="margin-left: 15px; text-align: left; font-size: 9px">1.2 Úhrada</p>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[2].QuoteServicesDorucenie}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div style="page-break-before: always" />
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <p style="margin-left: 15px; text-align: left; font-size: 9px">1.3 Balenie</p>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[2].QuoteServicesIne}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+
+          <p style="margin-left: 15px; text-align: left; font-size: 9px">1.4 Iné služby</p>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[2].QuoteServicesSluzby}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+          <apex:outputPanel rendered="{!Docs[2].ThereIsService == true && Docs[2].Discount == true}">
+            <ol style="padding: 0; margin: 1.5em">
+              <li style="hidden"></li>
+              <li>Zl'avy</li>
+              <p style="margin-left: 15px; text-align: left; font-size: 9px">
+                Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:
+              </p>
+            </ol>
+            <table style="width: 95%" border="1px" class="center">
+              <tr>
+                <th style="width: 25%; font-family: Arial">Poplatok</th>
+                <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+                <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+                <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[2].QuoteServicesDiscounted}" var="serviceListFirst">
+                <tr>
+                  <td style="width: 25%; text-align: left">{!serviceListFirst.name}</td>
+                  <td style="width: 25%">{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  <td style="width: 25%">{!serviceListFirst.discount}</td>
+                  <td style="width: 25%">{!serviceListFirst.TotalPrice} {!serviceListFirst.unit2}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+          </apex:outputPanel>
+        </div>
+      </div>
+    </div>
+    <!--div style="page-break-before: always"/!-->
+    <div class="block" style="padding-top: 50px">
+      <div class="size_1-of-1">
+        <apex:outputPanel rendered="{!Docs[2].ThereIsService == true && Docs[2].Discount == true}">
+          <ol style="padding: 0; margin: 1.5em">
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li>
+              Štandardná Objednávka zahŕňa objednanie TR poukážok prostredníctvom webovej aplikácie Ticket Service
+              „Online Objednávka“ /<a href='www.rychlaobjednavka.sk'>www.rychlaobjednavka.sk</a>/ v štandardnej nominálnej hodnote a v štandardnom balení,
+              osobný odber TR poukážok na pobočke Ticket Service v Bratislave, úhradu zálohovej faktúry bankovým
+              prevodom pred odberom alebo platbou v hotovosti na pobočke Ticket Service a zaslanie elektronickej faktúry
+              alebo osobný odber faktúr na pobočke Ticket Service v Bratislave spolu s TR poukážkami.
+            </li>
+            <li>
+              Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+              záväzného právneho predpisu.
+            </li>
+            <li>
+              Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+              elektronickou faktúrou vystavenej Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+            </li>
+          </ol>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!Docs[2].ThereIsService == false || Docs[2].Discount == false}">
+          <ol style="padding: 0; margin: 1.5em">
+            <li style="hidden"></li>
+            <li>
+              Štandardná Objednávka zahŕňa objednanie TR poukážok prostredníctvom webovej aplikácie Ticket Service
+              „Online Objednávka“ /www.rychlaobjednavka.sk/ v štandardnej nominálnej hodnote a v štandardnom balení,
+              osobný odber TR poukážok na pobočke Ticket Service v Bratislave, úhradu zálohovej faktúry bankovým
+              prevodom pred odberom alebo platbou v hotovosti na pobočke Ticket Service a zaslanie elektronickej faktúry
+              alebo osobný odber faktúr na pobočke Ticket Service v Bratislave spolu s TR poukážkami.
+            </li>
+            <li>
+              Výška poplatkov v zmysle tohto článku je bez DPH, ktorá bude uplatnená podl'a príslušného všeobecne
+              záväzného právneho predpisu.
+            </li>
+            <li>
+              Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku zálohovou faktúrou, faktúrou alebo
+              elektronickou faktúrou vystavenej Ticket Service v zmysle článku VI. bod 3. a 4. VOP-KLIENT.
+            </li>
+          </ol>
+        </apex:outputPanel>
+      </div>
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          III.<br />Spoločné ustanovenia
+        </div>
+        <apex:outputPanel rendered="{!showVoucher}">
+          <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+            <li>
+              <div>Splatnosť na faktúru</div>
+              <div>
+                Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+                nasledovnom znení:
+              </div>
+              <div style="font-style: italic">
+                „4. Klient uhradí Ticket Service odmenu za službu a poplatky v zmysle bodu 1. tohto článku a celkovú
+                Cenu za objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket Service
+                a doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru štandardne najneskôr do 3
+                pracovných dní od doručenia objednaného Produktu ER. Faktúra je doručovaná Klientovi najmä elektronicky
+                a to elektronickou poštou na e-mailovú adresu Klienta. Faktúra bude splatná v lehote
+                {!PaymentTermVoucher} dní odo dňa jej vystavenia. Klient uhradí Cenu bezhotovostným prevodom v prospech
+                bankového účtu Ticket Service alebo v hotovosti, pričom variabilným symbolom bude číslo faktúry. Klient
+                podpisom Zmluvy, respektíve zadaním Objednávky v zmysle týchto VOP-KLIENT a oboznámením Ticket Service
+                so svojou e-mailovou adresou potvrdzuje svoj súhlas s vydávaním a doručovaním elektronickej faktúry
+                vyhotovovanej Ticket Service v zmysle príslušných všeobecne záväzných právnych predpisov v prípade
+                rozhodnutia Ticket Service o vyhotovovaní a doručení elektronickej faktúry pre Klienta.“
+              </div>
+            </li>
+            <li>
+              Ustanovenia Sadzobníka TR poukážky majú prednosť pred ustanoveniami VOP-KLIENT a v prípade odlišností
+              ustanovení VOP-KLIENT a Sadzobníka TR poukážky, sú rozhodné ustanovenia Sadzobníka TR poukážky.
+              Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka TR poukážky a v prípade odlišností
+              ustanovení Zmluvy a Sadzobníka TR poukážky, sú rozhodné ustanovenia Zmluvy.
+            </li>
+            <li>
+              Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+              politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník TR
+              poukážky za podmienok uvedených v Zmluve a VOP-KLIENT.
+            </li>
+          </ol>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!showVoucher == false}">
+          <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+            <li>
+              Ustanovenia Sadzobníka TR poukážky majú prednosť pred ustanoveniami VOP-KLIENT a v prípade odlišností
+              ustanovení VOP-KLIENT a Sadzobníka TR poukážky, sú rozhodné ustanovenia Sadzobníka TR poukážky.
+              Ustanovenia Zmluvy majú prednosť pred ustanoveniami Sadzobníka TR poukážky a v prípade odlišností
+              ustanovení Zmluvy a Sadzobníka TR poukážky, sú rozhodné ustanovenia Zmluvy.
+            </li>
+            <li>
+              Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+              politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník TR
+              poukážky za podmienok uvedených v Zmluve a VOP-KLIENT.
+            </li>
+          </ol>
+        </apex:outputPanel>
+      </div>
+    </div>
+  </apex:outputPanel>
+  <!-- DELTA -->
+  <!-- TC -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[3] == true}">
+    <!-- TC -->
+    <apex:outputPanel layout="none" rendered="{! Docs[3].firstDoc == false}">
+      <div style="page-break-before: always" />
+    </apex:outputPanel>
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov<br />Edenred poukážky Darčeky - klient
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-family: Arial Unicode MS; color: #616161">
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava IČO: 52 005
+            551, DIČ: 2120870653,<br />IČ DPH: SK2120870653, zapísanej v Obchodnom registri Okresného súdu Bratislava I,
+            oddiel: Sro, vložka č.:132404/B
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník Edenred poukážky Darčeky“)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+            I.<br />Odmena
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 10px">
+            <ol style="padding: 0; margin: 1.5em">
+              <li>
+                Klient je povinný uhradiť Ticket Service odmenu za zabezpečenie dodania tovaru alebo poskytnutia služby
+                Partnerom pre Používatel'a v závislosti od druhu (názvu) Poukážky a celkového súčtu Hodnôt Poukážok
+                objednaných jednou Objednávkou Klienta v nasledovnej výške:
+              </li>
+              <li style="list-style-type: none">Edenred poukážka Darčeky,</li>
+            </ol>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial">Poplatok</th>
+                <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[3].QuoteServicesFirst}" var="serviceListFirst">
+                <tr>
+                  <td style="text-align: left">{!serviceListFirst.name}</td>
+                  <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+            <ol style="padding: 0; margin: 1.5em; text-align: justify">
+              <li style="list-style-type: none">
+                Suma odmeny bude vypočítaná v zmysle vyššie uvedeného vždy spolu za všetky Poukážky objednané jednou
+                Objednávkou Klienta
+              </li>
+              <li>
+                Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri poskytnutí
+                služby v zmysle Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených
+                v bodoch 1. až 12. Článku II Poplatky (ďalej len „Administratívny poplatok“). Suma Administratívneho
+                poplatku za jednotlivú Objednávku
+                <apex:outputPanel layout="none" rendered="{!Docs[3].P01 != null}">
+                  Klienta je {!Docs[3].P01}</apex:outputPanel>
+                bez DPH, ku ktorej bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom
+                znení, najmä zákona o DPH. V prípade, ak suma odmeny za zabezpečenie dodania tovaru alebo poskytnutia
+                služby vyčíslená za jednotlivú Objednávku v zmysle článku I. tohto Sadzobníka Edenred poukážky Darčeky
+                <apex:outputPanel layout="none" rendered="{!Docs[3].P01 != null}">
+                  bude vyššia ako {!Docs[3].P01}
+                </apex:outputPanel>
+                bez DPH, Ticket Service poskytne Klientovi 100 % zl'avu z administratívneho poplatku.
+              </li>
+              <li>
+                Suma odmeny vypočítaná v zmysle bodu 1. tohto článku je sumou odmeny bez DPH, ku ktorej bude uplatnená
+                DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona č. 222/2004
+                Z. z. o dani z pridanej hodnoty v znení neskorších predpisov (ďalej len „zákon o DPH“).
+              </li>
+              <li>
+                Ticket Service vyúčtuje odmenu v zmysle tohto článku v zálohovej faktúre, faktúre, alebo elektronickej
+                faktúre, vystavenej Ticket Service v zmysle článku VI. bod 4. VOP-KLIENT, pričom odmena bude splatná v
+                deň splatnosti uvedenej zálohovej faktúry, respektíve faktúry, respektíve elektronickej faktúry.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 10px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+            II.<br />Poplatky
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="padding-top: 0px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 10px">
+            <ol style="padding: 0; margin: 1.5em">
+              <li>
+                Poplatok za doručenie Poukážok prostredníctvom kuriéra, kuriérskej spoločnosti alebo poštového podniku
+                (iného ako spoločnosť Slovenská pošta, a.s., Partizánska cesta 9, 975 99 Banská Bystrica, IČO: 36631124)
+                na miesto doručenia na území Slovenskej republiky určené Klientom (ďalej len „Poplatok za doručenie
+                poukážok – kuriér“) je vo výške {!Docs[3].P02} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a
+                príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH, za jedno
+                doručenie Poukážok na jedno miesto doručenia.
+              </li>
+              <li>
+                Poplatok za doručenie Poukážok v celkovej hodnote maximálne 500 EUR prostredníctvom spoločnosti
+                Slovenská pošta, a.s., Partizánska cesta 9, 975 99 Banská Bystrica, IČO: 36631124, na miesto doručenia
+                na území Slovenskej republiky určené Klientom, respektíve na pobočku spoločnosti Slovenská pošta, a.s.,
+                zabezpečujúcej poskytovanie poštových služieb pre územnú oblasť, v ktorej sa nachádza miesto doručenia
+                určené Klientom, a to poskytnutím služby „poistený list“, respektíve obdobnej služby poskytovanej
+                spoločnosťou Slovenská pošta, a.s. (ďalej len „Poplatok za doručenie poukážok – Slovenská pošta“) je vo
+                výške {!Docs[3].P05} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného
+                právneho predpisu v účinnom znení, najmä zákona o DPH, za jedno doručenie Poukážok na jedno miesto
+                doručenia, respektíve jednu pobočku spoločnosti Slovenská pošta, a.s.
+              </li>
+              <li>
+                Poplatok za úhradu Poukážok spôsobom dobierky, ak celkový súčet Hodnôt Poukážok objednaných predmetnou
+                Objednávkou Klienta je vo výške od 0,01 EUR do 499,99 EUR (spoločnosť Slovenská Pošta, a.s.), je vo
+                výške {!Docs[3].P03} EUR bez DPH, ku ktorej bude uplatnená DPH podl'a príslušného všeobecne záväzného
+                právneho predpisu v účinnom znení, najmä zákona o DPH, ak celkový súčet Hodnôt Poukážok objednaných
+                predmetnou Objednávkou je vo výške od 500 EUR do 5000 EUR (kuriér/kuriérska spoločnosť), poplatok je vo
+                výške {!Docs[3].P04} EUR bez DPH, za jednu úhradu Poukážok spôsobom dobierky.
+              </li>
+              <li>
+                Balenie Poukážok - druh „Basic“ je štandardným balením objednaných Poukážok. K poplatku za balenie
+                Poukážok - druh „Basic“ (ďalej len „Poplatok za balenie - „Basic““) je poskytovaná 100 % zl'ava
+              </li>
+              <li>
+                Poplatok za balenie Poukážok - druh „Plus“ (ďalej len „Poplatok za balenie - „Plus““) bude pre každú
+                jednotlivú Objednávku Klienta vypočítaný ako súčet poplatkov za jednotlivé ozdobné obaly bez DPH
+                objednané Objednávkou Klienta s požiadavkou na uvedený druh balenia. K poplatku bude uplatnená DPH
+                podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH.
+              </li>
+              <li>
+                Poplatok za 1 ks ozdobného obalu uvedeného v Objednávke je v závislosti od objednaného ozdobného obalu v
+                nasledovnej výške:
+              </li>
+            </ol>
+            <table border="1px" class="center">
+              <tr>
+                <th style="font-family: Arial Unicode MS">Druh ozdobného obalu</th>
+                <th style="font-family: Arial Unicode MS">
+                  Štandardná výška poplatku za 1 ks ozdobného obalu bez DPH
+                </th>
+              </tr>
+              <apex:repeat value="{!Docs[3].QuoteServicesVydanie}" var="serviceListFirst">
+                <tr>
+                  <td style="text-align: left">{!serviceListFirst.name}</td>
+                  <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="page-break-after: always" />
+    <br /><br /><br /><br />
+    <div class="block" style="padding-top: 0px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 10px">
+            <ol style="padding: 0; margin: 1.5em">
+              <li style="hidden"></li>
+              <li style="hidden"></li>
+              <li style="hidden"></li>
+              <li style="hidden"></li>
+              <li style="hidden"></li>
+              <li style="hidden"></li>
+              <li>
+                Poplatok za balenie Poukážok - druh „Premium“ (ďalej len „Poplatok za balenie - „Premium““) je vo výške
+                {!Docs[3].QuoteServicesMapped['ERSK_TC_014']} EUR bez DPH za balenie do 1 ks ozdobného obalu,
+                obsahujúceho Poukážky objednané Objednávkou Klienta s požiadavkou na uvedený druh balenia. K poplatku
+                bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä
+                zákona o DPH.
+              </li>
+              <li>
+                Poplatok za balenie Poukážok - druh „Comfort“ (ďalej len „Poplatok za balenie - „Comfort“) je vo výške
+                {!Docs[3].QuoteServicesMapped['ERSK_TC_015']}% z celkového súčtu Hodnôt Poukážok objednaných Objednávkou
+                Klienta s požiadavkou na uvedený druh balenia bez DPH. K poplatku bude uplatnená DPH podl'a príslušného
+                všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH.
+              </li>
+              <li>
+                Poplatok za osobitnú potlač Poukážok podl'a grafického návrhu (Logo) dodaného Klientom (ďalej len
+                „Poplatok za osobitnú potlač poukážok“) je vo výške {!Docs[3].QuoteServicesMapped['ERSK_TC_016']} EUR
+                bez DPH, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v
+                účinnom znení, za potlač 1 ks Poukážky, minimálna suma poplatku je
+                <apex:outputPanel layout="none" rendered="{!Docs[3].QuoteServicesMapped['ERSK_TC_016_minFee'] != ''}">
+                  vo výške {!Docs[3].QuoteServicesMapped['ERSK_TC_016_minFee']} EUR bez DPH
+                </apex:outputPanel>
+                za jednu Objednávku, obsahujúcu požiadavku na osobitnú potlač Poukážok, ku ktorému bude uplatnená DPH
+                podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení.
+              </li>
+              <li>
+                Poplatok za zadanie Objednávky Poukážok akýmkol'vek iným spôsobom ako cez automatizovaný objednávací
+                systém prevádzkovaný na internetovej stránke Ticket Service <a href='www.rychlaobjednavka.sk'>www.rychlaobjednavka.sk</a> (ďalej len „Poplatok
+                za manuálne zadanie objednávky“) je vo výške {!Docs[3].QuoteServicesMapped['ERSK_TC_017']} EUR bez DPH,
+                ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení,
+                najmä zákona o DPH, za jedno zadanie Objednávky Poukážok uvedeným spôsobom.
+              </li>
+              <li>
+                Poplatok za spracovanie Klientom vrátených Poukážok je vo výške
+                {!Docs[3].QuoteServicesMapped['ERSK_TC_018']}% z celkového súčtu Hodnôt Poukážok Klientom vrátených
+                Poukážok (ďalej len „Poplatok za spracovanie vrátených poukážok“) bez DPH, ku ktorému bude uplatnená DPH
+                podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH. Suma
+                minimálneho poplatku je
+                <apex:outputPanel layout="none" rendered="{!Docs[3].QuoteServicesMapped['ERSK_TC_018_minFee'] != ''}">
+                  vo výške {!Docs[3].QuoteServicesMapped['ERSK_TC_018_minFee']} EUR
+                </apex:outputPanel>
+                za všetky súčasne vrátené Poukážky, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného
+                právneho predpisu v účinnom znení. V prípade úhrady Sumy vyčíslenej v zmysle bodu 11. článku III. 1
+                VOP-KLIENT na účet Klienta mimo územia Slovenskej republiky Ticket Service je oprávnená vyúčtovať
+                poplatok za medzinárodnú transakciu podl'a aktuálneho sadzobníka poplatkov banky Ticket Service.
+              </li>
+              <li>
+                Poplatok za doručenie faktúry iným spôsobom, ako elektronickou poštou na e-mailovú adresu uvedenú
+                Klientom v Zmluve alebo neskôr oznámenou Klientom, alebo spolu s balíkom poukážok, je vo výške
+                {!Docs[3].QuoteServicesMapped['ERSK_TC_019']} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a
+                príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH za jednu faktúru.
+              </li>
+              <li>
+                Výška poplatkov v zmysle tohto článku je, pokial' nie je uvedené inak, sumou poplatku bez DPH, ku ktorej
+                bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä
+                zákona o DPH.
+              </li>
+              <li>
+                Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku na základe zálohovej faktúry, faktúry
+                alebo elektronickej faktúry v zmysle článku VI. bod 4. VOP-KLIENT.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="page-break-after: always">
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          III.<br />Spoločné ustanovenia
+        </div>
+        <apex:outputPanel rendered="{!Docs[3].ThereIsService == true && Docs[3].Discount == true}">
+          <div style="text-align: center; font-size: 10px">
+            <ol style="padding: 0; margin: 1.5em">
+              <li>Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:</li>
+            </ol>
+            <table style="width: 95%" border="1px" class="center">
+              <tr>
+                <th style="width: 25%; font-family: Arial">Poplatok</th>
+                <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+                <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+                <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+              </tr>
+              <apex:repeat value="{!Docs[3].QuoteServicesDiscounted}" var="serviceList">
+                <tr>
+                  <td style="width: 25%; text-align: left">{!serviceList.name}</td>
+                  <td style="width: 25%">{!serviceList.price} {!serviceList.unit}</td>
+                  <td style="width: 25%">{!serviceList.discount}</td>
+                  <td style="width: 25%">{!serviceList.TotalPrice} {!serviceList.unit}</td>
+                </tr>
+              </apex:repeat>
+            </table>
+            <!--div style="page-break-after: always"/-->
+          </div>
+        </apex:outputPanel>
+        <div style="text-align: center; font-size: 10px">
+          <apex:outputPanel rendered="{!Docs[3].Discount == true && showVoucher == true}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li style="hidden"></li>
+              <li>
+                <div>Splatnosť na faktúru</div>
+                <div>
+                  Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+                  nasledovnom znení:
+                </div>
+                <div style="font-style: italic">
+                  „4. Klient uhradí Ticket Service odmenu za službu a poplatky v zmysle bodu 1. tohto článku a celkovú
+                  Cenu za objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket
+                  Service a doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru štandardne najneskôr
+                  do 3 pracovných dní od doručenia objednaného Produktu ER. Faktúra je doručovaná Klientovi najmä
+                  elektronicky a to elektronickou poštou na e-mailovú adresu Klienta. Faktúra bude splatná v lehote
+                  {!PaymentTermVoucher} dní odo dňa jej vystavenia. Klient uhradí Cenu bezhotovostným prevodom v
+                  prospech bankového účtu Ticket Service alebo v hotovosti, pričom variabilným symbolom bude číslo
+                  faktúry alebo Elektronickej faktúry. Klient podpisom Zmluvy, respektíve zadaním Objednávky v zmysle
+                  týchto VOP-KLIENT a oboznámením Ticket Service so svojou e-mailovou adresou potvrdzuje svoj súhlas s
+                  vydávaním a doručovaním elektronickej faktúry vyhotovovanej Ticket Service v zmysle príslušných
+                  všeobecne záväzných právnych predpisov v prípade rozhodnutia Ticket Service o vyhotovovaní a doručení
+                  elektronickej faktúry pre Klienta."
+                </div>
+              </li>
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Darčeky majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Darčeky, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Darčeky. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Darčeky a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Darčeky, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Darčeky za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!Docs[3].Discount == false && showVoucher == true}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li>
+                <div>Splatnosť na faktúru</div>
+                <div>
+                  Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+                  nasledovnom znení:
+                </div>
+                <div style="font-style: italic">
+                  „4. Klient uhradí Ticket Service odmenu za službu a poplatky v zmysle bodu 1. tohto článku a celkovú
+                  Cenu za objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket
+                  Service a doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru štandardne najneskôr
+                  do 3 pracovných dní od doručenia objednaného Produktu ER. Faktúra je doručovaná Klientovi najmä
+                  elektronicky a to elektronickou poštou na e-mailovú adresu Klienta. Faktúra bude splatná v lehote
+                  {!PaymentTermVoucher} dní odo dňa jej vystavenia. Klient uhradí Cenu bezhotovostným prevodom v
+                  prospech bankového účtu Ticket Service alebo v hotovosti, pričom variabilným symbolom bude číslo
+                  faktúry alebo Elektronickej faktúry. Klient podpisom Zmluvy, respektíve zadaním Objednávky v zmysle
+                  týchto VOP-KLIENT a oboznámením Ticket Service so svojou e-mailovou adresou potvrdzuje svoj súhlas s
+                  vydávaním a doručovaním elektronickej faktúry vyhotovovanej Ticket Service v zmysle príslušných
+                  všeobecne záväzných právnych predpisov v prípade rozhodnutia Ticket Service o vyhotovovaní a doručení
+                  elektronickej faktúry pre Klienta."
+                </div>
+              </li>
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Darčeky majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Darčeky, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Darčeky. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Darčeky a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Darčeky, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Darčeky za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!Docs[3].Discount == true && showVoucher == false}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li style="hidden"></li>
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Darčeky majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Darčeky, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Darčeky. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Darčeky a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Darčeky, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Darčeky za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!Docs[3].Discount == false && showVoucher == false}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Darčeky majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Darčeky, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Darčeky. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Darčeky a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Darčeky, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Darčeky za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+        </div>
+      </div>
+    </div>
+  </apex:outputPanel>
+  <!-- ECHO -->
+  <!-- TM -->
+  <apex:outputPanel layout="none" rendered="{!oneOrTwo[4] == true}">
+    <!-- TM -->
+    <apex:outputPanel layout="none" rendered="{! Docs[4].firstDoc == false}">
+      <div style="page-break-before: always" />
+    </apex:outputPanel>
+    <!--Title-->
+    <div class="header">
+      <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+        styleClass="blacklogo"
+        style="position: absolute; margin-left: 5mm"
+        width="116.40944882px"
+        height="71.811023622px"
+      />
+    </div>
+    <div class="block" style="padding-top: 50px">
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 20px; font-weight: bold; font-family: Arial Unicode MS">
+            Sadzobník odmeny a poplatkov<br />Edenred poukážky Služby - klient
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="size_1-of-1">
+          <div
+            style="
+              text-align: center;
+              font-size: 11px;
+              font-weight: bold;
+              font-family: Arial Unicode MS;
+              color: #616161;
+            "
+          >
+            spoločnosti Ticket Service, s.r.o., so sídlom Karadžičova 8, 820 15 Bratislava IČO: 52 005
+            551, DIČ: 2120870653,<br />IČ DPH: SK2120870653, zapísanej v Obchodnom registri Okresného súdu Bratislava I,
+            oddiel: Sro, vložka č.:132404/B
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 12px; font-weight: bold; font-family: Arial Unicode MS">
+            (ďalej len „Sadzobník Edenred poukážky Služby“)
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="size_1-of-1">
+          <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+            I.<br />Odmena
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 10px">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>
+              Klient je povinný uhradiť Ticket Service odmenu za zabezpečenie dodania tovaru alebo poskytnutia služby
+              Partnerom pre Používatel'a v závislosti od druhu (názvu) Poukážky a celkového súčtu Hodnôt Poukážok
+              objednaných jednou Objednávkou Klienta v nasledovnej výške:
+            </li>
+            <li style="list-style-type: none">Edenred poukážka Služby</li>
+          </ol>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial">Poplatok</th>
+              <th style="font-family: Arial">Štandardná výška poplatku bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[4].QuoteServicesFirst}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+          <ol style="padding: 0; margin: 1.5em">
+            <li style="list-style-type: none">
+              Suma odmeny bude vypočítaná v zmysle vyššie uvedeného vždy spolu za všetky Poukážky objednané jednou
+              Objednávkou Klienta.
+            </li>
+            <li>
+              Administratívny poplatok predstavuje náhradu tých nákladov vynaložených Ticket Service pri poskytnutí
+              služby v zmysle Zmluvy, ktorých náhrada nie je Klientovi účtovaná prostredníctvom poplatkov vymedzených v
+              bodoch 1. až 12. tohto článku (ďalej len „Administratívny poplatok“). Suma Administratívneho poplatku za
+              jednotlivú
+              <apex:outputPanel layout="none" rendered="{!Docs[4].P01 != null}">
+                Objednávku Klienta je {!Docs[4].P01}</apex:outputPanel>
+              bez DPH, ku ktorej bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom
+              znení, najmä zákona o DPH. V prípade, ak suma odmeny za zabezpečenie dodania tovaru alebo poskytnutia
+              služby vyčíslená za jednotlivú Objednávku v zmysle článku I. tohto Sadzobníka Edenred poukážky Služby bude
+              vyššia ako
+              <apex:outputPanel layout="none" rendered="{!Docs[4].P01 != null}">
+                {!Docs[4].P01} bez DPH, Ticket</apex:outputPanel>
+              Service poskytne Klientovi 100 % zl'avu z administratívneho poplatku.
+            </li>
+            <li>
+              Suma odmeny vypočítaná v zmysle bodu 1. tohto článku je sumou odmeny bez DPH, ku ktorej bude uplatnená DPH
+              podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona č. 222/2004 Z. z. o
+              dani z pridanej hodnoty v znení neskorších predpisov (ďalej len „zákon o DPH“).
+            </li>
+            <li>
+              Ticket Service vyúčtuje odmenu v zmysle tohto článku na základe zálohovej faktúry, faktúry, alebo
+              elektronickej faktúry, vystavenej Ticket Service v zmysle článku VI. bod 4. VOP-KLIENT, pričom odmena bude
+              splatná v deň splatnosti uvedenej v danej zálohovej faktúre, faktúre, alebo elektronickej faktúre.
+            </li>
+          </ol>
+        </div>
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          II.<br />Poplatky
+        </div>
+        <div style="text-align: center; font-size: 10px">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>
+              Poplatok za doručenie Poukážok prostredníctvom kuriéra, kuriérskej spoločnosti alebo poštového podniku
+              (iného ako spoločnosť Slovenská pošta, a.s., Partizánska cesta 9, 975 99 Banská Bystrica, IČO: 36631124)
+              na miesto doručenia na území Slovenskej republiky určené Klientom (ďalej len „Poplatok za doručenie
+              poukážok – kuriér“) je vo výške {!Docs[4].P02} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a
+              príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH, za jedno doručenie
+              Poukážok na jedno miesto doručenia.
+            </li>
+            <li>
+              Poplatok za doručenie Poukážok v celkovej hodnote maximálne 500 EUR prostredníctvom spoločnosti Slovenská
+              pošta, a.s., Partizánska cesta 9, 975 99 Banská Bystrica, IČO: 36631124, na miesto doručenia na území
+              Slovenskej republiky určené Klientom, respektíve na pobočku spoločnosti Slovenská pošta, a.s.,
+              zabezpečujúcej poskytovanie poštových služieb pre územnú oblasť, v ktorej sa nachádza miesto doručenia
+              určené Klientom, a to poskytnutím služby „poistený list“, respektíve obdobnej služby poskytovanej
+              spoločnosťou Slovenská pošta, a.s. (ďalej len „Poplatok za doručenie poukážok – Slovenská pošta“) je vo
+              výške {!Docs[4].P05} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného
+              právneho predpisu v účinnom znení, najmä zákona o DPH, za jedno doručenie Poukážok na jedno miesto
+              doručenia, respektíve jednu pobočku spoločnosti Slovenská pošta, a.s.
+            </li>
+            <li>
+              Poplatok za úhradu Poukážok spôsobom dobierky, ak celkový súčet Hodnôt Poukážok objednaných predmetnou
+              Objednávkou Klienta je vo výške od 0,01 EUR do 499,99 EUR (spoločnosť Slovenská Pošta, a.s.), je vo výške
+              {!Docs[4].P03} EUR bez DPH, ku ktorej bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho
+              predpisu v účinnom znení, najmä zákona o DPH, ak celkový súčet Hodnôt Poukážok objednaných predmetnou
+              Objednávkou je vo výške od 500 EUR do 5.000 EUR (kuriér/kuriérska spoločnosť), poplatok je vo výške
+              {!Docs[4].P04} EUR bez DPH, za jednu úhradu Poukážok spôsobom dobierky.
+            </li>
+            <li>
+              Balenie Poukážok - druh „Basic“ je štandardným balením objednaných Poukážok. K poplatku za balenie
+              Poukážok - druh „Basic“ (ďalej len „Poplatok za balenie - „Basic““) je poskytovaná 100 % zl'ava.
+            </li>
+            <li>
+              Poplatok za balenie Poukážok - druh „Plus“ (ďalej len „Poplatok za balenie - „Plus““) bude pre každú
+              jednotlivú Objednávku Klienta vypočítaný ako súčet poplatkov za jednotlivé ozdobné obaly bez DPH objednané
+              Objednávkou Klienta s požiadavkou na uvedený druh balenia. K poplatku bude uplatnená DPH podl'a
+              príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH.
+            </li>
+            <li>
+              Poplatok za 1 ks ozdobného obalu uvedeného v Objednávke je v závislosti od objednaného ozdobného obalu v
+              nasledovnej výške:
+            </li>
+          </ol>
+          <table border="1px" class="center">
+            <tr>
+              <th style="font-family: Arial Unicode MS">Druh ozdobného obalu</th>
+              <th style="font-family: Arial Unicode MS">
+                Štandardná výška poplatku za 1 ks ozdobného obalu bez DPH
+              </th>
+            </tr>
+            <apex:repeat value="{!Docs[4].QuoteServicesVydanie}" var="serviceListFirst">
+              <tr>
+                <td style="text-align: left">{!serviceListFirst.name}</td>
+                <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+          <ol style="padding: 0; margin: 1.5em; padding-top: 40px">
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li>
+              Poplatok za balenie Poukážok - druh „Premium“ (ďalej len „Poplatok za balenie - „Premium““) je vo výške
+              {!Docs[4].QuoteServicesMapped['ERSK_TM_014']} EUR bez DPH za balenie do 1 ks ozdobného obalu, obsahujúceho
+              Poukážky objednané Objednávkou Klienta s požiadavkou na uvedený druh balenia. K poplatku bude uplatnená
+              DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH (v
+              prípade 20 % DPH 0,20 EUR s DPH za balenie do 1 ks ozdobného obalu, obsahujúceho Poukážky objednané
+              Objednávkou Klienta s požiadavkou na uvedený druh balenia).
+            </li>
+          </ol>  
+        </div>
+      </div>
+    </div>
+    <div style="page-break-after: always" />
+    <div class="row">
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 10px; padding-top: 50px">
+          <ol style="padding: 0; margin: 1.5em; padding-top: 40px">
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li style="hidden"></li>
+            <li>
+              Poplatok za balenie Poukážok - druh „Comfort“ (ďalej len „Poplatok za balenie - „Comfort“) je vo výške
+              {!Docs[4].QuoteServicesMapped['ERSK_TM_015']} % z celkového súčtu Hodnôt Poukážok objednaných Objednávkou
+              Klienta s požiadavkou na uvedený druh balenia bez DPH. K poplatku bude uplatnená DPH podl'a príslušného
+              všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH.
+            </li>
+            <li>
+              Poplatok za osobitnú potlač Poukážok podl'a grafického návrhu (Logo) dodaného Klientom (ďalej len
+              „Poplatok za osobitnú potlač poukážok“) je vo výške {!Docs[4].QuoteServicesMapped['ERSK_TM_016']} EUR bez
+              DPH, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom
+              znení, za potlač 1 ks Poukážky, minimálna suma poplatku je vo výške
+              <apex:outputPanel layout="none" rendered="{!Docs[4].QuoteServicesMapped['ERSK_TM_016_minFee'] != ''}">
+                {!Docs[4].QuoteServicesMapped['ERSK_TM_016_minFee']}</apex:outputPanel>
+              EUR bez DPH za jednu Objednávku, obsahujúcu požiadavku na osobitnú potlač Poukážok, ku ktorému bude
+              uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení.
+            </li>
+            <li>
+              Poplatok za zadanie Objednávky Poukážok akýmkol'vek iným spôsobom ako cez automatizovaný objednávací
+              systém prevádzkovaný na internetovej stránke Ticket Service <a href='www.rychlaobjednavka.sk'>www.rychlaobjednavka.sk</a> (ďalej len „Poplatok
+              za manuálne zadanie objednávky“) je vo výške {!Docs[4].QuoteServicesMapped['ERSK_TM_017']} EUR bez DPH, ku
+              ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä
+              zákona o DPH, za jedno zadanie Objednávky Poukážok uvedeným spôsobom.
+            </li>
+            <li>
+              Poplatok za spracovanie Klientom vrátených Poukážok je vo výške
+              {!Docs[4].QuoteServicesMapped['ERSK_TM_018']} % z celkového súčtu Hodnôt Poukážok Klientom vrátených
+              Poukážok (ďalej len „Poplatok za spracovanie vrátených poukážok“) bez DPH, ku ktorému bude uplatnená DPH
+              podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH. Suma
+              minimálneho poplatku je vo výške {!Docs[4].QuoteServicesMapped['ERSK_TM_018_minFee']} EUR bez DPH za
+              všetky súčasne vrátené Poukážky, ku ktorému bude uplatnená DPH podl'a príslušného všeobecne záväzného
+              právneho predpisu v účinnom znení . V prípade úhrady Sumy vyčíslenej v zmysle bodu 11. článku III. 1
+              VOP-KLIENT na účet Klienta mimo územia Slovenskej republiky Ticket Service je oprávnená vyúčtovať poplatok
+              za medzinárodnú transakciu podl'a aktuálneho sadzobníka poplatkov banky Ticket Service.
+            </li>
+            <li>
+              Poplatok za doručenie faktúry iným spôsobom, ako elektronickou poštou na e-mailovú adresu uvedenú Klientom
+              v Zmluve alebo neskôr oznámenou Klientom, alebo spolu s balíkom poukážok, je vo výške
+              {!Docs[4].QuoteServicesMapped['ERSK_TM_019']} EUR bez DPH, ku ktorému bude uplatnená DPH podl'a
+              príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona o DPH za jednu faktúru.
+            </li>
+            <li>
+              Výška poplatkov v zmysle tohto článku je, pokial' nie je uvedené inak, sumou poplatku bez DPH, ku ktorej
+              bude uplatnená DPH podl'a príslušného všeobecne záväzného právneho predpisu v účinnom znení, najmä zákona
+              o DPH.
+            </li>
+            <li>
+              Ticket Service vyúčtuje Klientovi poplatok v zmysle tohto článku na základe zálohovej faktúry, faktúry
+              alebo elektronickej faktúry v zmysle článku VI. bod 4. VOP-KLIENT.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!--div style="page-break-after: always"/!-->
+    <div class="row">
+      <div class="size_1-of-1">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; font-family: Arial Unicode MS">
+          III.<br />Spoločné ustanovenia
+        </div>
+      </div>
+      <div class="size_1-of-1">
+        <apex:outputPanel rendered="{!Docs[4].ThereIsService == true && Docs[4].Discount == true}">
+          <ol style="padding: 0; margin: 1.5em">
+            <li>Ticket Service poskytuje Klientovi nasledovné zl'avy zo súm štandardných odmien a poplatkov:</li>
+          </ol>
+          <table style="width: 95%" border="1px" class="center">
+            <tr>
+              <th style="width: 25%; font-family: Arial">Poplatok</th>
+              <th style="width: 25%; font-family: Arial">Štandardná výška poplatku bez DPH</th>
+              <th style="width: 25%; font-family: Arial">Výška zl'avy v %</th>
+              <th style="width: 25%; font-family: Arial">Výška poplatku po zl'ave bez DPH</th>
+            </tr>
+            <apex:repeat value="{!Docs[4].QuoteServicesDiscounted}" var="serviceList">
+              <tr>
+                <td style="width: 25%; text-align: left">{!serviceList.name}</td>
+                <td style="width: 25%">{!serviceList.price} {!serviceList.unit}</td>
+                <td style="width: 25%">{!serviceList.discount}</td>
+                <td style="width: 25%">{!serviceList.totalPrice} {!serviceList.unit}</td>
+              </tr>
+            </apex:repeat>
+          </table>
+        </apex:outputPanel>
+        <div style="text-align: center; font-size: 10px">
+          <apex:outputPanel layout="none" rendered="{!showVoucher == true}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li>
+                <div>Splatnosť na faktúru</div>
+                <div>
+                  Zmluvné strany sa dohodli, že na zmluvný vzťah sa vzťahuje ustanovenie článku VI. bodu 4. VOP-KLIENT v
+                  nasledovnom znení:
+                </div>
+                <div style="font-style: italic">
+                  „4. Klient uhradí Ticket Service odmenu za službu a poplatky v zmysle bodu 1. tohto článku a celkovú
+                  Cenu za objednané Produkty ER v zmysle bodu 3. tohto článku na základe faktúry vystavenej Ticket
+                  Service a doručenej Klientovi. Ticket Service vystaví a doručí Klientovi faktúru štandardne najneskôr
+                  do 3 pracovných dní od doručenia objednaného Produktu ER. Faktúra je doručovaná Klientovi najmä
+                  elektronicky, a to elektronickou poštou na e-mailovú adresu Klienta. Faktúra bude splatná v lehote
+                  {!PaymentTermVoucher} dní odo dňa jej vystavenia. Klient uhradí Cenu bezhotovostným prevodom v
+                  prospech bankového účtu Ticket Service alebo v hotovosti, pričom variabilným symbolom bude číslo
+                  faktúry. Klient podpisom Zmluvy, respektíve zadaním Objednávky v zmysle týchto VOP-KLIENT a
+                  oboznámením Ticket Service so svojou e-mailovou adresou potvrdzuje svoj súhlas s vydávaním a
+                  doručovaním elektronickej faktúry vyhotovovanej Ticket Service v zmysle príslušných všeobecne
+                  záväzných právnych predpisov v prípade rozhodnutia Ticket Service o vyhotovovaní a doručení
+                  elektronickej faktúry pre Klienta."
+                </div>
+              </li>
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Služby majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Služby, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Služby. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Služby a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Služby, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Služby za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+          <apex:outputPanel layout="none" rendered="{!showVoucher == false}">
+            <ol style="padding: 0; margin: 1.5em; text-align: justify; font-size: 9px">
+              <li>
+                Ustanovenia tohto Sadzobníka Edenred poukážky Služby majú prednosť pred ustanoveniami VOP-KLIENT a v
+                prípade odlišností ustanovení VOP-KLIENT a tohto Sadzobníka Edenred poukážky Služby, rozhodné sú
+                ustanovenia tohto Sadzobníka Edenred poukážky Služby. Ustanovenia Zmluvy majú prednosť pred
+                ustanoveniami tohto Sadzobníka Edenred poukážky Služby a v prípade odlišností ustanovení Zmluvy a tohto
+                Sadzobníka Edenred poukážky Služby, rozhodné sú ustanovenia Zmluvy.
+              </li>
+              <li>
+                Ticket Service je oprávnený vzhl'adom na zmenu právnej úpravy, zmenu trhovej situácie, zmenu obchodnej
+                politiky alebo na základe jeho rozhodnutia zmeniť, doplniť, zrušiť alebo nahradiť tento Sadzobník
+                Edenred poukážky Služby za podmienok uvedených v Zmluve a VOP-KLIENT.
+              </li>
+            </ol>
+          </apex:outputPanel>
+        </div>
+      </div>
+    </div>
+  </apex:outputPanel>
+</apex:page>

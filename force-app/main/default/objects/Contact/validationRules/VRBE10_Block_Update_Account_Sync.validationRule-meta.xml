@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE10_Block_Update_Account_Sync</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISCHANGED(AccountId)
+            &amp;&amp; NOT(ISBLANK( ER_Creation_date_in_OS__c ))</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>VRBE10 - The account name cannot be modified when the contact is synchronized</errorMessage>
+</ValidationRule>

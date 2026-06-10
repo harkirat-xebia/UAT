@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFI02_PrefInvMandatory</fullName>
+    <active>true</active>
+    <description>VRFI02 - Preferred Invoicing Method mandatory when FC synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)&amp;&amp;
+    ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)&amp;&amp;
+    NOT(ISNEW())&amp;&amp;
+    ISPICKVAL(ER_Preferred_Invoicing_Method__c, &apos;&apos;)&amp;&amp;
+    NOT(ISBLANK(ER_Account_Name__r.ER_Creation_date_in_OS__c ))</errorConditionFormula>
+    <errorDisplayField>ER_Preferred_Invoicing_Method__c</errorDisplayField>
+    <errorMessage>VRFI02 - Preferred Invoicing Method is mandatory when FC is synchronized</errorMessage>
+</ValidationRule>

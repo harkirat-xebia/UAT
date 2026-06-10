@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_Check_If_Max_Level_Reached</fullName>
+    <active>true</active>
+    <description>Check when the field level is calculated, if the max level has been reached for this BU. The max levels are stored in the Global_Settings__mdt.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISBLANK(ER_TECH_MaxLevelByBU__c) )
+&amp;&amp; Level__c &gt; VALUE(ER_TECH_MaxLevelByBU__c)</errorConditionFormula>
+    <errorDisplayField>Level__c</errorDisplayField>
+    <errorMessage>The maximum number of child categories for this record has been reached.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,454 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <div class="header-top">
+        <h2>{label.header}</h2>
+        <p>{label.subHeader}</p>
+    </div>
+    <!-- <div class="service-div box-groups">
+        <template for:each={productMap.Service} for:item="service">
+            <template if:true={isWebOffer}>
+                <template if:true={service.isDiscountedItem}>
+                    <div class="red-border-box" key={service.productId} data-id={service.productId}>
+                        <template if:true={service.percentage}>
+                            <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2> 
+                            <h2 class="text-red"><s data-id={service.productId}>{service.percentage}%</s> <span class="text-green discountPrice">{service.discountedPercentage}%</span></h2>
+                        </template>
+                        
+                        <template if:false={service.percentage}>
+                            <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2>  
+                            <h2 class="text-red">
+                                <s data-id={service.productId}>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                                </s> 
+                                <span class="text-green discountPrice">
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.discountedunitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{service.discountedunitPrice}&nbsp;{euro}</template>
+                                </span>
+                            </h2>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={service.isDiscountedItem}>
+                    <div class="red-border-box" key={service.productId} data-id={service.productId}>
+                        <template if:true={service.percentage}>
+                            <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2> 
+                            <h2 class="text-red" data-id={service.productId}>{service.percentage}%</h2>
+                        </template>
+                        <template if:false={service.percentage}>
+                            <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2> 
+                            <h2 class="text-red" data-id={service.productId}>{service.unitPrice}€</h2>
+                        </template>
+                    </div>
+                </template>
+            </template>
+            <template if:false={isWebOffer}>
+                <template if:true={service.isDiscountedItem}>
+                    <div class="red-border-box" key={service.productId} data-id={service.productId}>
+                        <template if:true={service.percentage}>
+                            <h2>{label.provisionLabel} :</h2> 
+                            <h2 class="text-red"><s data-id={service.productId}>{service.percentage}%</s><span class="text-green discountPrice">{service.discountedPercentage}%</span></h2>
+                        </template>
+                        <template if:false={service.percentage}>
+                            <h2>{label.provisionLabel} :</h2> 
+                            <h2 class="text-red">
+                                <s data-id={service.productId}>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                                </s>
+                                <span class="text-green discountPrice">
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.discountedunitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{service.discountedunitPrice}&nbsp;{euro}</template>
+                                </span>
+                            </h2>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={service.isDiscountedItem}>
+                    <div class="red-border-box" key={service.productId} data-id={service.productId}>
+                        <template if:true={service.percentage}>
+                            <h2>{label.provisionLabel} :</h2> 
+                            <h2 class="text-red" data-id={service.productId}>
+                                {service.percentage}%
+                            </h2>
+                        </template>
+                        <template if:false={service.percentage}>
+                            <h2>{label.provisionLabel} :</h2>  
+                            <h2 class="text-red" data-id={service.productId}>
+                                <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                            </h2>
+                        </template>
+                    </div>
+                </template> 
+            </template> 
+        </template>
+    </div> -->
+    
+    <template if:true={productMap.Delivery}>
+        <div class="delivery-div delivery-tbl">
+        <table class="slds-table tbl-right slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        {label.cardDelivery}
+                    </th>
+                    <th scope="col">
+                        {label.price}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={productMap.Delivery} for:item="delivery">
+                    <tr key={delivery.productId}>
+                        <td>
+                            {delivery.minValue} <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon> {delivery.maxValue} 
+                        </td>
+                        <template if:true={delivery.isDiscountedItem}>
+                            <td>
+                                <span class="text-green">{label.freeLabel}&nbsp;</span> 
+                                <s>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{delivery.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{delivery.unitPrice}&nbsp;{euro}</template>
+                                    &nbsp;/&nbsp;{delivery.deliveryUnit}
+                                </s>
+                            </td>
+                        </template>
+                        <template if:false={delivery.isDiscountedItem}>
+                            <td>
+                                <span>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{delivery.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{delivery.unitPrice}&nbsp;{euro}</template>
+                                </span> / {delivery.deliveryUnit}
+                            </td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        </div>
+    </template>
+
+    <template if:true={productMap.Card}>
+        <div class="card-div delivery-tbl">
+        <table class="slds-table tbl-right slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        {label.pricing}
+                    </th>
+                    <th scope="col">
+                        {label.unitPrice}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={productMap.Card} for:item="card">
+                    <tr key={card.productId}>
+                        <td>
+                            {card.productName}
+                        </td>
+                        <!-- Discounted -->
+                        <template if:true={card.isDiscountedItem}>
+                            <td>
+                                <template if:true={card.percentage}>
+                                    <span class="text-green">{label.freeLabel}&nbsp;</span> <s>{card.percentage}&nbsp;%</s>
+                                </template>
+                                <template if:false={card.percentage}>
+                                    <span class="text-green">{label.freeLabel}&nbsp;</span> 
+                                    <s>
+                                        <template if:true={isCurrencyBefore}>{euro}&nbsp;{card.unitPrice}</template>
+                                        <template if:false={isCurrencyBefore}>{card.unitPrice}&nbsp;{euro}</template>
+                                    </s>
+                                </template>
+                            </td>
+                        </template>
+                        <!-- Not Discounted -->
+                        <template if:false={card.isDiscountedItem}>
+                            <td>
+                                <template if:true={card.percentage}>
+                                    {card.percentage}&nbsp;%
+                                </template>
+                                <template if:false={card.percentage}>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{card.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{card.unitPrice}&nbsp;{euro}</template>
+                                </template>
+                            </td>
+                        </template>
+                    </tr>
+                </template>
+                <!-- Adding new part -->
+                </tbody>
+        </table>
+    </div>
+</template>
+
+                <!-- SERVICE (PS) SECTION - NOW INDEPENDENT -->
+
+                <!-- Provision of Services (PS) shown as plain table rows -->
+                <template if:true={productMap.Service}>
+                    <!-- Adding new code -->
+                    <div class="service-div delivery-tbl">
+                        <table class="slds-table tbl-right slds-table_cell-buffer slds-table_bordered">
+                            <tbody>
+                    <!-- Adding new code ends-->
+                    <template for:each={productMap.Service} for:item="service">
+                        <tr key={service.productId} data-id={service.productId}>
+                            <td>
+                                <template if:true={isWebOffer}>
+                                    {label.provisionLabelMulti}&nbsp;{service.solutionName}&nbsp;:
+                                </template>
+                                <template if:false={isWebOffer}>
+                                    {label.provisionLabel}&nbsp;:
+                                </template>
+                            </td>
+
+                            <!-- Discounted -->
+                            <template if:true={service.isDiscountedItem}>
+                                <td>
+                                    <template if:true={service.percentage}>
+                                        <!-- Removing discountPrice from the class -->
+                                        <span class="text-green" data-id={service.productId}>
+                                            {service.discountedPercentage}%
+                                        </span>
+                                        &nbsp;
+                                        <s data-id={service.productId}>{service.percentage}%</s>
+                                    </template>
+
+                                    <template if:false={service.percentage}>
+                                        <s data-id={service.productId}>
+                                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                            <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                                        </s>
+                                        &nbsp;
+                                        <!-- Removing discountPrice from the class -->
+                                        <span class="text-green" data-id={service.productId}>
+                                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.discountedunitPrice}</template>
+                                            <template if:false={isCurrencyBefore}>{service.discountedunitPrice}&nbsp;{euro}</template>
+                                        </span>
+                                    </template>
+                                </td>
+                            </template>
+
+                            <!-- Not discounted -->
+                            <template if:false={service.isDiscountedItem}>
+                                <td>
+                                    <template if:true={service.percentage}>
+                                        {service.percentage}%
+                                    </template>
+                                    <template if:false={service.percentage}>
+                                        <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                        <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                                    </template>
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+                <!-- New code to be visible inside the table -->
+                <!-- <template for:each={nonDiscountedServices} for:item="service">
+                    <tr key={service.productId}>    
+                        <td>
+                            <template if:true={isWebOffer}>
+                                {label.provisionLabelMulti}&nbsp;{service.solutionName}&nbsp;:
+                            </template>
+                            <template if:false={isWebOffer}>
+                                {label.provisionLabel}&nbsp;:
+                            </template>
+                        </td>
+
+                        <td>
+                            <template if:true={service.percentage}>
+                                {service.percentage}%
+                            </template>
+                            <template if:false={service.percentage}>
+                                <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                            </template>
+                        </td>
+                    </tr>
+                </template> -->
+
+                <!-- <template for:each={nonDiscountedServices} for:item="service">
+                    <tr key={service.productId}>
+                        <td>
+                            {label.provisionLabelMulti}&nbsp;{service.solutionName}
+                        </td>
+                        <td>
+                            <template if:true={service.percentage}>
+                                {service.percentage}%
+                            </template>
+                            <template if:false={service.percentage}>
+                                <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                            </template>
+                        </td>
+                    </tr>
+                </template> -->
+
+<!-- New Code -->
+        <!-- <template if:true={nonDiscountedServices}>
+        <div class="slds-m-top_medium">
+            <template for:each={nonDiscountedServices} for:item="service">
+                <div class="red-border-box" key={service.productId} data-id={service.productId}>
+                    <template if:true={service.percentage}>
+                        <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2>
+                        <h2 class="text-red" data-id={service.productId}>{service.percentage}%</h2>
+                    </template>
+
+                    <template if:false={service.percentage}>
+                        <h2>{label.provisionLabelMulti}&nbsp;{service.solutionName} :</h2>
+                        <h2 class="text-red" data-id={service.productId}>
+                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                            <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                        </h2>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </template> -->
+    <template if:true={showPromoComp}>
+        <div class="">
+            <p class="counter-label">
+                {label.promoQuestionLabel}
+            </p>
+            <lightning-input
+                        type="toggle"
+                        class="toggle-custom"
+                        name="hasPromoCode"
+                        variant="label-hidden"
+                        checked={hasPromoCode}
+                        onchange={handleInputChange}
+                        data-form-element
+                        message-toggle-active={label.yesLabel}
+                        message-toggle-inactive={label.noLabel}
+                        disabled={isWebOffer}
+                    ></lightning-input>
+        </div>
+        <template if:true={hasPromoCode}>
+                    <!-- Row 1: Name and Street -->
+                    <div class="promocode">
+                        <lightning-input class={promoInputClass} name="promoCode" label={label.enterPromoLabel} value={promoCode}
+                            onchange={handleInputChange} onkeypress={handleApplyPromo} required data-form-element disabled={isWebOffer}>
+                        </lightning-input>
+                        
+                        <template if:true={showPromoError}>
+                            <div class="errormessage helpmessage">
+                            <lightning-icon icon-name="action:close" size="x-small"></lightning-icon>
+                            <p>{label.promoErrorMessage}</p>
+                            </div>
+                        </template>
+                        <template if:true={showPromoSuccess}>
+                            <div class="successmessage helpmessage">
+                                <lightning-icon icon-name="action:check" size="x-small"></lightning-icon>
+                                <p>{label.promoSuccessMessage} 🎉</p>
+                            </div>
+                        </template>
+                    </div>
+                    <template if:true={showPromoSuccess}>
+                        <div class="" style="margin: 2rem 1rem;font-weight: 500;">
+                            <h2>{promoDescription}</h2>
+                        </div>
+                    </template>
+                    
+        </template>
+    </template>
+
+    <!-- Harkirat Code -->
+    <!-- Checkboxes -->
+    <hr style="width: 30%;text-align: center;margin: 40px auto;margin-bottom: 30px;"/>
+    <div class="terms-conditions">
+     <div class="conditions-check">
+        <lightning-input 
+            type="checkbox" 
+            name="paymentAck" 
+            label={label.paymentAck} 
+            checked={paymentAck} 
+            onchange={handleInputChange} 
+            required>
+        </lightning-input>
+    </div>   
+    
+
+    <!-- <div class="slds-m-top_medium" style="display:flex;">
+        <lightning-input 
+            type="checkbox" 
+            name="marketingOptIn" 
+            variant="label-hidden" 
+            checked={marketingOptIn} 
+            onchange={handleInputChange}>
+        </lightning-input>
+        <span class="uniform-text">
+            {label.Privacy_policy_Text_part_1} 
+            <a href={privacyPolicyLink} target="_blank" class="condition-hyperlink"> {label.privacyPolicyText}</a>
+        </span>
+    </div> -->
+    <div class="conditions-check without-important">
+        <lightning-input type="checkbox" name="marketingOptIn" variant="label-hidden" checked={marketingOptIn} onchange={handleInputChange} data-form-element></lightning-input>
+        <span class="uniform-text">{label.Privacy_policy_Text_part_1}&nbsp;
+            <a href={privacyPolicyLink} target="_blank" class="condition-hyperlink">{label.privacyPolicyText}</a>
+        </span>
+    </div>
+
+   
+        <div class="conditions-check slds-m-top_large">
+            <lightning-input 
+                type="checkbox"
+                name="salesConditionAck"
+                variant="label-hidden"
+                checked={salesConditionAck}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+            <span class="general">
+                {salesConditionText}&nbsp;
+                <a href={termsLink} target="_blank" class="condition-hyperlink">{label.generalTermsText}</a>&nbsp;
+                {salesConditionPart2Final}
+            </span>
+        </div>
+   
+<div class="conditions-check slds-m-top_large">
+    <lightning-input 
+        type="checkbox" 
+        name="identityConfirm" 
+        label={label.identityConfirm} 
+        checked={identityConfirm} 
+        onchange={handleInputChange} 
+        required>
+    </lightning-input>
+</div>
+</div>
+
+
+    <!-- <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open custom-modal-popup">
+            <div class="slds-modal__container"> -->
+
+                <!-- Modal Header -->
+                <!-- <header class="slds-modal__header header-top slds-m-bottom_none">
+                    <button class="slds-button slds-modal__close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="">{label.modalHeader}</h2>
+                </header> -->
+
+                <!-- Modal Body -->
+                <!-- <div class="slds-modal__content scroll-content" style="max-height:400px; overflow-y:auto;">
+                    <div class="slds-p-around_medium slds-text-body_regular terms-body" lwc:dom="manual"></div>
+                </div> -->
+
+                <!-- Modal Footer -->
+                <!-- <footer class="slds-modal__footer slds-text-align_center nav-buttons slds-m-top_none" style="justify-content:center;">
+                    <lightning-button class="black-border" variant="neutral" label={label.closeLabel} onclick={closeModal}></lightning-button>
+                </footer> -->
+
+            <!-- </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>     -->
+</template>

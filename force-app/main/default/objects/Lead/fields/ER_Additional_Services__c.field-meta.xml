@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Additional_Services__c</fullName>
+    <description>Depending on the Edenred Solution, one or more additional services can be selected.</description>
+    <inlineHelpText>Depending on the Edenred Solution, one or more additional services can be selected.</inlineHelpText>
+    <label>Additional Services</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MyOrder</fullName>
+                <default>false</default>
+                <label>MyOrder</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>BENELUX</controllingFieldValue>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <valueName>MyOrder</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

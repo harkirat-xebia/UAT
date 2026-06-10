@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>CSIU_LastDateUpdateAcc</fullName>
+        <field>ER_Last_Credit_Scoring_Update__c</field>
+        <formula>TODAY()</formula>
+        <name>CSIU_LastDateUpdateAcc</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FUER03_Account_RT_Client</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>ER_Company_Account_RT</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>FUER03_Account_RT_Client</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FUER10_Merchant_Type</fullName>
+        <field>Type</field>
+        <literalValue>Merchant</literalValue>
+        <name>FUER10_Merchant_Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

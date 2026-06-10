@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Credit_Limit_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            $RecordType.Name = &apos;Client Opportunity&apos;,
+            ISBLANK(TEXT( ER_Credit_Limit2__c )),
+            AND(NOT(ISBLANK( TEXT(ER_PaymentTerms2__c) )),
+            NOT(TEXT(ER_PaymentTerms2__c)=&apos;Pre-paid&apos;))
+            )</errorConditionFormula>
+    <errorMessage>The field Credit Limit must be filled.</errorMessage>
+</ValidationRule>

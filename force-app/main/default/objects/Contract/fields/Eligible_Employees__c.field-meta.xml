@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Eligible_Employees__c</fullName>
+    <label>Eligible Employees</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TRE only</fullName>
+                <default>false</default>
+                <label>TRE only</label>
+            </value>
+            <value>
+                <fullName>All product</fullName>
+                <default>false</default>
+                <label>All product</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

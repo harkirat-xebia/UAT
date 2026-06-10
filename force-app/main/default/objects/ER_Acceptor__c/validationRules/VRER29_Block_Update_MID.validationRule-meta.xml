@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER29_Block_Update_MID</fullName>
+    <active>true</active>
+    <description>VRER29 - MID Authorization  cannot be modified</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c, &apos;WEBAuth&apos;) || ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;))
+&amp;&amp; ISCHANGED(ER_MID_Authorization__c)
+&amp;&amp; TEXT($User.UserType) != &apos;AutomatedProcess&apos;</errorConditionFormula>
+    <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+    <errorMessage>VRER29 - MID Authorization  cannot be modified</errorMessage>
+</ValidationRule>

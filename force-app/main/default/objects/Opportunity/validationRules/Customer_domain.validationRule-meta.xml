@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_domain</fullName>
+    <active>true</active>
+    <description>it must contain letters and/or digits only
+its length must be between 3 and 100 characters</description>
+    <errorConditionFormula>AND(
+				
+    NOT($User.ER_BypassVR__c),
+				CONTAINS(Pricebook2.Name , &apos;Engagement&apos;),
+    NOT(ISBLANK(Customer_Domain__c)),
+    OR( 
+        LEN(Customer_Domain__c) &lt; 3,      
+        LEN(Customer_Domain__c) &gt; 100,  
+        REGEX(Customer_Domain__c, &quot;.*([/&apos;().: _$&amp;#@! é§èç{}à%ùäëüï]|\\[|\\]).*&quot;)  
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Customer_Domain__c</errorDisplayField>
+    <errorMessage>Customer Domain contains invalid characters. The following characters are not allowed: / &apos; . ( ) [ ] : _ $ &amp; # @ ! (space) é § è ç { } à % ù ä ë ü ï. The value must be between 3 and 100 characters.</errorMessage>
+</ValidationRule>

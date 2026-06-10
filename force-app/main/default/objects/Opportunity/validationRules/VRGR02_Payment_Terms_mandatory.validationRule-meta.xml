@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRGR02_Payment_Terms_mandatory</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) &amp;&amp;
+            ISPICKVAL(ER_BUPicklist__c, &quot;GR&quot;) &amp;&amp;
+            ISPICKVAL(ER_PaymentTerms__c,&quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>ER_PaymentTerms__c</errorDisplayField>
+    <errorMessage>VRGR02 - Please fill in the Payment Terms.</errorMessage>
+</ValidationRule>

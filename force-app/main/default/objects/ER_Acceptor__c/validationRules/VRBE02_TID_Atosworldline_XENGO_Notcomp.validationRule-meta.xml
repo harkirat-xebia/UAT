@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE02_TID_Atosworldline_XENGO_Notcomp</fullName>
+    <active>true</active>
+    <description>TID Atosworldline XENGO with compatible</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Atos-Worldline&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;XENGO&apos;)
+&amp;&amp; NOT(ISBLANK( ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Xengo is not compatible with electronic cheques</errorMessage>
+</ValidationRule>

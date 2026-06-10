@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER03_Edenred_POS_TerminalID_missing</fullName>
+    <active>true</active>
+    <description>Acceptors with record type “Edenred POS” cannot have another status than “Created” if “Terminal ID / Certificate” is empty</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp; NOT(TEXT(ER_Status__c) = &apos;Created&apos;)
+&amp;&amp; ISBLANK( ER_Terminal_ID_Certificate__c )</errorConditionFormula>
+    <errorMessage>You must enter a Terminal ID / Certificate before modifying the acceptor status</errorMessage>
+</ValidationRule>

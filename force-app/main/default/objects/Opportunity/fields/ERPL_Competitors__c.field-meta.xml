@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERPL_Competitors__c</fullName>
+    <label>Competitors</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Bank</fullName>
+                <default>false</default>
+                <label>Bank</label>
+            </value>
+            <value>
+                <fullName>Benefit System</fullName>
+                <default>false</default>
+                <label>Benefit System</label>
+            </value>
+            <value>
+                <fullName>Canteen</fullName>
+                <default>false</default>
+                <label>Canteen</label>
+            </value>
+            <value>
+                <fullName>Cash</fullName>
+                <default>false</default>
+                <label>Cash</label>
+            </value>
+            <value>
+                <fullName>Catering</fullName>
+                <default>false</default>
+                <label>Catering</label>
+            </value>
+            <value>
+                <fullName>Gifts</fullName>
+                <default>false</default>
+                <label>Gifts</label>
+            </value>
+            <value>
+                <fullName>Monobrands</fullName>
+                <default>false</default>
+                <label>Monobrands</label>
+            </value>
+            <value>
+                <fullName>Multisport</fullName>
+                <default>false</default>
+                <label>Multisport</label>
+            </value>
+            <value>
+                <fullName>No money</fullName>
+                <default>false</default>
+                <label>No money</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Other agency</fullName>
+                <default>false</default>
+                <label>Other agency</label>
+            </value>
+            <value>
+                <fullName>Own solution</fullName>
+                <default>false</default>
+                <label>Own solution</label>
+            </value>
+            <value>
+                <fullName>Sodexo cards</fullName>
+                <default>false</default>
+                <label>Sodexo cards</label>
+            </value>
+            <value>
+                <fullName>Sodexo vouchers</fullName>
+                <default>false</default>
+                <label>Sodexo vouchers</label>
+            </value>
+            <value>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+                <label>Unknown</label>
+            </value>
+            <value>
+                <fullName>upBonus</fullName>
+                <default>false</default>
+                <label>upBonus</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

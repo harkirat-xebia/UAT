@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Last_Modified_By_Functional_user__c</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Last Modified by a functional user</description>
+    <label>Last Modified By Functional user</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Accounts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

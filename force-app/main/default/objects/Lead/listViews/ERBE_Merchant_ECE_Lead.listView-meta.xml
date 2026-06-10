@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Merchant_ECE_Lead</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERBE Merchant ECE</label>
+    <queue>ERBE_Merchant_ECE</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

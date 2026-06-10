@@ -1,0 +1,13 @@
+.boxWrap{
+    display: flex;
+    justify-content: space-around;
+}
+.table-wrapper {
+    overflow-x: auto;
+    padding: 0 1rem;
+}
+
+table {
+    min-width: 100%;
+    border-collapse: collapse;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER03_Price_Percentage_Check</fullName>
+    <active>true</active>
+    <description>List price and Percentage fields can’t be both not equal to 0.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ((UnitPrice &gt; 0 &amp;&amp; ER_Percentage__c &gt; 0)
+    || (UnitPrice &gt; 0 &amp;&amp; NOT(ISPICKVAL(ER_ValueType__c, &quot;Currency&quot;)) || (ISBLANK(ER_Percentage__c) &amp;&amp; ISPICKVAL(ER_ValueType__c, &quot;Percentage&quot;)) || (ER_Percentage__c &gt;= 0 &amp;&amp; NOT(ISPICKVAL(ER_ValueType__c, &quot;Percentage&quot;)))) 
+)</errorConditionFormula>
+    <errorMessage>VRER03 - Only list price or percentage can be populated.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_List</fullName>
+    <columns>ER_Solution__c</columns>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>PRODUCT2.ACTIVE</columns>
+    <columns>ER_Line_Order__c</columns>
+    <columns>ER_Business_Unit__c</columns>
+    <columns>PRODUCT2.FAMILY</columns>
+    <columns>PRODUCT2.CUSTOMER_PRODUCT_ID</columns>
+    <columns>PRODUCT2.DESCRIPTION</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ER_Type__c</field>
+        <operation>equals</operation>
+        <value>Service</value>
+    </filters>
+    <label>Service List</label>
+    <language>en_US</language>
+    <sharedTo>
+        <role>CEO</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>zqu__New_Quote_CPQX</fullName>
+    <availability>online</availability>
+    <description>New Quote (New)</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Quote (New)</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.BaseRequestUrl+&apos;/apex/zqu__QuoteStudio&apos;, null)}?crmOpportunityId={!Opportunity.Id}&amp;retUrl=/{!Opportunity.Id}</url>
+</WebLink>

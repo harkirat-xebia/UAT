@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFI_Online_Payment_Enablement_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFI Online Payment Enablement</label>
+    <queue>ERFI_Online_Payment_Enablement</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

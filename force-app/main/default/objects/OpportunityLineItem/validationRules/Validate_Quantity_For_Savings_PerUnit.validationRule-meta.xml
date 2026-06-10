@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Quantity_For_Savings_PerUnit</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+            ISPICKVAL(Product2.Solution_Group__c, &quot;Savings&quot;),
+            ISPICKVAL(Product2.QuantityUnitOfMeasure, &quot;Per Unit&quot;),
+            OR(
+                ISBLANK(Quantity),
+                Quantity = 0
+            )
+        )</errorConditionFormula>
+    <errorMessage>For Savings products with Per Unit measure, Quantity cannot be 0 or blank. Please populate the Number of Beneficiaries.</errorMessage>
+</ValidationRule>

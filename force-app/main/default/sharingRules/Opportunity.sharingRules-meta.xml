@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Engagement</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Engagement</label>
+        <sharedTo>
+            <role>Engagement_Manager</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>ER_Solutions__c</field>
+            <operation>contains</operation>
+            <value>DISC</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Marketing_Automation_Opportunity_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Marketing Automation Opportunity Sharing Rule</label>
+        <sharedTo>
+            <group>Marketing_Automation_Integration_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Stambia_Opportunity_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Stambia Opportunity Sharing Rule</label>
+        <sharedTo>
+            <group>Stambia_Integration_User_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>Opportunity_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Opportunity Sharing Rule</label>
+        <sharedTo>
+            <guestUser>Client_BE</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+    <sharingOwnerRules>
+        <fullName>SME_L2W_Partners_channel_Sales_Rep_to_SME_L2W_Partners_channel_Sales_Rep</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME L2W/Partners channel Sales Rep to SME L2W/Partners channel Sales Rep</label>
+        <sharedTo>
+            <role>SME_L2W_Partners_channel_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_L2W_Partners_channel_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SME_Telesales_Farming_Sales_Rep_to_SME_Telesales_Farming_Sales_Rep</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME Telesales Farming Sales Rep to SME Telesales Farming Sales Rep</label>
+        <sharedTo>
+            <role>SME_Telesales_Farming_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_Telesales_Farming_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SME_Telesales_Hunting_Sales_Rep_to_SME_Telesales_Hunting_Sales_Rep</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SME Telesales Hunting Sales Rep to SME Telesales Hunting Sales Rep</label>
+        <sharedTo>
+            <role>SME_Telesales_Hunting_Sales_Rep</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SME_Telesales_Hunting_Sales_Rep</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

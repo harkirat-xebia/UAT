@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Block_Update_Account_Sync</fullName>
+    <active>true</active>
+    <description>VRER07 - Account cannot be modified when the financial center is synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISCHANGED(ER_Account_Name__c )
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_Account_Name__c</errorDisplayField>
+    <errorMessage>VRER07 - The account name cannot be modified when the store is synchronized</errorMessage>
+</ValidationRule>

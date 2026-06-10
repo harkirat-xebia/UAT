@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Shopping_center__c</fullName>
+    <label>Shopping center</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Avion Shopping park Brno</fullName>
+                <default>false</default>
+                <label>Avion Shopping park Brno</label>
+            </value>
+            <value>
+                <fullName>Avion Shopping park Ostrava</fullName>
+                <default>false</default>
+                <label>Avion Shopping park Ostrava</label>
+            </value>
+            <value>
+                <fullName>Avion Shopping park Praha</fullName>
+                <default>false</default>
+                <label>Avion Shopping park Praha</label>
+            </value>
+            <value>
+                <fullName>Centro Zlín</fullName>
+                <default>false</default>
+                <label>Centro Zlín</label>
+            </value>
+            <value>
+                <fullName>Centrum Babylon</fullName>
+                <default>false</default>
+                <label>Centrum Babylon</label>
+            </value>
+            <value>
+                <fullName>Centrum Černý Most</fullName>
+                <default>false</default>
+                <label>Centrum Černý Most</label>
+            </value>
+            <value>
+                <fullName>Centrum Olympia Teplice</fullName>
+                <default>false</default>
+                <label>Centrum Olympia Teplice</label>
+            </value>
+            <value>
+                <fullName>Černá Růže</fullName>
+                <default>false</default>
+                <label>Černá Růže</label>
+            </value>
+            <value>
+                <fullName>Dětský dům Shopping centre</fullName>
+                <default>false</default>
+                <label>Dětský dům Shopping centre</label>
+            </value>
+            <value>
+                <fullName>Euro Park</fullName>
+                <default>false</default>
+                <label>Euro Park</label>
+            </value>
+            <value>
+                <fullName>Freeport Chvalovice</fullName>
+                <default>false</default>
+                <label>Freeport Chvalovice</label>
+            </value>
+            <value>
+                <fullName>Galerie Butovice</fullName>
+                <default>false</default>
+                <label>Galerie Butovice</label>
+            </value>
+            <value>
+                <fullName>Galerie Dvořák</fullName>
+                <default>false</default>
+                <label>Galerie Dvořák</label>
+            </value>
+            <value>
+                <fullName>Grand Pardubice</fullName>
+                <default>false</default>
+                <label>Grand Pardubice</label>
+            </value>
+            <value>
+                <fullName>Hypermarket Carrefour Ústí nad Labem - Všebořice</fullName>
+                <default>false</default>
+                <label>Hypermarket Carrefour Ústí nad Labem - Všebořice</label>
+            </value>
+            <value>
+                <fullName>IGY Centrum</fullName>
+                <default>false</default>
+                <label>IGY Centrum</label>
+            </value>
+            <value>
+                <fullName>Metropole Zličín</fullName>
+                <default>false</default>
+                <label>Metropole Zličín</label>
+            </value>
+            <value>
+                <fullName>Myslbek</fullName>
+                <default>false</default>
+                <label>Myslbek</label>
+            </value>
+            <value>
+                <fullName>NC Borská Pole</fullName>
+                <default>false</default>
+                <label>NC Borská Pole</label>
+            </value>
+            <value>
+                <fullName>NC Eden</fullName>
+                <default>false</default>
+                <label>NC Eden</label>
+            </value>
+            <value>
+                <fullName>NC Galerie Vaňkovka</fullName>
+                <default>false</default>
+                <label>NC Galerie Vaňkovka</label>
+            </value>
+            <value>
+                <fullName>NC Královo Pole</fullName>
+                <default>false</default>
+                <label>NC Královo Pole</label>
+            </value>
+            <value>
+                <fullName>NC Pardubice</fullName>
+                <default>false</default>
+                <label>NC Pardubice</label>
+            </value>
+            <value>
+                <fullName>NC Průhonice</fullName>
+                <default>false</default>
+                <label>NC Průhonice</label>
+            </value>
+            <value>
+                <fullName>NC Stodůlky</fullName>
+                <default>false</default>
+                <label>NC Stodůlky</label>
+            </value>
+            <value>
+                <fullName>Nisa Center Liberec</fullName>
+                <default>false</default>
+                <label>Nisa Center Liberec</label>
+            </value>
+            <value>
+                <fullName>Obchodní dům Spektrum</fullName>
+                <default>false</default>
+                <label>Obchodní dům Spektrum</label>
+            </value>
+            <value>
+                <fullName>OC Fontána</fullName>
+                <default>false</default>
+                <label>OC Fontána</label>
+            </value>
+            <value>
+                <fullName>OC Futurum Brno</fullName>
+                <default>false</default>
+                <label>OC Futurum Brno</label>
+            </value>
+            <value>
+                <fullName>OC Futurum Hradec Králové</fullName>
+                <default>false</default>
+                <label>OC Futurum Hradec Králové</label>
+            </value>
+            <value>
+                <fullName>OC Futurum Ostrava</fullName>
+                <default>false</default>
+                <label>OC Futurum Ostrava</label>
+            </value>
+            <value>
+                <fullName>OC Haná Olomouc</fullName>
+                <default>false</default>
+                <label>OC Haná Olomouc</label>
+            </value>
+            <value>
+                <fullName>OC Karviná</fullName>
+                <default>false</default>
+                <label>OC Karviná</label>
+            </value>
+            <value>
+                <fullName>OC Letňany</fullName>
+                <default>false</default>
+                <label>OC Letňany</label>
+            </value>
+            <value>
+                <fullName>OC Nový Smíchov</fullName>
+                <default>false</default>
+                <label>OC Nový Smíchov</label>
+            </value>
+            <value>
+                <fullName>OC Plzeň</fullName>
+                <default>false</default>
+                <label>OC Plzeň</label>
+            </value>
+            <value>
+                <fullName>OC Silesia</fullName>
+                <default>false</default>
+                <label>OC Silesia</label>
+            </value>
+            <value>
+                <fullName>OD Kotva</fullName>
+                <default>false</default>
+                <label>OD Kotva</label>
+            </value>
+            <value>
+                <fullName>Olympia centrum Brno</fullName>
+                <default>false</default>
+                <label>Olympia centrum Brno</label>
+            </value>
+            <value>
+                <fullName>Olympia centrum Mladá Boleslav</fullName>
+                <default>false</default>
+                <label>Olympia centrum Mladá Boleslav</label>
+            </value>
+            <value>
+                <fullName>Olympia centrum Olomouc</fullName>
+                <default>false</default>
+                <label>Olympia centrum Olomouc</label>
+            </value>
+            <value>
+                <fullName>Olympia centrum Plzeň</fullName>
+                <default>false</default>
+                <label>Olympia centrum Plzeň</label>
+            </value>
+            <value>
+                <fullName>Atrium Flora</fullName>
+                <default>false</default>
+                <label>Atrium Flora</label>
+            </value>
+            <value>
+                <fullName>Park Hostivař</fullName>
+                <default>false</default>
+                <label>Park Hostivař</label>
+            </value>
+            <value>
+                <fullName>Slovanský dům</fullName>
+                <default>false</default>
+                <label>Slovanský dům</label>
+            </value>
+            <value>
+                <fullName>Velký Špalíček</fullName>
+                <default>false</default>
+                <label>Velký Špalíček</label>
+            </value>
+            <value>
+                <fullName>Vinohradský pavilon</fullName>
+                <default>false</default>
+                <label>Vinohradský pavilon</label>
+            </value>
+            <value>
+                <fullName>OD Bílá Labuť I.</fullName>
+                <default>false</default>
+                <label>OD Bílá Labuť I.</label>
+            </value>
+            <value>
+                <fullName>OD Bílá Labuť II.</fullName>
+                <default>false</default>
+                <label>OD Bílá Labuť II.</label>
+            </value>
+            <value>
+                <fullName>OD Bílá Labuť III.</fullName>
+                <default>false</default>
+                <label>OD Bílá Labuť III.</label>
+            </value>
+            <value>
+                <fullName>Centrum Chodov</fullName>
+                <default>false</default>
+                <label>Centrum Chodov</label>
+            </value>
+            <value>
+                <fullName>OC Varyáda</fullName>
+                <default>false</default>
+                <label>OC Varyáda</label>
+            </value>
+            <value>
+                <fullName>Olomouc CITY</fullName>
+                <default>false</default>
+                <label>Olomouc CITY</label>
+            </value>
+            <value>
+                <fullName>OC Novodvorská Plaza</fullName>
+                <default>false</default>
+                <label>OC Novodvorská Plaza</label>
+            </value>
+            <value>
+                <fullName>IBC Centrum Brno</fullName>
+                <default>false</default>
+                <label>IBC Centrum Brno</label>
+            </value>
+            <value>
+                <fullName>OC Mercury</fullName>
+                <default>false</default>
+                <label>OC Mercury</label>
+            </value>
+            <value>
+                <fullName>OC Šestka</fullName>
+                <default>false</default>
+                <label>OC Šestka</label>
+            </value>
+            <value>
+                <fullName>Palladium</fullName>
+                <default>false</default>
+                <label>Palladium</label>
+            </value>
+            <value>
+                <fullName>Bondy Centrum</fullName>
+                <default>false</default>
+                <label>Bondy Centrum</label>
+            </value>
+            <value>
+                <fullName>Outlet Fashion Arena</fullName>
+                <default>false</default>
+                <label>Outlet Fashion Arena</label>
+            </value>
+            <value>
+                <fullName>OC Plzeň Plaza</fullName>
+                <default>false</default>
+                <label>OC Plzeň Plaza</label>
+            </value>
+            <value>
+                <fullName>Galerie Fénix</fullName>
+                <default>false</default>
+                <label>Galerie Fénix</label>
+            </value>
+            <value>
+                <fullName>OC Central Most</fullName>
+                <default>false</default>
+                <label>OC Central Most</label>
+            </value>
+            <value>
+                <fullName>OC City Park Jihlava</fullName>
+                <default>false</default>
+                <label>OC City Park Jihlava</label>
+            </value>
+            <value>
+                <fullName>OC Palác Pardubice</fullName>
+                <default>false</default>
+                <label>OC Palác Pardubice</label>
+            </value>
+            <value>
+                <fullName>OC Arkády Pankrác</fullName>
+                <default>false</default>
+                <label>OC Arkády Pankrác</label>
+            </value>
+            <value>
+                <fullName>DBK Praha</fullName>
+                <default>false</default>
+                <label>DBK Praha</label>
+            </value>
+            <value>
+                <fullName>OC Galerie Dvořák</fullName>
+                <default>false</default>
+                <label>OC Galerie Dvořák</label>
+            </value>
+            <value>
+                <fullName>NC Géčko Liberec</fullName>
+                <default>false</default>
+                <label>NC Géčko Liberec</label>
+            </value>
+            <value>
+                <fullName>OC Futurum Kolín</fullName>
+                <default>false</default>
+                <label>OC Futurum Kolín</label>
+            </value>
+            <value>
+                <fullName>OC CAMPUS SQUARE</fullName>
+                <default>false</default>
+                <label>OC CAMPUS SQUARE</label>
+            </value>
+            <value>
+                <fullName>OC PLAZA Liberec</fullName>
+                <default>false</default>
+                <label>OC PLAZA Liberec</label>
+            </value>
+            <value>
+                <fullName>Debenhams</fullName>
+                <default>false</default>
+                <label>Debenhams</label>
+            </value>
+            <value>
+                <fullName>Palác Metro</fullName>
+                <default>false</default>
+                <label>Palác Metro</label>
+            </value>
+            <value>
+                <fullName>Nákupní galerie Atrium</fullName>
+                <default>false</default>
+                <label>Nákupní galerie Atrium</label>
+            </value>
+            <value>
+                <fullName>Brumlovka</fullName>
+                <default>false</default>
+                <label>Brumlovka</label>
+            </value>
+            <value>
+                <fullName>Dejvice Center</fullName>
+                <default>false</default>
+                <label>Dejvice Center</label>
+            </value>
+            <value>
+                <fullName>Galleria Moda</fullName>
+                <default>false</default>
+                <label>Galleria Moda</label>
+            </value>
+            <value>
+                <fullName>Čtyři Dvory</fullName>
+                <default>false</default>
+                <label>Čtyři Dvory</label>
+            </value>
+            <value>
+                <fullName>Nákupní centrum Géčko České Budějovice</fullName>
+                <default>false</default>
+                <label>Nákupní centrum Géčko České Budějovice</label>
+            </value>
+            <value>
+                <fullName>Obchodní dům Dvořák</fullName>
+                <default>false</default>
+                <label>Obchodní dům Dvořák</label>
+            </value>
+            <value>
+                <fullName>Obchodní centrum Cukrovar</fullName>
+                <default>false</default>
+                <label>Obchodní centrum Cukrovar</label>
+            </value>
+            <value>
+                <fullName>Palác CD Brno</fullName>
+                <default>false</default>
+                <label>Palác CD Brno</label>
+            </value>
+            <value>
+                <fullName>Obchodní centrum Alej</fullName>
+                <default>false</default>
+                <label>Obchodní centrum Alej</label>
+            </value>
+            <value>
+                <fullName>Galerie Liberec Plaza</fullName>
+                <default>false</default>
+                <label>Galerie Liberec Plaza</label>
+            </value>
+            <value>
+                <fullName>Nákupní centrum Géčko Liberec</fullName>
+                <default>false</default>
+                <label>Nákupní centrum Géčko Liberec</label>
+            </value>
+            <value>
+                <fullName>Nákupní Centrum Karolína</fullName>
+                <default>false</default>
+                <label>Nákupní Centrum Karolína</label>
+            </value>
+            <value>
+                <fullName>Obchodní centrum Galerie</fullName>
+                <default>false</default>
+                <label>Obchodní centrum Galerie</label>
+            </value>
+            <value>
+                <fullName>Obchodní galerie Arkáda</fullName>
+                <default>false</default>
+                <label>Obchodní galerie Arkáda</label>
+            </value>
+            <value>
+                <fullName>Nákupní galerie PYRAMIDA</fullName>
+                <default>false</default>
+                <label>Nákupní galerie PYRAMIDA</label>
+            </value>
+            <value>
+                <fullName>Berounka Park Plzeň</fullName>
+                <default>false</default>
+                <label>Berounka Park Plzeň</label>
+            </value>
+            <value>
+                <fullName>OD Dvořák Plzeň - Slovany</fullName>
+                <default>false</default>
+                <label>OD Dvořák Plzeň - Slovany</label>
+            </value>
+            <value>
+                <fullName>NC OAZA Kladno</fullName>
+                <default>false</default>
+                <label>NC OAZA Kladno</label>
+            </value>
+            <value>
+                <fullName>NC Futurum Kolín</fullName>
+                <default>false</default>
+                <label>NC Futurum Kolín</label>
+            </value>
+            <value>
+                <fullName>Kaskáda Zlín</fullName>
+                <default>false</default>
+                <label>Kaskáda Zlín</label>
+            </value>
+            <value>
+                <fullName>Obchodní a zábavní centrum Zlaté Jablko</fullName>
+                <default>false</default>
+                <label>Obchodní a zábavní centrum Zlaté Jablko</label>
+            </value>
+            <value>
+                <fullName>Galerie Harfa</fullName>
+                <default>false</default>
+                <label>Galerie Harfa</label>
+            </value>
+            <value>
+                <fullName>OC Chomutovka</fullName>
+                <default>false</default>
+                <label>OC Chomutovka</label>
+            </value>
+            <value>
+                <fullName>OC Skalka</fullName>
+                <default>false</default>
+                <label>OC Skalka</label>
+            </value>
+            <value>
+                <fullName>Obchodní centrum Korzo</fullName>
+                <default>false</default>
+                <label>Obchodní centrum Korzo</label>
+            </value>
+            <value>
+                <fullName>OC FORUM Liberec</fullName>
+                <default>false</default>
+                <label>OC FORUM Liberec</label>
+            </value>
+            <value>
+                <fullName>OD FORUM Ústí nad Labem</fullName>
+                <default>false</default>
+                <label>OD FORUM Ústí nad Labem</label>
+            </value>
+            <value>
+                <fullName>OC Nová Karolína</fullName>
+                <default>false</default>
+                <label>OC Nová Karolína</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Avion Shopping park Brno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Avion Shopping park Ostrava</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Avion Shopping park Praha</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Centro Zlín</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Centrum Babylon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Centrum Černý Most</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Centrum Olympia Teplice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Černá Růže</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Dětský dům Shopping centre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Euro Park</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Freeport Chvalovice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galerie Butovice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galerie Dvořák</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Grand Pardubice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Hypermarket Carrefour Ústí nad Labem - Všebořice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>IGY Centrum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Metropole Zličín</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Myslbek</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Borská Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Eden</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Galerie Vaňkovka</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Královo Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Pardubice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Průhonice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Stodůlky</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nisa Center Liberec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní dům Spektrum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Fontána</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Futurum Brno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Futurum Hradec Králové</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Futurum Ostrava</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Haná Olomouc</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Karviná</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Letňany</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Nový Smíchov</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Plzeň</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Silesia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD Kotva</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Olympia centrum Brno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Olympia centrum Mladá Boleslav</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Olympia centrum Olomouc</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Olympia centrum Plzeň</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Atrium Flora</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Park Hostivař</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Slovanský dům</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Velký Špalíček</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Vinohradský pavilon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD Bílá Labuť I.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD Bílá Labuť II.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD Bílá Labuť III.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Centrum Chodov</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Varyáda</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Olomouc CITY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Novodvorská Plaza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>IBC Centrum Brno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Mercury</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Šestka</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Palladium</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Bondy Centrum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Outlet Fashion Arena</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Plzeň Plaza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galerie Fénix</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Central Most</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC City Park Jihlava</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Palác Pardubice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Arkády Pankrác</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>DBK Praha</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Galerie Dvořák</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Géčko Liberec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Futurum Kolín</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC CAMPUS SQUARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC PLAZA Liberec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Debenhams</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Palác Metro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nákupní galerie Atrium</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Brumlovka</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Dejvice Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galleria Moda</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Čtyři Dvory</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nákupní centrum Géčko České Budějovice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní dům Dvořák</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní centrum Cukrovar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Palác CD Brno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní centrum Alej</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galerie Liberec Plaza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nákupní centrum Géčko Liberec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nákupní Centrum Karolína</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní centrum Galerie</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní galerie Arkáda</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Nákupní galerie PYRAMIDA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Berounka Park Plzeň</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD Dvořák Plzeň - Slovany</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC OAZA Kladno</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>NC Futurum Kolín</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Kaskáda Zlín</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní a zábavní centrum Zlaté Jablko</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Galerie Harfa</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Chomutovka</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Skalka</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>Obchodní centrum Korzo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC FORUM Liberec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OD FORUM Ústí nad Labem</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CZ</controllingFieldValue>
+            <valueName>OC Nová Karolína</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

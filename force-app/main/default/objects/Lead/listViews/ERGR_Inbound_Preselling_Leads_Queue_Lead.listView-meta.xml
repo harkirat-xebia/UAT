@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERGR_Inbound_Preselling_Leads_Queue_Lead</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERGR Inbound Preselling Leads Queue</label>
+    <queue>ERGR_Inbound_Preselling_Leads_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

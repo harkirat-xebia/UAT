@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFR_B2B_Contact_form_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFR B2B Contact form TR</label>
+    <queue>ERFR_B2B_Contact_form</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

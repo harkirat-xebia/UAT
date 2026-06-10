@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_CannotUpdateMultipleTC_At_Once</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_Type__c, &apos;UpdateT&amp;C&apos;)
+&amp;&amp; ( (!ISBLANK(Text(ER_Payment_Method__c)) &amp;&amp; !ISBLANK(Text(ER_Invoicing_Frequency__c )) ) 
+|| (!ISBLANK(Text(ER_Invoicing_Frequency__c )) &amp;&amp; !ISBLANK(Text(ER_Payment_Term__c )) )
+|| (!ISBLANK(Text(ER_Payment_Term__c )) &amp;&amp;  !ISBLANK(Text(ER_Payment_Method__c)) ))</errorConditionFormula>
+    <errorMessage>You cannot Update two T&amp;C fields with the same operation, Please fill only 1 field at a time.</errorMessage>
+</ValidationRule>

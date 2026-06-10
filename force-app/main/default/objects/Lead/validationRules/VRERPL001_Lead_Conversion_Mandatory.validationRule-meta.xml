@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRERPL001_Lead_Conversion_Mandatory</fullName>
+    <active>false</active>
+    <description>The fields Company, Email and LastName must be filled in order to convert the Lead</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ IsConverted = true,
+ RecordType.DeveloperName = &apos;ER_Client_Lead_RT&apos;,
+ ISPICKVAL( ER_BUPicklist__c ,&quot;PL&quot;),
+OR(
+ISBLANK( ER_VAT_Number__c ))
+)</errorConditionFormula>
+    <errorMessage>The field VAT Number must be filled in order to convert the Lead</errorMessage>
+</ValidationRule>

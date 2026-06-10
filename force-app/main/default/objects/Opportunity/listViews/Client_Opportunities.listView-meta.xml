@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_Opportunities</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>ER_Business_Unit__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ER_Business_Unit__c</field>
+        <operation>equals</operation>
+        <value>MY</value>
+    </filters>
+    <label>Client Opportunities</label>
+    <sharedTo>
+        <role>Client_Sales_Manager</role>
+        <role>Client_Sales_Rep</role>
+    </sharedTo>
+</ListView>

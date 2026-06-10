@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_InvoicingFrequency2__c</fullName>
+    <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;Per Order&apos;,&apos;&apos;)</defaultValue>
+    <label>Invoicing Frequency</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>ER_Invoicing_Frequency</valueSetName>
+    </valueSet>
+</CustomField>

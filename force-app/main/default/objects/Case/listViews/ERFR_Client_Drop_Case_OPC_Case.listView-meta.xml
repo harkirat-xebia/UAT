@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFR_Client_Drop_Case_OPC_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFR Client Drop Case OPC</label>
+    <queue>ERFR_Client_Drop_Case_OPC</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

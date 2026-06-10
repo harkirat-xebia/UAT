@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>1) Create PDF and save it to quote.
+2) Generate Email.</description>
+    <height>200</height>
+    <label>CreatePDF</label>
+    <lightningComponent>LCER01_Quote_PDF</lightningComponent>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>LightningComponent</type>
+    <width>-100</width>
+</QuickAction>

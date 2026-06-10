@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER32_Block_Update_AID_Clearing</fullName>
+    <active>true</active>
+    <description>VRER32 - AID Clearing cannot be modified</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;) || ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;))
+&amp;&amp; ISCHANGED(ER_AID_Clearing__c)</errorConditionFormula>
+    <errorDisplayField>ER_AID_Clearing__c</errorDisplayField>
+    <errorMessage>VRER32 - AID Clearing cannot be modified</errorMessage>
+</ValidationRule>

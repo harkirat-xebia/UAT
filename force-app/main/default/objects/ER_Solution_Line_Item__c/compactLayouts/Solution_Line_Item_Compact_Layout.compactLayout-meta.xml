@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solution_Line_Item_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>ER_Status__c</fields>
+    <fields>ER_Global_Status__c</fields>
+    <fields>RecordTypeId</fields>
+    <fields>ER_Sync_result__c</fields>
+    <label>Solution Line Item Compact Layout</label>
+</CompactLayout>

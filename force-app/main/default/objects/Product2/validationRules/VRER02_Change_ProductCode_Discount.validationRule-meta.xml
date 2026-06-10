@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Change_ProductCode_Discount</fullName>
+    <active>true</active>
+    <description>The product of Discount Record type shall never have a product code different from its parent product (Service or Range)</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; RecordType.DeveloperName= &apos;Discount&apos;
+&amp;&amp; ProductCode != ER_Solution__r.ProductCode</errorConditionFormula>
+    <errorDisplayField>ProductCode</errorDisplayField>
+    <errorMessage>VRER02 - A Discount shall never have a product code different from its parent product (Service or Range)</errorMessage>
+</ValidationRule>

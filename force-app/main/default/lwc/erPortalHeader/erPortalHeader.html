@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 09-13-2021
+  @last modified by  : AAM
+-->
+<template>
+  <!-- <div class="slds-col slds-size_5-of-6"> -->
+  <div class="slds-grid">
+    <div class="slds-col slds-size_1-of-6 div-logo">
+      <img src={productLogo} />
+    </div>
+    <div class="div-lang">
+      <select name="lang" class="select-lang" onchange={handleChangeLang}>
+        <template for:each={langList} for:item="lang" for:index="index">
+          <option selected={lang.selected} key={lang.index} value={lang.key}>{lang.value}</option>
+        </template>
+        <!-- <option value="FR">FR</option>
+                <option value="NL">NL</option> -->
+      </select>
+    </div>
+  </div>
+
+  <hr class="hr-header" />
+</template>

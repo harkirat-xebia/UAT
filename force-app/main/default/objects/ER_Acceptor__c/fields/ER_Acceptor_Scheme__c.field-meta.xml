@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor_Scheme__c</fullName>
+    <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;MasterCard&apos;, &apos;&apos;)</defaultValue>
+    <label>Acceptor Scheme</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>WEBAuth</fullName>
+                <default>false</default>
+                <label>WEBAuth</label>
+            </value>
+            <value>
+                <fullName>MasterCard</fullName>
+                <default>false</default>
+                <label>MasterCard</label>
+            </value>
+            <value>
+                <fullName>C-TAP</fullName>
+                <default>false</default>
+                <label>C-TAP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

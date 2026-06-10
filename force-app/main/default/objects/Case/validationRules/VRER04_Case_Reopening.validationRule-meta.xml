@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Case_Reopening</fullName>
+    <active>false</active>
+    <description>Case can be reopen only with the status &quot;Reopen&quot;.
+            Case cannot be changed to &quot;New&quot; value.</description>
+    <errorConditionFormula>AND(
+                NOT($User.ER_BypassVR__c),
+                OR(
+                AND(
+                ISCHANGED(Status),
+                IsClosed,
+                NOT(ISPICKVAL( Status ,&quot;Reopen&quot;))
+                ),
+                AND(
+                ISCHANGED(Status),
+                ISPICKVAL( Status ,&quot;New&quot;)
+                ),
+                AND(
+                ISNEW(),
+                ISPICKVAL( Status ,&quot;Reopen&quot;)
+                )
+                )
+                )</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Case status is not valid.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commercial_Origin__c</fullName>
+    <label>Commercial Origin</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Changement de TVA</fullName>
+                <default>false</default>
+                <label>Changement de TVA</label>
+            </value>
+            <value>
+                <fullName>Greenfield TRE - client ô produits</fullName>
+                <default>false</default>
+                <label>Greenfield TRE - client ô produits</label>
+            </value>
+            <value>
+                <fullName>Client Monizze</fullName>
+                <default>false</default>
+                <label>Client Monizze</label>
+            </value>
+            <value>
+                <fullName>Client Monizze - Ex-client TR</fullName>
+                <default>false</default>
+                <label>Client Monizze - Ex-client TR</label>
+            </value>
+            <value>
+                <fullName>Client CORP BEN</fullName>
+                <default>false</default>
+                <label>Client CORP BEN</label>
+            </value>
+            <value>
+                <fullName>Client SDX</fullName>
+                <default>false</default>
+                <label>Client SDX</label>
+            </value>
+            <value>
+                <fullName>Client SDX - Ex client TR</fullName>
+                <default>false</default>
+                <label>Client SDX - Ex client TR</label>
+            </value>
+            <value>
+                <fullName>Econtractonline - Monizze</fullName>
+                <default>false</default>
+                <label>Econtractonline - Monizze</label>
+            </value>
+            <value>
+                <fullName>Econtratonline - Greenfield</fullName>
+                <default>false</default>
+                <label>Econtratonline - Greenfield</label>
+            </value>
+            <value>
+                <fullName>Econtractonline - Sodexo</fullName>
+                <default>false</default>
+                <label>Econtractonline - Sodexo</label>
+            </value>
+            <value>
+                <fullName>Greenfield ex-client TR</fullName>
+                <default>false</default>
+                <label>Greenfield ex-client TR</label>
+            </value>
+            <value>
+                <fullName>Greenfield New category</fullName>
+                <default>false</default>
+                <label>Greenfield New category</label>
+            </value>
+            <value>
+                <fullName>Federgon Greenfield</fullName>
+                <default>false</default>
+                <label>Federgon Greenfield</label>
+            </value>
+            <value>
+                <fullName>Federgon Ex-client</fullName>
+                <default>false</default>
+                <label>Federgon Ex-client</label>
+            </value>
+            <value>
+                <fullName>Federgon - clients MNZ</fullName>
+                <default>false</default>
+                <label>Federgon - clients MNZ</label>
+            </value>
+            <value>
+                <fullName>Federgon - clients SDX</fullName>
+                <default>false</default>
+                <label>Federgon - clients SDX</label>
+            </value>
+            <value>
+                <fullName>Leads2win 2023 partenaires</fullName>
+                <default>false</default>
+                <label>Leads2win  partenaires</label>
+            </value>
+            <value>
+                <fullName>LUX - ACF</fullName>
+                <default>false</default>
+                <label>LUX - ACF</label>
+            </value>
+            <value>
+                <fullName>LUX - Comptafisc</fullName>
+                <default>false</default>
+                <label>LUX - Comptafisc</label>
+            </value>
+            <value>
+                <fullName>Lux - EY</fullName>
+                <default>false</default>
+                <label>Lux - EY</label>
+            </value>
+            <value>
+                <fullName>Lux - Fiduciaire centrale</fullName>
+                <default>false</default>
+                <label>Lux - Fiduciaire centrale</label>
+            </value>
+            <value>
+                <fullName>Lux - GT</fullName>
+                <default>false</default>
+                <label>Lux - GT</label>
+            </value>
+            <value>
+                <fullName>Lux - Kolmio</fullName>
+                <default>false</default>
+                <label>Lux - Kolmio</label>
+            </value>
+            <value>
+                <fullName>Lux - parfinindus</fullName>
+                <default>false</default>
+                <label>Lux - parfinindus</label>
+            </value>
+            <value>
+                <fullName>Lux - pwc</fullName>
+                <default>false</default>
+                <label>Lux - pwc</label>
+            </value>
+            <value>
+                <fullName>Lux - securex</fullName>
+                <default>false</default>
+                <label>Lux - securex</label>
+            </value>
+            <value>
+                <fullName>Lux - SD worx</fullName>
+                <default>false</default>
+                <label>Lux - SD worx</label>
+            </value>
+            <value>
+                <fullName>Lux - TMF</fullName>
+                <default>false</default>
+                <label>Lux - TMF</label>
+            </value>
+            <value>
+                <fullName>Lux VO consulting</fullName>
+                <default>false</default>
+                <label>Lux VO consulting</label>
+            </value>
+            <value>
+                <fullName>Greenfield</fullName>
+                <default>false</default>
+                <label>Greenfield</label>
+            </value>
+            <value>
+                <fullName>renégociation standard</fullName>
+                <default>false</default>
+                <label>renégociation standard</label>
+            </value>
+            <value>
+                <fullName>renégo suite attaque Monizze</fullName>
+                <default>false</default>
+                <label>renégo suite attaque Monizze</label>
+            </value>
+            <value>
+                <fullName>renégo suite attaque Sodexo</fullName>
+                <default>false</default>
+                <label>renégo suite attaque Sodexo</label>
+            </value>
+            <value>
+                <fullName>renégo suite attaque CORP BEN</fullName>
+                <default>false</default>
+                <label>renégo suite attaque CORP BEN</label>
+            </value>
+            <value>
+                <fullName>Tender Greenfield</fullName>
+                <default>false</default>
+                <label>Tender Greenfield</label>
+            </value>
+            <value>
+                <fullName>Tender MNZ</fullName>
+                <default>false</default>
+                <label>Tender MNZ</label>
+            </value>
+            <value>
+                <fullName>Tender SDX</fullName>
+                <default>false</default>
+                <label>Tender SDX</label>
+            </value>
+            <value>
+                <fullName>Tender Ex-client</fullName>
+                <default>false</default>
+                <label>Tender Ex-client</label>
+            </value>
+            <value>
+                <fullName>transfert de personnel</fullName>
+                <default>false</default>
+                <label>transfert de personnel</label>
+            </value>
+            <value>
+                <fullName>Customer EDR Benefits with CB</fullName>
+                <default>false</default>
+                <label>Customer EDR Benefits with CB</label>
+            </value>
+            <value>
+                <fullName>Customer EDR Benefits without CB</fullName>
+                <default>false</default>
+                <label>Customer EDR Benefits without CB</label>
+            </value>
+            <value>
+                <fullName>Prospect EDR Benefits with CB</fullName>
+                <default>false</default>
+                <label>Prospect EDR Benefits with CB</label>
+            </value>
+            <value>
+                <fullName>Prospect EDR Benefits without CB</fullName>
+                <default>false</default>
+                <label>Prospect EDR Benefits without CB</label>
+            </value>
+            <value>
+                <fullName>Renégo suite à VF augmentation</fullName>
+                <default>false</default>
+                <label>Renégo suite à VF augmentation</label>
+            </value>
+            <value>
+                <fullName>Renégo suite à un accord de fédération</fullName>
+                <default>false</default>
+                <label>Renégo suite à un accord de fédération</label>
+            </value>
+            <value>
+                <fullName>Client PLUXEE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Client PLUXEE</label>
+            </value>
+            <value>
+                <fullName>Client TRE Greenfield ô produits</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Client TRE Greenfield ô produits</label>
+            </value>
+            <value>
+                <fullName>En attente</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>En attente</label>
+            </value>
+            <value>
+                <fullName>Greenfield TRE Client ô produits</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greenfield TRE Client ô produits</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>New category - client MNZ/UP</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>New category - client MNZ/UP</label>
+            </value>
+            <value>
+                <fullName>PROMOSME</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PROMOSME</label>
+            </value>
+            <value>
+                <fullName>PROSME-EX-CLIENT ETR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PROSME-EX-CLIENT ETR</label>
+            </value>
+            <value>
+                <fullName>Renégo suite attaque PLUXEE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Renégo suite attaque PLUXEE</label>
+            </value>
+            <value>
+                <fullName>Tender MNZ/UP</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tender MNZ/UP</label>
+            </value>
+            <value>
+                <fullName>VF Augmentation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VF Augmentation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

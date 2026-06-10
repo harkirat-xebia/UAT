@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor__c</fullName>
+    <label>Acceptor</label>
+    <referenceTo>ER_Acceptor__c</referenceTo>
+    <relationshipLabel>Acceptors to Loops</relationshipLabel>
+    <relationshipName>Acceptors_to_Loops</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

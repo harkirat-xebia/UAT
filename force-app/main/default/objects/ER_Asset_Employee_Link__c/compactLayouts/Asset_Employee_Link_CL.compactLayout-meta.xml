@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Asset_Employee_Link_CL</fullName>
+    <fields>Name</fields>
+    <fields>ER_Asset__c</fields>
+    <fields>ER_Employee__c</fields>
+    <label>Asset Employee Link CL</label>
+</CompactLayout>

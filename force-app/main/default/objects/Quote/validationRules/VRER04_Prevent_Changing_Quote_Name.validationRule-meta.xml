@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Prevent_Changing_Quote_Name</fullName>
+    <active>false</active>
+    <description>Prevent changing the Quote Name</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp;  ISCHANGED( Name )</errorConditionFormula>
+    <errorMessage>You cannot change the Quote Name</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER001_AssetlName_AccountLookup</fullName>
+    <active>true</active>
+    <description>User is not able to modify Business Account or Asset Number assigned to Asset.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRER001_AssetlName_AccountLookup__c = false
+            &amp;&amp; (ISCHANGED(AccountId) || ISCHANGED(Name))</errorConditionFormula>
+    <errorMessage>You are not able to modify</errorMessage>
+</ValidationRule>

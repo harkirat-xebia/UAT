@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE07_ContactMandatory</fullName>
+    <active>true</active>
+    <description>Contact should be mandatory for BENELUX</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) &amp;&amp;
+ER_Business_Unit__c =&apos;BENELUX&apos;&amp;&amp;
+((NOT(ISBLANK(ER_Creation_Date_In_OS__c)) )
+|| (NOT(ISBLANK( ER_Financial_Center__r.ER_Creation_date_in_OS__c ) ))) &amp;&amp; 
+ISBLANK(ER_Contact__c)</errorConditionFormula>
+    <errorDisplayField>ER_Contact__c</errorDisplayField>
+    <errorMessage>Contact is mandatory</errorMessage>
+</ValidationRule>

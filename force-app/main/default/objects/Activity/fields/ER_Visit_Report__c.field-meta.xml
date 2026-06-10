@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Visit_Report__c</fullName>
+    <description>User fill the report once the visit done is checked</description>
+    <inlineHelpText>Make sure your comments are objective, adequate, and limited to what is strictly necessary. They must not contain sensitive data (e.g., in relation to health/medical, religion, political opinions, racial or ethnic origins, etc.) or data related to the commission of criminal offences. Appropriate and respectful language is expected</inlineHelpText>
+    <label>Visit Report</label>
+    <required>false</required>
+    <type>TextArea</type>
+</CustomField>

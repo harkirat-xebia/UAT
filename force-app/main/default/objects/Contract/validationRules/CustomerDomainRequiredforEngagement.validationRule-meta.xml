@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomerDomainRequiredforEngagement</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ NOT(isnew()),
+  NOT($User.ER_BypassVR__c),
+  CONTAINS( Pricebook2.Name , &apos;Engagement&apos;),
+  NOT(ISPICKVAL(Status, &quot;Draft&quot;)),
+  NOT(ISPICKVAL(Status, &quot;Terminated&quot;)),
+  OR(
+    ISBLANK(ER_Customer_Domain__c),
+    ISBLANK(ER_Program_Name__c)
+  )
+)</errorConditionFormula>
+    <errorMessage>Customer Domain and/or Program Name is required when the opportunity is for Engagement. Please select a value before proceeding.</errorMessage>
+</ValidationRule>

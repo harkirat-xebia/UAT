@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_SmartER_Drop_Case_Step__c</fullName>
+    <label>SmartER Drop Case Step</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Step 1</fullName>
+                <default>false</default>
+                <label>Step 1</label>
+            </value>
+            <value>
+                <fullName>Step 2</fullName>
+                <default>false</default>
+                <label>Step 2</label>
+            </value>
+            <value>
+                <fullName>Step 3</fullName>
+                <default>false</default>
+                <label>Step 3</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

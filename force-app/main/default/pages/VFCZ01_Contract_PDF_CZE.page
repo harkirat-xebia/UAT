@@ -1,0 +1,1430 @@
+<apex:page controller="VFCCZ01_Contract_PDF"
+  renderAs="pdf"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  standardStylesheets="false"
+>
+  <head>
+    <style type="text/css" media="print">
+      @page {
+        size: A4;
+        margin: 0mm 4mm 0mm 4mm;
+        @top-center {
+          content: element(header);
+        }
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+      label {
+      }
+      strong {
+      }
+      .header {
+        font-family: Arial Unicode MS;
+        margin-left: 46px;
+        margin-top: 30px;
+        position: running(header);
+      }
+      .content {
+        font-family: Arial Unicode MS;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .pagenumber:before {
+        content: counter(page);
+      }
+      .pagecount:before {
+        content: counter(pages);
+      }
+      .container {
+        margin-top: 90px;
+        font-size: 9pt;
+      }
+      .topleft {
+        float: left;
+        width: 48%;
+      }
+      .left {
+        position: absolute;
+        left: 16px;
+        width: 46%;
+      }
+      .right {
+        position: absolute;
+        right: 16px;
+        width: 46%;
+      }
+      .topright {
+        float: right;
+        width: 48%;
+      }
+      ol.alphabetList {
+        list-style-type: lower-alpha;
+      }
+      li {
+        text-align: justify;
+      }
+      p {
+        font-size: 10px;
+      }
+      hr {
+        width: 60%;
+        margin-left: 0px;
+      }
+      table {
+        border-collapse: separate;
+        border: 1px solid #ffffff;
+        width: 75%;
+      }
+
+      th {
+        padding: 1.5px;
+        text-align: center;
+        background-color: #e8e8e8;
+        font-size: 8.8px;
+        color: #000000;
+      }
+      td {
+        border-bottom: 1px solid #ddd;
+        padding: 2.5px;
+        font-size: 8.8px;
+        color: #616161;
+      }
+      .block {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #616161;
+      }
+      .gdiv {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #000000;
+        background-color: #d3d3d3;
+        padding-left: 5px;
+
+        font-size: 11px;
+      }
+      .row {
+      }
+      .size_1-of-1 {
+        width: 100%;
+        display: inline-block;
+      }
+      .size_1-of-2 {
+        width: 49%;
+        display: inline-block;
+      }
+      .size_1-of-3 {
+        width: 33%;
+        display: inline-block;
+      }
+      .size_1-of-4 {
+        width: 24%;
+        display: inline-block;
+      }
+      .title {
+        color: #0085ca;
+        font-weight: bold;
+      }
+      .outputField {
+        font-weight: bold;
+      }
+
+      .footer {
+        font-family: Arial Unicode MS;
+        margin-left: 10px;
+        color: #bdbdbd;
+        font-size: 10px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <!-- FIRST PAGE -->
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="70"
+      height="40"
+    />
+    <div style="text-align: center; margin-top: 5%; color: #b22222">
+      Rámcová smlouva o zprostředkování<br />Smluvní strany
+    </div>
+  </div>
+  <apex:form styleClass="content">
+    <div class="container">
+      <div class="gdiv">
+        <div class="row">
+          <div class="size_1-of-2">
+            <span class="outputField">Edenred CZ s.r.o.</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">Pernerova 691/42, 186 00 Praha 8</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">IČO: 247 45 391, DIČ: CZ24745391</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">zastoupená: {!ownerName}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">internetové stránky www: edenred.cz</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">jako zprostředkovatel (dále jen „Edenred“)</div>
+        </div>
+      </div>
+
+      <div class="gdiv">
+        <div class="row">
+          <div class="size_1-of-1">Sídlo: {!legalStreet} , {!legalZipCode} , {!legalCity}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">IČO: {!companyRegistrationNumber}</div>
+          <div class="size_1-of-2">DIČ: {!vatNumber}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            zastoupenou: {!financialCenterContact.FirstName} {!financialCenterContact.MiddleName}
+            {!financialCenterContact.LastName} tel.: {!financialCenterContact.Phone}
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">e-mail: {!financialCenterContact.Email}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">č. účtu / směrový kód banky: {!iban}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">Fakturační e-mail: {!financialCenterContact.Email}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">Kontaktní e-mail:</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1" style="font-size: 8.8px">
+            (uveďte, prosím, platnou e-mailovou adresu určenou pro zasílání daňových dokladů a jiných sdělení)
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">(dále jen „Partner“)</div>
+        </div>
+      </div>
+
+      <div class="block" style="">
+        <div class="size_1-of-2">
+          <span class="outputField" style="color: #000000"
+            >uzavřely níže uvedeného dne, měsíce a roku tuto smlouvu:</span
+          >
+        </div>
+      </div>
+      <div class="block">
+        <div class="size_1-of-2" style="font-size: 7.8px">
+          <span class="outputField" style="color: #b22222">I. Co je předmětem této Smlouvy?</span><br /> Společnost
+          Edenred zprostředkuje uživatelům, kteří používají Poukazy vydané společností Edenred, prodej zboží/služeb
+          Partnera. Partner se na oplátku zavazuje, že svoje zboží/služby poskytne uživatelům Poukazů a na jejich úhradu
+          bude přijímat příslušné Poukazy vydané společností Edenred.<br /><br />
+          <span class="outputField" style="color: #b22222">II. Jaké Poukazy Edenred bude Partner přijímat?</span
+          ><br /> Partner bude na úhradu svého zboží/služeb přijímat tyto Poukazy Edenred:<br /><br />
+          <table border="1">
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_ETR'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000">Ticket Restaurant®</span>
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Ticket Restaurant®</span>
+            </apex:outputPanel>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:variable var="solutionIsIn" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+                <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_ESE'}">
+                  <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                  <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                    rendered="true"
+                    width="10px"
+                    height="10px"
+                  /><span style="color: #000000"> Edenred Service </span> <br />
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}"
+                rendered="true"
+                width="10px"
+                height="10px"
+              /><span style="color: #000000"> Edenred Service </span> <br />
+            </apex:outputPanel>
+          </table>
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_ECO'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+                <span style="color: #000000">Edenred Compliments </span> <br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Compliments
+            </span>
+            <br />
+          </apex:outputPanel>
+
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_ECL'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Čistý </span><br /><br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Čistý </span
+            ><br /><br />
+          </apex:outputPanel>
+
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_TRC'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Ticket Restaurant® Card: (dále jen „TRC“)</span><br /><br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+            <span style="color: #000000">Ticket Restaurant® Card: (dále jen „TRC“)</span><br /><br />
+          </apex:outputPanel>
+
+          <span style="color: #000000">Edenred Benefits: </span>(dále jen „Edenred Benefits“)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBML'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Multi</span>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+            <span style="color: #000000">Edenred Multi</span>
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBM'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Medica </span><br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Medica
+            </span>
+            <br />
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBML'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Multi FKSP</span>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+            <span style="color: #000000">Edenred Multi FKSP</span>
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBH'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Holiday</span> <br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" />
+            <span style="color: #000000">Edenred Holiday</span> <br />
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBA'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Academica</span>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Academica
+            </span>
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EET'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000">e-Ticket</span> <br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+              >e-Ticket</span
+            >
+            <br />
+          </apex:outputPanel>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_BSK'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Edenred Sport&amp;Kultura</span>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Sport&amp;Kultura</span
+            >
+          </apex:outputPanel>
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EPG'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                /><span style="color: #000000"> Platební brána Edenred Benefity Café </span> <br /><br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Platební brána Edenred Benefity Café
+            </span>
+            <br /><br />
+          </apex:outputPanel>
+
+          <apex:variable var="solutionIsIn" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli" rows="1">
+              <apex:outputPanel rendered="{!qli.Product2.ER_Solution__r.productCode =='ERCZ_EBC'}">
+                <apex:variable var="solutionIsIn" value="true"></apex:variable>
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+                platbu prostřednictvím digitální peněženky<span style="color: #000000"> Edenred Benefits </span>(dále
+                jen „EB“):<br />
+                <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}"
+                  rendered="true"
+                  width="10px"
+                  height="10px"
+                />platbu prostřednictvím digitální peněženky<span style="color: #000000"> Edenred Benefits FKSP </span
+                >(dále jen „EB FKSP“)<br />
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!solutionIsIn == 'false'}">
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Benefits Card: </span
+            >(dále jen „EBC“) <br />
+            <apex:image url="{!URLFOR($Resource.CheckBoxUnChecked)}" rendered="true" width="10px" height="10px" /><span
+              style="color: #000000"
+            >
+              Edenred Benefits FKSP: </span
+            >(dále jen „EB FKSP“) <br />
+          </apex:outputPanel>
+
+          <br /><br />
+          <span class="outputField" style="color: #b22222"
+            >III. Jaká práva a jaké povinnosti mají společnost Edenred a Partner?</span
+          ><br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Společnost Edenred bude aktivně rozšiřovat síť svých klientů, a zvyšovat tak počet uživatelů, kteří
+              používají k placení Poukazy Edenred.
+            </li>
+            <li>
+              Partner bude k úhradě ceny svého zboží/služeb přijímat Poukazy za stejných podmínek, jaké mají ostatní
+              spotřebitelé platící jiným způsobem. Partner nebude uživatele platící Poukazy nijak znevýhodňovat či
+              diskriminovat, zejména nebude navyšovat cenu zboží/služeb, zavádět poplatky uživatelům platícím Poukazy,
+              ani ukládat jakékoli podmínky. V případě porušení tohoto závazku je společnost Edenred oprávněna od této
+              smlouvy odstoupit.
+            </li>
+            <li>
+              Partner bere na vědomí, že za kvalitu svého zboží/služeb odpovídá přímo uživateli platícímu Poukazem jako
+              konečnému spotřebiteli a veškeré případné reklamace bude řešit přímo s uživatelem Poukazu bez účasti
+              společnosti Edenred.
+            </li>
+            <li>
+              Partner řádně a viditelně označí nálepkami s logem příslušných Poukazů, které společnost Edenred zašle na
+              adresu sídla Partnera, vstupní dveře všech svých provozoven uvedených v Příloze č. 3 této Smlouvy tak, aby
+              bylo zřejmé, že v provozovně lze platit prostřednictvím Poukazů.
+            </li>
+            <li>
+              Partner je povinen umístit na své internetové stránky prezentující své provozovny uvedené v Příloze č. 3
+              této Smlouvy logo s odkazem na internetové stránky společnosti Edenred, a to v souladu s manuálem, který
+              je dostupný na následující adrese: www.edenred.cz/loga-a-materialy.
+            </li>
+            <li>
+              Partner je povinen dodržovat Podmínky programu FOOD, pokud byl do tohoto programu zařazen. Další práva a
+              povinnosti Partnera související s programem FOOD jsou upraveny ve Všeobecných obchodních podmínkách k této
+              smlouvě.
+            </li>
+          </ol>
+          <span class="outputField" style="color: #b22222"
+            >IV. Součástí Smlouvy jsou i Obchodní podmínky a Ceník služeb.</span
+          ><br /> Nedílnou součástí této Smlouvy jsou i Všeobecné obchodní podmínky (dále jen „VOP“ jako Příloha 1) a
+          Ceník služeb (dále jen „Ceník“ jako Příloha 2).<br /> 2) Práva a povinnosti smluvních stran neupravené touto
+          Smlouvou jsou upraveny ve VOP nebo v Ceníku. Společnost Edenred je oprávněna jednostranně změnit obsah VOP
+          a/nebo Ceníku. Činí tak obvykle zejména s ohledem na vývoj právních předpisů, na změny obchodních podmínek na
+          trhu, na obchodní cíle společnosti Edenred, v zájmu zlepšení<br /><br />
+          Smlouva generována v Praze dne {!sysdate}
+          <br /><br />
+          <hr />
+          <!--/hr-->
+          Edenred CZ s.r.o.
+        </div>
+        <div class="size_1-of-2" style="font-size: 7.8px">
+          kvality poskytovaných služeb klientům atd. Nové znění VOP a/nebo Ceníku zašle společnost Edenred Partnerovi na
+          shora uvedenou e-mailovou adresu a současně je uveřejní na svých internetových stránkách, a to nejpozději 14
+          dní přede dnem nabytí účinnosti nového znění VOP/Ceníku, včetně informace o dni, kdy nové znění VOP/Ceníku
+          nabývají účinnosti. Partner je oprávněn takto oznámenou změnu písemně odmítnout, a to tak, že písemné
+          odmítnutí musí být společnosti Edenred doručeno nejpozději v poslední pracovní den před oznámeným dnem
+          účinnosti nového znění VOP/Ceníku, v opačném případě platí, že Partner s novým zněním VOP/Ceníku souhlasí a
+          nové znění VOP/Ceníku nabude účinnosti v oznámený den. V případě, že Partner nové znění VOP/Ceníku odmítne,
+          kterákoli ze smluvních stran má právo tuto Smlouvu vypovědět postupem uvedeným v čl. VII. této Smlouvy.<br /><br />
+          <span class="outputField" style="color: #b22222">V. Jaká odměna náleží společnosti Edenred?</span><br />
+          <apex:outputText rendered="{!indexation}">a) </apex:outputText>
+          Partner zaplatí společnosti Edenred odměnu za navýšení objemu a další poplatky, jejichž výše je uvedena v
+          Ceníku.<br />
+          <apex:outputPanel rendered="{!indexation}"
+            >b) Společnost Edenred je oprávněna zvýšit odměnu o míru inflace vyhlášenou Českým statistickým úřadem.
+            Oznámení o zvýšení odměny o míru inflace zveřejní společnost Edenred na svých webových stránkách. Zvýšení
+            odměny je účinné ode dne zveřejnění oznámení. Zvýšení odměny o míru inflace není změnou Ceníku podle čl. VI.
+            a nepodléhá tedy souhlasu Partnera.<br
+          /></apex:outputPanel>
+
+          <span class="outputField" style="color: #b22222">VI. Jak Edenred proplácí Partnerovi přijaté Poukazy?</span
+          ><br /><br /> Společnost Edenred proplatí Partnerovi Poukazy, které přijal jako úhradu ceny zboží/služeb v
+          souladu s touto Smlouvou. Způsob a postup úhrady Partnerem přijatých Poukazů je upraven ve VOP.<br /><br />
+          <span class="outputField" style="color: #b22222">VII. S čím uděluje Partner svůj souhlas?</span><br /> Partner
+          uděluje společnosti Edenred svůj souhlas (ve smyslu ust. § 7 zákona č. 480/2004 Sb.) s využitím jeho shora
+          uvedených kontaktních údajů pro účely zasílání obchodních sdělení společnosti Edenred. Partner může tento
+          souhlas kdykoliv odvolat. Společnost Edenred dále v rámci propagace svých služeb a za účelem rozšíření sítě
+          svých uživatelů platících Poukazy může sdělovat třetím osobám informace o svých partnerech, kteří přijímají
+          platby prostřednictvím Poukazů a v této souvislosti uvádět identifikaci takových partnerů, jejich loga atd.
+          Partner bere tuto skutečnost na vědomí, je s ní srozuměn a uděluje k tomu společnosti Edenred svůj souhlas.<br /><br />
+          <span class="outputField" style="color: #b22222">VIII. Jaká bude platnost naší Smlouvy?</span><br /> Tato
+          Smlouva je účinná ode dne, kdy ji podepsaly obě smluvní strany a je uzavírána na dobu neurčitou. V případě, že
+          je Partner subjektem, na kterého se vztahuje povinnost uveřejnit smlouvu v registru smluv dle zákona č.
+          340/2015 Sb., nastává účinnost této smlouvy dnem jejího uveřejnění v registru smluv. Uveřejnění smlouvy
+          zajistí Partner. Jak společnost Edenred, tak i Partner, mohou tuto Smlouvu písemně vypovědět. Výpovědní doba
+          činí dva měsíce a začíná běžet prvním dnem měsíce následujícího po doručení výpovědi druhé smluvní straně.
+          Uplynutím výpovědní doby tato Smlouva zaniká.<br /><br />
+          <span class="outputField" style="color: #b22222">IX. Co se jinam nevešlo.</span><br /> Podisem této Smlouvy
+          dává Partner najevo, že si Smlouvu přečetl, stejně tak i VOP a Ceník, že význam těchto listin pochopil a že s
+          jejich obsahem souhlasí. Partner především prohlašuje, že ho společnost Edenred výslovně upozornila na
+          ustanovení Smlouvy, která odkazují na výše uvedené dokumenty stojící mimo vlastní text Smlouvy, a jejich
+          význam mu byl dostatečně vysvětlen. Partner si je vědom, že je vázán nejen Smlouvou, ale i těmito dokumenty
+          stojícími mimo její vlastní text, a bere na vědomí, že porušení povinností v nich uvedených je porušením
+          Smlouvy samotné.<br /><br /> Tato Smlouva obsahuje i tyto přílohy, které jsou její nedílnou součástí:<br /> –
+          &nbsp;Příloha 1: Všeobecné obchodní podmínky (VOP)<br /> – &nbsp;Příloha 2: Ceník služeb (Ceník)<br /> –
+          &nbsp;Příloha 3: Seznam provozoven Partnera<br /><br />
+          Tato Smlouva nahrazuje jakoukoli stranami dříve uzavřenou smlouvu v rozsahu, v jakém se předmět kryje.p
+          <br /><br /><br /><br /><br /><br /><br /><br />
+          <hr />
+          <!--/hr-->
+          Partner
+        </div>
+      </div>
+    </div>
+  </apex:form>
+  <div class="footer">
+    <div style="font-size: 9px; width: 90%; display: inline-block">
+      Edenred CZ s.r.o., Pernerova 691/42, 186 00 Praha 8, DIČ: CZ 247 45 391, společnost je zapsaná u Městského soudu V
+      Praze oddíle C, vložka 170804
+    </div>
+    <div style="display: inline-block; text-align: right">
+      <apex:image url="{!URLFOR($Resource.CZFooterLogo)}" styleClass="blacklogo" width="50" height="20" />
+    </div>
+  </div>
+
+  <!-- SECOND PAGE -->
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="70"
+      height="40"
+    />
+    <div style="text-align: center; margin-top: 5%; color: #b22222">
+      VŠEOBECNÉ OBCHODNÍ PODMÍNKY<br />k Rámcové smlouvě o zprostředkování
+    </div>
+  </div>
+  <br /><br />
+  <apex:form styleClass="content">
+    <div class="container">
+      <div class="block">
+        <div class="size_1-of-2" style="font-size: 7.8px">
+          <span class="outputField" style="color: #b22222">I. Předmět Všeobecných obchodních podmínek</span><br /> Tyto
+          Všeobecné obchodní podmínky (dále jen „VOP“) upravují práva a povinnosti obchodní společnosti Edenred CZ,
+          s.r.o., IČO 24745391, se sídlem Praha 8, Pernerova 691/42, PSČ 186 00, zapsané v obchodním rejstříku vedeném
+          Městským soudem v Praze, v oddílu C, vložce 170804 (dále jen „Edenred“) jako zprostředkovatele na straně
+          jedné, a Partnera jako zájemce o zprostředkování při plnění rámcové Smlouvy uzavřené mezi společností Edenred
+          a Partnerem. Ustanovení rámcové Smlouvy mají přednost před těmito VOP, které mají přednost před ustanoveními
+          zákona, od kterých se lze odchýlit. Tyto VOP jsou přílohou a nedílnou součástí rámcové Smlouvy.<br /><br />
+          <span class="outputField" style="color: #b22222">II. Poukazy společnosti Edenred<br /> Poukazy</span>jsou
+          poukazy vydávané společností Edenred v papírové nebo elektronické podobě s konkrétní jmenovitou hodnotou
+          vyjádřenou v českých korunách, které opravňují uživatele Poukazu k odběru zboží nebo služeb určitého typu, na
+          území České republiky, poskytovaných partnery společnosti Edenred, kteří na základě smlouvy o zprostředkování
+          přijímají Poukazy jako prostředek k úhradě ceny takového zboží a takových služeb. Partner se zavazuje přijímat
+          Poukazy výhradně dle jejich účelů specifikovaných níže. Vzory platných Poukazů jsou uvedeny na internetových
+          stránkách společnosti Edenred a Partner má povinnost se s nimi seznámit. Společnost Edenred vydává následující
+          druhy Poukazů:<br /><br /> <span class="outputField" style="color: #b22222">Ticket Restaurant®</span
+          ><br /> jsou papírové Poukazy určené k zajištění závodního stravování zaměstnanců klientů společnosti Edenred.
+          Ticket Restaurant® slouží výhradně k úhradě ceny potravin určených k přímé spotřebě nebo jiných stravovacích
+          služeb v provozovně Partnera. Poukazy Ticket Restaurant® nelze uplatnit k úhradě ceny tabákových výrobků nebo
+          alkoholických nápojů.<br /><br />
+          <span class="outputField" style="color: #b22222">Digitální peněženka Ticket Restaurant® (dále jen „TR“)</span
+          ><br /> je digitální peněženka s elektronickými Poukazy nahranými v rámci této peněženky. Poukazy nahrané v
+          rámci TR peněženky jsou určeny k úhradě stejného zboží/služeb jako papírové Poukazy Ticket Restaurant®.
+          Ustanovení týkající se TR peněženky se po dobu jejich vydávání a oběhu přiměřeně vztahují také na dříve
+          vydávané samostatné elektronické karty Ticket Restaurant® Card („TRC“).<br /><br />
+          <span class="outputField" style="color: #b22222">Digitální peněženka Edenred Benefits (dále jen „EB“)</span
+          ><br /> je digitální peněženka s elektronickými Poukazy nahranými v rámci této peněženky, které jsou určeny k
+          úhradě ceny zboží a služeb ve smyslu § 6 odst. 9 písm. d) zákona č. 586/1992 Sb., o daních z příjmů.
+          Ustanovení týkající se EB peněženky se po dobu jejich vydávání a oběhu přiměřeně vztahují také na dříve
+          vydávané samostatné elektronické karty Edenred Benefits Card („EBC“).<br /><br />
+          <span class="outputField" style="color: #b22222"
+            >Digitální peněženka Edenred Benefits FKSP (dále jen „EB FKSP“)</span
+          ><br /> je digitální peněženka s elektronickými Poukazy nahranými v rámci této peněženky, které bude Partner
+          přijímat na úhradu svého zboží/služeb. Tyto Poukazy jsou určeny ke zprostředkování benefitů hrazených z fondu
+          kulturních a sociálních potřeb v souladu se zákonem č. 218/2000 Sb., o rozpočtových pravidlech a o změně
+          některých souvisejících zákonů (rozpočtová pravidla), ve znění pozdějších předpisů (dále jen „zákon o
+          rozpočtových pravidlech“), a vyhláškou č. 114/2002 Sb., o fondu kulturních a sociálních potřeb ve znění
+          pozdějších právních předpisů (dále jen „vyhláška o FKSP“) pro použití v oblasti kultury, sportu, vzdělávání,
+          rekreačního a zdravotního vyžití v souladu s vyhláškou o FKSP.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Card (dále jen „karta“ nebo „karta EC“)</span
+          ><br /> karta je vydávána společností PrePay Technologies Ltd., společností zapsanou pod číslem 4008083 v
+          Anglii a Walesu, se sídlem 3 Sheldon Square, 6th Floor, Londýn W2 6HY, Spojené království, na bázi Mastercard
+          s přiděleným osobním identifikačním číslem (PIN), umožňující provádět kontaktní i bezkontaktní úhrady cen nebo
+          části cen prostřednictvím platebních terminálů nebo online. Karta EC
+          <span style="color: #000000">není prostředkem elektronických peněz</span>
+          ve smyslu zákona č. 370/2017 Sb., o platebním styku, v platném znění. Platba prostřednictvím EC se provádí
+          skrze platební terminál, který akceptuje platební karty Mastercard. Za tímto účelem je Partner přijímající
+          platby kartou EC povinen uzavřít se svou bankou příslušné smlouvy pro přijímání Mastercard a udržovat je v
+          platnosti a účinnosti po dobu trvání Smlouvy. Partner přijímající kartu EC je povinen v každé své provozovně
+          uvedené v Příloze 3 Smlouvy instalovat funkční terminály připojené na síť Mastercard a informovat společnost
+          Edenred o aktuálních MID číslech těchto terminálů. Partner přijímající kartu EC je povinen přistoupit k
+          pravidlům Mastercard vydaným jeho přijímající bankou a jednat v souladu se specifickými pravidly Mastercard
+          upravujícími užití předplacených karet s omezeným okruhem příjemců. Partner odpovídá za řádné fungování
+          terminálů, a to především za dodržování všech předepsaných technických standardů.
+          <br /><br />V případě, že má Partner u společnosti Edenred aktivovanou možnost platby Edenred Card, TRC nebo
+          EBC online, je oprávněn přijímat úhradu ceny zboží/služeb také přes internet, avšak pouze v souladu s účelem
+          Poukazu specifikovaným v těchto VOP.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Benefits</span><br />
+          <span class="outputField" style="color: #b22222">Edenred Multi</span><br /> jsou papírové Poukazy určené k
+          úhradě služeb rekreačních, zdravotnických, vzdělávacích, předškolních, tělovýchovných a sportovních zařízení a
+          zájezdů, které klienti společnosti Edenred poskytují svým zaměstnancům jako zaměstnanecké benefity v souladu s
+          příslušnými právními předpisy. Poukazy Edenred Multi se rozumí, pokud není dále uvedeno jinak i poukazy
+          Edenred Academica, Edenred Medica, Edenred Holiday, Edenred Sport&amp;Kultura.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Multi FKSP</span><br /> jsou papírové Poukazy, které
+          bude Partner přijímat na úhradu svého zboží/služeb. Tyto Poukazy jsou určené ke zprostředkování benefitů
+          hrazených z fondu kulturních a sociálních potřeb v souladu se zákonem o rozpočtových pravidlech a vyhláškou o
+          FKSP v oblasti kultury, sportu, vzdělávání, rekreačního a zdravotního vyžití v souladu s vyhláškou o FKSP.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Academica</span><br />
+          jsou papírové Poukazy určené k úhradě služeb vzdělávacích zařízení, které klienti společnosti Edenred
+          poskytují svým zaměstnancům jako zaměstnanecké benefity v souladu s příslušnými právními předpisy.
+        </div>
+        <div class="size_1-of-2" style="font-size: 7.8px">
+          <span class="outputField" style="color: #b22222">Edenred Medica</span><br /> jsou papírové Poukazy určené k
+          úhradě služeb zdravotnických zařízení, které klienti společnosti Edenred poskytují svým zaměstnancům jako
+          zaměstnanecké benefity v souladu s příslušnými právními předpisy.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Holiday</span><br /> jsou papírové Poukazy určené k
+          úhradě služeb rekreačních zařízení, které klienti společnosti Edenred poskytují svým zaměstnancům jako
+          zaměstnanecké benefity v souladu s příslušnými právními předpisy<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Sport&amp;Kultura</span><br /> jsou papírové Poukazy
+          určené k úhradě služeb sportovních a kulturních zařízení nebo nákupu zájezdů, které klienti společnosti
+          Edenred poskytují svým zaměstnancům jako zaměstnanecké benefity v souladu s příslušnými právními předpisy.<br /><br />
+          <span class="outputField" style="color: #b22222">e-Ticket</span><br />
+          jsou elektronické Poukazy určené k úhradě zboží/služeb v rámci poskytování zaměstnaneckých benefitů
+          prostřednictvím online portálu Edenred Benefity Café. e-Ticket má podobu unikátního šestimístného kódu
+          automaticky vygenerovaného při objednávce v Edenred Benefity Café a zaslaného na e-mailovou adresu konkrétního
+          klienta oprávněného zboží/službu odebrat. Před poskytnutím zboží/služby Partner validuje klientem předložený
+          kód e-Ticketu, tzn., že jej zadá spolu s partnerským kódem svojí provozovny do validačního
+          <br />
+          rozhraní na internetové adrese https://partner.benefitycafe.cz, stiskne tlačítko „validovat“ a následně
+          „uplatnit“ (dále jen „validace“) a ověří tak zároveň platnost e-Ticketu.<br /><br />
+          <span class="outputField" style="color: #b22222">Platební brána Edenred Benefity Café</span><br /> umožňuje
+          uživateli, oprávněné osobě, zaplatit online benefitními body z cafeterie Benefity Café za zboží a služby v
+          e-shopu Partnera. Platební brána je umístěna na internetových stránkách Partnera. V procesu zaplacení
+          nákupního košíku oprávněnou osobou je automaticky vygenerován doklad o provedení Platby a Partnerovi vznikne
+          pohledávka za společností Edenred v příslušné výši. Společnost Edenred a Partner si poskytnou veškerou
+          potřebnou vzájemnou součinnost při implementaci platební brány. Každá ze smluvních stran ponese veškeré
+          náklady, které jí se zprovozněním Platební brány Edenred vzniknou, za tím účelem, aby příslušné zboží a služby
+          mohly být oprávněné osobě poskytnuty dle rámcové Smlouvy.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Compliments</span><br /> jsou dárkové papírové
+          Poukazy určené k úhradě ceny zboží/služeb.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Service</span><br /> jsou papírové Poukazy určené k
+          výplatě dávek v systému pomoci v hmotné nouzi ve smyslu ust. § 4 zákona č. 111/2006 Sb., o pomoci v hmotné
+          nouzi. Poukazy Edenred Service slouží zejména k úhradě ceny potravin a nápojů, dětského zboží, školních
+          potřeb, drogistického či lékárenského zboží, oděvů a zdravotních potřeb. Poukazy Edenred Service nelze
+          uplatnit k úhradě ceny tabákových výrobků nebo alkoholických nápojů.<br /><br />
+          <span class="outputField" style="color: #b22222">Edenred Čistý</span><br /> jsou papírové Poukazy určené k
+          úhradě ceny za čištění a praní osobních ochranných prostředků a uniforem, nákup mycích, čistících a
+          dezinfekčních prostředků určených k ochraně života a zdraví během pracovního procesu.<br /><br />
+          <span class="outputField" style="color: #b22222">III. Proplácení papírových Poukazů</span><br /> Papírové
+          Poukazy, které Partner přijal jako úhradu ceny za poskytnuté zboží/služby, proplatí společnost Edenred
+          Partnerovi za následujících podmínek:<br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Přijaté papírové Poukazy Partner označí na rubu svým razítkem a vyplní výčetku přijatých papírových
+              Poukazů, na níž bude uveden kód a identifikační číslo Partnera, označení druhu, počtu a nominální hodnoty
+              přijatých papírových Poukazů a celková nominální hodnota papírových Poukazů k proplacení. Papírové Poukazy
+              spolu s výčetkou zašle Partner společnosti Edenred poštou nebo kurýrem s žádostí o proplacení na adresu
+              Edenred Production Center s.r.o., Ohradní 1439/61a, 140 00 Praha 4. Papírové poukazy budou Partnerovi
+              proplaceny bezhotovostním převodem na bankovní účet Partnera uvedený v rámcové Smlouvě. Bezhotovostní
+              výplatu papírových Poukazů provede společnost Edenred do 4 až 9 pracovních dnů od předložení papírových
+              Poukazů k proplacení.
+            </li>
+            <li>
+              Papírové Poukazy lze předložit k proplacení nejdříve od prvního dne jejich platnosti a nejpozději do konce
+              prvního kalendářního měsíce po dni skončení jejich platnosti, jinak společnost Edenred papírové Poukazy
+              neproplatí. Platnost je uvedena na každém jednotlivém papírovém Poukazu.
+            </li>
+            <li>
+              V případě, že se bude celková nominální hodnota společností Edenred obdržených realizovaných papírových
+              Poukazů z jakéhokoliv důvodu lišit od celkové nominální hodnoty uvedené Partnerem na Výčetce papírových
+              Poukazů, je rozhodující celková nominální hodnota papírových Poukazů zjištěná společností Edenred po
+              jejich obdržení s tím, že pokud rozdíl bude činit v jedné zásilce realizovaných papírových Poukazů částku
+              vyšší než 3 000 Kč (slovy: tři tisíce korun českých), pozastaví společnost Edenred proces načítání a
+              zpracování realizovaných papírových Poukazů za účelem jejich proplacení Partnerovi a bude o tom Partnera
+              telefonicky informovat. V případě písemného souhlasu Partnera, je společnost Edenred oprávněn načíst
+              papírové Poukazy i přes vzniklý rozdíl. Zprostředkovatel je povinen poukázky, při jejichž načítání vznikl
+              rozdíl vyšší než 3 000 Kč archivovat po dobu 30 dnů za účelem jejich kontroly objednatelem.
+            </li>
+            <li>
+              Jsou-li papírové Poukazy předložené k proplacení neoddělené po jednotlivých kusech, nebo jsou-li papírové
+              Poukazy jakkoli poškozeny, znehodnoceny, padělány nebo z jiného důvodu neplatné (s výjimkou jejich
+              označení razítkem Partnera na rubu), společnost Edenred papírové Poukazy neproplatí. Totéž platí, je-li
+              výčetka předložených papírových Poukazů vyplněna chybně, nesrozumitelně nebo neúplně nebo nebyl použit
+              společností Edenred poskytnutý formulář Výčetky.
+            </li>
+            <li>
+              Přijaté papírové Poukazy proplatí společnost Edenred Partnerovi nejvýše 3x za kalendářní měsíc. Za každý
+              další požadavek na proplacení papírových Poukazů v témže kalendářním měsíci zaplatí Partner společnosti
+              Edenred poplatek dle Ceníku.
+            </li>
+            <li>Po načtení papírových Poukazů zašle společnost Edenred Partnerovi příslušný daňový doklad.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </apex:form>
+  <div class="footer">
+    <div style="font-size: 9px; width: 90%; display: inline-block">
+      Edenred CZ s.r.o., Pernerova 691/42, 186 00 Praha 8, DIČ: CZ 247 45 391, společnost je zapsaná u Městského soudu V
+      Praze oddíle C, vložka 170804
+    </div>
+    <div style="display: inline-block; text-align: right">
+      <apex:image url="{!URLFOR($Resource.CZFooterLogo)}" styleClass="blacklogo" width="50" height="20" />
+    </div>
+  </div>
+
+  <!-- THIRD PAGE -->
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="70"
+      height="40"
+    />
+  </div>
+  <br /><br /><br />
+  <apex:form styleClass="content">
+    <div class="container">
+      <div class="block">
+        <div class="size_1-of-2" style="font-size: 8.6px">
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li>
+              Přijaté papírové Poukazy Ticket Restaurant® může Partner rovněž předložit k proplacení ve velkoobchodní
+              síti společností MAKRO Cash &amp; Carry ČR, s.r.o.,. V takovém případě bude výsledná částka po odečtení
+              odměn a daně z přidané hodnoty zaplacena Partnerovi na účet obchodní společnosti MAKRO Cash &amp; Carry
+              ČR, s.r.o., s variabilním symbolem platby shodným s číslem daňového dokladu zasílaného Partnerovi a se
+              splatností do 18 pracovních dní ode dne předání Poukazů Ticket Restaurant® prostřednictvím výběrních míst
+              umístěných ve velko-obchodních střediscích obchodní společnosti MAKRO Cash &amp; Carry ČR, s.r.o.,
+              respektive po ukončení reklamačního řízení ohledně počtu Poukazů Ticket Restaurant®, kdy rozhodující bude
+              vždy počet a celková nominální hodnota Poukazů Ticket Restaurant® obdržených společností Edenred, veškeré
+              finanční prostředky za zpětný odběr Poukazů Ticket Restaurant® mohou být využity dle dohody s obchodní
+              společností MAKRO Cash &amp; Carry ČR, s.r.o., počínaje 12:00 hod. čtvrtého pracovního dne po dni předání
+              Poukazů Ticket Restaurant® prostřednictvím výběrních míst umístěných ve velkoobchodních střediscích
+              obchodní společnosti MAKRO Cash &amp; Carry ČR, s.r.o., pouze na zaplacení ceny převzatého zboží a
+              odebraných služeb od obchodní společnosti MAKRO Cash &amp; Carry ČR, s.r.o., v ostatním platí vše uvedené
+              v těchto Obchodních podmínkách a ceníku služeb.
+            </li>
+          </ol>
+          <span class="outputField" style="color: #b22222"
+            >IV. Proplácení elektronických Poukazů z digitální peněženky TR/EB/EB FKSP</span
+          ><br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Proplácení elektronických Poukazů nahraných v rámci peněženky TR/EB/EB FKSP přijatých Partnerem k úhradě
+              ceny za poskytnuté zboží/služby prostřednictvím platebního terminálu se řídí pravidly a podmínkami
+              přijímání karet Mastercard sjednanými mezi Partnerem a jeho bankou.
+            </li>
+            <li>
+              Poplatky účtované bankou v souvislosti s používáním platebního terminálu pro přijímání karty EC, TRC nebo
+              EBC nejsou zahrnuty v odměně společnosti Edenred a jdou výhradně k tíži Partnera.
+            </li>
+            <li>
+              Společnost Edenred vystaví Partnerovi daňový doklad na odměnu za elektronické Poukazy nahrané v rámci
+              peněženky TR/EB/EB FKSP přijaté Partnerem v uplynulém kalendářním měsíci.
+            </li>
+            <li>
+              Partner zaplatí společnosti Edenred roční členský poplatek za členství v síti provozoven, které přijímají
+              platby prostřednictvím peněženky TR/EB/EB FKSP, jehož výše je uvedena v Ceníku (dále jen „poplatek“). Výše
+              poplatku je paušální za každý kalendářní rok, v němž platí rámcová Smlouva (byť i jen část roku), a to bez
+              ohledu na její začátek či konec. Výše poplatku se snižuje až do celé jeho výše o celkovou částku odměny
+              společnosti Edenred za elektronické Poukazy TR/EB/EB FKSP přijaté Partnerem, dosažené v příslušném
+              kalendářním roce. Na tento členský poplatek vystaví společnost Edenred Partnerovi daňový doklad za
+              uplynulý kalendářní rok nebo po skončení rámcové smlouvy za kalendářní rok, v němž rámcová Smlouva
+              skončila.
+            </li>
+          </ol>
+        </div>
+        <div class="size_1-of-2" style="font-size: 8.6px">
+          <span class="outputField" style="color: #b22222"
+            >V. Proplácení Poukazů e-Ticket a Platební brány Edenred Benefity Café</span
+          ><br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Validované e-Tickety a Poukazy Platební brány Edenred proplácí společnost Edenred Partnerovi tak, že
+              vystaví a zašle Partnerovi daňový doklad na proplacení Poukazů e-Ticket a Platební brána Edenred
+              validovaných/uplatněných v uplynulém kalendářním měsíci. Na dokladu bude z výsledného součtu částky
+              validovaných/uplatněných Poukazů e-Ticket a Platební brána Edenred odečtena odměna společnosti Edenred dle
+              výše stanovené v Ceníku a částka daně z přidané hodnoty z této odměny.
+            </li>
+            <li>Společnost Edenred uhradí Partnerovi výslednou částku ve lhůtě 10 dnů od odeslání faktury.</li>
+          </ol>
+          <span class="outputField" style="color: #b22222">VI. Program FOOD</span><br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Program FOOD je celoevropský program, který usiluje o veřejné zdraví díky jedinečné síti restaurací
+              splňující kritéria programu FOOD. Cílem programu FOOD je dlouhodobě zlepšit stravovací návyky uživatelů
+              Poukazů Ticket Restaurant a TRC zvýšením jejich povědomí o nutričně vyvážené stravě a současně podpořit
+              restaurace, nabízející výživově kvalitní jídla.
+            </li>
+            <li>
+              Partner se svým členstvím v programu FOOD zavazuje respektovat nejméně 5 z 8 kritérií programu FOOD z
+              hlediska zdravé výživy (dále jen „Podmínky programu FOOD“). Podrobnosti o splnění těchto podmínek a
+              členství v programu FOOD vyznačí Partner v příloze č. 3.
+            </li>
+            <li>
+              Partner, který je členem programu FOOD řádně a viditelně označí speciálními nálepkami programu FOOD
+              vstupní dveře všech svých provozoven uvedených v Příloze č. 3 této Smlouvy.
+            </li>
+            <li>
+              Pokud Partner přestane splňovat Podmínky programu FOOD je povinen o tom společnost Edenred písemně
+              informovat bez zbytečného odkladu. Společnost Edenred jej v takovém případě vyloučí z programu FOOD.
+            </li>
+            <li>
+              Společnost Edenred je oprávněna kdykoliv kontrolovat plnění Podmínek programu FOOD ze strany Partnera.
+              Toto oprávnění však nezbavuje Partnera jeho povinnosti plnit Podmínky programu FOOD nebo oznámit
+              společnosti Edenred, že tyto podmínky přestal splňovat v souladu s článkem VI. písm. c) VOP.
+            </li>
+          </ol>
+          <span class="outputField" style="color: #b22222">VII. Závěrečná ustanovení</span><br />
+          <ol style="padding: 0; margin: 1.2em; list-style: lower-alpha">
+            <li>
+              Společnost Edenred je oprávněna jednostranně započíst svoje pohledávky za Partnerem na jakékoli pohledávky
+              Partnera za společností Edenred.
+            </li>
+            <li>
+              Částky uvedené v Ceníku jsou bez DPH. K částkám fakturovaným společností Edenred bude připočtena DPH v
+              zákonné výši.
+            </li>
+            <li>
+              Partner uděluje společnosti Edenred souhlas se zasíláním daňových dokladů v elektronické podobě na
+              emailovou adresu uvedenou v rámcové Smlouvě. Zasílání papírových daňových dokladů je zpoplatněno dle
+              Ceníku.
+            </li>
+            <li>
+              Informace o zpracování osobních údajů je dostupná zde:<br />
+              https://www.edenred.cz/informace-o-zpracovani-osobnich-udaju.
+            </li>
+            <li>
+              Daňové doklady společnosti Edenred jsou splatné ve lhůtě uvedené na dokladu, jinak ve lhůtě 5 pracovních
+              dnů ode dne doručení dokladu.
+            </li>
+          </ol>
+          <span class="outputField" style="color: #000000; font-size: 8.5px"
+            >Tyto Obchodní podmínky jsou účinné ke dni 14. 10. 2021.</span
+          >
+        </div>
+      </div>
+    </div> </apex:form><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <div class="footer">
+    <div style="font-size: 9px; width: 90%; display: inline-block">
+      Edenred CZ s.r.o., Pernerova 691/42, 186 00 Praha 8, DIČ: CZ 247 45 391, společnost je zapsaná u Městského soudu V
+      Praze oddíle C, vložka 170804
+    </div>
+    <div style="display: inline-block; text-align: right">
+      <apex:image url="{!URLFOR($Resource.CZFooterLogo)}" styleClass="blacklogo" width="50" height="20" />
+    </div>
+  </div>
+  <br /><br /><br /><br /><br /><br />
+  <!-- FOURTH PAGE -->
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="70"
+      height="40"
+    />
+    <div style="text-align: center; margin-top: 5%; color: #b22222">Ceník služeb</div>
+  </div>
+  <br />
+  <apex:form styleClass="content">
+    <div class="container" style="">
+      <div class="block" style="overflow: hidden">
+        <span class="outputField" style="font-size: 11.5px; color: #000000"
+          >Ticket Restaurant® Card („TRC“)/digitální peněženka TR)</span
+        ><br />
+        <table>
+          <tr>
+            <th>
+              <span class="outputField" style="width: 45%">Způsob proplácení</span>
+            </th>
+            <th><span class="outputField" style="width: 30%">Lhůta</span></th>
+            <th><span class="outputField" style="width: 25%">ODMĚNA*</span></th>
+          </tr>
+
+          <apex:variable var="index" value="false"></apex:variable>
+
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+              <apex:outputPanel rendered="{!qli.product2.productCode =='ERCZ_TRCBTF'}">
+                <apex:variable var="index" value="true"></apex:variable>
+                <tr>
+                  <td style="text-align: left; width: 45%">Převod na bankovní účet při platbě prostřednictvím POS</td>
+                  <td style="text-align: center; width: 30%">Dle podmínek objednatele a jeho banky</td>
+
+                  <td style="text-align: left; width: 25%"><apex:outputText value="{!qli.ER_Percentage__c}" />%</td>
+                </tr>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!index == 'false'}">
+            <tr>
+              <td style="text-align: left; width: 45%">Převod na bankovní účet při platbě prostřednictvím POS</td>
+              <td style="text-align: center; width: 30%">Dle podmínek objednatele a jeho banky</td>
+
+              <td style="text-align: left; width: 25%">{!ServiceMap['ERCZ_TRCBTF'].ER_Percentage__c} %</td>
+            </tr>
+          </apex:outputPanel>
+        </table>
+        <p style="font-size: 8px">
+          * Cena za způsob proplacení je uvedena částkou v % z celkové částky zaplacené Ticket Restaurant® Card nebo z
+          digitální peněženky Ticket Restaurant®.
+        </p>
+        <span class="outputField" style="font-size: 11.5px; color: #000000">Ticket Restaurant®</span><br />
+        <table>
+          <tr>
+            <th>
+              <span class="outputField" style="width: 40%">Způsob proplácení</span>
+            </th>
+            <th><span class="outputField" style="width: 20%">Lhůta</span></th>
+            <th><span class="outputField" style="width: 20%">ODMĚNA</span></th>
+          </tr>
+          <apex:variable var="index" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+              <apex:outputPanel rendered="{!qli.Product2.productCode =='ERCZ_ETRBTF'}">
+                <apex:variable var="index" value="true"></apex:variable>
+                <tr>
+                  <td style="text-align: left; width: 45%">Převod na bankovní účet</td>
+                  <td style="text-align: center; width: 30%">9 pracovních dnů</td>
+                  <td style="text-align: center; width: 25%">
+                    {!qli.ER_Percentage__c}% (min. {!qli.ER_Minimum_Fee__c} Kč)**
+                  </td>
+                </tr>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!index == 'false'}">
+            <tr>
+              <td style="text-align: left; width: 45%">Převod na bankovní účet</td>
+              <td style="text-align: center; width: 30%">9 pracovních dnů</td>
+              <td style="text-align: center; width: 25%">
+                {!ServiceMap['ERCZ_ETRBTF'].ER_Percentage__c} % (min.
+                {!ServiceMap['ERCZ_ETRBTF'].Product2.ER_Minimum_Fee__c} Kč)**
+              </td>
+            </tr>
+          </apex:outputPanel>
+          <tr>
+            <td style="text-align: left; width: 45%">Převod na bankovní účet EXPRESS</td>
+            <td style="text-align: center; width: 30%">4 pracovní dny</td>
+            <td style="text-align: center; width: 25%">6,3 % (min. 100 Kč)**</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; width: 45%">
+              Prostřednictvím výběrného místa v MAKRO Cash &amp; Carry ČR s.r.o.
+            </td>
+            <td style="text-align: center; width: 30%">18 pracovní dny</td>
+            <td style="text-align: center; width: 25%">6,5 % (min. 100 Kč)**</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; width: 45%">Bidfood</td>
+            <td style="text-align: center; width: 30%">14 pracovních dnů</td>
+            <td style="text-align: center; width: 25%">5,5 % (min. 100 Kč)***</td>
+          </tr>
+        </table>
+        <p style="font-size: 8px">
+          ** V případě požadavku na proplacení částky zaplacené papírovými Poukazy Ticket Restaurant® nižší než 100 Kč
+          je odměna rovna této výši plus DPH.<br /> ** V případě expresního převodu na účet se poplatek zvyšuje o 0,5 %
+          vůči převodu na bankovní účet.<br /> *** Prostřednictvím úhrady objednávky v Bidfood.
+        </p>
+
+        <span class="outputField" style="font-size: 11.5px; color: #000000"
+          >Edenred Benefits Card („EBC“/digitální peněženka EB/digitální peněženka EB FKSP) </span
+        ><br />
+        <table>
+          <tr>
+            <th>
+              <span class="outputField" style="width: 40%">Způsob proplácení</span>
+            </th>
+            <th><span class="outputField" style="width: 20%">Lhůta</span></th>
+            <th>
+              <span class="outputField" style="width: 20%">ODMĚNA***</span>
+            </th>
+          </tr>
+          <apex:variable var="index" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+              <apex:outputPanel rendered="{!qli.Product2.productCode =='ERCZ_EBCBTF'}">
+                <apex:variable var="index" value="true"></apex:variable>
+                <tr>
+                  <td style="text-align: left; width: 45%">Převod na bankovní účet při platbě prostřednictvím POS</td>
+                  <td style="text-align: center; width: 30%">Dle podmínek objednatele a jeho banky</td>
+                  <td style="text-align: center; width: 25%">{!qli.ER_Percentage__c}%</td>
+                </tr>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!index == 'false'}">
+            <tr>
+              <td style="text-align: left; width: 45%">Převod na bankovní účet při platbě prostřednictvím POS</td>
+              <td style="text-align: center; width: 30%">Dle podmínek objednatele a jeho banky</td>
+              <td style="text-align: center; width: 25%">{!ServiceMap['ERCZ_EBCBTF'].ER_Percentage__c} %</td>
+            </tr>
+          </apex:outputPanel>
+        </table>
+        <div class="block">
+          <div style="width: 50%; height: 50%; float: left">
+            <span class="outputField" style="font-size: 11.5px; color: #000000"
+              >E-ticket, Platební brána Edenred Benefity Café</span
+            >
+
+            <table>
+              <tr>
+                <th>
+                  <span class="outputField" style="width: 50%">Platební způsob</span>
+                </th>
+                <th>
+                  <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                </th>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet E-ticket</td>
+                <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EETBTF'].value}%</td>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Benefity Café</td>
+                <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EPGBTF'].value}%</td>
+              </tr>
+            </table>
+          </div>
+          <div style="width: 50%; height: 50%; float: right">
+            <span class="outputField" style="font-size: 11.5px; color: #000000">Edenred Service</span>
+            <apex:variable var="index" value="false"></apex:variable>
+            <apex:repeat value="{!SolutionMap}" var="serviceList">
+              <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+                <apex:outputPanel rendered="{!qli.Product2.productCode =='ERCZ_ESEBTF'}">
+                  <apex:variable var="index" value="true"></apex:variable>
+                  <table>
+                    <tr>
+                      <th>
+                        <span class="outputField" style="width: 50%">Platební způsob</span>
+                      </th>
+                      <th>
+                        <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                      <td style="text-align: center; width: 50%">
+                        {!qli.ER_Percentage__c}% (min. {!qli.ER_Minimum_Fee__c} Kč)
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left; width: 50%">Převod na bankovní účet EXPRESS</td>
+                      <td style="text-align: center; width: 50%">6,5 % (min. 100 Kč)</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left; width: 50%" colspan="2">
+                        V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                      </td>
+                    </tr>
+                  </table>
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!index == 'false'}">
+              <table>
+                <tr>
+                  <th>
+                    <span class="outputField" style="width: 50%">Platební způsob</span>
+                  </th>
+                  <th>
+                    <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                  </th>
+                </tr>
+                <tr>
+                  <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                  <td style="text-align: center; width: 50%">
+                    {!ServiceMap['ERCZ_ESEBTF'].ER_Percentage__c}% (min.
+                    {!ServiceMap['ERCZ_ESEBTF'].Product2.ER_Minimum_Fee__c} Kč)
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: left; width: 50%">Převod na bankovní účet EXPRESS</td>
+                  <td style="text-align: center; width: 50%">6,5 % (min. 100 Kč)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left; width: 50%" colspan="2">
+                    V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                  </td>
+                </tr>
+              </table>
+            </apex:outputPanel>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div style="width: 50%; height: 50%; float: left">
+          <span class="outputField" style="font-size: 11.5px; color: #000000">Edenred Benefits</span>
+          <table>
+            <tr>
+              <th>
+                <span class="outputField" style="width: 50%">Platební způsob</span>
+              </th>
+              <th>
+                <span class="outputField" style="width: 50%">ODMĚNA***</span>
+              </th>
+            </tr>
+
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Multi</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EBMLBTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Multi FKSP</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EBMLBTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Academica</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EBABTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Medica</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EBMBTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Holiday</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_EBHBTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%">Převod na bankovní účet Edenred Sport&amp;Kultura</td>
+              <td style="text-align: center; width: 50%">{!serviceValueMap['ERCZ_BSKBTF'].value}%</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 50%" colspan="2">
+                V případě expresního převodu na účet se poplatek zvyšuje o 0,5% vůči převodu na bankovní účet.
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="width: 50%; height: 50%; float: right">
+          <span class="outputField" style="font-size: 11.5px; color: #000000">Edenred Čistý</span>
+          <apex:variable var="index" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+              <apex:outputPanel rendered="{!qli.Product2.productCode =='ERCZ_ECLBTF'}">
+                <apex:variable var="index" value="true"></apex:variable>
+                <table>
+                  <tr>
+                    <th>
+                      <span class="outputField" style="width: 50%">Platební způsob</span>
+                    </th>
+                    <th>
+                      <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                    <td style="text-align: center; width: 50%">{!qli.ER_Percentage__c}%</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%">Převod na bankovní účet EXPRESS</td>
+                    <td style="text-align: center; width: 50%">8,0 %</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%" colspan="2">
+                      V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                    </td>
+                  </tr>
+                </table>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!index == 'false'}">
+            <table>
+              <tr>
+                <th>
+                  <span class="outputField" style="width: 50%">Platební způsob</span>
+                </th>
+                <th>
+                  <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                </th>
+              </tr>
+
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                <td style="text-align: center; width: 50%">{!ServiceMap['ERCZ_ECLBTF'].ER_Percentage__c}%</td>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet EXPRESS</td>
+                <td style="text-align: center; width: 50%">8,0 %</td>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%" colspan="2">
+                  V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                </td>
+              </tr>
+            </table>
+          </apex:outputPanel>
+
+          <span class="outputField" style="font-size: 11.5px; color: #000000">Edenred Compliments</span>
+          <apex:variable var="index" value="false"></apex:variable>
+          <apex:repeat value="{!SolutionMap}" var="serviceList">
+            <apex:repeat value="{!SolutionMap[serviceList]}" var="qli">
+              <apex:outputPanel rendered="{!qli.product2.productCode =='ERCZ_ECOBTF'}">
+                <apex:variable var="index" value="true"></apex:variable>
+                <table>
+                  <tr>
+                    <th>
+                      <span class="outputField" style="width: 50%">Platební způsob</span>
+                    </th>
+                    <th>
+                      <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                    <td style="text-align: center; width: 50%">{!ServiceMap['ERCZ_ECOBTF'].ER_Percentage__c}%</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                    <td style="text-align: center; width: 50%">{!qli.ER_Percentage__c}%</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; width: 50%" colspan="2">
+                      V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                    </td>
+                  </tr>
+                </table>
+              </apex:outputPanel>
+            </apex:repeat>
+          </apex:repeat>
+          <apex:outputPanel rendered="{!index == 'false'}">
+            <table>
+              <tr>
+                <th>
+                  <span class="outputField" style="width: 50%">Platební způsob</span>
+                </th>
+                <th>
+                  <span class="outputField" style="width: 50%">ODMĚNA***</span>
+                </th>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet</td>
+                <td style="text-align: center; width: 50%">{!ServiceMap['ERCZ_ECOBTF'].ER_Percentage__c}%</td>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%">Převod na bankovní účet EXPRESS</td>
+                <td style="text-align: center; width: 50%">9,0 %</td>
+              </tr>
+              <tr>
+                <td style="text-align: left; width: 50%" colspan="2">
+                  V případě expresního převodu na účet se poplatek zvyšuje o 0,5 % vůči převodu na bankovní účet.
+                </td>
+              </tr>
+            </table>
+          </apex:outputPanel>
+        </div>
+      </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+      <span class="outputField" style="font-size: 12px">Ostatní poplatky </span>
+      <table>
+        <tr>
+          <th>
+            <span class="outputField" style="width: 80%">Ostatní poplatky</span>
+          </th>
+          <th><span class="outputField" style="width: 20%">ODMĚNA</span></th>
+        </tr>
+        <tr>
+          <td style="text-align: left; width: 80%">
+            4. a další požadavek na proplacení Poukazů v jednom kalendářním měsíci (III/d VOP):
+          </td>
+          <td style="text-align: center; width: 20%">+1 % z částky</td>
+        </tr>
+        <tr>
+          <td style="text-align: left; width: 80%">
+            Roční poplatek za členství v síti provozoven, které přijímají platby TRC/EBC (IV/d VOP)
+          </td>
+          <td style="text-align: center; width: 20%">1 200 Kč</td>
+        </tr>
+        <tr>
+          <td style="text-align: left; width: 80%">
+            Poplatek za vystavení a zaslání papírového daňového dokladu (VII/c VOP):
+          </td>
+          <td style="text-align: center; width: 20%">50 Kč</td>
+        </tr>
+      </table>
+      <p style="font-size: 8.8px; color: #616161">
+        ***Odměna je určena % z celkové částky dotčených proplácených Poukazů.
+      </p>
+      <p style="font-size: 8.8px; color: #616161">
+        Veškeré částky jsou uvedeny bez DPH a budou navýšeny o DPH v zákonné výši.
+      </p>
+      <span class="outputField" style="font-size: 8.8px">Tento Ceník služeb je účinný ke dni 14. 10. 2021.</span>
+    </div>
+  </apex:form>
+  <div class="footer">
+    <div style="font-size: 9px; width: 90%; display: inline-block">
+      Edenred CZ s.r.o., Pernerova 691/42, 186 00 Praha 8, DIČ: CZ 247 45 391, společnost je zapsaná u Městského soudu V
+      Praze oddíle C, vložka 170804
+    </div>
+    <div style="display: inline-block; text-align: right">
+      <apex:image url="{!URLFOR($Resource.CZFooterLogo)}" styleClass="blacklogo" width="50" height="20" />
+    </div>
+  </div>
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="70"
+      height="40"
+    />
+
+    <div style="text-align: center; margin-top: 5%; color: #b22222">Ceník služeb</div>
+  </div>
+</apex:page>

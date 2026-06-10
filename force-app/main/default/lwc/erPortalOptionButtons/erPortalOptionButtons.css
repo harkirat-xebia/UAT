@@ -1,0 +1,105 @@
+.slds-form-element {
+  /* margin: 1.5rem 1rem; */
+  max-width: fit-content;
+  justify-content: center;
+  display: contents;
+}
+
+.slds-form-element__control {
+  text-align: center;
+  padding-bottom: 1.5em;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  font-size: 0.8rem;
+  font-family: 'edenredlight';
+  text-align: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.option-text {
+  font-family: 'montserratregular';
+}
+
+.option-text-selected {
+  font-weight: bold;
+}
+
+.option {
+  justify-content: center;
+  display: contents;
+}
+
+.choice1 {
+  border-start-start-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-end-end-radius: 0px;
+  border-top-right-radius: 0px;
+  border: solid 0.1em #00859b;
+  border-right: 0;
+}
+
+.choice2 {
+  border-start-start-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-end-end-radius: 5px;
+  border-top-right-radius: 5px;
+  border: solid 0.1em #00859b;
+  border-left: 0;
+  margin-left: -0.1em;
+}
+
+.selected {
+  font-weight: bold;
+  color: white;
+  background-color: #00859b;
+}
+
+.unselected {
+  font-weight: normal;
+  color: #272727;
+  background-color: white;
+}
+
+.er-tooltip {
+  position: relative;
+  top: -0.5rem;
+}
+
+/* To be reviewed  */
+@media screen and (max-width: 700px) {
+  .option-text {
+    font-family: 'montserratregular';
+    font-size: 0.7em;
+  }
+
+  .btn {
+    font-size: 0.5rem;
+  }
+
+  .slds-form-element__control {
+    padding-bottom: 0.3em;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .large {
+    width: 95%;
+  }
+
+  .x-large {
+    width: 98%;
+  }
+
+  .max {
+    width: 100%;
+  }
+}

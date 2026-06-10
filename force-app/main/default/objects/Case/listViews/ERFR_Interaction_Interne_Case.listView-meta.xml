@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERFR_Interaction_Interne_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERFR Interaction Interne</label>
+    <queue>ERFR_Interaction_Interne</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

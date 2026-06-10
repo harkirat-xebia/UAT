@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copied_from_Child_Account__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>this field is checked when the activity (task/event) is created via the flow who duplicates children activities on parent account</description>
+    <label>Copied from Child Account</label>
+    <type>Checkbox</type>
+</CustomField>

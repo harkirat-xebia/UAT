@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VAT_Number_Format_By_Country</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(
+    AND(
+        NOT($User.ER_BypassVR__c),
+        NOT(ISBLANK(ER_VAT_Number__c)),
+        NOT(
+            REGEX(ER_VAT_Number__c, &quot;^DE[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^ATU[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^BE[0-9]{10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^BG[0-9]{9,10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^CY[0-9]{8}[A-Z]$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^HR[0-9]{11}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^DK[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^ES[0-9A-Z][0-9]{7}[0-9A-Z]$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^EE[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^FI[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^FR[0-9A-Z]{2}[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^EL[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^HU[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^IE[0-9]{7}[A-Z]{1}[0-9]{1}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^IT[0-9]{11}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^LV[0-9]{11}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^LT[0-9]{9,12}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^LU[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^MT[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^NL[0-9]{9}B[0-9]{2}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^PL[0-9]{10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^PT[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^CZ[0-9]{8,10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^RO[0-9]{2,10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^SK[0-9]{10}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^SI[0-9]{8}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^SE[0-9]{12}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^GB[0-9]{9}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^GB[0-9]{12}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^GBGD[0-9]{3}$&quot;) ||  
+            REGEX(ER_VAT_Number__c, &quot;^GBHA[0-9]{3}$&quot;) ||
+            REGEX(ER_VAT_Number__c, &quot;^BE[0-1]{1}[0-9]{9}$&quot;) ||
+            REGEX(ER_VAT_Number__c, &quot;^LU[0-9]{8}$&quot;) 
+        )
+    ),
+    true,
+    false
+)</errorConditionFormula>
+    <errorMessage>Invalid VAT Number format. Please enter a valid VAT Number based on the country-specific format.</errorMessage>
+</ValidationRule>

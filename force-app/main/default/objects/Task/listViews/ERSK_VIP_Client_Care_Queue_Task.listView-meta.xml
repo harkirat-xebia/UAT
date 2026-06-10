@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERSK_VIP_Client_Care_Queue_Task</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERSK VIP Client Care Queue</label>
+    <queue>ERSK_VIP_Client_Care_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

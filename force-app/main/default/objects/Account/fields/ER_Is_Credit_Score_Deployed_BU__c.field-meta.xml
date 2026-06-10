@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Is_Credit_Score_Deployed_BU__c</fullName>
+    <formula>CONTAINS($CustomMetadata.Global_Settings__mdt.CreditScoring_Deployed_BUs.Valueforformula__c, &quot;;&quot; &amp; TEXT(ER_BUPicklist__c) &amp; &quot;;&quot;)
+            || $CustomMetadata.Global_Settings__mdt.CreditScoring_Deployed_BUs.Valueforformula__c = &quot;ALL&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>is Credit Score Deployed BU</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

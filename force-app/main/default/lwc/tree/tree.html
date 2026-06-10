@@ -1,0 +1,15 @@
+<template>
+  <div class="slds-tree_container">
+    <h4 class="slds-tree__group-header" id="treeheading">{header}</h4>
+    <c-tree-item
+      if:true={hasChildren}
+      class="slds-tree"
+      aria-labelledby="treeheading"
+      focused-child={focusedChild}
+      node-key={rootElement}
+      child-items={children}
+      is-root
+    >
+    </c-tree-item>
+  </div>
+</template>

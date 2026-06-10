@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Client_Case_RT</fullName>
+    <active>true</active>
+    <businessProcess>Client Support</businessProcess>
+    <compactLayoutAssignment>ER_Client_Merchant_Core_Model</compactLayoutAssignment>
+    <description>Record Type for the Client Case</description>
+    <label>ER Client Case RT</label>
+    <picklistValues>
+        <picklist>ER_Answers_Solution_Provided__c</picklist>
+        <values>
+            <fullName>Claim registered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial gesture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Happy Client %2F No action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information given on procedures</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting scheduled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Problem escalated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Problem resolved</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_BUPicklist__c</picklist>
+        <values>
+            <fullName>AE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BENELUX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CEN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>US</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UTA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VN</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Call_Evaluation__c</picklist>
+        <values>
+            <fullName>Improvement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No change</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Worse</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_CaseReason2__c</picklist>
+        <values>
+            <fullName>Acceptance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acceptance Network</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apple Pay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Balance adjustment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Balance transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelation Of Voucher Order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancellation of card or load order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Card Vouchers Order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Card activation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Card and or load order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Card reissuance damaged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Card reissuance lost or stolen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Extranet assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Extranet connection issues</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Extranet forgotten credentials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Modification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract modification following VAT CRN change</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract set up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Damaged asset</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivery of Asset</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivery of cards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee transfer within Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired asset</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired load</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Face value</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Funds transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Google Pay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incomplete delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incorrect amount on invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incorrect data on invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incorrect delivery address</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incorrect packaging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incorrect printing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information concerning a card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information regarding invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low printing quality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missing loads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other local Extranet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment status</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permanently block card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reports on beneficiaries expired cards inactive cards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request duplicate invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request new merchant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solution information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Status of Order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Status of loads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Temporarily block card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terms and conditions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unblock card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User Extranet assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validity of assets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validity of loads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vouchers Order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrong Merchant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrong Wallet</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Contact_Form__c</picklist>
+        <values>
+            <fullName>Offline</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Customer_Segment__c</picklist>
+        <values>
+            <fullName>Beneficiary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delicard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merchant</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Reason__c</picklist>
+        <values>
+            <fullName>Acceptance network</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_User Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Complaint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Contract_modification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Extranet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_General_Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Invoicing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Online_support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Order_Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ER_Validity</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Solution__c</picklist>
+        <values>
+            <fullName>ERES_Ticket Corporate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Dietas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Flex</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Gasolina</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Guardería</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Regalo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Restaurante</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERES_Ticket Transporte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Delicard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Dental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Lounas card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Massage card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Työmatka card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Virike %28sport only%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred Virike card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Edenred card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Lounasseteli voucher</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERFI_Virikeseteli voucher</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>My Benefits</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MyBenefits Consumer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MyBenefits GOV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spendeo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Compliments Gift Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Restaurant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Restaurant Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Restaurant Lite</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Strength_Areas__c</picklist>
+        <values>
+            <fullName>Availability of Staff or Teams</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivery or Loading of Cards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digital Tools Website or App</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Accuracy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Efficiency of Staff or Teams</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fees Reimbursements Exchange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information Clarity or Transparency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ordering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Setup or Activation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Usability of the products</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Sub_Product__c</picklist>
+        <values>
+            <fullName>H24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Gasolina Solred</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Regalo Premium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Regalo Seleccion</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ER_Weaknesses__c</picklist>
+        <values>
+            <fullName>Availability of Staff or Teams</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivery or Loading of Cards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digital Tools Website or App</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Accuracy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Efficiency of Staff or Teams</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fees Reimbursements Exchange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information Clarity or Transparency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ordering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Setup or Activation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Usability of the products</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ES_Sub_Product__c</picklist>
+        <values>
+            <fullName>Gasolina Solred</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Dietas %28universal%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Regalo Premium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Regalo Seleccion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket Restaurante Seleccion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte and Restaurante</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origin</picklist>
+        <values>
+            <fullName>Chat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Face_to_face</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Social Media</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason</picklist>
+        <values>
+            <fullName>Accounting</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Claim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERPL_Multiproducts_REGIONS_Lead</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERPL Multiproducts REGIONS</label>
+    <queue>ERPL_Multiproducts_REGIONS</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

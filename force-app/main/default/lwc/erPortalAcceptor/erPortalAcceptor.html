@@ -1,0 +1,87 @@
+<!--
+  @ticket            : COUL-3721, COUL-3722, COUL-3723
+  @description       : 
+  @author            : Dinesh Kumar Bussunt
+  @group             : 
+  @last modified on  : 01/06/2023
+  @last modified by  : Dinesh Kumar Bussunt
+-->
+<template>
+  <template if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading"></lightning-spinner>
+  </template>
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_12-of-12 slds-p-around_small">
+      <c-er-portal-breadcrumbs rec-id={acceptorId} parent-id={parentId} mode={mode} scope={scope}></c-er-portal-breadcrumbs>
+    </div>
+  </div>
+  <div class="form show-ease">
+    <div class="left-ribbon"></div>
+        <div class="slds-grid slds-wrap" style="width:100%; position:relative;">
+      <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_10-of-12 acceptorSectionTitle">
+                <h1>{labelsMetadata.lb_general_information_en}</h1>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_2-of-12 slds-p-bottom_medium">
+        <template lwc:if={isReadOnlyEditable}>
+                        <c-er-portal-button id="editButtonDiv" label={labelsMetadata.lb_edit_en} size="big" alignment="right" onclick={handleAcceptorEdit}>
+                        </c-er-portal-button>
+        </template>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_12-of-12">
+        <div class="slds-box">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+              <div class="slds-form-element__control" data-id="acceptor_status_picklist">
+                <c-er-portal-picklist
+                                    input-label={labelsMetadata.lb_store_status_m_en}
+                  required="true"
+                  pk-entries={statusPicklistValues}
+                  display-cur-value="true"
+                  value={acceptorStatus}
+                  disabled={isReadOnlyEditable}
+                  onchange={handleStatusChange}
+                >
+                </c-er-portal-picklist>
+              </div>
+            </div>
+          </div>
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-around_small">
+              <div class="slds-form-element__control">
+                                <c-er-portal-input input-label={labelsMetadata.lb_mid2_en} value={acceptorMID} required="true" onchange={handleMIDChange} disabled={isReadOnlyEditable}>
+                </c-er-portal-input>
+              </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-around_small">
+              <div class="slds-form-element__control">
+                <c-er-portal-input
+                  input-label="Sub-MID"
+                  value={acceptorSubMID}
+                  onchange={handleSubMIDChange}
+                  disabled={isReadOnlyEditable}
+                >
+                </c-er-portal-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_12-of-12 slds-p-around_small">
+      <template lwc:if={isEditModeOn}>
+                <c-er-portal-button label={labelsMetadata.lb_cancel_en} size="small" alignment="left" onclick={handleCancelSave}
+                    responsive="x-large">
+        </c-er-portal-button>
+                <c-er-portal-button label={labelsMetadata.lb_step1_save_en} size="small" alignment="right" onclick={handleSaveAcceptor} responsive="x-large">
+        </c-er-portal-button>
+      </template>
+      <template lwc:else>
+                <c-er-portal-button label={labelsMetadata.lb_step2b_previous_en} size="small" alignment="left" onclick={handlePreviousPageAcceptor}
+                    responsive="x-large">
+        </c-er-portal-button>
+      </template>
+    </div>
+  </div>
+</template>

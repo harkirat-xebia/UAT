@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Cannot_Edit_Activated</fullName>
+    <active>true</active>
+    <description>Once activated, an affiliation code cannot be modified, edited and deleted.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; $RecordType.DeveloperName = &apos;ER_Affiliation_Code&apos;
+&amp;&amp; ISPICKVAL(ER_Status__c, &apos;Activated&apos;)
+&amp;&amp; NOT(ISCHANGED(ER_Status__c))
+&amp;&amp; NOT(ISNEW())</errorConditionFormula>
+    <errorMessage>VRER05 - Once activated, an affiliation code cannot be modified, edited and deleted.</errorMessage>
+</ValidationRule>

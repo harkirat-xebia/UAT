@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Prevent_Person_Account_Changing</fullName>
+    <active>true</active>
+    <description>Prevent changes on Individual for Customer Services, execpts for Finland if they try to modify certain fields.</description>
+    <errorConditionFormula>NOT(ISCHANGED( ER_VIP__pc ) ) &amp;&amp;  AND(
+NOT($User.ER_BypassVR__c),
+$Profile.Name = &apos;Customer Service&apos;,
+IsPersonAccount,
+IF(
+AND(
+$User.ER_BUText__c = &apos;FI&apos;,
+OR(
+ISCHANGED(PersonEmail),
+ISCHANGED(PersonMailingAddress),
+ISCHANGED(PersonMailingPostalCode),
+ISCHANGED(PersonMailingCountry),
+ISCHANGED(Phone))
+),
+false,
+true
+)
+)</errorConditionFormula>
+    <errorMessage>You are not able to modify</errorMessage>
+</ValidationRule>

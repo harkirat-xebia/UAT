@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Contact_Role_Comapct_Layout</fullName>
+    <fields>ER_Contact__c</fields>
+    <fields>ER_Status__c</fields>
+    <fields>ER_Role__c</fields>
+    <fields>ER_Primary__c</fields>
+    <fields>ER_Sync_result__c</fields>
+    <fields>ER_External_Id__c</fields>
+    <label>ER_Contact_Role_Comapct_Layout</label>
+</CompactLayout>

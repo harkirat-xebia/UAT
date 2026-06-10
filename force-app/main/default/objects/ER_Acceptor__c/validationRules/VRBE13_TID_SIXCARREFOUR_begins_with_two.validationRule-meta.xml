@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE13_TID_SIXCARREFOUR_begins_with_two</fullName>
+    <active>true</active>
+    <description>Terminal ID of SIX-Carrefour needs to start with 80</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment - Carrefour&apos;) 
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;80&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Terminal ID of SIX-Carrefour needs to start with 80</errorMessage>
+</ValidationRule>

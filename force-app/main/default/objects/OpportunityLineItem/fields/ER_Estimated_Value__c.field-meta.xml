@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Estimated_Value__c</fullName>
+    <complianceGroup>GDPR</complianceGroup>
+    <formula>IF(
+    CONTAINS(LOWER(CreatedBy.Alias), &quot;guest&quot;),
+    IF(
+        Parent_Product__c = &quot;Order Fee&quot;,
+        ER_Face_Value__c * ER_Nb_Beneficiaries__c * ER_Load_Per_Year__c * ER_Days_Per_Month__c,
+        NULL
+    ),
+    ER_Face_Value__c * ER_Nb_Beneficiaries__c * ER_Load_Per_Year__c * ER_Days_Per_Month__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estimated Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Currency</type>
+</CustomField>

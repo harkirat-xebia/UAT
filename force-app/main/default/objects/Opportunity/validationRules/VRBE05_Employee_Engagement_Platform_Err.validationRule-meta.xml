@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE05_Employee_Engagement_Platform_Err</fullName>
+    <active>false</active>
+    <description>PBI14190 - Make the selection of the type mandatory for any Opportunity record associated
+with the pricebook &quot;ERBE Merchant EKIVITA&quot; (if this pricebook is selected the type must be:
+&quot;Employee Engagement Platform&quot;.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; TEXT(ER_BU_Picklist__c) = &apos;BENELUX&apos;
+&amp;&amp; $RecordType.Name = &apos;Merchant Opportunity&apos;
+&amp;&amp; (UPPER(Pricebook2.Name) = &apos;ERBE MERCHANT EKIVITA&apos; &amp;&amp; NOT(ISPICKVAL(Type, &apos;Employee Engagement Platform&apos;)))</errorConditionFormula>
+    <errorMessage>VRBE05: If PriceBook EKIVITA is selected, the Opportunity type should be Employee Engagement Platform.</errorMessage>
+</ValidationRule>

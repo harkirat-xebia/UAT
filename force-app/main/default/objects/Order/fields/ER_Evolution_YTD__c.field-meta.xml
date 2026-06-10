@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Evolution_YTD__c</fullName>
+    <description>Difference in % between the IV generated during last year over the same period (Issued Volume YTD  N-1 ) and this year ‘s IV YTD</description>
+    <label>Evolution_YTD</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Global_Segmentation__c</fullName>
+    <label>Global Segmentation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>E-commerce</fullName>
+                <default>false</default>
+                <label>E-commerce</label>
+            </value>
+            <value>
+                <fullName>Food chains</fullName>
+                <default>false</default>
+                <label>Food chains</label>
+            </value>
+            <value>
+                <fullName>Fuel retailers</fullName>
+                <default>false</default>
+                <label>Fuel retailers</label>
+            </value>
+            <value>
+                <fullName>Large grocery retail</fullName>
+                <default>false</default>
+                <label>Large grocery retail</label>
+            </value>
+            <value>
+                <fullName>Market places (and-or aggregators)</fullName>
+                <default>false</default>
+                <label>Market places (and-or aggregators)</label>
+            </value>
+            <value>
+                <fullName>Non food Retail</fullName>
+                <default>false</default>
+                <label>Non food Retail</label>
+            </value>
+            <value>
+                <fullName>Non food services</fullName>
+                <default>false</default>
+                <label>Non food services</label>
+            </value>
+            <value>
+                <fullName>Oil Companies</fullName>
+                <default>false</default>
+                <label>Oil Companies</label>
+            </value>
+            <value>
+                <fullName>Other grocery retail</fullName>
+                <default>false</default>
+                <label>Other grocery retail</label>
+            </value>
+            <value>
+                <fullName>Others F&amp;M</fullName>
+                <default>false</default>
+                <label>Others F&amp;M</label>
+            </value>
+            <value>
+                <fullName>Repair workshops</fullName>
+                <default>false</default>
+                <label>Repair workshops</label>
+            </value>
+            <value>
+                <fullName>Restaurants</fullName>
+                <default>false</default>
+                <label>Restaurants</label>
+            </value>
+            <value>
+                <fullName>Toll operators</fullName>
+                <default>false</default>
+                <label>Toll operators</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

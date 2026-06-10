@@ -1,0 +1,155 @@
+<template>
+    <template if:true={quoteFound}>
+        <template if:true={formSubmitted}>
+            <div class="slds-text-heading_medium slds-p-around_medium slds-theme_success slds-box">
+                {labels.Success_Message}
+            </div>
+        </template>
+
+        <template if:false={formSubmitted}>
+            <template if:true={isLoading}>
+                <div class="slds-p-around_medium">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <template if:false={isLoading}>
+                <!-- Logo -->
+                <div class="slds-grid slds-m-bottom_medium">
+                    <img src={logoUrl} alt="Edenred Logo" style="height: 80px;" />
+                </div>
+
+                <!-- Accordion Sections -->
+                <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+
+                    <!-- Account Info -->
+                    <lightning-accordion-section name="account" label={labels.Client_Information}>
+                        <div class="slds-grid slds-wrap slds-gutters slds-p-around_medium slds-theme_default">
+                            <lightning-input disabled label={labels.Company_Name_And_Form} value={accountData.Name} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.BCE_KBO_Number} value={accountData.ER_Registration_Number__c} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.Street} value={accountData.BillingStreet} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.Postal_Code} value={accountData.BillingPostalCode} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.Municipality} value={accountData.BillingCity} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.Joint_Committee_Number} value={accountData.ERBE_Joint_Commissions__c} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input disabled label={labels.Federation} value={accountData.Federation__c} class="slds-col slds-size_1-of-2"></lightning-input>
+
+                            <template if:true={hasPayrollAgencyIsTrue}>
+                                <lightning-input disabled label={labels.Payroll_Agency} value={accountData.BE_Social_Secretary_Name__c} class="slds-col slds-size_1-of-2"></lightning-input>
+                                <lightning-radio-group disabled label={labels.Payroll_Handles_Orders} options={yesNoOptions} value={accountData.BE_Social_Secretary_orders__c} class="slds-col slds-size_1-of-2"></lightning-radio-group>
+                            </template>
+
+                            <lightning-radio-group disabled label={labels.Client_Type} options={clientTypeOptions} value={accountData.Client_Type_formula__c} class="slds-col slds-size_1-of-2"></lightning-radio-group>
+                            <lightning-radio-group disabled label={labels.Has_Payroll_Agency} options={yesNoOptions} value={accountData.ERBE_Has_a_Social_secretary__c} class="slds-col slds-size_1-of-2"></lightning-radio-group>
+                            <lightning-radio-group disabled label={labels.VAT_Number} options={yesNoOptions} value={accountData.ER_Not_subject_to_VAT__c} class="slds-col slds-size_1-of-2"></lightning-radio-group>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <!-- Contact Roles -->
+                    <lightning-accordion-section name="ocr" label={labels.Contact_Role}>
+                        <template for:each={ocrRoleList} for:item="ocr">
+                            <div key={ocr.role} class="slds-box slds-m-top_x-small slds-m-bottom_medium slds-theme_default slds-p-around_medium">
+                                <h3 class="slds-text-heading_small slds-m-bottom_small">{ocr.translatedRole}</h3>
+                                <div class="slds-grid slds-wrap slds-gutters">
+                                    <template if:true={ocr.readOnly}>
+                                        <lightning-input label={labels.Salutation} value={ocr.Salutation} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input label={labels.First_Name} value={ocr.FirstName} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input label={labels.Last_Name} value={ocr.LastName} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input label={labels.Email} value={ocr.Email} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input label={labels.Phone} value={ocr.Phone} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input label={labels.Language} value={ocr.ER_Language__c} disabled class="slds-col slds-size_1-of-2"></lightning-input>
+                                    </template>
+                                    <template if:false={ocr.readOnly}>
+                                        <lightning-combobox
+                                            required
+                                            label={labels.Salutation}
+                                            data-id="Salutation"
+                                            data-role={ocr.role}
+                                            data-section="ocr"
+                                            value={ocr.Salutation}
+                                            options={salutationOptions}
+                                            onchange={handleInput}
+                                            class="slds-col slds-size_1-of-2">
+                                        </lightning-combobox>
+                                        <lightning-input required data-id="FirstName" data-role={ocr.role} data-section="ocr" label={labels.First_Name} value={ocr.FirstName} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input required data-id="LastName" data-role={ocr.role} data-section="ocr" label={labels.Last_Name} value={ocr.LastName} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input required type="email" data-id="Email" data-role={ocr.role} data-section="ocr" label={labels.Email} value={ocr.Email} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-input required data-id="Phone" data-role={ocr.role} data-section="ocr" label={labels.Phone} value={ocr.Phone} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                                        <lightning-combobox
+                                            required
+                                            label={labels.Language}
+                                            data-id="ER_Language__c"
+                                            data-role={ocr.role}
+                                            data-section="ocr"
+                                            value={ocr.ER_Language__c}
+                                            options={languageOptions}
+                                            onchange={handleInput}
+                                            class="slds-col slds-size_1-of-2">
+                                        </lightning-combobox>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </lightning-accordion-section>
+
+                    <!-- Financial Center -->
+                    <lightning-accordion-section name="financial" label={labels.Financial_Center}>
+                        <div class="slds-theme_default slds-p-around_medium slds-grid slds-wrap slds-gutters">
+                            <lightning-input required={isFinancialCenterEditable} disabled={hasExistingFinancialCenter} data-id="ER_Invoicing_Street__c" data-section="financial" label={labels.Street} value={financialCenterData.ER_Invoicing_Street__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isFinancialCenterEditable} disabled={hasExistingFinancialCenter} data-id="ER_Invoicing_Zip_Code__c" data-section="financial" label={labels.Postal_Code} value={financialCenterData.ER_Invoicing_Zip_Code__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isFinancialCenterEditable} disabled={hasExistingFinancialCenter} data-id="ER_Invoicing_City__c" data-section="financial" label={labels.Municipality} value={financialCenterData.ER_Invoicing_City__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isFinancialCenterEditable} disabled={hasExistingFinancialCenter} data-id="ER_Email__c" data-section="financial" label={labels.Email} value={financialCenterData.ER_Email__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isFinancialCenterEditable} disabled={hasExistingFinancialCenter} data-id="ER_Invoicing_Country__c" data-section="financial" label={labels.Country} value={financialCenterData.ER_Invoicing_Country__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <!-- Delivery Site -->
+                    <lightning-accordion-section name="delivery" label={labels.Delivery_Site}>
+                        <div class="slds-theme_default slds-p-around_medium slds-grid slds-wrap slds-gutters">
+                            <lightning-input required={isDeliverySiteEditable} disabled={hasExistingDeliverySite} data-id="ER_Street__c" data-section="delivery" label={streetNumberLabel} value={deliverySiteData.ER_Street__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isDeliverySiteEditable} disabled={hasExistingDeliverySite} data-id="ER_Zip_Code__c" data-section="delivery" label={labels.Postal_Code} value={deliverySiteData.ER_Zip_Code__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isDeliverySiteEditable} disabled={hasExistingDeliverySite} data-id="ER_City__c" data-section="delivery" label={labels.Municipality} value={deliverySiteData.ER_City__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                            <lightning-input required={isDeliverySiteEditable} disabled={hasExistingDeliverySite} data-id="ER_Country__c" data-section="delivery" label={labels.Country} value={deliverySiteData.ER_Country__c} onchange={handleInput} class="slds-col slds-size_1-of-2"></lightning-input>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <!-- Quote Feedback -->
+                    <lightning-accordion-section name="feedback" label={labels.Quote_Feedback}>
+                        <div class="slds-theme_default slds-p-around_medium">
+                            <template if:true={labels.Quote_Feedback_Helptext}>
+                                <p class="slds-text-body_small slds-m-bottom_small">{labels.Quote_Feedback_Helptext}</p>
+                            </template>
+
+                            <lightning-textarea
+                                label={feedbackLabel}
+                                value={quoteFeedback}
+                                onchange={handleInput}
+                                data-section="feedback"
+                                disabled={feedbackReadOnly}
+                                class="slds-size_1-of-1"
+                                required={isFeedbackEditable}>
+                            </lightning-textarea>
+                        </div>
+                    </lightning-accordion-section>
+
+
+                </lightning-accordion>
+
+                <!-- Submit Button -->
+                <template if:true={showSubmitButton}>
+                    <div class="slds-p-around_medium slds-align_absolute-center">
+                        <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </template>
+
+    <!-- Quote Not Found -->
+    <template if:true={hasLoaded}>
+        <template if:false={quoteFound}>
+            <div class="slds-text-color_error slds-p-around_medium slds-theme_warning slds-box">
+                Quote not found or invalid quote ID.
+            </div>
+        </template>
+    </template>
+</template>

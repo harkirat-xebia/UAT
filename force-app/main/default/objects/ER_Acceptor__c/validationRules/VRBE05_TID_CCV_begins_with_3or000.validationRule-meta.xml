@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE05_TID_CCV_begins_with_3or000</fullName>
+    <active>true</active>
+    <description>CCV begins with 3 or 000</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;CCV&apos;)
+&amp;&amp; NOT(BEGINS(ER_TID_Authorization__c,&apos;3&apos;))
+&amp;&amp; NOT(BEGINS(ER_TID_Authorization__c,&apos;87&apos;))</errorConditionFormula>
+    <errorMessage>Operator Provider CCV needs to start with 3 or 87</errorMessage>
+</ValidationRule>

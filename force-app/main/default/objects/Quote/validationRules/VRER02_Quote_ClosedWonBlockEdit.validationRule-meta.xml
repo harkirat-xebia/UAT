@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Quote_ClosedWonBlockEdit</fullName>
+    <active>false</active>
+    <description>When stage is set to “Closed won”, the opportunity record and related quotes cannot be edited.</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c), 
+TEXT(Opportunity.StageName)=&apos;Closed won&apos;, 
+NOT( ISCHANGED( ContractId ) ) ,
+NOT(ISCHANGED( LastModifiedDate )) 
+)</errorConditionFormula>
+    <errorMessage>When stage is set to “Closed won”, the opportunity record and related quotes cannot be edited.</errorMessage>
+</ValidationRule>

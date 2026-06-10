@@ -1,0 +1,222 @@
+<template>
+  <c-er-portal-breadcrumbs rec-id={storeId} mode={mode} scope={scope}></c-er-portal-breadcrumbs>
+  <div class="form show-ease">
+    <div class="left-ribbon"></div>
+    <fieldset class="slds-form-element slds-form-element_compound">
+      <div class="row-spacing">
+        <hgroup class="show-ease">
+          <h3>
+            <lightning-formatted-text value={labels.lb_general_information}></lightning-formatted-text>
+          </h3>
+        </hgroup>
+        <div class="slds-box slds-theme_default form-block-border">
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="storeName"
+                input-label={labels.lb_name}
+                tool-tip-text={labels.lb_name_tooltip}
+                required="true"
+                value={storeInfos.name}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-picklist
+                property-name="storeStatus"
+                input-label={labels.lb_status}
+                value={storeInfos.status}
+                pk-entries={picklistGroup.storeStatus}
+                required="true"
+                display-cur-value="true"
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-picklist>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="street"
+                input-label={labels.lb_step1_street}
+                required="true"
+                value={storeInfos.street}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-input
+                property-name="city"
+                input-label={labels.lb_step1_city}
+                required="true"
+                value={storeInfos.city}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="postalCode"
+                input-label={labels.lb_step1_postal_code}
+                required="true"
+                value={storeInfos.postalCode}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-picklist
+                property-name="country"
+                input-label={labels.lb_step1_country}
+                value={storeInfos.country}
+                pk-entries={picklistGroup.country}
+                required="true"
+                display-cur-value="true"
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-picklist>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="facebook"
+                input-label={labels.lb_facebook}
+                value={storeInfos.facebook}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-input
+                property-name="website"
+                input-label={labels.lb_website}
+                value={storeInfos.website}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="phone"
+                place-holder-text={labels.lb_phone_place_holder}
+                input-label={labels.lb_step1_phone}
+                value={storeInfos.phone}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-input
+                property-name="email"
+                place-holder-text={labels.lb_email_place_holder}
+                input-label={labels.lb_step1_email}
+                value={storeInfos.email}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-spacing">
+        <hgroup class="show-ease">
+          <h3>
+            <lightning-formatted-text value={labels.lb_contact_person}></lightning-formatted-text>
+          </h3>
+        </hgroup>
+        <div class="slds-box slds-theme_default form-block-border">
+          <div class="slds-form-element__row slds-p-bottom_xxx-small">
+            <div class="field-check-form">
+              <c-er-portal-cbx
+                input-label={labels.lb_same_as_reimb_site}
+                data-group="refundCbx"
+                is-checked={useFCContact}
+                onchange={handleSameContactAsFC}
+              >
+              </c-er-portal-cbx>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form field-form-below-text slds-m-right_large">
+              <c-er-portal-input
+                property-name="contactFirstName"
+                place-holder-text={labels.lb_firstname_place_holder}
+                input-label={labels.lb_step1_firstname}
+                required="true"
+                value={storeInfos.firstName}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form field-form-below-text slds-m-left_large">
+              <c-er-portal-input
+                property-name="contactLastName"
+                place-holder-text={labels.lb_lastname_place_holder}
+                input-label={labels.lb_lastname}
+                required="true"
+                value={storeInfos.lastName}
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+            <div class="field-form slds-m-right_large">
+              <c-er-portal-input
+                property-name="contactEmail"
+                place-holder-text={labels.lb_email_place_holder}
+                input-label={labels.lb_step1_email}
+                value={storeInfos.ctcEmail}
+                required="true"
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_large">
+              <c-er-portal-input
+                property-name="contactPhone"
+                place-holder-text={labels.lb_phone_place_holder}
+                input-label={labels.lb_phone_nb}
+                value={storeInfos.ctcPhone}
+                required="true"
+                onchange={handleChangeValue}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <template if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+  </template>
+  <div class="slds-grid slds-gutters navigation-buttons">
+    <div class="slds-col">
+      <c-er-portal-button
+        id="cancelButtonDiv"
+        label={labels.lb_cancel}
+        size="big"
+        alignment="left"
+        onclick={editStoreInfoCancel}
+      >
+      </c-er-portal-button>
+      <c-er-portal-button
+        id="nextButtonDiv"
+        label={labels.lb_step1_save}
+        size="big"
+        alignment="right"
+        disabled={disableEditInfoSave}
+        onclick={editStoreInfoSave}
+      >
+      </c-er-portal-button>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFI01_MandatoryFields</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)&amp;&amp;
+ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)&amp;&amp;
+ISPICKVAL(ER_Preferred_Invoicing_Method__c, &apos;&apos;)</errorConditionFormula>
+    <errorDisplayField>ER_Preferred_Invoicing_Method__c</errorDisplayField>
+    <errorMessage>VRFI01 - Preferred Invoicing Method is mandatory</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE07_TID_EasyPayments_begins_with_two</fullName>
+    <active>true</active>
+    <description>Terminal ID of EasyPayments needs to start with 2</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Easy Payments&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;2&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+    <errorMessage>Terminal ID of Easy Payments needs to start with 2</errorMessage>
+</ValidationRule>

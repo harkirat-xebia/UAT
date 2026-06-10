@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Closure_Reason__c</fullName>
+    <label>Closure Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Transformation of Company - noticed by Merchant</fullName>
+                <default>false</default>
+                <label>Transformation of Company - noticed by Merchant</label>
+            </value>
+            <value>
+                <fullName>Termination of Merchant activities - no written notice</fullName>
+                <default>false</default>
+                <label>Termination of Merchant activities - no written notice</label>
+            </value>
+            <value>
+                <fullName>Termination of Merchant activities - noticed</fullName>
+                <default>false</default>
+                <label>Termination of Merchant activities - noticed</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - by Merchant</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - by Merchant</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - by ER</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - by ER</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - Legal reasons</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - Legal reasons</label>
+            </value>
+            <value>
+                <fullName>Doesn’t accept any Solution</fullName>
+                <default>false</default>
+                <label>Doesn’t accept any Solution</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

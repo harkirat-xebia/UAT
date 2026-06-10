@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Strength_Areas__c</fullName>
+    <description>What strength areas has the customer identified</description>
+    <label>Strength Areas</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Setup or Activation</fullName>
+                <default>false</default>
+                <label>Setup or Activation</label>
+            </value>
+            <value>
+                <fullName>Ordering</fullName>
+                <default>false</default>
+                <label>Ordering</label>
+            </value>
+            <value>
+                <fullName>Delivery or Loading of Cards</fullName>
+                <default>false</default>
+                <label>Delivery or Loading of Cards</label>
+            </value>
+            <value>
+                <fullName>Digital Tools Website or App</fullName>
+                <default>false</default>
+                <label>Digital Tools Website or App</label>
+            </value>
+            <value>
+                <fullName>Fees Reimbursements Exchange</fullName>
+                <default>false</default>
+                <label>Fees Reimbursements Exchange</label>
+            </value>
+            <value>
+                <fullName>Information Clarity or Transparency</fullName>
+                <default>false</default>
+                <label>Information Clarity or Transparency</label>
+            </value>
+            <value>
+                <fullName>Documents Delivery</fullName>
+                <default>false</default>
+                <label>Documents Delivery</label>
+            </value>
+            <value>
+                <fullName>Documents Accuracy</fullName>
+                <default>false</default>
+                <label>Documents Accuracy</label>
+            </value>
+            <value>
+                <fullName>Availability of Staff or Teams</fullName>
+                <default>false</default>
+                <label>Availability of Staff or Teams</label>
+            </value>
+            <value>
+                <fullName>Efficiency of Staff or Teams</fullName>
+                <default>false</default>
+                <label>Efficiency of Staff or Teams</label>
+            </value>
+            <value>
+                <fullName>Usability of the products</fullName>
+                <default>false</default>
+                <label>Usability of the products</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,198 @@
+<template>
+    <div class="slds-card">
+        <!-- Header with Summary -->
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:contract" size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_medium">Contract Activation Results</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            
+            <!-- Summary Section -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <!-- Total Contracts -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                        <div class="slds-box slds-text-align_center slds-theme_shade">
+                            <div class="slds-text-heading_large slds-text-color_default">{totalCount}</div>
+                            <div class="slds-text-body_small slds-text-color_weak">Total Contracts</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Successful -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                        <div class="slds-box slds-text-align_center" style="background-color: #d9f0d1;">
+                            <div class="slds-text-heading_large slds-text-color_success">{successCount}</div>
+                            <div class="slds-text-body_small slds-text-color_weak">Sync completed successfully. You can check the status on the Contract.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Failed -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                        <div class="slds-box slds-text-align_center" style="background-color: #feded8;">
+                            <div class="slds-text-heading_large slds-text-color_error">{failedCount}</div>
+                            <div class="slds-text-body_small slds-text-color_weak">Failed Validation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Table -->
+            <!-- <template if:true={hasSuccessfulContracts}>
+                <div class="slds-m-bottom_large">
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning-icon 
+                                        icon-name="utility:success" 
+                                        size="small" 
+                                        variant="success">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Successfully Queued for Activation ({successCount})</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <lightning-datatable
+                                key-field="contractId"
+                                data={successTableData}
+                                columns={successColumns}
+                                hide-checkbox-column
+                                show-row-number-column>
+                            </lightning-datatable>
+                        </div>
+                    </article>
+                </div>
+            </template> -->
+
+            <!-- Failed Contracts with Detailed Errors -->
+            <template if:true={hasFailedContracts}>
+                <div class="slds-m-bottom_medium">
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning-icon 
+                                        icon-name="utility:warning" 
+                                        size="small" 
+                                        variant="warning">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Failed Contracts ({failedCount})</span>
+                                    </h2>
+                                </div>
+                            </header>
+                            <div class="slds-no-flex">
+                                <lightning-button-icon
+                                    icon-name="utility:download"
+                                    alternative-text="Download Failed Contracts"
+                                    title="Download as CSV"
+                                    onclick={downloadFailedContracts}
+                                    variant="border-filled">
+                                </lightning-button-icon>
+                            </div>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <div class="slds-notify slds-notify_alert slds-alert_warning slds-m-bottom_small" role="alert">
+                                <span class="slds-assistive-text">warning</span>
+                                <h2>These contracts failed validation. Please review and fix the issues below.</h2>
+                            </div>
+                            
+                            <!-- Failed Contracts List with Expandable Errors -->
+                            <template for:each={failedTableData} for:item="contract">
+                                <div key={contract.contractId} class="slds-box slds-m-bottom_small">
+                                    <div class="slds-grid slds-grid_vertical-align-center">
+                                        <div class="slds-col slds-size_11-of-12">
+                                            <div class="slds-media">
+                                                <div class="slds-media__figure">
+                                                    <lightning-icon 
+                                                        icon-name="standard:contract" 
+                                                        size="small">
+                                                    </lightning-icon>
+                                                </div>
+                                                <div class="slds-media__body">
+                                                    <h3 class="slds-text-heading_small">
+                                                        <a href={contract.recordUrl} target="_blank">
+                                                            {contract.contractNumber}
+                                                        </a>
+                                                        <template if:true={contract.contractCategory}>
+                                                            <lightning-badge 
+                                                                label={contract.contractCategory} 
+                                                                class="slds-m-left_x-small">
+                                                            </lightning-badge>
+                                                        </template>
+                                                    </h3>
+                                                    <p class="slds-text-body_small slds-text-color_weak">
+                                                        Status: {contract.status}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-12 slds-text-align_right">
+                                            <lightning-button-icon
+                                                icon-name={contract.errorIconName}
+                                                alternative-text="Toggle Errors"
+                                                title="Toggle Errors"
+                                                onclick={toggleErrors}
+                                                data-id={contract.contractId}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Error Details (Expandable) -->
+                                    <template if:true={contract.showErrors}>
+                                        <div class="slds-m-top_small slds-p-around_small" style="background-color: #fef5f1; border-left: 3px solid #ea001e;">
+                                            <h4 class="slds-text-heading_x-small slds-m-bottom_x-small">
+                                                <lightning-icon 
+                                                    icon-name="utility:error" 
+                                                    size="xx-small" 
+                                                    variant="error"
+                                                    class="slds-m-right_xx-small">
+                                                </lightning-icon>
+                                                Validation Errors:
+                                            </h4>
+                                            <div class="slds-text-body_small">
+                                                <lightning-formatted-text value={contract.errorDetails}></lightning-formatted-text>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </article>
+                </div>
+            </template>
+
+            <!-- All Success Message -->
+            <template if:true={allSuccessful}>
+                <div class="slds-text-align_center slds-p-around_large">
+                    <lightning-icon 
+                        icon-name="utility:success" 
+                        size="large" 
+                        variant="success"
+                        class="slds-m-bottom_small">
+                    </lightning-icon>
+                    <p class="slds-text-heading_medium slds-text-color_success">
+                        All {totalCount} contract(s) validated and queued for activation successfully!
+                    </p>
+                </div>
+            </template>
+
+        </div>
+    </div>
+</template>

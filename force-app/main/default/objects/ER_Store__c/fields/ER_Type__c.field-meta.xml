@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bakery</fullName>
+                <default>false</default>
+                <label>Bakery</label>
+            </value>
+            <value>
+                <fullName>Food</fullName>
+                <default>false</default>
+                <label>Food</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Pizzeria</fullName>
+                <default>false</default>
+                <label>Pizzeria</label>
+            </value>
+            <value>
+                <fullName>Restaurant</fullName>
+                <default>false</default>
+                <label>Restaurant</label>
+            </value>
+            <value>
+                <fullName>Snack</fullName>
+                <default>false</default>
+                <label>Snack</label>
+            </value>
+            <value>
+                <fullName>Hypermarket</fullName>
+                <default>false</default>
+                <label>Hypermarket</label>
+            </value>
+            <value>
+                <fullName>Supermarket</fullName>
+                <default>false</default>
+                <label>Supermarket</label>
+            </value>
+            <value>
+                <fullName>Convenience stores</fullName>
+                <default>false</default>
+                <label>Convenience stores</label>
+            </value>
+            <value>
+                <fullName>Fast food</fullName>
+                <default>false</default>
+                <label>Fast food</label>
+            </value>
+            <value>
+                <fullName>Cantine</fullName>
+                <default>false</default>
+                <label>Cantine</label>
+            </value>
+            <value>
+                <fullName>Gas stations</fullName>
+                <default>false</default>
+                <label>Gas stations</label>
+            </value>
+            <value>
+                <fullName>Grocery</fullName>
+                <default>false</default>
+                <label>Grocery</label>
+            </value>
+            <value>
+                <fullName>Discounter</fullName>
+                <default>false</default>
+                <label>Discounter</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_DeliverCenterOnlyClientFCenter</fullName>
+    <active>true</active>
+    <description>Delivery Site can only be created on Client Financial Center</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c), 
+TEXT(ER_Financial_Center__r.ER_Type__c) = &quot;Merchant&quot; 
+)</errorConditionFormula>
+    <errorMessage>Delivery Site can only be created on Client Financial Center</errorMessage>
+</ValidationRule>

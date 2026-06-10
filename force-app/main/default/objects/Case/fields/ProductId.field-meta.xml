@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductId</fullName>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$User.ER_Business_Unit__c</field>
+            <operation>equals</operation>
+            <valueField>Product2.ER_Business_Unit__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Product2.ER_Type__c</field>
+            <operation>equals</operation>
+            <value>Solution</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

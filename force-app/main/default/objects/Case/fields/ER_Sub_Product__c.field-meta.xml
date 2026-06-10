@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Sub_Product__c</fullName>
+    <label>Sub Product</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>H24</fullName>
+                <default>false</default>
+                <label>H24</label>
+            </value>
+            <value>
+                <fullName>Ticket Gasolina Solred</fullName>
+                <default>false</default>
+                <label>Ticket Gasolina Solred</label>
+            </value>
+            <value>
+                <fullName>Ticket Regalo Premium</fullName>
+                <default>false</default>
+                <label>Ticket Regalo Premium</label>
+            </value>
+            <value>
+                <fullName>Ticket Regalo Seleccion</fullName>
+                <default>false</default>
+                <label>Ticket Regalo Seleccion</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>zqu__Allow_Feature_Changes__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Specify if features in the product can be changed when creating QuoteProductFeatures</description>
+    <inlineHelpText>If features in the product can be changed when creating QuoteProductFeatures</inlineHelpText>
+    <label>Allow Feature Changes</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

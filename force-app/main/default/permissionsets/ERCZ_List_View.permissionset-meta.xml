@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>APER08_Case_Management</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>APER08_Case_Management_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Provide access for Sharing List Views</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ERCZ List View</label>
+    <license>Salesforce</license>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateCustomizeFilters</name>
+    </userPermissions>
+</PermissionSet>

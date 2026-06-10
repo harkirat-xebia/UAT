@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFR02_Valid_VATNumber</fullName>
+    <active>true</active>
+    <description>Validation rule created for respecting the required format for the field ER_VAT_Number__c.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ER_SmartER_Context__c= True 
+            &amp;&amp; NOT(ISBLANK(ER_VAT_Number__c))
+            &amp;&amp; ISPICKVAL( ER_Country_Code__c , &apos;FR&apos;) 
+            &amp;&amp; NOT(
+            REGEX( ER_VAT_Number__c, &quot;[0-9]{11}&quot;) ||
+            REGEX( ER_VAT_Number__c, &quot;[^IO]{1}[0-9]{10}&quot;) ||
+            REGEX( ER_VAT_Number__c, &quot;[^IO]{2}[0-9]{9}&quot;) ||
+            REGEX( ER_VAT_Number__c, &quot;FR[0-9A-Z]{2}[0-9]{9}&quot;) ||
+            REGEX( ER_VAT_Number__c, &quot;[0-9]{1}[^IO]{1}[0-9]{9}&quot;)
+            )</errorConditionFormula>
+    <errorDisplayField>ER_VAT_Number__c</errorDisplayField>
+    <errorMessage>The VAT field must have the following structure “FR + 2 check digits + 9 digits”</errorMessage>
+</ValidationRule>

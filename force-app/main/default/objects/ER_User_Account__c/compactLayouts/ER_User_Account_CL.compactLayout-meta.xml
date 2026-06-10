@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_User_Account_CL</fullName>
+    <fields>Name</fields>
+    <fields>Status__c</fields>
+    <fields>ER_User_Identity_Id__c</fields>
+    <fields>EdenredPlus__c</fields>
+    <fields>ER_BUPicklist__c</fields>
+    <label>User Account CL</label>
+</CompactLayout>

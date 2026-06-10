@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_lead_providers__c</fullName>
+    <label>Product</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Meal Belgium (TRE)</fullName>
+                <default>false</default>
+                <label>Meal Belgium (TRE)</label>
+            </value>
+            <value>
+                <fullName>Gift Belgium (TCE)</fullName>
+                <default>false</default>
+                <label>Gift Belgium (TCE)</label>
+            </value>
+            <value>
+                <fullName>Sport and Culture Belgium (SCE)</fullName>
+                <default>false</default>
+                <label>Sport and Culture Belgium (SCE)</label>
+            </value>
+            <value>
+                <fullName>Eco Belgium (ECE)</fullName>
+                <default>false</default>
+                <label>Eco Belgium (ECE)</label>
+            </value>
+            <value>
+                <fullName>Meal Luxemburg (TRL)</fullName>
+                <default>false</default>
+                <label>Meal Luxemburg (TRL)</label>
+            </value>
+            <value>
+                <fullName>Gift Luxemburg (TCL)</fullName>
+                <default>false</default>
+                <label>Gift Luxemburg (TCL)</label>
+            </value>
+            <value>
+                <fullName>Meal Belgium (TRE);Meal Belgium (TRE)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Meal Belgium (TRE);Meal Belgium (TRE)</label>
+            </value>
+            <value>
+                <fullName>TRE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>TRE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

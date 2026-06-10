@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_UseContactFromSameAccount</fullName>
+    <active>false</active>
+    <description>Validation rule to block the quote from having a contact different from account to which the quote belongs</description>
+    <errorConditionFormula>AND(
+				!$User.ER_BypassVR__c,
+            Contact.AccountId != Null,
+    NOT(
+								OR(
+				        Contact.AccountId = Opportunity.AccountId,
+            Contact.AccountId = Opportunity.Account.ParentId,
+            Contact.AccountId = Opportunity.Account.Parent.ParentId
+								)
+    )
+)</errorConditionFormula>
+    <errorDisplayField>ContactId</errorDisplayField>
+    <errorMessage>Please choose a  Contact that belongs to the same Account or Account hierarchy</errorMessage>
+</ValidationRule>

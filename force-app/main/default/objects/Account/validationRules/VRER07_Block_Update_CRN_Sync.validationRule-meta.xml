@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Block_Update_CRN_Sync</fullName>
+    <active>true</active>
+    <description>VRER07 - Company Registration Number cannot be modified when the account is synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+                    &amp;&amp; NOT(ISNEW())
+                    &amp;&amp; NOT(ISPICKVAL(ER_BUPicklist__c, &quot;ES&quot;))
+                    &amp;&amp; ISCHANGED(ER_Registration_Number__c)
+                    &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_Registration_Number__c</errorDisplayField>
+    <errorMessage>VRER07 - The company registration number cannot be modified when the account is synchronized</errorMessage>
+</ValidationRule>

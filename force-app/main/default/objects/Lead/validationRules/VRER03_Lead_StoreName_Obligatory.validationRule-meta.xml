@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER03_Lead_StoreName_Obligatory</fullName>
+    <active>true</active>
+    <description>Information about Store Name is obligatory for the Led Channel = Unmatched, User, Client</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; RecordType.DeveloperName = &quot;ER_Merchant_Lead_RT&quot;
+            &amp;&amp; ISBLANK (ER_Store_Name__c)
+            &amp;&amp; NOT(ISPICKVAL(ER_Lead_Channel__c, &quot;Merchant&quot;))
+            &amp;&amp; TEXT(Status) = $Label.LABS_SF_Lead_Status_Qualification</errorConditionFormula>
+    <errorDisplayField>ER_Store_Name__c</errorDisplayField>
+    <errorMessage>VRER03 - The field Store Name must be filled in order to register the Lead</errorMessage>
+</ValidationRule>

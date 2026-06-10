@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER10_Email_OR_PhoneNumber_required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ISPICKVAL(Status,&quot;Qualified&quot;),
+AND(
+Email == null,
+AND (Phone == null, MobilePhone == null)
+))</errorConditionFormula>
+    <errorMessage>E-mail or Phone/Mobile phone number must be filled in order to convert the Lead</errorMessage>
+</ValidationRule>

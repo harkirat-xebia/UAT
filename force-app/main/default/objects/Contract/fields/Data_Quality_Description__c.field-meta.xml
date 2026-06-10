@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Quality_Description__c</fullName>
+    <externalId>false</externalId>
+    <formula>/*IF( Data_Quality_Score__c =100,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;IF( LEN( TEXT(MONTH( StartDate ))) = 0, &quot;Contract Start Date, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF(LEN(  TEXT(ContractTerm)) = 0, &quot;Contract Term, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF( LEN( BillingCity ) = 0, &quot;Complete Contract Address, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF(LEN( CustomerSignedId ) = 0, &quot;Customer Signature, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF( ISPICKVAL(  OwnerExpirationNotice ,&quot;&quot;), &quot;Owner Expiration Notice&quot;,&quot;&quot;))*/
+
+            IF( RecordType.DeveloperName=&quot;ER_Client_Contract_RT&quot;,
+
+            IF( Data_Quality_Score__c&gt;98,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;
+            IF(LEN(CustomerSignedId)=0,&quot;Customer Signed By,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),&quot;Account not active and no contract end date,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;),LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),&quot;Operational System ID missing and no synchronization,&quot;,&quot;&quot;)
+            &amp;IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;)),&quot;Inv. Freq. or payment term,&quot;,&quot;&quot;)
+            &amp;IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),&quot;Payment Method,&quot;,&quot;&quot;)
+            )
+
+            ,
+            IF( Data_Quality_Score__c&gt;98,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;
+            IF(LEN(CustomerSignedId)=0,&quot;Customer Signed By,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),&quot;Account not active and no contract end date,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;),LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),&quot;Operational System ID missing and no synchronization,&quot;,&quot;&quot;)
+            &amp;IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;),ISPICKVAL(ER_ReimbursementTerm2__c,&quot;&quot;)),&quot;Inv. Freq., Reimb. or payment term,&quot;,&quot;&quot;)
+            &amp;IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),&quot;Payment Method,&quot;,&quot;&quot;)
+            )
+
+            )</formula>
+    <label>Data Quality Description</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

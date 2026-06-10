@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BE_Bank_Account__c</fullName>
+    <description>Master-Detail to Bank Account</description>
+    <label>Bank Account</label>
+    <referenceTo>ER_Bank_Account__c</referenceTo>
+    <relationshipLabel>Financial Centers</relationshipLabel>
+    <relationshipName>Financial_Center_Bank_Accounts</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

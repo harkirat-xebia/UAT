@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor_Model__c</fullName>
+    <label>Acceptor Model</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_Acceptor_Provider__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>8000</fullName>
+                <default>false</default>
+                <label>8000</label>
+            </value>
+            <value>
+                <fullName>8210</fullName>
+                <default>false</default>
+                <label>8210</label>
+            </value>
+            <value>
+                <fullName>CZAM/XENTA-M1</fullName>
+                <default>false</default>
+                <label>CZAM/XENTA-M1</label>
+            </value>
+            <value>
+                <fullName>CZAM/XENTA-M2</fullName>
+                <default>false</default>
+                <label>CZAM/XENTA-M2</label>
+            </value>
+            <value>
+                <fullName>E 265</fullName>
+                <default>false</default>
+                <label>E 265</label>
+            </value>
+            <value>
+                <fullName>INGENICO Desk</fullName>
+                <default>false</default>
+                <label>INGENICO Desk</label>
+            </value>
+            <value>
+                <fullName>INGENICO ICT 220</fullName>
+                <default>false</default>
+                <label>INGENICO ICT 220</label>
+            </value>
+            <value>
+                <fullName>INGENICO ICT220 (inactive value)</fullName>
+                <default>false</default>
+                <label>INGENICO ICT220 (inactive value)</label>
+            </value>
+            <value>
+                <fullName>INGENICO ICT 250</fullName>
+                <default>false</default>
+                <label>INGENICO ICT 250</label>
+            </value>
+            <value>
+                <fullName>INGENICO IPP 310</fullName>
+                <default>false</default>
+                <label>INGENICO IPP 310</label>
+            </value>
+            <value>
+                <fullName>INGENICO IPP310 (inactive value)</fullName>
+                <default>false</default>
+                <label>INGENICO IPP310 (inactive value)</label>
+            </value>
+            <value>
+                <fullName>INGENICO IPP 350</fullName>
+                <default>false</default>
+                <label>INGENICO IPP 350</label>
+            </value>
+            <value>
+                <fullName>INGENICO IUP 250</fullName>
+                <default>false</default>
+                <label>INGENICO IUP 250</label>
+            </value>
+            <value>
+                <fullName>INGENICO IWL 250</fullName>
+                <default>false</default>
+                <label>INGENICO IWL 250</label>
+            </value>
+            <value>
+                <fullName>INGENICO Move 500</fullName>
+                <default>false</default>
+                <label>INGENICO Move 500</label>
+            </value>
+            <value>
+                <fullName>LAN 500</fullName>
+                <default>false</default>
+                <label>LAN 500</label>
+            </value>
+            <value>
+                <fullName>OPTIMUM M4320</fullName>
+                <default>false</default>
+                <label>OPTIMUM M4320</label>
+            </value>
+            <value>
+                <fullName>OPTIMUM SERIES</fullName>
+                <default>false</default>
+                <label>OPTIMUM SERIES</label>
+            </value>
+            <value>
+                <fullName>OPTIMUM T4220</fullName>
+                <default>false</default>
+                <label>OPTIMUM T4220</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>PAX_A80</fullName>
+                <default>false</default>
+                <label>PAX_A80</label>
+            </value>
+            <value>
+                <fullName>PAX_A920_PRO</fullName>
+                <default>false</default>
+                <label>PAX_A920_PRO</label>
+            </value>
+            <value>
+                <fullName>PAX A910</fullName>
+                <default>false</default>
+                <label>PAX A910</label>
+            </value>
+            <value>
+                <fullName>PAY4YOU GPRS</fullName>
+                <default>false</default>
+                <label>PAY4YOU GPRS</label>
+            </value>
+            <value>
+                <fullName>S800</fullName>
+                <default>false</default>
+                <label>S800</label>
+            </value>
+            <value>
+                <fullName>S900</fullName>
+                <default>false</default>
+                <label>S900</label>
+            </value>
+            <value>
+                <fullName>S920</fullName>
+                <default>false</default>
+                <label>S920</label>
+            </value>
+            <value>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+                <label>SUM UP</label>
+            </value>
+            <value>
+                <fullName>VX 520</fullName>
+                <default>false</default>
+                <label>VX 520</label>
+            </value>
+            <value>
+                <fullName>VX 570</fullName>
+                <default>false</default>
+                <label>VX 570</label>
+            </value>
+            <value>
+                <fullName>VX 680</fullName>
+                <default>false</default>
+                <label>VX 680</label>
+            </value>
+            <value>
+                <fullName>VX 820</fullName>
+                <default>false</default>
+                <label>VX 820</label>
+            </value>
+            <value>
+                <fullName>XENGO</fullName>
+                <default>false</default>
+                <label>XENGO</label>
+            </value>
+            <value>
+                <fullName>XENTEO</fullName>
+                <default>false</default>
+                <label>XENTEO</label>
+            </value>
+            <value>
+                <fullName>XENTIM</fullName>
+                <default>false</default>
+                <label>XENTIM</label>
+            </value>
+            <value>
+                <fullName>XENTISSIMO</fullName>
+                <default>false</default>
+                <label>XENTISSIMO</label>
+            </value>
+            <value>
+                <fullName>Yomani</fullName>
+                <default>false</default>
+                <label>Yomani</label>
+            </value>
+            <value>
+                <fullName>YOMANI PTI</fullName>
+                <default>false</default>
+                <label>YOMANI PTI</label>
+            </value>
+            <value>
+                <fullName>YOMANI Retail M1</fullName>
+                <default>false</default>
+                <label>YOMANI Retail M1</label>
+            </value>
+            <value>
+                <fullName>YOMANI Retail M2</fullName>
+                <default>false</default>
+                <label>YOMANI Retail M2</label>
+            </value>
+            <value>
+                <fullName>YOMOVA</fullName>
+                <default>false</default>
+                <label>YOMOVA</label>
+            </value>
+            <value>
+                <fullName>YONEO</fullName>
+                <default>false</default>
+                <label>YONEO</label>
+            </value>
+            <value>
+                <fullName>YOXIMO</fullName>
+                <default>false</default>
+                <label>YOXIMO</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Six Payment - Carrefour</controllingFieldValue>
+            <controllingFieldValue>Six Payment</controllingFieldValue>
+            <valueName>LAN 500</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment - Carrefour</controllingFieldValue>
+            <controllingFieldValue>Six Payment</controllingFieldValue>
+            <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+            <controllingFieldValue>SUM UP</controllingFieldValue>
+            <controllingFieldValue>Worldline - NL</controllingFieldValue>
+            <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+            <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+            <controllingFieldValue>Keyware</controllingFieldValue>
+            <controllingFieldValue>Loyaltek</controllingFieldValue>
+            <controllingFieldValue>Nepting</controllingFieldValue>
+            <controllingFieldValue>Payleven</controllingFieldValue>
+            <controllingFieldValue>Adyen</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+            <controllingFieldValue>Bevo</controllingFieldValue>
+            <controllingFieldValue>CCV</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <controllingFieldValue>Easy Payments</controllingFieldValue>
+            <controllingFieldValue>Payworld</controllingFieldValue>
+            <controllingFieldValue>Sepay</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment</controllingFieldValue>
+            <valueName>Yomani</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment</controllingFieldValue>
+            <controllingFieldValue>Keyware</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YOXIMO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+            <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+            <controllingFieldValue>Keyware</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <valueName>INGENICO ICT 220</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+            <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+            <controllingFieldValue>Keyware</controllingFieldValue>
+            <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <valueName>INGENICO ICT 250</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+            <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+            <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <valueName>INGENICO IPP 310</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SUM UP</controllingFieldValue>
+            <valueName>SUM UP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Viva Wallet</controllingFieldValue>
+            <valueName>PAX A910</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+            <valueName>OPTIMUM M4320</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+            <valueName>OPTIMUM T4220</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+            <controllingFieldValue>CCV</controllingFieldValue>
+            <valueName>VX 680</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+            <controllingFieldValue>CCV</controllingFieldValue>
+            <valueName>VX 820</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <valueName>INGENICO IWL 250</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Keyware</controllingFieldValue>
+            <valueName>VX 570</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Loyaltek</controllingFieldValue>
+            <controllingFieldValue>Easy Payments</controllingFieldValue>
+            <valueName>8000</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Loyaltek</controllingFieldValue>
+            <valueName>8210</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nepting</controllingFieldValue>
+            <valueName>PAX_A80</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nepting</controllingFieldValue>
+            <valueName>PAX_A920_PRO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>N-TS</controllingFieldValue>
+            <valueName>INGENICO IPP 350</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment Consulting</controllingFieldValue>
+            <valueName>INGENICO Desk</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment Consulting</controllingFieldValue>
+            <valueName>INGENICO Move 500</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>CZAM/XENTA-M1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>CZAM/XENTA-M2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>XENGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>XENTEO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>XENTIM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>XENTISSIMO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YOMANI PTI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YOMANI Retail M1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YOMANI Retail M2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YOMOVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+            <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+            <valueName>YONEO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+            <controllingFieldValue>Chess</controllingFieldValue>
+            <valueName>INGENICO IUP 250</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bevo</controllingFieldValue>
+            <valueName>OPTIMUM SERIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CCV</controllingFieldValue>
+            <valueName>E 265</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CCV</controllingFieldValue>
+            <valueName>VX 520</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Easy Payments</controllingFieldValue>
+            <controllingFieldValue>Sepay</controllingFieldValue>
+            <valueName>PAY4YOU GPRS</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

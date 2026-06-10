@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Check_Max_Greater_Than_Min</fullName>
+    <active>true</active>
+    <description>The range max should be greater than the min</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(Product2.ER_Type__c, &quot;Range&quot;)
+&amp;&amp; ER_Max__c &lt; ER_Min__c</errorConditionFormula>
+    <errorMessage>VRER05 - The Range Min should be greater than the Min</errorMessage>
+</ValidationRule>

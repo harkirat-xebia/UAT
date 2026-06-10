@@ -1,0 +1,18 @@
+<template>
+  <div class="slds-form-element">
+    <div class="slds-form-element__control">
+      <label class="option">
+        <span class={labelClass}>{optionText}</span>
+        <template if:true={hasTooltip}>
+          <lightning-helptext content={toolTipText} class="er-tooltip"></lightning-helptext>
+        </template>
+      </label>
+      <template if:true={showOptions}>
+        <div class="button-group">
+          <button value="true" class={btnClassChoice1} onclick={handleClick}>{choice1Label}</button>
+          <button value="false" class={btnClassChoice2} onclick={handleClick}>{choice2Label}</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

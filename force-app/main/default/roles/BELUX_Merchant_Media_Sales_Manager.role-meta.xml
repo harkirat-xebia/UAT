@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Read</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>BELUX Merchant Media Sales Manager</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>BELUX Merchant Media Sales Manager</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>BELUX_Sales_Director</parentRole>
+</Role>

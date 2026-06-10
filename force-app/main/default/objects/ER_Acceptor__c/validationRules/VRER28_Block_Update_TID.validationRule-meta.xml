@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER28_Block_Update_TID</fullName>
+    <active>true</active>
+    <description>VRER28 - TID Authorization  cannot be modified</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;WEBAuth&apos;)
+&amp;&amp; ISCHANGED(ER_TID_Authorization__c)</errorConditionFormula>
+    <errorDisplayField>ER_TID_Authorization__c</errorDisplayField>
+    <errorMessage>VRER28 - TID Authorization  cannot be modified</errorMessage>
+</ValidationRule>

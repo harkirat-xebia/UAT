@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER001_Employee_FullName</fullName>
+    <active>true</active>
+    <description>Employee Full Name can&apos;t be modify</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRER001_Employee_FullName__c = false
+            &amp;&amp; ISCHANGED(Name)</errorConditionFormula>
+    <errorMessage>You are not able to modify this value</errorMessage>
+</ValidationRule>

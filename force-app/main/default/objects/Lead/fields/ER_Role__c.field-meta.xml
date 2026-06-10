@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Role__c</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <label>Role</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Autre</fullName>
+                <default>false</default>
+                <label>Autre</label>
+            </value>
+            <value>
+                <fullName>F - Facturation</fullName>
+                <default>false</default>
+                <label>F - Facturation</label>
+            </value>
+            <value>
+                <fullName>R - Relation</fullName>
+                <default>false</default>
+                <label>R - Relation</label>
+            </value>
+            <value>
+                <fullName>U - Utilisateur</fullName>
+                <default>false</default>
+                <label>U - Utilisateur</label>
+            </value>
+            <value>
+                <fullName>Order Contact</fullName>
+                <default>false</default>
+                <label>Order Contact</label>
+            </value>
+            <value>
+                <fullName>Primary Contact</fullName>
+                <default>false</default>
+                <label>Primary Contact</label>
+            </value>
+            <value>
+                <fullName>Invoice Site Contact</fullName>
+                <default>false</default>
+                <label>Invoice Site Contact</label>
+            </value>
+            <value>
+                <fullName>Payment Site Contact</fullName>
+                <default>false</default>
+                <label>Payment Site Contact</label>
+            </value>
+            <value>
+                <fullName>Direction</fullName>
+                <default>false</default>
+                <label>Direction</label>
+            </value>
+            <value>
+                <fullName>Gestion</fullName>
+                <default>false</default>
+                <label>Gestion</label>
+            </value>
+            <value>
+                <fullName>Outlet Contact</fullName>
+                <default>false</default>
+                <label>Outlet Contact</label>
+            </value>
+            <value>
+                <fullName>HR manager</fullName>
+                <default>false</default>
+                <label>HR manager</label>
+            </value>
+            <value>
+                <fullName>Owner</fullName>
+                <default>false</default>
+                <label>Owner</label>
+            </value>
+            <value>
+                <fullName>Assistant</fullName>
+                <default>false</default>
+                <label>Assistant</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Manager</fullName>
+                <default>false</default>
+                <label>Manager</label>
+            </value>
+            <value>
+                <fullName>Accountant</fullName>
+                <default>false</default>
+                <label>Accountant</label>
+            </value>
+            <value>
+                <fullName>Purchasing Manager</fullName>
+                <default>false</default>
+                <label>Purchasing Manager</label>
+            </value>
+            <value>
+                <fullName>Administrator</fullName>
+                <default>false</default>
+                <label>Administrator</label>
+            </value>
+            <value>
+                <fullName>Management assistant</fullName>
+                <default>false</default>
+                <label>Management assistant</label>
+            </value>
+            <value>
+                <fullName>Administrative employee</fullName>
+                <default>false</default>
+                <label>Administrative employee</label>
+            </value>
+            <value>
+                <fullName>HR Director</fullName>
+                <default>false</default>
+                <label>HR Director</label>
+            </value>
+            <value>
+                <fullName>CFO</fullName>
+                <default>false</default>
+                <label>CFO</label>
+            </value>
+            <value>
+                <fullName>Treasurer</fullName>
+                <default>false</default>
+                <label>Treasurer</label>
+            </value>
+            <value>
+                <fullName>Independant administrator</fullName>
+                <default>false</default>
+                <label>Independant administrator</label>
+            </value>
+            <value>
+                <fullName>Sales representative</fullName>
+                <default>false</default>
+                <label>Sales representative</label>
+            </value>
+            <value>
+                <fullName>Policy officer</fullName>
+                <default>false</default>
+                <label>Policy officer</label>
+            </value>
+            <value>
+                <fullName>Product manager</fullName>
+                <default>false</default>
+                <label>Product manager</label>
+            </value>
+            <value>
+                <fullName>Project manager</fullName>
+                <default>false</default>
+                <label>Project manager</label>
+            </value>
+            <value>
+                <fullName>Head of Department</fullName>
+                <default>false</default>
+                <label>Head of Department</label>
+            </value>
+            <value>
+                <fullName>Head of school</fullName>
+                <default>false</default>
+                <label>Head of school</label>
+            </value>
+            <value>
+                <fullName>Comptable</fullName>
+                <default>false</default>
+                <label>Comptable</label>
+            </value>
+            <value>
+                <fullName>Departmental councillor</fullName>
+                <default>false</default>
+                <label>Departmental councillor</label>
+            </value>
+            <value>
+                <fullName>Municipal council</fullName>
+                <default>false</default>
+                <label>Municipal council</label>
+            </value>
+            <value>
+                <fullName>Regional Councillor</fullName>
+                <default>false</default>
+                <label>Regional Councillor</label>
+            </value>
+            <value>
+                <fullName>DGA</fullName>
+                <default>false</default>
+                <label>DGA</label>
+            </value>
+            <value>
+                <fullName>DGS</fullName>
+                <default>false</default>
+                <label>DGS</label>
+            </value>
+            <value>
+                <fullName>Director</fullName>
+                <default>false</default>
+                <label>Director</label>
+            </value>
+            <value>
+                <fullName>Deputy director</fullName>
+                <default>false</default>
+                <label>Deputy director</label>
+            </value>
+            <value>
+                <fullName>Elected representative</fullName>
+                <default>false</default>
+                <label>Elected representative</label>
+            </value>
+            <value>
+                <fullName>Mayor</fullName>
+                <default>false</default>
+                <label>Mayor</label>
+            </value>
+            <value>
+                <fullName>Deputy mayor</fullName>
+                <default>false</default>
+                <label>Deputy mayor</label>
+            </value>
+            <value>
+                <fullName>Chairman</fullName>
+                <default>false</default>
+                <label>Chairman</label>
+            </value>
+            <value>
+                <fullName>Liberal profession</fullName>
+                <default>false</default>
+                <label>Liberal profession</label>
+            </value>
+            <value>
+                <fullName>Person in charge</fullName>
+                <default>false</default>
+                <label>Person in charge</label>
+            </value>
+            <value>
+                <fullName>Sales Manager</fullName>
+                <default>false</default>
+                <label>Sales Manager</label>
+            </value>
+            <value>
+                <fullName>Secretary</fullName>
+                <default>false</default>
+                <label>Secretary</label>
+            </value>
+            <value>
+                <fullName>Chief administrative</fullName>
+                <default>false</default>
+                <label>Chief administrative</label>
+            </value>
+            <value>
+                <fullName>Vice-president</fullName>
+                <default>false</default>
+                <label>Vice-president</label>
+            </value>
+            <value>
+                <fullName>Decision Maker</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Decision Maker</label>
+            </value>
+            <value>
+                <fullName>Decision Preparator</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Decision Preparator</label>
+            </value>
+            <value>
+                <fullName>Middle Management</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Middle Management</label>
+            </value>
+            <value>
+                <fullName>Top Management</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Top Management</label>
+            </value>
+            <value>
+                <fullName>Vice-Président</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Vice-Président</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Autre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>F - Facturation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>R - Relation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>U - Utilisateur</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Order Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Primary Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Invoice Site Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Payment Site Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Direction</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Gestion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Outlet Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>HR manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Owner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Assistant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Accountant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Purchasing Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Management assistant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Administrative employee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>HR Director</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>CFO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Treasurer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Independant administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Sales representative</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Policy officer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Product manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Project manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Head of Department</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Head of school</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Comptable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Departmental councillor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Municipal council</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Regional Councillor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>DGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>DGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Director</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Deputy director</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Elected representative</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Mayor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Deputy mayor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Chairman</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Liberal profession</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Person in charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Sales Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Secretary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Chief administrative</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Vice-president</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

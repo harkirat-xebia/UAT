@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRGR02_MANDATORY_FILEDS</fullName>
+    <active>true</active>
+    <description>COUL-4109 : Make fields mandatory : User, Priority, Role.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL( ER_Account__r.ER_BUPicklist__c , &apos;GR&apos;)
+&amp;&amp; (
+      ISBLANK(ER_User__c)
+    || ISBLANK(ER_Priority__c)
+    || ISBLANK(TEXT(ER_Role__c))
+
+)</errorConditionFormula>
+    <errorMessage>User, priority and role fields are mandatory</errorMessage>
+</ValidationRule>

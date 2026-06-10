@@ -1,0 +1,1443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_CaseReason2__c</fullName>
+    <label>Case Detailed Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_Reason__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Asset not received</fullName>
+                <default>false</default>
+                <label>Asset not received</label>
+            </value>
+            <value>
+                <fullName>Balance enquiry</fullName>
+                <default>false</default>
+                <label>Balance enquiry</label>
+            </value>
+            <value>
+                <fullName>Transaction enquiry</fullName>
+                <default>false</default>
+                <label>Transaction enquiry</label>
+            </value>
+            <value>
+                <fullName>Mobile App</fullName>
+                <default>false</default>
+                <label>Mobile App</label>
+            </value>
+            <value>
+                <fullName>Payment Topics</fullName>
+                <default>false</default>
+                <label>Payment Topics</label>
+            </value>
+            <value>
+                <fullName>Product</fullName>
+                <default>false</default>
+                <label>Product</label>
+            </value>
+            <value>
+                <fullName>Bank account modification</fullName>
+                <default>false</default>
+                <label>Bank account modification</label>
+            </value>
+            <value>
+                <fullName>Bankruptcy</fullName>
+                <default>false</default>
+                <label>Bankruptcy</label>
+            </value>
+            <value>
+                <fullName>Financial Topic</fullName>
+                <default>false</default>
+                <label>Financial Topic</label>
+            </value>
+            <value>
+                <fullName>Copy of contract</fullName>
+                <default>false</default>
+                <label>Copy of contract</label>
+            </value>
+            <value>
+                <fullName>Company change</fullName>
+                <default>false</default>
+                <label>Company change</label>
+            </value>
+            <value>
+                <fullName>Card acceptance issue</fullName>
+                <default>false</default>
+                <label>Card acceptance issue</label>
+            </value>
+            <value>
+                <fullName>Store locator</fullName>
+                <default>false</default>
+                <label>Store locator</label>
+            </value>
+            <value>
+                <fullName>Collection</fullName>
+                <default>false</default>
+                <label>Collection</label>
+            </value>
+            <value>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+                <label>Relationship</label>
+            </value>
+            <value>
+                <fullName>Special requests (reports, GDPR)</fullName>
+                <default>false</default>
+                <label>Special requests (reports, GDPR)</label>
+            </value>
+            <value>
+                <fullName>Acceptance Network</fullName>
+                <default>false</default>
+                <label>Acceptance Network</label>
+            </value>
+            <value>
+                <fullName>Card activation</fullName>
+                <default>false</default>
+                <label>Card activation</label>
+            </value>
+            <value>
+                <fullName>Permanently block card</fullName>
+                <default>false</default>
+                <label>Permanently block card</label>
+            </value>
+            <value>
+                <fullName>Unblock card</fullName>
+                <default>false</default>
+                <label>Unblock card</label>
+            </value>
+            <value>
+                <fullName>Apple Pay</fullName>
+                <default>false</default>
+                <label>Apple Pay</label>
+            </value>
+            <value>
+                <fullName>Google Pay</fullName>
+                <default>false</default>
+                <label>Google Pay</label>
+            </value>
+            <value>
+                <fullName>Acceptance</fullName>
+                <default>false</default>
+                <label>Acceptance</label>
+            </value>
+            <value>
+                <fullName>Validity</fullName>
+                <default>false</default>
+                <label>Validity</label>
+            </value>
+            <value>
+                <fullName>Block</fullName>
+                <default>false</default>
+                <label>Block</label>
+            </value>
+            <value>
+                <fullName>Unblock</fullName>
+                <default>false</default>
+                <label>Unblock</label>
+            </value>
+            <value>
+                <fullName>Characteristic</fullName>
+                <default>false</default>
+                <label>Characteristic</label>
+            </value>
+            <value>
+                <fullName>Card</fullName>
+                <default>false</default>
+                <label>Card</label>
+            </value>
+            <value>
+                <fullName>Delivery</fullName>
+                <default>false</default>
+                <label>Delivery</label>
+            </value>
+            <value>
+                <fullName>NA</fullName>
+                <default>false</default>
+                <label>N/A</label>
+            </value>
+            <value>
+                <fullName>Inscription</fullName>
+                <default>false</default>
+                <label>Inscription</label>
+            </value>
+            <value>
+                <fullName>Mobile Payment</fullName>
+                <default>false</default>
+                <label>Mobile Payment</label>
+            </value>
+            <value>
+                <fullName>Myedenred</fullName>
+                <default>false</default>
+                <label>Myedenred</label>
+            </value>
+            <value>
+                <fullName>Navigation</fullName>
+                <default>false</default>
+                <label>Navigation</label>
+            </value>
+            <value>
+                <fullName>Contract Modification</fullName>
+                <default>false</default>
+                <label>Contract Modification</label>
+            </value>
+            <value>
+                <fullName>Contract set up</fullName>
+                <default>false</default>
+                <label>Contract set-up</label>
+            </value>
+            <value>
+                <fullName>Country Specific contract set up</fullName>
+                <default>false</default>
+                <label>Country Specific contract set-up</label>
+            </value>
+            <value>
+                <fullName>Contract modification following VAT CRN change</fullName>
+                <default>false</default>
+                <label>Contract modification following VAT / CRN change</label>
+            </value>
+            <value>
+                <fullName>Contract termination</fullName>
+                <default>false</default>
+                <label>Contract termination</label>
+            </value>
+            <value>
+                <fullName>Store termination</fullName>
+                <default>false</default>
+                <label>Store termination</label>
+            </value>
+            <value>
+                <fullName>Store creation</fullName>
+                <default>false</default>
+                <label>Store creation</label>
+            </value>
+            <value>
+                <fullName>Operation</fullName>
+                <default>false</default>
+                <label>Operation</label>
+            </value>
+            <value>
+                <fullName>Installation</fullName>
+                <default>false</default>
+                <label>Installation</label>
+            </value>
+            <value>
+                <fullName>Payment</fullName>
+                <default>false</default>
+                <label>Payment</label>
+            </value>
+            <value>
+                <fullName>Invoicing</fullName>
+                <default>false</default>
+                <label>Invoicing</label>
+            </value>
+            <value>
+                <fullName>Delay</fullName>
+                <default>false</default>
+                <label>Delay</label>
+            </value>
+            <value>
+                <fullName>Activation</fullName>
+                <default>false</default>
+                <label>Activation</label>
+            </value>
+            <value>
+                <fullName>Order</fullName>
+                <default>false</default>
+                <label>Order</label>
+            </value>
+            <value>
+                <fullName>PIN Reset</fullName>
+                <default>false</default>
+                <label>PIN Reset</label>
+            </value>
+            <value>
+                <fullName>Lost</fullName>
+                <default>false</default>
+                <label>Lost</label>
+            </value>
+            <value>
+                <fullName>Stolen</fullName>
+                <default>false</default>
+                <label>Stolen</label>
+            </value>
+            <value>
+                <fullName>Damaged</fullName>
+                <default>false</default>
+                <label>Damaged</label>
+            </value>
+            <value>
+                <fullName>Forgotten PIN</fullName>
+                <default>false</default>
+                <label>Forgotten PIN</label>
+            </value>
+            <value>
+                <fullName>Card reissuance lost or stolen</fullName>
+                <default>false</default>
+                <label>Card reissuance (lost or stolen)</label>
+            </value>
+            <value>
+                <fullName>Card reissuance damaged</fullName>
+                <default>false</default>
+                <label>Card reissuance (damaged)</label>
+            </value>
+            <value>
+                <fullName>Information concerning a card</fullName>
+                <default>false</default>
+                <label>Information concerning a card</label>
+            </value>
+            <value>
+                <fullName>Temporarily block card</fullName>
+                <default>false</default>
+                <label>Temporarily block card</label>
+            </value>
+            <value>
+                <fullName>Account statement</fullName>
+                <default>false</default>
+                <label>Account statement</label>
+            </value>
+            <value>
+                <fullName>Personal Data</fullName>
+                <default>false</default>
+                <label>Personal Data</label>
+            </value>
+            <value>
+                <fullName>SMS</fullName>
+                <default>false</default>
+                <label>SMS</label>
+            </value>
+            <value>
+                <fullName>Credentials</fullName>
+                <default>false</default>
+                <label>Credentials</label>
+            </value>
+            <value>
+                <fullName>Incorrect data on invoice</fullName>
+                <default>false</default>
+                <label>Incorrect data on invoice</label>
+            </value>
+            <value>
+                <fullName>Incorrect amount on invoice</fullName>
+                <default>false</default>
+                <label>Incorrect amount on invoice</label>
+            </value>
+            <value>
+                <fullName>Request duplicate invoice</fullName>
+                <default>false</default>
+                <label>Request duplicate invoice</label>
+            </value>
+            <value>
+                <fullName>Credit Notes</fullName>
+                <default>false</default>
+                <label>Credit Notes</label>
+            </value>
+            <value>
+                <fullName>Collection letter reaction</fullName>
+                <default>false</default>
+                <label>Collection letter reaction</label>
+            </value>
+            <value>
+                <fullName>Payment status</fullName>
+                <default>false</default>
+                <label>Payment status</label>
+            </value>
+            <value>
+                <fullName>Card and or load order</fullName>
+                <default>false</default>
+                <label>Card and/or load order</label>
+            </value>
+            <value>
+                <fullName>Cancellation of card or load order</fullName>
+                <default>false</default>
+                <label>Cancellation of card or load order</label>
+            </value>
+            <value>
+                <fullName>Delivery of cards</fullName>
+                <default>false</default>
+                <label>Delivery of cards</label>
+            </value>
+            <value>
+                <fullName>Status of loads</fullName>
+                <default>false</default>
+                <label>Status of loads</label>
+            </value>
+            <value>
+                <fullName>Missing loads</fullName>
+                <default>false</default>
+                <label>Missing loads</label>
+            </value>
+            <value>
+                <fullName>Incomplete delivery</fullName>
+                <default>false</default>
+                <label>Incomplete delivery</label>
+            </value>
+            <value>
+                <fullName>Incorrect delivery address</fullName>
+                <default>false</default>
+                <label>Incorrect delivery address</label>
+            </value>
+            <value>
+                <fullName>Card not received</fullName>
+                <default>false</default>
+                <label>Card not received</label>
+            </value>
+            <value>
+                <fullName>Question regarding amount</fullName>
+                <default>false</default>
+                <label>Question regarding amount</label>
+            </value>
+            <value>
+                <fullName>Question regarding delay</fullName>
+                <default>false</default>
+                <label>Question regarding delay</label>
+            </value>
+            <value>
+                <fullName>Failed transaction</fullName>
+                <default>false</default>
+                <label>Failed transaction</label>
+            </value>
+            <value>
+                <fullName>Online Payment</fullName>
+                <default>false</default>
+                <label>Online Payment</label>
+            </value>
+            <value>
+                <fullName>Suspicion of fraud</fullName>
+                <default>false</default>
+                <label>Suspicion of fraud</label>
+            </value>
+            <value>
+                <fullName>Merchant Extranet connection issues</fullName>
+                <default>false</default>
+                <label>Merchant Extranet - connection issues</label>
+            </value>
+            <value>
+                <fullName>Merchant Extranet forgotten credentials</fullName>
+                <default>false</default>
+                <label>Merchant Extranet - forgotten credentials</label>
+            </value>
+            <value>
+                <fullName>Merchant Extranet assistance</fullName>
+                <default>false</default>
+                <label>Merchant Extranet - assistance</label>
+            </value>
+            <value>
+                <fullName>Client Extranet connection issues</fullName>
+                <default>false</default>
+                <label>Client Extranet - connection issues</label>
+            </value>
+            <value>
+                <fullName>Client Extranet forgotten credentials</fullName>
+                <default>false</default>
+                <label>Client Extranet - forgotten credentials</label>
+            </value>
+            <value>
+                <fullName>Client Extranet assistance</fullName>
+                <default>false</default>
+                <label>Client Extranet - assistance</label>
+            </value>
+            <value>
+                <fullName>Expired asset</fullName>
+                <default>false</default>
+                <label>Expired asset</label>
+            </value>
+            <value>
+                <fullName>Expired load</fullName>
+                <default>false</default>
+                <label>Expired load</label>
+            </value>
+            <value>
+                <fullName>Damaged asset</fullName>
+                <default>false</default>
+                <label>Damaged asset</label>
+            </value>
+            <value>
+                <fullName>Terminal activation</fullName>
+                <default>false</default>
+                <label>Terminal activation</label>
+            </value>
+            <value>
+                <fullName>Web search maps</fullName>
+                <default>false</default>
+                <label>Web search/maps</label>
+            </value>
+            <value>
+                <fullName>Reports on beneficiaries expired cards inactive cards</fullName>
+                <default>false</default>
+                <label>Reports on beneficiaries expired cards inactive cards</label>
+            </value>
+            <value>
+                <fullName>Update user data</fullName>
+                <default>false</default>
+                <label>Update user data</label>
+            </value>
+            <value>
+                <fullName>Delete account GDPR</fullName>
+                <default>false</default>
+                <label>Delete account - GDPR</label>
+            </value>
+            <value>
+                <fullName>Incorrect printing</fullName>
+                <default>false</default>
+                <label>Incorrect printing</label>
+            </value>
+            <value>
+                <fullName>Low printing quality</fullName>
+                <default>false</default>
+                <label>Low printing quality</label>
+            </value>
+            <value>
+                <fullName>Incorrect packaging</fullName>
+                <default>false</default>
+                <label>Incorrect packaging</label>
+            </value>
+            <value>
+                <fullName>Face value</fullName>
+                <default>false</default>
+                <label>Face value</label>
+            </value>
+            <value>
+                <fullName>Terms and conditions</fullName>
+                <default>false</default>
+                <label>Terms and conditions</label>
+            </value>
+            <value>
+                <fullName>Validity of assets</fullName>
+                <default>false</default>
+                <label>Validity of assets</label>
+            </value>
+            <value>
+                <fullName>Validity of loads</fullName>
+                <default>false</default>
+                <label>Validity of loads</label>
+            </value>
+            <value>
+                <fullName>Solution information</fullName>
+                <default>false</default>
+                <label>Solution information</label>
+            </value>
+            <value>
+                <fullName>User Extranet forgotten credentials</fullName>
+                <default>false</default>
+                <label>User Extranet - forgotten credentials</label>
+            </value>
+            <value>
+                <fullName>User Extranet assistance</fullName>
+                <default>false</default>
+                <label>User Extranet - assistance</label>
+            </value>
+            <value>
+                <fullName>User Extranet technical issues</fullName>
+                <default>false</default>
+                <label>User Extranet - technical issues</label>
+            </value>
+            <value>
+                <fullName>App</fullName>
+                <default>false</default>
+                <label>App</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Auto enrollment check</fullName>
+                <default>false</default>
+                <label>Auto enrollment check</label>
+            </value>
+            <value>
+                <fullName>Welcome letter</fullName>
+                <default>false</default>
+                <label>Welcome letter</label>
+            </value>
+            <value>
+                <fullName>Send missing invoice</fullName>
+                <default>false</default>
+                <label>Send missing invoice</label>
+            </value>
+            <value>
+                <fullName>Report</fullName>
+                <default>false</default>
+                <label>Report</label>
+            </value>
+            <value>
+                <fullName>New vouchers issue</fullName>
+                <default>false</default>
+                <label>New vouchers issue</label>
+            </value>
+            <value>
+                <fullName>Send materials (logo, window stickers, dummy cards or vouchers)</fullName>
+                <default>false</default>
+                <label>Send materials (logo, window stickers, dummy cards or vouchers)</label>
+            </value>
+            <value>
+                <fullName>Cross-Sale offer</fullName>
+                <default>false</default>
+                <label>Cross-Sale offer</label>
+            </value>
+            <value>
+                <fullName>Need Financial Department assistance</fullName>
+                <default>false</default>
+                <label>Need Financial Department assistance</label>
+            </value>
+            <value>
+                <fullName>Vouchers Order</fullName>
+                <default>false</default>
+                <label>Vouchers order</label>
+            </value>
+            <value>
+                <fullName>Card Vouchers Order</fullName>
+                <default>false</default>
+                <label>Card &amp; vouchers order</label>
+            </value>
+            <value>
+                <fullName>Cancelation Of Voucher Order</fullName>
+                <default>false</default>
+                <label>Cancelation of voucher order</label>
+            </value>
+            <value>
+                <fullName>Other local Extranet</fullName>
+                <default>false</default>
+                <label>Other local Extranet</label>
+            </value>
+            <value>
+                <fullName>Status of the order</fullName>
+                <default>false</default>
+                <label>Status of the order</label>
+            </value>
+            <value>
+                <fullName>Cancellation of order</fullName>
+                <default>false</default>
+                <label>Cancellation of order</label>
+            </value>
+            <value>
+                <fullName>Request new merchant</fullName>
+                <default>false</default>
+                <label>Request new merchant</label>
+            </value>
+            <value>
+                <fullName>Payment issue ( former failed transaction)</fullName>
+                <default>false</default>
+                <label>Payment issue ( former failed transaction)</label>
+            </value>
+            <value>
+                <fullName>Mobile payment activation Apple Pay</fullName>
+                <default>false</default>
+                <label>Mobile payment activation Apple Pay</label>
+            </value>
+            <value>
+                <fullName>Mobile payment activation Google Pay</fullName>
+                <default>false</default>
+                <label>Mobile payment activation Google Pay</label>
+            </value>
+            <value>
+                <fullName>Mobile payment activation Samsung Pay</fullName>
+                <default>false</default>
+                <label>Mobile payment activation Samsung Pay</label>
+            </value>
+            <value>
+                <fullName>Status of Order</fullName>
+                <default>false</default>
+                <label>Status of Order</label>
+            </value>
+            <value>
+                <fullName>Delivery of Asset</fullName>
+                <default>false</default>
+                <label>Delivery of Asset</label>
+            </value>
+            <value>
+                <fullName>Wrong Wallet</fullName>
+                <default>false</default>
+                <label>Wrong Wallet</label>
+            </value>
+            <value>
+                <fullName>Wrong Merchant</fullName>
+                <default>false</default>
+                <label>Wrong Merchant</label>
+            </value>
+            <value>
+                <fullName>Asset Expiry</fullName>
+                <default>false</default>
+                <label>Asset Expiry</label>
+            </value>
+            <value>
+                <fullName>Load Expiry</fullName>
+                <default>false</default>
+                <label>Load Expiry</label>
+            </value>
+            <value>
+                <fullName>Technical issue</fullName>
+                <default>false</default>
+                <label>Technical issue</label>
+            </value>
+            <value>
+                <fullName>Change of employer</fullName>
+                <default>false</default>
+                <label>Change of employer</label>
+            </value>
+            <value>
+                <fullName>Mobile device association</fullName>
+                <default>false</default>
+                <label>Mobile device association</label>
+            </value>
+            <value>
+                <fullName>Advance Against Salary</fullName>
+                <default>false</default>
+                <label>Advance Against Salary</label>
+            </value>
+            <value>
+                <fullName>Salaries</fullName>
+                <default>false</default>
+                <label>Salaries</label>
+            </value>
+            <value>
+                <fullName>Cash cheque</fullName>
+                <default>false</default>
+                <label>Cash cheque</label>
+            </value>
+            <value>
+                <fullName>Bank transfer</fullName>
+                <default>false</default>
+                <label>Bank transfer</label>
+            </value>
+            <value>
+                <fullName>Credit note</fullName>
+                <default>false</default>
+                <label>Credit note</label>
+            </value>
+            <value>
+                <fullName>Reversal</fullName>
+                <default>false</default>
+                <label>Reversal</label>
+            </value>
+            <value>
+                <fullName>Notification</fullName>
+                <default>false</default>
+                <label>Notification</label>
+            </value>
+            <value>
+                <fullName>ATM issue</fullName>
+                <default>false</default>
+                <label>ATM issue</label>
+            </value>
+            <value>
+                <fullName>ATM fees issue</fullName>
+                <default>false</default>
+                <label>ATM fees issue</label>
+            </value>
+            <value>
+                <fullName>Fees issue</fullName>
+                <default>false</default>
+                <label>Fees issue</label>
+            </value>
+            <value>
+                <fullName>Request more information concerning invoice</fullName>
+                <default>false</default>
+                <label>Request more information concerning invoice</label>
+            </value>
+            <value>
+                <fullName>Question regarding Mobile Payment</fullName>
+                <default>false</default>
+                <label>Question regarding Mobile Payment</label>
+            </value>
+            <value>
+                <fullName>Voucher collection</fullName>
+                <default>false</default>
+                <label>Voucher collection</label>
+            </value>
+            <value>
+                <fullName>Balance adjustment</fullName>
+                <default>false</default>
+                <label>Balance adjustment</label>
+            </value>
+            <value>
+                <fullName>Employee transfer within Account</fullName>
+                <default>false</default>
+                <label>Employee transfer within Account</label>
+            </value>
+            <value>
+                <fullName>Information regarding invoice</fullName>
+                <default>false</default>
+                <label>Information regarding invoice</label>
+            </value>
+            <value>
+                <fullName>Balance transfer</fullName>
+                <default>false</default>
+                <label>Balance transfer</label>
+            </value>
+            <value>
+                <fullName>Funds transfer</fullName>
+                <default>false</default>
+                <label>Funds transfer</label>
+            </value>
+            <value>
+                <fullName>Pending transaction</fullName>
+                <default>false</default>
+                <label>Pending transaction</label>
+            </value>
+            <value>
+                <fullName>Card reissuance</fullName>
+                <default>false</default>
+                <label>Card reissuance</label>
+            </value>
+            <value>
+                <fullName>Transaction Denied - Blocked Terminal</fullName>
+                <default>false</default>
+                <label>Transaction Denied - Blocked Terminal</label>
+            </value>
+            <value>
+                <fullName>Settlement form</fullName>
+                <default>false</default>
+                <label>Settlement form</label>
+            </value>
+            <value>
+                <fullName>Unresolved Problem</fullName>
+                <default>false</default>
+                <label>Unresolved Problem</label>
+            </value>
+            <value>
+                <fullName>Extreme Detractor</fullName>
+                <default>false</default>
+                <label>Extreme Detractor</label>
+            </value>
+            <value>
+                <fullName>Mild Detractor</fullName>
+                <default>false</default>
+                <label>Mild Detractor</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>ER_Card_acceptance</controllingFieldValue>
+            <valueName>Card acceptance issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card_acceptance</controllingFieldValue>
+            <valueName>Terminal activation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_PULSE_Alert</controllingFieldValue>
+            <controllingFieldValue>ER_Customer_Care_Alert</controllingFieldValue>
+            <valueName>Unresolved Problem</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_PULSE_Alert</controllingFieldValue>
+            <controllingFieldValue>ER_Customer_Care_Alert</controllingFieldValue>
+            <valueName>Extreme Detractor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_PULSE_Alert</controllingFieldValue>
+            <controllingFieldValue>ER_Customer_Care_Alert</controllingFieldValue>
+            <valueName>Mild Detractor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Incorrect data on invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Incorrect amount on invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Request duplicate invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Credit Notes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Collection letter reaction</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Payment status</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Send missing invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Report</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Request more information concerning invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Invoicing</controllingFieldValue>
+            <valueName>Information regarding invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Expired asset</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Expired load</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Damaged asset</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_User</controllingFieldValue>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Asset Expiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Load Expiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Validity</controllingFieldValue>
+            <valueName>Balance transfer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Acceptance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Validity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Delivery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <controllingFieldValue>ER_Reimbursement</controllingFieldValue>
+            <valueName>Payment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Invoicing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Incorrect printing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Low printing quality</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Complaint</controllingFieldValue>
+            <valueName>Incorrect packaging</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <valueName>Mobile App</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <valueName>User Extranet forgotten credentials</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>User Extranet assistance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <valueName>User Extranet technical issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <valueName>App</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Online_support</controllingFieldValue>
+            <valueName>Technical issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <valueName>Special requests (reports, GDPR)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <valueName>NA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <valueName>Web search maps</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <valueName>Reports on beneficiaries expired cards inactive cards</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_User</controllingFieldValue>
+            <valueName>Update user data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_User</controllingFieldValue>
+            <valueName>Delete account GDPR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_Voucher</controllingFieldValue>
+            <valueName>New vouchers issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_Voucher</controllingFieldValue>
+            <valueName>Send materials (logo, window stickers, dummy cards or vouchers)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_Voucher</controllingFieldValue>
+            <valueName>Cross-Sale offer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Others</controllingFieldValue>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Voucher collection</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Finance</controllingFieldValue>
+            <valueName>Collection</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Finance</controllingFieldValue>
+            <valueName>Need Financial Department assistance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Acceptance network</controllingFieldValue>
+            <valueName>Request new merchant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Acceptance network</controllingFieldValue>
+            <valueName>Transaction Denied - Blocked Terminal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_User</controllingFieldValue>
+            <valueName>Change of employer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_User</controllingFieldValue>
+            <valueName>Mobile device association</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Balance enquiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Transaction enquiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Acceptance Network</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Card activation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Permanently block card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Unblock card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Block</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Unblock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Characteristic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <valueName>Operation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <valueName>Activation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>PIN Reset</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Stolen</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Damaged</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Forgotten PIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Card reissuance lost or stolen</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Card reissuance damaged</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Information concerning a card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Temporarily block card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Account statement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Solution information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Balance adjustment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Card</controllingFieldValue>
+            <valueName>Funds transfer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <valueName>Inscription</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <valueName>Navigation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Mobile_App</controllingFieldValue>
+            <valueName>Installation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Reimbursement</controllingFieldValue>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Delay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Mobile Payment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Question regarding amount</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Question regarding delay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Failed transaction</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Online Payment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Suspicion of fraud</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Payment issue ( former failed transaction)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Mobile payment activation Apple Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Mobile payment activation Google Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Mobile payment activation Samsung Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Wrong Wallet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Wrong Merchant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Question regarding Mobile Payment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payment</controllingFieldValue>
+            <valueName>Pending transaction</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Payment Topics</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Apple Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Google Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Face value</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Terms and conditions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Validity of assets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_General_Information</controllingFieldValue>
+            <valueName>Validity of loads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Asset not received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Card and or load order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Cancellation of card or load order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Delivery of cards</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Status of loads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Missing loads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Incomplete delivery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Incorrect delivery address</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Card not received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Vouchers Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Card Vouchers Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Cancelation Of Voucher Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Cancellation of order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Status of Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Card reissuance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Order_Delivery</controllingFieldValue>
+            <valueName>Settlement form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Store locator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Merchant Extranet connection issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Merchant Extranet forgotten credentials</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Merchant Extranet assistance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Client Extranet connection issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Client Extranet forgotten credentials</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Client Extranet assistance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Extranet</controllingFieldValue>
+            <valueName>Other local Extranet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Bank account modification</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Bankruptcy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Financial Topic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Copy of contract</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Company change</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Contract Modification</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Contract set up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Country Specific contract set up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Contract modification following VAT CRN change</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Contract termination</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Store termination</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Store creation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Auto enrollment check</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Contract_modification</controllingFieldValue>
+            <valueName>Welcome letter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Advance Against Salary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Salaries</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Cash cheque</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Bank transfer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Credit note</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Reversal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Notification</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>ATM issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>ATM fees issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ER_Payroll service</controllingFieldValue>
+            <valueName>Fees issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ERFI_User Management</controllingFieldValue>
+            <valueName>Employee transfer within Account</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

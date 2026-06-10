@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Channel__c</fullName>
+    <label>Channel</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Phone</fullName>
+                <default>false</default>
+                <label>Phone</label>
+            </value>
+            <value>
+                <fullName>Call</fullName>
+                <default>false</default>
+                <label>Call</label>
+            </value>
+            <value>
+                <fullName>Meeting Face to Face</fullName>
+                <default>false</default>
+                <label>Meeting Face to Face</label>
+            </value>
+            <value>
+                <fullName>Meeting Screen to Screen</fullName>
+                <default>false</default>
+                <label>Meeting Screen to Screen</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Backoffice</fullName>
+                <default>false</default>
+                <label>Backoffice</label>
+            </value>
+            <value>
+                <fullName>Face To Face</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Face To Face</label>
+            </value>
+            <value>
+                <fullName>Virtual</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Virtual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

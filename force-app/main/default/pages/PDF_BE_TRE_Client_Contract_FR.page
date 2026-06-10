@@ -1,0 +1,1125 @@
+<!--
+/**********************************************************************************************
+ * Description      : PDF_BE_TRE_Client_Contract_FR : Generates contract PDF for TRE client (FR)
+ * @author          : Imalka Hemachandra
+ * @since           : 26 July 2018
+ * Copyright 2018 ABSI. All rights reserved.
+ **********************************************************************************************/
+ -->
+ <apex:page id="PDF_BE_TRE_Client_Contract_FR" controller="PDF_BE_TREContractController" language="FR" showHeader="false" cache="false" sidebar="false" applyhtmltag="false" standardStylesheets="false" renderAs="PDF">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: A4;
+                margin: 0mm 0mm 30mm 0mm;
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-left {
+                    content: element(footer);
+                }
+            }
+            label {
+              font-family: 'Arial Unicode MS';
+            }
+            strong{
+                font-family:Arial !important;
+            }
+            div.header {
+                padding: 15px;
+                position: running(header);
+            }
+
+            div.footer {
+
+                position: running(footer);
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            table {
+                border-spacing: 10px;
+            }
+
+            .container {
+                position: relative;
+                top: 110px;
+                font-family: Arial Unicode MS;
+            }
+
+            .topleft {
+                position: absolute;
+                top: 8px;
+                left: 16px;
+                font-size: 18px;
+                width:47%;
+            }
+
+            .topright {
+                position: absolute;
+                top: 8px;
+                right: 16px;
+                font-size: 18px;
+                width:47%;
+            }
+
+        </style>
+    </head>
+    <div class="header">
+        <div style="position: absolute;right: 0px; top:0px">
+            <apex:image url="{!URLFOR($Resource.header_image_blue)}" width="130" height="130"/>
+        </div>
+    </div>
+
+    <div class="footer">
+
+        <table style="width: 100%; margin-left:30px;margin-right: 20px;">
+            <tr>
+                <td width="20%">
+                    <a href="http://www.edenred.be">
+                        <apex:image url="{!URLFOR($Resource.EdenredLogo)}" width="60" alt="Edenred"/>
+                    </a>
+                </td>
+                <td style="font-family: Arial Unicode MS; font-size: 10pt; color: #88898b;" width="60%">
+                    <center>
+                        <p>EDENRED BELGIUM SA - Boulevard du Souverain, <br/>165 boite 9 1160 Bruxelles - RPM Bruxelles - BE <br/>0407 034 269
+                            <br/>www.edenred.be</p>
+                    </center>
+                </td>
+                <td width="20%">
+                    <apex:image url="{!URLFOR($Resource.ISO_9001)}" width="50"/>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <br/>
+    <br/>
+
+    <center>
+        <div style="margin-top:85px">
+            <a href="http://www.edenred.be" class="logo">
+                <apex:image url="{!URLFOR($Resource.LogoTicketRestaurant)}" width="250" alt="Ticket EcoCheque"/>
+            </a>
+        </div>
+    </center>
+    <div style="margin-left:15px;margin-right: 20px;">
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-top: none;">
+                <td rowspan="2" valign="bottom"><apex:image url="{!URLFOR($Resource.VerticleBar_Blue)}" width="15" height="170"/></td>
+                <td style="width: 100%;" colspan="2" valign="bottom">
+                    <strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 20pt;">Contrat de services</span></strong> &nbsp;&nbsp;
+                    <span style="color:#282554; font-family: Arial Unicode MS; font-size: 18pt;font-style: italic;">"Easy"</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width: 65%;vertical-align: top; font-family: Arial Unicode MS; font-size: 10pt; color: #88898b;" valign="top">
+                    <p>Contrat entre : la S.A. EDENRED BELGIUM (division Ticket Restaurant®), dont le siège social est situé à 1160 Bruxelles,
+                        Boulevard du Souverain 165 b.9 - BE 0407.034.269, RPM Bruxelles, dénommé ci-après EDENRED valablement représenté par <strong>{!$Label.LABS_SF_PDF_CommercialDirectorName}</strong>,
+                        et le CLIENT, ci-après décrit :</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <apex:form style="margin-left:30px;margin-right: 30px;">
+        <input type="hidden" name="currentlanguage" value="FR"/>
+        <input type="hidden" name="local" value="fr_BE"/>
+        <table style="width: 100%;">
+            <tbody>
+            <tr>
+                <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                    <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">INFORMATIONS CLIENT<wbr /></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="border-top: 2px dotted #e6e7e8; margin-bottom:0px;padding-bottom:0px;">
+                <td colspan="2" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>N° d’entreprise</label><br/>
+                    <strong>{!enterpriseNumber}&nbsp;</strong>
+                </td>
+                <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; align:right;margin-bottom:0px;padding-bottom:0px;" width="60%" height="55" valign="bottom">
+                    <label>Raison Sociale</label><br/>
+                    <strong>{!accName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <table style="width: 100%;" cellpadding="5" cellspacing="2px;">
+            <tbody>
+            <tr>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; " width="42%" height="55" valign="bottom">
+                    <label>Forme juridique</label><br/>
+                    <strong>{!legalForm}&nbsp;</strong>
+                </td>
+                <td style="border: 3px;font-size: 12pt; color: #88898b; align: right" width="5px" height="55" valign="middle">
+                    <apex:outputPanel rendered="{! !isSubjectToVAT}" style="margin-top:5px">
+                        <apex:image url="{!URLFOR($Resource.CheckBoxUnCheched)}" rendered="{! !isSubjectToVAT }" width="15px" height="15px"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{! isSubjectToVAT }" style="margin-top:10px">
+                        <apex:image url="{!URLFOR($Resource.CheckBoxCheched)}" rendered="{! isSubjectToVAT }" width="15px" height="15px"/>
+                    </apex:outputPanel>
+                </td>
+                <td style="border: 3px;font-size: 12pt; color: #88898b; left:0px" width="16%" height="55" valign="middle">
+                    Assujetti à la TVA
+                </td>
+                <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;" width="44%" height="55" valign="bottom">
+                    <label>Groupe</label><br/>
+                    <strong>{!relName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                    <label>Adresse (siège sociale)</label><br/>
+                    <strong>{!billingStreet}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+                <tr style="margin-bottom:0px;padding-bottom:0px;">
+                    <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                        <label>Code postal</label><br/>
+                        <strong>{!billingPostalCode}&nbsp;</strong>
+                    </td>
+                    <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="80%" height="55" valign="bottom">
+                        <label>Localité</label><br/>
+                        <strong>{!billingCity}&nbsp;</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--<table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                    <label>Secrétariat social</label><br/>
+                    <strong>{!socialSecretaryName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>-->
+        <div style="page-break-after:always;"/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                    <label>Votre secrétariat social se charge-t-il de vos commandes de Ticket Restaurant®?</label><br/>
+                    <strong>{!socialSecretaryOrders}</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Nombre total de travailleurs</label><br/>
+                    <strong>{!numberEmployees}&nbsp;</strong>
+                </td>
+                <td colspan="3" style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Nombre de bénéficiaires du Ticket Restaurant®</label><br/>
+                    <strong>{!numberBeneficiaries}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <table style="width: 100%;margin-top:10px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%" height="40" valign="bottom"><center>Représentée par</center></td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Civilité</label><br/>
+                    <strong>{!main_salutation}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>Nom</label><br/>
+                    <strong>{!main_lastName}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                    <label>Prénom</label><br/>
+                    <strong>{!main_firstName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Téléphone</label><br/>
+                    <strong>{!main_phone}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>GSM</label><br/>
+                    <strong>{!main_mobilePhone}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                    <label>Langue</label><br/>
+                    <strong>{!main_language}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                    <label>E-mail</label><br/>
+                    <strong>{!main_email}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+        <table style="width: 100%;">
+            <tbody>
+            <tr>
+                <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                    <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">INFORMATIONS CONTACT(S)<wbr /></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;margin-top:10px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                    <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Responsable des relations avec EDENRED – Primary contact</span></strong></center>
+                    <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Personne de contact qui réceptionnera par mail les accès à votre Espace Client)</span></center>
+                </td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Civilité</label><br/>
+                    <strong>{!main_salutation}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>Nom</label><br/>
+                    <strong>{!main_lastName}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                    <label>Prénom</label><br/>
+                    <strong>{!main_firstName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Téléphone</label><br/>
+                    <strong>{!main_phone}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>GSM</label><br/>
+                    <strong>{!main_mobilePhone}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                    <label>Langue</label><br/>
+                    <strong>{!main_language}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                    <label>E-mail</label><br/>
+                    <strong>{!main_email}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="page-break-after:always;"/>
+        <table style="width: 100%;margin-top:120px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                    <br/>
+                    <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Responsable de la facturation</span></strong></center>
+                    <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Personne de contact qui réceptionnera les factures ainsi que les demandes de paiement en fonction du mode de paiement)</span></center>
+                </td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Civilité</label><br/>
+                    <strong>{!invoice_salutation}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>Nom</label><br/>
+                    <strong>{!invoice_lastName}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                    <label>Prénom</label><br/>
+                    <strong>{!invoice_firstName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Téléphone</label><br/>
+                    <strong>{!invoice_phone}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>GSM</label><br/>
+                    <strong>{!invoice_mobilePhone}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                    <label>Langue</label><br/>
+                    <strong>{!invoice_language}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                    <label>E-mail</label><br/>
+                    <strong>{!invoice_email}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <table style="width: 100%;margin-top:75px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;border-top: 3px solid #e6e7e8;" width="100%">
+                    <br/>
+                    <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Responsable des commandes</span></strong></center>
+                    <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Personne de contact qui réceptionnera toutes les informations pour passer les commandes)</span></center>
+                </td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Civilité</label><br/>
+                    <strong>{!order_salutation}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>Nom</label><br/>
+                    <strong>{!order_lastName}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                    <label>Prénom</label><br/>
+                    <strong>{!order_firstName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Téléphone</label><br/>
+                    <strong>{!order_phone}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>GSM</label><br/>
+                    <strong>{!order_mobilePhone}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                    <label>Langue</label><br/>
+                    <strong>{!order_language}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                    <label>E-mail</label><br/>
+                    <strong>{!order_email}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="page-break-after:always;"/>
+        <table style="width: 100%;margin-top:100px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                    <br/>
+                    <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Responsable de la réception des livraisons des cartes</span></strong></center>
+                    <center><span style="color:#282554; font-family: Arial Unicode MS; font-size: 8pt;">(Personne de contact qui réceptionnera les différents colis comprenant les cartes)</span></center>
+                </td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Civilité</label><br/>
+                    <strong>{!delivery_salutation}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="40%" height="55" valign="bottom">
+                    <label>Nom</label><br/>
+                    <strong>{!delivery_lastName}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="40%" height="55" valign="bottom">
+                    <label>Prénom</label><br/>
+                    <strong>{!delivery_firstName}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>Téléphone</label><br/>
+                    <strong>{!delivery_phone}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="50%" height="55" valign="bottom">
+                    <label>GSM</label><br/>
+                    <strong>{!delivery_mobilePhone}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="34%" height="55" valign="bottom">
+                    <label>Langue</label><br/>
+                    <strong>{!delivery_language}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="66%" height="55" valign="bottom">
+                    <label>E-mail</label><br/>
+                    <strong>{!delivery_email}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="bottom">
+                    <label>Adresse</label><br/>
+                    <strong>{!shippingStreet}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;" cellpadding="10">
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="20%" height="55" valign="bottom">
+                    <label>Code postal</label><br/>
+                    <strong>{!shippingPostalCode}&nbsp;</strong>
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="80%" height="55" valign="bottom">
+                    <label>Commune</label><br/>
+                    <strong>{!shippingCity}&nbsp;</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+        <div style="page-break-after:always;"/>
+        <table style="width: 100%;margin-top:100px">
+            <tbody>
+            <tr>
+                <td colspan="2" style="border-radius:0;border-bottom: 2px dotted #bcbec0; font-size: 12pt; color: #c4d82e;" class="point" width="100%" height="55">
+                    <span style="color: #3583BF; font-family: Arial Unicode MS;  font-size: 20pt;">CONDITIONS FINANCIERES &#38; DUREE DU CONTRAT<wbr /></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;margin-top:10px" cellpadding="10">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 10pt; color: #88898b; align:center; font-style: italic;" width="100%">
+                    <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Ticket Restaurant®</span></strong></center>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <td>
+                <center>
+                    <p style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b;">
+                        <apex:outputText rendered="{!(promoCode != 'Standard')}" value="Code Promo : {!promoCode}" />
+                    </p>
+                </center>
+            </td>
+        </table>
+        <apex:outputPanel rendered="{!(promoCode != 'Standard')}" id="promoCodePanelid">
+            <table style="width: 100%;" >
+                <tbody>
+                    <tr style="margin-bottom:0px;padding-bottom:0px;">
+                        <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" valign="top" height="37">
+                            <label>{!promoDescription}</label><br/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </apex:outputPanel>
+        <!--<table style="width: 100%;" >
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" width="32%" height="37" valign="top">
+                    <label>Prestation de services</label><br/>
+                    <strong><span style="text-align:right;float:right">{!participationPercentClient}</span></strong>
+                </td>
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                    &nbsp;&nbsp;<br/>
+                    %
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="31%" height="37" valign="top">
+
+                    <label>Valeur faciale</label><br/>
+
+                    <strong><span style="text-align:right;float:right" >{!faceValue}</span></strong>
+                </td>
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                    &nbsp;&nbsp;<br/>
+                    &euro;
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="31%" height="37" valign="top">
+                    <label>Création du compte</label><br/>
+                    <strong><span style="text-align:right;float:right" >{!accountCreationCost}</span></strong>
+                </td>
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="37" valign="bottom">
+                    &nbsp;&nbsp;<br/>
+                    &euro;
+                </td>
+            </tr>
+            </tbody>
+        </table>-->
+
+        <table style="width: 100%; border: 1px solid #bcbec0;margin-top:15px;border-collapse: collapse;" cellpadding="0" cellspacing="0">
+            <tr>                
+                <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Nom du service</center></th>
+                <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Volume de commande</center></th>
+                <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="15" valign="middle"><center>Prestation de Service</center></th>
+            </tr>
+            <apex:repeat value="{!rates}" var="item">
+                <!-- Conditionally render the row based on the Min and Max comparison with rateZone -->
+                <apex:outputPanel layout="none" rendered="{!OR(isOppFromWebform, AND(item.MinInt <= rateZone, OR(ISBLANK(item.MaxInt), item.MaxInt >= rateZone)))}">
+
+                    <tr style="margin-bottom:0px;padding-bottom:0px;">
+                        <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                            <label class="persoFont"><center>{!item.ParentSolution}</center></label>
+                        </td>
+                        <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                            <label class="persoFont">
+                                    <center>
+                                        {!IF(item.Max == null, '>' + item.Min, item.Min + ' - ' + item.Max)} €
+                                    </center>
+                            </label>
+                        </td>
+                        <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="33%" height="20" valign="middle">
+                            <label class="persoFont"><center>
+                                {!IF(
+                                    item.Percentage != null,
+                                    item.Percentage + ' %',
+                                    item.Price + ' €'
+                                )}
+                            </center></label>
+                        </td>
+                    </tr>
+                </apex:outputPanel>
+            </apex:repeat>
+
+
+        </table>
+
+        <table style="width: 100%;">
+            <tbody>
+            <tr>
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="100%" height="55" valign="top">
+                    <center>Durée du contrat :
+                        &nbsp;<apex:image url="{!URLFOR($Resource.CheckBoxCheched)}" width="15px" height="15px" style="vertical-align: text-bottom;"/> 2 an (standard) </center>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <center><strong><span style="color:#282554; font-family: Arial Unicode MS; font-size: 10pt;">Carte Edenred</span></strong></center>
+
+        <table style="width: 100%;" >
+            <tbody>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-right: 0px;" width="22%" height="30" valign="top" align="right">
+                    <label>Coût unique par carte</label><br/>
+                    <strong><span style="text-align:right;float:right">{!cardCost}</span></strong>
+                </td>
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="15%" height="30" valign="bottom">
+                    &nbsp;&nbsp;<br/>
+                    &euro;x nombre de cartes
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="25%" height="30" valign="top">
+                    <label>Carte(s) de remplacement</label>
+                    <strong><span style="text-align:right;float:right" >{!cardReplacement}</span></strong>
+                </td>
+                <!--<td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;" width="25%" height="30" valign="top">
+                    <label>Carte(s) de renouvelable</label>
+                    <strong><span style="text-align:right;float:right" >{!cardRenewable}</span></strong>
+                </td>-->
+                <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;padding-left: 0px;" width="2%" height="30" valign="bottom">
+                    &nbsp;&nbsp;<br/>
+                    &euro;
+                </td>
+                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b; margin-bottom:0px;padding-bottom:0px; " width="21%" height="30" valign="top">
+                    <label>Mode de paiement</label>
+                    <strong><span>Prépaiement</span></strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%; border: 1px solid #bcbec0;margin-top:0px;border-collapse: collapse;margin-top:30px" cellpadding="0" cellspacing="0">
+            <tr>
+                <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><center>Livraison</center></th>
+                <th style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><center>Prix livraison carte(s)</center></th>
+            </tr>
+
+            <apex:repeat value="{!deliveries}" var="item">
+                <tr style="margin-bottom:0px;padding-bottom:0px;">
+                    <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="40%" height="20" valign="middle">
+                        <label><strong><center>
+                            <apex:outputText style="font-family:Arial Unicode MS ;" value=" {!if(not(isnull(item.Max)), 'Entre ', 'Plus de ')}  {!item.Min} {!if(not(isnull(item.Max)), ' '+$Label.Preposition_TO+' ', '')}
+                                    {!if(not(isnull(item.Max)), item.Max, '')} cartes : {!if(not(isnull(item.Max)), 'par poste', 'par livreur ')}">
+                            </apex:outputText>
+
+                        </center></strong></label>
+                    </td>
+                    <td style="font-size: 10pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="60%" height="20" valign="middle">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="font-size: 10pt; color: #88898b;" width="3%" height="20" valign="bottom">
+                                    &euro;
+                                </td>
+                                <td style="border-bottom: 2px dotted #e6e7e8; font-size: 12pt; color: #88898b;" width="60%" height="20" valign="top">
+                                    <strong> {!item.Price}</strong>
+
+                                </td>
+                                <td style="font-family:Arial Unicode MS ;font-size: 10pt; color: #88898b;" width="40%" height="20" valign="bottom">
+                                        {! If((item.Min == '1') ,'/ unité','/ point de livraison' ) }
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <table style="width: 100%;margin-top: 50px">
+            <tbody>
+            <tr>
+                <td colspan="5" style="font-size: 12pt; color: #88898b; align:center;font-family: Arial Unicode MS;" width="100%">
+                    <center>Fait à Bruxelles le {!dateAcceptedGeneralConditions}.</center>
+                    <center>Le présent contrat a été contracté sur la plateforme le {!dateAcceptedGeneralConditions} à  {!timeAcceptedGeneralConditions}</center>
+                </td>
+            </tr>
+            <tr style="margin-bottom:0px;padding-bottom:0px;">
+                <td style="font-size: 12pt; color: #88898b;font-family: Arial Unicode MS;" width="70%" valign="top">
+                    Par le représentant légal<br/>
+                    Nom :<br/>
+                    Fonction :<br/>
+                    Signature<br/>
+                </td>
+                <td style="font-size: 12pt; color: #88898b;font-family: Arial Unicode MS;" width="30%" valign="top">
+                    Pour Edenred Belgium,<br/>
+                    <strong>{!$Label.LABS_SF_PDF_CommercialDirectorName}</strong><br/>
+                    {!$Label.LABS_SF_PDF_DirectorTitleFR}<br/>
+                    <apex:image url="{!URLFOR($Resource.TRE_Signature)}" width="60"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="page-break-after:always;"/>
+
+        <!-- SFR-4433-Terms and agreement updates -->
+        <div class="container" style="width: 100%;margin-top:10px " cellpadding="10">
+            <!--<div class="topleft">-->
+                <p style="font-size: 9pt; color: #282554;text-align:justify;"><strong>CONTRAT DE VENTE - Conditions Générales - Belgique</strong> </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    Les conditions particulières de vente (« Conditions Particulières ») et les présentes conditions générales de vente (« Conditions Générales »), les premières primant sur les secondes en cas de divergence,
+forment ensemble le contrat de vente (« Contrat ») conclu entre Edenred Belgium SA (« Edenred ») et le Client tel qu’indiqué dans les Conditions Particulières (« Client »). Les définitions fournies dans
+ces Conditions Générales s’appliquent pareillement aux Conditions Particulières et les Annexes et vice versa. Le Contrat remplace tous les contrats, accords ou arrangements existants entre les Parties. Le
+Contrat régit pleinement et exclusivement la relation contractuelle entre Edenred et le Client en rapport avec son objet. Le Client renonce, sans aucune réserve, à ses propres conditions générales, sous
+quelque dénomination que ce soit et quel que soit le moment de leur transmission à Edenred. Edenred peut modifier les Conditions Générales à tout moment, moyennant une notification préalable de 30
+jours au Client. Si le Client n’accepte pas les nouvelles conditions, il sera en droit de résilier le Contrat par écrit au moins 15 jours avant la date effective des nouvelles conditions. À défaut d’une notification
+de résiliation envoyée par le Client au moins 15 jours avant la date effective des nouvelles conditions, celles-ci seront considérées comme acceptées par le Client.
+                    
+                    Les présentes Conditions Générales peuvent être consultées à tout moment par le Client sur le site internet d’Edenred : <strong><span style="color: #00BFFF;">www.edenred.be</span></strong>
+                </p>
+                <p style="font-size: 9pt; color: #282554;text-decoration:underline;"><strong>DÉFINITIONS</strong></p>
+                
+                <table style="width: 100%; border: 1px solid #bcbec0;margin-top:0px;border-collapse: collapse;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Application »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Les plateformes internet et applications mobiles développées et maintenues par Edenred et mises à la disposition de ses clients et des Utilisateurs. Les Applications sont accessibles aux clients et aux Utilisateurs par le biais de codes d’accès personnalisés. Les Applications peuvent fonctionner comme un site d’information, une Application ou un espace personnalisé (p. ex. MyEdenred).</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Carte Edenred »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Carte de paiement personnalisée et sécurisée, délivrée à chaque Utilisateur de Chèques permettant ainsi aux Utilisateurs d’acheter les Produits auprès des Commerçants. La Carte Edenred est liée au Compte de l’Utilisateur qui est chargée de la valeur des Chèques.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« (Système) Chèques »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Le (Système des) titres de service électroniques (Edenred Repas, Edenred Eco, Edenred Cadeaux, Edenred Sport &#38; Culture et Edenred Conso et tout nouveau produit ou service similaire qu’Edenred lancerait dans le futur), qui permettent aux Utilisateurs de payer les Transactions relatives aux Produits des Commerçants avec les Chèques conformément à la Loi Applicable.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Commande »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Toutes les commandes passées par le Client pour la fourniture des Services. Toute commande doit mentionner (i) le type de Services, (ii) le volume, (iii) la date et le lieu de livraison et (iv) le Prix.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Commerçant »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Tout partenaire commercial membre du Réseau Edenred qui permet aux Utilisateurs d’acheter ses Produits à l’aide des Chèques.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Compte »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Un espace personnalisé et sécurisé par Client et par Utilisateur sur une Application (p.ex. MyEdenred).</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Date de prise d’effet »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Date à laquelle le Contrat prend effet, à savoir le jour de la signature du Contrat par le Client, sauf autrement stipulé dans les Conditions Particulières.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Données personnelles »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Toutes informations se rapportant à une personne physique identifiée ou identifiable.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Droit intellectuels »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Tous les droits de propriété intellectuelle, y compris les logos, noms commerciaux, marques, droits d’auteur, brevets, technologies, secrets d’affaires et les Informations Confidentielles d’une Partie.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Force majeure »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Tout événement ou circonstance, y compris, mais sans s’y limiter, incendie, explosion, épidémie, action des éléments, guerre, émeute, grève du gouvernement ou de ses agents, ou toute cause similaire, hors de tout contrôle raisonnable de la Partie frappée par cet événement ou cette circonstance et qui rend l’exécution du Contrat raisonnablement impossible.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Informations confidentielles »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Toutes les informations, sous quelque forme que ce soit, (i) communiquées entre les Parties dans le cadre du Contrat, (ii) en relation avec les Utilisateurs, y inclus les Données Personnelles, (iii) désignées explicitement par les Parties comme informations confidentielles ou (iv) qui, par leur nature, doivent raisonna-blement être traitées comme confidentielles.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Loi applicable »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Les règles, lois et règlements, existants et futurs, sous quelque dénomination que ce soit, qui s’appliquent aux Chèques, aux Services et à ce Contrat, et notamment (mais sans s’y limiter) l’Arrêté Royal du 28 novembre 1969 pris en exécution de la loi du 27 juin 1969 révisant l’Arrêté Royal du 28 décembre 1944 concernant la sécurité sociale des travailleurs, la Convention collective de travail n° 98 et le règlement européen (EU) 2016/679 – GDPR ainsi que toutes les modifications à ces différents textes législatifs.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Produits »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Les services et/ ou biens offerts à la vente par le Commerçant aux consommateurs/Utilisateurs.</th>    
+                </tr> 
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Prix »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Le prix, les coûts et les frais tels qu’énoncés aux Conditions Particulières et à l’article 4 et, dans le cas où le Client étendrait ultérieurement les Services via le site web d’Edenred, les prix, coûts et frais affichés sur le site web d’Edenred, au moment de la Commande des Services étendus.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Société Liées »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Les personnes et/ou les sociétés liées au Client et mentionnées et ajoutées au Contrat en Annexe 2, complétée pour chaque Société Liée (Annexe 2a), 2b), etc.)).</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Réseau Edenred »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">L’ensemble des Commerçants qui acceptent les Chèques comme outil de paiement pour l’achat de leurs Produits .</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Services »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">Ensemble ou séparément, les Chèques, les Cartes Edenred, et/ou Applications tels que sélectionnés dans les Conditions Particulières et/ou les Services ajoutés (le caséchéant) par le Client après la Date de Prise d’Effet via le site web d’Edenred</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Transaction »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">L’achat, la location, la réservation ou toute autre transaction commerciale effectuée, via les Chèques, par les Utilisateurs auprès des Commerçants par rapport aux Produits.</th>    
+                </tr>
+                <tr>
+                    <th style="font-family:Arial Unicode MS ;font-size: 8pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="15" valign="middle"><strong>« Utilisateur »</strong></th>
+                    <th style="font-family:Arial Unicode MS ;font-size: 5pt; color: #88898b; margin-bottom:0px;padding-bottom:0px;border: 1px solid #bcbec0;" width="50%" height="8" valign="middle">La personne (employé désigné par le Client) qui est le bénéficiaire final des Services.</th>    
+                </tr>
+                
+                </table>
+                
+                <p style="font-size: 6pt; color: #282554;"><strong>1. OBJET</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    Les présentes Conditions Générales sont liées aux Services. Elles ont été rédigées conformément à la Loi Applicable. Les Services sélectionnés dans les Conditions Particulières peuvent être étendus par le Client à tout moment via le site web d’Edenred ou en passant une Commande basée sur un « prix en fonction du volume de la commande sur base d’une grille de prix standard », ledit prix et les conditions du Contrat s’appliquant ensuite automatiquement pour chaque Commande.
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>2. OBLIGATIONS D’EDENRED</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;">
+                    Pendant la durée du Contrat, EDENRED s’engage à :
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                    2.1. CHEQUES ET CARTES
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.1. produire une Carte Edenred individuelle et nominative pour chaque Utilisateur désigné par le Client, conformément aux informations préalablement communiquées par le Client concernant l’identité de chaque Utilisateur. La Carte Edenred peut être utilisée pour tout type de Chèques sélectionnés dans les Conditions Particulières.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.2. personnaliser, à la demande du Client et dans les limites raisonnables des moyens techniques d’Edenred, les Cartes Edenred selon les indications faites par le Client et acceptées par Edenred. Le Client garantit à Edenred, sans aucune réserve, qu’il est en droit d’utiliser lesdites mentions et décharge Edenred de toute responsabilité à cet égard.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.3. commander automatiquement et conformément aux conditions du Contrat une Carte Edenred pour tout nouvel Utilisateur qui ne dispose pas encore de Carte Edenred lorsqu’une Commande de Chèques est placée par le Client pour ledit Utilisateur.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.4. assurer le transfert automatique de la Carte Edenred de l’Utilisateur en cas de changement d’employeur (dans le cas où l’ancien et le nouvel employeur sont tous deux Client d’EDENRED) afin de permettre à l’Utilisateur de conserver sa Carte Edenred et de conserver l’accès à tout solde restant fourni par l’ancien employeur.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.5. livrer les Cartes Edenred au Client, à son siège ou à tout autre endroit situé en Belgique et convenu entre les Parties. Sur demande du Client, les Cartes Edenred peuvent être livrées, au seul risque du Client, au domicile des Utilisateurs. La livraison est effectuée par Edenred selon le mode de livraison de son choix, sauf accord contraire entre les Parties. Les Cartes Edenred sont livrées désactivées ; leurs conditions d’utilisation doivent être acceptées par les Utilisateur avant leur utilisation. Elles sont et restent la propriété d’Edenred.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.6. (i) créditer les Comptes avec les Chèques tels que définis par le Client via l’Application, sous conditions et pour autant que le Client a préalablement chargé les fonds et/ou payé les factures s’y référant à leur date d’échéance et (ii) traiter les Transactions effectuées avec la Carte Edenred en utilisant en premier lieu les Chèques ayant la durée de validité la plus courte (« premier entré, premier sorti »).
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.7. automatiquement délivrer une nouvelle Carte Edenred si (i) trois mois avant la date d’expiration d’une Carte Edenred l’Utilisateur a encore reçu des Chèques commandés par le Client et/ou (ii) 45 jours avant la date d’expiration d’une Carte Edenred, cette dernière montre toujours un solde positif.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.8. si nécessaire, garantir, en cas de retrait ou d’expiration de l’agrément d’EDENRED en tant qu’émetteur pour un type spécifique de Chèques, que lesdits Chèques restent valables jusqu’à leur date d’expiration.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.9. en cas de perte ou de vol d’une Carte Edenred, permettre aux Utilisateurs de bloquer gratuitement leur Carte Edenred via le service indépendant Card Stop, via un extranet sécurisé ou via un Serveur vocal interactif (SVI).
+                </p>
+                <div style="page-break-after:always;"/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.1.10. en cas de perte, de vol, de défectuosité ou de détérioration de la Carte Edenred :
+                </p>
+                <ul style="font-size: 4.2pt; color: #88898b;">
+                    <li>fournir aux Utilisateurs une nouvelle Carte Edenred dans les 10 jours ouvrables à compter (i) de la date de blocage de la Carte Edenred volée ou perdue ou (ii) de la réception par EDENRED de la carte endommagée ou défectueuse, envoyée par lettre recommandée avec accusé de réception.</li>
+                    <li>en cas de perte, de vol ou de détérioration, facturer au Client les frais liés au remplacement de la Carte Edenred, conformément aux Conditions Particulières. Le Client ne peut répercuter ces frais sur les Utilisateurs qu’à concurrence de la valeur nominale maximale d’un Chèque Edenred Repas ou d’un montant de 5 euros dans le cas du Chèque Edenred Eco, le premier primant sur le second si l’Utilisateur bénéficie des deux Services. En cas de défectuosité de la Carte Edenred, le remplacement est gratuit.</li>
+                </ul>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                    2.2. APPLICATIONS
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.2.1. créer un Compte et un accès personnalisé à l’Application pour le Client et chaque Utilisateur, sur base des informations préalablement communiquées par le Client concernant l’identité de chaque Utilisateur ; (ii) permettre aux Utilisateurs à tout moment de créer et de modifier en ligne leur nom d’utilisateur et/ou leur mot de passe et d’accéder à leur Compte ; (ii) fournir au Client ou à l’Utilisateur la procédure d’activation de la Carte Edenred. Grâce à son code personnalisé, le Client et les Utilisateurs peuvent se connecter à l’Application et consulter, leur Compte et d’autres informations proposées via l’Application ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.2.2. faire en sorte que les Utilisateurs puissent utiliser et consulter l’Application à tout moment. Edenred met tout en œuvre pour fournir une disponibilité d’au moins 97 % sur une base annuelle (24 heures sur 24, 7 jours sur 7). Toutefois, le Client accepte que l’Application ne soit pas disponible en cas de Force Majeure ou de maintenance technique. En cas d’interruption de l’accès ou du service, Edenred mettra tout en œuvre pour trouver une solution au problème dans les meilleurs délais.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.2.3. fournir la bande et la capacité de stockage nécessaires au bon fonctionnement de l’Application, au bénéfice du Client et des Utilisateurs ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.2.4. fournir les systèmes de sécurité nécessaires pour protéger correctement l’Application, les bases de données, les données des Utilisateurs et l’environnement de serveurs informatiques ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.2.5. informer régulièrement les Utilisateurs de l’étendue du Réseau Edenred et des Produits, via l’Application et, le cas échéant, via des newsletters. Ces dernières ne seront envoyées qu’aux Utilisateurs ayant expressément accepté de les recevoir.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;text-decoration:underline;">
+                    2.3. DISPOSITIONS GÉNÉRALES
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.1. accepter les Commandes placées conformément aux conditions du Contrat. Sauf convention contraire dans les Conditions Particulières, les Commandes ne seront livrées qu’après paiement du Prix relatif à la Commande et/ou de toutes les factures déjà échues.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.2. traiter les Transactions effectuées par les Utilisateurs ayant recours aux Services, pour autant qu’ils respectent toutes les obligations relatives aux Transactions effectuées.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.3. inviter les Commerçants susceptibles d’accepter les Services et répondant aux conditions de partenariat émises par EDENRED à rejoindre le Réseau Edenred ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.4. être à la disposition du Client et des Utilisateurs et assister ces derniers pour des questions ou plaintes, via le service clientèle <strong>https://user.edenred.be/hc/fr/requests/new?ticket_form.</strong>
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.5. fournir tous les autres services demandés par le Client tels que détaillés dans les Conditions Particulières ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    2.3.6. de manière générale, veiller au respect de toutes les obligations contractuelles et de toute Loi Applicable en relation avec les Services ou le Contrat.
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>3. OBLIGATIONS DU CLIENT</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;">
+                    Pendant la durée du Contrat, le Client s’engage à :
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.1. communiquer à Edenred, (i) au plus tard au moment de la passation de Commande, les informations – par Utilisateur – nécessaires à la fabrication de la Carte Edenred, à la création d’un Compte et l’activation d’un accès personnalisé à l’Application, qui sont le nom, le prénom et l’adresse électronique ainsi que, pour les Chèques, le numéro de registre national de chaque Utilisateur identifié par le Client; (ii) immédiatement, tout changement concernant ces informations, y compris les informations à propos de toute personne ayant perdu la qualité d’Utilisateur (par exemple en cas de départ d’employés).
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.2. mettre les Cartes Edenred et/ou les Applications à la disposition des Utilisateurs et à les informer qu’en les utilisant ils acceptent leurs conditions d’utilisation (qui s’affichent et sont à accepter sur l’Application avant la première utilisation, et ensuite à l’occasion des mises à jour éventuelles). Edenred se réserve le droit de suspendre, de plein droit, sans préavis ni indemnité, l’utilisation des Services en cas d’utilisation frauduleuse ou non conforme des Services par le Client ou par les Utilisateurs.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.3. sauf convention contraire dans les Conditions Particulières, couvrir les frais d’émission des Chèques ou de la Carte Edenred mis à la disposition des Utilisateurs et à assumer la responsabilité en cas de perte, de vol ou de détérioration des Cartes Edenred entre leur livraison au Client et leur remise par le Client aux Utilisateurs.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.4. valider la commande de la Carte Edenred en cas d’expiration, de perte, de vol, de défectuosité ou de détérioration tant que l’Utilisateur dispose sur son Compte de Chèques en cours de validité et assumer les frais de remplacement, conformément aux Conditions Particulières (sauf en cas de Carte Edenred défectueuse).
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.5. pour les Chèques Edenred Repas uniquement : garantir, d’une part, que les Utilisateurs qui ont accès à un restaurant d’entreprise dans lequel le prix du repas est inférieur à son prix de revient (tel que fixé par la Loi Applicable), soient tenus de payer ledit repas exclusivement avec un Chèque Edenred Repas, sans remboursement possible, et, d’autre part, que le Commerçant concerné soit informé de la valeur nominale des Chèques Edenred Repas que les Utilisateurs utilisent.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.6. s’assurer que le matériel utilisé pour accéder à l’Application (y compris les tablettes, smartphones, ordinateurs, accès internet, numéros de téléphone, etc.) est compatible avec l’utilisation de celui-ci dans le contexte des Services ;
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.7. s’assurer que le Client et les Utilisateurs (i) connaissent, acceptent et respectent les conditions d’utilisation de l’Application et de la Carte Edenred, (ii) n’utilisent pas les Services d’une manière qui pourrait violer les droits d’Edenred ou de tiers (y compris, les Droits Intellectuels) ; et (iii) ne revendent, ne louent ou ne donnent l’accès aux Services à des tiers. Edenred se réserve le droit de prendre toutes les mesures nécessaires si le Client ou un Utilisateur met en danger ou compromet les Services, les droits d’Edenred ou de tiers ou la relation entre Edenred et ses partenaires, d’autres clients ou d’autres tiers.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.8. de manière générale, veiller au respect de toutes les obligations contractuelles et de toute Loi Applicable en relation avec les Services ou le Contrat.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    3.9. payer le Prix conformément aux dispositions des articles 4 et 5 ci-après.
+                </p>
+            <!--</div>-->
+            <!--<div class="topright">-->
+                <p style="font-size: 6pt; color: #282554;"><strong>4. PRIX</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.1. Le Client paie les Services au Prix fixé dans les Conditions Particulières, majoré de la TVA applicable. Après la fin du Contrat, pour quelle que raison que ce soit, tous les Services prépayés resteront acquis par EDENRED. Aucun remboursement ne sera possible pour les Services ou crédits non utilisés.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.2. Le Client pourra, à n’importe quel moment pendant la durée du Contrat, et dans les limites prévues par la Loi Applicable, ajouter des Services et/ou augmenter la valeur faciale des Chèques, et/ou ajuster le nombre d’Utilisateurs via l’application MyEdenred. Dans ce cas, toutes les autres conditions reprises dans le Contrat resteront inchangées.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.3. Le Client peut ajuster le volume de Commande qu’il a déterminé à sa seule discrétion. Toutefois, si le volume commandé diminue de 50% ou plus avant la fin de la durée du Contrat telle que prévue à l’article 7.1. du présent Contrat, Edenred se réserve le droit de réclamer au Client des dommages et intérêts forfaitaires d’un montant de 10€/Utilisateur pour les 49 premiers Utilisateurs, 7,5€/Utilisateur pour les Utilisateurs 50 à 250, et 5€/Utilisateur pour les Utilisateurs au-delà de 250. Ceci ne s’applique qu’aux Utilisateurs pour lesquels les Services ne sont plus commandés. Le volume de Commande pris en compte pour ce calcul sera la moyenne entre le volume de Commande de la première Commande et le volume de Commande à l’issue des 6 premiers mois (ou seulement le volume de la première commande si celle-ci a lieu au cours des six premiers mois du contrat).    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.4. Le Prix est lié aux variations à la hausse de l’indice du coût salarial AGORIA (moyenne nationale). En cas d’augmentation de l’indice AGORIA, les Prix seront adaptés au maximum une fois par année calendaire, selon la formule suivante : <strong>P = P0 (0,2 + 0,8 x S / S0)</strong> où:   
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;">
+                    <strong>P</strong> = valeur adaptée du Prix mentionné aux conditions financières<br/>
+                    <strong>P0</strong>= prix mentionné aux conditions financières<br/>
+                    <strong>S</strong> = l’indice Agoria des coûts de la main d’oeuvre (moyenne nationale) en vigueur le premier jour de chaque trimestre<br/>
+                    <strong>S0</strong> = l’indice Agoria des coûts de la main d’oeuvre (moyenne nationale) en vigueur le jour de la conclusion du contrat<br/>
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    Si l’indice AGORIA n’est plus publié ou subit des changements importants dans la teneur et dans la forme, c’est un indice comparable qui sera retenu moyennant notification au Client.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.3. Sans préjudice aux dispositions de l’article 4.2., EDENRED se réserve le droit de modifier le Prix à tout moment, mais limitée à une fois par année calendrier, moyennant une notification préalable de 60 jours au Client. Si le Client n’accepte pas le nouveau Prix, le Client sera en droit de terminer le Contrat par écrit au moins 15 jours avant la date effective du nouveau Prix et moyennant un préavis de 90 jours à partir de la date effective du nouveau Prix. Pendant cette période de préavis, le Prix sera le dernier prix convenu entre les Parties. À défaut d’une notification de la résiliation envoyée par le Client au moins 15 jours avant la date effective du nouveau Prix, celui-ci sera considéré comme accepté par le Client.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    4.5. Sans préjudice des dispositions de l’article 4.2., Edenred se réserve le droit de modifier le Prix à tout moment, mais limité à une fois par année calendrier, moyennant une notification préalable de 60 jours au Client. Si le Client n’accepte pas le nouveau Prix, le Client sera en droit de résilier le Contrat par écrit au moins 15 jours avant la date effective du nouveau Prix et moyennant un préavis de 90 jours qui commence à courir à partir de la date effective du nouveau Prix. Pendant cette période de préavis, le Prix sera le dernier prix convenu entre les Parties. À défaut d’une notification de la résiliation envoyée par le Client au moins 15 jours avant la date effective du nouveau Prix, celui-ci sera considéré comme accepté par le Client.
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>5. FACTURATION ET PAIEMENT</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    5.1. Sauf convention contraire entre les Parties, le Prix lié aux Services et la Carte Edenred ainsi que la valeur faciale des Chèques est facturé mensuellement, de manière anticipative, pour le mois prochain (paiement soit par virement, soit par domiciliation SEPA).
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    5.2. Sauf convention contraire entre les Parties, le Prix, ainsi que les valeurs faciales des Chèques seront facturés de manière électronique. Edenred garantit l’authenticité de l’origine des factures émises de manière électronique, l’intégrité de leur contenu et leur lisibilité. La valeur probante de la facturation électronique est explicitement reconnue et acceptée par le Client.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    5.3. À défaut de paiement avant la date de livraison prévue, Edenred se réserve le droit d’annuler la Commande sans préavis. Le cas échéant, et à défaut de paiement par le biais d’un prépaiement ou d’un prélèvement SEPA, les factures sont dues à 30 jours date de réception de la facture. Tout retard de paiement des factures à l’échéance entraîne le paiement d’intérêts de retard et une indemnité forfaitaire, conformément à la loi du 2 août 2002 concernant la lutte contre le retard de paiement dans les transactions commerciales. En cas de cessation de paiement, de liquidation, de faillite ou de toute autre situation de concours entre les créanciers du Client, toutes les factures et créances d’Edenred vis-à-vis du Client sont immédiatement exigibles et payables.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    5.4. Toute contestation de facture doit être faite par écrit et dans les 14 jours calendrier suivant la date de réception de la facture ; à défaut, la facture sera réputée non contestée et acceptée par le Client. Si seules certaines parties d’une facture sont contestées, la partie non-contestée doit être payée dans le délai de paiement normal.   
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    5.5. EDENRED se réserve le droit de facturer des frais forfaitaires de 30,00 EUR par incident, pour des requêtes spécifiques ou des erreurs (p.ex. mauvaise n° de référence, double commande, etc.) faites par le Client.   
+                </p>
+                <div style="page-break-after:always;"/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p style="font-size: 6pt; color: #282554;"><strong>6. RESPONSABILITÉ</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    6.1. Edenred sera responsable à l’égard du Client de sa faute lourde, de son dol et de sa négligence grave. Edenred ne peut pas être tenue responsable (i) en cas de Force Majeure,(ii) pour les actions, omissions ou décisions de tiers impliqués dans l’exécution du Contrat, notamment des perturbations, retards ou pertes de toute nature causés par la fraude, le piratage ou toute autre intrusion illicite dans le système de communication ou l’Application d’Edenred; (iii) de l’indisponibilité de la Carte Edenred suite à des travaux de maintenance ou à des défauts, (iv) du fait que certains Produits achetés à l’aide des Chèques, de la Carte Edenred ou via l’Application s’avèrent être inappropriés, illégaux, de mauvaise qualité, défectueux ou autrement insatisfaisants ; (v) du non-respect par le Client et/ou de l’Utilisateur des prescriptions et/ou indications en matière de sécurité. Dans les cas (ii) et (iv), l’Utilisateur ou le Client doit contacter le Commerçant ou le tiers directement. Edenred s’efforcera d’assister le Client au mieux de ses connaissances et capacités dans les négociations avec le Commerçant ou le tiers concerné afin de trouver une solution acceptable.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    6.2. Le Client garantira et indemnisera Edenred en cas d’action ou de réclamation intentée à encontre d’Edenred par un tiers (incluant notamment les Utilisateurs) découlant (i) de tout manquement de la part du Client, ses employés, agents ou représentants, aux obligations du Contrat, y inclus toute violation des Droits Intellectuels de tiers.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    6.3. Sauf en cas de fraude, dol ou faute grave, négligence grave, dommage corporel ou décès et pour autant qu’autorisé par la Loi Applicable:    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    6.3.1. la responsabilité d’Edenred est limitée au montant égal au Prix facturé au cours des six mois (complets) précédant l’incident ayant causé le dommage.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    6.3.2. aucune des Parties ne sera tenue responsable envers l’autre Partie de toute forme de dommages spéciaux, indirects ou consécutifs, y compris sans toutefois s’y limiter, la perte de revenus ou de bénéfices, la perte des données, l’atteinte à la réputation, etc.    
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>7. DURÉE ET RÉSILIATION</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    7.1. Sauf convention contraire entre les Parties dans les Conditions Particulières, le Contrat est conclu pour une durée de 24 mois à compter de la Date de Prise d’Effet (« Période Initiale ») et sera ensuite tacitement reconduit aux mêmes conditions pour des périodes consécutives de 12 mois (« Période Consécutive »), sauf résiliation par l’une des Parties par lettre recommandée au moins 90 jours avant l’expiration de la Période Initiale ou toute autre Période Consécutive.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    7.2. Tout manquement d’une Partie (Partie défaillante) à ses obligations au titre du Contrat, non remédié par la Partie défaillante dans un délai de 15 jours calendaires à compter de la mise en demeure qui lui a été adressée par l’autre Partie, autorise l’autre Partie à résilier le Contrat sans préavis et sans indemnité. Tout changement dans la situation d’une Partie, tel que la cessation de ses activités, le redressement judiciaire, la faillite, la liquidation ou toute autre situation similaire, autorise l’autre Partie à résilier le Contrat sans préavis et sans indemnité.
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    7.3. Toute résiliation du Contrat Edenred en application de l’article 7.2 implique l’obligation pour la Partie défaillante de dédommager l’autre Partie pour tout dommage qu’elle doit subir à cause de la résiliation anticipative. En cas de résiliation anticipative, les dommages sont fixés à 50 % du Prix à facturer pendant la durée contractuelle restante du Contrat, calculé sur la base du Prix moyen facturé au Client pendant la durée du Contrat précédant la résiliation anticipative, sans préjudice du droit d’Edenred de réclamer tout montant supérieur équivalent à son dommage réellement subi.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    7.4. Si le Client résilie le présent Contrat avant la première Commande, sauf cas de Force Majeure, le Client sera tenu de rembourser à Edenred un montant de 50€/Utilisateur pour les Utilisateurs 1 à 49, 15€/ Utilisateur pour les Utilisateurs 50 à 250 et 5€/Utilisateur pour les Utilisateurs au-delà de 250.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    7.5. En cas de résiliation, les Parties s’engagent à continuer, pendant la période de préavis, à exécuter le Contrat conformément à ses dispositions.    
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>8. PROTECTION DES DONNÉES</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    8.1. Chaque Partie traite les Données à caractère personnel reçues dans le cadre du Contrat en tant que responsable du traitement distinct. Rien dans le Contrat ou ses effets envisagés ne peut qualifier l’une ou l’autre Partie de sous-traitant ou de responsable conjoint du traitement en ce qui concerne les Données à caractère personnel reçues et traitées dans le cadre du Contrat.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    8.2. Les Parties déclarent et garantissent qu’elles se conforment à tout moment, pendant la durée du Contrat et après sa résiliation, à la Règlementation Applicable en matière de Protection des Données à caractère personnel et, notamment, le Règlement Général (UE) 2016/679 sur la Protection des Données (« RGPD »).    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    8.3. Chaque Partie met en place, à ses propres frais, des mesures techniques et organisationnelles appropriées, comme l’exige notamment l’article 32 du RGPD, contre la perte ou toute forme de traitement illicite (telle que la destruction, la perte, la détérioration non autorisée, l’altération, l’accès à ou la divulgation de Données Personnelles accidentelle ou illicite) dans le cadre du traitement des Données à caractère personnel. Dans la mesure et pour autant que l’exige la Règlementation Applicable, les Parties informeront les personnes concernées (par exemple les Utilisateurs) des activités de traitement effectuées dans le cadre du Contrat.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    8.4. La politique de confidentialité d’Edenred est disponible sur <strong><span style="color: #00BFFF;">https://www.edenred.be/fr/privacy-policy</span></strong> ou sur simple demande à l’adresse <strong><span style="color: #00BFFF;">dpo.belgium@edenred.com</span></strong>. En cas de questions, de demandes ou de réclamations concernant le traitement de leurs Données à caractère personnel par Edenred, le Client ou l’Utilisateur peut prendre contact à tout moment avec le délégué à la protection des données, via l’adresse <strong><span style="color: #00BFFF;">dpo.belgium@edenred.com</span></strong>. Le Client ou l’Utilisateur peut également introduire une plainte auprès de l’Autorité de Protection des Données.    
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>9. DROITS INTELLECTUELS</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    9.1. Chaque Partie reste le propriétaire exclusif de ses Droits Intellectuels respectifs utilisés dans le cadre du Contrat.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    9.2. Chaque Partie peut autoriser l’autre Partie à utiliser ses Droits Intellectuels à des fins de marketing et de communication en rapport avec le Contrat, à condition que cette utilisation (i) se fasse en concertation avec l’autre Partie et conformément aux éléments préalablement communiqués par le titulaire des Droits Intellectuels concernés; (ii) ne porte en aucune manière atteinte aux Droits Intellectuels, à l’image de l’autre Partie, à l’ordre public et aux bonnes mœurs et (iii) s’effectue sans divulgation du contenu du Contrat. Cette autorisation ne porte en aucun cas sur les Droits Intellectuels de tiers qui seraient utilisés par l’une ou l’autre Partie (dans le cadre d’une licence d’utilisation) dans le cadre de son activité.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    9.3. Chaque Partie peut demander à l’autre Partie de cesser toute utilisation de ses Droits Intellectuels qui, selon son opinion raisonnable, est contraire à ce qui précède. L’autre Partie cessera immédiatement toute utilisation contraire.    
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    9.4. Chaque Partie garantit que ses logos ne portent pas atteinte à des Droits Intellectuels de tiers et dégage l’autre Partie de toute responsabilité et l’indemnise contre tout recours ou toute réclamation dans ce cadre.    
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>10. CONFIDENTIALITÉ</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    Pendant la durée du Contrat et 36 mois après son terme, aucune Partie ne peut utiliser les Informations Confidentielles de l’autre Partie à des fins autres que l’exécution du Contrat ou des fins d’archivage. Chaque Partie veille à ce que les Informations Confidentielles de l’autre Partie ne soient pas divulguées et à ce que ses employés, membres du personnel ou agents commerciaux ne les révèlent pas à des tiers. Si une Partie est tenue par un tribunal ou une autorité de divulguer ou de communiquer des Informations Confidentielles de l’autre Partie, elle en informera immédiatement cette autre Partie.
+                </p>
+                <p style="font-size: 6pt; color: #282554;"><strong>11. DISPOSITIONS GÉNÉRALES</strong></p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    11.1. Les Parties s’engagent à respecter l’ensemble des règles de conduite éthique et, en particulier, le Code d’éthique du Groupe Edenred (<strong><span style="color: #00BFFF;">https://www.edenred.com/system/files/documents/edenred_charte_ethique_fr.pdf</span></strong>).        
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    11.2. Aux fins du Contrat et de toutes ses conséquences, toute communication, notification de nature judiciaire ou extrajudiciaire peut être valablement faite à l’adresse spécifiée dans les Conditions Particulières ou au siège de chacune des Parties.      
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    11.3. Le Contrat remplace et annule l’ensemble des discussions, négociations et accords antérieurs entre les Parties et régit la relation globale entre les Parties en ce qui concerne les Services (tel que sélectionnés dans les Conditions Particulières ou via le site web d’Edenred en passant une Commande basée sur un « prix en fonction du volume de la commande sur base d’une grille de prix standard »).        
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    11.4. Si une disposition du Contrat est jugée invalide ou inapplicable, la partie valide et applicable de celle-ci et les autres dispositions du présent Contrat resteront pleinement en vigueur. Toute renonciation (expresse ou implicite) par une Partie à l’application de toute disposition du présent Contrat ne constituera pas une renonciation à toute application ultérieure de la même disposition.      
+                </p>
+                <p style="font-size: 4.2pt; color: #88898b;text-align:justify;">
+                    11.5. Le Contrat est soumis au droit belge. En cas de litige, les Parties chercheront toujours, de bonne foi, une solution à l’amiable à leur différend. Edenred se réserve le droit de suspendre ou de limiter le Contrat en cas de litige. Si aucun règlement à l’amiable ne peut être trouvé, tout litige relatif à la conclusion, l’interprétation ou l’exécution du Contrat relève de la compétence exclusive des tribunaux de l’arrondissement de Bruxelles (premier canton de la justice de paix).           
+                </p>
+            <!--</div>-->
+        </div>
+        
+    </apex:form>
+</apex:page>

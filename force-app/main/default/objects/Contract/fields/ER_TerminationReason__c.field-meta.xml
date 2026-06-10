@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_TerminationReason__c</fullName>
+    <label>Termination Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bankruptcy / Closure</fullName>
+                <default>false</default>
+                <label>Bankruptcy / Closure</label>
+            </value>
+            <value>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+                <label>Amendment</label>
+            </value>
+            <value>
+                <fullName>Lost to direct competition</fullName>
+                <default>false</default>
+                <label>Lost to direct competition</label>
+            </value>
+            <value>
+                <fullName>Termination for legal reasons</fullName>
+                <default>false</default>
+                <label>Termination for legal reasons</label>
+            </value>
+            <value>
+                <fullName>Quality of service</fullName>
+                <default>false</default>
+                <label>Quality of service</label>
+            </value>
+            <value>
+                <fullName>Costs</fullName>
+                <default>false</default>
+                <label>Costs</label>
+            </value>
+            <value>
+                <fullName>Not Interested anymore</fullName>
+                <default>false</default>
+                <label>Not Interested anymore</label>
+            </value>
+            <value>
+                <fullName>Internal issues at client</fullName>
+                <default>false</default>
+                <label>Internal issues at client</label>
+            </value>
+            <value>
+                <fullName>Product no longer fits needs</fullName>
+                <default>false</default>
+                <label>Product no longer fits needs</label>
+            </value>
+            <value>
+                <fullName>Lost to indirect competition</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lost to indirect competition</label>
+            </value>
+            <value>
+                <fullName>Lost to internal competition</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lost to internal competition</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Scheduled end date</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Scheduled end date</label>
+            </value>
+            <value>
+                <fullName>To little volume</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>To little volume</label>
+            </value>
+            <value>
+                <fullName>Transformation of the company</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Transformation of the company</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

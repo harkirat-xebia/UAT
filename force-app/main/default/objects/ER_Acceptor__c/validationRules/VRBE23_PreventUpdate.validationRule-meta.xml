@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE23_PreventUpdate</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; NOT( ISNEW() )
+&amp;&amp; ISPICKVAL(ER_Status__c, &apos;Activated&apos;) 
+&amp;&amp; OR( $Profile.Name = &apos;Merchant Sales&apos;,
+			$Profile.Name = &apos;Client Sales&apos;,
+			$Profile.Name = &apos;Marketing&apos;
+		)</errorConditionFormula>
+    <errorMessage>VRBE23 - You are not able to modify an active acceptor.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Lead_Solution_Obligatory</fullName>
+    <active>false</active>
+    <description>Solution field is obligatory for the lead coming from Merchant or Unmatched Transactions</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+RecordType.DeveloperName = &quot;ER_Merchant_Lead_RT&quot;,
+OR(
+ISPICKVAL(ER_Lead_Channel__c ,&quot;User&quot;),
+ISPICKVAL(ER_Lead_Channel__c ,&quot;Customer&quot;)), 
+(ISBLANK(TEXT( ER_Solution__c ))
+))</errorConditionFormula>
+    <errorDisplayField>ER_Solution__c</errorDisplayField>
+    <errorMessage>The field Solution must be filled in order to register the Lead</errorMessage>
+</ValidationRule>

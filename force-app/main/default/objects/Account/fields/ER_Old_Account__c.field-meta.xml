@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Old_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Field to link an account to a former account following a change in VAT / company registration number</description>
+    <label>Old Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Accounts (Old Account)</relationshipLabel>
+    <relationshipName>Accounts1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

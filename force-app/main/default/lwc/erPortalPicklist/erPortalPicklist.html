@@ -1,0 +1,50 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 17-09-2021
+  @last modified by  : AAM
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   05-17-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+  <div class="slds-form-element slds-align-top slds-col--padded">
+    <label class="slds-form-element__label" for="text-input-id-1">
+      <template if:true={required}>
+        <abbr class="slds-required" title="required">* </abbr>
+      </template>
+      {inputLabel}
+    </label>
+    <template if:true={hasTooltip}>
+      <lightning-helptext content={toolTipText} class="er-tooltip"></lightning-helptext>
+    </template>
+    <div class="slds-form-element__control">
+      <div class="slds-select_container">
+        <select
+          class={pickListCssClass}
+          id="select-01"
+          disabled={disabled}
+          onclick={handleClick}
+          onchange={handleChange}
+          autocomplete="off"
+        >
+          <template if:true={displayCurValue}>
+            <option selected>{displayedValue}</option>
+          </template>
+          <template if:false={displayCurValue}>
+            <template for:each={pkEntries} for:item="pkEntry" for:index="index">
+              <!-- <option key={pkEntry.key} value={pkEntry.key} disabled={pkEntry.disabled} selected={pkEntry.selected}>{pkEntry.value}</option> -->
+              <option selected={pkEntry.selected} key={pkEntry.index} value={pkEntry.key} hidden={pkEntry.hidden}>
+                {pkEntry.value}
+              </option>
+            </template>
+          </template>
+        </select>
+      </div>
+    </div>
+    <template if:true={hasError}>
+      <div class="slds-form-element__help" id="error-message-unique-id">{errorMessage}</div>
+    </template>
+  </div>
+</template>

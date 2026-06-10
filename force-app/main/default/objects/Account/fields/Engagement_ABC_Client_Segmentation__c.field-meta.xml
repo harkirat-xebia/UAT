@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Engagement_ABC_Client_Segmentation__c</fullName>
+    <label>Engagement ABC Client Segmentation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Intensive AA&apos;</fullName>
+                <default>false</default>
+                <label>Intensive AA&apos;</label>
+            </value>
+            <value>
+                <fullName>Intensive AB&apos;</fullName>
+                <default>false</default>
+                <label>Intensive AB&apos;</label>
+            </value>
+            <value>
+                <fullName>Maintain AC&apos;</fullName>
+                <default>false</default>
+                <label>Maintain AC&apos;</label>
+            </value>
+            <value>
+                <fullName>Intensive BA&apos;</fullName>
+                <default>false</default>
+                <label>Intensive BA&apos;</label>
+            </value>
+            <value>
+                <fullName>Develop BB&apos;</fullName>
+                <default>false</default>
+                <label>Develop BB&apos;</label>
+            </value>
+            <value>
+                <fullName>Maintain BC&apos;</fullName>
+                <default>false</default>
+                <label>Maintain BC&apos;</label>
+            </value>
+            <value>
+                <fullName>Develop CA&apos;</fullName>
+                <default>false</default>
+                <label>Develop CA&apos;</label>
+            </value>
+            <value>
+                <fullName>Economical CB&apos;</fullName>
+                <default>false</default>
+                <label>Economical CB&apos;</label>
+            </value>
+            <value>
+                <fullName>Economical CC&apos;</fullName>
+                <default>false</default>
+                <label>Economical CC&apos;</label>
+            </value>
+            <value>
+                <fullName>New legacy</fullName>
+                <default>false</default>
+                <label>New legacy</label>
+            </value>
+            <value>
+                <fullName>New freemium</fullName>
+                <default>false</default>
+                <label>New freemium</label>
+            </value>
+            <value>
+                <fullName>New premium</fullName>
+                <default>false</default>
+                <label>New premium</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

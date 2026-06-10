@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE02_InvoicingDayOfWeek_Obligatory</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_BU_Picklist__c, &quot;BENELUX&quot;)
+&amp;&amp; ISPICKVAL( ER_InvoicingFrequency__c ,&quot;Weekly&quot;)
+&amp;&amp; (ISBLANK(TEXT( ERBE_Invoicing_day_of_week__c )))</errorConditionFormula>
+    <errorMessage>The field Invoicing Day Of Week must be filled in order to register the Opportunity</errorMessage>
+</ValidationRule>

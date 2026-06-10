@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Domain_unicity</fullName>
+    <active>true</active>
+    <errorConditionFormula>If ( Customer_Domain_Unicity__c = true, true,False)</errorConditionFormula>
+    <errorMessage>Customer domain duplicate found</errorMessage>
+</ValidationRule>

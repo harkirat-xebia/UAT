@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BE_General_Condition_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>BE_Edenred_Solution__c</fields>
+    <fields>BE_Type__c</fields>
+    <fields>BE_Language__c</fields>
+    <fields>BE_Active__c</fields>
+    <label>General Condition Compact Layout</label>
+</CompactLayout>

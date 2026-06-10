@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRRO01_Prevent_Person_Account_Changing__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field is created to bypass teh following VR Account.VRRO01_Prevent_Person_Account_Changing</description>
+    <label>VRRO01_Prevent_Person_Account_Changing</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

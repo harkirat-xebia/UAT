@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER08_AccountContactMandatory</fullName>
+    <active>true</active>
+    <description>Validation rule to make the fields Account and Contact mandatory to some BUs</description>
+    <errorConditionFormula>AND(
+ NOT($User.ER_BypassVR__c),
+ NOT(CONTAINS($User.Alias, &apos;ssyst&apos;)), 
+ NOT(CONTAINS(RecordType.Name, &apos;User&apos;)), 
+ ISBLANK(AccountId), 
+ ISBLANK(ContactId),  
+ ISBLANK(CreatedById ), 
+ NOT(ISPICKVAL(Owner:User.ER_Business_Unit__c,&apos;FI&apos;)),
+ NOT(ISPICKVAL(Owner:User.ER_Business_Unit__c,&apos;SE&apos;)),
+ NOT(ISPICKVAL(Owner:User.ER_Business_Unit__c,&apos;ES&apos;))
+)</errorConditionFormula>
+    <errorMessage>You have to fill the &quot;Account Name&quot; and &quot;Contact Name&quot; fields</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_IncompatibleOperationWithUpdateTC</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_Type__c, &apos;UpdateT&amp;C&apos;)
+&amp;&amp; (!ISBLANK(ER_New_Price__c)
+  || !ISBLANK(ER_Service_Reference__c))</errorConditionFormula>
+    <errorMessage>You cannot fill the Service Reference or the New price with the UpdateT&amp;C type.</errorMessage>
+</ValidationRule>

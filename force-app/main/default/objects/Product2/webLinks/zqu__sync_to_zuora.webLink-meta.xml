@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>zqu__sync_to_zuora</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Sync to Zuora</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/zqu__ProductListViewSync?syncObjectId={!Product2.Id}&amp;stype=Product2</url>
+</WebLink>

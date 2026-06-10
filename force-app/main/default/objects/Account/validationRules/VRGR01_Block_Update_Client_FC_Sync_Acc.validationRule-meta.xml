@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRGR01_Block_Update_Client_FC_Sync_Acc</fullName>
+    <active>true</active>
+    <description>A Master Financial Center with a Preferred invoice method is mandatory for a Greek synchronized account</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+                    &amp;&amp; NOT(ISNEW())
+                    &amp;&amp; ISPICKVAL(ER_BUPicklist__c, &quot;GR&quot;)
+                    &amp;&amp; ISCHANGED(ER_Client_Master_FinancialCenter__c)
+                    &amp;&amp; ISPICKVAL(ER_Client_Master_FinancialCenter__r.ER_Preferred_Invoicing_Method__c ,&apos;&apos;)
+                    &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_Client_Master_FinancialCenter__c</errorDisplayField>
+    <errorMessage>VRGR01 - A Master Financial Center with a Preferred invoice method is mandatory for a Greek synchronized account</errorMessage>
+</ValidationRule>

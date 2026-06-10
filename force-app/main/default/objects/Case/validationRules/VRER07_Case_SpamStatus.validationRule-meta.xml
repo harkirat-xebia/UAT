@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Case_SpamStatus</fullName>
+    <active>true</active>
+    <description>Allow to change status to spam without mandatory fields</description>
+    <errorConditionFormula>IF(
+ISCHANGED(OwnerId),
+false,
+AND(
+NOT($User.ER_BypassVR__c),
+NOT(CONTAINS(RecordType.Name, &apos;User&apos;)),
+NOT(ISPICKVAL(Status, &apos;Spam&apos;)),
+ISBLANK(AccountId),
+ISBLANK(ContactId),
+NOT(ISBLANK(CreatedById)),
+NOT(CONTAINS($User.Alias, &apos;ssyst&apos;)),
+NOT(ISPICKVAL($User.ER_Business_Unit__c, &apos;ES&apos;)),
+NOT(ISPICKVAL($User.ER_Business_Unit__c, &apos;FI&apos;)),
+NOT(ISPICKVAL($User.ER_Business_Unit__c, &apos;SE&apos;))
+)
+)</errorConditionFormula>
+    <errorMessage>Please fill the mandatory fields. &quot;Account Name&quot;, &quot;Contact Name&quot;.</errorMessage>
+</ValidationRule>

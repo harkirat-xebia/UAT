@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Framework_Opportunity_Decision</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; Account.ER_Decision_maker__c = false
+&amp;&amp;  TEXT(Type) = &apos;Framework agreement&apos;</errorConditionFormula>
+    <errorMessage>Framework Opportunities can only be created on “Decision maker” accounts</errorMessage>
+</ValidationRule>

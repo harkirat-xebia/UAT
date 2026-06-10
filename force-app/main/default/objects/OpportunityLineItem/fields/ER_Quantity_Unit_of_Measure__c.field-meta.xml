@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Quantity_Unit_of_Measure__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(PricebookEntry.Product2.RecordType.Name = &apos;Range&apos;,
+TEXT(PricebookEntry.Product2.ER_Solution__r.QuantityUnitOfMeasure),
+TEXT(PricebookEntry.Product2.QuantityUnitOfMeasure)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Quantity Unit of Measure</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

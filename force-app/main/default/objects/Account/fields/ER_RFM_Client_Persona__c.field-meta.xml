@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_RFM_Client_Persona__c</fullName>
+    <label>RFM Client Persona</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hibernating</fullName>
+                <default>false</default>
+                <label>Hibernating</label>
+            </value>
+            <value>
+                <fullName>At Risk</fullName>
+                <default>false</default>
+                <label>At Risk</label>
+            </value>
+            <value>
+                <fullName>Can&apos;t Lose Them</fullName>
+                <default>false</default>
+                <label>Can&apos;t Lose Them</label>
+            </value>
+            <value>
+                <fullName>About to Sleep</fullName>
+                <default>false</default>
+                <label>About to Sleep</label>
+            </value>
+            <value>
+                <fullName>Need Attention</fullName>
+                <default>false</default>
+                <label>Need Attention</label>
+            </value>
+            <value>
+                <fullName>Promising</fullName>
+                <default>false</default>
+                <label>Promising</label>
+            </value>
+            <value>
+                <fullName>Loyal Customers</fullName>
+                <default>false</default>
+                <label>Loyal Customers</label>
+            </value>
+            <value>
+                <fullName>New Customers</fullName>
+                <default>false</default>
+                <label>New Customers</label>
+            </value>
+            <value>
+                <fullName>Potential Loyalists</fullName>
+                <default>false</default>
+                <label>Potential Loyalists</label>
+            </value>
+            <value>
+                <fullName>Champions</fullName>
+                <default>false</default>
+                <label>Champions</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

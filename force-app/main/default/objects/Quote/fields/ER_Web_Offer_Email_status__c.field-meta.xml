@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Web_Offer_Email_status__c</fullName>
+    <label>Web Offer Email status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>To be sent</fullName>
+                <default>false</default>
+                <label>To be sent</label>
+            </value>
+            <value>
+                <fullName>Sent</fullName>
+                <default>false</default>
+                <label>Sent</label>
+            </value>
+            <value>
+                <fullName>Sending in Error</fullName>
+                <default>false</default>
+                <label>Sending in Error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

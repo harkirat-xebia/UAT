@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER002_Employee_ScheduledDayForBlocking</fullName>
+    <active>true</active>
+    <description>&quot;Scheduled day for blocking&quot; is filled when Employee Status = &quot;to be deactivated&quot;</description>
+    <errorConditionFormula>AND(
+                NOT($User.ER_BypassVR__c), 
+				ISPICKVAL(ER_Employee_Status__c,&apos;To be deactivated&apos;),
+				ISBLANK( ERFI_Scheduled_day_for_blocking__c)
+				)</errorConditionFormula>
+    <errorMessage>You need to inform the Scheduled day for blocking</errorMessage>
+</ValidationRule>

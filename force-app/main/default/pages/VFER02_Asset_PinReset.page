@@ -1,0 +1,365 @@
+<apex:page standardController="Asset"
+  extensions="VFCER02_Asset_PinReset"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+>
+  <head>
+    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+    <style>
+      .lookupHoverDetail .labelCol {
+        font-weight: bold;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #dddbda;
+      }
+      .lookupHoverDetail .dataCol {
+        border-bottom: 1px solid #dddbda;
+      }
+      .lookupHoverDetail .mainTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .lookupHoverDetail .bPageBlock {
+        margin: 0.5rem;
+      }
+      .lookupHoverDetail .pbHeader {
+        margin-bottom: 1rem;
+      }
+      .lookupHoverDetail .btn {
+        border: 1px solid #dddbda;
+        color: #0070d2;
+        background: white;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .lookupHoverDetail {
+        border: 1px solid #dddbda;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        background: rgb(243, 242, 242);
+        height: auto;
+        width: auto;
+      }
+      .lookupHoverDetailOverridable {
+        width: 320px;
+        height: 270px;
+      }
+      .lookupHoverDetail {
+        position: absolute;
+        z-index: 15;
+        top: 0;
+        left: 0;
+        display: none;
+        padding: 0;
+        margin: 0;
+      }
+      html {
+        background-color: white;
+      }
+      html body.sfdcBody {
+        padding: 0;
+        /*background-color: white;*/
+      }
+      th {
+        padding-left: 10px !important;
+      }
+      .slds-button {
+        min-width: 7rem;
+      }
+      .slds-form-element__group {
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <apex:outputPanel id="contentId"
+      rendered="{!(Asset.status==$Label.LAB_SF_ASSET_Status_Active) || (Asset.status=='')}"
+    >
+      <apex:outputPanel id="msgErrorId">
+        <apex:outputPanel rendered="{!showError}">
+          <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+            <apex:pageMessages escape="false" />
+          </div>
+        </apex:outputPanel>
+      </apex:outputPanel>
+      <apex:form id="formId">
+        <h3 class="slds-section__title test-id__section-header-container">
+          <div class="slds-section__title-action" style="cursor: initial">
+            <span class="test-id__section-header-title slds-truncate"
+              >{!$Label.LAB_SF_ASSET_VerifyIdentitySection}</span
+            >
+          </div>
+        </h3>
+        <div class="slds-form-element slds-form_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Asset.Fields.ER_Employee__c.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="employeeFieldId"
+                      styleClass="slds-input"
+                      value="{!currentAsset.ER_Employee__c}"
+                    />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Delivery_Address_Street__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="deliveryStreetFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_Delivery_Address_Street__c}"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Client__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="employerFieldId" value="{!currentAsset.ER_Employee__r.ER_Client__c}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Delivery_Address_Zip_Code__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="deliveryCodeFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_Delivery_Address_Zip_Code__c}"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_National_ID_Number__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="nationalIDFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_National_ID_Number__c}"
+                    />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Delivery_Address_City__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="deliveryCityFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_Delivery_Address_City__c}"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Date_of_birth__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="DateOfBirthFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_Date_of_birth__c}"
+                    />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.ER_Employee__c.Fields.ER_Delivery_Address_Country__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="deliveryCountryFieldId"
+                      value="{!currentAsset.ER_Employee__r.ER_Delivery_Address_Country__c}"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Asset.Fields.Name.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="assetNameFieldId" value="{!currentAsset.Name}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Asset.Fields.ER_Product_Class__c.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="productClassFieldId" value="{!currentAsset.ER_Product_Class__c}" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="slds-section__title test-id__section-header-container">
+          <div class="slds-section__title-action" style="cursor: initial">
+            <span class="test-id__section-header-title slds-truncate">{!$Label.LAB_SF_ASSET_PIN_ResetSection}</span>
+          </div>
+        </h3>
+        <div class="slds-form-element slds-form_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+              <div class="slds-form-element__row" style="margin-bottom: 0">
+                <div class="slds-form-element slds-size_1-of-2">
+                  <apex:actionStatus id="getPinStatus">
+                    <apex:facet name="start">
+                      <apex:outputPanel >
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton id="getPinButtonId"
+                          styleClass="slds-button slds-button_neutral"
+                          disabled="{!pinCode!=''}"
+                          reRender="msgErrorId,pinCardValId,getPinButtonId"
+                          status="getPinStatus"
+                          action="{!getPinCode}"
+                          oncomplete="displayCaseManagementPanel()"
+                          value="{!$Label.LAB_SF_ASSET_GetPinButton}"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2">
+                  <div class="slds-form-element__control">
+                    <apex:outputText id="pinCardValId"
+                      styleClass="slds-input slds-form-element__static"
+                      value="{!pinCode}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <apex:outputPanel id="caseManagementPanelId" style="display: none">
+          <h3 class="slds-section__title test-id__section-header-container">
+            <div class="slds-section__title-action" style="cursor: initial">
+              <span class="test-id__section-header-title slds-truncate"
+                >{!$Label.LAB_SF_ASSET_CaseManagementSection}</span
+              >
+            </div>
+          </h3>
+          <div class="slds-form-element slds-form_compound">
+            <div class="slds-form-element__control">
+              <div class="slds-form-element__group">
+                <div class="slds-form-element__row">
+                  <div class="slds-form-element slds-size_1-of-2">
+                    <apex:actionStatus id="linkCaseStatus">
+                      <apex:facet name="start">
+                        <apex:outputPanel >
+                          <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                            height="25"
+                            width="25"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="linkCaseButtonId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="msgErrorId,linkCaseButtonId"
+                            status="linkCaseStatus"
+                            action="{!linkCase}"
+                            oncomplete="OpenCase('{!caseID}')"
+                            value="{!$Label.LAB_SF_ASSET_LinkCaseButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+                  <div class="slds-form-element slds-size_1-of-2">
+                    <apex:selectList disabled="{!!(requetesOptions.size>1)}"
+                      value="{!selectedCase}"
+                      multiselect="false"
+                      size="1"
+                      styleclass="slds-input slds-combobox__input slds-combobox__input-value slds-form-element__static"
+                      onchange="controlCaseButtons(this)"
+                    >
+                      <apex:selectOptions value="{!requetesOptions}" />
+                    </apex:selectList>
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2">
+                  <apex:actionStatus id="newCaseStatus">
+                    <apex:facet name="start">
+                      <apex:outputPanel >
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton id="newCaseButtonId"
+                          disabled="{!!(selectedCase=='')}"
+                          styleClass="slds-button slds-button_neutral"
+                          reRender="msgErrorId,newCaseButtonId"
+                          status="newCaseStatus"
+                          action="{!createNewCase}"
+                          oncomplete="OpenCase('{!caseID}')"
+                          value="{!$Label.LAB_SF_ASSET_NewCaseButton}"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </div>
+              </div>
+            </div>
+          </div>
+        </apex:outputPanel>
+      </apex:form>
+    </apex:outputPanel>
+    <script type="text/javascript">
+      function displayCaseManagementPanel() {
+        $("[id$='caseManagementPanelId']").css("display", "block");
+      }
+
+      $(document).ready(function () {
+        controlCaseButtons();
+      });
+
+      function controlCaseButtons(data) {
+        if (data && data.value) {
+          $("[id$='newCaseButtonId']").attr("disabled", "disabled");
+          $("[id$='linkCaseButtonId']").removeAttr("disabled");
+        } else {
+          $("[id$='newCaseButtonId']").removeAttr("disabled");
+          $("[id$='linkCaseButtonId']").attr("disabled", "disabled");
+        }
+      }
+
+      function OpenCase(CaseID) {
+        if (CaseID) {
+          if (sforce.one != undefined) {
+            // Lightning
+            sforce.one.navigateToSObject(CaseID, "detail");
+            Sfdc.canvas.publisher.publish({
+              name: "publisher.close",
+              payload: { refresh: "true" }
+            });
+          } else {
+            // Classic
+            window.parent.location = "/" + CaseID;
+          }
+        }
+      }
+    </script>
+  </body>
+</apex:page>

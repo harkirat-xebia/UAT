@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_LegalName_HeadOfficeContact_Mandatory</fullName>
+    <active>true</active>
+    <description>The Legal Name and Head Office Contact fields are mandatory for account sync
+                    This Validation rule is used for the following BUs:
+                    - BENELUX</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+                    &amp;&amp; ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;)
+                    &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))
+                    &amp;&amp; (ISBLANK(ER_Legal_Name__c) || ISBLANK(HU_HQ_Contact__c))</errorConditionFormula>
+    <errorMessage>Legal Name and Head Office Contact are mandatory for synced accounts</errorMessage>
+</ValidationRule>

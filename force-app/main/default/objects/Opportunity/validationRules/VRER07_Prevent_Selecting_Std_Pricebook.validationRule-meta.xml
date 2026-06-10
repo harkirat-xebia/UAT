@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER07_Prevent_Selecting_Std_Pricebook</fullName>
+    <active>false</active>
+    <description>This VR is to prevent selecting the standard pricebook</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; $Setup.ER_Validation_Rules_Settings__c.VRER07_Prevent_Selecting_Std_Pricebook__c = false
+&amp;&amp; NOT(ER_SmartER_Context__c)
+&amp;&amp; (Pricebook2.IsStandard || (ER_Business_Unit__c != TEXT(Pricebook2.ER_Business_Unit__c)))
+&amp;&amp; NOT(ISBLANK(Pricebook2Id))</errorConditionFormula>
+    <errorMessage>VRER07 - This Price Book cannot be used</errorMessage>
+</ValidationRule>

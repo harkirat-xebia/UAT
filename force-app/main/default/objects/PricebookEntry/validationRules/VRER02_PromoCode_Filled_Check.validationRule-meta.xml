@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_PromoCode_Filled_Check</fullName>
+    <active>true</active>
+    <description>If Promo code is filled, Duration or Pricing End date is mandatory</description>
+    <errorConditionFormula>AND(
+	NOT($User.ER_BypassVR__c),
+	NOT(ISBLANK(ER_Promo_Code2__c)),
+	AND(ISBLANK(ER_Offer_validity_end_date__c), ISBLANK(ER_Duration__c))
+)</errorConditionFormula>
+    <errorDisplayField>ER_Promo_Code2__c</errorDisplayField>
+    <errorMessage>VRER02 - If Promo code is filled, Duration or Pricing End date is mandatory.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Lost_Reason__c</fullName>
+    <label>Lost Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Administrative Reason</fullName>
+                <default>false</default>
+                <label>Administrative Reason</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>No employees</fullName>
+                <default>false</default>
+                <label>No employees</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor - Monizze</fullName>
+                <default>false</default>
+                <label>Lost to Competitor - Monizze</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor - Pluxee</fullName>
+                <default>false</default>
+                <label>Lost to Competitor - Pluxee</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor - Other</fullName>
+                <default>false</default>
+                <label>Lost to Competitor - Other</label>
+            </value>
+            <value>
+                <fullName>Non eligible</fullName>
+                <default>false</default>
+                <label>Non eligible</label>
+            </value>
+            <value>
+                <fullName>Daily allowance preference</fullName>
+                <default>false</default>
+                <label>Daily allowance preference</label>
+            </value>
+            <value>
+                <fullName>Invalid phone number</fullName>
+                <default>false</default>
+                <label>Invalid phone number</label>
+            </value>
+            <value>
+                <fullName>Unreachable after all contact attempts</fullName>
+                <default>false</default>
+                <label>Unreachable after all contact attempts</label>
+            </value>
+            <value>
+                <fullName>Plus de personnel</fullName>
+                <default>false</default>
+                <label>Plus de personnel</label>
+            </value>
+            <value>
+                <fullName>Edenred user</fullName>
+                <default>false</default>
+                <label>Edenred user</label>
+            </value>
+            <value>
+                <fullName>Duplicates (&lt; 2 weeks)</fullName>
+                <default>false</default>
+                <label>Duplicates (&lt; 2 weeks)</label>
+            </value>
+            <value>
+                <fullName>Company does not exist anymore</fullName>
+                <default>false</default>
+                <label>Company does not exist anymore</label>
+            </value>
+            <value>
+                <fullName>Already client of this solution</fullName>
+                <default>false</default>
+                <label>Already client of this solution</label>
+            </value>
+            <value>
+                <fullName>Merchant</fullName>
+                <default>false</default>
+                <label>Merchant</label>
+            </value>
+            <value>
+                <fullName>Declare not having given his contact details to be contacted</fullName>
+                <default>false</default>
+                <label>Declare not having given his contact details to be contacted</label>
+            </value>
+            <value>
+                <fullName>Indépendant personne physique</fullName>
+                <default>false</default>
+                <label>Indépendant personne physique</label>
+            </value>
+            <value>
+                <fullName>Not interested</fullName>
+                <default>false</default>
+                <label>Not interested</label>
+            </value>
+            <value>
+                <fullName>Not satisfied</fullName>
+                <default>false</default>
+                <label>Not satisfied</label>
+            </value>
+            <value>
+                <fullName>Acceptance network</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Acceptance network</label>
+            </value>
+            <value>
+                <fullName>Added value services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Added value services</label>
+            </value>
+            <value>
+                <fullName>Administrative delays</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Administrative delays</label>
+            </value>
+            <value>
+                <fullName>Already client</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Already client</label>
+            </value>
+            <value>
+                <fullName>Brand awareness</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Brand awareness</label>
+            </value>
+            <value>
+                <fullName>Cafeteria</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Cafeteria</label>
+            </value>
+            <value>
+                <fullName>Catering</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Catering</label>
+            </value>
+            <value>
+                <fullName>Delivery time</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Delivery time</label>
+            </value>
+            <value>
+                <fullName>Device not compatible</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Device not compatible</label>
+            </value>
+            <value>
+                <fullName>Discount</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Discount</label>
+            </value>
+            <value>
+                <fullName>Dissatisfied with MDP</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Dissatisfied with MDP</label>
+            </value>
+            <value>
+                <fullName>Dissatisfied with our services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Dissatisfied with our services</label>
+            </value>
+            <value>
+                <fullName>Ease of distribution</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Ease of distribution</label>
+            </value>
+            <value>
+                <fullName>Employees fluctuation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Employees fluctuation</label>
+            </value>
+            <value>
+                <fullName>Food delivery (no POS)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Food delivery (no POS)</label>
+            </value>
+            <value>
+                <fullName>Gifts</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Gifts</label>
+            </value>
+            <value>
+                <fullName>HR Policy</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>HR Policy</label>
+            </value>
+            <value>
+                <fullName>Inadequacy Value Services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inadequacy Value Services</label>
+            </value>
+            <value>
+                <fullName>It is not a priority</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>It is not a priority</label>
+            </value>
+            <value>
+                <fullName>Labor agreement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Labor agreement</label>
+            </value>
+            <value>
+                <fullName>Legislation/cash</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Legislation/cash</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lost to Competitor</label>
+            </value>
+            <value>
+                <fullName>Lost to competitor - better tools for employees</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lost to competitor - better tools for employees</label>
+            </value>
+            <value>
+                <fullName>Low employees technical skills</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Low employees technical skills</label>
+            </value>
+            <value>
+                <fullName>Network</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Network</label>
+            </value>
+            <value>
+                <fullName>No Budget / Lost Funding</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No Budget / Lost Funding</label>
+            </value>
+            <value>
+                <fullName>No Decision / Non-Responsive</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No Decision / Non-Responsive</label>
+            </value>
+            <value>
+                <fullName>No dm reached</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No dm reached</label>
+            </value>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No interest</label>
+            </value>
+            <value>
+                <fullName>Not interested in the formula</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not interested in the formula</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Other meal allowance solution (canteen, . . .)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other meal allowance solution (canteen, . . .)</label>
+            </value>
+            <value>
+                <fullName>Own solutions</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Own solutions</label>
+            </value>
+            <value>
+                <fullName>Payment terms</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Payment terms</label>
+            </value>
+            <value>
+                <fullName>Prefer vouchers</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Prefer vouchers</label>
+            </value>
+            <value>
+                <fullName>Price increase</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Price increase</label>
+            </value>
+            <value>
+                <fullName>Price too high</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Price too high</label>
+            </value>
+            <value>
+                <fullName>Program end</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Program end</label>
+            </value>
+            <value>
+                <fullName>Rejected by employees</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rejected by employees</label>
+            </value>
+            <value>
+                <fullName>Rejected by management</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rejected by management</label>
+            </value>
+            <value>
+                <fullName>Relations</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Relations</label>
+            </value>
+            <value>
+                <fullName>Technical barrier</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Technical barrier</label>
+            </value>
+            <value>
+                <fullName>Tender</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tender</label>
+            </value>
+            <value>
+                <fullName>Too complicated systems</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Too complicated systems</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Administrative Reason</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Price</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>No employees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Duplicate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Lost to Competitor - Monizze</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Lost to Competitor - Pluxee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Lost to Competitor - Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Non eligible</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Daily allowance preference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Invalid phone number</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Unreachable after all contact attempts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Plus de personnel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Edenred user</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Duplicates (&lt; 2 weeks)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Company does not exist anymore</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Already client of this solution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Merchant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Declare not having given his contact details to be contacted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Indépendant personne physique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Not interested</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Not satisfied</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

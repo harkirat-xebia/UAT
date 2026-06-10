@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Invoicing_day_of_week__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(Opportunity.ERBE_Invoicing_day_of_week__c)</formula>
+    <label>Invoicing day of week</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

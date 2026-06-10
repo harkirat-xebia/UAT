@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BE_E_tickets_YTD_N_1__c</fullName>
+    <description>Number of E-tickets invoiced during N-1 form January 1st until the date of the extraction</description>
+    <externalId>false</externalId>
+    <label>E-tickets YTD N-1</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

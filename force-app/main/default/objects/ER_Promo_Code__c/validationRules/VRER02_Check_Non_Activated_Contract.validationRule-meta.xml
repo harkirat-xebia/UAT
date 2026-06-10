@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Check_Non_Activated_Contract</fullName>
+    <active>true</active>
+    <description>TSK:14447 A non activated contract, cannot be associated to an affiliation code (regardless of the &quot;activation&quot; code status).</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; $RecordType.DeveloperName = &apos;ER_Affiliation_Code&apos;
+&amp;&amp; NOT(ISPICKVAL(ER_Contract__r.Status, &apos;Activated&apos;))
+&amp;&amp; NOT(ISCHANGED(ER_Status__c))</errorConditionFormula>
+    <errorMessage>VRER02 - A non activated contract cannot be associated to an affiliation code.</errorMessage>
+</ValidationRule>

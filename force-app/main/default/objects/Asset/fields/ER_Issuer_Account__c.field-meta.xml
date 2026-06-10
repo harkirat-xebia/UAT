@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Issuer_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Issuer Account</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Issuer Account</value>
+        </filterItems>
+        <filterItems>
+            <field>Asset.ER_BUPicklist__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.ER_BUPicklist__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Asset</referenceTo>
+    <relationshipLabel>Edenred+ Cards</relationshipLabel>
+    <relationshipName>EdenredPlusCards</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

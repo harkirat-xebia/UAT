@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Employee__c</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <label>Employee</label>
+    <referenceTo>ER_Employee__c</referenceTo>
+    <relationshipLabel>Asset Employee Links</relationshipLabel>
+    <relationshipName>Asset_Employee_Links</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

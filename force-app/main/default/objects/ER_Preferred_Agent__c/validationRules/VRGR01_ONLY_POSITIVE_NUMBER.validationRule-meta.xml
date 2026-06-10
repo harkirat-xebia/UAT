@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRGR01_ONLY_POSITIVE_NUMBER</fullName>
+    <active>true</active>
+    <description>Allow</description>
+    <errorConditionFormula>AND( 
+NOT(REGEX(TEXT(ER_Priority__c), &quot;^\\d+$&quot;)), 
+NOT( ER_Priority__c =0))</errorConditionFormula>
+    <errorMessage>Only positive numbers are allowed !</errorMessage>
+</ValidationRule>

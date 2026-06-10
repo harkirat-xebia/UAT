@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_Loop_Ref_Caracters_Control</fullName>
+    <active>true</active>
+    <description>A specific format has to be used, for PPS “Must be Alphanumeric with no spaces. Underscores &apos;_&apos; and dashes &apos;-&apos; are allowed.”</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c),
+NOT(REGEX( ER_External_Reference__c ,&quot;^[a-zA-Z0-9_-]*$&quot;)))</errorConditionFormula>
+    <errorDisplayField>ER_External_Reference__c</errorDisplayField>
+    <errorMessage>The External Reference field cannot contains special Caracters other than - (dash) and _ (underscore)</errorMessage>
+</ValidationRule>

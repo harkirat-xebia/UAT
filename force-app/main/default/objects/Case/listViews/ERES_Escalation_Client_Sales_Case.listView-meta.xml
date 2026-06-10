@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERES_Escalation_Client_Sales_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERES Escalation Client Sales</label>
+    <queue>ERES_Escalation_Client_Sales</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

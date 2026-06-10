@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_DocuGen_E_Shop__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Field mapped with Lead and used in the Quote for Docu Gen</description>
+    <label>E-Shop</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

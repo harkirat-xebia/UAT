@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ProcessInstance$TableEnumOrId</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$TargetName</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$SubmittedBy</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$LastActor</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance.Nodes$ProcessNode</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$Status</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$CompletedDate</field>
+    </columns>
+    <currency>EUR</currency>
+    <format>Tabular</format>
+    <name>Approval Process Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Approval_Process_Report_Type__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ProcessInstance$CompletedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

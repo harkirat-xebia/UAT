@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_Check_Website_Format</fullName>
+    <active>false</active>
+    <description>This VR checks the website url format</description>
+    <errorConditionFormula>ER_Business_Unit__c = &apos;BE&apos;  &amp;&amp; NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISBLANK(ER_Website_URL__c))
+&amp;&amp; NOT(REGEX(ER_Website_URL__c,&apos;^((https|http|ftp)://)?([A-Za-z0-9]\\.|[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9]\\.){1,3}[A-Za-z]{2,6}&apos;))</errorConditionFormula>
+    <errorMessage>VRER06 - Invalid website url format.</errorMessage>
+</ValidationRule>

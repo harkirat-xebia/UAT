@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER30_Block_Update_MCC_Sync</fullName>
+    <active>true</active>
+    <description>VRER30-  ER_MCC_Authorization__c  cannot be modified when the financial center is synchronized</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+            &amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;)
+            &amp;&amp; ISCHANGED( ER_MCC_Authorization__c)
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+    <errorDisplayField>ER_MCC_Authorization__c</errorDisplayField>
+    <errorMessage>VRER30 - The  MCC Authorization cannot be modified when the acceptor is synchronized</errorMessage>
+</ValidationRule>

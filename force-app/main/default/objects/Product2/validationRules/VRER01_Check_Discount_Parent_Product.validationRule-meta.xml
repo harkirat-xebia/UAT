@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_Check_Discount_Parent_Product</fullName>
+    <active>true</active>
+    <description>A discount product should always have a service or a range as parent product.</description>
+    <errorConditionFormula>AND(
+	NOT($User.ER_BypassVR__c),
+	RecordType.Name= &apos;Discount&apos;, 
+	OR((ER_Solution__r.RecordType.Name= &apos;Solution&apos;), 
+	ER_Solution__r.RecordType.Name= &apos;Discount&apos;, 
+		ISBLANK(ER_Solution__c))
+)</errorConditionFormula>
+    <errorDisplayField>ER_Solution__c</errorDisplayField>
+    <errorMessage>VRER01 - Discount product can only have service or range as product object.</errorMessage>
+</ValidationRule>

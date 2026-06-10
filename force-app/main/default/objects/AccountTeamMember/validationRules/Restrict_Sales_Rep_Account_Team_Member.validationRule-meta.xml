@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Sales_Rep_Account_Team_Member</fullName>
+    <active>false</active>
+    <description>Restrict Sales Rep Account Team Member Addition.</description>
+    <errorConditionFormula>$Profile.Name = &quot;Sales Rep&quot;</errorConditionFormula>
+    <errorMessage>Sales Reps are not permitted to add members to the Account Team. Please contact your Sales Manager if assistance is needed.</errorMessage>
+</ValidationRule>

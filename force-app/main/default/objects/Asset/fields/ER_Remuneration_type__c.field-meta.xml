@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Remuneration_type__c</fullName>
+    <label>Remuneration type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Subvention</fullName>
+                <default>false</default>
+                <label>Subvention</label>
+            </value>
+            <value>
+                <fullName>Salary sacrifice</fullName>
+                <default>false</default>
+                <label>Salary sacrifice</label>
+            </value>
+            <value>
+                <fullName>Mix</fullName>
+                <default>false</default>
+                <label>Mix</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

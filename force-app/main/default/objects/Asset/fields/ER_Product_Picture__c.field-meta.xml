@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Product_Picture__c</fullName>
+    <externalId>false</externalId>
+    <formula>IMAGE(&quot;/resource/&quot;&amp;Product2.ER_Product_Resource__c, &quot;Product Picture&quot;,162,261)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Product Picture</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Won_Reason__c</fullName>
+    <label>Won Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ER_BUPicklist__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Discounts</fullName>
+                <default>false</default>
+                <label>Discounts</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Avoided attrition</fullName>
+                <default>false</default>
+                <label>Avoided attrition</label>
+            </value>
+            <value>
+                <fullName>Network</fullName>
+                <default>false</default>
+                <label>Network</label>
+            </value>
+            <value>
+                <fullName>Auto-Enrollment</fullName>
+                <default>false</default>
+                <label>Auto-Enrollment</label>
+            </value>
+            <value>
+                <fullName>Gain from competition</fullName>
+                <default>false</default>
+                <label>Gain from competition</label>
+            </value>
+            <value>
+                <fullName>Added value services</fullName>
+                <default>false</default>
+                <label>Added value services</label>
+            </value>
+            <value>
+                <fullName>Social Secretary</fullName>
+                <default>false</default>
+                <label>Social Secretary</label>
+            </value>
+            <value>
+                <fullName>Belong to a group</fullName>
+                <default>false</default>
+                <label>Belong to a group</label>
+            </value>
+            <value>
+                <fullName>Brand</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Brand</label>
+            </value>
+            <value>
+                <fullName>Commercial contact</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Commercial contact</label>
+            </value>
+            <value>
+                <fullName>Conversion paper to digital</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Conversion paper to digital</label>
+            </value>
+            <value>
+                <fullName>Dissatisfied with competitor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Dissatisfied with competitor</label>
+            </value>
+            <value>
+                <fullName>Flexibility</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Flexibility</label>
+            </value>
+            <value>
+                <fullName>Framework contract</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Framework contract</label>
+            </value>
+            <value>
+                <fullName>HR Policy</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>HR Policy</label>
+            </value>
+            <value>
+                <fullName>Marketing action</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Marketing action</label>
+            </value>
+            <value>
+                <fullName>Offer diversity</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Offer diversity</label>
+            </value>
+            <value>
+                <fullName>Payment terms</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Payment terms</label>
+            </value>
+            <value>
+                <fullName>Potential business volume</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Potential business volume</label>
+            </value>
+            <value>
+                <fullName>Product functionality</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Product functionality</label>
+            </value>
+            <value>
+                <fullName>Referal</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Referal</label>
+            </value>
+            <value>
+                <fullName>Relations</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Relations</label>
+            </value>
+            <value>
+                <fullName>Satisfied with our services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Satisfied with our services</label>
+            </value>
+            <value>
+                <fullName>Technical expertise</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Technical expertise</label>
+            </value>
+            <value>
+                <fullName>Tender</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tender</label>
+            </value>
+            <value>
+                <fullName>Transfer from other account</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Transfer from other account</label>
+            </value>
+            <value>
+                <fullName>Value added product services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Value added product services</label>
+            </value>
+            <value>
+                <fullName>Webform Offer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Webform Offer</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Price</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Discounts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Avoided attrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Network</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Auto-Enrollment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Gain from competition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Added value services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Social Secretary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BE</controllingFieldValue>
+            <controllingFieldValue>LU</controllingFieldValue>
+            <valueName>Belong to a group</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_LeadSource_SubSource</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+    IsConverted, 
+    OR(
+        ISPICKVAL(LeadSource, &quot;&quot;), 
+        ISPICKVAL(ER_Lead_sub_source__c, &quot;&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Lead Source and Lead Sub Source must be filled before converting the lead.</errorMessage>
+</ValidationRule>

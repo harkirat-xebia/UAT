@@ -1,0 +1,886 @@
+<!--
+~ Author            : Oussama LASFAR
+~ Created Date      : 27/12/2018 (dd/mm/yyyy)
+~ Description       : Visualforce Page to Display opportunity products and to save Quote with synced line items
+-->
+<apex:page standardController="Opportunity"
+  extensions="VFCER04_Opportunity_Product"
+  standardStylesheets="false"
+  showHeader="false"
+>
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /*SCROLL BAR*/
+      /* width */
+      ::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #b0c4df;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #54698d;
+      }
+      html {
+        background: white !important;
+      }
+      table {
+        font-size: 0.6rem !important;
+      }
+      thead th {
+        padding: 0 0.5rem !important;
+      }
+      table td {
+        padding: 0;
+      }
+      textarea {
+        width: 100%;
+      }
+      .collapse {
+        visibility: collapse;
+        transition: none 0s ease 0s;
+      }
+      .valueUnit {
+        float: right;
+        padding-right: 50%;
+      }
+      @media (max-width: 640px) {
+        .colmun1 {
+          width: 0 !important;
+        }
+        .colmun3 {
+          width: 6rem !important;
+        }
+        .valueUnit {
+          padding-right: 0;
+        }
+      }
+      .showSpinner .spinnerBlock {
+        display: block !important;
+      }
+      .showSpinner .contentBlock {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+        width: 100%;
+        height: 100%;
+        /*background-color: #ccc;*/
+        pointer-events: none;
+      }
+      .buttonsBlock {
+        text-align: center;
+      }
+      .approvalBlock {
+        display: none;
+      }
+    </style>
+
+    <apex:form styleClass="block" id="formId">
+      <div class="spinnerBlock" style="display: none">
+        <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_large">
+          <span class="slds-assistive-text">Loading</span>
+          <div class="slds-spinner__dot-a"></div>
+          <div class="slds-spinner__dot-b"></div>
+        </div>
+      </div>
+      <div
+        id="messageTextId"
+        class="slds-notify slds-notify_alert slds-theme_alert-texture"
+        role="alert"
+        style="display: none"
+      >
+        <h2 id="errortextId" />
+      </div>
+      <div class="contentBlock">
+        <div class="buttonsBlock">
+          <apex:actionStatus id="editPriceStatus">
+            <apex:facet name="start">
+              <apex:outputPanel >
+                <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                  height="25"
+                  width="25"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="editPriceButtonId"
+                  styleClass="slds-button slds-button_neutral"
+                  status="editPriceStatus"
+                  action="{!editPrice}"
+                  reRender="editPriceButtonId"
+                  value="{!$Label.LABS_SF_Opp_Product_AddEditSolutions}"
+                  disabled="{!pendingApproval || hasAcceptedQuote}"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+          <apex:actionStatus id="saveQuoteStatus">
+            <apex:facet name="start">
+              <apex:outputPanel >
+                <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                  height="25"
+                  width="25"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="saveQuoteButtonId"
+                  styleClass="slds-button slds-button_neutral"
+                  status="saveQuoteStatus"
+                  onclick="saveAsQuote();"
+                  reRender="saveQuoteButtonId"
+                  value="{!$Label.LABS_SF_Opp_Product_SaveAsQuote}"
+                  disabled="{!pendingApproval || hasAcceptedQuote}"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+          <apex:actionStatus id="estimateOpp">
+            <apex:facet name="start">
+              <apex:outputPanel >
+                <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                  height="25"
+                  width="25"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="estimateButtonId"
+                  styleClass="slds-button slds-button_neutral"
+                  status="estimateOpp"
+                  action="{!calculateEstimate}"
+                  reRender="estimateButtonId"
+                  value="{!$Label.LABS_SF_Opp_Product_Estimate}"
+                  disabled="{!!opportunityRecord.HasOpportunityLineItem}"
+                  title="{!$Label.LABS_SF_Opp_Product_Estimate_Title}"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+        </div>
+        <div class="tableBlock">
+          <table
+            id="serviceTableid"
+            class="slds-table slds-no-cell-focus slds-table_bordered slds-table_edit slds-table_fixed-layout slds-table_resizable-cols"
+            style="margin-bottom: 5%"
+            role="grid"
+          >
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th class="slds-text-title_caps column1" style="width: 3rem">
+                  <span id="column-group-header" class="slds-assistive-text"></span>
+                  <div class="slds-th__action slds-th__action_form"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column2" style="width: 20%">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$Label.LABS_SF_Opp_Price_ServiceName}"
+                      >{!$Label.LABS_SF_Opp_Price_ServiceName}</span
+                    >
+                  </div>
+
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column7" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="Min">Min</span>
+                  </div>
+
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column8" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="Max">Max</span>
+                  </div>
+
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column3" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$Label.LABS_SF_Opp_Price_Value}"
+                      >{!$Label.LABS_SF_Opp_Price_Value}</span
+                    >
+                  </div>
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column4" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$Label.LABS_SF_Opp_Price_MinimumFee}"
+                      >{!$Label.LABS_SF_Opp_Price_MinimumFee}</span
+                    >
+                  </div>
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column5" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$Label.LABS_SF_Opp_Price_Discount}"
+                      >{!$Label.LABS_SF_Opp_Price_Discount}</span
+                    >
+                  </div>
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column7" style="width: 15%">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="Price end date">Price end date</span>
+                  </div>
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column5" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="Duration">Duration</span>
+                  </div>
+                  <div class="slds-resizable"></div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column8" style="width: 5%"></th>
+              </tr>
+            </thead>
+            <tbody id="ContentTable">
+              <!--JS CONTENT-->
+            </tbody>
+          </table>
+        </div>
+        <div class="approvalBlock" id="approvalModalId">
+          <div class="slds-m-around_xx-large">
+            <section
+              role="dialog"
+              tabindex="-1"
+              aria-labelledby="modal-heading-01"
+              aria-modal="true"
+              aria-describedby="modal-content-id-1"
+              class="slds-modal slds-fade-in-open"
+            >
+              <div class="slds-modal__container" style="padding-top: 35px; padding-bottom: 35px">
+                <div class="modal-header slds-modal__header">
+                  <h2 class="title slds-text-heading--medium" id="title_1470:0">
+                    {!$Label.LABS_SF_Opp_Product_ApprovalSubmit}
+                  </h2>
+                  <button
+                    class="slds-button slds-modal__close closeIcon slds-button_icon-bare slds-button_icon-inverse"
+                    type="button"
+                    title="Close this window"
+                    onclick="closeApprovalModal();"
+                  >
+                    <span>
+                      <svg
+                        focusable="false"
+                        data-key="close"
+                        aria-hidden="true"
+                        class="slds-button__icon slds-button__icon_large slds-button_icon-inverse"
+                      >
+                        <use xlink:href="/resource/SLDS272/icons/utility-sprite/svg/symbols.svg?cache=9.24.0#close" />
+                      </svg>
+                    </span>
+                    <span class="slds-assistive-text">{!$Label.LABS_SF_Opp_Product_CloseModal}</span>
+                  </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                  <div>
+                    <div class="commentContainer" style="padding: 0.5rem">
+                      <div class="uiInput uiInputTextArea uiInput--default uiInput--textarea">
+                        <label class="uiLabel-top form-element__label uiLabel">
+                          <span class="slds-required requiredHeader">*</span>
+                          <span>{!$Label.LABS_SF_Opp_Product_ApprovalComment}</span>
+                        </label>
+                        <textarea class="slds-textarea" id="approvalCommentId" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <footer class="slds-modal__footer">
+                  <apex:commandButton id="CancelApproval"
+                    styleClass="slds-button slds-button_neutral"
+                    onclick="closeApprovalModal();"
+                    reRender="CancelApproval"
+                    value="{!$Label.LABS_SF_Opp_Price_Cancel}"
+                  />
+                  <apex:commandButton id="SaveApproval"
+                    styleClass="slds-button slds-button_brand"
+                    onclick="launchApprovalProcess();"
+                    reRender="SaveApproval"
+                    value="{!$Label.LABS_SF_Opp_Product_SaveAsQuote}"
+                  />
+                </footer>
+              </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+          </div>
+        </div>
+      </div>
+    </apex:form>
+    <script type="text/javascript">
+
+      var opportunityId = "{!$CurrentPage.parameters.id}";
+      var chevrondown = "{!URLFOR($Resource.SLDS272, 'icons/utility/chevrondown_60.png')}";
+      var chevronright = "{!URLFOR($Resource.SLDS272, 'icons/utility/chevronright_60.png')}";
+      var pendingApproval = {!pendingApproval};
+      var hasAcceptedQuote = {!hasAcceptedQuote};
+      var approved = {!approved};
+      var currentPhase='Phase1';
+      var needApproval = false;
+      let OpportunityProduct = new Map();
+      let serviceMap = new Map();
+      var businessUnit = "{!opportunityRecord.ER_BUPicklist__c}"; //Added  6 Sep, 2024
+      var renderIssuedVolumeBUSet = "{!renderIssuedVolumeBUSet}"; //Added 6 Sep, 2024
+
+
+      $( document ).ready(function() {
+          showSpinner();
+          console.log( "ready! : "+opportunityId );
+          disableElement('saveQuoteButtonId');
+          
+          /** Changes made on 09 September 2024 by Pranjal Tiwari */
+          if(renderIssuedVolumeBUSet.includes(businessUnit)){
+              disableElement("estimateButtonId");
+          }
+          /** End */
+          
+          getOpportunityProduct(opportunityId);
+
+
+          if(pendingApproval){
+
+              showMessage('{!$Label.LABS_SF_Opp_Product_NeedApprovalWarningMessage}','warning');
+          }
+          if(hasAcceptedQuote){
+
+              showMessage('{!$Label.LABS_SF_Opp_Product_hasAcceptedQuoteMessage}','warning', true);
+          }
+      });
+
+      function getOpportunityProduct(oppId){
+
+          Visualforce.remoting.Manager.invokeAction (
+
+              "{!$RemoteAction.VFCER04_Opportunity_Product.getOpportunityProducts}",
+              oppId,
+              function(result, event) {
+                  hideSpinner();
+                  if (event.status) {
+
+                      console.log('JSON.stringify result : '+JSON.stringify(result));
+                      createTable(result);
+                      if(result.length > 0 && !pendingApproval && !approved && !hasAcceptedQuote){
+                          enableElement('saveQuoteButtonId');
+                      }
+                  }
+                  else if(event.type === 'exception'){
+
+                      showMessage(event.message,'error');
+                  }
+                  else {
+
+                      showMessage(event.message,'error');
+
+                  }
+              }
+              );
+      }
+
+              function getOpportunityProduct(oppId){
+
+                  Visualforce.remoting.Manager.invokeAction (
+
+                      "{!$RemoteAction.VFCER04_Opportunity_Product.getOpportunityProducts}",
+                      oppId,
+                      function(result, event) {
+                          hideSpinner();
+                          if (event.status) {
+
+                              console.log('JSON.stringify result : '+JSON.stringify(result));
+                              createTable(result);
+                              if(result.length > 0 && !pendingApproval && !approved && !hasAcceptedQuote){
+                                  enableElement('saveQuoteButtonId');
+                              }
+                          }
+                          else if(event.type === 'exception'){
+
+                              showMessage(event.message,'error');
+                          }
+                              else {
+
+                                  showMessage(event.message,'error');
+                              }
+                      }
+                  );
+              }
+
+              function createTable(serviceList){
+
+                   var newGroup = false;
+                    let servicesBySolution = new Set();
+                
+                    // Clear any previous table rows
+                    $("[id$=ContentTable]").children("tr").remove();
+                
+                    serviceList.forEach(function (element) {
+
+                        // Add product to service map
+                        serviceMap.set(element.Id, element);
+                
+                        // Check if product belongs to a solution and handle grouping logic
+                        if (element.Product2.ER_Solution2__r && servicesBySolution.has(element.Product2.ER_Solution2__r.Name)) {
+                            // Solution already exists, no need to create a new group
+                            newGroup = false;
+                        } else if ((element.Product2.ER_Solution2__r && element.Product2.ER_Solution2__r.ER_Type__c === 'Solution') || (element.Product2.ER_Solution__r && element.Product2.ER_Solution__r.ER_Type__c === 'Solution')) {
+                            // Create a new group for the solution
+                            servicesBySolution.add(element.Product2.ER_Solution2__r.Name);
+                
+                            // Add a header for the solution
+                            var colctr = $("[id$=serviceTableid]").find("tr:first th").length;
+                
+                            var groupTR = document.createElement("tr");
+                            groupTR.setAttribute("class", "head");
+                
+                            var groupTH = document.createElement("th");
+                            groupTH.setAttribute("style", "padding:0;");
+                            groupTH.setAttribute("colspan", colctr);
+                
+                            // Build the collapsible section for the solution
+                            var section = buildSection(element.Product2.ER_Solution2__r.Name);
+                            $(groupTH).append(section);
+                
+                            $(groupTH).find('.slds-section__title-action').on("click", function () {
+                                collapseServices($(this).closest('.slds-section'));
+                            });
+                
+                            $(groupTH).find('.slds-section input').on("click", function () {
+                                addHiddenServices(this);
+                            });
+                
+                            $(groupTR).append(groupTH);
+                
+                            var groupTH2 = document.createElement("th");
+                            groupTH2.setAttribute("colspan", 1);
+                
+                            var addButton = document.createElement("input");
+                            addButton.setAttribute("class", "slds-button slds-button_brand");
+                            addButton.setAttribute("type", "button");
+                            addButton.setAttribute("value", "Add Services");
+                            addButton.setAttribute("style", "float:right;");
+                            $(addButton).on("click", function () {
+                                addHiddenServices(this);
+                            });
+                
+                            $(groupTH2).append(addButton);
+                
+                            newGroup = true;
+                        }
+
+                      var tr = document.createElement("tr");
+                      tr.setAttribute("id", "trRow"+element.Id);
+                      tr.setAttribute("class", "collapse");
+
+                      // COLUMN 1: CHECKBOX
+
+                      var td1 = document.createElement("td");
+
+                      // COLUMN 2: PRODUCT
+
+                      var td2 = document.createElement("td");
+
+                      td2.setAttribute("title", element.PricebookEntry.Name);
+                      var td2div1 = document.createElement("div");
+                      td2div1.setAttribute("class", "slds-truncate");
+                      td2div1.setAttribute("id", "product"+element.Id);
+                      if(element.PricebookEntry.ER_Min__c || element.PricebookEntry.ER_Max__c){
+                          $(td2div1).append(element.PricebookEntry.Name + ' ' + element.PricebookEntry.ER_Min__c + ' - ' + element.PricebookEntry.ER_Max__c);
+                      }else{
+                          $(td2div1).append(element.PricebookEntry.Name);
+                      }
+
+                      var toolTip ='';
+                      /*if(element.Product2.Description){
+                          toolTip = buildToolTips(element.Product2.Description);
+                      }*/
+                      $(td2).append([td2div1,toolTip]);
+
+                  $(td2).find(".tooltiptest").hover(function (e) {
+                      $(td2).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+
+                  }, function () {
+                      $(td2).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+                  });
+
+                      // COLUMN 7: MIN
+
+                      var td7 = document.createElement("td");
+
+                      td7.setAttribute("title", element.PricebookEntry.Min__c);
+                      var td7div1 = document.createElement("div");
+                      td7div1.setAttribute("class", "slds-truncate");
+                      td7div1.setAttribute("id", "product"+element.Id);
+                      if(element.PricebookEntry.ER_Min__c || element.PricebookEntry.ER_Max__c){
+                          $(td7div1).append(element.PricebookEntry.ER_Min__c);
+                      }else{
+                          $(td7div1).append('');
+                      }
+
+                      var toolTip ='';
+                      /*if(element.Product2.Description){
+                          toolTip = buildToolTips(element.Product2.Description);
+                      }*/
+                      $(td7).append([td7div1,toolTip]);
+
+                  $(td7).find(".tooltiptest").hover(function (e) {
+                      $(td7).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+
+                  }, function () {
+                      $(td7).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+                  });
+
+
+                      // COLUMN 8: MAX
+
+                      var td8 = document.createElement("td");
+
+                      td8.setAttribute("title", element.PricebookEntry.Min__c);
+                      var td8div1 = document.createElement("div");
+                      td8div1.setAttribute("class", "slds-truncate");
+                      td8div1.setAttribute("id", "product"+element.Id);
+                      if(element.PricebookEntry.ER_Max__c){
+                          $(td8div1).append(element.PricebookEntry.ER_Max__c);
+                      }else{
+                          if(element.PricebookEntry.ER_Min__c){
+                          $(td8div1).append('> ' + element.PricebookEntry.ER_Min__c);
+                          }else{
+                              $(td8div1).append('');
+                          }
+                      }
+
+                      var toolTip ='';
+                      /*if(element.Product2.Description){
+                          toolTip = buildToolTips(element.Product2.Description);
+                      }*/
+                      $(td8).append([td8div1,toolTip]);
+
+                  $(td8).find(".tooltiptest").hover(function (e) {
+                      $(td8).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+
+                  }, function () {
+                      $(td8).find(".slds-popover").toggleClass("slds-rise-into-ground").toggleClass("slds-fall-into-ground");
+                  });
+
+                  // COLUMN 3: Value
+
+                  var td3 = document.createElement("td");
+                  var td3span1 = document.createElement("span");
+
+                  var td3span2 = document.createElement("span");
+                  td3span2.setAttribute("class", "valueUnit");
+
+                  if(element.ER_Percentage__c == null){
+                      console.log('Test perc null element UnitPrice ' + element.UnitPrice);
+                      console.log('Test perc null element ER_Percentage__c ' + element.ER_Percentage__c);
+                      console.log('Test perc null element ' + element.listprice);
+
+
+                      td3span1.setAttribute("id", 'listprice'+element.Id);
+                      //td3span1.setAttribute("value", element.UnitPrice);
+                      $(td3span1).append(numberWithSpaces(parseFloat(element.UnitPrice).toFixed(4)));
+                      $(td3span2).append(element.CurrencyIsoCode);
+                      $(td3).append( [td3span1, td3span2] );
+                  } else{
+                      console.log('Test perc !null element UnitPrice ' + element.UnitPrice);
+                      console.log('Test perc !null element ER_Percentage__c ' + element.ER_Percentage__c);
+                      console.log('Test perc !null element ' + element.listpercentage);
+                      td3span1.setAttribute("id", 'listpercentage'+element.Id);
+                      $(td3span1).append(parseFloat(element.ER_Percentage__c).toFixed(4));
+                      $(td3span2).append('%');
+                      $(td3).append( [td3span1, td3span2] );
+                  }
+
+                  // COLUMN 4:
+
+                  var td4 = document.createElement("td");
+                  if(element.ER_Minimum_Fee__c != null){
+
+                      $(td4).append(parseFloat(element.ER_Minimum_Fee__c).toFixed(4));
+                  }
+
+
+                   // COLUMN 5: Discount Value
+
+                  var td5 = document.createElement("td");
+                  var td5span = document.createElement("span");
+                  td5span.setAttribute("class", "valueUnit");
+                  if(element.Discount){
+
+                      $(td5).append(parseFloat(element.Discount).toFixed(4));
+                      $(td5span).append('%');
+                      $(td5).append(td5span);
+                  }
+
+
+                  // COLUMN 6:
+
+                  var td6 = document.createElement("td");
+
+                  if(element.ER_NeedApproval__c){
+                      if(element.Opportunity.ER_Approved__c){
+                          td6.setAttribute("style","color:green");
+                          $(td6).append("{!$Label.LABS_SF_Opp_Product_Approved}");
+                      }
+                      else{
+                          if({!pendingApproval}){
+                              td6.setAttribute("style","color:#ffb75d");
+                              $(td6).append("{!$Label.LABS_SF_Opp_Product_PendingApproval}");
+                          }
+                          else{
+                              td6.setAttribute("style","color:#ffb75d");
+                              $(td6).append("{!$Label.LABS_SF_Opp_Product_ApprovalNeeded}");
+                          }
+                      }
+                  }
+
+                    // COLUMN 9: Price End Date
+
+                      var td9 = document.createElement("td");
+                      var td9span = document.createElement("span");
+                      td9span.setAttribute("class", "");
+
+                      var Enddate = null;
+                      var nEnddate = null;
+                      Enddate = new Date(element.ER_Price_End_Date__c);
+                      nEnddate = null;
+                      if(Enddate != undefined) nEnddate = Enddate.getFullYear() +'-'+ ("0" + (Enddate.getMonth()+1)).slice(-2) +'-'+("0" + Enddate.getDate()).slice(-2);
+
+                      if(element.ER_Price_End_Date__c){
+                          td9span.setAttribute("value", nEnddate);
+                          $(td9).append(td9span);
+                          $(td9).append(Enddate.toLocaleDateString("fr-FR"));
+                      }
+
+
+                      // COLUMN 10: Duration
+                      var td10 = document.createElement("td");
+                      var td10span = document.createElement("span");
+                      td10span.setAttribute("class", "valueUnit");
+                      if(element.ER_Duration__c){
+
+                          $(td10).append(parseInt(element.ER_Duration__c).toFixed(4));
+                          $(td10).append(td10span);
+                      }
+
+                $(tr).append( [td1,td2,td7,td8,td3,td4,td5,td9,td10,td6] );
+
+                  if(newGroup)
+                      $("[id$=ContentTable]").append(groupTR);
+
+                  $("[id$=ContentTable]").append(tr);
+              });
+      }
+
+              function collapseServices(input){
+
+                  $(input).toggleClass("slds-is-open");
+                  $( input ).closest("tr").nextUntil( ".head" ).each(function( index, element ) {
+                      $(element).toggleClass("collapse");
+                  });
+              }
+
+              function buildSection(title){
+
+                  var serctionHTML =
+                      '<div class="slds-section" style="margin:0">'+
+                      '<h3 class="slds-section__title">'+
+                      '<div class="slds-button slds-section__title-action">'+
+                      '<svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left">'+
+                      '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/SLDS272/icons/utility-sprite/svg/symbols.svg#switch" />'+
+                      '</svg>'+
+                      '<span class="slds-truncate" style="font-size: 0.8rem;" title="'+title+'">'+title+'</span>'+
+                      '</div>'+
+                      '</h3>'+
+                      '</div>';
+                  return serctionHTML;
+              }
+
+              function buildToolTips(text){
+
+                  var ToolTipHTML =
+                      '<span style="padding-left: 1rem; position: relative; white-space: normal !important;">'+
+                      '<span class="tooltiptest slds-icon_container slds-icon-utility-info" title="{!$Label.LABS_SF_Opp_Price_Help}">'+
+                      '<svg class="slds-icon slds-icon slds-icon_xx-small slds-icon-text-default" aria-hidden="true">'+
+                      '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/SLDS272/icons/utility-sprite/svg/symbols.svg#info" />'+
+                      '</svg>'+
+                      '<span class="slds-assistive-text">{!$Label.LABS_SF_Opp_Product_Help}</span>'+
+                      '</span>'+
+                      '<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-slide-from-bottom-to-top slds-fall-into-ground" role="tooltip" id="help" style="position: absolute; bottom: 2.5rem; left: 0.1rem; width: max-content; max-width: 50rem;">'+
+                      '<div class="slds-popover__body popover__body_small"><p>'+text+'</p></div>'+
+                      '</div>'+
+                      '</span>';
+                  return ToolTipHTML;
+              }
+
+              function numberWithSpaces(x) {
+
+                  var parts = x.toString().split(".");
+                  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                  return parts.join(".");
+              }
+
+              function enableElement(id){
+
+                  $("[id$='"+id+"']").removeAttr('disabled');
+              }
+
+              function disableElement(id){
+
+                  $("[id$='"+id+"']").attr('disabled','disabled');
+              }
+
+              function saveAsQuote(){
+                  showSpinner();
+
+                  Visualforce.remoting.Manager.invokeAction (
+
+                      "{!$RemoteAction.VFCER04_Opportunity_Product.saveAsQuote}",
+                      opportunityId,
+                      function(result, event) {
+                          if (event.status) {
+                              console.log('JSON.stringify result : '+JSON.stringify(result));
+                              if(result){
+
+                                  sforce.one.navigateToSObject(result.Id);
+                              }
+                          }
+                          else if(event.type === 'exception'){
+                              console.log( "before needApproval? : "+needApproval );
+                              if(event.message == 'Need Approval'){
+                                  needApproval = true;
+                                  hideSpinner();
+                                  console.log( "after control needApproval? : "+needApproval );
+                                  //updateOpportunity();
+                                  //showMessage('{!$Label.LABS_SF_Opp_Product_NeedApprovalWarningMessage}','warning');
+                                  openApprovalModal();
+                              }else if(event.message == 'Need Financial Approval'){
+                                  hideSpinner();
+                                  openApprovalModal();
+                              }
+                              else{
+                                  hideSpinner();
+                                  showMessage(event.message,'error');
+                              }
+                          }
+                              else {
+
+                                  showMessage(event.message,'error');
+                              }
+                      },
+                     {escape: true}
+                  );
+              }
+
+              function updateOpportunity(approvalComment){
+                  Visualforce.remoting.Manager.invokeAction (
+
+                      "{!$RemoteAction.VFCER04_Opportunity_Product.updateOpportunity}",
+                      opportunityId,
+                      approvalComment,
+                      needApproval,
+                      function(result, event) {
+
+                          closeApprovalModal();
+                          hideSpinner();
+                          if (event.status) {
+                              if(result){
+                                  showMessage('{!$Label.LABS_SF_Opp_Product_NeedApprovalWarningMessage}','warning');
+                                  disableElement("editPriceButtonId");
+                                  disableElement("saveQuoteButtonId");
+                              }else{
+                                  showMessage('Error');
+                              }
+                              //closeApprovalModal();
+                          }
+                          else if(event.type === 'exception'){
+
+                              showMessage(event.message,'error');
+                          }
+                              else {
+
+                                  showMessage(event.message,'error');
+                              }
+                      }
+                  );
+              }
+              function launchApprovalProcess(){
+
+                  var approvalComment = $( "#approvalCommentId" ).val();
+                  if(approvalComment==''){
+                      $( "#approvalCommentId" ).addClass('slds-has-error');
+                  }
+                  else{
+                      $( "#approvalCommentId" ).removeClass('slds-has-error');
+                      showSpinner();
+                      updateOpportunity(approvalComment);
+                  }
+
+              }
+
+              function showMessage(element, type, hasLink){
+
+                  switch(type){
+                      case 'warning': $( "#messageTextId" ).addClass("slds-theme_warning");
+                          break;
+                      case 'error': $( "#messageTextId" ).addClass("slds-theme_error");
+                          break;
+                  }
+                  if(hasLink){
+
+                      $("#errortextId").html(element);
+                      $( "#errortextId").find("b").on( "click", function(){
+                          OpenAcceptedQuote('{!acceptedQuote.Id}');
+                      });
+                      $( "#messageTextId" ).css( "display","block" );
+                  }else{
+                      $("#errortextId").text(element);
+                      $( "#messageTextId" ).css( "display","block" );
+                  }
+              }
+
+              function OpenAcceptedQuote(quoteId){
+                  sforce.one.navigateToSObject(quoteId,"RELATED");
+              }
+
+              function cleanMessage(){
+
+                  $( "#messageTextId" ).css( "display","none" );
+                  $( "#messageTextId" ).removeClass("slds-theme_warning").removeClass("slds-theme_error");
+                  $("#errortextId").text("");
+              }
+
+              function closeApprovalModal(){
+                  $( "#approvalModalId" ).hide();
+              }
+
+              function openApprovalModal(){
+                  $( "#approvalModalId" ).show();
+              }
+
+              function showSpinner(){
+                  $("html, body").animate({ scrollTop: 0 }, "slow");
+                  $(".block").addClass("showSpinner");
+              }
+
+              function hideSpinner(){
+                  $(".block").removeClass("showSpinner");
+              }
+    </script>
+  </html>
+</apex:page>

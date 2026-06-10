@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERGR_Merchant_Financial_Centers</fullName>
+    <columns>NAME</columns>
+    <columns>ER_Account_Name__c</columns>
+    <columns>ER_Contact__c</columns>
+    <columns>ER_Type__c</columns>
+    <columns>ER_Bank_Account__c</columns>
+    <columns>ER_City__c</columns>
+    <columns>ER_Country__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ER_Type__c</field>
+        <operation>equals</operation>
+        <value>Merchant</value>
+    </filters>
+    <label>Merchant Financial Centers</label>
+</ListView>

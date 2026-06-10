@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Picklist_Values__c</fullName>
+    <description>Picklist values (that are stored in the record) in csv format.
+Please pay attention that the order must match the one in the Picklist labels field in order to do the right translation.
+Example:
+if &quot;Picklist values&quot; is &quot;Purchasing Manager,Administrator,Assistant,Other&quot;,
+then &quot;Picklist labels&quot; must be &quot;Acheteur,Administrateur,Assistant,Autre&quot; (in french)</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Picklist Values</label>
+    <length>1000</length>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

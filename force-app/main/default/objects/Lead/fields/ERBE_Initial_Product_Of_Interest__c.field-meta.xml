@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Initial_Product_Of_Interest__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Initial Product Of Interest</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.ER_BUPicklist__c</field>
+            <operation>equals</operation>
+            <valueField>Product2.ER_BUPicklist__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Product2.IsActive</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>LeadsPrd</relationshipLabel>
+    <relationshipName>LeadsPrd</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

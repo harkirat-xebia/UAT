@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERRO_User_Customer_Service_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERRO Customer Service</label>
+    <queue>ERRO_User_Customer_Service</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

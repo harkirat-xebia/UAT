@@ -1,0 +1,347 @@
+<template>
+  <!-- Credit Scoring -->
+
+  <div if:false={isPubReg}>
+    <div class="exampleHolder">
+      <template if:true={isLoadingCreditScoring}>
+        <div class="demo-only" style="height: 6rem; position: relative">
+          <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+              <span class="slds-assistive-text">Loading</span>
+              <div class="slds-spinner__dot-a"></div>
+              <div class="slds-spinner__dot-b"></div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <!--  / Credit Scoring -->
+
+  <!-- Public register for ES -->
+
+  <div if:true={isPubReg}>
+    <template if:true={isLoadingInfo}>
+      <div class="slds-spinner_container" style="background: none; height: 750px">
+        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+          <span class="slds-assistive-text">Loading</span>
+          <div class="slds-spinner__dot-a"></div>
+          <div class="slds-spinner__dot-b"></div>
+        </div>
+      </div>
+    </template>
+    <template if:false={isLoadingInfo}>
+      <div class="modal-header slds-modal__header" style="font-weight: bold">
+        <div style="display: inline-block">
+          <lightning-icon icon-name={iconName} size="small" alternative-text="Indicates approval"> </lightning-icon>
+        </div>
+        <br />
+        <div style="display: inline-block">ES {labels.LAB_SF_PublicRegister_Title} : "{sid}"</div>
+      </div>
+      <div>
+        <div style="border: 0px; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0); float: right">
+          <lightning-input
+            type="checkbox"
+            label={labels.LAB_SF_PublicRegister_CheckAll}
+            name="allChk"
+            class="checkAll"
+            onchange={handleCheckbox}
+          ></lightning-input>
+        </div>
+        <!-- LegalNAME-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end" style="clear: both">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="legalNameChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="legalName"
+              label={labels.LAB_SF_PublicRegister_LegalName}
+              value={legalName}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!-- Legal Form-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="legalFormChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="legalForm"
+              label={labels.LAB_SF_PublicRegister_LegalForm}
+              value={legalForm}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!-- Street-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="streetChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="street"
+              label={labels.LAB_SF_PublicRegister_Street}
+              value={street}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!-- Zip Code-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="zipCodeChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="zipCode"
+              label={labels.LAB_SF_PublicRegister_ZipCode}
+              value={zipCode}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!--City-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="cityChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="city"
+              label={labels.LAB_SF_PublicRegister_City}
+              value={city}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!--Country-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="countryChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="country"
+              label={labels.LAB_SF_PublicRegister_Country}
+              value={country}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!--Phone-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="phoneChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="phone"
+              label={labels.LAB_SF_PublicRegister_Phone}
+              value={phone}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!--Email-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="emailChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="email"
+              label={labels.LAB_SF_PublicRegister_Email}
+              value={email}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+        <!--NumberOfEmployee-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="nbEmployeesChk"
+                onchange={handleCheckbox}
+                checked={allChk}
+              ></lightning-input>
+            </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="nbEmployees"
+              label={labels.LAB_SF_PublicRegister_NumberOfEmployees}
+              value={nbEmployees}
+              onchange={handleChange}
+            ></lightning-input>
+          </div>
+        </div>
+
+        <br />
+        <div style="border: 0px; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0); float: right">
+          <lightning-input
+            type="checkbox"
+            label={labels.LAB_SF_PublicRegister_CheckAllNace}
+            name="allNaceChk"
+            class="checkAll"
+            onchange={handleCheckbox}
+          ></lightning-input>
+        </div>
+        <table class="slds-table">
+          <tr>
+            <td style="padding-left: 0px">
+              <lightning-input
+                type="checkbox"
+                value="false"
+                name="naceChk"
+                onchange={handleCheckbox}
+                checked={allNaceChk}
+              ></lightning-input>
+            </td>
+            <td><b>{nace1}</b></td>
+            <td>{nace2}</td>
+          </tr>
+        </table>
+        <br />
+        <h1>
+          <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+            <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+              <span style="display: block; height: 25px">
+                <lightning-input
+                  type="checkbox"
+                  value="false"
+                  name="creditChk"
+                  onchange={handleCheckbox}
+                ></lightning-input>
+              </span>
+            </div>
+            <div class="slds-col slds-size_11-of-12">
+              <b>Credit Scoring information</b>
+            </div>
+          </div>
+        </h1>
+
+        <!-- Credit Scoring -->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px"> </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="creditScoring"
+              label="Credit Scoring"
+              value={creditScoring}
+              onchange={handleChange}
+              disabled="true"
+            ></lightning-input>
+          </div>
+        </div>
+        <!--Credit Limit-->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+          <div class="slds-col slds-size_1-of-12 slds-grid_align-center">
+            <span style="display: block; height: 25px"> </span>
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <lightning-input
+              name="creditLimit"
+              label="Credit Limit"
+              value={creditLimit}
+              onchange={handleChange}
+              disabled="true"
+            ></lightning-input>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer slds-modal__footer">
+        <div style="float: left">
+          <lightning-button
+            label={labels.LAB_SF_PublicRegister_Cancel}
+            variant="neutral"
+            onclick={handleCancel}
+          ></lightning-button>
+        </div>
+        <div>
+          <lightning-button
+            label={labels.LAB_SF_PublicRegister_Update}
+            variant="brand"
+            onclick={handleUpdate}
+          ></lightning-button>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <!-- Public register for ES -->
+</template>

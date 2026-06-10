@@ -1,0 +1,44 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 09-02-2023
+  @last modified by  : AAM
+-->
+<template>
+  <div class={inputCssClass}>
+    <template if:true={hasInputLabel}>
+      <label class="slds-form-element__label" for="text-input-id-1">
+        <template if:true={required}>
+          <abbr class="slds-required" title="required">* </abbr>
+        </template>
+        <template if:true={requiredConditional}>
+          (<abbr class="slds-required" title="required">*</abbr>)&nbsp;
+        </template>
+        {inputLabel}
+      </label>
+    </template>
+
+    <template if:true={hasTooltip}>
+      <lightning-helptext content={toolTipText} class="er-tooltip"></lightning-helptext>
+    </template>
+    <div class="slds-form-element__control">
+      <input
+        type="text"
+        id="text-input-id-1"
+        class={inputCssClass2}
+        value={_value}
+        required={required}
+        maxlength={maxLength}
+        disabled={disabled}
+        placeholder={placeHolderText}
+        onchange={handleChange}
+        onkeyup={handleKeyup}
+        autofocus={autofocus}
+      />
+    </div>
+    <template if:true={hasError}>
+      <div class="slds-form-element__help" id="error-message-unique-id">{errorMessage}</div>
+    </template>
+  </div>
+</template>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERBE_Acceptor_Provider__c</fullName>
+    <label>Acceptor Provider</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+                <label>Adyen</label>
+            </value>
+            <value>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+                <label>Atos-Worldline</label>
+            </value>
+            <value>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+                <label>Bepax-Paynation</label>
+            </value>
+            <value>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+                <label>Bevo</label>
+            </value>
+            <value>
+                <fullName>CCV</fullName>
+                <default>false</default>
+                <label>CCV</label>
+            </value>
+            <value>
+                <fullName>Chess</fullName>
+                <default>false</default>
+                <label>Chess</label>
+            </value>
+            <value>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+                <label>Easy Payments</label>
+            </value>
+            <value>
+                <fullName>European merchant services</fullName>
+                <default>false</default>
+                <label>European merchant services</label>
+            </value>
+            <value>
+                <fullName>Hypercom/BS Cards</fullName>
+                <default>false</default>
+                <label>Hypercom/BS Cards</label>
+            </value>
+            <value>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+                <label>Ingenico Payment Services</label>
+            </value>
+            <value>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+                <label>Keyware</label>
+            </value>
+            <value>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+                <label>Loyaltek</label>
+            </value>
+            <value>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+                <label>N-TS</label>
+            </value>
+            <value>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+                <label>Payleven</label>
+            </value>
+            <value>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+                <label>Payworld</label>
+            </value>
+            <value>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+                <label>Sepay</label>
+            </value>
+            <value>
+                <fullName>SIX - Carrefour</fullName>
+                <default>false</default>
+                <label>SIX - Carrefour</label>
+            </value>
+            <value>
+                <fullName>Six Payments</fullName>
+                <default>false</default>
+                <label>Six Payments</label>
+            </value>
+            <value>
+                <fullName>Six Payments - BNP</fullName>
+                <default>false</default>
+                <label>Six Payments - BNP</label>
+            </value>
+            <value>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+                <label>SUM UP</label>
+            </value>
+            <value>
+                <fullName>EMS</fullName>
+                <default>false</default>
+                <label>EMS</label>
+            </value>
+            <value>
+                <fullName>VivaWallet</fullName>
+                <default>false</default>
+                <label>VivaWallet</label>
+            </value>
+            <value>
+                <fullName>GlobalPay</fullName>
+                <default>false</default>
+                <label>GlobalPay</label>
+            </value>
+            <value>
+                <fullName>Mypos</fullName>
+                <default>false</default>
+                <label>Mypos</label>
+            </value>
+            <value>
+                <fullName>Nayax</fullName>
+                <default>false</default>
+                <label>Nayax</label>
+            </value>
+            <value>
+                <fullName>Xafaw</fullName>
+                <default>false</default>
+                <label>Xafaw</label>
+            </value>
+            <value>
+                <fullName>Dover Fueling Solutions</fullName>
+                <default>false</default>
+                <label>Dover Fueling Solutions</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

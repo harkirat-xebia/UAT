@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER06_FC_SAME_ACCOUNT</fullName>
+    <active>true</active>
+    <description>a Store can be linked only to the Financial Center related to its merchant.</description>
+    <errorConditionFormula>AND(
+				 NOT($User.ER_BypassVR__c),
+				 NOT(ISBLANK(ER_Merchant__c)),
+                 NOT(RecordType.DeveloperName = &apos;Store_Aggregator&apos;),
+				 ER_Merchant__r.Id &lt;&gt; ER_Financial_Center__r.ER_Account_Name__c
+)</errorConditionFormula>
+    <errorMessage>A Store can be linked only to the Financial Center related to its merchant.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor_Provider__c</fullName>
+    <label>Acceptor Provider</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+                <label>Adyen</label>
+            </value>
+            <value>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+                <label>Atos-Worldline</label>
+            </value>
+            <value>
+                <fullName>Atos-Worldline - No invoice</fullName>
+                <default>false</default>
+                <label>Atos-Worldline - No invoice</label>
+            </value>
+            <value>
+                <fullName>Belgium Payment</fullName>
+                <default>false</default>
+                <label>Belgium Payment</label>
+            </value>
+            <value>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+                <label>Bepax-Paynation</label>
+            </value>
+            <value>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+                <label>Bevo</label>
+            </value>
+            <value>
+                <fullName>CCV</fullName>
+                <default>false</default>
+                <label>CCV</label>
+            </value>
+            <value>
+                <fullName>Chess</fullName>
+                <default>false</default>
+                <label>Chess</label>
+            </value>
+            <value>
+                <fullName>Dover Fueling Solutions</fullName>
+                <default>false</default>
+                <label>Dover Fueling Solutions</label>
+            </value>
+            <value>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+                <label>Easy Payments</label>
+            </value>
+            <value>
+                <fullName>Elavon</fullName>
+                <default>false</default>
+                <label>Elavon</label>
+            </value>
+            <value>
+                <fullName>EMS</fullName>
+                <default>false</default>
+                <label>EMS</label>
+            </value>
+            <value>
+                <fullName>GlobalPay</fullName>
+                <default>false</default>
+                <label>GlobalPay</label>
+            </value>
+            <value>
+                <fullName>Hypercom/B+S Cards</fullName>
+                <default>false</default>
+                <label>Hypercom/B+S Cards</label>
+            </value>
+            <value>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+                <label>Ingenico Payment Services</label>
+            </value>
+            <value>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+                <label>Keyware</label>
+            </value>
+            <value>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+                <label>Loyaltek</label>
+            </value>
+            <value>
+                <fullName>Nepting</fullName>
+                <default>false</default>
+                <label>Nepting</label>
+            </value>
+            <value>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+                <label>N-TS</label>
+            </value>
+            <value>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+                <label>Payleven</label>
+            </value>
+            <value>
+                <fullName>Payment Consulting</fullName>
+                <default>false</default>
+                <label>Payment Consulting</label>
+            </value>
+            <value>
+                <fullName>Payment Services</fullName>
+                <default>false</default>
+                <label>Payment Services</label>
+            </value>
+            <value>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+                <label>Payworld</label>
+            </value>
+            <value>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+                <label>Sepay</label>
+            </value>
+            <value>
+                <fullName>Six Payment</fullName>
+                <default>false</default>
+                <label>Six Payment</label>
+            </value>
+            <value>
+                <fullName>Six Payment - BNP</fullName>
+                <default>false</default>
+                <label>Six Payment - BNP</label>
+            </value>
+            <value>
+                <fullName>Six Payment - Carrefour</fullName>
+                <default>false</default>
+                <label>Six Payment - Carrefour</label>
+            </value>
+            <value>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+                <label>SUM UP</label>
+            </value>
+            <value>
+                <fullName>Syncpay</fullName>
+                <default>false</default>
+                <label>Syncpay</label>
+            </value>
+            <value>
+                <fullName>Viva Wallet</fullName>
+                <default>false</default>
+                <label>Viva Wallet</label>
+            </value>
+            <value>
+                <fullName>Worldline - NL</fullName>
+                <default>false</default>
+                <label>Worldline - NL</label>
+            </value>
+            <value>
+                <fullName>Xafaw</fullName>
+                <default>false</default>
+                <label>Xafaw</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

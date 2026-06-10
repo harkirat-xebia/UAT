@@ -1,0 +1,41 @@
+<!--
+ - Created by ALK on 15/04/2021
+ - Description : switchLanguage
+ -->
+<!-- Switch Language -->
+<template>
+  <!-- CONTENT -->
+  <div class="content">
+    <!-- SPINNER -->
+    <div if:true={showLoadingSpinner}>
+      <lightning-spinner alternative-text={label.processing} size="large"> </lightning-spinner>
+    </div>
+
+    <div class="modal-header slds-modal__header">
+      <h2 class="title slds-text-heading_medium">{title}</h2>
+    </div>
+
+    <div class="component-body">
+      <div class="slds-p-around_medium">
+        <div class="language-options">
+          <lightning-combobox
+            name={label.language}
+            label={label.language}
+            placeholder={label.selectLanguage}
+            value={selectedLanguage}
+            options={languages}
+            onchange={handleChange}
+            variant="label-stacked"
+          >
+          </lightning-combobox>
+        </div>
+
+        <!-- SAVE -->
+        <div class="div-save">
+          <lightning-button label={label.save} variant="brand" icon-name="utility:record_update" onclick={handleSave}>
+          </lightning-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

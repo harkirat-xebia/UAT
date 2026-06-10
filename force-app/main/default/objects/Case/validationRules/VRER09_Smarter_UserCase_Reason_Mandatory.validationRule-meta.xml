@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER09_Smarter_UserCase_Reason_Mandatory</fullName>
+    <active>true</active>
+    <description>The Case reason should be mandatory on Smarter User Cases</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &apos;FR&apos;)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_User_Case_RT&apos;
+&amp;&amp; ISPICKVAL(ER_Reason__c, &apos;&apos;)</errorConditionFormula>
+    <errorMessage>VRER09 - The case reason is mandatory</errorMessage>
+</ValidationRule>

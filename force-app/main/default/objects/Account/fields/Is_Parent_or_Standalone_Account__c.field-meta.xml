@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Parent_or_Standalone_Account__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Checked if account is a parent account (has children) or is not part of any hierarchy (no parent). Used for activity reporting.</description>
+    <label>Is Parent or Standalone Account</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

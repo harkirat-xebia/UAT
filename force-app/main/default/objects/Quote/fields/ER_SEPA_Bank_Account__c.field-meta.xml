@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_SEPA_Bank_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>SEPA Bank Account</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>The related bank account must have SEPA active checked</errorMessage>
+        <filterItems>
+            <field>ER_Bank_Account__c.ER_SEPA_active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>ER_Bank_Account__c</referenceTo>
+    <relationshipLabel>Quotes</relationshipLabel>
+    <relationshipName>Quotes</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

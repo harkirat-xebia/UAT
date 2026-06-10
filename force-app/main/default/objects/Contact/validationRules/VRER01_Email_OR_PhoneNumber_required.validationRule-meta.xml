@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_Email_OR_PhoneNumber_required</fullName>
+    <active>true</active>
+    <description>Suggestion: E-mail or Phone/Mobilephone number must be a required field.</description>
+    <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c), 
+AND( 
+Email == null, 
+AND (Phone == null, MobilePhone == null) 
+))</errorConditionFormula>
+    <errorMessage>E-mail or Phone/Mobile phone number are required.</errorMessage>
+</ValidationRule>

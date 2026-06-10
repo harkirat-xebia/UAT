@@ -1,0 +1,65 @@
+<template>
+    <template if:false={showMMErrorComp}>
+        <div class="inner-container">
+
+            <!-- Icon placeholder -->
+            <div class="slds-m-bottom_medium celebration-icon">
+                <img src={iconUrl} alt="Celebration Icon" />
+            </div>
+
+            <!-- Main Title -->
+            <div class="header-top">
+                <h2>{label.header}</h2>
+                <p>{label.subHeader}</p>
+            </div>
+            
+            <!-- Hiding Products as per new reequirement -->
+            <!-- Product Options -->
+            <template if:false={isActiveContract}>
+                <div class="slds-grid slds-wrap slds-gutters slds-grid_align-center slds-grid_vertical-stretch">
+                    <template for:each={activeProducts} for:item="product">
+                        <div key={product.id} class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
+                            <!-- Active Product -->
+                            <template if:false={product.isActive}>
+                                <div class="slds-text-align_center box-custom" data-id={product.id}>
+                                    <img src={product.imageUrl} alt={product.name} />
+                                    <p>{product.name}</p>
+                                </div>
+                            </template>
+
+                            <!-- Inactive Product -->
+                            <template if:true={product.isActive}>
+                                <div class="slds-text-align_center slds-text-color_weak box-custom" data-id={product.id}>
+                                    <img src={product.imageUrl} alt={product.name} style="filter: grayscale(100%);" />
+                                    <p>{product.name}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </template> 
+                </div>
+            </template>
+
+            <!-- Buttons -->
+            <div class="nav-buttons">
+                <div class="next-btn">
+                    <button class="slds-button" onclick={handleMyEdenredOnClick} style="justify-content:center">{label.myEdenredLabel}</button>
+                </div>
+                <div class="black-border">
+                    <button class="slds-button" onclick={handleEdenredBEOnClick} style="justify-content:center">{label.helpCenterLabel}</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={showMMErrorComp}>
+        <div class="inner-container">
+        <div class="slds-m-bottom_medium celebration-icon">
+            <img src={iconUrl} alt="Celebration Icon" />
+        </div>
+        <div class="header-top">
+            <h2>{label.mmErrorHeader}</h2>
+            <p class="slds-m-bottom_medium">{label.mmError}</p>
+            <p>{label.mmErrorEnd}</p>
+        </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Check_ValueType</fullName>
+    <active>true</active>
+    <description>Price format should be consistent with Value Type : either Percentage, or Currency</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+AND(TEXT(ER_ValueType__c)=&apos;Percentage&apos;, ISBLANK(ER_Percentage__c)),
+AND(TEXT(ER_ValueType__c)=&apos;Currency&apos;, ISBLANK(UnitPrice))
+)</errorConditionFormula>
+    <errorDisplayField>ER_ValueType__c</errorDisplayField>
+    <errorMessage>VRER04 - Price format should be consistent with Value Type : either Percentage, or Currency.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERES_Client_Telesales_Task</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERES Client Telesales</label>
+    <queue>ERES_Client_Telesales</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

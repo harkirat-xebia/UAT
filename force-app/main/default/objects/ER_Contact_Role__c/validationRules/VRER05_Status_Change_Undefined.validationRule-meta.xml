@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Status_Change_Undefined</fullName>
+    <active>true</active>
+    <description>Validation Rule to prevent users to empty the status</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_Status__c, &quot;&quot;)</errorConditionFormula>
+    <errorMessage>Please choose either Active or Inactive for the contact role status.</errorMessage>
+</ValidationRule>

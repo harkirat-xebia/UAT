@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFI01_CRN_Format</fullName>
+    <active>true</active>
+    <description>This validation rule ensure that the format of the CRN is correctly captured by User, and follow the finnish format. This rule can be bypassed by a User by checking the field &apos;BypassVR&apos; on its account.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) &amp;&amp;
+            RecordType.DeveloperName = &apos;ER_Company_Account_RT&apos; &amp;&amp;
+            ISPICKVAL( ER_BUPicklist__c, &apos;FI&apos;) &amp;&amp;
+            NOT(REGEX( ER_Registration_Number__c , &quot;[0-9]{7}-[0-9]{1}&quot;))</errorConditionFormula>
+    <errorDisplayField>ER_Registration_Number__c</errorDisplayField>
+    <errorMessage>The Company Registration Number must be 9 alphanumeric characters long with the following format: 0000000-0 (7 digits then &quot;-&quot; then 1 digit)</errorMessage>
+</ValidationRule>

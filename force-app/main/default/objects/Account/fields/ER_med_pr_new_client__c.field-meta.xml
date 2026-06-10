@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_med_pr_new_client__c</fullName>
+    <formula>OR( DATEVALUE(ER_Creation_date_in_OS__c ) &gt; (TODAY() - 365))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>New client</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

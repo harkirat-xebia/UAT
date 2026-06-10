@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Acceptor_Id__c</fullName>
+    <label>Virtual Acceptor</label>
+    <referenceTo>ER_Acceptor__c</referenceTo>
+    <relationshipLabel>Virtual Acceptor Store Aggregators</relationshipLabel>
+    <relationshipName>Virtual_Acceptor_Store_Aggregators</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+</CustomField>

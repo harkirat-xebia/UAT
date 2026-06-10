@@ -1,0 +1,9 @@
+/**
+ * Created by davram on 2/26/2021.
+ */
+.divStyle {
+  color: #006dcc;
+}
+.divStyle:hover {
+  text-decoration-line: underline;
+}

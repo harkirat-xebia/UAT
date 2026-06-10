@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER04_Lead_Address_Obligatory</fullName>
+    <active>true</active>
+    <description>Address information is obligatory for the User and Customer lead channel</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; RecordType.DeveloperName = &quot;ER_Merchant_Lead_RT&quot;
+            &amp;&amp; TEXT(Status) = $Label.LABS_SF_Lead_Status_Qualification
+            &amp;&amp; ISBLANK (Street)
+            &amp;&amp; (ISPICKVAL(ER_Lead_Channel__c ,&quot;User&quot;) || ISPICKVAL(ER_Lead_Channel__c ,&quot;Customer&quot;))</errorConditionFormula>
+    <errorDisplayField>Street</errorDisplayField>
+    <errorMessage>The address information must be filled in order to register the Lead</errorMessage>
+</ValidationRule>

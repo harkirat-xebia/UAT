@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_VAT_Number_Format_On_Lead</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF($User.ER_BypassVR__c  = false &amp;&amp; NOT(ISBLANK(ER_VAT_Number__c)) &amp;&amp; NOT( REGEX(ER_VAT_Number__c, &quot;^BE[0-1]{1}[0-9]{9}$&quot;) || REGEX(ER_VAT_Number__c, &quot;^LU[0-9]{8}$&quot;) ), true, false)</errorConditionFormula>
+    <errorMessage>Please enter a valid VAT Number.</errorMessage>
+</ValidationRule>

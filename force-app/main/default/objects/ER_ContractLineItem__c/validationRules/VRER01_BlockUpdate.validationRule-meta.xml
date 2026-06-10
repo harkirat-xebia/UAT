@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER01_BlockUpdate</fullName>
+    <active>false</active>
+    <description>Allow modification of creation date in OS only.</description>
+    <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+NOT(ISNEW()),
+NOT( ISCHANGED(ER_Last_date_of_Sync__c ))
+)</errorConditionFormula>
+    <errorMessage>You cannot update this record.</errorMessage>
+</ValidationRule>

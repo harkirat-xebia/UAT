@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE03_TID_Atosworldline_begins_wt_01or5</fullName>
+    <active>true</active>
+    <description>Terminal ID of Atos Worldline needs to start with 01 or 5</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Provider__c,&apos;Atos-Worldline&apos;) || ISPICKVAL(ER_Acceptor_Provider__c,&apos;Atos-Worldline - No invoice&apos;))
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;01&quot;)
+||BEGINS(ER_TID_Authorization__c,&quot;5&quot;) )</errorConditionFormula>
+    <errorMessage>Terminal ID of Atos Worldline needs to start with 01 or 5</errorMessage>
+</ValidationRule>

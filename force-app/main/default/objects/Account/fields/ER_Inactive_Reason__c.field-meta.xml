@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Inactive_Reason__c</fullName>
+    <label>Inactive Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <label>No interest</label>
+            </value>
+            <value>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <label>Terminated</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Bankrupt</fullName>
+                <default>false</default>
+                <label>Bankrupt</label>
+            </value>
+            <value>
+                <fullName>GDPR</fullName>
+                <default>false</default>
+                <label>GDPR</label>
+            </value>
+            <value>
+                <fullName>Does not order every month</fullName>
+                <default>false</default>
+                <label>Does not order every month</label>
+            </value>
+            <value>
+                <fullName>Competition</fullName>
+                <default>false</default>
+                <label>Competition</label>
+            </value>
+            <value>
+                <fullName>No employee</fullName>
+                <default>false</default>
+                <label>No employee</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Unsatisfied</fullName>
+                <default>false</default>
+                <label>Unsatisfied</label>
+            </value>
+            <value>
+                <fullName>No budget</fullName>
+                <default>false</default>
+                <label>No budget</label>
+            </value>
+            <value>
+                <fullName>Transformation of Company - noticed by Merchant</fullName>
+                <default>false</default>
+                <label>Transformation of Company - noticed by Merchant</label>
+            </value>
+            <value>
+                <fullName>Termination of Merchant activities - no written notice</fullName>
+                <default>false</default>
+                <label>Termination of Merchant activities - no written notice</label>
+            </value>
+            <value>
+                <fullName>Termination of Merchant activities - noticed</fullName>
+                <default>false</default>
+                <label>Termination of Merchant activities - noticed</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - by Merchant</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - by Merchant</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - by Edenred</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - by Edenred</label>
+            </value>
+            <value>
+                <fullName>Cancellation of Contract - Legal reasons</fullName>
+                <default>false</default>
+                <label>Cancellation of Contract - Legal reasons</label>
+            </value>
+            <value>
+                <fullName>Operation ceased</fullName>
+                <default>false</default>
+                <label>Operation ceased</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

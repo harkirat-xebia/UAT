@@ -1,0 +1,42 @@
+<apex:page standardController="Case" Extensions="VFCER02_Case_Accept" recordSetVar="selectedCases" action="{!Redirect}">
+  <apex:includeScript value="/support/console/40.0/integration.js" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+  <script>
+
+    function inLightning() {
+
+        return sforce.one != undefined ;
+    }
+
+    $(document).ready(function() {
+        try{
+            if(!{!selected}){
+                alert('{!$Label.LAB_SF_Case_AcceptCaseAlert}');
+                if(inLightning()){
+                    sforce.one.navigateToURL("{!url}");
+                }else{
+                    window.location.href = "{!url}";
+                }
+            }
+            else{
+                if(inLightning()){
+
+                    sforce.one.back(true);
+                    sforce.one.navigateToSObject("{!recId}","detail");
+                }else{
+                    if (sforce.console.isInConsole()) {
+
+                        window.location.href = "{!url}";
+                        sforce.console.openPrimaryTab(undefined, '/{!recId}', true);
+                    }else {
+
+                        window.top.location.href = '/{!recId}';
+                    }
+                }
+            }
+        }catch(e){
+            console.log(e);
+        }
+    });
+  </script>
+</apex:page>

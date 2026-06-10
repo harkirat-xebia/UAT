@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRBE20_TIDAuthorisation_Obligatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISCHANGED(TECH_AcceptorCreationViaLeadConversion__c)) 
+            &amp;&amp; NOT(PRIORVALUE(TECH_AcceptorCreationViaLeadConversion__c ) = True)
+            &amp;&amp; TECH_AcceptorCreationViaLeadConversion__c = False
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c,&apos;BENELUX&apos;) 
+            &amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c,&apos;C-TAP&apos;) ||  ISPICKVAL(ER_Acceptor_Scheme__c,&apos;WEBAuth&apos;))
+            &amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+            &amp;&amp; ISBLANK(ER_TID_Authorization__c)</errorConditionFormula>
+    <errorMessage>The field TID Authorization must be filled in order to register the Acceptor</errorMessage>
+</ValidationRule>

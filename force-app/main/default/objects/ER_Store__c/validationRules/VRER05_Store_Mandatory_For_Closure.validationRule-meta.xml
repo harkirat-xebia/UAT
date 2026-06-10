@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER05_Store_Mandatory_For_Closure</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT($User.ER_BypassVR__c ),AND(ISPICKVAL(ER_Status__c, &apos;Inactive&apos;), OR(ISPICKVAL(ER_Closure_Reason__c,&apos;&apos;), ISBLANK(ER_Closure_Date__c))))</errorConditionFormula>
+    <errorMessage>Closure Reason and Closure Date is mandatory when a Store is set as Inactive</errorMessage>
+</ValidationRule>

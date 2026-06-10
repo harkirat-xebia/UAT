@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Asset_Status_Last_Modified_Date__c</fullName>
+    <description>If the value of the status(from WS) is different from the value of Asset Status, we need to update the Asset Status and this field.</description>
+    <label>Status Last Modified Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>DateTime</type>
+</CustomField>

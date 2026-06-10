@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFR01_Valid_CompanyRegistrationNumber</fullName>
+    <active>true</active>
+    <description>Validation rule created for respecting the required format for the field ER_Registration_Number__c.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) 
+        &amp;&amp; RecordType.DeveloperName = &apos;ER_Company_Account_RT&apos;
+        &amp;&amp; ER_SmartER_Context__c = True 
+        &amp;&amp; ISPICKVAL(  ER_Country_Code__c , &apos;FR&apos;) 
+        &amp;&amp; NOT(REGEX( ER_Registration_Number__c, &quot;[0-9]{14}&quot;))</errorConditionFormula>
+    <errorDisplayField>ER_Registration_Number__c</errorDisplayField>
+    <errorMessage>The Registration Number field must be 14 digits long without space.</errorMessage>
+</ValidationRule>

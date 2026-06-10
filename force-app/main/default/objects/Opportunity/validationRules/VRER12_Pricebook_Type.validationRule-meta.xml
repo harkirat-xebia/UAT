@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER12_Pricebook_Type</fullName>
+    <active>true</active>
+    <description>Pricebook [Delicard] can only be used with Employee Engagement Platform</description>
+    <errorConditionFormula>!$User.ER_BypassVR__c &amp;&amp;
+Pricebook2.Name = &apos;ERFI Delicards&apos; &amp;&amp;
+NOT(ISPICKVAL(Type, &apos;Employee Engagement Platform&apos;))</errorConditionFormula>
+    <errorDisplayField>Pricebook2Id</errorDisplayField>
+    <errorMessage>VRER12 - Pricebook [Delicard] can only be used with Type &quot;Employee Engagement Platform&quot;</errorMessage>
+</ValidationRule>

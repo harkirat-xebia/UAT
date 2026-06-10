@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Impacted_Beneficiaries_For_OSS_H</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+				CONTAINS(Pricebook2.Name , &apos;Engagement&apos;),
+    NOT($User.ER_BypassVR__c), 
+    ISPICKVAL(Onboarding_Method__c, &quot;OSS&quot;) 
+    || ISPICKVAL(Onboarding_Method__c, &quot;Hybrid&quot;),
+    ISBLANK(TEXT(Impacted_Beneficiaries__c))
+)</errorConditionFormula>
+    <errorDisplayField>Impacted_Beneficiaries__c</errorDisplayField>
+    <errorMessage>Impacted Beneficiaries is required when Onboarding Method is OSS or Hybrid.</errorMessage>
+</ValidationRule>

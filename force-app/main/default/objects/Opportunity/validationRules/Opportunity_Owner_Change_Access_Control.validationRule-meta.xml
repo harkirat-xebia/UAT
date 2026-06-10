@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Owner_Change_Access_Control</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(OwnerId),
+    NOT(
+        OR(
+            $Profile.Name = &quot;Sales Operations&quot;,
+            $Profile.Name = &quot;System Administrator&quot;,
+            $Profile.Name = &quot;Sales Head&quot;,
+
+            AND(
+                $Profile.Name = &quot;Sales Rep&quot;,
+                $User.Id = PRIORVALUE(OwnerId)
+            ),
+
+            AND(
+                $Profile.Name = &quot;Sales Rep&quot;,
+                $UserRole.Name = &quot;SME L2W/Partners channel Sales Rep&quot;,
+                Owner.UserRole.Name = &quot;SME L2W/Partners channel Sales Rep&quot;
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>You cannot change the Owner of this Record.</errorMessage>
+</ValidationRule>

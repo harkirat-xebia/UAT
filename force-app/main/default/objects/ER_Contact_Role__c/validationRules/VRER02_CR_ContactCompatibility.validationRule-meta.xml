@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER02_CR_ContactCompatibility</fullName>
+    <active>true</active>
+    <description>Check if the selected contact is available for the selected Parent.</description>
+    <errorConditionFormula>AND(
+NOT( $User.ER_BypassVR__c ),
+OR(
+AND(
+NOT(ISBLANK(ER_Financial_Center__c )),
+ER_Contact__r.AccountId != ER_Financial_Center__r.ER_Account_Name__c
+),
+AND(
+NOT(ISBLANK(ER_Store__c)),
+ER_Contact__r.AccountId != ER_Store__r.ER_Financial_Center__r.ER_Account_Name__c
+),
+AND(
+NOT(ISBLANK(ER_Delivery_Site__c)),
+ER_Contact__r.AccountId != ER_Delivery_Site__r.ER_Financial_Center__r.ER_Account_Name__c
+),
+AND(
+NOT(ISBLANK(ER_Distribution_Point__c)),
+ER_Contact__r.AccountId != ER_Distribution_Point__r.ER_Delivery_Site__r.ER_Financial_Center__r.ER_Account_Name__c
+)
+)
+)</errorConditionFormula>
+    <errorDisplayField>ER_Contact__c</errorDisplayField>
+    <errorMessage>The selected contact not found at Account level.</errorMessage>
+</ValidationRule>

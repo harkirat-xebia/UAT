@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERES_USER_Beneficios_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>ERES - USER Beneficios</label>
+    <queue>ERES_USER_Beneficios</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

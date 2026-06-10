@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Last_Modified_Date_Functional_User__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>When this checkbox is ticked this means the field ER_Last_Modified_Date_Functional_User__c won&apos;t be overridden by the selected Profile/User</description>
+    <label>ER_Last_Modified_Date_Functional_User__c</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

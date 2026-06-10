@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Role__c</fullName>
+    <complianceGroup>PII;GDPR</complianceGroup>
+    <label>Role</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Autre</fullName>
+                <default>false</default>
+                <label>Autre</label>
+            </value>
+            <value>
+                <fullName>F - Facturation</fullName>
+                <default>false</default>
+                <label>F - Facturation</label>
+            </value>
+            <value>
+                <fullName>R - Relation</fullName>
+                <default>false</default>
+                <label>R - Relation</label>
+            </value>
+            <value>
+                <fullName>U - Utilisateur</fullName>
+                <default>false</default>
+                <label>U - Utilisateur</label>
+            </value>
+            <value>
+                <fullName>Order Contact</fullName>
+                <default>false</default>
+                <label>Order Contact</label>
+            </value>
+            <value>
+                <fullName>Primary Contact</fullName>
+                <default>false</default>
+                <label>Primary Contact</label>
+            </value>
+            <value>
+                <fullName>Invoice Site Contact</fullName>
+                <default>false</default>
+                <label>Invoice Site Contact</label>
+            </value>
+            <value>
+                <fullName>Payment Site Contact</fullName>
+                <default>false</default>
+                <label>Payment Site Contact</label>
+            </value>
+            <value>
+                <fullName>Direction</fullName>
+                <default>false</default>
+                <label>Direction</label>
+            </value>
+            <value>
+                <fullName>Gestion</fullName>
+                <default>false</default>
+                <label>Gestion</label>
+            </value>
+            <value>
+                <fullName>Outlet Contact</fullName>
+                <default>false</default>
+                <label>Outlet Contact</label>
+            </value>
+            <value>
+                <fullName>HR manager</fullName>
+                <default>false</default>
+                <label>HR manager</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

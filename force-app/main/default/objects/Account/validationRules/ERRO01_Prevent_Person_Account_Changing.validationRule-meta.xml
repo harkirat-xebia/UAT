@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERRO01_Prevent_Person_Account_Changing</fullName>
+    <active>true</active>
+    <description>Prevent Ro users to modify or create any person account.</description>
+    <errorConditionFormula>NOT(ISCHANGED( ER_VIP__pc ) ) &amp;&amp; NOT($User.ER_BypassVR__c)
+                    &amp;&amp; $Setup.ER_Validation_Rules_Settings__c.ERRO01_Prevent_Person_Account_Changing__c = false
+                    &amp;&amp; IsPersonAccount
+                    &amp;&amp; ISPICKVAL($User.ER_Business_Unit__c, &quot;RO&quot;)</errorConditionFormula>
+    <errorMessage>You are not able to modify</errorMessage>
+</ValidationRule>

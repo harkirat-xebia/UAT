@@ -1,0 +1,348 @@
+<apex:page controller="VFCHU01_Contract_PDF"
+  renderAs="pdf"
+  language="FR"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  standardStylesheets="false"
+>
+  <head>
+    <style type="text/css" media="print">
+      @page {
+        size: A4;
+        margin: 0mm 4mm 0mm 4mm;
+        @top-center {
+          content: element(header);
+        }
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+      label {
+      }
+      strong {
+      }
+      .header {
+        font-family: Dialog !important;
+        margin-left: 46px;
+        margin-top: 30px;
+        position: running(header);
+      }
+      .footer {
+        font-family: Dialog !important;
+        /*color:#AEB2BD;*/
+        font-size: 6pt;
+        /*text-align: center;*/
+        position: running(footer);
+      }
+      .content {
+        font-family: Dialog !important;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      .pagenumber:before {
+        content: counter(page);
+      }
+      .pagecount:before {
+        content: counter(pages);
+      }
+      .container {
+        margin-top: 90px;
+        font-size: 9pt;
+      }
+      .topleft {
+        float: left;
+        width: 48%;
+      }
+      .left {
+        position: absolute;
+        left: 16px;
+        width: 46%;
+      }
+      .right {
+        position: absolute;
+        right: 16px;
+        width: 46%;
+      }
+      .topright {
+        float: right;
+        width: 48%;
+      }
+      ol.alphabetList {
+        list-style-type: lower-alpha;
+      }
+      li {
+        text-align: justify;
+      }
+      table,
+      th,
+      td {
+        /*border: .5px solid black;*/
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        padding: 4px;
+      }
+      th {
+        padding: 8px;
+        text-align: center;
+      }
+      .block {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #11204c;
+      }
+      .row {
+      }
+      .size_1-of-1 {
+        width: 100%;
+        display: inline-block;
+      }
+      .size_1-of-2 {
+        width: 49%;
+        display: inline-block;
+      }
+      .size_1-of-3 {
+        width: 33%;
+        display: inline-block;
+      }
+      .size_1-of-4 {
+        width: 24%;
+        display: inline-block;
+      }
+      .title {
+        color: #0085ca;
+        font-weight: bold;
+      }
+      .outputField {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="60"
+      height="40"
+    />
+    <div style="text-align: center; margin-top: 5%">Edenred Card acceptor contract</div>
+  </div>
+  <!--div class="footer">
+
+</div-->
+  <apex:form styleClass="content">
+    <!--********PAGE : 1*********-->
+    <div class="container">
+      <div class="block">
+        Parties: <b>Edenred Hungary Kft.</b> (H-1034 Budapest, Váci út 45., company registration no.: 01-09-266926, VAT
+        code: 10884979-2-41; bank account number: 12001008-00164130-00800005, (hereinafter referred to as EDENRED),
+        represented by Krisztián Balázs, and
+      </div>
+      <br />
+      <div class="title">Acceptor/ Participating Business:</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2">Company name: <span class="outputField">{!accountName}</span></div>
+          <div class="size_1-of-2">Legal Forms: <span class="outputField">{!legalForm}</span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Registered office: <span class="outputField">{!legalStreet}</span>
+            <span class="outputField">{!legalZipCode}</span>
+            <span class="outputField">{!legalCity}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Mailing address (if different):
+            <span class="outputField">{!mailingStreet}</span><span class="outputField">{!mailingZipCode}</span
+            ><span class="outputField">{!mailingCity}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">
+            Company ID No.:
+            <span class="outputField">{!nationalCompanyID}</span>
+          </div>
+          <div class="size_1-of-2">Tax ID No.: <span class="outputField">{!vatNumber}</span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">Merchant Identification Number: <span class="outputField"></span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Represented by:
+            <span class="outputField"
+              >{!headContact.firstName} {!headContact.MiddleName} {!headContact.lastName} {!headContact.Suffix}</span
+            >,<br />
+            hereinafter referred to as "Participating business"
+          </div>
+        </div>
+      </div>
+
+      <div class="title">Operational contacts:</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1">
+            Name of manager in charge:
+            <span class="outputField"
+              >{!financialCenterContact.salutation} {!financialCenterContact.firstName}
+              {!financialCenterContact.MiddleName} {!financialCenterContact.lastName} {!financialCenterContact.Suffix}
+            </span>
+            Position:
+            <span class="outputField"> {!financialCenterContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">Phone: {!financialCenterContact.phone}</div>
+          <div class="size_1-of-3">Mobile: {!financialCenterContact.MobilePhone}</div>
+          <div class="size_1-of-3">E-mail: {!financialCenterContact.email}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Name of contact person:
+            <span class="outputField"
+              >{!quoteContact.salutation} {!quoteContact.firstName} {!quoteContact.MiddleName} {!quoteContact.lastName}
+              {!quoteContact.Suffix}
+            </span>
+            Position:
+            <span class="outputField">{!quoteContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">Phone: {!quoteContact.phone}</div>
+          <div class="size_1-of-3">Mobile: {!quoteContact.MobilePhone}</div>
+          <div class="size_1-of-3">E-mail: {!quoteContact.email}</div>
+        </div>
+      </div>
+
+      <div class="title">Financial information</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1">Bank Account number: {!bankAccountNumber}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Contact related to invoices
+            <span class="outputField"
+              >{!financialCenterContact.salutation} {!financialCenterContact.firstName}
+              {!financialCenterContact.MiddleName} {!financialCenterContact.lastName} {!financialCenterContact.Suffix}
+            </span>
+            Position:
+            <span class="outputField">{!financialCenterContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">Phone: {!financialCenterContact.phone}</div>
+          <div class="size_1-of-3">Mobile: {!financialCenterContact.MobilePhone}</div>
+          <div class="size_1-of-3">E-mail: {!financialCenterContact.email}</div>
+        </div>
+      </div>
+
+      <div class="title">Subject of the contract:</div>
+      <div class="block">
+        <p>
+          Acceptance of the cards issued by EDENRED in the stores of the Participating business listed in the appendix
+          of this contract. The stores of the Participating business to be opened subsequently shall become subject to
+          this contract automatically. Edenred levies handling charge for the acceptance of the cards:
+        </p>
+
+        <apex:repeat value="{!serviceList}" var="service">
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Gift'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Gift Card</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Handling charge* to be levied on the nominal value: {!service.value} % + VAT
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Fixed Fee**: {!service.value} HUF + VAT / Store per calendar year
+            </apex:outputPanel>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Schooling'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Schooling Card</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Handling charge* to be levied on the nominal value: {!service.value} % + VAT
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Fixed Fee**: {!service.value} HUF + VAT / Store per calendar year
+            </apex:outputPanel>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Sport'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Culture&amp;Sport Card</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Handling charge* to be levied on the nominal value: {!service.value} % + VAT
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Fixed Fee**: {!service.value} HUF + VAT / Store per calendar year
+            </apex:outputPanel>
+          </apex:outputPanel>
+        </apex:repeat>
+        <div>
+          <apex:outputPanel rendered="{!!hasFixedFee}">
+            <p>*Edenred invoices Participating business at least once a month</p>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!hasFixedFee}">
+            <p>
+              *Should the annual card turnover reach HUF {!ValueFixedFeeThreshold}, the handling charge levied for the
+              net card turnover changes to 5%(+VAT) from 1 January of the year following the concerned year.
+            </p>
+          </apex:outputPanel>
+        </div>
+      </div>
+
+      <div class="title">Participating business undertakes that:</div>
+      <div class="block">
+        <ul>
+          <li>
+            It will accept the above displayed card(s) issued by Edenred as method of payment, and will not apply any
+            sanction against the customers using these cards. Any card type not mentioned above will not be accepted by
+            the Participating business, and will not be reimbursed by Edenred.
+          </li>
+          <li>
+            Participating business undertakes to comply with the provisions of the Personal Income Tax Act in force at
+            the time, and to accept the card only for consideration of the items belonging under the range of products
+            and services indicated on the card.
+          </li>
+          <li>
+            Participating business shall notify Edenred of the opening of a new store or the closing (shut down) of a
+            store included in the list attached to the contract as appendix within 3 business days, in the form of a
+            registered letter.
+          </li>
+        </ul>
+        <br />
+        <div>
+          The contract shall be for an indefinite term and may be terminated by the Parties with a 60-day notice posted
+          in mail with acknowledgement of receipt.
+          <b
+            >Following preliminary negotiations, perusal and joint interpretation, the parties duly signed this contract
+            in approval as one being in full compliance with their wills. I have read the General Terms and Conditions
+            (version 2019) and accept their contents as those being in full compliance with my will.</b
+          >
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="block">
+        <div>Budapest, 2019</div>
+        <br /><br /><br /><br />
+        <div style="display: inline-block; margin-right: 25px">
+          ____________________________________
+          <p>Edenred Hungary Kft.</p>
+        </div>
+        <div style="display: inline-block; float: right">
+          ____________________________________
+          <p>Signed by:</p>
+        </div>
+      </div>
+    </div>
+  </apex:form>
+</apex:page>

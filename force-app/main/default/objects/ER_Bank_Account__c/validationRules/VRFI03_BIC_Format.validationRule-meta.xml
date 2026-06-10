@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRFI03_BIC_Format</fullName>
+    <active>true</active>
+    <description>This validation rule ensure that the format of the BIC is correctly captured by User, and follow the finnish format. This rule can be bypassed by a User by checking the field &apos;BypassVR&apos; on its account.</description>
+    <errorConditionFormula>NOT($User.ER_BypassVR__c) &amp;&amp;
+            ISPICKVAL( ER_BUPicklist__c, &apos;FI&apos;) &amp;&amp;
+            NOT(LEN(ER_BIC__c) = 0) &amp;&amp;
+            LEN(ER_BIC__c) &lt;&gt; 8 &amp;&amp; 
+            LEN(ER_BIC__c) &lt;&gt; 11</errorConditionFormula>
+    <errorDisplayField>ER_BIC__c</errorDisplayField>
+    <errorMessage>The format of the BIC must be 8 or 11 characters long</errorMessage>
+</ValidationRule>

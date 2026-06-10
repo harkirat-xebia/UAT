@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER13_ClosedWonWithoutContract</fullName>
+    <active>false</active>
+    <description>The opportunity can be closed as &apos;Won&apos; if there is at least one related contract, regardless of its status</description>
+    <errorConditionFormula>AND(
+                    NOT($User.ER_BypassVR__c),
+                    NOT(ISPICKVAL($User.ER_Business_Unit__c , &apos;PL&apos;)),
+                    ISPICKVAL( StageName, &apos;Closed won&apos;),
+                    NOT(ISPICKVAL( PRIORVALUE(StageName), &apos;Closed won&apos;)),
+                    ISBLANK(Contract.Id),
+				                $Profile.Name =&apos;Sales Rep&apos;
+                    )</errorConditionFormula>
+    <errorMessage>The opportunity can be closed as &apos;Won&apos; if there is at least one related contract</errorMessage>
+</ValidationRule>
