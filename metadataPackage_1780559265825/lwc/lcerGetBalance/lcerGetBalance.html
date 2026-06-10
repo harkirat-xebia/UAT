@@ -1,0 +1,42 @@
+<!--
+ - Created by AAZ on 08/01/2023
+ - Description: lcerGetBalance
+ -->
+
+<!-- Lcer Get Balance -->
+<template>
+  <lightning-quick-action-panel header={label.getBalanceTitle}>
+    <!-- SPINNER -->
+    <div if:true={showLoadingSpinner}>
+      <lightning-spinner alternative-text={label.processing} size="large"> </lightning-spinner>
+    </div>
+
+    <template if:true={error}>
+      <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
+
+    <template if:false={error}>
+      <template if:true={data.length}>
+        <div class="slds-box slds-box_x-small slds-m-around_x-small slds-text-body_small">
+          <lightning-datatable
+            class="slds-table_striped"
+            hide-checkbox-column="true"
+            key-field="id"
+            data={data}
+            columns={columns}
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+    </template>
+
+    <!-- THIS DIV SHOULD BE DISPLAYED AFTER THE RELEASE OF Spring 23 INTO PROD -->
+    <!--div slot="footer">
+            <lightning-button
+                    variant="brand"
+                    label={label.close}
+                    onclick={handleClose}
+            ></lightning-button>
+        </div-->
+  </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,525 @@
+<apex:page standardController="Account"
+  extensions="VFCER09_Account_UpdateIndividual"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+>
+  <head>
+    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+    <style>
+      .messageText {
+        text-align: center !important;
+      }
+
+      .lookupHoverDetail .labelCol {
+        font-weight: bold;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #dddbda;
+      }
+
+      .lookupHoverDetail .dataCol {
+        border-bottom: 1px solid #dddbda;
+      }
+
+      .lookupHoverDetail .mainTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .lookupHoverDetail .bPageBlock {
+        margin: 0.5rem;
+      }
+
+      .lookupHoverDetail .pbHeader {
+        margin-bottom: 1rem;
+      }
+
+      .lookupHoverDetail .btn {
+        border: 1px solid #dddbda;
+        color: #0070d2;
+        background: white;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .lookupHoverDetail {
+        border: 1px solid #dddbda;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        background: rgb(243, 242, 242);
+        height: auto;
+        width: auto;
+      }
+
+      .lookupHoverDetailOverridable {
+        width: 320px;
+        height: 270px;
+      }
+
+      .lookupHoverDetail {
+        position: absolute;
+        z-index: 15;
+        top: 0;
+        left: 0;
+        display: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      html {
+        background-color: white;
+      }
+
+      html body.sfdcBody {
+        padding: 0;
+        /*background-color: white;*/
+      }
+
+      th {
+        padding-left: 10px !important;
+      }
+
+      .slds-button {
+        min-width: 7rem;
+      }
+
+      .slds-form-element__group {
+        padding: 0.5rem;
+      }
+
+      .handleError {
+        border-color: rgb(194, 57, 52);
+      }
+
+      .errorMsg {
+        color: rgb(150, 0, 0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <apex:outputPanel id="contentId">
+      <apex:outputPanel id="msgErrorId">
+        <apex:outputPanel rendered="{!showError}">
+          <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+            <apex:pageMessages escape="false" />
+          </div>
+        </apex:outputPanel>
+      </apex:outputPanel>
+      <apex:form id="formId">
+        <h3 class="slds-section__title test-id__section-header-container">
+          <div class="slds-section__title-action" style="cursor: initial">
+            <span class="test-id__section-header-title slds-truncate"
+              >{!$Label.LAB_SF_Account_VerifyIdentitySection}</span
+            >
+          </div>
+        </h3>
+        <div class="slds-form-element slds-form_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Account.Fields.Name.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="nameFieldId" styleClass="slds-input" value="{!currentAcc.Name}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Account.Fields.PersonBirthdate.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="dobFieldId" value="{!currentAcc.PersonBirthdate}" />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.Account.Fields.ER_National_ID_Number__c.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="nationalIDFieldId" value="{!currentAcc.ER_National_ID_Number__c}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.Account.Fields.PersonMailingStreet.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="mailingStreetFieldId" value="{!currentAcc.PersonMailingStreet}" />
+                  </div>
+                </div>
+                <!--<div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+	                                <label class="slds-form-element__label">{!$ObjectType.Account.Fields.PersonMailingPostalCode.Label}</label>
+	                                <div class="slds-form-element__control slds-form-element__static">
+	                                    <apex:outputField id="mailingCodeFieldId" value="{!currentAcc.PersonMailingPostalCode}" />
+	                                </div>
+	                            </div>-->
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Account.Fields.PersonEmail.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="PersonEmailFieldId" value="{!currentAcc.PersonEmail}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.Account.Fields.PersonMailingPostalCode.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="mailingCodeFieldId" value="{!currentAcc.PersonMailingPostalCode}" />
+                  </div>
+                </div>
+              </div>
+              <!--<div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                                <label class="slds-form-element__label">{!$ObjectType.Account.Fields.PersonBirthdate.Label}</label>
+                                <div class="slds-form-element__control slds-form-element__static">
+                                    <apex:outputField id="dobFieldId" value="{!currentAcc.PersonBirthdate}" />
+                                </div>
+                            </div>-->
+              <div class="slds-form-element__row">
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Account.Fields.Phone.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputText id="PhoneFieldId" value="{!currentAcc.Phone}" />
+                  </div>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label">{!$ObjectType.Account.Fields.PersonMailingCity.Label}</label>
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="mailingCityFieldId" value="{!currentAcc.PersonMailingCity}" />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div id="getSecretQuestion" class="slds-form-element slds-size_1-of-2">
+                  <apex:actionStatus >
+                    <apex:facet name="start">
+                      <apex:outputPanel >
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton rendered="{!IF(userBU == 'ES', false, true)}"
+                          id="skipSecretQuestionId"
+                          styleClass="slds-button slds-button_neutral"
+                          rerender="LeftNewValues,RightNewValues"
+                          onclick="showEmailAddressSection();"
+                          value="{!$Label.LAB_SF_ASSET_ConfirmationButton}"
+                          action="{!getIndividualInfo}"
+                        />
+                        <apex:commandButton rendered="{!IF(userBU == 'ES', true, false)}"
+                          id="confirmInfoId"
+                          styleClass="slds-button slds-button_neutral"
+                          reRender="secretQuestionSection"
+                          onclick="showSecretQuestionSection();"
+                          value="{!$Label.LAB_SF_ASSET_ConfirmationButton}"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </div>
+                <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                  <label class="slds-form-element__label"
+                    >{!$ObjectType.Account.Fields.PersonMailingCountry.Label}</label
+                  >
+                  <div class="slds-form-element__control slds-form-element__static">
+                    <apex:outputField id="mailingCountryFieldId" value="{!currentAcc.PersonMailingCountry}" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <apex:outputPanel id="secretQuestionSection" style="display: none">
+          <h3 class="slds-section__title test-id__section-header-container">
+            <div class="slds-section__title-action" style="cursor: initial">
+              <span class="test-id__section-header-title slds-truncate"
+                >{!$Label.LAB_SF_Account_SecretQuestionSection}</span
+              >
+            </div>
+          </h3>
+          <div class="slds-form-element slds-form_compound">
+            <div class="slds-form-element__control">
+              <div class="slds-form-element__group">
+                <div id="getSecretQuestion" class="slds-form-element slds-size_1-of-2">
+                  <apex:actionStatus id="getSecretQuestionButton">
+                    <apex:facet name="start">
+                      <apex:outputPanel >
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton id="getSecretQuestionId"
+                          styleClass="slds-button slds-button_neutral"
+                          rerender="getSecretQuestionId,secretQuestionAndAnswer,secretQuestionId,secretAnswerId"
+                          action="{!getSecretQuestion}"
+                          onclick="showConfirmSecretQuestionButton();"
+                          status="getSecretQuestionButton"
+                          value="{!$Label.LAB_SF_ASSET_GetSecretQuestionButton}"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </div>
+                <div id="secretQuestionAndAnswer">
+                  <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_SecretQuestion}</label>
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputText id="secretQuestionId" value="{!secretQuestion}" />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_SecretAnswer}</label>
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputText id="secretAnswerId" value="{!secretAnswer}" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-2"></div>
+                    <div id="getPanNumber" style="display: none" class="slds-form-element slds-size_1-of-2">
+                      <apex:actionStatus >
+                        <apex:facet name="start">
+                          <apex:outputPanel >
+                            <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                              height="25"
+                              width="25"
+                            />
+                          </apex:outputPanel>
+                        </apex:facet>
+                        <apex:facet name="stop">
+                          <apex:outputPanel >
+                            <apex:commandButton id="confirmSecretQuestionId"
+                              styleClass="slds-button slds-button_neutral"
+                              rerender="getPanNumberId, secretQuestionAndAnswer"
+                              onclick="showEmailAddressSection();"
+                              value="{!$Label.LAB_SF_ASSET_ConfirmationButton}"
+                            />
+                          </apex:outputPanel>
+                        </apex:facet>
+                      </apex:actionStatus>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </apex:outputPanel>
+        <apex:outputPanel id="emailAddressSection" style="display: none">
+          <apex:outputPanel id="emailAddressSectionFI" rendered="{!IF(userBU == 'ES', false, true)}">
+            <h3 class="slds-section__title test-id__section-header-container">
+              <div class="slds-section__title-action" style="cursor: initial">
+                <span class="test-id__section-header-title slds-truncate"
+                  >{!$Label.LAB_SF_Account_VerifyServerInformation}</span
+                >
+              </div>
+            </h3>
+            <div class="slds-form-element slds-form_compound">
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__group">
+                  <div class="slds-form-element__row" style="margin-bottom: 0">
+                    <div class="slds-form-element slds-size_1-of-2 slds-form-element__control">
+                      <apex:outputPanel id="LeftNewValues">
+                        <label class="slds-form-element__label">New Email</label>
+                        <div class="slds-form-element__control slds-form-element__static">
+                          <apex:inputText id="newEmailId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!IndivEmail}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_EmailError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolEmailError}"
+                          />
+                        </div>
+                        <label class="slds-form-element__label">New Phone Number</label>
+                        <div class="slds-form-element__control slds-form-element__static">
+                          <apex:inputText id="newPhoneNumberId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!indivPhoneNumber}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_PhoneError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolPNError}"
+                          />
+                        </div>
+                        <label class="slds-form-element__label">New Address</label>
+                        <div class="slds-form-element__control slds-form-element__static" style="padding-bottom: 50px">
+                          <apex:inputText id="newAddressId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!indivAddress}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_AddressError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolAddressError}"
+                          />
+                        </div>
+                      </apex:outputPanel>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-2 slds-form-element__control">
+                      <apex:outputPanel id="RightNewValues">
+                        <label class="slds-form-element__label">New Postal Code</label>
+                        <div class="slds-form-element__control slds-form-element__static">
+                          <apex:inputText id="newPostalCodeId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!indivPostalCode}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_PCError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolPCError}"
+                          />
+                        </div>
+                        <label class="slds-form-element__label">New City</label>
+                        <div class="slds-form-element__control slds-form-element__static">
+                          <apex:inputText id="newCityId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!indivCity}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_CityError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolCityError}"
+                          />
+                        </div>
+                        <label class="slds-form-element__label">Portal Username</label>
+                        <div class="slds-form-element__control slds-form-element__static" style="padding-bottom: 20px">
+                          <apex:inputText id="portalId"
+                            styleClass="slds-input slds-form-element__static"
+                            value="{!indivPortal}"
+                          />
+                          <apex:outputText value="{!$Label.LAB_SF_Account_PortalError}"
+                            styleClass="errorMsg"
+                            rendered="{!boolPortalError}"
+                          />
+                        </div>
+                        <div>
+                          <apex:commandButton styleClass="slds-button slds-button_neutral"
+                            rerender="LeftNewValues,RightNewValues"
+                            action="{!sendIndividualInfo}"
+                            value="{!$Label.LAB_SF_Account_SaveAndUpdateIndividual}"
+                            oncomplete="OpenCase('{!caseID}')"
+                          />
+                        </div>
+                      </apex:outputPanel>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </apex:outputPanel>
+          <apex:outputPanel id="emailAddressSectionES" rendered="{!IF(userBU == 'ES', true, false)}">
+            <h3 class="slds-section__title test-id__section-header-container">
+              <div class="slds-section__title-action" style="cursor: initial">
+                <span class="test-id__section-header-title slds-truncate"
+                  >{!$Label.LAB_SF_Account_UserWebAccountEmailAddressSection}</span
+                >
+              </div>
+            </h3>
+            <div class="slds-form-element slds-form_compound">
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__group">
+                  <div class="slds-form-element__row" style="margin-bottom: 0">
+                    <div class="slds-form-element slds-size_1-of-2">
+                      <div class="slds-form-element__control">
+                        <apex:inputText id="newEmailAddressId"
+                          styleClass="slds-input slds-form-element__static"
+                          value="{!IndivEmail}"
+                        />
+                      </div>
+                    </div>
+                    <div id="getSecretQuestion" class="slds-form-element slds-size_1-of-2">
+                      <apex:actionStatus id="sendNewEmailAddressButton">
+                        <apex:facet name="start">
+                          <apex:outputPanel >
+                            <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                              height="25"
+                              width="25"
+                            />
+                          </apex:outputPanel>
+                        </apex:facet>
+                        <apex:facet name="stop">
+                          <apex:outputPanel >
+                            <apex:commandButton id="sendNewEmailAddressId"
+                              styleClass="slds-button slds-button_neutral"
+                              action="{!sendIndividualInfo}"
+                              value="{!$Label.LAB_SF_Account_SaveAndUpdateIndividual}"
+                              oncomplete="OpenCase('{!caseID}')"
+                            />
+                          </apex:outputPanel>
+                        </apex:facet>
+                      </apex:actionStatus>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </apex:outputPanel>
+        </apex:outputPanel>
+      </apex:form>
+    </apex:outputPanel>
+    <script type="text/javascript">
+      function showSecretQuestion() {
+        $("[id$='secretQuestionAndAnswer'").css("display", "block");
+      }
+
+      function showCaseManagement() {
+        $("[id$='caseManagementPanelId'").css("display", "block");
+      }
+
+      function showSecretQuestionSection() {
+        $("[id$='secretQuestionSection'").css("display", "block");
+        $("[id$='confirmInfoId'").attr("disabled", "disabled");
+      }
+
+      function showConfirmSecretQuestionButton() {
+        $("[id$='getPanNumber'").css("display", "block");
+      }
+
+      function showEmailAddressSection() {
+        $("[id$='emailAddressSection'").css("display", "block");
+        $("[id$='confirmSecretQuestionId'").attr("disabled", "disabled");
+      }
+
+      $(document).ready(function () {
+        // controlCaseButtons();
+      });
+
+      function OpenCase(CaseID) {
+        if (CaseID) {
+          if (sforce.one != undefined) {
+            // Lightning
+            sforce.one.navigateToSObject(CaseID, "detail");
+            Sfdc.canvas.publisher.publish({
+              name: "publisher.close",
+              payload: { refresh: "true" }
+            });
+          } else {
+            // Classic
+            window.parent.location = "/" + CaseID;
+          }
+        }
+      }
+
+      function refresh() {
+        Sfdc.canvas.publisher.publish({
+          name: "publisher.close",
+          payload: { refresh: "true" }
+        });
+      }
+    </script>
+  </body>
+</apex:page>

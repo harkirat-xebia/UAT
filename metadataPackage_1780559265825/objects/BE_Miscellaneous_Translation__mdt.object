@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used to translate other data than picklist value and errors. In example, record name.</description>
+    <label>Miscellaneous Translation</label>
+    <pluralLabel>Miscellaneous Translations</pluralLabel>
+    <visibility>Public</visibility>
+    <fields>
+        <fullName>BE_Label_Translation__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Label Translation</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BE_Language__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Language</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>en_US</fullName>
+                    <default>true</default>
+                    <label>en_US</label>
+                </value>
+                <value>
+                    <fullName>fr_BE</fullName>
+                    <default>false</default>
+                    <label>fr_BE</label>
+                </value>
+                <value>
+                    <fullName>nl_BE</fullName>
+                    <default>false</default>
+                    <label>nl_BE</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

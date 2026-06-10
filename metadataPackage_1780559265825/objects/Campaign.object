@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>ER_Campaign_Compact_layout</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <externalSharingModel>Private</externalSharingModel>
+    <searchLayouts>
+        <customTabListAdditionalFields>CAMPAIGN.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.START_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.NAME</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CAMPAIGN.NAME</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PARENT_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.STATUS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.START_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.END_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NUM_RESPONSES</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <compactLayouts>
+        <fullName>ER_Campaign_Compact_layout</fullName>
+        <fields>Name</fields>
+        <fields>ER_Business_Unit__c</fields>
+        <fields>Type</fields>
+        <fields>Status</fields>
+        <fields>StartDate</fields>
+        <fields>EndDate</fields>
+        <label>Campaign Compact layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>ActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>Becare_Marketing_Action_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Becare Marketing Action Id</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>CampaignMemberRecordTypeId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Create_task_when_CM_is_created__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Create task when CM is created</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>Discount_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Discount Code</label>
+        <referenceTo>ER_Promo_Code__c</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+    </fields>
+    <fields>
+        <fullName>ER_BUPicklist__c</fullName>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Business Unit</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Business_Unit</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Business_Unit__c</fullName>
+        <label>Business Unit DO NOT USE</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Business_Unit</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_ProductCode__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <inlineHelpText>Primary Target Solution</inlineHelpText>
+        <label>Solution</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Product2.RecordType.Name</field>
+                <operation>equals</operation>
+                <value>Solution</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Source</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Source_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Source ID</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_UTM_Campaign__c</fullName>
+        <externalId>true</externalId>
+        <label>UTM Campaign</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_UTM_Medium__c</fullName>
+        <externalId>true</externalId>
+        <label>UTM Medium</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_UTM_Source__c</fullName>
+        <externalId>true</externalId>
+        <label>UTM Source</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ERBE_SIM_Synchronization__c</fullName>
+        <externalId>false</externalId>
+        <label>SIM Synchronization</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpectedResponse</fullName>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyBudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+    </fields>
+    <fields>
+        <fullName>Lead_Source__c</fullName>
+        <label>Lead Source</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Websales</fullName>
+                    <default>false</default>
+                    <label>Websales</label>
+                </value>
+                <value>
+                    <fullName>SEO</fullName>
+                    <default>false</default>
+                    <label>SEO</label>
+                </value>
+                <value>
+                    <fullName>Phone in</fullName>
+                    <default>false</default>
+                    <label>Phone in</label>
+                </value>
+                <value>
+                    <fullName>Paid Social media</fullName>
+                    <default>false</default>
+                    <label>Paid Social media</label>
+                </value>
+                <value>
+                    <fullName>SEA</fullName>
+                    <default>false</default>
+                    <label>SEA</label>
+                </value>
+                <value>
+                    <fullName>Lead providers</fullName>
+                    <default>false</default>
+                    <label>Lead providers</label>
+                </value>
+                <value>
+                    <fullName>Emailing</fullName>
+                    <default>false</default>
+                    <label>Emailing</label>
+                </value>
+                <value>
+                    <fullName>Afspraken makers</fullName>
+                    <default>false</default>
+                    <label>Afspraken makers</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+                <value>
+                    <fullName>L2W</fullName>
+                    <default>false</default>
+                    <label>L2W</label>
+                </value>
+                <value>
+                    <fullName>Manual input</fullName>
+                    <default>false</default>
+                    <label>Manual input</label>
+                </value>
+                <value>
+                    <fullName>Import</fullName>
+                    <default>false</default>
+                    <label>Import</label>
+                </value>
+                <value>
+                    <fullName>Trade Fairs</fullName>
+                    <default>false</default>
+                    <label>Trade Fairs</label>
+                </value>
+                <value>
+                    <fullName>Referral program</fullName>
+                    <default>false</default>
+                    <label>Referral program</label>
+                </value>
+                <value>
+                    <fullName>Outbound call</fullName>
+                    <default>false</default>
+                    <label>Outbound call</label>
+                </value>
+                <value>
+                    <fullName>Zeta</fullName>
+                    <default>false</default>
+                    <label>Zeta</label>
+                </value>
+                <value>
+                    <fullName>Partners</fullName>
+                    <default>false</default>
+                    <label>Partners</label>
+                </value>
+                <value>
+                    <fullName>Organic Social Media</fullName>
+                    <default>false</default>
+                    <label>Organic Social Media</label>
+                </value>
+                <value>
+                    <fullName>Offline</fullName>
+                    <default>false</default>
+                    <label>Offline</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead_sub_source__c</fullName>
+        <label>Lead sub-source</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Lead_Source__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Econtratonline</fullName>
+                    <default>false</default>
+                    <label>Econtratonline</label>
+                </value>
+                <value>
+                    <fullName>Econtratonline Connection</fullName>
+                    <default>false</default>
+                    <label>Econtratonline Connection</label>
+                </value>
+                <value>
+                    <fullName>Internet</fullName>
+                    <default>false</default>
+                    <label>Internet</label>
+                </value>
+                <value>
+                    <fullName>Zeta</fullName>
+                    <default>false</default>
+                    <label>Zeta</label>
+                </value>
+                <value>
+                    <fullName>Appel de Permanence</fullName>
+                    <default>false</default>
+                    <label>Appel de Permanence</label>
+                </value>
+                <value>
+                    <fullName>Email entrant</fullName>
+                    <default>false</default>
+                    <label>Email entrant</label>
+                </value>
+                <value>
+                    <fullName>Statut 35</fullName>
+                    <default>false</default>
+                    <label>Statut 35</label>
+                </value>
+                <value>
+                    <fullName>Customer care</fullName>
+                    <default>false</default>
+                    <label>Customer care</label>
+                </value>
+                <value>
+                    <fullName>Facebook</fullName>
+                    <default>false</default>
+                    <label>Facebook</label>
+                </value>
+                <value>
+                    <fullName>Linkedin</fullName>
+                    <default>false</default>
+                    <label>Linkedin</label>
+                </value>
+                <value>
+                    <fullName>Adwords</fullName>
+                    <default>false</default>
+                    <label>Adwords</label>
+                </value>
+                <value>
+                    <fullName>Bing</fullName>
+                    <default>false</default>
+                    <label>Bing</label>
+                </value>
+                <value>
+                    <fullName>Bobex</fullName>
+                    <default>false</default>
+                    <label>Bobex</label>
+                </value>
+                <value>
+                    <fullName>BizzBooster</fullName>
+                    <default>false</default>
+                    <label>BizzBooster</label>
+                </value>
+                <value>
+                    <fullName>Companeo</fullName>
+                    <default>false</default>
+                    <label>Companeo</label>
+                </value>
+                <value>
+                    <fullName>Manageo</fullName>
+                    <default>false</default>
+                    <label>Manageo</label>
+                </value>
+                <value>
+                    <fullName>HR alert</fullName>
+                    <default>false</default>
+                    <label>HR alert</label>
+                </value>
+                <value>
+                    <fullName>People Sphere</fullName>
+                    <default>false</default>
+                    <label>People Sphere</label>
+                </value>
+                <value>
+                    <fullName>Emailing</fullName>
+                    <default>false</default>
+                    <label>Emailing</label>
+                </value>
+                <value>
+                    <fullName>Afspraken makers</fullName>
+                    <default>false</default>
+                    <label>Afspraken makers</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+                <value>
+                    <fullName>L2W</fullName>
+                    <default>false</default>
+                    <label>L2W</label>
+                </value>
+                <value>
+                    <fullName>Manual input</fullName>
+                    <default>false</default>
+                    <label>Manual input</label>
+                </value>
+                <value>
+                    <fullName>Import</fullName>
+                    <default>false</default>
+                    <label>Import</label>
+                </value>
+                <value>
+                    <fullName>Trade Fairs</fullName>
+                    <default>false</default>
+                    <label>Trade Fairs</label>
+                </value>
+                <value>
+                    <fullName>Webform</fullName>
+                    <default>false</default>
+                    <label>Webform</label>
+                </value>
+                <value>
+                    <fullName>Referral program</fullName>
+                    <default>false</default>
+                    <label>Referral program</label>
+                </value>
+                <value>
+                    <fullName>Outbound call</fullName>
+                    <default>false</default>
+                    <label>Outbound call</label>
+                </value>
+                <value>
+                    <fullName>Internal Webform</fullName>
+                    <default>false</default>
+                    <label>Internal Webform</label>
+                </value>
+                <value>
+                    <fullName>Editus</fullName>
+                    <default>false</default>
+                    <label>Editus</label>
+                </value>
+                <value>
+                    <fullName>API</fullName>
+                    <default>false</default>
+                    <label>API</label>
+                </value>
+                <value>
+                    <fullName>Adhoc Campaign</fullName>
+                    <default>false</default>
+                    <label>Adhoc Campaign</label>
+                </value>
+                <value>
+                    <fullName>Automated Email</fullName>
+                    <default>false</default>
+                    <label>Automated Email</label>
+                </value>
+                <value>
+                    <fullName>Newsletter</fullName>
+                    <default>false</default>
+                    <label>Newsletter</label>
+                </value>
+                <value>
+                    <fullName>Qr-code</fullName>
+                    <default>false</default>
+                    <label>Qr-code</label>
+                </value>
+                <value>
+                    <fullName>Influencer</fullName>
+                    <default>false</default>
+                    <label>Influencer</label>
+                </value>
+                <value>
+                    <fullName>Instagram</fullName>
+                    <default>false</default>
+                    <label>Instagram</label>
+                </value>
+                <value>
+                    <fullName>Youtube</fullName>
+                    <default>false</default>
+                    <label>Youtube</label>
+                </value>
+                <value>
+                    <fullName>Social Selling</fullName>
+                    <default>false</default>
+                    <label>Social Selling</label>
+                </value>
+                <value>
+                    <fullName>Media Partners</fullName>
+                    <default>false</default>
+                    <label>Media Partners</label>
+                </value>
+                <value>
+                    <fullName>Affiliate</fullName>
+                    <default>false</default>
+                    <label>Affiliate</label>
+                </value>
+                <value>
+                    <fullName>Internet Zeta</fullName>
+                    <default>false</default>
+                    <label>Internet Zeta</label>
+                </value>
+                <value>
+                    <fullName>Notifications</fullName>
+                    <default>false</default>
+                    <label>Notifications</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Manual input</controllingFieldValue>
+                <valueName>Manual input</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Import</controllingFieldValue>
+                <valueName>Import</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Trade Fairs</controllingFieldValue>
+                <valueName>Trade Fairs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Referral program</controllingFieldValue>
+                <valueName>Referral program</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound call</controllingFieldValue>
+                <valueName>Outbound call</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Zeta</controllingFieldValue>
+                <valueName>Internet Zeta</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Partners</controllingFieldValue>
+                <valueName>Media Partners</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Partners</controllingFieldValue>
+                <valueName>Affiliate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Organic Social Media</controllingFieldValue>
+                <valueName>Influencer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Organic Social Media</controllingFieldValue>
+                <valueName>Instagram</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Organic Social Media</controllingFieldValue>
+                <valueName>Youtube</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Organic Social Media</controllingFieldValue>
+                <controllingFieldValue>Paid Social media</controllingFieldValue>
+                <valueName>Social Selling</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Offline</controllingFieldValue>
+                <valueName>Qr-code</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Websales</controllingFieldValue>
+                <valueName>Econtratonline</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Websales</controllingFieldValue>
+                <valueName>Econtratonline Connection</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SEO</controllingFieldValue>
+                <valueName>Webform</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phone in</controllingFieldValue>
+                <valueName>Appel de Permanence</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phone in</controllingFieldValue>
+                <valueName>Email entrant</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phone in</controllingFieldValue>
+                <valueName>Statut 35</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phone in</controllingFieldValue>
+                <valueName>Customer care</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Paid Social media</controllingFieldValue>
+                <valueName>Facebook</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Paid Social media</controllingFieldValue>
+                <valueName>Linkedin</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SEA</controllingFieldValue>
+                <valueName>Adwords</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SEA</controllingFieldValue>
+                <valueName>Bing</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lead providers</controllingFieldValue>
+                <valueName>Bobex</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lead providers</controllingFieldValue>
+                <valueName>BizzBooster</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lead providers</controllingFieldValue>
+                <valueName>Companeo</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lead providers</controllingFieldValue>
+                <valueName>Editus</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Emailing</controllingFieldValue>
+                <valueName>Adhoc Campaign</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Emailing</controllingFieldValue>
+                <valueName>Automated Email</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Emailing</controllingFieldValue>
+                <valueName>Newsletter</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Emailing</controllingFieldValue>
+                <valueName>Notifications</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Afspraken makers</controllingFieldValue>
+                <valueName>Afspraken makers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Others</controllingFieldValue>
+                <valueName>Others</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>L2W</controllingFieldValue>
+                <valueName>L2W</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>L2W</controllingFieldValue>
+                <valueName>API</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__Adjusted_End_Date_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <description>An end date and time of a campaign in user&apos;s local timezone adjusted based on the end date in the selected timezone.</description>
+        <label>Adjusted End Date Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__Adjusted_Start_Date_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A start date and time of a campaign in user&apos;s local timezone adjusted based on the start date in the selected timezone.</description>
+        <label>Adjusted Start Date Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__Failed_Attempts_to_Reconcile_Results__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Failed Attempts to Reconcile Results</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Campaign_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Genesys Cloud Campaign ID</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Campaign_Priority__c</fullName>
+        <deprecated>false</deprecated>
+        <label>Genesys Cloud Campaign Priority</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>5</fullName>
+                    <default>true</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Campaign_Schedule__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <label>Genesys Cloud Campaign Schedule</label>
+        <referenceTo>purecloud__PureCloud_Campaign_Schedule__c</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Campaign_Setting__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <label>Genesys Cloud Campaign Setting</label>
+        <referenceTo>purecloud__PureCloud_Campaign_Setting__c</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Campaign_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(purecloud__PureCloud_Campaign_Setting__c), &quot;&quot;, IF(purecloud__Adjusted_End_Date_Time__c &lt; Now(), &quot;Not Running&quot;, IF(purecloud__Adjusted_Start_Date_Time__c &gt; Now(), &quot;Scheduled&quot;, &quot;Running&quot;)))</formula>
+        <label>Genesys Cloud Campaign Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>purecloud__PureCloud_Contact_List_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Genesys Cloud Contact List ID</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>purecloud__Reconciled_Contact_Results__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <label>Reconciled Contact Results</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>purecloud__Time_Zone__c</fullName>
+        <deprecated>false</deprecated>
+        <label>Time Zone</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>purecloud__Time_Zones</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StartDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <type>Picklist</type>
+    </fields>
+    <listViews>
+        <fullName>AllActiveCampaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Active Campaigns</label>
+    </listViews>
+    <listViews>
+        <fullName>MyActiveCampaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CAMPAIGN.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Active Campaigns</label>
+    </listViews>
+    <listViews>
+        <fullName>Org_Campaign_Hierarchy</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.ACTIVE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>Org_Campaign_Hierarchy</label>
+    </listViews>
+    <listViews>
+        <fullName>purecloud__PureCloud_Campaigns_Ended_Yesterday</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.BUDGETED_COST</columns>
+        <columns>CAMPAIGN.ACTUAL_COST</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>purecloud__PureCloud_Campaign_Status__c</columns>
+        <columns>purecloud__PureCloud_Campaign_Setting__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>purecloud__Adjusted_End_Date_Time__c</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <filters>
+            <field>purecloud__PureCloud_Campaign_Setting__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </filters>
+        <label>Genesys Cloud Campaigns Ended Yesterday</label>
+    </listViews>
+    <listViews>
+        <fullName>purecloud__PureCloud_Campaigns_Ending_Today</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.BUDGETED_COST</columns>
+        <columns>CAMPAIGN.ACTUAL_COST</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>purecloud__PureCloud_Campaign_Status__c</columns>
+        <columns>purecloud__PureCloud_Campaign_Setting__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>purecloud__Adjusted_End_Date_Time__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>purecloud__PureCloud_Campaign_Setting__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </filters>
+        <label>Genesys Cloud Campaigns Ending Today</label>
+    </listViews>
+    <listViews>
+        <fullName>purecloud__PureCloud_Campaigns_Running</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.BUDGETED_COST</columns>
+        <columns>CAMPAIGN.ACTUAL_COST</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>purecloud__PureCloud_Campaign_Status__c</columns>
+        <columns>purecloud__PureCloud_Campaign_Setting__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>purecloud__PureCloud_Campaign_Status__c</field>
+            <operation>equals</operation>
+            <value>Running</value>
+        </filters>
+        <filters>
+            <field>purecloud__PureCloud_Campaign_Setting__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </filters>
+        <label>Genesys Cloud Campaigns Running</label>
+    </listViews>
+    <validationRules>
+        <fullName>purecloud__PC_EndDate_Required</fullName>
+        <active>true</active>
+        <description>An end date is required for PureCloud Campaigns</description>
+        <errorConditionFormula>AND(NOT(ISBLANK(purecloud__PureCloud_Campaign_Setting__c)), ISBLANK(EndDate))</errorConditionFormula>
+        <errorDisplayField>EndDate</errorDisplayField>
+        <errorMessage>An end date is required for PureCloud Campaigns</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>purecloud__PC_StartDate_Required</fullName>
+        <active>true</active>
+        <description>A start date is required for PureCloud Campaigns</description>
+        <errorConditionFormula>AND(NOT(ISBLANK(purecloud__PureCloud_Campaign_Setting__c)), ISBLANK(StartDate))</errorConditionFormula>
+        <errorDisplayField>StartDate</errorDisplayField>
+        <errorMessage>A start date is required for PureCloud Campaigns. Select today&apos;s date to start a PureCloud campaign immediately.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>ViewAllCampaignMembers</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View All Campaign Members</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/camp/rptcmpgncalldown.jsp?scope=1&amp;scopeid={!Campaign_Name}</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewCampaignInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Campaign Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign_Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+</CustomObject>

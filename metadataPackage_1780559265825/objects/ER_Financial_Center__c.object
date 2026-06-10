@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Financial_Center_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>ER_Financial_Center_Compact_Layout</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Financial Center</label>
+    <nameField>
+        <label>Financial Center Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Financial Centers</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>ER_Account_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ER_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ER_Bank_Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ER_City__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>ER_Account_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ER_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ER_Bank_Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ER_City__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ER_Business_Unit__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayouts>
+        <fullName>ER_Financial_Center_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>ER_Type__c</fields>
+        <fields>ER_Account_Name__c</fields>
+        <fields>ER_Contact__c</fields>
+        <fields>ER_Bank_Account__c</fields>
+        <fields>ER_Sync_result__c</fields>
+        <fields>ER_Card_Operational_System_ID__c</fields>
+        <label>Financial Center Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>ER_Account_Name__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account Name</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Financial Centers</relationshipLabel>
+        <relationshipName>Financial_Centers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Accounting_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Accounting System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Bank_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Bank Account</label>
+        <referenceTo>ER_Bank_Account__c</referenceTo>
+        <relationshipLabel>Financial Centers</relationshipLabel>
+        <relationshipName>Financial_Centers_BankAccount</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_BUPicklist__c</fullName>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Business_Unit</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Business_Unit__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(ER_Account_Name__r.ER_BUPicklist__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Unit Formula</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Card_MO__c</fullName>
+        <label>Card Middle Office</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Middle_Office</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Card_Operational_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Card Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_City__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment City</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Contact__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Contact</label>
+        <lookupFilter>
+            <active>false</active>
+            <filterItems>
+                <field>Contact.AccountId</field>
+                <operation>equals</operation>
+                <valueField>$Source.ER_Account_Name__c</valueField>
+            </filterItems>
+            <filterItems>
+                <field>Contact.ER_Status__c</field>
+                <operation>equals</operation>
+                <value>Active</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Financial Centers</relationshipLabel>
+        <relationshipName>Financial_Centers_Contact</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Country__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Payment Country</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Country_Code__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Payment Country Code</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Country_Code</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Creation_date_in_OS__c</fullName>
+        <description>Use as a reference for EDG data creation</description>
+        <label>Creation date in OS</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_dd_Trace_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>dd Trace Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Direct_Debit_Scoring__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Direct Debit Scoring</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_DocuGen_BIC__c</fullName>
+        <externalId>false</externalId>
+        <label>DocuGen BIC</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_DocuGen_IBAN__c</fullName>
+        <externalId>false</externalId>
+        <label>DocuGen IBAN</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Docusign_Template__c</fullName>
+        <description>Store docusign template Id</description>
+        <externalId>false</externalId>
+        <label>ER_Docusign_Template</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Primary Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_External_Reference__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>External Reference</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_City__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Invoicing City</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Country__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Invoicing Country</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Country_Code__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Invoicing Country Code</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Country_Code</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Region_State__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Invoicing Region/State</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Site__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Invoicing Site ?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Street__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Invoicing Street</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Invoicing_Zip_Code__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Invoicing Zip Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Last_Lock_Date__c</fullName>
+        <label>Last Lock Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Last_Modified_By_Functional_user__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Last Modified By Functional user</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Financial_Centers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Last_Modified_Date_Functional_User__c</fullName>
+        <label>Last Modified Date Functional User</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Last_Synchronization_Date__c</fullName>
+        <label>Last Synchronization Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_LastModifiedBy__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( DATEVALUE(LastModifiedDate) &gt;= DATE ( YEAR (DATEVALUE(LastModifiedDate)),3,1)
++
+( 14 - CASE( MOD(DATE ( YEAR (DATEVALUE(LastModifiedDate)),3,1) - DATE (1900,1,7),7) ,
+0,7,MOD(DATE ( YEAR (DATEVALUE(LastModifiedDate)),3,1) - DATE (1900,1,7),7))
+)
+
+&amp;&amp;
+
+DATEVALUE(LastModifiedDate) &lt; DATE ( YEAR (DATEVALUE(LastModifiedDate)),11,1) +
+(
+7-
+CASE( MOD(DATE ( YEAR (DATEVALUE(LastModifiedDate)),11,1) - DATE (1900,1,7),7) ,
+0,7,MOD(DATE ( YEAR (DATEVALUE(LastModifiedDate)),11,1) - DATE (1900,1,7),7))
+),
+
+/*check if the last modified by is filled */
+IF( ER_Last_Modified_By_Functional_user__c  != null, 
+
+/* if true */
+
+HYPERLINK(LEFT($Api.Partner_Server_URL_420, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_420)) + 
+               &apos;/lightning/r/User/&apos; + ER_Last_Modified_By_Functional_user__c + &apos;/view&apos;,ER_Last_Modified_By_Functional_user__r.FirstName  + &apos; &apos; + ER_Last_Modified_By_Functional_user__r.LastName) +  &apos;, &apos; + 
+               TEXT(DAY(DATEVALUE(ER_Last_Modified_Date_Functional_User__c + 2/24))) + &apos;/&apos; +  
+               TEXT(MONTH(DATEVALUE(ER_Last_Modified_Date_Functional_User__c + 2/24))) + &apos;/&apos; + 
+               TEXT(YEAR(DATEVALUE(ER_Last_Modified_Date_Functional_User__c + 2/24))) + &apos; &apos; +  
+               TEXT(HOUR(TIMEVALUE(ER_Last_Modified_Date_Functional_User__c + 2/24))) + &apos;:&apos; +  
+               TEXT(MINUTE(TIMEVALUE(ER_Last_Modified_Date_Functional_User__c + 2/24))), 
+
+/* else */
+&apos;&apos;) 
+
+,
+
+
+/*check if the last modified by is filled */
+IF(ER_Last_Modified_By_Functional_user__c != null, 
+
+/* if true */
+
+HYPERLINK(LEFT($Api.Partner_Server_URL_420, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_420)) + 
+               &apos;/lightning/r/User/&apos; + ER_Last_Modified_By_Functional_user__c + &apos;/view&apos;,ER_Last_Modified_By_Functional_user__r.FirstName + &apos; &apos; + ER_Last_Modified_By_Functional_user__r.LastName) +  &apos;, &apos; + 
+               TEXT(DAY(DATEVALUE(ER_Last_Modified_Date_Functional_User__c+ 1/24))) + &apos;/&apos; +  
+               TEXT(MONTH(DATEVALUE(ER_Last_Modified_Date_Functional_User__c+ 1/24))) + &apos;/&apos; + 
+               TEXT(YEAR(DATEVALUE(ER_Last_Modified_Date_Functional_User__c+ 1/24))) + &apos; &apos; +  
+               TEXT(HOUR(TIMEVALUE(ER_Last_Modified_Date_Functional_User__c+ 1/24))) + &apos;:&apos; +  
+               TEXT(MINUTE(TIMEVALUE(ER_Last_Modified_Date_Functional_User__c+ 1/24))), 
+
+/* else */
+&apos;&apos;)
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Modified By Functional User</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Master__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Master</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_MDMId__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>MDM ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Paper_MO__c</fullName>
+        <label>Paper Middle Office</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Middle_Office</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Paper_Operational_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Paper Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Payment_Site__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Payment Site ?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Preferred_Invoicing_Method__c</fullName>
+        <defaultValue>CASE($User.ER_Business_Unit__c, &apos;FI&apos;, &apos;E-invoice&apos;,
+						&apos;GR&apos;, &apos;E-mail&apos;,null)</defaultValue>
+        <label>Preferred Invoicing Method</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ER_BUPicklist__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>E-invoice</fullName>
+                    <default>false</default>
+                    <label>E-invoice</label>
+                </value>
+                <value>
+                    <fullName>E-mail</fullName>
+                    <default>false</default>
+                    <label>E-mail</label>
+                </value>
+                <value>
+                    <fullName>Paper</fullName>
+                    <default>false</default>
+                    <label>Paper</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>MD</controllingFieldValue>
+                <controllingFieldValue>MA</controllingFieldValue>
+                <controllingFieldValue>PE</controllingFieldValue>
+                <controllingFieldValue>PL</controllingFieldValue>
+                <controllingFieldValue>PT</controllingFieldValue>
+                <controllingFieldValue>PC</controllingFieldValue>
+                <controllingFieldValue>RO</controllingFieldValue>
+                <controllingFieldValue>RU</controllingFieldValue>
+                <controllingFieldValue>SG</controllingFieldValue>
+                <controllingFieldValue>SK</controllingFieldValue>
+                <controllingFieldValue>CO</controllingFieldValue>
+                <controllingFieldValue>ES</controllingFieldValue>
+                <controllingFieldValue>CZ</controllingFieldValue>
+                <controllingFieldValue>SE</controllingFieldValue>
+                <controllingFieldValue>AE</controllingFieldValue>
+                <controllingFieldValue>TW</controllingFieldValue>
+                <controllingFieldValue>FI</controllingFieldValue>
+                <controllingFieldValue>TR</controllingFieldValue>
+                <controllingFieldValue>FR</controllingFieldValue>
+                <controllingFieldValue>UK</controllingFieldValue>
+                <controllingFieldValue>DE</controllingFieldValue>
+                <controllingFieldValue>US</controllingFieldValue>
+                <controllingFieldValue>GR</controllingFieldValue>
+                <controllingFieldValue>UTA</controllingFieldValue>
+                <controllingFieldValue>IT</controllingFieldValue>
+                <controllingFieldValue>VE</controllingFieldValue>
+                <controllingFieldValue>JP</controllingFieldValue>
+                <controllingFieldValue>LB</controllingFieldValue>
+                <controllingFieldValue>HU</controllingFieldValue>
+                <controllingFieldValue>AR</controllingFieldValue>
+                <controllingFieldValue>AT</controllingFieldValue>
+                <controllingFieldValue>BENELUX</controllingFieldValue>
+                <controllingFieldValue>BR</controllingFieldValue>
+                <controllingFieldValue>BG</controllingFieldValue>
+                <controllingFieldValue>CEN</controllingFieldValue>
+                <controllingFieldValue>CL</controllingFieldValue>
+                <controllingFieldValue>CN</controllingFieldValue>
+                <controllingFieldValue>VN</controllingFieldValue>
+                <controllingFieldValue>BE</controllingFieldValue>
+                <controllingFieldValue>MY</controllingFieldValue>
+                <controllingFieldValue>LU</controllingFieldValue>
+                <controllingFieldValue>MX</controllingFieldValue>
+                <valueName>E-mail</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>MD</controllingFieldValue>
+                <controllingFieldValue>MA</controllingFieldValue>
+                <controllingFieldValue>PE</controllingFieldValue>
+                <controllingFieldValue>PL</controllingFieldValue>
+                <controllingFieldValue>PT</controllingFieldValue>
+                <controllingFieldValue>PC</controllingFieldValue>
+                <controllingFieldValue>RO</controllingFieldValue>
+                <controllingFieldValue>RU</controllingFieldValue>
+                <controllingFieldValue>SG</controllingFieldValue>
+                <controllingFieldValue>SK</controllingFieldValue>
+                <controllingFieldValue>CO</controllingFieldValue>
+                <controllingFieldValue>ES</controllingFieldValue>
+                <controllingFieldValue>CZ</controllingFieldValue>
+                <controllingFieldValue>SE</controllingFieldValue>
+                <controllingFieldValue>AE</controllingFieldValue>
+                <controllingFieldValue>TW</controllingFieldValue>
+                <controllingFieldValue>FI</controllingFieldValue>
+                <controllingFieldValue>TR</controllingFieldValue>
+                <controllingFieldValue>FR</controllingFieldValue>
+                <controllingFieldValue>UK</controllingFieldValue>
+                <controllingFieldValue>DE</controllingFieldValue>
+                <controllingFieldValue>US</controllingFieldValue>
+                <controllingFieldValue>GR</controllingFieldValue>
+                <controllingFieldValue>UTA</controllingFieldValue>
+                <controllingFieldValue>IT</controllingFieldValue>
+                <controllingFieldValue>VE</controllingFieldValue>
+                <controllingFieldValue>JP</controllingFieldValue>
+                <controllingFieldValue>LB</controllingFieldValue>
+                <controllingFieldValue>HU</controllingFieldValue>
+                <controllingFieldValue>AR</controllingFieldValue>
+                <controllingFieldValue>AT</controllingFieldValue>
+                <controllingFieldValue>BENELUX</controllingFieldValue>
+                <controllingFieldValue>BR</controllingFieldValue>
+                <controllingFieldValue>BG</controllingFieldValue>
+                <controllingFieldValue>CEN</controllingFieldValue>
+                <controllingFieldValue>CL</controllingFieldValue>
+                <controllingFieldValue>CN</controllingFieldValue>
+                <controllingFieldValue>VN</controllingFieldValue>
+                <controllingFieldValue>BE</controllingFieldValue>
+                <controllingFieldValue>MY</controllingFieldValue>
+                <controllingFieldValue>LU</controllingFieldValue>
+                <controllingFieldValue>MX</controllingFieldValue>
+                <valueName>Paper</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>FI</controllingFieldValue>
+                <valueName>E-invoice</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Secondary_Email__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Secondary Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Smarter_1st_Sync_Date__c</fullName>
+        <label>Smarter 1st Sync Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_SmartER_Context__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>SmartER Context</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Smarter_Last_Sync_Date__c</fullName>
+        <label>Smarter Last Sync Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_SmartER_Original_Lead_Id__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>SmartER Original Lead Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Smarter_Sync_Error__c</fullName>
+        <label>Smarter Sync Error</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ER_Smarter_Sync_Status__c</fullName>
+        <label>Smarter Sync Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Sync_result</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_State_Province__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Payment State/ Province</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Street__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Payment Street</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Sync_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Sync_result__c</fullName>
+        <label>Sync result</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>not_synchronized</fullName>
+                    <default>false</default>
+                    <label>Not Synchronized</label>
+                </value>
+                <value>
+                    <fullName>synchronized</fullName>
+                    <default>false</default>
+                    <label>Synchronized</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>pending_synchronization</fullName>
+                    <default>false</default>
+                    <label>Pending Synchronization</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_To_sync_with_smarter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>To sync with smarter</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Type__c</fullName>
+        <label>Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Client</fullName>
+                    <default>false</default>
+                    <label>Client</label>
+                </value>
+                <value>
+                    <fullName>Merchant</fullName>
+                    <default>false</default>
+                    <label>Merchant</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_WS_result__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(ER_Sync_result__c, 
+&quot;1&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Success_Img.png&quot;, &quot;Success&quot;,40,40), 
+&quot;2&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Error_Img.png&quot;, &quot;Error&quot;,40,40),
+&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sync Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_WS_result_Text__c</fullName>
+        <externalId>false</externalId>
+        <label>Sync Error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Zip_Code__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Payment Zip Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Zuora_Lock_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Zuora Lock Time</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ERFI_OVT_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>OVT Code</label>
+        <length>15</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ERFI_OVT_Operator__c</fullName>
+        <externalId>false</externalId>
+        <label>OVT Operator</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ER_Account_Name__c</columns>
+        <columns>ER_Type__c</columns>
+        <columns>ER_Bank_Account__c</columns>
+        <columns>ER_City__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>ERGR_Client_Financial_Center</fullName>
+        <columns>NAME</columns>
+        <columns>ER_Account_Name__c</columns>
+        <columns>ER_Contact__c</columns>
+        <columns>ER_Type__c</columns>
+        <columns>ER_Bank_Account__c</columns>
+        <columns>ER_City__c</columns>
+        <columns>ER_Country__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ER_Type__c</field>
+            <operation>equals</operation>
+            <value>Client</value>
+        </filters>
+        <label>Client Financial Center</label>
+    </listViews>
+    <listViews>
+        <fullName>ERGR_Merchant_Financial_Centers</fullName>
+        <columns>NAME</columns>
+        <columns>ER_Account_Name__c</columns>
+        <columns>ER_Contact__c</columns>
+        <columns>ER_Type__c</columns>
+        <columns>ER_Bank_Account__c</columns>
+        <columns>ER_City__c</columns>
+        <columns>ER_Country__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ER_Type__c</field>
+            <operation>equals</operation>
+            <value>Merchant</value>
+        </filters>
+        <label>Merchant Financial Centers</label>
+    </listViews>
+    <validationRules>
+        <fullName>VRBE01_BankAccountMandatory</fullName>
+        <active>true</active>
+        <description>VRBE01 - The Bank Account is mandatory when the account is already synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;BENELUX&apos;)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISBLANK(ER_Bank_Account__c)
+            &amp;&amp; NOT(ISBLANK(ER_Account_Name__r.ER_Creation_date_in_OS__c ))</errorConditionFormula>
+        <errorDisplayField>ER_Bank_Account__c</errorDisplayField>
+        <errorMessage>VRBE01 - The Bank Account is mandatory when the account is already synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER01_FinancialC_Mandatory_Fields</fullName>
+        <active>true</active>
+        <description>At least one of those fields need to be checked : Invoicing Site ? or &quot;Payment Site ?&quot;</description>
+        <errorConditionFormula>AND( 
+NOT($User.ER_BypassVR__c),
+NOT(OR(ER_Invoicing_Site__c = true,  ER_Payment_Site__c = true))
+)</errorConditionFormula>
+        <errorMessage>At least one of those fields need to be checked : &quot;Invoicing Site ?&quot; or &quot;Payment Site ?&quot;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER02_FC_CANNOT_FINANCIAL_PAYMENT</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ER_Business_Unit__c == &apos;ES&apos;,
+ER_Invoicing_Site__c,
+ER_Payment_Site__c
+)</errorConditionFormula>
+        <errorMessage>A Financial center cannot be defined as both Invoicing site and Payment site.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER03_Invoicing_Site_Company_Reg_Check</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ER_Business_Unit__c == &apos;ES&apos;,
+ER_Invoicing_Site__c,
+ISBLANK( ER_Account_Name__r.ER_Registration_Number__c)
+)</errorConditionFormula>
+        <errorMessage>Enter a valid Company Registration Number on the Account before selecting “Invoicing Site&quot;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER05_FC_Block_Type_Update</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ISCHANGED(ER_Type__c)</errorConditionFormula>
+        <errorDisplayField>ER_Type__c</errorDisplayField>
+        <errorMessage>You can&apos;t update this field.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER07_Block_Update_Account_Sync</fullName>
+        <active>true</active>
+        <description>VRER07 - Account cannot be modified when the financial center is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISCHANGED(ER_Account_Name__c )
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_Account_Name__c</errorDisplayField>
+        <errorMessage>VRER07 - The account name cannot be modified when the store is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER08_Check_OVT_Fields_e_invoicing</fullName>
+        <active>true</active>
+        <description>VR for Finland to check if the OVT fields are filled in case of E-invoicing</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT( ER_SmartER_Context__c )
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)
+            &amp;&amp; NOT( ISPICKVAL($User.UserType , &apos;AutomatedProcess&apos;))
+            &amp;&amp; ISPICKVAL(ER_Preferred_Invoicing_Method__c , &apos;E-invoice&apos;)
+            &amp;&amp; ER_SmartER_Original_Lead_Id__c == null
+            &amp;&amp; (ERFI_OVT_Operator__c == null || ERFI_OVT_Code__c == null)</errorConditionFormula>
+        <errorMessage>Both the fields OVT Code and OVT Operator have to be filled when the preferred method is e-invoicing.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRFI01_MandatoryFields</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)&amp;&amp;
+ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)&amp;&amp;
+ISPICKVAL(ER_Preferred_Invoicing_Method__c, &apos;&apos;)</errorConditionFormula>
+        <errorDisplayField>ER_Preferred_Invoicing_Method__c</errorDisplayField>
+        <errorMessage>VRFI01 - Preferred Invoicing Method is mandatory</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRFI02_PrefInvMandatory</fullName>
+        <active>true</active>
+        <description>VRFI02 - Preferred Invoicing Method mandatory when FC synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)&amp;&amp;
+    ISPICKVAL(ER_BUPicklist__c ,&apos;FI&apos;)&amp;&amp;
+    NOT(ISNEW())&amp;&amp;
+    ISPICKVAL(ER_Preferred_Invoicing_Method__c, &apos;&apos;)&amp;&amp;
+    NOT(ISBLANK(ER_Account_Name__r.ER_Creation_date_in_OS__c ))</errorConditionFormula>
+        <errorDisplayField>ER_Preferred_Invoicing_Method__c</errorDisplayField>
+        <errorMessage>VRFI02 - Preferred Invoicing Method is mandatory when FC is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRGR01_Block_Deletion_Invoicing_method</fullName>
+        <active>true</active>
+        <description>Block the deletion of invoicing method for the sync account</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &quot;GR&quot;)
+&amp;&amp; ISCHANGED(ER_Preferred_Invoicing_Method__c)
+&amp;&amp; ISPICKVAL(ER_Preferred_Invoicing_Method__c ,&apos;&apos;)
+&amp;&amp; NOT(ISBLANK(ER_Account_Name__r.ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_Preferred_Invoicing_Method__c</errorDisplayField>
+        <errorMessage>VRGR01 - The Preferred invoice method is mandatory for the Greek synchronized Financial Center</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRPL01_Check_Country_Code</fullName>
+        <active>true</active>
+        <description>The country code is a mandatory data for sync with SAXO and Zuora</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ER_Business_Unit__c = &apos;PL&apos;
+&amp;&amp; ISPICKVAL(ER_Country_Code__c, &apos;&apos;)</errorConditionFormula>
+        <errorDisplayField>ER_Country_Code__c</errorDisplayField>
+        <errorMessage>VRPL01 - Please select a Country Code</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Send_Direct_Debit_Form</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Send Direct Debit Form</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>{!URLFOR(IF($Site.prefix == &apos;/s&apos;,&apos;/apex/dfsle__gendocumentgenerator&apos;, $Site.Prefix +&apos;/apex/dfsle__gendocumentgenerator&apos;), null, [sId = ER_Financial_Center__c.Id, templateId = ER_Financial_Center__c.ER_Docusign_Template__c, recordId = ER_Financial_Center__c.Id, title = &apos;ERFR SEPA Mandat Template&apos;])}</url>
+    </webLinks>
+</CustomObject>

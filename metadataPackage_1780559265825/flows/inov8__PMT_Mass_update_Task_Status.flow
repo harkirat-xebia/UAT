@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <description>Flow on Project to update PMT Task status in Task Data table component due to limitations on component picklist field edit.</description>
+    <environments>Default</environments>
+    <label>PMT Mass Update Task Status</label>
+    <processType>Flow</processType>
+</Flow>

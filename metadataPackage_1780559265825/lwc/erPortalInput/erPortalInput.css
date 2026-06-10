@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'montserratregular';
+  src: url('/resource/SRER_Portal/fonts/montserrat-regular.eot');
+  src: url('/resource/SRER_Portal/fonts/montserrat-regular.eot?#iefix') format('embedded-opentype'),
+    url('/resource/SRER_Portal/fonts/montserrat-regular.woff2') format('woff2'),
+    url('/resource/SRER_Portal/fonts/montserrat-regular.woff') format('woff'),
+    url('/resource/SRER_Portal/fonts/montserrat-regular.ttf') format('truetype'),
+    url('/resource/SRER_Portal/fonts/montserrat-regular.svg#montserratregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.erportal-input {
+  padding: 0; /* nécessaire pour IE */
+  font: inherit; /* même rendu suivant font document */
+  font-weight: bold; /* même rendu suivant font document */
+  border-radius: 1.5em;
+  padding-left: 0.5em;
+  font-family: var(--parent-font-family);
+}
+
+.er-tooltip {
+  position: relative;
+  top: -0.5rem;
+}
+
+.slds-form-element__label {
+  font-family: 'montserratregular';
+  font-size: 1.2rem;
+  color: var(--parent-main-color);
+}
+
+.slds-input {
+  /* border-radius: 60px; */
+  box-shadow: none;
+  font-size: 1.3rem;
+  /* padding: 5px 15px 7px; */
+  /* min-height: auto; */
+  max-height: 30px;
+  /* height: 40px; */
+  line-height: 2rem;
+  color: #323232;
+}
+abbr {
+  font-weight: bolder;
+}
+
+.has-error {
+  border: solid 0.15rem #c23934;
+}
+
+.erportal-input[disabled]:hover,
+.erportal-input[disabled]:focus,
+.erportal-input[disabled]:active {
+  background: #e6e6e6;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.slds-input:focus,
+.slds-input:active {
+  /* border: 0px; */
+  box-shadow: none;
+}
+
+.slds-form-element__help {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #d52b1e;
+  position: absolute;
+}
+
+::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bolder;
+  color: #b2b2b2;
+}
+
+::-moz-placeholder {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bolder;
+  color: #b2b2b2;
+}
+
+:-ms-input-placeholder {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bolder;
+  color: #b2b2b2;
+}
+
+:-moz-placeholder {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bolder;
+  color: #b2b2b2;
+}
+
+@media screen and (max-width: 700px) {
+  .slds-input {
+    font-size: 1rem;
+  }
+}

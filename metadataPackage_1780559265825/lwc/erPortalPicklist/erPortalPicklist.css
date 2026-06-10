@@ -1,0 +1,51 @@
+.erportal-picklist {
+  padding: 0; /* nécessaire pour IE */
+  font: inherit; /* même rendu suivant font document */
+  font-weight: bold; /* même rendu suivant font document */
+  border-radius: 10em;
+  padding-left: 1em;
+}
+
+.slds-form-element__label {
+  font-family: 'montserratregular';
+  font-size: 1.2rem;
+  color: var(--parent-main-color);
+}
+
+.slds-select_container .slds-select {
+  box-shadow: none;
+  font-size: 1.3rem;
+  /* min-height: 2.13rem; */
+  line-height: 2rem;
+  color: #323232;
+}
+
+option {
+  font-weight: bolder;
+}
+
+abbr {
+  font-weight: bolder;
+}
+
+.has-error {
+  border: solid 0.15rem #c23934;
+}
+
+.slds-form-element__help {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #d52b1e;
+  position: absolute;
+}
+
+.er-tooltip {
+  position: relative;
+  top: -0.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .slds-select_container .slds-select {
+    font-size: 1rem;
+  }
+}

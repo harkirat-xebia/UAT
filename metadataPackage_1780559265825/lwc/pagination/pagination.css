@@ -1,0 +1,42 @@
+/**
+ * @author: ALK
+ * @date: 10/06/2023
+ * @desc: pagination
+ */
+
+.pages {
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 2.1rem;
+  max-height: 2.8rem;
+  padding: 22px;
+}
+
+lightning-button {
+  --slds-c-button-radius-border: 50%;
+  --slds-c-button-neutral-spacing-inline-end: 16px;
+  --slds-c-button-neutral-spacing-inline-start: 16px;
+  --slds-c-button-text-color: #002f6c;
+  --slds-c-button-line-height: 38px;
+  --slds-c-button-neutral-color-background: none;
+  --slds-c-button-neutral-color-border-hover: none;
+  padding-top: 5px;
+}
+
+.currentpage {
+  --slds-c-button-neutral-color-background: #0176d3;
+  --slds-c-button-neutral-color-background-active: #0176d3;
+  --slds-c-button-text-color: #fff;
+  --slds-c-button-neutral-color-border-hover: none;
+}
+
+.info {
+  color: #0176d3;
+  padding-left: 2px;
+  padding-top: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: Frank Ruhl Libre, sans-serif;
+  text-align: left;
+}

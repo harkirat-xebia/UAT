@@ -1,0 +1,1507 @@
+<apex:page controller="VFCSK02_Proposal_PDF_SK"
+  renderAs="pdf"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  standardStylesheets="false"
+>
+  <head>
+    <style type="text/css" media="print">
+      @page {
+        size: A4;
+        margin: 0mm 0mm 4mm 0mm;
+        @top-center {
+          content: element(header);
+        }
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+      label {
+      }
+      strong {
+      }
+      .header {
+        font-family: Arial Unicode MS;
+        margin-left: 46px;
+        margin-top: 30px;
+        position: running(header);
+      }
+      .footer {
+        font-family: Arial Unicode MS;
+        /*color:#AEB2BD;*/
+        font-size: 6pt;
+        /*text-align: center;*/
+        position: running(footer);
+      }
+      .content {
+        font-family: Arial Unicode MS;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      .contentcover {
+        font-family: Arial Unicode MS;
+      }
+      .pagenumber:before {
+        content: counter(page);
+      }
+      .pagecount:before {
+        content: counter(pages);
+      }
+      .container {
+        margin-top: 90px;
+        font-size: 8.5pt; /*modified 9*/
+      }
+      .containertc {
+        margin-top: 30px;
+        font-size: 7pt; /*modified 9*/
+      }
+      .topleft {
+        float: left;
+        width: 48%;
+      }
+      .left {
+        position: absolute;
+        left: 16px;
+        width: 46%;
+      }
+      .right {
+        position: absolute;
+        right: 16px;
+        width: 46%;
+      }
+      .topright {
+        float: right;
+        width: 48%;
+      }
+      ol.alphabetList {
+        list-style-type: lower-alpha;
+      }
+      li {
+        text-align: justify;
+      }
+      table,
+      th,
+      td {
+        /*border: .5px solid black;*/
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        padding: 4px;
+      }
+      th {
+        padding: 8px;
+        text-align: center;
+      }
+      .block {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #11204c;
+      }
+      .row {
+      }
+      .size_1-of-1 {
+        width: 100%;
+        display: inline-block;
+      }
+      .size_1-of-2 {
+        width: 49%;
+        display: inline-block;
+      }
+      .size_1-of-3 {
+        width: 33%;
+        display: inline-block;
+      }
+
+      .size_1-of-4 {
+        width: 24%;
+        display: inline-block;
+      }
+      .title {
+        color: #000000;
+        font-weight: bold;
+      }
+      .outputField {
+        font-weight: bold;
+      }
+      .BackgroundImg {
+        background: url(/resource/ContractCover2);
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        width: 800px;
+        height: 500px;
+        margin-left: -40px !important;
+        margin-right: 200px;
+      }
+
+      .size_1-of-2-cov {
+        width: 43%; /*48*/
+        /*height: 50px;*/
+        display: inline-block;
+        text-align: center;
+        /* margin: 3px;*/
+        padding: 20px;
+        border: 1px solid #757575;
+        /*height: 20vh;*/
+      }
+
+      .parag {
+        margin: 20px 50px 20px 0px;
+      }
+
+      #tabtrv {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtrv td,
+      #tabtrv th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #004e9c;
+      }
+      #tabtrv th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #e1f0fa;
+        /*color: #0452c8;*/
+        color: #004e9c;
+      }
+      #tabhc {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabhc td,
+      #tabhc th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #008fa1;
+      }
+      #tabhc th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #dcecee;
+        /*color: #0452c8;*/
+        color: #008fa1;
+      }
+
+      #tabtr {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtr td,
+      #tabtr th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #004e9c;
+      }
+      #tabtr th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #e1f0fa;
+        color: #004e9c;
+      }
+      #tabTRR {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabTRR td,
+      #tabTRR th {
+        border: 1px solid #000;
+        padding: 4px;
+        border-color: #004e9c;
+      }
+      #tabTRR th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        background-color: #e1f0fa;
+        color: #004e9c;
+      }
+
+      #tabtc {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtc td,
+      #tabtc th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #481463;
+      }
+      #tabtc th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #b0ded6;
+        /*color: #0452c8;*/
+        color: #481463;
+      }
+
+      #tabtc2 {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtc2 td,
+      #tabtc2 th {
+        border: 1px solid #000;
+        padding: 4px;
+        border-color: #481463;
+      }
+      #tabtc2 th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        background-color: #b0ded6;
+        /*color: #0452c8;*/
+        color: #481463;
+      }
+
+      #tabtm {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtm td,
+      #tabtm th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #000;
+      }
+      #tabtm th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #dfd1e7;
+        /*color: #0452c8;*/
+        color: #481463;
+      }
+
+      #tabtm2 {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabtm2 td,
+      #tabtm2 th {
+        border: 1px solid #000;
+        padding: 4px;
+        border-color: #000;
+      }
+      #tabtm2 th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        background-color: #dfd1e7;
+        /*color: #0452c8;*/
+        color: #481463;
+      }
+
+      #table {
+        border-collapse: collapse;
+        /*width:80%;60*/
+      }
+      #table.blue {
+        border: 1px solid #004e9c;
+        text-align: center;
+        height: 40px;
+        padding: 10px;
+        width: 7%;
+      }
+      #table.none {
+        border-style: none;
+        text-align: right;
+        padding: 10px;
+        width: 10%;
+      }
+
+      #tabeb {
+        font-family: Arial Unicode MS;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+      }
+
+      #tabeb td,
+      #tabeb th {
+        border: 1px solid #000;
+        padding: 8px;
+        border-color: #ff5978;
+      }
+      #tabeb th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #fed0c8;
+        /*color: #0452c8;*/
+        color: #ff5978;
+      }
+    </style>
+  </head>
+
+  <apex:form styleClass="content">
+    <div>
+      <div>
+        <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+          style="float: right; margin-right: 10px"
+          width="116.40944882px"
+          height="71.811023622px"
+        />
+      </div>
+    </div>
+    <div class="footer"></div>
+    <!-- Cover-->
+    <div class="container">
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1">
+            <div class="BackgroundImg">
+              <div style="font-size: 55px; color: red; margin-left: 100px; padding-top: 55px">ponuka</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-3" style="font-size: 35px; margin-left: 350px; color: red; width: 400px">
+            Riešenia od Edenred <br /><br />
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2"></div>
+          <div class="size_1-of-2" style="text-align: left">Ponuka pre spoločnosť:</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="text-align: right"></div>
+          <div class="size_1-of-2-cov">{!accountName}</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2"></div>
+          <div class="size_1-of-2" style="text-align: left">IČO:</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="text-align: right"></div>
+          <div class="size_1-of-2-cov">{!companyRegistrationNumber}</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2"></div>
+          <div class="size_1-of-2" style="text-align: left">Ponuku vypracoval:</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="text-align: right"></div>
+          <div class="size_1-of-2-cov">{!ownerName}</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2"></div>
+          <div class="size_1-of-2" style="text-align: left">Dátum:</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2" style="text-align: right"></div>
+          <div class="size_1-of-2-cov">{!sysdate}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRV -->
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[0] == true}">
+      <!-- Page 1-->
+      <div style="page-break-after: always" />
+      <div style="margin-top: 15px">
+        <div>
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <!-- logo ancienne position-->
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="width=120px height=70px;color: #004E9C; font-size: 25px;margin: 0px;">
+                  Karta Edenred - peňaženka Ticket Restaurant<sup>®</sup>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">
+              <table id="tabtrv">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <apex:repeat value="{!Docs[0].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Vydanie karty</div>
+            <div class="size_1-of-1">
+              <table id="tabtrv">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[0].QuoteServicesVydanie}" var="serviceListVyd">
+                  <tr>
+                    <td>{!serviceListVyd.name}</td>
+                    <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtrv">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[0].QuoteServicesDorucenie}" var="serviceListDoru">
+                  <tr>
+                    <td>{!serviceListDoru.name}</td>
+                    <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabtrv">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[0].QuoteServicesIne}" var="serviceListIne">
+                  <tr>
+                    <td>{!serviceListIne.name}</td>
+                    <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[0].ThereIsService == true && Docs[0].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <table id="tabtrv">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                  <th>Výška zl'avy v %</th>
+                  <th>Výška poplatku po zl'ave bez DPH</th>
+                </tr>
+                <apex:variable var="index" value="{!0}" />
+                <apex:repeat value="{!Docs[0].QuoteServicesDiscounted}" var="serviceList">
+                  <tr>
+                    <td>{!serviceList.name}</td>
+                    <td>{!serviceList.price} {!serviceList.unit}</td>
+                    <td>{!serviceList.discount}</td>
+                    <td>{!serviceList.totalPrice} {!serviceList.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue">{!PaymentTerms}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #004e9c; text-align: center"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+
+    <!-- EB -->
+
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[5] == true}">
+      <div style="page-break-before: always" />
+      <div style="margin-top: 15px">
+        <div>
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="color: #ff5978; font-size: 25px; margin: 0px">Karta Edenred - peňaženka Benefits</h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+            <div class="size_1-of-1"></div>
+            <div class="size_1-of-1">
+              <table id="tabeb">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <apex:repeat value="{!Docs[5].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Vydanie karty</div>
+            <div class="size_1-of-1">
+              <table id="tabeb">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[5].QuoteServicesVydanie}" var="serviceListVyd">
+                  <tr>
+                    <td>{!serviceListVyd.name}</td>
+                    <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabeb">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[5].QuoteServicesDorucenie}" var="serviceListDoru">
+                  <tr>
+                    <td>{!serviceListDoru.name}</td>
+                    <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabeb">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[5].QuoteServicesIne}" var="serviceListIne">
+                  <tr>
+                    <td>{!serviceListIne.name}</td>
+                    <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[5].ThereIsService == true && Docs[5].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <div class="size_1-of-1">
+                <table id="tabeb">
+                  <tr>
+                    <th>Poplatok</th>
+                    <th>Štandardná výška poplatku bez DPH</th>
+                    <th>Výška zl'avy v %</th>
+                    <th>Výška poplatku po zl'ave bez DPH</th>
+                  </tr>
+
+                  <apex:repeat value="{!Docs[5].QuoteServicesDiscounted}" var="serviceList">
+                    <tr>
+                      <td>{!serviceList.name}</td>
+                      <td>{!serviceList.price} {!serviceList.unit}</td>
+                      <td>{!serviceList.discount}</td>
+                      <td>{!serviceList.totalPrice} {!serviceList.unit}</td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+              </div>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue" style="border-color: #ff5978">{!PaymentTerms}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue" style="border-color: #ff5978">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #ff5978"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+
+    <!-- EB -->
+
+    <!-- HC -->
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[1] == true}">
+      <div style="page-break-before: always" />
+      <div style="margin-top: 15px">
+        <div>
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="color: #61bb46; font-size: 25px; margin: 0px">Karta Edenred - peňaženka Dovolenka</h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+            <div class="size_1-of-1"></div>
+            <div class="size_1-of-1">
+              <table id="tabhc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <apex:repeat value="{!Docs[1].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Vydanie karty</div>
+            <div class="size_1-of-1">
+              <table id="tabhc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[1].QuoteServicesVydanie}" var="serviceListVyd">
+                  <tr>
+                    <td>{!serviceListVyd.name}</td>
+                    <td>{!serviceListVyd.price} {!serviceListVyd.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabhc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[1].QuoteServicesDorucenie}" var="serviceListDoru">
+                  <tr>
+                    <td>{!serviceListDoru.name}</td>
+                    <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabhc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[1].QuoteServicesIne}" var="serviceListIne">
+                  <tr>
+                    <td>{!serviceListIne.name}</td>
+                    <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[1].ThereIsService == true && Docs[1].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <div class="size_1-of-1">
+                <table id="tabhc">
+                  <tr>
+                    <th>Poplatok</th>
+                    <th>Štandardná výška poplatku bez DPH</th>
+                    <th>Výška zl'avy v %</th>
+                    <th>Výška poplatku po zl'ave bez DPH</th>
+                  </tr>
+
+                  <apex:repeat value="{!Docs[1].QuoteServicesDiscounted}" var="serviceList">
+                    <tr>
+                      <td>{!serviceList.name}</td>
+                      <td>{!serviceList.price} {!serviceList.unit}</td>
+                      <td>{!serviceList.discount}</td>
+                      <td>{!serviceList.totalPrice} {!serviceList.unit}</td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+              </div>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue" style="border-color: #008fa1">{!PaymentTerms}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue" style="border-color: #008fa1">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #008fa1"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+    <!--TR-->
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[2] == true}">
+      <!-- Page 1-->
+      <div style="page-break-after: always" />
+      <div style="margin-top: 15px">
+        <div>
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="color: #004e9c; font-size: 25px; margin: 0px">Stravovacie poukážky Ticket Restaurant<sup>®</sup></h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">
+              <table id="tabtr">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <apex:repeat value="{!Docs[2].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtr">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[2].QuoteServicesDorucenie}" var="serviceListDorut">
+                  <tr>
+                    <td>{!serviceListDorut.name}</td>
+                    <td>{!serviceListDorut.price} {!serviceListDorut.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Úhrada</div>
+            <div class="size_1-of-1">
+              <table id="tabtr">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[2].QuoteServicesUhrada}" var="serviceLisUhra">
+                  <tr>
+                    <td>{!serviceLisUhra.name}</td>
+                    <td>{!serviceLisUhra.price} {!serviceLisUhra.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Balenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtr">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[2].QuoteServicesBalenie}" var="serviceListBale">
+                  <tr>
+                    <td>{!serviceListBale.name}</td>
+                    <td>{!serviceListBale.price} {!serviceListBale.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabtr">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[2].QuoteServicesIne}" var="serviceListIne">
+                  <tr>
+                    <td>{!serviceListIne.name}</td>
+                    <td>{!serviceListIne.price} {!serviceListIne.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[2].ThereIsService == true && Docs[2].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <table id="tabTRR">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                  <th>Výška zl'avy v %</th>
+                  <th>Výška poplatku po zl'ave bez DPH</th>
+                </tr>
+                <!-- bloc de test-->
+
+                <apex:repeat value="{!Docs[2].QuoteServicesDiscounted}" var="serviceListdisc">
+                  <tr>
+                    <td>{!serviceListdisc.name}</td>
+                    <td>{!serviceListdisc.price} {!serviceListdisc.unit}</td>
+                    <td>{!serviceListdisc.discount}</td>
+                    <td>{!serviceListdisc.totalPrice} {!serviceListdisc.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue">{!PaymentVoucher}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #004e9c; text-align: center"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+    <!--TC-->
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[3] == true}">
+      <!-- Page 1-->
+      <div style="page-break-after: always" />
+      <div style="margin-top: 15px">
+        <div>
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="color: #8f499c; font-size: 25px; margin: 0px">Edenred poukážky Darčeky</h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">
+              <table id="tabtc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <apex:repeat value="{!Docs[3].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[3].QuoteServicesDorucenie}" var="serviceListDoru">
+                  <tr>
+                    <td>{!serviceListDoru.name}</td>
+                    <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Úhrada</div>
+            <div class="size_1-of-1">
+              <table id="tabtc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[3].QuoteServicesUhrada}" var="serviceListUhra">
+                  <tr>
+                    <td>{!serviceListUhra.name}</td>
+                    <td>{!serviceListUhra.price} {!serviceListUhra.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Balenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[3].QuoteServicesBalenie}" var="serviceListBale">
+                  <tr>
+                    <td>{!serviceListBale.name}</td>
+                    <td>{!serviceListBale.price} {!serviceListBale.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Poplatok za ozdobný obal / ďakovnú kartu</div>
+            <div class="size_1-of-1">
+              <table id="tabtc">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[3].QuoteServicesVydanie}" var="serviceListVyda">
+                  <tr>
+                    <td>{!serviceListVyda.name}</td>
+                    <td>{!serviceListVyda.price} {!serviceListVyda.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="containertc">
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabtc2">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+
+                <apex:repeat value="{!Docs[3].QuoteServicesSluzby}" var="serviceListSluz">
+                  <tr>
+                    <td>{!serviceListSluz.name}</td>
+                    <td>{!serviceListSluz.price} {!serviceListSluz.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[3].ThereIsService == true && Docs[3].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <table id="tabtc2">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                  <th>Výška zl'avy v %</th>
+                  <th>Výška poplatku po zl'ave bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[3].QuoteServicesDiscounted}" var="serviceListDisc">
+                  <tr>
+                    <td>{!serviceListDisc.name}</td>
+                    <td>{!serviceListDisc.price} {!serviceListDisc.unit}</td>
+                    <td>{!serviceListDisc.discount}</td>
+                    <td>{!serviceListDisc.totalPrice} {!serviceListDisc.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1"></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue" style="border-color: #481463">{!PaymentVoucher}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue" style="border-color: #481463">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #481463"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+    <!--TM-->
+    <apex:outputPanel layout="none" rendered="{!oneOrTwo[4] == true}">
+      <!-- Page 1-->
+      <div style="page-break-after: always" />
+      <div>
+        <div style="margin-top: 15px">
+          <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+            style="float: right; margin-right: 10px"
+            width="116.40944882px"
+            height="71.811023622px"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="block">
+          <div class="row">
+            <div>
+              <h1 style="width=120px height=70px; color: Black; font-size: 35px;margin: 0px;">Cenová ponuka</h1>
+              <h2 style="color: #8f499c; font-size: 25px; margin: 0px">Edenred poukážky Služby</h2>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">
+              <table id="tabtm">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <!--row repeat-->
+
+                <!-- here-->
+                <apex:repeat value="{!Docs[4].QuoteServicesFirst}" var="serviceListFirst">
+                  <tr>
+                    <td>{!serviceListFirst.name}</td>
+                    <td>{!serviceListFirst.price} {!serviceListFirst.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Doručenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtm">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[4].QuoteServicesDorucenie}" var="serviceListDoru">
+                  <tr>
+                    <td>{!serviceListDoru.name}</td>
+                    <td>{!serviceListDoru.price} {!serviceListDoru.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Úhrada</div>
+            <div class="size_1-of-1">
+              <table id="tabtm">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[4].QuoteServicesUhrada}" var="serviceListUhra">
+                  <tr>
+                    <td>{!serviceListUhra.name}</td>
+                    <td>{!serviceListUhra.price} {!serviceListUhra.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Balenie</div>
+            <div class="size_1-of-1">
+              <table id="tabtm">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+
+                <apex:repeat value="{!Docs[4].QuoteServicesBalenie}" var="serviceListBale">
+                  <tr>
+                    <td>{!serviceListBale.name}</td>
+                    <td>{!serviceListBale.price} {!serviceListBale.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Poplatok za ozdobný obal / ďakovnú kartu</div>
+            <div class="size_1-of-1">
+              <table id="tabtm">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+                <apex:repeat value="{!Docs[4].QuoteServicesVydanie}" var="serviceListVyda">
+                  <tr>
+                    <td>{!serviceListVyda.name}</td>
+                    <td>{!serviceListVyda.price} {!serviceListVyda.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2-->
+      <div style="page-break-after: always" />
+      <div class="containertc">
+        <div class="block">
+          <div class="row">
+            <div class="size_1-of-1">Iné služby</div>
+            <div class="size_1-of-1">
+              <table id="tabtm2">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                </tr>
+
+                <apex:repeat value="{!Docs[4].QuoteServicesSluzby}" var="serviceListSluz">
+                  <tr>
+                    <td>{!serviceListSluz.name}</td>
+                    <td>{!serviceListSluz.price} {!serviceListSluz.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row">
+            <apex:outputPanel rendered="{!Docs[4].ThereIsService == true && Docs[4].Discount == true}">
+              <div class="size_1-of-1">Zl'avy</div>
+              <table id="tabtm2">
+                <tr>
+                  <th>Poplatok</th>
+                  <th>Štandardná výška poplatku bez DPH</th>
+                  <th>Výška zl'avy v %</th>
+                  <th>Výška poplatku po zl'ave bez DPH</th>
+                </tr>
+                <!-- bloc de test-->
+                <apex:repeat value="{!Docs[4].QuoteServicesDiscounted}" var="serviceListDisc">
+                  <tr>
+                    <td>{!serviceListDisc.name}</td>
+                    <td>{!serviceListDisc.price} {!serviceListDisc.unit}</td>
+                    <td>{!serviceListDisc.discount}</td>
+                    <td>{!serviceListDisc.totalPrice} {!serviceListDisc.unit}</td>
+                  </tr>
+                </apex:repeat>
+              </table>
+            </apex:outputPanel>
+          </div>
+        </div>
+        <div class="block">
+          <div class="row"></div>
+        </div>
+
+        <div class="block">
+          <div class="row">
+            <table id="table">
+              <tr>
+                <td id="table" class="none">Platobné podmienky</td>
+                <td id="table" class="blue" style="border-color: #000">{!PaymentVoucher}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none" colspan="2">Ceny sú uvedené bez DPH.</td>
+              </tr>
+              <tr>
+                <td id="table" class="none">Cenová ponuka je platná do:</td>
+                <td id="table" class="blue" style="border-color: #000">{!expirationDateFormat}</td>
+              </tr>
+              <tr>
+                <td id="table" class="none"></td>
+              </tr>
+              <tr>
+                <td id="table"></td>
+                <td id="table" class="blue" style="border-color: #000"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+  </apex:form>
+</apex:page>

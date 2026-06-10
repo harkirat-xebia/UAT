@@ -1,0 +1,23 @@
+<!--
+ - Created by davram on 2/10/2021.
+ -->
+
+<!-- Framework Contract List -->
+<template>
+  <div if:false={companyRecordType}>
+    <h1 class="headerComponent">
+      <lightning-icon class="titleItems" icon-name="standard:contract" size="small"></lightning-icon>
+      Framework & Referral contracts ({contractsSize})
+    </h1>
+
+    <template if:true={contracts} for:each={contracts} for:item="contract">
+      <div if:true={contract.Id} key={contract.Id}>
+        <c-contract-item
+          contract-id={contract.Id}
+          contract-number={contract.ContractNumber}
+          current-account={recordId}
+        ></c-contract-item>
+      </div>
+    </template>
+  </div>
+</template>

@@ -1,0 +1,58 @@
+/* // Use common library for css */
+@font-face {
+    font-family: 'edenredlight';
+    src: url('/resource/SRER_Portal/fonts/edenred_light.eot');
+    src: url('/resource/SRER_Portal/fonts/edenred_light.eot?#iefix') format('embedded-opentype'),
+        url('/resource/SRER_Portal/fonts/edenred_light.woff2') format('woff2'),
+        url('/resource/SRER_Portal/fonts/edenred_light.woff') format('woff'),
+        url('/resource/SRER_Portal/fonts/edenred_light.ttf') format('truetype'),
+        url('/resource/SRER_Portal/fonts/edenred_light.svg#edenredlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: url('/resource/SRER_Portal/fonts/Montserrat.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:host {
+    --parent-font-family: 'edenredlight';
+    --parent-main-color: #00859b;
+}
+
+body{
+    font-family: 'edenredlight';
+}
+
+.form {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.left-ribbon {
+    height: auto;
+    width: 2%;
+    background: #ffc72c;
+    border-radius: 60px;
+    margin-right: 3%;
+}
+
+.acceptorSectionTitle {
+    color: var(--parent-main-color);
+    font-size: x-large;
+}
+/* ----------------- START : MEDIA QUERIES ----------------- */
+@media screen and (max-width: 700px) {
+
+    .left-ribbon {
+        display: none;
+    }
+
+}
+
+/* ----------------- END : MEDIA QUERIES ----------------- */

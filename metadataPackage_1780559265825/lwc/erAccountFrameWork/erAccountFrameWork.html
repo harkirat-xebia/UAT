@@ -1,0 +1,28 @@
+<!--
+ - Created by noorgoolamnabee on 29/11/2021.
+ -->
+
+<!-- Er Account Frame Work -->
+<template>
+  <div class="slds-box slds-theme_default align-box">
+    <h1 class="headerComponent">
+      <lightning-icon class="titleItems" icon-name="standard:contract" size="small"></lightning-icon>
+      Framework & Referral contracts ({contractsSize})
+    </h1>
+    <div class="spinner">
+      <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+      </template>
+    </div>
+    <div>
+      <lightning-tree-grid
+        columns={gridColumns}
+        data={gridData}
+        key-field="Id"
+        onrowaction={handleRowAction}
+        expanded-rows={expandedRows}
+        hide-checkbox-column
+      ></lightning-tree-grid>
+    </div>
+  </div>
+</template>

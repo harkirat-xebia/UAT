@@ -1,0 +1,63 @@
+.slds-form-element {
+  margin: 1.5rem 1rem;
+}
+
+.btn {
+  font-size: 1.25rem;
+  font-family: 'edenredlight';
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
+  margin: 0 0.3rem;
+  border: none;
+  max-width: 40%;
+  text-align: center;
+}
+
+.question-text {
+  font-family: 'montserratregular';
+  font-size: 1.5rem;
+  color: #00859b;
+}
+
+.question {
+  margin-right: 1rem;
+}
+
+.selected {
+  color: #fff;
+  background: #00859b;
+}
+
+.unselected {
+  color: #00859b;
+  background: #fff;
+  border: solid 0.05rem #00859b;
+}
+
+.er-tooltip {
+  position: relative;
+  top: -0.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .btn {
+    padding: 0.8rem 1.2rem;
+    display: block;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .large {
+    width: 95%;
+  }
+
+  .x-large {
+    width: 98%;
+  }
+
+  .max {
+    width: 100%;
+  }
+}

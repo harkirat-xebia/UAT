@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Customer</name>
+        <label>Assign Customer Domain</label>
+        <locationX>710</locationX>
+        <locationY>1103</locationY>
+        <assignmentItems>
+            <assignToReference>CustomerDomain1</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>VarStep1</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CustomerDomain2</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>VarStep2</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CustomerDomain3</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Varstep3</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_Domain__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CustomerDomain3</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Copy_1_of_Get_customer_Domain_from_Active_Contract</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Number_Of_Employees</name>
+        <label>Assign Number Of Employees</label>
+        <locationX>1007</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.ER_Nb_of_Employees__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Account.NumberOfEmployees</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Engagement_Pricebook</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Program_Name0</name>
+        <label>Assign Program Name</label>
+        <locationX>512</locationX>
+        <locationY>803</locationY>
+        <assignmentItems>
+            <assignToReference>ProgramName1</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>VarStep1Program</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ProgramName2</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Varstep2Program</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ProgramName3</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Varstep3Program</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Program_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProgramNameValue</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Customer_Domain_Empty</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_1_of_Assign_Customer_Domain</name>
+        <label>Assign Customer Domain</label>
+        <locationX>578</locationX>
+        <locationY>1427</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_Domain__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CustomerDomainValue</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <customErrors>
+        <name>Duplicate_Custom_Domain_was_found</name>
+        <label>Duplicate Custom Domain was found</label>
+        <locationX>50</locationX>
+        <locationY>1319</locationY>
+        <customErrorMessages>
+            <errorMessage>Duplicate &quot;Custom Domain&quot; was found in an active contract Please enter a new value. contract id {!Get_customer_Domain_from_Active_Contract.Id}</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>Copy_1_of_Duplicate_Found</name>
+        <label>Duplicate Found</label>
+        <locationX>710</locationX>
+        <locationY>1319</locationY>
+        <defaultConnectorLabel>Default</defaultConnectorLabel>
+        <rules>
+            <name>Copy_1_of_Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Copy_1_of_Get_customer_Domain_from_Active_Contract.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Assign_Customer_Domain</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Duplicate_Found</name>
+        <label>Duplicate Found</label>
+        <locationX>182</locationX>
+        <locationY>1211</locationY>
+        <defaultConnectorLabel>Default</defaultConnectorLabel>
+        <rules>
+            <name>Yes_00</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_customer_Domain_from_Active_Contract.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Duplicate_Custom_Domain_was_found</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Insert_or_Update</name>
+        <label>Insert or Update</label>
+        <locationX>1139</locationX>
+        <locationY>287</locationY>
+        <defaultConnector>
+            <targetReference>Is_Engagement_Pricebook</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Update</defaultConnectorLabel>
+        <rules>
+            <name>Insert</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Number_Of_Employees</targetReference>
+            </connector>
+            <label>Insert</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Customer_Domain_Empty</name>
+        <label>Is Customer Domain  Null</label>
+        <locationX>644</locationX>
+        <locationY>995</locationY>
+        <defaultConnectorLabel>Defalut</defaultConnectorLabel>
+        <rules>
+            <name>Yes_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Customer_Domain__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_customer_Domain_from_Active_Contract</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+        <rules>
+            <name>Yes_0000000</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Customer_Domain__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Customer_Domain__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Customer</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Engagement_Pricebook</name>
+        <label>Is  Pricebook</label>
+        <locationX>1139</locationX>
+        <locationY>587</locationY>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Engagement</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Engagement</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Is_Program_Name_Empty</targetReference>
+            </connector>
+            <label>Engagement</label>
+        </rules>
+        <rules>
+            <name>Benefits</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Benefits</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Remove_value_in_Engagement_Field</targetReference>
+            </connector>
+            <label>Benefits</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Program_Name_Empty</name>
+        <label>Is Program Name Empty</label>
+        <locationX>644</locationX>
+        <locationY>695</locationY>
+        <defaultConnector>
+            <targetReference>Is_Customer_Domain_Empty</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_0000</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Program_Name__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Program_Name0</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>CustomerDomain</name>
+        <dataType>String</dataType>
+        <expression>LOWER(SUBSTITUTE({!$Record.Account.Name}, &quot; &quot;, &quot;&quot;))</expression>
+    </formulas>
+    <formulas>
+        <name>CustomerDomainValue</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Customer_Domain__c} &amp; Right({!Copy_1_of_Get_customer_Domain_from_Active_Contract.Id},8)</expression>
+    </formulas>
+    <formulas>
+        <name>ID</name>
+        <dataType>String</dataType>
+        <expression>&quot;$Record.Id&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>IsNew()</expression>
+    </formulas>
+    <formulas>
+        <name>ProgramName</name>
+        <dataType>String</dataType>
+        <expression>&quot;My &quot; + LOWER(SUBSTITUTE({!$Record.Account.Name}, &quot; &quot;, &quot;&quot;))  + &quot; Engagement&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>ProgramNameValue</name>
+        <dataType>String</dataType>
+        <expression>&quot;My&quot;&amp; &quot; &quot;&amp;{!ProgramName3} &amp; &quot; &quot; &amp; &quot;Engagement&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>VarStep1</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE(
+                  SUBSTITUTE({!$Record.Account.Name}, &quot;/&quot;, &quot;&quot;),
+                &quot;&apos;&quot;, &quot;&quot;),
+              &quot;.&quot;, &quot;&quot;),
+            &quot;(&quot;, &quot;&quot;),
+          &quot;)&quot;, &quot;&quot;),
+        &quot;[&quot;, &quot;&quot;),
+      &quot;]&quot;, &quot;&quot;),
+    &quot;:&quot;, &quot;&quot;),
+  &quot;_&quot;, &quot;&quot;),
+&quot;$&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>VarStep1Program</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE(
+                  SUBSTITUTE({!$Record.Account.Name}, &quot;/&quot;, &quot;&quot;),
+                &quot;&apos;&quot;, &quot;&quot;),
+              &quot;.&quot;, &quot;&quot;),
+            &quot;(&quot;, &quot;&quot;),
+          &quot;)&quot;, &quot;&quot;),
+        &quot;[&quot;, &quot;&quot;),
+      &quot;]&quot;, &quot;&quot;),
+    &quot;:&quot;, &quot;&quot;),
+  &quot;_&quot;, &quot;&quot;),
+&quot;$&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>VarStep2</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!CustomerDomain1}, &quot;&amp;&quot;, &quot;&quot;),
+              &quot;#&quot;, &quot;&quot;),
+            &quot;@&quot;, &quot;&quot;),
+          &quot;!&quot;, &quot;&quot;),
+        &quot; &quot;, &quot;&quot;),
+      &quot;§&quot;, &quot;&quot;),
+    &quot;{&quot;, &quot;&quot;),
+  &quot;}&quot;, &quot;&quot;),
+&quot;%&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Varstep2Program</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!ProgramName1}, &quot;&amp;&quot;, &quot;&quot;),
+              &quot;#&quot;, &quot;&quot;),
+            &quot;@&quot;, &quot;&quot;),
+          &quot;!&quot;, &quot;&quot;),
+        &quot; &quot;, &quot;&quot;),
+      &quot;§&quot;, &quot;&quot;),
+    &quot;{&quot;, &quot;&quot;),
+  &quot;}&quot;, &quot;&quot;),
+&quot;%&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Varstep3</name>
+        <dataType>String</dataType>
+        <expression>LOWER( SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!CustomerDomain2}, &quot;é&quot;, &quot;e&quot;),
+              &quot;è&quot;, &quot;e&quot;),
+            &quot;ç&quot;, &quot;c&quot;),
+          &quot;à&quot;, &quot;a&quot;),
+        &quot;ù&quot;, &quot;u&quot;),
+      &quot;ä&quot;, &quot;a&quot;),
+    &quot;ë&quot;, &quot;e&quot;),
+  &quot;ü&quot;, &quot;u&quot;),
+&quot;ï&quot;, &quot;i&quot;))</expression>
+    </formulas>
+    <formulas>
+        <name>Varstep3Program</name>
+        <dataType>String</dataType>
+        <expression>LOWER( SUBSTITUTE(
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            SUBSTITUTE(
+              SUBSTITUTE(
+                SUBSTITUTE({!ProgramName2}, &quot;é&quot;, &quot;e&quot;),
+              &quot;è&quot;, &quot;e&quot;),
+            &quot;ç&quot;, &quot;c&quot;),
+          &quot;à&quot;, &quot;a&quot;),
+        &quot;ù&quot;, &quot;u&quot;),
+      &quot;ä&quot;, &quot;a&quot;),
+    &quot;ë&quot;, &quot;e&quot;),
+  &quot;ü&quot;, &quot;u&quot;),
+&quot;ï&quot;, &quot;i&quot;))</expression>
+    </formulas>
+    <interviewLabel>Opportunity: {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity:Before</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Copy_1_of_Get_customer_Domain_from_Active_Contract</name>
+        <label>New Get customer Domain from Active Contract</label>
+        <locationX>710</locationX>
+        <locationY>1211</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Copy_1_of_Duplicate_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ER_Customer_Domain__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CustomerDomain3</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.ER_AmendedFromContract__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contract</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_customer_Domain_from_Active_Contract</name>
+        <label>Get customer Domain from Active Contract</label>
+        <locationX>182</locationX>
+        <locationY>1103</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Duplicate_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ER_Customer_Domain__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Customer_Domain__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.ER_AmendedFromContract__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contract</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Remove_value_in_Engagement_Field</name>
+        <label>Remove value in Engagement Field</label>
+        <locationX>1370</locationX>
+        <locationY>695</locationY>
+        <inputAssignments>
+            <field>Customer_Domain__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ER_InvoicingFrequency__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Impacted_Beneficiaries__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Onboarding_Method__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Program_Name__c</field>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>1013</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Insert_or_Update</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>CustomerDomain1</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CustomerDomain2</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CustomerDomain3</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ProgramName1</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ProgramName2</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ProgramName3</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

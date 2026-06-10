@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>NEMO_AMEND_API</name>
+    </customPermissions>
+    <description>Gives custom permission - NEMO_AMEND_API to integration user</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>NEMO Integration Access</label>
+</PermissionSet>

@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Opportunity Line Items">
+        <template if:true={lineItems.length}>
+            <div class="table-wrapper">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Solution Name</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Percentage</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Estimated Value</th>
+                            <th scope="col">Total Amount</th>
+                            <th scope="col">Face Value</th>
+                            <th scope="col">Days Per Month</th>
+                            <th scope="col">Load Per Year</th>
+                            <th scope="col">No of Beneficiaries</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={lineItems} for:item="item">
+                            <tr key={item.Id}>
+                                <td>{item.PricebookEntry.ER_SolutionName__c}</td>
+                                <td>{item.PricebookEntry.Name}</td>
+                                <td>{item.ER_Percentage__c}</td>
+                                <td>{item.Discount}</td>
+                                <td>{item.ER_Estimated_Value__c}</td>
+                                <td>{item.Total_Amount__c}</td>
+                                <td>{item.ER_Face_Value__c}</td>
+                                <td>{item.ER_Days_Per_Month__c}</td>
+                                <td>{item.ER_Load_Per_Year__c}</td>
+                                <td>{item.ER_Nb_Beneficiaries__c}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </lightning-card>
+  </template>

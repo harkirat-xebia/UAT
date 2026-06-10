@@ -1,0 +1,127 @@
+<!--
+   - Created by noorgoolamnabee on 04/01/2023.
+ -->
+<template>
+  <lightning-quick-action-panel header={LABEL.LAB_SF_CL_ORDER_TITLE}>
+    <template if:false={loaded}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <template if:true={error}>
+      <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
+
+    <template if:true={loaded}>
+      <template if:false={showOrderPage}>
+        <!-- Start Level One -->
+        <template if:true={islevelOne}>
+          <template if:true={orderData}>
+            <lightning-breadcrumbs>
+              <lightning-breadcrumb label="Orders" href="#"> </lightning-breadcrumb>
+            </lightning-breadcrumbs>
+            <br />
+            <lightning-datatable
+              key-field="orderId"
+              data={orderData}
+              columns={columns}
+              onrowaction={firstRowAction}
+              hide-checkbox-column="true"
+            >
+            </lightning-datatable>
+            <br />
+            <div class="slds-float_right slds-size_1-of-1">
+              <template if:true={totalOrderData}>
+                <c-pagination
+                  totalrecords={totalOrderData}
+                  page-size={pageSize}
+                  onpagination={handlePagination}
+                ></c-pagination>
+              </template>
+            </div>
+          </template>
+        </template>
+
+        <!-- Start Level Two -->
+        <template if:true={islevelTwo}>
+          <template if:true={orderLineData}>
+            <lightning-breadcrumbs>
+              <lightning-breadcrumb label="Orders" href="#" onclick={back}> </lightning-breadcrumb>
+              <lightning-breadcrumb label={orderNumber} href="#"> </lightning-breadcrumb>
+            </lightning-breadcrumbs>
+            <br />
+            <lightning-datatable
+              key-field="orderItemId"
+              data={orderLineData}
+              columns={columnsOrderline}
+              onrowaction={secondRowAction}
+              hide-checkbox-column="true"
+            >
+            </lightning-datatable>
+          </template>
+        </template>
+
+        <!-- Start Level Three -->
+        <template if:true={islevelThree}>
+          <template if:true={orderlineItemData}>
+            {orderlineItemData.orderItemLineId}
+            <lightning-breadcrumbs>
+              <lightning-breadcrumb label="Orders" href="#" onclick={back}> </lightning-breadcrumb>
+              <lightning-breadcrumb label={orderNumber} href="#"> </lightning-breadcrumb>
+              <lightning-breadcrumb label={orderItemId} href="#"> </lightning-breadcrumb>
+            </lightning-breadcrumbs>
+            <br />
+            <lightning-datatable
+              key-field="orderItemLineId"
+              data={orderlineItemData}
+              columns={columnsOrderlineItem}
+              hide-checkbox-column="true"
+            >
+            </lightning-datatable>
+            <br />
+            <div class="slds-float_right slds-size_1-of-1">
+              <template if:true={totalOrderlineItemData}>
+                <c-pagination
+                  totalrecords={totalOrderlineItemData}
+                  page-size={pageSize}
+                  onpagination={handleOrderlineItemPagination}
+                ></c-pagination>
+              </template>
+            </div>
+          </template>
+        </template>
+      </template>
+      <template if:true={loadOrderId}>
+        <lightning-breadcrumbs>
+          <lightning-breadcrumb label={orderNumber} href="#" onclick={handleNavigateToLevel1}> </lightning-breadcrumb>
+          <lightning-breadcrumb label={LABEL.LAB_SF_CL_LOAD_IN_ERROR} href="#" onclick={handleNavigateToLevel1}>
+          </lightning-breadcrumb>
+        </lightning-breadcrumbs>
+        <c-er-load-errors order-id={loadOrderId} record-id={recordId}  query-type-param="order-id"></c-er-load-errors>
+      </template>
+      <template if:true={processEventOrderId}>
+        <lightning-breadcrumbs>
+          <lightning-breadcrumb label={orderNumber} href="#" onclick={handleNavigateToLevel1}> </lightning-breadcrumb>
+          <lightning-breadcrumb
+            label={LABEL.LAB_SF_CL_PROCESSING_EVENT_TITLE}
+            href="#"
+            onclick={handleNavigateToLevel1}
+          >
+          </lightning-breadcrumb>
+        </lightning-breadcrumbs>
+        <c-er-order-processing-event
+          order-id={processEventOrderId}
+          order-number={orderNumber}
+          billing-account={billingAccount}
+        ></c-er-order-processing-event>
+      </template>
+      <c-lcer-confirmation-dialog
+        title={LABEL.LAB_SF_CL_CANCEL_ORDER}
+        message={LABEL.LAB_SF_CANCEL_ORDER_CONFIRMATION_MSG}
+        confirm-label={LABEL.LAB_SF_ASSET_ConfirmationButton}
+        cancel-label={LABEL.LABS_SF_Opp_Price_Cancel}
+        visible={isDialogVisible}
+        onclickconfirmmodal={handleConfirmationModal}
+      >
+      </c-lcer-confirmation-dialog>
+    </template>
+  </lightning-quick-action-panel>
+</template>

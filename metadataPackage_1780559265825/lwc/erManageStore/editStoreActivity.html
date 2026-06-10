@@ -1,0 +1,113 @@
+<template>
+  <div class="slds-p-bottom_large">
+    <c-er-portal-breadcrumbs rec-id={storeId} mode={mode} scope={scope}></c-er-portal-breadcrumbs>
+  </div>
+  <hgroup>
+    <h2>
+      <lightning-formatted-text value={labels.lb_my_store_activity}></lightning-formatted-text>
+    </h2>
+    <h3>
+      <lightning-formatted-text value={labels.lb_select_activity}></lightning-formatted-text>
+    </h3>
+  </hgroup>
+  <div class="form show-ease">
+    <div class="left-ribbon"></div>
+    <fieldset class="slds-form-element slds-form-element_compound">
+      <div class="slds-form-element__control">
+        <section class="slds-accordion__section slds-is-open">
+          <template for:each={categorieItems} for:item="item" for:index="index">
+            <template if:true={item.showItem}>
+              <li
+                id={item.id}
+                key={item.index}
+                class="categorie-li"
+                style={item.levelOffset}
+                onclick={handleToggleCategorie}
+              >
+                <span id={item.id} class={item.className}>
+                  <template if:true={item.selectable}>
+                    <input
+                      id={item.id}
+                      type="checkbox"
+                      class="categorie-checkbox"
+                      checked={item.isChecked}
+                      onchange={handleSelectCategorie}
+                    />
+                  </template>
+                  <template if:false={item.selectable}>
+                    <template if:false={item.showChilds}>
+                      <div class="big-chevron">
+                        <lightning-icon
+                          id={item.id}
+                          icon-name="utility:chevronright"
+                          size="medium"
+                          class="categorie-checkbox"
+                          alternative-text="Collapsed"
+                        >
+                        </lightning-icon>
+                      </div>
+                      <div class="small-chevron">
+                        <lightning-icon
+                          id={item.id}
+                          icon-name="utility:chevronright"
+                          size="x-small"
+                          class="categorie-checkbox"
+                          alternative-text="Collapsed"
+                        >
+                        </lightning-icon>
+                      </div>
+                    </template>
+                    <template if:true={item.showChilds}>
+                      <div class="big-chevron">
+                        <lightning-icon
+                          id={item.id}
+                          icon-name="utility:chevrondown"
+                          size="medium"
+                          class="categorie-checkbox"
+                          alternative-text="Expanded"
+                        >
+                        </lightning-icon>
+                      </div>
+                      <div class="small-chevron">
+                        <lightning-icon
+                          id={item.id}
+                          icon-name="utility:chevrondown"
+                          size="x-small"
+                          class="categorie-checkbox"
+                          alternative-text="Expanded"
+                        >
+                        </lightning-icon>
+                      </div>
+                    </template>
+                  </template>
+                  <p id={item.id} class="categorie-p">{item.name}</p>
+                </span>
+              </li>
+            </template>
+          </template>
+        </section>
+      </div>
+    </fieldset>
+  </div>
+  <div class="slds-grid slds-gutters navigation-buttons">
+    <div class="slds-col">
+      <c-er-portal-button
+        id="cancelButtonDiv"
+        label={labels.lb_cancel}
+        size="big"
+        alignment="left"
+        onclick={editStoreActivityCancel}
+      >
+      </c-er-portal-button>
+      <c-er-portal-button
+        id="nextButtonDiv"
+        label={labels.lb_step1_next}
+        size="big"
+        alignment="right"
+        disabled={disableEditStoreActivityNext}
+        onclick={editStoreActivityNext}
+      >
+      </c-er-portal-button>
+    </div>
+  </div>
+</template>

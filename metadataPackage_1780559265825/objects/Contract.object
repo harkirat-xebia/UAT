@@ -1,0 +1,4682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Activate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Activate</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Activate</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChangeStatus</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChangeStatus</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChangeStatus</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Terminate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Terminate</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Terminate</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Contract_ERBE</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Contract_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>headlessPricingAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>headlessPricingAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>headlessPricingAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>ER_Contract_Compact</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <searchLayouts>
+        <customTabListAdditionalFields>CONTRACT.CONTRACT_NUMBER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTRACT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SALES.ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTRACT.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ER_Contract_Type__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <listViewButtons>Bulk_Contract_Activation</listViewButtons>
+        <lookupDialogsAdditionalFields>CONTRACT.CONTRACT_NUMBER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTRACT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USERS.ALIAS</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTRACT.CONTRACT_NUMBER</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTRACT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.ALIAS</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SALES.ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.STATUS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.START_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.END_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT_TERM</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <compactLayouts>
+        <fullName>ER_Contract_Compact</fullName>
+        <fields>ContractNumber</fields>
+        <fields>AccountId</fields>
+        <fields>ER_OpportunityId__c</fields>
+        <fields>StartDate</fields>
+        <fields>EndDate</fields>
+        <fields>ER_Contract_Type__c</fields>
+        <fields>OwnerId</fields>
+        <fields>ER_WS_StatusCode__c</fields>
+        <label>Contract Compact</label>
+    </compactLayouts>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActivatedById</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActivatedDate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Approval_Date__c</fullName>
+        <label>Approval Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Recalled</fullName>
+                    <default>false</default>
+                    <label>Recalled</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Approved_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Approved By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Approver_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Approver Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Billing_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Billing Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BillingAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Card_Replacement_Payment__c</fullName>
+        <label>Card Replacement Payment</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Paid by beneficiary</fullName>
+                    <default>false</default>
+                    <label>Paid by beneficiary</label>
+                </value>
+                <value>
+                    <fullName>Paid by customer</fullName>
+                    <default>true</default>
+                    <label>Paid by customer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CompanySignedDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>CompanySignedId</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Content_Visibility_Flag__c</fullName>
+        <formula>IF( ER_OpportunityId__r.Content_Visibility_Flag__c = true
+ || OwnerId = $User.Id || $Profile.Name = &apos;System Administrator&apos; || $Profile.Name  = &apos;Sales Operations&apos; , true, false)</formula>
+        <label>Content Visibility Flag</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Category__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND( Number_of_Benefit_Lines__c &gt;=1,  Number_of_Savings_Line__c =0), &quot;Benefits&quot;,  IF(AND (Number_of_Benefit_Lines__c =0,  Number_of_Savings_Line__c &gt;= 1), &quot;Engagement&quot;,  IF(AND (Number_of_Benefit_Lines__c &gt;=1,  Number_of_Savings_Line__c &gt;= 1), &quot;Benefits and Engagement&quot;, &quot;Services Only&quot;) ) )</formula>
+        <label>Contract Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractTerm</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Creditting__c</fullName>
+        <label>Creditting</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Credit 1 day</fullName>
+                    <default>false</default>
+                    <label>Credit 1 day</label>
+                </value>
+                <value>
+                    <fullName>Credit 2 day</fullName>
+                    <default>true</default>
+                    <label>Credit 2 day</label>
+                </value>
+                <value>
+                    <fullName>Credit 3 day</fullName>
+                    <default>false</default>
+                    <label>Credit 3 day</label>
+                </value>
+                <value>
+                    <fullName>Credit 4 day</fullName>
+                    <default>false</default>
+                    <label>Credit 4 day</label>
+                </value>
+                <value>
+                    <fullName>Credit Express</fullName>
+                    <default>false</default>
+                    <label>Credit Express</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Customer_Domain__c</fullName>
+        <externalId>false</externalId>
+        <formula>ER_OpportunityId__r.Customer_Domain__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Domain</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerSignedDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>CustomerSignedId</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <lookupFilter>
+            <active>false</active>
+            <filterItems>
+                <field>$Source.AccountId</field>
+                <operation>equals</operation>
+                <valueField>Contact.AccountId</valueField>
+            </filterItems>
+            <filterItems>
+                <field>Contact.ER_Status__c</field>
+                <operation>equals</operation>
+                <value>Active</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CustomerSignedTitle</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Data_Quality_Description__c</fullName>
+        <externalId>false</externalId>
+        <formula>/*IF( Data_Quality_Score__c =100,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;IF( LEN( TEXT(MONTH( StartDate ))) = 0, &quot;Contract Start Date, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF(LEN(  TEXT(ContractTerm)) = 0, &quot;Contract Term, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF( LEN( BillingCity ) = 0, &quot;Complete Contract Address, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF(LEN( CustomerSignedId ) = 0, &quot;Customer Signature, &quot;,&quot;&quot;)&amp;&quot;&quot;&amp;IF( ISPICKVAL(  OwnerExpirationNotice ,&quot;&quot;), &quot;Owner Expiration Notice&quot;,&quot;&quot;))*/
+
+            IF( RecordType.DeveloperName=&quot;ER_Client_Contract_RT&quot;,
+
+            IF( Data_Quality_Score__c&gt;98,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;
+            IF(LEN(CustomerSignedId)=0,&quot;Customer Signed By,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),&quot;Account not active and no contract end date,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;),LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),&quot;Operational System ID missing and no synchronization,&quot;,&quot;&quot;)
+            &amp;IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;)),&quot;Inv. Freq. or payment term,&quot;,&quot;&quot;)
+            &amp;IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),&quot;Payment Method,&quot;,&quot;&quot;)
+            )
+
+            ,
+            IF( Data_Quality_Score__c&gt;98,&quot;All Contract Details Captured&quot;, &quot;Missing: &quot;&amp;
+            IF(LEN(CustomerSignedId)=0,&quot;Customer Signed By,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),&quot;Account not active and no contract end date,&quot;,&quot;&quot;)
+            &amp;IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;),LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),&quot;Operational System ID missing and no synchronization,&quot;,&quot;&quot;)
+            &amp;IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;),ISPICKVAL(ER_ReimbursementTerm2__c,&quot;&quot;)),&quot;Inv. Freq., Reimb. or payment term,&quot;,&quot;&quot;)
+            &amp;IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),&quot;Payment Method,&quot;,&quot;&quot;)
+            )
+
+            )</formula>
+        <label>Data Quality Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Data_Quality_Score__c</fullName>
+        <externalId>false</externalId>
+        <formula>/*IF( LEN(TEXT(MONTH(StartDate)))=0, 0,20) + IF( LEN(TEXT( ContractTerm ))=0, 0,20) + IF( LEN( BillingCity ) = 0, 0,20) + IF( LEN( CustomerSignedId) = 0, 0,20) + IF( ISPICKVAL(  OwnerExpirationNotice ,&quot;&quot;), 0,20)*/
+
+            IF( RecordType.DeveloperName=&quot;ER_Client_Contract_RT&quot;,
+
+            IF(LEN(CustomerSignedId)=0,0,11.11111112)
+            + IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),0,22.22222222)
+            + IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;), LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),0,22.22222222)
+            + IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;)),0,22.22222222)
+            + IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),0,22.22222222)
+
+            ,
+            IF(LEN(CustomerSignedId)=0,0,11.11111112)
+            + IF(AND(NOT(ISPICKVAL(Account.ER_Status__c,&quot;Active&quot;)),LEN( TEXT(MONTH(EndDate)))=0),0,22.22222222)
+            + IF(AND(NOT(ER_WS_Message__c=&quot;succeeded&quot;), LEN(ER_Card_Operational_System_ID__c&amp;ER_Paper_Operational_System_ID__c)=0),0,22.22222222)
+            + IF(OR(ISPICKVAL(ER_InvoicingFrequency2__c,&quot;&quot;),ISPICKVAL(ER_PaymentTerms2__c,&quot;&quot;),ISPICKVAL(ER_ReimbursementTerm2__c,&quot;&quot;)),0,22.22222222)
+            + IF(ISPICKVAL(ER_PaymentMethod2__c,&quot;&quot;),0,22.22222222)
+
+            )</formula>
+        <label>Data Quality Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Eligible_Employees__c</fullName>
+        <label>Eligible Employees</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>TRE only</fullName>
+                    <default>false</default>
+                    <label>TRE only</label>
+                </value>
+                <value>
+                    <fullName>All product</fullName>
+                    <default>false</default>
+                    <label>All product</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ER_Account_CRN__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.ER_Registration_Number__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account CRN</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Agreement_DateTime__c</fullName>
+        <label>Agreement Date Time</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_BUPicklist__c</fullName>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BE</fullName>
+                    <default>false</default>
+                    <label>Belgium</label>
+                </value>
+                <value>
+                    <fullName>BENELUX</fullName>
+                    <default>false</default>
+                    <label>Benelux</label>
+                </value>
+                <value>
+                    <fullName>AR</fullName>
+                    <default>false</default>
+                    <label>Argentina</label>
+                </value>
+                <value>
+                    <fullName>AT</fullName>
+                    <default>false</default>
+                    <label>Austria</label>
+                </value>
+                <value>
+                    <fullName>BR</fullName>
+                    <default>false</default>
+                    <label>Brasil</label>
+                </value>
+                <value>
+                    <fullName>BG</fullName>
+                    <default>false</default>
+                    <label>Bulgaria</label>
+                </value>
+                <value>
+                    <fullName>CL</fullName>
+                    <default>false</default>
+                    <label>Chile</label>
+                </value>
+                <value>
+                    <fullName>CN</fullName>
+                    <default>false</default>
+                    <label>China</label>
+                </value>
+                <value>
+                    <fullName>CO</fullName>
+                    <default>false</default>
+                    <label>Colombia</label>
+                </value>
+                <value>
+                    <fullName>CZ</fullName>
+                    <default>false</default>
+                    <label>Czech Republic</label>
+                </value>
+                <value>
+                    <fullName>AE</fullName>
+                    <default>false</default>
+                    <label>Dubai</label>
+                </value>
+                <value>
+                    <fullName>FI</fullName>
+                    <default>false</default>
+                    <label>Finland</label>
+                </value>
+                <value>
+                    <fullName>FR</fullName>
+                    <default>false</default>
+                    <label>France</label>
+                </value>
+                <value>
+                    <fullName>DE</fullName>
+                    <default>false</default>
+                    <label>Germany</label>
+                </value>
+                <value>
+                    <fullName>GR</fullName>
+                    <default>false</default>
+                    <label>Greece</label>
+                </value>
+                <value>
+                    <fullName>HU</fullName>
+                    <default>false</default>
+                    <label>Hungary</label>
+                </value>
+                <value>
+                    <fullName>IT</fullName>
+                    <default>false</default>
+                    <label>Italy</label>
+                </value>
+                <value>
+                    <fullName>JP</fullName>
+                    <default>false</default>
+                    <label>Japan</label>
+                </value>
+                <value>
+                    <fullName>LB</fullName>
+                    <default>false</default>
+                    <label>Lebanon</label>
+                </value>
+                <value>
+                    <fullName>MY</fullName>
+                    <default>false</default>
+                    <label>Malaysia</label>
+                </value>
+                <value>
+                    <fullName>MX</fullName>
+                    <default>false</default>
+                    <label>Mexico</label>
+                </value>
+                <value>
+                    <fullName>MD</fullName>
+                    <default>false</default>
+                    <label>Moldavia</label>
+                </value>
+                <value>
+                    <fullName>MA</fullName>
+                    <default>false</default>
+                    <label>Morocco</label>
+                </value>
+                <value>
+                    <fullName>PE</fullName>
+                    <default>false</default>
+                    <label>Peru</label>
+                </value>
+                <value>
+                    <fullName>PL</fullName>
+                    <default>false</default>
+                    <label>Poland</label>
+                </value>
+                <value>
+                    <fullName>PT</fullName>
+                    <default>false</default>
+                    <label>Portugal</label>
+                </value>
+                <value>
+                    <fullName>RO</fullName>
+                    <default>false</default>
+                    <label>Romania</label>
+                </value>
+                <value>
+                    <fullName>RU</fullName>
+                    <default>false</default>
+                    <label>Russia</label>
+                </value>
+                <value>
+                    <fullName>SG</fullName>
+                    <default>false</default>
+                    <label>Singapore</label>
+                </value>
+                <value>
+                    <fullName>SK</fullName>
+                    <default>false</default>
+                    <label>Slovakia</label>
+                </value>
+                <value>
+                    <fullName>ES</fullName>
+                    <default>false</default>
+                    <label>Spain</label>
+                </value>
+                <value>
+                    <fullName>SE</fullName>
+                    <default>false</default>
+                    <label>Sweden</label>
+                </value>
+                <value>
+                    <fullName>TW</fullName>
+                    <default>false</default>
+                    <label>Taiwan</label>
+                </value>
+                <value>
+                    <fullName>TR</fullName>
+                    <default>false</default>
+                    <label>Turkey</label>
+                </value>
+                <value>
+                    <fullName>UK</fullName>
+                    <default>false</default>
+                    <label>UK</label>
+                </value>
+                <value>
+                    <fullName>US</fullName>
+                    <default>false</default>
+                    <label>US</label>
+                </value>
+                <value>
+                    <fullName>VE</fullName>
+                    <default>false</default>
+                    <label>Venezuela</label>
+                </value>
+                <value>
+                    <fullName>VN</fullName>
+                    <default>false</default>
+                    <label>Vietnam</label>
+                </value>
+                <value>
+                    <fullName>PC</fullName>
+                    <default>false</default>
+                    <label>Punto Clave</label>
+                </value>
+                <value>
+                    <fullName>UTA</fullName>
+                    <default>false</default>
+                    <label>UTA</label>
+                </value>
+                <value>
+                    <fullName>CEN</fullName>
+                    <default>false</default>
+                    <label>Central</label>
+                </value>
+                <value>
+                    <fullName>LU</fullName>
+                    <default>false</default>
+                    <label>Luxembourg</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Business_Unit__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Account.ER_BUPicklist__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Unit Formula</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Card_Operational_System_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>Card Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_CategoryUser__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <label>Category user</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>RH</fullName>
+                    <default>false</default>
+                    <label>RH</label>
+                </value>
+                <value>
+                    <fullName>Delight</fullName>
+                    <default>false</default>
+                    <label>Delight</label>
+                </value>
+                <value>
+                    <fullName>Edenred users</fullName>
+                    <default>false</default>
+                    <label>Edenred users</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ER_Contract_Duration__c</fullName>
+        <label>Contract Duration</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Evergreen</fullName>
+                    <default>true</default>
+                    <label>Evergreen</label>
+                </value>
+                <value>
+                    <fullName>1 year</fullName>
+                    <default>false</default>
+                    <label>1 year</label>
+                </value>
+                <value>
+                    <fullName>2 years</fullName>
+                    <default>false</default>
+                    <label>2 years</label>
+                </value>
+                <value>
+                    <fullName>3 years</fullName>
+                    <default>false</default>
+                    <label>3 years</label>
+                </value>
+                <value>
+                    <fullName>4 Years</fullName>
+                    <default>false</default>
+                    <label>4 Years</label>
+                </value>
+                <value>
+                    <fullName>5 Years</fullName>
+                    <default>false</default>
+                    <label>5 Years</label>
+                </value>
+                <value>
+                    <fullName>6 Years</fullName>
+                    <default>false</default>
+                    <label>6 Years</label>
+                </value>
+                <value>
+                    <fullName>Termed</fullName>
+                    <default>false</default>
+                    <label>Termed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Contract_Expired__c</fullName>
+        <formula>EndDate &lt; TODAY()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contract Expired</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Contract_External_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>Contract External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Contract_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Creation_date_in_OS__c</fullName>
+        <label>Creation date in OS</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Credit_Limit2__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Customer_Domain__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Domain</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Customer_Signed_Version__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Signed Version</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Delivery_Type__c</fullName>
+        <label>Delivery Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk</fullName>
+                    <default>true</default>
+                    <label>Bulk</label>
+                </value>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>false</default>
+                    <label>Individual</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_First_Card_Order_Date__c</fullName>
+        <label>First card order date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_First_Load_Order_Date__c</fullName>
+        <label>First load order date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Impacted_Beneficiaries__c</fullName>
+        <label>Impacted Beneficiaries</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>All</fullName>
+                    <default>false</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>TRE Only</fullName>
+                    <default>false</default>
+                    <label>TRE Only</label>
+                </value>
+                <value>
+                    <fullName>No Beneficiary</fullName>
+                    <default>false</default>
+                    <label>No Beneficiary</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Indexation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Indexation</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Indexation_Index2__c</fullName>
+        <label>Indexation Index</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ER_BUPicklist__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Consumer price index</fullName>
+                    <default>false</default>
+                    <label>Consumer price index</label>
+                </value>
+                <value>
+                    <fullName>Agoria index</fullName>
+                    <default>false</default>
+                    <label>Agoria index</label>
+                </value>
+                <value>
+                    <fullName>Health index</fullName>
+                    <default>false</default>
+                    <label>Health index</label>
+                </value>
+                <value>
+                    <fullName>Industrial price index</fullName>
+                    <default>false</default>
+                    <label>Industrial price index</label>
+                </value>
+                <value>
+                    <fullName>Agoria price index</fullName>
+                    <default>false</default>
+                    <label>Agoria price index</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>MD</controllingFieldValue>
+                <controllingFieldValue>MA</controllingFieldValue>
+                <controllingFieldValue>PE</controllingFieldValue>
+                <controllingFieldValue>PL</controllingFieldValue>
+                <controllingFieldValue>PT</controllingFieldValue>
+                <controllingFieldValue>RO</controllingFieldValue>
+                <controllingFieldValue>RU</controllingFieldValue>
+                <controllingFieldValue>SG</controllingFieldValue>
+                <controllingFieldValue>SK</controllingFieldValue>
+                <controllingFieldValue>ES</controllingFieldValue>
+                <controllingFieldValue>CZ</controllingFieldValue>
+                <controllingFieldValue>SE</controllingFieldValue>
+                <controllingFieldValue>AE</controllingFieldValue>
+                <controllingFieldValue>TW</controllingFieldValue>
+                <controllingFieldValue>FI</controllingFieldValue>
+                <controllingFieldValue>TR</controllingFieldValue>
+                <controllingFieldValue>FR</controllingFieldValue>
+                <controllingFieldValue>UK</controllingFieldValue>
+                <controllingFieldValue>DE</controllingFieldValue>
+                <controllingFieldValue>US</controllingFieldValue>
+                <controllingFieldValue>GR</controllingFieldValue>
+                <controllingFieldValue>VE</controllingFieldValue>
+                <controllingFieldValue>HU</controllingFieldValue>
+                <controllingFieldValue>VN</controllingFieldValue>
+                <controllingFieldValue>IT</controllingFieldValue>
+                <controllingFieldValue>PC</controllingFieldValue>
+                <controllingFieldValue>JP</controllingFieldValue>
+                <controllingFieldValue>LB</controllingFieldValue>
+                <controllingFieldValue>BE</controllingFieldValue>
+                <controllingFieldValue>BENELUX</controllingFieldValue>
+                <controllingFieldValue>AR</controllingFieldValue>
+                <controllingFieldValue>AT</controllingFieldValue>
+                <controllingFieldValue>BR</controllingFieldValue>
+                <controllingFieldValue>BG</controllingFieldValue>
+                <controllingFieldValue>CL</controllingFieldValue>
+                <controllingFieldValue>CN</controllingFieldValue>
+                <controllingFieldValue>CO</controllingFieldValue>
+                <controllingFieldValue>UTA</controllingFieldValue>
+                <controllingFieldValue>CEN</controllingFieldValue>
+                <controllingFieldValue>MY</controllingFieldValue>
+                <controllingFieldValue>MX</controllingFieldValue>
+                <valueName>Consumer price index</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BENELUX</controllingFieldValue>
+                <valueName>Agoria price index</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_InvoicingFrequency2__c</fullName>
+        <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;Per Order&apos;,&apos;&apos;)</defaultValue>
+        <label>Invoicing Frequency</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Invoicing_Frequency</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Last_date_of_Sync__c</fullName>
+        <label>Last date of Sync</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Last_Order_Date__c</fullName>
+        <label>Last order date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Loads_Per_Year__c</fullName>
+        <description>Number of loads per year as indicated on the opportunity</description>
+        <label>Loads Per Year</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>9</fullName>
+                    <default>false</default>
+                    <label>9</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+                <value>
+                    <fullName>11</fullName>
+                    <default>false</default>
+                    <label>11</label>
+                </value>
+                <value>
+                    <fullName>12</fullName>
+                    <default>false</default>
+                    <label>12</label>
+                </value>
+                <value>
+                    <fullName>Occasionally</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Occasionally</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_MDMId__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>MDM ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Offline__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Flag Activated/Terminated Contract W/O Synchronization.</description>
+        <label>Offline</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Onboarding_Method__c</fullName>
+        <label>Onboarding Method</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>OSS</fullName>
+                    <default>false</default>
+                    <label>OSS</label>
+                </value>
+                <value>
+                    <fullName>Hybrid</fullName>
+                    <default>false</default>
+                    <label>Hybrid</label>
+                </value>
+                <value>
+                    <fullName>Explicit Only</fullName>
+                    <default>false</default>
+                    <label>Explicit Only</label>
+                </value>
+                <value>
+                    <fullName>Manual</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Manual</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_OppIndexation2__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Do not apply Indexation</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_OpportunityId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Original_Agreement__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Original Agreement</label>
+        <referenceTo>Contract</referenceTo>
+        <relationshipLabel>Related contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Paper_Operational_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Paper Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_PaymentMethod2__c</fullName>
+        <label>Payment Method</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Payment_Method</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_PaymentTerms2__c</fullName>
+        <label>Payment Terms</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Payment_Terms</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Potential_Attrition__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To register that a decrease or absence in ordering has been reported.</description>
+        <label>Potential Attrition</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Program_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Program Name</label>
+        <length>60</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_QuoteId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Quote</label>
+        <referenceTo>Quote</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_ReimbursementTerm2__c</fullName>
+        <label>Reimbursement Term</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Reimbursement_Term</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_SEPA_Bank_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>SEPA Bank Account</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>The related bank account must have SEPA active checked</errorMessage>
+            <filterItems>
+                <field>ER_Bank_Account__c.ER_SEPA_active__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ER_Bank_Account__c</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_SmartER_Context__c</fullName>
+        <formula>ER_OpportunityId__r.ER_SmartER_Context__c</formula>
+        <label>SmartER Context</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ER_Solutions__c</fullName>
+        <externalId>false</externalId>
+        <label>Solutions</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Start_Date__c</fullName>
+        <label>Onboarding Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Sync_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_TCs_Signed_Link__c</fullName>
+        <label>T&amp;Cs Signed Link</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>ER_Terminated_Date__c</fullName>
+        <label>Terminated Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Termination_date_in_OS__c</fullName>
+        <label>Termination date in OS</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_TerminationReason__c</fullName>
+        <label>Termination Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bankruptcy / Closure</fullName>
+                    <default>false</default>
+                    <label>Bankruptcy / Closure</label>
+                </value>
+                <value>
+                    <fullName>Amendment</fullName>
+                    <default>false</default>
+                    <label>Amendment</label>
+                </value>
+                <value>
+                    <fullName>Lost to direct competition</fullName>
+                    <default>false</default>
+                    <label>Lost to direct competition</label>
+                </value>
+                <value>
+                    <fullName>Termination for legal reasons</fullName>
+                    <default>false</default>
+                    <label>Termination for legal reasons</label>
+                </value>
+                <value>
+                    <fullName>Quality of service</fullName>
+                    <default>false</default>
+                    <label>Quality of service</label>
+                </value>
+                <value>
+                    <fullName>Costs</fullName>
+                    <default>false</default>
+                    <label>Costs</label>
+                </value>
+                <value>
+                    <fullName>Not Interested anymore</fullName>
+                    <default>false</default>
+                    <label>Not Interested anymore</label>
+                </value>
+                <value>
+                    <fullName>Internal issues at client</fullName>
+                    <default>false</default>
+                    <label>Internal issues at client</label>
+                </value>
+                <value>
+                    <fullName>Product no longer fits needs</fullName>
+                    <default>false</default>
+                    <label>Product no longer fits needs</label>
+                </value>
+                <value>
+                    <fullName>Lost to indirect competition</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Lost to indirect competition</label>
+                </value>
+                <value>
+                    <fullName>Lost to internal competition</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Lost to internal competition</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Scheduled end date</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Scheduled end date</label>
+                </value>
+                <value>
+                    <fullName>To little volume</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>To little volume</label>
+                </value>
+                <value>
+                    <fullName>Transformation of the company</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Transformation of the company</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>ER_OpportunityId__r.RecordType.Name</formula>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Validity_channel__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(ER_OpportunityId__r.ER_Validity_channel__c)</formula>
+        <label>Validity channel</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Validity_Period__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(ER_OpportunityId__r.ER_Validity_Period__c)</formula>
+        <label>Validity Period</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_VAT__c</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <label>VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ER_WS_Message__c</fullName>
+        <externalId>false</externalId>
+        <label>Sync Message</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_WS_Message_Long__c</fullName>
+        <label>Sync Message</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ER_WS_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(ER_WS_StatusCode__c,
+            &quot;synchronized&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Success_Img.png&quot;, &quot;Success&quot;,40,40),
+            &quot;not_synchronized&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Error_Img.png&quot;, &quot;Error&quot;,40,40),
+            &quot;3&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Warning_Img.png&quot;, &quot;Warning&quot;,40,40),
+            &quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sync Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_WS_StatusCode__c</fullName>
+        <label>Sync Status Code</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>synchronized</fullName>
+                    <default>false</default>
+                    <label>Synchronized</label>
+                </value>
+                <value>
+                    <fullName>not_synchronized</fullName>
+                    <default>false</default>
+                    <label>Not Synchronized</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>pending_synchronization</fullName>
+                    <default>false</default>
+                    <label>Pending Synchronization</label>
+                </value>
+                <value>
+                    <fullName>Not Valid</fullName>
+                    <default>false</default>
+                    <label>Not Valid</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_ZuoraQuote__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Zuora Quote</label>
+        <referenceTo>zqu__Quote__c</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ERBE_Invoicing_day_of_week__c</fullName>
+        <label>Invoicing day of week</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Monday</fullName>
+                    <default>false</default>
+                    <label>Monday</label>
+                </value>
+                <value>
+                    <fullName>Tuesday</fullName>
+                    <default>false</default>
+                    <label>Tuesday</label>
+                </value>
+                <value>
+                    <fullName>Wednesday</fullName>
+                    <default>false</default>
+                    <label>Wednesday</label>
+                </value>
+                <value>
+                    <fullName>Thursday</fullName>
+                    <default>false</default>
+                    <label>Thursday</label>
+                </value>
+                <value>
+                    <fullName>Friday</fullName>
+                    <default>false</default>
+                    <label>Friday</label>
+                </value>
+                <value>
+                    <fullName>Saturday</fullName>
+                    <default>false</default>
+                    <label>Saturday</label>
+                </value>
+                <value>
+                    <fullName>Sunday</fullName>
+                    <default>false</default>
+                    <label>Sunday</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ERBE_Invoicing_Payment_Delay__c</fullName>
+        <label>Invoicing Payment Delay</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>14</fullName>
+                    <default>false</default>
+                    <label>14</label>
+                </value>
+                <value>
+                    <fullName>30</fullName>
+                    <default>false</default>
+                    <label>30</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ERBE_Invoicing_Support__c</fullName>
+        <label>Invoicing Support</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ERBE_Invoicing_Support</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ERBE_Reimbursement_Statement_Frequency__c</fullName>
+        <label>Reimbursement Statement Frequency</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ERBE_Reimbursement_Statement_Frequency</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ERBE_Reimbursement_statement_Support__c</fullName>
+        <label>Reimbursement statement Support</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ERBE_Reimbursement_Statement_Support</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ERBE_Weekly_Frequence__c</fullName>
+        <label>Weekly frequence</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Impacted_Beneficiaries__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(ER_OpportunityId__r.Impacted_Beneficiaries__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Impacted Beneficiaries</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Locked__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Locked</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Legacy_Catalogue__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Legacy Catalogue</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>NEMO_Sync_Pending__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>NEMO Sync Pending</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Benefit_Lines__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines the number of lines on this contract that are from the Benefit category of solution.</inlineHelpText>
+        <label>Number of Benefit Lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Savings_Line__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines the number of lines on this contract that are from the Savings or Edenred Engagement category of solution</inlineHelpText>
+        <label>Number of Savings Line</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Offer_Validity_End_Date__c</fullName>
+        <label>Offer Validity End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Onboarding_Method__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(ER_OpportunityId__r.Onboarding_Method__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Onboarding Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Order_Frequency__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the frequency, in months, at which the customer typically places orders</inlineHelpText>
+        <label>Order Frequency</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerExpirationNotice</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <complianceGroup>PII;GDPR</complianceGroup>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Primary Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Contracts (Primary Contact)</relationshipLabel>
+        <relationshipName>Contracts1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Program_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>ER_OpportunityId__r.Program_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Program Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_Individual__c</fullName>
+        <label>Shipping Individual</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>La Poste - 3 days</fullName>
+                    <default>false</default>
+                    <label>La Poste - 3 days</label>
+                </value>
+                <value>
+                    <fullName>La Poste - 4 days</fullName>
+                    <default>false</default>
+                    <label>La Poste - 4 days</label>
+                </value>
+                <value>
+                    <fullName>La Poste - 7 days</fullName>
+                    <default>false</default>
+                    <label>La Poste - 7 days</label>
+                </value>
+                <value>
+                    <fullName>La Poste - 10 days</fullName>
+                    <default>false</default>
+                    <label>La Poste - 10 days</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ShippingAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>SK_Credit_Note_Frequency2__c</fullName>
+        <label>Credit Note Frequency</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>monthly</fullName>
+                    <default>false</default>
+                    <label>monthly</label>
+                </value>
+                <value>
+                    <fullName>quarterly</fullName>
+                    <default>false</default>
+                    <label>quarterly</label>
+                </value>
+                <value>
+                    <fullName>yearly</fullName>
+                    <default>false</default>
+                    <label>yearly</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SK_Payment_Terms_Voucher2__c</fullName>
+        <label>Payment Terms Voucher</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+                <value>
+                    <fullName>13</fullName>
+                    <default>false</default>
+                    <label>13</label>
+                </value>
+                <value>
+                    <fullName>14</fullName>
+                    <default>false</default>
+                    <label>14</label>
+                </value>
+                <value>
+                    <fullName>15</fullName>
+                    <default>false</default>
+                    <label>15</label>
+                </value>
+                <value>
+                    <fullName>18</fullName>
+                    <default>false</default>
+                    <label>18</label>
+                </value>
+                <value>
+                    <fullName>20</fullName>
+                    <default>false</default>
+                    <label>20</label>
+                </value>
+                <value>
+                    <fullName>21</fullName>
+                    <default>false</default>
+                    <label>21</label>
+                </value>
+                <value>
+                    <fullName>24</fullName>
+                    <default>false</default>
+                    <label>24</label>
+                </value>
+                <value>
+                    <fullName>25</fullName>
+                    <default>false</default>
+                    <label>25</label>
+                </value>
+                <value>
+                    <fullName>27</fullName>
+                    <default>false</default>
+                    <label>27</label>
+                </value>
+                <value>
+                    <fullName>28</fullName>
+                    <default>false</default>
+                    <label>28</label>
+                </value>
+                <value>
+                    <fullName>30</fullName>
+                    <default>false</default>
+                    <label>30</label>
+                </value>
+                <value>
+                    <fullName>34</fullName>
+                    <default>false</default>
+                    <label>34</label>
+                </value>
+                <value>
+                    <fullName>35</fullName>
+                    <default>false</default>
+                    <label>35</label>
+                </value>
+                <value>
+                    <fullName>40</fullName>
+                    <default>false</default>
+                    <label>40</label>
+                </value>
+                <value>
+                    <fullName>45</fullName>
+                    <default>false</default>
+                    <label>45</label>
+                </value>
+                <value>
+                    <fullName>50</fullName>
+                    <default>false</default>
+                    <label>50</label>
+                </value>
+                <value>
+                    <fullName>55</fullName>
+                    <default>false</default>
+                    <label>55</label>
+                </value>
+                <value>
+                    <fullName>60</fullName>
+                    <default>false</default>
+                    <label>60</label>
+                </value>
+                <value>
+                    <fullName>65</fullName>
+                    <default>false</default>
+                    <label>65</label>
+                </value>
+                <value>
+                    <fullName>70</fullName>
+                    <default>false</default>
+                    <label>70</label>
+                </value>
+                <value>
+                    <fullName>80</fullName>
+                    <default>false</default>
+                    <label>80</label>
+                </value>
+                <value>
+                    <fullName>90</fullName>
+                    <default>false</default>
+                    <label>90</label>
+                </value>
+                <value>
+                    <fullName>100</fullName>
+                    <default>false</default>
+                    <label>100</label>
+                </value>
+                <value>
+                    <fullName>120</fullName>
+                    <default>false</default>
+                    <label>120</label>
+                </value>
+                <value>
+                    <fullName>197</fullName>
+                    <default>false</default>
+                    <label>197</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SpecialTerms</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <formula>ER_OpportunityId__r.Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Onboarding Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StartDate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subscription__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Subscription</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.AccountId</field>
+                <operation>equals</operation>
+                <valueField>Zuora__Subscription__c.Zuora__Account__r.Id</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Zuora__Subscription__c</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Termination_Sub_Reason__c</fullName>
+        <label>Termination Sub-Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ER_TerminationReason__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Monizze</fullName>
+                    <default>false</default>
+                    <label>Monizze</label>
+                </value>
+                <value>
+                    <fullName>Pluxee</fullName>
+                    <default>false</default>
+                    <label>Pluxee</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Lost to direct competition</controllingFieldValue>
+                <valueName>Monizze</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lost to direct competition</controllingFieldValue>
+                <valueName>Pluxee</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Lost to direct competition</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Validated_by_Engagement_Manager__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Validated by Engagement Manager</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <listViews>
+        <fullName>AllActivatedContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>ER_Solutions__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>A</value>
+        </filters>
+        <label>All Activated Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>ER_Solutions__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllDraftContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>CONTRACT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>ER_Solutions__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>D</value>
+        </filters>
+        <filters>
+            <field>PRICEBOOK2.Name</field>
+            <operation>notContain</operation>
+            <value>EKIVITA</value>
+        </filters>
+        <label>All Draft Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInApprovalContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>P</value>
+        </filters>
+        <label>All In Approval Contracts</label>
+        <sharedTo>
+            <role>CEO</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ENGAGEMENT</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Contract_Category__c</field>
+            <operation>contains</operation>
+            <value>Engagement</value>
+        </filters>
+        <label>ENGAGEMENT</label>
+    </listViews>
+    <listViews>
+        <fullName>MyActivatedContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>A</value>
+        </filters>
+        <label>My Activated Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyDraftContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>D</value>
+        </filters>
+        <filters>
+            <field>PRICEBOOK2.Name</field>
+            <operation>notContain</operation>
+            <value>EKIVITA</value>
+        </filters>
+        <label>My Draft Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyInApprovalContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>ER_Contract_Type__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>P</value>
+        </filters>
+        <label>My In Approval Contracts</label>
+    </listViews>
+    <recordTypes>
+        <fullName>ER_Client_Contract_RT</fullName>
+        <active>true</active>
+        <label>Client</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Card_Replacement_Payment__c</picklist>
+            <values>
+                <fullName>Paid by beneficiary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid by customer</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Creditting__c</picklist>
+            <values>
+                <fullName>Credit 1 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit 2 day</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Credit 3 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit 4 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit Express</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_Payment_Delay__c</picklist>
+            <values>
+                <fullName>14</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_Support__c</picklist>
+            <values>
+                <fullName>E-Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_day_of_week__c</picklist>
+            <values>
+                <fullName>Friday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Saturday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sunday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Thursday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tuesday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wednesday</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Reimbursement_Statement_Frequency__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Friday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Monday</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Weekly Saturday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Sunday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Thursday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Tuesday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Wednesday</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Reimbursement_statement_Support__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Weekly_Frequence__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_BUPicklist__c</picklist>
+            <values>
+                <fullName>AE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BENELUX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CEN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>US</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VN</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_CategoryUser__c</picklist>
+            <values>
+                <fullName>Delight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edenred users</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RH</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Contract_Duration__c</picklist>
+            <values>
+                <fullName>1 year</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evergreen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Delivery_Type__c</picklist>
+            <values>
+                <fullName>Bulk</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Individual</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Impacted_Beneficiaries__c</picklist>
+            <values>
+                <fullName>All</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Beneficiary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TRE Only</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Indexation_Index2__c</picklist>
+            <values>
+                <fullName>Agoria price index</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consumer price index</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_InvoicingFrequency2__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yearly</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Loads_Per_Year__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Onboarding_Method__c</picklist>
+            <values>
+                <fullName>Explicit Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hybrid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OSS</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_PaymentMethod2__c</picklist>
+            <values>
+                <fullName>Bank transfer</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Direct debit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_PaymentTerms2__c</picklist>
+            <values>
+                <fullName>10 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>100 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>21 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>50 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>At reception of invoice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-paid</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_ReimbursementTerm2__c</picklist>
+            <values>
+                <fullName>10 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7 days</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_TerminationReason__c</picklist>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bankruptcy %2F Closure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Costs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal issues at client</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lost to direct competition</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Interested anymore</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product no longer fits needs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quality of service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termination for legal reasons</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_WS_StatusCode__c</picklist>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Valid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>not_synchronized</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pending_synchronization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>synchronized</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Eligible_Employees__c</picklist>
+            <values>
+                <fullName>All product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TRE only</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SK_Credit_Note_Frequency2__c</picklist>
+            <values>
+                <fullName>monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>quarterly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SK_Payment_Terms_Voucher2__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>100</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>197</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>21</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>24</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>27</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>28</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>34</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>35</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>40</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>50</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>55</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>65</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>70</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>80</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Shipping_Individual__c</picklist>
+            <values>
+                <fullName>La Poste - 10 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 3 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 4 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 7 days</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Activated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Termination</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Termination_Sub_Reason__c</picklist>
+            <values>
+                <fullName>Monizze</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pluxee</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ER_Merchant_Contract_RT</fullName>
+        <active>true</active>
+        <label>Merchant</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Card_Replacement_Payment__c</picklist>
+            <values>
+                <fullName>Paid by beneficiary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid by customer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Creditting__c</picklist>
+            <values>
+                <fullName>Credit 1 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit 2 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit 3 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit 4 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit Express</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_Payment_Delay__c</picklist>
+            <values>
+                <fullName>14</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_Support__c</picklist>
+            <values>
+                <fullName>E-Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Invoicing_day_of_week__c</picklist>
+            <values>
+                <fullName>Friday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Saturday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sunday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Thursday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tuesday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wednesday</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Reimbursement_Statement_Frequency__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Friday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Monday</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Weekly Saturday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Sunday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Thursday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Tuesday</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly Wednesday</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Reimbursement_statement_Support__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ERBE_Weekly_Frequence__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_BUPicklist__c</picklist>
+            <values>
+                <fullName>AE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BENELUX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CEN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>US</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VN</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_CategoryUser__c</picklist>
+            <values>
+                <fullName>Delight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edenred users</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RH</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Contract_Duration__c</picklist>
+            <values>
+                <fullName>1 year</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6 Years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evergreen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Delivery_Type__c</picklist>
+            <values>
+                <fullName>Bulk</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Individual</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Impacted_Beneficiaries__c</picklist>
+            <values>
+                <fullName>All</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TRE Only</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Indexation_Index2__c</picklist>
+            <values>
+                <fullName>Agoria price index</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consumer price index</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_InvoicingFrequency2__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Loads_Per_Year__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Onboarding_Method__c</picklist>
+            <values>
+                <fullName>Hybrid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OSS</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_PaymentMethod2__c</picklist>
+            <values>
+                <fullName>Bank transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct debit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_PaymentTerms2__c</picklist>
+            <values>
+                <fullName>1 day after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>100 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>21 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>24 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>25 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>27 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>32 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>35 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>40 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>42 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>50 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>55 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>70 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>75 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90 days after invoice issuance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>At reception of invoice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-paid</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_ReimbursementTerm2__c</picklist>
+            <values>
+                <fullName>0 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1 day</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>22 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7 days</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_TerminationReason__c</picklist>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bankruptcy %2F Closure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Costs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal issues at client</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lost to direct competition</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Interested anymore</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product no longer fits needs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quality of service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termination for legal reasons</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_WS_StatusCode__c</picklist>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Valid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>not_synchronized</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pending_synchronization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>synchronized</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Eligible_Employees__c</picklist>
+            <values>
+                <fullName>All product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TRE only</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SK_Credit_Note_Frequency2__c</picklist>
+            <values>
+                <fullName>monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>quarterly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SK_Payment_Terms_Voucher2__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>100</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>197</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>21</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>24</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>27</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>28</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>34</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>35</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>40</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>50</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>55</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>65</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>70</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>80</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Shipping_Individual__c</picklist>
+            <values>
+                <fullName>La Poste - 10 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 3 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 4 days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>La Poste - 7 days</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Activated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Termination</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Termination_Sub_Reason__c</picklist>
+            <values>
+                <fullName>Monizze</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pluxee</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <validationRules>
+        <fullName>Blocking_Engagement_Fields</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Status, &quot;Activated&quot;),
+    NOT($User.ER_BypassVR__c),
+    CONTAINS(Pricebook2.Name , &quot;Engagement&quot;),
+    OR(
+        ISCHANGED( ER_Customer_Domain__c ),
+        ISCHANGED( ER_Onboarding_Method__c ),
+        ISCHANGED( ER_Program_Name__c ),
+        ISCHANGED(  ER_InvoicingFrequency2__c ),
+        ISCHANGED(  Legacy_Catalogue__c ),
+        ISCHANGED(   ER_Impacted_Beneficiaries__c ),
+        ISCHANGED(    ER_Start_Date__c )
+    )
+)</errorConditionFormula>
+        <errorMessage>You are not allowed to change this field as the Contract is Activated</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Customer_Domain</fullName>
+        <active>true</active>
+        <description>it must contain letters and/or digits only
+its length must be between 3 and 100 characters</description>
+        <errorConditionFormula>AND(
+
+Not(Isnew()),
+NOT($User.ER_BypassVR__c),
+CONTAINS(Pricebook2.Name, &apos;Engagement&apos;),	
+	NOT(ISBLANK(ER_Customer_Domain__c)),
+NOT(
+  AND(
+    
+    LEN(ER_Customer_Domain__c) &gt;= 3,
+    LEN(ER_Customer_Domain__c) &lt;= 100,
+    NOT(
+      REGEX(
+        ER_Customer_Domain__c,
+        &quot;.*([/&apos;().: _$&amp;#@! é§èç{}à%ùäëüï]|\\[|\\]).*&quot;
+      )
+    )
+  )
+))</errorConditionFormula>
+        <errorDisplayField>ER_Customer_Domain__c</errorDisplayField>
+        <errorMessage>&quot;Customer Domain contains invalid characters. The following characters are not allowed: / &apos; . ( ) [ ] : _ $ &amp; # @ ! (space) é § è ç { } à % ù ä ë ü ï. The value must be between 3 and 100 characters.&quot;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>CustomerDomainRequiredforEngagement</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+ NOT(isnew()),
+  NOT($User.ER_BypassVR__c),
+  CONTAINS( Pricebook2.Name , &apos;Engagement&apos;),
+  NOT(ISPICKVAL(Status, &quot;Draft&quot;)),
+  NOT(ISPICKVAL(Status, &quot;Terminated&quot;)),
+  OR(
+    ISBLANK(ER_Customer_Domain__c),
+    ISBLANK(ER_Program_Name__c)
+  )
+)</errorConditionFormula>
+        <errorMessage>Customer Domain and/or Program Name is required when the opportunity is for Engagement. Please select a value before proceeding.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ImpactedBeneficiaries_Req_OSS_H_Contract</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+				CONTAINS(Pricebook2.Name , &apos;Engagement&apos;), 
+
+    OR(
+        ISPICKVAL(ER_Onboarding_Method__c, &quot;OSS&quot;),
+        ISPICKVAL(ER_Onboarding_Method__c, &quot;Hybrid&quot;)
+    ),
+
+    ISBLANK(TEXT(ER_Impacted_Beneficiaries__c))
+)</errorConditionFormula>
+        <errorMessage>Impacted Beneficiaries is required when Onboarding Method is OSS or Hybrid.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>OnboardingMethodReqEngagementContract</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+
+    ISBLANK(TEXT(ER_Onboarding_Method__c)),
+
+    CONTAINS(ER_OpportunityId__r.Pricebook2.Name, &quot;Engagement&quot;),
+
+    NOT(
+        ISPICKVAL(ER_OpportunityId__r.StageName, &quot;Qualification&quot;) ||
+        ISPICKVAL(ER_OpportunityId__r.StageName, &quot;Need Analysis&quot;)
+    )
+)</errorConditionFormula>
+        <errorMessage>Please select an Onboarding Method before saving this Contract.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Invalid_Beneficiary_Selection</fullName>
+        <active>true</active>
+        <errorConditionFormula>And (
+			NOT($User.ER_BypassVR__c),
+				CONTAINS(Pricebook2.Name , &apos;Engagement&apos;),
+AND(
+				
+    ISPICKVAL( ER_Onboarding_Method__c , &quot;Explicit Only&quot;),
+    OR(
+       ISPICKVAL( ER_Impacted_Beneficiaries__c  , &quot;All&quot;),
+        ISPICKVAL( ER_Impacted_Beneficiaries__c  , &quot;TRE Only&quot;)
+    )
+))</errorConditionFormula>
+        <errorDisplayField>ER_Impacted_Beneficiaries__c</errorDisplayField>
+        <errorMessage>You cannot select &apos;All&apos; or &apos;TRE Only&apos; for Impacted Beneficiaries when the Onboarding Method is set to &apos;Explicit Only.&apos; Please choose a different option.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE01_PreventChange</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            ISPICKVAL( $User.ER_Business_Unit__c, &apos;BENELUX&apos;),
+            OR( $Profile.Name = &apos;Client Sales&apos;,
+            $Profile.Name = &apos;Marketing&apos;
+            )
+            )</errorConditionFormula>
+        <errorMessage>You are not able to modify</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER01_ActiveContractStartDate</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            ISPICKVAL(Status,&apos;Activated&apos;),
+            ISCHANGED(StartDate)
+            )</errorConditionFormula>
+        <errorMessage>You cannot change the Start Date when the contract is Activated.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER02_ContractStatus</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ISCHANGED(Status)
+            &amp;&amp; ((ISPICKVAL(Status, &apos;Terminated&apos;) &amp;&amp; (ISBLANK(ER_Terminated_Date__c)))
+            || (ISPICKVAL(Status, &apos;Activated&apos;) &amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status), &apos;Draft&apos;)))
+            || (ISPICKVAL(Status, &apos;Pending Termination&apos;) &amp;&amp; (NOT(ISPICKVAL(PRIORVALUE(Status), &apos;Activated&apos;))))
+            )</errorConditionFormula>
+        <errorMessage>You cannot perform this Action</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER03_ContractEndDate</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            ISCHANGED(EndDate),
+            NOT(ISBLANK(EndDate)),
+            EndDate &lt;  StartDate
+            )</errorConditionFormula>
+        <errorMessage>The end date cannot be before the start date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER04_TerminationReasonMandatory</fullName>
+        <active>true</active>
+        <description>Mandatory when Contract End Date is not empty</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISBLANK(TEXT(ER_TerminationReason__c))
+&amp;&amp; NOT(ISBLANK(EndDate))
+&amp;&amp; ER_Contract_Type__c != &apos;Framework agreement&apos;</errorConditionFormula>
+        <errorMessage>Please Capture the Termination Reason</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER05_Credit_Limit_Mandatory</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+            NOT($User.ER_BypassVR__c),
+            $RecordType.Name = &apos;Client Opportunity&apos;,
+            ISBLANK(TEXT( ER_Credit_Limit2__c )),
+            AND(NOT(ISBLANK( TEXT(ER_PaymentTerms2__c) )),
+            NOT(TEXT(ER_PaymentTerms2__c)=&apos;Pre-paid&apos;))
+            )</errorConditionFormula>
+        <errorMessage>The field Credit Limit must be filled.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER06_Prevent_Changing_Contract_Name</fullName>
+        <active>false</active>
+        <description>Prevent changing the Contract Name</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp;  ISCHANGED( Name )</errorConditionFormula>
+        <errorMessage>You cannot change the Contract Name</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER07_PreventChangingTerminationEndDate</fullName>
+        <active>false</active>
+        <description>Prevent changing the end date of a terminated contract</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; (ISPICKVAL(Status, &apos;Pending Termination&apos;) || ISPICKVAL(Status, &apos;Terminated&apos;))
+            &amp;&amp; ISCHANGED(EndDate)
+            &amp;&amp; NOT(ISBLANK(PRIORVALUE(EndDate)))</errorConditionFormula>
+        <errorMessage>You cannot change the End Date when the contract is Pending Termination or Terminated.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Bulk_Contract_Activation</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Bulk Contract Activation</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/flow/Bulk_Contract_Activation?retURL=/lightning/o/Contract/list</url>
+    </webLinks>
+</CustomObject>

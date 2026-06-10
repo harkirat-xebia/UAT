@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Raison sociale</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Noms du compte</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>account_name</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Origine du compte</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>account_source</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Adresse du compte</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_address_account</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Ville</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_city_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Pays</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_country_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Région/Province</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_state_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Rue</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_street_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Code postal</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>billing_zip_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Fax</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>fax_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Compte parent</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Compte parent</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>parent_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+</CustomObjectTranslation>

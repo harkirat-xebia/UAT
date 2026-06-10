@@ -1,0 +1,28 @@
+.div-logo {
+  width: 90%;
+  margin-left: 1rem;
+  padding-top: 1rem;
+}
+
+.div-lang {
+  width: 10%;
+  float: right;
+  padding-top: 0.5rem;
+}
+
+.select-lang {
+  border: 0px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.hr-header {
+  margin: 1rem 0;
+}
+
+/* ----------------- MEDIA QUERIES ----------------- */
+@media screen and (max-width: 768px) {
+  .div-logo {
+    width: 76%;
+  }
+}

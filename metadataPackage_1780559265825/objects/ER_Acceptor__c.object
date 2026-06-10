@@ -1,0 +1,3383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Acceptor_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>ER_Acceptor_Compact_Layout</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Acceptor</label>
+    <nameField>
+        <label>Acceptor Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Acceptors</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <searchLayouts></searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayouts>
+        <fullName>ER_Acceptor_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>ER_Store__c</fields>
+        <fields>ER_Acceptor_Type__c</fields>
+        <fields>ER_Status__c</fields>
+        <fields>ER_Sync_result__c</fields>
+        <fields>ER_Card_Operational_System_ID__c</fields>
+        <label>Acceptor Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>Aggregator_Store__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Aggregator Store</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>ER_Store__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Store_Aggregator</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ER_Store__c</referenceTo>
+        <relationshipLabel>Virtual Acceptors</relationshipLabel>
+        <relationshipName>VirtualAcceptors</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BE_Terminal_Provider__c</fullName>
+        <description>Terminal Provider</description>
+        <label>Terminal Provider</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Adyen</fullName>
+                    <default>false</default>
+                    <label>Adyen</label>
+                </value>
+                <value>
+                    <fullName>Atos-Worldline</fullName>
+                    <default>false</default>
+                    <label>Atos-Worldline</label>
+                </value>
+                <value>
+                    <fullName>AXEPTA</fullName>
+                    <default>false</default>
+                    <label>AXEPTA</label>
+                </value>
+                <value>
+                    <fullName>Bepax-Paynation</fullName>
+                    <default>false</default>
+                    <label>Bepax-Paynation</label>
+                </value>
+                <value>
+                    <fullName>Bevo</fullName>
+                    <default>false</default>
+                    <label>Bevo</label>
+                </value>
+                <value>
+                    <fullName>CCV</fullName>
+                    <default>false</default>
+                    <label>CCV</label>
+                </value>
+                <value>
+                    <fullName>Chess</fullName>
+                    <default>false</default>
+                    <label>Chess</label>
+                </value>
+                <value>
+                    <fullName>Easy Payments</fullName>
+                    <default>false</default>
+                    <label>Easy Payments</label>
+                </value>
+                <value>
+                    <fullName>European merchant services</fullName>
+                    <default>false</default>
+                    <label>European merchant services</label>
+                </value>
+                <value>
+                    <fullName>Hypercom/BS Cards</fullName>
+                    <default>false</default>
+                    <label>Hypercom/BS Cards</label>
+                </value>
+                <value>
+                    <fullName>Ingenico Payment Services</fullName>
+                    <default>false</default>
+                    <label>Ingenico Payment Services</label>
+                </value>
+                <value>
+                    <fullName>Keyware</fullName>
+                    <default>false</default>
+                    <label>Keyware</label>
+                </value>
+                <value>
+                    <fullName>Loyaltek</fullName>
+                    <default>false</default>
+                    <label>Loyaltek</label>
+                </value>
+                <value>
+                    <fullName>N-TS</fullName>
+                    <default>false</default>
+                    <label>N-TS</label>
+                </value>
+                <value>
+                    <fullName>Payleven</fullName>
+                    <default>false</default>
+                    <label>Payleven</label>
+                </value>
+                <value>
+                    <fullName>Payment Consulting</fullName>
+                    <default>false</default>
+                    <label>Payment Consulting</label>
+                </value>
+                <value>
+                    <fullName>Payworld</fullName>
+                    <default>false</default>
+                    <label>Payworld</label>
+                </value>
+                <value>
+                    <fullName>Sepay</fullName>
+                    <default>false</default>
+                    <label>Sepay</label>
+                </value>
+                <value>
+                    <fullName>SIX - Carrefour</fullName>
+                    <default>false</default>
+                    <label>SIX - Carrefour</label>
+                </value>
+                <value>
+                    <fullName>Six Payments</fullName>
+                    <default>false</default>
+                    <label>Six Payments</label>
+                </value>
+                <value>
+                    <fullName>Six Payments - BNP</fullName>
+                    <default>false</default>
+                    <label>Six Payments - BNP</label>
+                </value>
+                <value>
+                    <fullName>SUM UP</fullName>
+                    <default>false</default>
+                    <label>SUM UP</label>
+                </value>
+                <value>
+                    <fullName>Viva Wallet</fullName>
+                    <default>false</default>
+                    <label>Viva Wallet</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Acceptor_Model__c</fullName>
+        <label>Acceptor Model</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ER_Acceptor_Provider__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>8000</fullName>
+                    <default>false</default>
+                    <label>8000</label>
+                </value>
+                <value>
+                    <fullName>8210</fullName>
+                    <default>false</default>
+                    <label>8210</label>
+                </value>
+                <value>
+                    <fullName>CZAM/XENTA-M1</fullName>
+                    <default>false</default>
+                    <label>CZAM/XENTA-M1</label>
+                </value>
+                <value>
+                    <fullName>CZAM/XENTA-M2</fullName>
+                    <default>false</default>
+                    <label>CZAM/XENTA-M2</label>
+                </value>
+                <value>
+                    <fullName>E 265</fullName>
+                    <default>false</default>
+                    <label>E 265</label>
+                </value>
+                <value>
+                    <fullName>INGENICO Desk</fullName>
+                    <default>false</default>
+                    <label>INGENICO Desk</label>
+                </value>
+                <value>
+                    <fullName>INGENICO ICT 220</fullName>
+                    <default>false</default>
+                    <label>INGENICO ICT 220</label>
+                </value>
+                <value>
+                    <fullName>INGENICO ICT220 (inactive value)</fullName>
+                    <default>false</default>
+                    <label>INGENICO ICT220 (inactive value)</label>
+                </value>
+                <value>
+                    <fullName>INGENICO ICT 250</fullName>
+                    <default>false</default>
+                    <label>INGENICO ICT 250</label>
+                </value>
+                <value>
+                    <fullName>INGENICO IPP 310</fullName>
+                    <default>false</default>
+                    <label>INGENICO IPP 310</label>
+                </value>
+                <value>
+                    <fullName>INGENICO IPP310 (inactive value)</fullName>
+                    <default>false</default>
+                    <label>INGENICO IPP310 (inactive value)</label>
+                </value>
+                <value>
+                    <fullName>INGENICO IPP 350</fullName>
+                    <default>false</default>
+                    <label>INGENICO IPP 350</label>
+                </value>
+                <value>
+                    <fullName>INGENICO IUP 250</fullName>
+                    <default>false</default>
+                    <label>INGENICO IUP 250</label>
+                </value>
+                <value>
+                    <fullName>INGENICO IWL 250</fullName>
+                    <default>false</default>
+                    <label>INGENICO IWL 250</label>
+                </value>
+                <value>
+                    <fullName>INGENICO Move 500</fullName>
+                    <default>false</default>
+                    <label>INGENICO Move 500</label>
+                </value>
+                <value>
+                    <fullName>LAN 500</fullName>
+                    <default>false</default>
+                    <label>LAN 500</label>
+                </value>
+                <value>
+                    <fullName>OPTIMUM M4320</fullName>
+                    <default>false</default>
+                    <label>OPTIMUM M4320</label>
+                </value>
+                <value>
+                    <fullName>OPTIMUM SERIES</fullName>
+                    <default>false</default>
+                    <label>OPTIMUM SERIES</label>
+                </value>
+                <value>
+                    <fullName>OPTIMUM T4220</fullName>
+                    <default>false</default>
+                    <label>OPTIMUM T4220</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>PAX_A80</fullName>
+                    <default>false</default>
+                    <label>PAX_A80</label>
+                </value>
+                <value>
+                    <fullName>PAX_A920_PRO</fullName>
+                    <default>false</default>
+                    <label>PAX_A920_PRO</label>
+                </value>
+                <value>
+                    <fullName>PAX A910</fullName>
+                    <default>false</default>
+                    <label>PAX A910</label>
+                </value>
+                <value>
+                    <fullName>PAY4YOU GPRS</fullName>
+                    <default>false</default>
+                    <label>PAY4YOU GPRS</label>
+                </value>
+                <value>
+                    <fullName>S800</fullName>
+                    <default>false</default>
+                    <label>S800</label>
+                </value>
+                <value>
+                    <fullName>S900</fullName>
+                    <default>false</default>
+                    <label>S900</label>
+                </value>
+                <value>
+                    <fullName>S920</fullName>
+                    <default>false</default>
+                    <label>S920</label>
+                </value>
+                <value>
+                    <fullName>SUM UP</fullName>
+                    <default>false</default>
+                    <label>SUM UP</label>
+                </value>
+                <value>
+                    <fullName>VX 520</fullName>
+                    <default>false</default>
+                    <label>VX 520</label>
+                </value>
+                <value>
+                    <fullName>VX 570</fullName>
+                    <default>false</default>
+                    <label>VX 570</label>
+                </value>
+                <value>
+                    <fullName>VX 680</fullName>
+                    <default>false</default>
+                    <label>VX 680</label>
+                </value>
+                <value>
+                    <fullName>VX 820</fullName>
+                    <default>false</default>
+                    <label>VX 820</label>
+                </value>
+                <value>
+                    <fullName>XENGO</fullName>
+                    <default>false</default>
+                    <label>XENGO</label>
+                </value>
+                <value>
+                    <fullName>XENTEO</fullName>
+                    <default>false</default>
+                    <label>XENTEO</label>
+                </value>
+                <value>
+                    <fullName>XENTIM</fullName>
+                    <default>false</default>
+                    <label>XENTIM</label>
+                </value>
+                <value>
+                    <fullName>XENTISSIMO</fullName>
+                    <default>false</default>
+                    <label>XENTISSIMO</label>
+                </value>
+                <value>
+                    <fullName>Yomani</fullName>
+                    <default>false</default>
+                    <label>Yomani</label>
+                </value>
+                <value>
+                    <fullName>YOMANI PTI</fullName>
+                    <default>false</default>
+                    <label>YOMANI PTI</label>
+                </value>
+                <value>
+                    <fullName>YOMANI Retail M1</fullName>
+                    <default>false</default>
+                    <label>YOMANI Retail M1</label>
+                </value>
+                <value>
+                    <fullName>YOMANI Retail M2</fullName>
+                    <default>false</default>
+                    <label>YOMANI Retail M2</label>
+                </value>
+                <value>
+                    <fullName>YOMOVA</fullName>
+                    <default>false</default>
+                    <label>YOMOVA</label>
+                </value>
+                <value>
+                    <fullName>YONEO</fullName>
+                    <default>false</default>
+                    <label>YONEO</label>
+                </value>
+                <value>
+                    <fullName>YOXIMO</fullName>
+                    <default>false</default>
+                    <label>YOXIMO</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Six Payment - Carrefour</controllingFieldValue>
+                <controllingFieldValue>Six Payment</controllingFieldValue>
+                <valueName>LAN 500</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment - Carrefour</controllingFieldValue>
+                <controllingFieldValue>Six Payment</controllingFieldValue>
+                <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+                <controllingFieldValue>SUM UP</controllingFieldValue>
+                <controllingFieldValue>Worldline - NL</controllingFieldValue>
+                <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+                <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+                <controllingFieldValue>Keyware</controllingFieldValue>
+                <controllingFieldValue>Loyaltek</controllingFieldValue>
+                <controllingFieldValue>Nepting</controllingFieldValue>
+                <controllingFieldValue>Payleven</controllingFieldValue>
+                <controllingFieldValue>Adyen</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+                <controllingFieldValue>Bevo</controllingFieldValue>
+                <controllingFieldValue>CCV</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <controllingFieldValue>Easy Payments</controllingFieldValue>
+                <controllingFieldValue>Payworld</controllingFieldValue>
+                <controllingFieldValue>Sepay</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment</controllingFieldValue>
+                <valueName>Yomani</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment</controllingFieldValue>
+                <controllingFieldValue>Keyware</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YOXIMO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+                <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+                <controllingFieldValue>Keyware</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <valueName>INGENICO ICT 220</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+                <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+                <controllingFieldValue>Keyware</controllingFieldValue>
+                <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <valueName>INGENICO ICT 250</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Six Payment - BNP</controllingFieldValue>
+                <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+                <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <valueName>INGENICO IPP 310</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SUM UP</controllingFieldValue>
+                <valueName>SUM UP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Viva Wallet</controllingFieldValue>
+                <valueName>PAX A910</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+                <valueName>OPTIMUM M4320</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+                <valueName>OPTIMUM T4220</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+                <controllingFieldValue>CCV</controllingFieldValue>
+                <valueName>VX 680</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Hypercom/B+S Cards</controllingFieldValue>
+                <controllingFieldValue>CCV</controllingFieldValue>
+                <valueName>VX 820</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Ingenico Payment Services</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <valueName>INGENICO IWL 250</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Keyware</controllingFieldValue>
+                <valueName>VX 570</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyaltek</controllingFieldValue>
+                <controllingFieldValue>Easy Payments</controllingFieldValue>
+                <valueName>8000</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyaltek</controllingFieldValue>
+                <valueName>8210</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Nepting</controllingFieldValue>
+                <valueName>PAX_A80</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Nepting</controllingFieldValue>
+                <valueName>PAX_A920_PRO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>N-TS</controllingFieldValue>
+                <valueName>INGENICO IPP 350</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Payment Consulting</controllingFieldValue>
+                <valueName>INGENICO Desk</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Payment Consulting</controllingFieldValue>
+                <valueName>INGENICO Move 500</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>CZAM/XENTA-M1</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>CZAM/XENTA-M2</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>XENGO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>XENTEO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>XENTIM</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>XENTISSIMO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YOMANI PTI</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YOMANI Retail M1</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YOMANI Retail M2</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YOMOVA</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Atos-Worldline</controllingFieldValue>
+                <controllingFieldValue>Atos-Worldline - No invoice</controllingFieldValue>
+                <valueName>YONEO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bepax-Paynation</controllingFieldValue>
+                <controllingFieldValue>Chess</controllingFieldValue>
+                <valueName>INGENICO IUP 250</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bevo</controllingFieldValue>
+                <valueName>OPTIMUM SERIES</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>CCV</controllingFieldValue>
+                <valueName>E 265</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>CCV</controllingFieldValue>
+                <valueName>VX 520</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Easy Payments</controllingFieldValue>
+                <controllingFieldValue>Sepay</controllingFieldValue>
+                <valueName>PAY4YOU GPRS</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Acceptor_Provider__c</fullName>
+        <label>Acceptor Provider</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Adyen</fullName>
+                    <default>false</default>
+                    <label>Adyen</label>
+                </value>
+                <value>
+                    <fullName>Atos-Worldline</fullName>
+                    <default>false</default>
+                    <label>Atos-Worldline</label>
+                </value>
+                <value>
+                    <fullName>Atos-Worldline - No invoice</fullName>
+                    <default>false</default>
+                    <label>Atos-Worldline - No invoice</label>
+                </value>
+                <value>
+                    <fullName>Belgium Payment</fullName>
+                    <default>false</default>
+                    <label>Belgium Payment</label>
+                </value>
+                <value>
+                    <fullName>Bepax-Paynation</fullName>
+                    <default>false</default>
+                    <label>Bepax-Paynation</label>
+                </value>
+                <value>
+                    <fullName>Bevo</fullName>
+                    <default>false</default>
+                    <label>Bevo</label>
+                </value>
+                <value>
+                    <fullName>CCV</fullName>
+                    <default>false</default>
+                    <label>CCV</label>
+                </value>
+                <value>
+                    <fullName>Chess</fullName>
+                    <default>false</default>
+                    <label>Chess</label>
+                </value>
+                <value>
+                    <fullName>Dover Fueling Solutions</fullName>
+                    <default>false</default>
+                    <label>Dover Fueling Solutions</label>
+                </value>
+                <value>
+                    <fullName>Easy Payments</fullName>
+                    <default>false</default>
+                    <label>Easy Payments</label>
+                </value>
+                <value>
+                    <fullName>Elavon</fullName>
+                    <default>false</default>
+                    <label>Elavon</label>
+                </value>
+                <value>
+                    <fullName>EMS</fullName>
+                    <default>false</default>
+                    <label>EMS</label>
+                </value>
+                <value>
+                    <fullName>GlobalPay</fullName>
+                    <default>false</default>
+                    <label>GlobalPay</label>
+                </value>
+                <value>
+                    <fullName>Hypercom/B+S Cards</fullName>
+                    <default>false</default>
+                    <label>Hypercom/B+S Cards</label>
+                </value>
+                <value>
+                    <fullName>Ingenico Payment Services</fullName>
+                    <default>false</default>
+                    <label>Ingenico Payment Services</label>
+                </value>
+                <value>
+                    <fullName>Keyware</fullName>
+                    <default>false</default>
+                    <label>Keyware</label>
+                </value>
+                <value>
+                    <fullName>Loyaltek</fullName>
+                    <default>false</default>
+                    <label>Loyaltek</label>
+                </value>
+                <value>
+                    <fullName>Nepting</fullName>
+                    <default>false</default>
+                    <label>Nepting</label>
+                </value>
+                <value>
+                    <fullName>N-TS</fullName>
+                    <default>false</default>
+                    <label>N-TS</label>
+                </value>
+                <value>
+                    <fullName>Payleven</fullName>
+                    <default>false</default>
+                    <label>Payleven</label>
+                </value>
+                <value>
+                    <fullName>Payment Consulting</fullName>
+                    <default>false</default>
+                    <label>Payment Consulting</label>
+                </value>
+                <value>
+                    <fullName>Payment Services</fullName>
+                    <default>false</default>
+                    <label>Payment Services</label>
+                </value>
+                <value>
+                    <fullName>Payworld</fullName>
+                    <default>false</default>
+                    <label>Payworld</label>
+                </value>
+                <value>
+                    <fullName>Sepay</fullName>
+                    <default>false</default>
+                    <label>Sepay</label>
+                </value>
+                <value>
+                    <fullName>Six Payment</fullName>
+                    <default>false</default>
+                    <label>Six Payment</label>
+                </value>
+                <value>
+                    <fullName>Six Payment - BNP</fullName>
+                    <default>false</default>
+                    <label>Six Payment - BNP</label>
+                </value>
+                <value>
+                    <fullName>Six Payment - Carrefour</fullName>
+                    <default>false</default>
+                    <label>Six Payment - Carrefour</label>
+                </value>
+                <value>
+                    <fullName>SUM UP</fullName>
+                    <default>false</default>
+                    <label>SUM UP</label>
+                </value>
+                <value>
+                    <fullName>Syncpay</fullName>
+                    <default>false</default>
+                    <label>Syncpay</label>
+                </value>
+                <value>
+                    <fullName>Viva Wallet</fullName>
+                    <default>false</default>
+                    <label>Viva Wallet</label>
+                </value>
+                <value>
+                    <fullName>Worldline - NL</fullName>
+                    <default>false</default>
+                    <label>Worldline - NL</label>
+                </value>
+                <value>
+                    <fullName>Xafaw</fullName>
+                    <default>false</default>
+                    <label>Xafaw</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Acceptor_Scheme__c</fullName>
+        <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;MasterCard&apos;, &apos;&apos;)</defaultValue>
+        <label>Acceptor Scheme</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>WEBAuth</fullName>
+                    <default>false</default>
+                    <label>WEBAuth</label>
+                </value>
+                <value>
+                    <fullName>MasterCard</fullName>
+                    <default>false</default>
+                    <label>MasterCard</label>
+                </value>
+                <value>
+                    <fullName>C-TAP</fullName>
+                    <default>false</default>
+                    <label>C-TAP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Acceptor_To_Loop_Number__c</fullName>
+        <description>Number of loops linked to the acceptor</description>
+        <label>Acceptor To Loop Number</label>
+        <summaryForeignKey>ER_Acceptor_to_Loop__c.ER_Acceptor__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>ER_Acceptor_Type__c</fullName>
+        <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;POS&apos;, &apos;&apos;)</defaultValue>
+        <label>Acceptor Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>POS</fullName>
+                    <default>true</default>
+                    <label>POS</label>
+                </value>
+                <value>
+                    <fullName>Payment Gate</fullName>
+                    <default>false</default>
+                    <label>Payment Gate</label>
+                </value>
+                <value>
+                    <fullName>Aggregator</fullName>
+                    <default>false</default>
+                    <label>Aggregator</label>
+                </value>
+                <value>
+                    <fullName>Physical Device</fullName>
+                    <default>false</default>
+                    <label>Physical Device</label>
+                </value>
+                <value>
+                    <fullName>Digital Device</fullName>
+                    <default>false</default>
+                    <label>Digital Device</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Aggregator__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Aggregator</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Company</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.ER_Aggregator__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Aggregator</relationshipLabel>
+        <relationshipName>Acceptors</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_AID__c</fullName>
+        <externalId>false</externalId>
+        <label>AID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_AID_Authorization__c</fullName>
+        <externalId>false</externalId>
+        <label>AID Authorization</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_AID_Clearing__c</fullName>
+        <externalId>false</externalId>
+        <label>AID Clearing</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_BUPicklist__c</fullName>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Business_Unit</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Business_Unit__c</fullName>
+        <externalId>false</externalId>
+        <formula>ER_Store__r.ER_Business_Unit__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Unit Formula</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Card_Operational_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Card Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Cash_Register_Provider__c</fullName>
+        <externalId>false</externalId>
+        <label>Cash Register Provider</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Category_name__c</fullName>
+        <externalId>false</externalId>
+        <label>Category name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Creation_date_in_OS__c</fullName>
+        <label>Creation date in OS</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Description__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <label>Description</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ER_End_Date__c</fullName>
+        <label>End Date</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_IS_Acceptor_Linked_To_Cash_Register__c</fullName>
+        <label>Is Acceptor Linked To Cash Register</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Last_date_of_Sync__c</fullName>
+        <label>Last date of Sync</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ER_Legacy_Status__c</fullName>
+        <description>This field  will be used to store the status of acceptor from NEMO for BENELUX.</description>
+        <externalId>false</externalId>
+        <label>Legacy Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MCC_Authorization__c</fullName>
+        <externalId>false</externalId>
+        <label>MCC Authorization</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MCC_Clearing__c</fullName>
+        <externalId>false</externalId>
+        <label>MCC Clearing</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MDMId__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>MDM ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MID__c</fullName>
+        <externalId>false</externalId>
+        <label>MID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MID_AID__c</fullName>
+        <externalId>false</externalId>
+        <label>MID_AID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MID_Authorization__c</fullName>
+        <externalId>false</externalId>
+        <label>MID Authorization</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_MID_Clearing__c</fullName>
+        <externalId>false</externalId>
+        <label>MID Clearing</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Paper_Operational_System_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Paper Operational System ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Start_Date__c</fullName>
+        <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;BENELUX&apos;),  TODAY(), null)</defaultValue>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Status__c</fullName>
+        <defaultValue>IF(ISPICKVAL($User.ER_Business_Unit__c, &apos;GR&apos;), &apos;Active&apos;, &apos;&apos;)</defaultValue>
+        <label>Status</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>true</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                    <label>Inactive</label>
+                </value>
+                <value>
+                    <fullName>Created</fullName>
+                    <default>false</default>
+                    <label>Created</label>
+                </value>
+                <value>
+                    <fullName>Demo</fullName>
+                    <default>false</default>
+                    <label>Demo</label>
+                </value>
+                <value>
+                    <fullName>Blocked</fullName>
+                    <default>false</default>
+                    <label>Blocked</label>
+                </value>
+                <value>
+                    <fullName>Lost/Stolen</fullName>
+                    <default>false</default>
+                    <label>Lost/Stolen</label>
+                </value>
+                <value>
+                    <fullName>Damaged</fullName>
+                    <default>false</default>
+                    <label>Damaged</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Store__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Store</label>
+        <referenceTo>ER_Store__c</referenceTo>
+        <relationshipLabel>Acceptors</relationshipLabel>
+        <relationshipName>Acceptors</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_Sub_MID_Clearing__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub MID Clearing</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_SubMID_Authorization__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub MID Authorization</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Sync_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Sync_result__c</fullName>
+        <label>Sync result</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>not_synchronized</fullName>
+                    <default>false</default>
+                    <label>Not Synchronized</label>
+                </value>
+                <value>
+                    <fullName>synchronized</fullName>
+                    <default>false</default>
+                    <label>Synchronized</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>pending_synchronization</fullName>
+                    <default>false</default>
+                    <label>Pending Synchronization</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Terminal_ID_Certificate__c</fullName>
+        <externalId>false</externalId>
+        <label>Terminal ID / Certificate</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_TID_Authorization__c</fullName>
+        <externalId>true</externalId>
+        <label>TID Authorization</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_TID_Clearing__c</fullName>
+        <externalId>false</externalId>
+        <label>TID Clearing</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_WS_result__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(ER_Sync_result__c,
+&quot;1&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Success_Img.png&quot;, &quot;Success&quot;,40,40),
+&quot;2&quot;, IMAGE(&quot;/resource/SRER01_WebServiceHandler/Error_Img.png&quot;, &quot;Error&quot;,40,40),
+&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sync Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_WS_result_Text__c</fullName>
+        <externalId>false</externalId>
+        <label>Sync Error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TECH_AcceptorCreationViaLeadConversion__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>TECH_AcceptorCreationViaLeadConversion</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Tech_AggStoreAggregator__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(ER_Aggregator__c) +&apos;_&apos;+ CASESAFEID(ER_Store__c)</formula>
+        <label>Tech_AggStoreAggregator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TECH_IsRandomMID__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To flag the acceptors with MID generated randomly (in order to not have an empty MID which causes issues with BENELUX sync)</description>
+        <label>TECH_IsRandomMID</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ER_Business_Unit__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <recordTypes>
+        <fullName>Edenred_POS</fullName>
+        <active>true</active>
+        <description>Acceptor used for Digital Store</description>
+        <label>Edenred POS</label>
+        <picklistValues>
+            <picklist>BE_Terminal_Provider__c</picklist>
+            <values>
+                <fullName>AXEPTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CCV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chess</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>European merchant services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hypercom%2FBS Cards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SIX - Carrefour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payments - BNP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viva Wallet</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Model__c</picklist>
+            <values>
+                <fullName>8000</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8210</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZAM%2FXENTA-M1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZAM%2FXENTA-M2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E 265</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT 220</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT220 %28inactive value%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP 310</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP 350</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP310 %28inactive value%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IUP 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IWL 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LAN 500</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM M4320</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM SERIES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM T4220</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX A910</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX_A80</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX_A920_PRO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAY4YOU GPRS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S800</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S900</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S920</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 520</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 570</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 680</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 820</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENGO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTEO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTIM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTISSIMO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI PTI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI Retail M1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI Retail M2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMOVA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YONEO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOXIMO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yomani</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Provider__c</picklist>
+            <values>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline - No invoice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CCV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chess</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dover Fueling Solutions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EMS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GlobalPay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hypercom%2FB%2BS Cards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nepting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment - BNP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment - Carrefour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viva Wallet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worldline - NL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Xafaw</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Scheme__c</picklist>
+            <values>
+                <fullName>C-TAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MasterCard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WEBAuth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Type__c</picklist>
+            <values>
+                <fullName>Digital Device</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Device</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_BUPicklist__c</picklist>
+            <values>
+                <fullName>AE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BENELUX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CEN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>US</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VN</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_IS_Acceptor_Linked_To_Cash_Register__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Blocked</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Created</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Damaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Demo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lost%2FStolen</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Sync_result__c</picklist>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>not_synchronized</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pending_synchronization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>synchronized</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ER_Merchant_Acceptor_RT</fullName>
+        <active>true</active>
+        <label>Merchant Acceptor</label>
+        <picklistValues>
+            <picklist>BE_Terminal_Provider__c</picklist>
+            <values>
+                <fullName>AXEPTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CCV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chess</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>European merchant services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hypercom%2FBS Cards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SIX - Carrefour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payments - BNP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viva Wallet</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Model__c</picklist>
+            <values>
+                <fullName>8000</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8210</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZAM%2FXENTA-M1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZAM%2FXENTA-M2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E 265</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT 220</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO ICT220 %28inactive value%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP 310</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP 350</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IPP310 %28inactive value%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IUP 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO IWL 250</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>INGENICO Move 500</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LAN 500</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM M4320</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM SERIES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OPTIMUM T4220</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX A910</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX_A80</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAX_A920_PRO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAY4YOU GPRS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S800</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S900</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>S920</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 520</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 570</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 680</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VX 820</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENGO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTEO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTIM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XENTISSIMO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI PTI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI Retail M1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMANI Retail M2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOMOVA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YONEO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YOXIMO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yomani</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Provider__c</picklist>
+            <values>
+                <fullName>Adyen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atos-Worldline - No invoice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Belgium Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bepax-Paynation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bevo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CCV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chess</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dover Fueling Solutions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EMS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Easy Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Elavon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GlobalPay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hypercom%2FB%2BS Cards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingenico Payment Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keyware</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyaltek</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N-TS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nepting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payleven</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payworld</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUM UP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sepay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment - BNP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Six Payment - Carrefour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Syncpay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viva Wallet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worldline - NL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Xafaw</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Scheme__c</picklist>
+            <values>
+                <fullName>C-TAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MasterCard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WEBAuth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Acceptor_Type__c</picklist>
+            <values>
+                <fullName>Aggregator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Digital Device</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POS</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Payment Gate</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_BUPicklist__c</picklist>
+            <values>
+                <fullName>AE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BENELUX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CEN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>US</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VN</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_IS_Acceptor_Linked_To_Cash_Register__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ER_Sync_result__c</picklist>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>not_synchronized</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pending_synchronization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>synchronized</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <validationRules>
+        <fullName>VR_Start_Date_Mandatory</fullName>
+        <active>true</active>
+        <description>Start Date field is mandatory for acceptor sync</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+    &amp;&amp; ISBLANK(ER_Creation_date_in_OS__c )
+    &amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+    &amp;&amp; ISBLANK(ER_Start_Date__c)</errorConditionFormula>
+        <errorMessage>Start Date field is mandatory for account sync</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE01_Max_nr_of_characters_TID</fullName>
+        <active>true</active>
+        <description>8 characters max.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; LEN(ER_TID_Authorization__c)  &lt;&gt; 8
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))
+&amp;&amp; NOT(OR(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;Web&quot;), 
+   (ISPICKVAL(ER_Acceptor_Scheme__c, &quot;WEBAuth&quot;)),
+   (ISPICKVAL(ER_Acceptor_Scheme__c, &quot;MasterCard&quot;))
+   ))</errorConditionFormula>
+        <errorMessage>The TID needs to have 8 characters</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE02_TID_Atosworldline_XENGO_Notcomp</fullName>
+        <active>true</active>
+        <description>TID Atosworldline XENGO with compatible</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Atos-Worldline&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;XENGO&apos;)
+&amp;&amp; NOT(ISBLANK( ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Xengo is not compatible with electronic cheques</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE03_TID_Atosworldline_begins_wt_01or5</fullName>
+        <active>true</active>
+        <description>Terminal ID of Atos Worldline needs to start with 01 or 5</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Provider__c,&apos;Atos-Worldline&apos;) || ISPICKVAL(ER_Acceptor_Provider__c,&apos;Atos-Worldline - No invoice&apos;))
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;01&quot;)
+||BEGINS(ER_TID_Authorization__c,&quot;5&quot;) )</errorConditionFormula>
+        <errorMessage>Terminal ID of Atos Worldline needs to start with 01 or 5</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE04_TID_CCV_E265_Notcompatible</fullName>
+        <active>true</active>
+        <description>CCV, E265 not compatible</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Provider__c ,&apos;CCV&apos;) 
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;E 265&apos;)
+&amp;&amp; NOT(ISBLANK( ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>E 265 is not compatible with electronic cheques</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE05_TID_CCV_begins_with_3or000</fullName>
+        <active>true</active>
+        <description>CCV begins with 3 or 000</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(ER_BUPicklist__c, &apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;CCV&apos;)
+&amp;&amp; NOT(BEGINS(ER_TID_Authorization__c,&apos;3&apos;))
+&amp;&amp; NOT(BEGINS(ER_TID_Authorization__c,&apos;87&apos;))</errorConditionFormula>
+        <errorMessage>Operator Provider CCV needs to start with 3 or 87</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE06_TID_Chess_begins_with_10or11</fullName>
+        <active>true</active>
+        <description>Terminal ID of Chess needs to start with 10 or 11</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Chess&apos;) 
+&amp;&amp; NOT( (BEGINS(ER_TID_Authorization__c,&quot;10&quot;) || BEGINS(ER_TID_Authorization__c,&quot;11&quot;)))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Chess needs to start with 10 or 11</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE07_TID_EasyPayments_begins_with_two</fullName>
+        <active>true</active>
+        <description>Terminal ID of EasyPayments needs to start with 2</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Easy Payments&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;2&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Easy Payments needs to start with 2</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE08_TID_HypercomBScards_Notcompatible</fullName>
+        <active>true</active>
+        <description>Hypercom/B+S Cards not compatible with electronic cheques.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Hypercom/B+S Cards&apos;)</errorConditionFormula>
+        <errorMessage>Hypercom/B+S Cards is not compatible with electronic cheques</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE09_TID_Ingenicopymntservice_6or12</fullName>
+        <active>true</active>
+        <description>Ingenico payment services need to start with 6 or 12</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Ingenico Payment Services&apos;)  
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;6&quot;)
+ || BEGINS(ER_TID_Authorization__c,&quot;12&quot;) )
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Ingenico Payment Services needs to start with 6 or 12</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE10_TID_Keywr_INGENTICO_notcompatible</fullName>
+        <active>true</active>
+        <description>Terminal provider Keyware with model ingenico is not compatible</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Keyware&apos;)
+&amp;&amp; ( ISPICKVAL( ER_Acceptor_Model__c ,&apos;INGENICO ICT 220&apos;) || ISPICKVAL( ER_Acceptor_Model__c ,&apos;INGENICO ICT 250&apos;))</errorConditionFormula>
+        <errorMessage>Keyware Ingenico ICT 220, 250 is not compatible with electoric cheques</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE11_TID_Keywr_begins_with_01or2or3</fullName>
+        <active>true</active>
+        <description>TID Keyware needs to start with zeroone or three or two</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Keyware&apos;) 
+&amp;&amp; NOT(  BEGINS(ER_TID_Authorization__c,&quot;3&quot;)
+||BEGINS(ER_TID_Authorization__c,&quot;01&quot;) 
+||BEGINS(ER_TID_Authorization__c,&quot;2&quot;) )</errorConditionFormula>
+        <errorMessage>Operator Provider Keyware needs to start with 01 or 2 or 3</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE12_TID_Loyaltek_begins_with_20or23</fullName>
+        <active>true</active>
+        <description>Terminal ID of Loyaltek needs to start with 20 or 23</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Loyaltek&apos;)
+&amp;&amp; NOT( ( BEGINS(ER_TID_Authorization__c,&quot;20&quot;) || BEGINS(ER_TID_Authorization__c,&quot;23&quot;) ))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Loyaltek needs to start with 20 or 23</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE13_TID_SIXCARREFOUR_begins_with_two</fullName>
+        <active>true</active>
+        <description>Terminal ID of SIX-Carrefour needs to start with 80</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment - Carrefour&apos;) 
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;80&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of SIX-Carrefour needs to start with 80</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE14_TID_Terminalproviders_Notcomp</fullName>
+        <active>true</active>
+        <description>Payleven, Bevo, Sum up and Adyen are not compatible with electronic cheques.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ( ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Payleven&apos;)
+|| ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Bevo&apos;)
+|| ISPICKVAL( ER_Acceptor_Provider__c ,&apos;SUM UP&apos;)
+|| ISPICKVAL( ER_Acceptor_Provider__c ,&apos;Adyen&apos;))</errorConditionFormula>
+        <errorMessage>Payleven, Bevo, Sum up and Adyen are not compatible with electronic cheques.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE15_TID_sepay_begins_with_onezero</fullName>
+        <active>true</active>
+        <description>Terminal ID of Sepay starts with one zero</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Sepay&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;10&quot;))</errorConditionFormula>
+        <errorMessage>Terminal ID of Sepay begins with 10</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE16_TID_sixpmentBNP_begins_wt_22</fullName>
+        <active>true</active>
+        <description>Terminal ID of Six Payment-BNP needs to start with 22</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment - BNP&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;22&quot;))
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Please replace 23XXXXXX by 22XXXXXX</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE17_TID_sixpment_Yomani_begins_wt_314</fullName>
+        <active>true</active>
+        <description>Terminal ID of Six Payment, Yomani needs to start with 314</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;Yomani&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;314&quot;)) 
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Six Payment, Yomani needs to start with 314</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE18_TID_sixpment_Yoximo_begins_wt_241</fullName>
+        <active>true</active>
+        <description>Terminal ID of Six Payment, Yomani needs to start with 241</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;YOXIMO&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;241&quot;)) 
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Six Payment, Yoximo needs to start with 241</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE19_TID_sixpment_lan_begins_wt_252</fullName>
+        <active>true</active>
+        <description>Terminal ID of Six Payment, LAN500 needs to start with 252</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Scheme__c ,&apos;C-TAP&apos;)
+&amp;&amp; ISPICKVAL(ER_Acceptor_Provider__c,&apos;Six Payment&apos;)
+&amp;&amp; ISPICKVAL( ER_Acceptor_Model__c ,&apos;LAN 500&apos;)
+&amp;&amp; NOT(BEGINS( ER_TID_Authorization__c,&quot;252&quot;)) 
+&amp;&amp; NOT(ISBLANK(ER_TID_Authorization__c))</errorConditionFormula>
+        <errorMessage>Terminal ID of Six Payment, LAN500 needs to start with 252</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE20_TIDAuthorisation_Obligatory</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISCHANGED(TECH_AcceptorCreationViaLeadConversion__c)) 
+            &amp;&amp; NOT(PRIORVALUE(TECH_AcceptorCreationViaLeadConversion__c ) = True)
+            &amp;&amp; TECH_AcceptorCreationViaLeadConversion__c = False
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c,&apos;BENELUX&apos;) 
+            &amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c,&apos;C-TAP&apos;) ||  ISPICKVAL(ER_Acceptor_Scheme__c,&apos;WEBAuth&apos;))
+            &amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+            &amp;&amp; ISBLANK(ER_TID_Authorization__c)</errorConditionFormula>
+        <errorMessage>The field TID Authorization must be filled in order to register the Acceptor</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE21_AcceptorProvider_Obligatory</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISCHANGED(TECH_AcceptorCreationViaLeadConversion__c))
+            &amp;&amp; NOT(PRIORVALUE(TECH_AcceptorCreationViaLeadConversion__c ) = True)
+            &amp;&amp; TECH_AcceptorCreationViaLeadConversion__c = False
+            &amp;&amp; ISPICKVAL(ER_BUPicklist__c ,&apos;BENELUX&apos;) 
+            &amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+            &amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c,&apos;C-TAP&apos;)
+            &amp;&amp; ISBLANK(TEXT(ER_Acceptor_Provider__c))</errorConditionFormula>
+        <errorMessage>The field Acceptor Provider must be filled in order to register the Acceptor</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE23_PreventUpdate</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; (ER_Business_Unit__c =&apos;BENELUX&apos;)
+&amp;&amp; NOT( ISNEW() )
+&amp;&amp; ISPICKVAL(ER_Status__c, &apos;Activated&apos;) 
+&amp;&amp; OR( $Profile.Name = &apos;Merchant Sales&apos;,
+			$Profile.Name = &apos;Client Sales&apos;,
+			$Profile.Name = &apos;Marketing&apos;
+		)</errorConditionFormula>
+        <errorMessage>VRBE23 - You are not able to modify an active acceptor.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE24_Acceptor_Scheme_required</fullName>
+        <active>true</active>
+        <description>The acceptor scheme field is required for BE &amp; LU</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISCHANGED(TECH_AcceptorCreationViaLeadConversion__c))
+            &amp;&amp; NOT(PRIORVALUE(TECH_AcceptorCreationViaLeadConversion__c ) = True)
+            &amp;&amp; TECH_AcceptorCreationViaLeadConversion__c = False
+            &amp;&amp;  ISPICKVAL(ER_BUPicklist__c , &apos;BENELUX&apos;) 
+            &amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c, &apos;&apos;) || 
+                (NOT(ISNEW()) &amp;&amp; ISCHANGED(ER_Acceptor_Scheme__c))
+            )</errorConditionFormula>
+        <errorDisplayField>ER_Acceptor_Scheme__c</errorDisplayField>
+        <errorMessage>VRBE24 - The Acceptor Scheme is a mandatory field and cannot be changed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRBE25_Acceptor_Name_Length</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp;  ISPICKVAL( ER_BUPicklist__c ,&quot;BENELUX&quot;) 
+            &amp;&amp;  LEN( Name ) &gt; 22</errorConditionFormula>
+        <errorDisplayField>Name</errorDisplayField>
+        <errorMessage>The acceptor name should not exceed 22 characters</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER01_Activate_Store_Start</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+ISPICKVAL(ER_Status__c,&apos;Active&apos;),
+ISBLANK(ER_Start_Date__c)
+)</errorConditionFormula>
+        <errorDisplayField>ER_Start_Date__c</errorDisplayField>
+        <errorMessage>Start Date is required when the Acceptor is Active</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER02_Edenred_POS_Exclusivity</fullName>
+        <active>true</active>
+        <description>Acceptors with record type “Edenred POS” can be created only it is linked to a Digital Store</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp;  ER_Store__r.ER_Digital_Store__c = false
+&amp;&amp;  TEXT(ER_Status__c) != &apos;Inactive&apos;</errorConditionFormula>
+        <errorMessage>Edenred POS can only be created on Stores set as Digital Store</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER03_Edenred_POS_TerminalID_missing</fullName>
+        <active>true</active>
+        <description>Acceptors with record type “Edenred POS” cannot have another status than “Created” if “Terminal ID / Certificate” is empty</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp; NOT(TEXT(ER_Status__c) = &apos;Created&apos;)
+&amp;&amp; ISBLANK( ER_Terminal_ID_Certificate__c )</errorConditionFormula>
+        <errorMessage>You must enter a Terminal ID / Certificate before modifying the acceptor status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER04_Edenred_POS_Status</fullName>
+        <active>true</active>
+        <description>Status of Acceptors with record type “Edenred POS” cannot go back to “Created” or “Demo”</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;Edenred_POS&apos;
+&amp;&amp; ISCHANGED( ER_Status__c )
+&amp;&amp; (
+    ( NOT(TEXT(PRIORVALUE(ER_Status__c)) = &apos;Created&apos;) &amp;&amp; !ISBLANK(TEXT(PRIORVALUE(ER_Status__c)))
+     &amp;&amp; TEXT(ER_Status__c) = &apos;Demo&apos; 
+    ) 
+    ||( !ISBLANK(TEXT(PRIORVALUE(ER_Status__c))) &amp;&amp; 
+          TEXT(ER_Status__c) = &apos;Created&apos;  )
+    )</errorConditionFormula>
+        <errorMessage>You cannot go back to “Created” or “Demo” status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER05_Mid_Auth_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+&amp;&amp; ISBLANK(ER_MID_Authorization__c) 
+&amp;&amp; (
+    ER_Business_Unit__c != &apos;BENELUX&apos; ||
+    (ER_Business_Unit__c = &apos;BENELUX&apos; &amp;&amp; (NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;WEBAuth&quot;)) || NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;MasterCard&quot;)) || NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &quot;C-TAP&quot;))) )
+)</errorConditionFormula>
+        <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+        <errorMessage>The MID Authorization is missing</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER06_Check_Sub_MID_Clearing</fullName>
+        <active>true</active>
+        <description>This VR is used today only for ERPL
+            - “Sub MID Clearing” should not be filled-in if “MID Clearing” is null
+            - “Sub MID Clearing” should not be filled-in if “Sub MID Authorization” is null</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; ER_Business_Unit__c = &apos;PL&apos;
+            &amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+            &amp;&amp; NOT(ISBLANK(ER_Sub_MID_Clearing__c))
+            &amp;&amp; (ISBLANK(ER_SubMID_Authorization__c) || ISBLANK(ER_MID_Clearing__c))</errorConditionFormula>
+        <errorMessage>VRER06 - Both Sub MID Authorization and MID Clearing must be filled-in!</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER07_Check_Dates_Consistency</fullName>
+        <active>true</active>
+        <description>End date should always be greater than start date</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+&amp;&amp; NOT(ISBLANK(ER_Start_Date__c))
+&amp;&amp; NOT(ISBLANK(ER_End_Date__c))
+&amp;&amp; ER_End_Date__c &lt; ER_Start_Date__c</errorConditionFormula>
+        <errorMessage>VRER07 - The End Date can&apos;t be lower than Start Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER25_Block_Update_Store_Sync</fullName>
+        <active>true</active>
+        <description>VRER08 - Account cannot be modified when the financial center is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ISCHANGED(ER_Store__c)
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_Store__c</errorDisplayField>
+        <errorMessage>VRER25 - The store cannot be modified when the acceptor is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER26_Block_Update_TID_Sync</fullName>
+        <active>true</active>
+        <description>VRER26 - TID Authorization  cannot be modified when the financial center is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ISCHANGED(ER_TID_Authorization__c)
+&amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))
+&amp;&amp; (NOT(ER_Business_Unit__c =&apos;BENELUX&apos;)||
+				NOT(ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;)) )</errorConditionFormula>
+        <errorDisplayField>ER_TID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER26 - The TID cannot be modified when the acceptor is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER27_Block_Update_MID_Sync</fullName>
+        <active>true</active>
+        <description>VRER27 - MID Authorization  cannot be modified when the acceptor is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; ISCHANGED(ER_MID_Authorization__c)
+&amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER27 - The MID cannot be modified when the acceptor is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER28_Block_Update_TID</fullName>
+        <active>true</active>
+        <description>VRER28 - TID Authorization  cannot be modified</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;WEBAuth&apos;)
+&amp;&amp; ISCHANGED(ER_TID_Authorization__c)</errorConditionFormula>
+        <errorDisplayField>ER_TID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER28 - TID Authorization  cannot be modified</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER29_Block_Update_MID</fullName>
+        <active>true</active>
+        <description>VRER29 - MID Authorization  cannot be modified</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c, &apos;WEBAuth&apos;) || ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;))
+&amp;&amp; ISCHANGED(ER_MID_Authorization__c)
+&amp;&amp; TEXT($User.UserType) != &apos;AutomatedProcess&apos;</errorConditionFormula>
+        <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER29 - MID Authorization  cannot be modified</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER30_Block_Update_MCC_Sync</fullName>
+        <active>true</active>
+        <description>VRER30-  ER_MCC_Authorization__c  cannot be modified when the financial center is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+            &amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;)
+            &amp;&amp; ISCHANGED( ER_MCC_Authorization__c)
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_MCC_Authorization__c</errorDisplayField>
+        <errorMessage>VRER30 - The  MCC Authorization cannot be modified when the acceptor is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER31_Block_Update_Sub_MID_Sync</fullName>
+        <active>true</active>
+        <description>VRER31-  Sub MID Authorization cannot be modified when the acceptor is synchronized</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+            &amp;&amp; NOT(ISNEW())
+            &amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+            &amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;)
+            &amp;&amp; ISCHANGED(ER_SubMID_Authorization__c)
+            &amp;&amp; NOT(ISBLANK(ER_Creation_date_in_OS__c))</errorConditionFormula>
+        <errorDisplayField>ER_SubMID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER31 - The  Sub MID Authorization cannot be modified when the acceptor is synchronized</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER32_Block_Update_AID_Clearing</fullName>
+        <active>true</active>
+        <description>VRER32 - AID Clearing cannot be modified</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; (ISPICKVAL(ER_Acceptor_Scheme__c, &apos;MasterCard&apos;) || ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;))
+&amp;&amp; ISCHANGED(ER_AID_Clearing__c)</errorConditionFormula>
+        <errorDisplayField>ER_AID_Clearing__c</errorDisplayField>
+        <errorMessage>VRER32 - AID Clearing cannot be modified</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER33_Block_Update_MID_Clearing</fullName>
+        <active>true</active>
+        <description>VRER33 - MID Clearing  cannot be modified</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;)
+&amp;&amp; ISCHANGED(ER_MID_Clearing__c)</errorConditionFormula>
+        <errorDisplayField>ER_MID_Clearing__c</errorDisplayField>
+        <errorMessage>VRER33 - MID Clearing  cannot be modified</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER34_Block_Update_AID_Authorization</fullName>
+        <active>true</active>
+        <description>VRER34 - AID Authorization  cannot be modified</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; NOT(ISNEW())
+&amp;&amp; ER_Business_Unit__c =&apos;BENELUX&apos;
+&amp;&amp; ISPICKVAL(ER_Acceptor_Scheme__c, &apos;C-TAP&apos;)
+&amp;&amp; ISCHANGED(ER_AID_Authorization__c)</errorConditionFormula>
+        <errorDisplayField>ER_AID_Authorization__c</errorDisplayField>
+        <errorMessage>VRER34 - AID Authorization cannot be modified</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRHU07_MIDAuthorization_Format</fullName>
+        <active>true</active>
+        <description>This validation rule ensure that the format of the MID Authorization is correctly captured by User, and follow the hungarian format. This rule can be bypassed by a User by checking the field &apos;BypassVR&apos; on its account.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; RecordType.DeveloperName = &apos;ER_Merchant_Acceptor_RT&apos;
+&amp;&amp; ER_Business_Unit__c =&apos;HU&apos;
+&amp;&amp; LEN(ER_MID_Authorization__c) &gt; 40</errorConditionFormula>
+        <errorDisplayField>ER_MID_Authorization__c</errorDisplayField>
+        <errorMessage>The length of the MID Authorization must contain at most 40 characters</errorMessage>
+    </validationRules>
+</CustomObject>

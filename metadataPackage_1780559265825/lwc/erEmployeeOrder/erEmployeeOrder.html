@@ -1,0 +1,49 @@
+<!--
+ - Created by noorgoolamnabee on 26/01/2023.
+ -->
+
+<!-- Er Employee Order -->
+<template>
+  <lightning-quick-action-panel header={LABEL.LAB_SF_CL_ORDER_EMPLOYEE_TITLE}>
+    <template if:false={loaded}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <template if:true={error}>
+      <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
+
+    <template if:true={loaded}>
+      <template if:true={orderData}>
+        <template if:false={orderLineItemId}>
+          <lightning-datatable
+            key-field="orderItemLineId"
+            data={orderData}
+            columns={columnsOrder}
+            onrowaction={handleRowAction}
+            hide-checkbox-column="true"
+          >
+          </lightning-datatable>
+          <br />
+          <div class="slds-float_right slds-size_1-of-1">
+            <template if:true={totalOrderData}>
+              <c-pagination
+                totalrecords={totalOrderData}
+                page-size={pageSize}
+                onpagination={handlePagination}
+              ></c-pagination>
+            </template>
+          </div>
+        </template>
+        <template if:true={orderLineItemId}>
+          <lightning-breadcrumbs>
+            <lightning-breadcrumb label={orderLineItemId} href="#" onclick={handleNavigateToLevel1}>
+            </lightning-breadcrumb>
+            <lightning-breadcrumb label={LABEL.LAB_SF_CL_LOAD_IN_ERROR} href="#" onclick={handleNavigateToLevel1}>
+            </lightning-breadcrumb>
+          </lightning-breadcrumbs>
+          <c-er-load-errors order-id={orderLineItemId} record-id={recordId}  query-type-param="order-item-line-id"></c-er-load-errors>
+        </template>
+      </template>
+    </template>
+  </lightning-quick-action-panel>
+</template>

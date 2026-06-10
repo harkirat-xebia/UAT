@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 01-08-2022
+  @last modified by  : AAM
+-->
+<template>
+  <div class={className}>
+    <div class="slds-form-element">
+      <div class="slds-form-element__control">
+        <div class="slds-checkbox">
+          <input
+            type="checkbox"
+            name="options"
+            id="checkbox-unique-id-72"
+            value="checkbox-unique-id-72"
+            checked={isChecked}
+            disabled={disabled}
+            onchange={handleChange}
+          />
+          <label class="slds-checkbox__label" for="checkbox-unique-id-72">
+            <span class="slds-checkbox_faux erportal-cbx"></span>
+            <span class="slds-form-element__label erportal-cbxlabel">
+              <lightning-formatted-rich-text value={inputLabel}></lightning-formatted-rich-text>
+            </span>
+          </label>
+          <template if:true={hasTooltip}>
+            <lightning-helptext content={toolTipText} class="er-tooltip"></lightning-helptext>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

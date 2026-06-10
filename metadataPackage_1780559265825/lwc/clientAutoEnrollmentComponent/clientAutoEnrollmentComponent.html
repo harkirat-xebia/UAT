@@ -1,0 +1,196 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner></lightning-spinner>
+    </template>
+    <div class="slds-align_absolute-center">
+        <template if:false={showProgress}>
+            <template if:false={showErrorComponent}>
+            <div class="">
+                <template if:true={showPath}>
+                    <ul class="step-main">
+                        <li class={contactStepClass}>
+                            <p class="step-circle">1</p>
+                            <p class="step-text">{label.pathPhase1}</p>
+                        </li>
+                        <li class={enterpriseStepClass}>
+                            <p class="step-circle">2</p>
+                            <p class="step-text">{label.pathPhase2}</p>
+                        </li>
+                        <li class={commandeStepClass}>
+                            <p class="step-circle">3</p>
+                            <p class="step-text">{label.pathPhase3}</p>
+                        </li>
+                        <li class={signatureStepClass}>
+                            <p class="step-circle">4</p>
+                            <p class="step-text">{label.pathPhase4}</p>
+                        </li>
+                    </ul>
+                </template>
+                <!-- <template if:true={isPhaseWebOffer}>
+                        <c-client-auto-enrollment-component-phase-web-offer 
+                        opportunity-id={opportunityId}
+                        promo-id={promoId}
+                        language={selectedLanguage}>
+                    </c-client-auto-enrollment-component-phase-web-offer>
+                </template> -->
+                <template if:false={isPhaseNegative}>
+                    <div class="inner-container">
+                    
+                        <template if:true={isPhase0}>
+                            <template if:false={showBeneficiaryComp}>
+                                <div class="header-top">
+                                    <h2>{welcomeMessage} <span style="color:red;">{label.welcomeMessageSub}</span></h2>
+                                    <p>{label.welcomePhrase}</p>
+                                </div>
+                                <template if:true={promoExists}>
+                                    <div class="header-top promo-box">
+                                        <h2>{label.promoHeader}&nbsp;{markettingDescription}</h2>
+                                        <p>{description}</p>
+                                    </div>
+                                </template>
+    
+                            </template>
+                            <template if:true={showBeneficiaryComp}>
+                                <div class="header-top">
+                                    <h2>{label.beneficiaryFirstHeader}</h2>
+                                    <p>{label.beneficiarySecondHeader}</p>
+                                    <p class="slds-m-top_large">
+                                        {label.beneficiarySubHeader}<span class="text-red">{translatedProductName}</span>
+                                    </p>
+                                </div>
+                                <div class="counter-main">
+                                    <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease"
+                                        onclick={decrease} variant="border-filled" disabled={isWebOffer}>
+                                    </lightning-button-icon>
+    
+                                    <lightning-input type="number" value={noOfBeneficiaries} onchange={handleInput} min="0"
+                                        variant="label-hidden" max={maxBenefCount} data-form-element disabled={isWebOffer}>
+                                    </lightning-input>
+    
+                                    <lightning-button-icon icon-name="utility:add" alternative-text="Increase"
+                                        onclick={increase} variant="border-filled" disabled={isWebOffer}>
+                                    </lightning-button-icon>
+                                </div>
+    
+                            </template>
+                        </template>
+                        <template if:true={isPhase1}>
+                            <div class="phase-one">
+                                <c-client-auto-enrollment-component-phase-1 no-of-beneficiaries={noOfBeneficiaries}
+                                    salutation={salutation} first-name={firstName} last-name={lastName} language={language}
+                                    role={role} email={email} phone={phone} country-code={countryCode} dial-code={dialCode}
+                                    mobile={mobile} optin={optin} country-code-phone={countryCodePhone}
+                                    dial-code-phone={dialCodePhone} is-web-offer={isWebOffer} selected-language={selectedLanguage}
+                                    business-unit={businessUnit} job-title={jobTitle} department={department} sub-department={subDepartment}>
+                                </c-client-auto-enrollment-component-phase-1>
+                            </div>
+                        </template>
+                        <template if:true={isPhase2}>
+                            <div class="phase-two">
+                                <c-client-auto-enrollment-component-phase-2 enterprise-number={enterpriseNumber}
+                                    business-name={businessName} commercial-name={commercialName} code-t-v-a={codeTVA}
+                                    street-number={streetNumber} city={city} postal-code={postalCode} pays={pays}
+                                    has-enterprise-number={hasEnterpriseNumber} business-unit={businessUnit} vat-checkbox={vatCheckbox} is-web-offer={isWebOffer}
+                                    promo-code={promoCode} product-code={productCode} no-of-beneficiaries={noOfBeneficiaries}>
+                                </c-client-auto-enrollment-component-phase-2>
+                            </div>
+                        </template>
+                        <template if:true={isPhase2Contact}>
+                            <c-client-auto-enrollment-component-phase-contact enterprise-number={enterpriseNumber}
+                                opportunity-id={opportunityId} primary-contact-id={primaryContactId}
+                                billing-contact-id={billingContactId}
+                                order-contact-id={orderContactId}
+                                delivery-contact-id={deliveryContactId}
+                                map-of-contacts={mapOfContacts}
+                                social-secretary={socialSecretary}
+                                selected-language={selectedLanguage}
+                                is-social-secretary-handling-orders={isSocialSecretaryHandlingOrders} is-web-offer={isWebOffer}
+                                promo-code={promoCode} product-code={productCode} no-of-beneficiaries={noOfBeneficiaries}
+                                business-unit={businessUnit}>
+                            </c-client-auto-enrollment-component-phase-contact>
+                        </template>
+                        <template if:true={isPhase3}>
+                                <c-client-auto-enrollment-component-phase-3 enterprise-number={enterpriseNumber}
+                                no-of-beneficiaries={noOfBeneficiaries}
+                                translated-product-name={translatedProductName}
+                                product-code={productCode}
+                                max-benef-count={maxBenefCount}
+                                shipping-name={shippingName}
+                                shipping-street={shippingStreet}
+                                shipping-postal-code={shippingPostalCode}
+                                shipping-city={shippingCity}
+                                shipping-country={shippingCountry}
+                                is-employee-same-as-benef={isEmployeeSameAsBenef}
+                                is-billing-same-as-shipping={isBillingSameAsShipping}
+                                opportunity-contact-roles-map={opportunityContactRolesMap}
+                                no-of-employees={noOfEmployees}
+                                is-web-offer={isWebOffer}
+                                multi-product-list={multiProductList}
+                                business-unit={businessUnit}
+                                >
+                                </c-client-auto-enrollment-component-phase-3>
+                        </template>
+                        <template if:true={isPhase4}>
+                            <c-client-auto-enrollment-component-phase-4 product-code={productCode}
+                                promo-code={promoCode}
+                                business-unit={businessUnit}
+                                estimated-volume={estimatedVolume}
+                                language={selectedLanguage}
+                                has-promo-code={hasPromoCode}
+                                show-promo-error={showPromoError}
+                                show-promo-success={showPromoSuccess}
+                                is-web-offer={isWebOffer}
+                                opportunity-id={opportunityId}
+                                promo-description={description}>
+                            </c-client-auto-enrollment-component-phase-4>
+                        </template>
+                        <template if:false={isPhaseNegative}>
+                            <template if:false={hidePrevious}>
+                                <div class="nav-buttons">
+                                    <lightning-button-icon icon-name="utility:chevronleft" title="Back" class="back-btn"
+                                        onclick={handleBack} disabled={isPhase0}>
+                                    </lightning-button-icon>
+                                    <lightning-button label={nextButton} title="Next" class="next-btn" onclick={handleNext}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                            <template if:true={hidePrevious}>
+                                <div class="nav-buttons" style="justify-content:center;">
+                                    <lightning-button label={label.next} title="Next" class="next-btn" onclick={handleNext} disabled={disableNext}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:false={showEnd}>
+            <template if:true={showErrorComponent}>
+                <c-client-auto-enrollment-component-phase-error language={language} business-unit={businessUnit}
+                    enterprise-number={enterpriseNumber} product-code={productCode} show-m-m-error-comp={showMMErrorComp}></c-client-auto-enrollment-component-phase-error>
+            </template>
+        </template>
+        <template if:true={showEnd}>
+            <c-client-auto-enrollment-component-phase-end business-unit={businessUnit}></c-client-auto-enrollment-component-phase-end>
+        </template>
+        </template>
+        <template if:true={showProgress}>
+            <div class="inner-container">
+                <div class="header-top">
+                    <h2>{label.processingHeader}</h2>
+                    <p>{label.processingSubHeader}</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" data-id="bar"></div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <template if:true={isPhaseNegative}>
+        <div class="nav-buttons" style="justify-content:center;">
+            <lightning-button label={label.next} title="Next" class="next-btn" onclick={handleNext}>
+            </lightning-button>
+        </div>
+    </template>
+</template>

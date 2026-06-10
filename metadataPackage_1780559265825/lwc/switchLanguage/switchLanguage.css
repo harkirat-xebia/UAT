@@ -1,0 +1,16 @@
+/**
+ * @author : ALK
+ * @date : 15/04/2021
+ * @desc : switchLanguage
+ */
+
+.language-label {
+  padding: 10px 0;
+}
+.language-options {
+  padding: 10px 0;
+}
+.div-save {
+  text-align: right;
+}
+/*.div-save button {}*/

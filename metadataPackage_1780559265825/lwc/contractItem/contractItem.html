@@ -1,0 +1,24 @@
+<!--
+ - Created by davram on 2/10/2021.
+ -->
+
+<!-- Contract Item -->
+<template>
+  <div class="spinner">
+    <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+    </template>
+  </div>
+  <lightning-record-view-form record-id={contractId} object-api-name="Contract" density="compact">
+    <div class="slds-box slds-theme_default">
+      <div class="divStyle" data-id={contractId} onclick={onClickContract} style="cursor: pointer">
+        {contractNumber}
+      </div>
+      <lightning-output-field field-name="AccountId"></lightning-output-field>
+      <lightning-output-field field-name="Status"></lightning-output-field>
+      <lightning-output-field field-name="ER_Contract_Type__c"></lightning-output-field>
+      <lightning-output-field field-name="StartDate"></lightning-output-field>
+      <lightning-button variant="brand" label="Apply" onclick={handleOpportunityCreation}></lightning-button>
+    </div>
+  </lightning-record-view-form>
+</template>

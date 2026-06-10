@@ -1,0 +1,619 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 07-27-2023
+  @last modified by  : Malha AMEUR
+-->
+<template>
+  <!-- <div style={backgroundImage}> -->
+  <div>
+    <template if:true={isShowHeader}>
+      <c-er-portal-progress-indicator steps={stepList} current-step={phase}> </c-er-portal-progress-indicator>
+    </template>
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </template>
+    <!--******************************************************-->
+    <!--              Step 0 Store main infos            3443   -->
+    <!--******************************************************-->
+    <template if:true={isStepZeroStoreInfos}>
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__row slds-grid_vertical-align-end slds-p-bottom_medium">
+            <div class="field-form enterprise-nb">
+              <c-er-portal-input
+                      property-name="enterpriseNb"
+                      place-holder-text={labels.lb_enterprise_nb_format}
+                      input-label={labels.lb_step1_enterprise_nb}
+                      value={formCompanyNumber}
+                      required="true"
+                      onchange={handleCompanyNumber}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="field-form slds-m-left_medium">
+              <c-er-portal-input
+                      property-name="email"
+                      place-holder-text={labels.lb_email_place_holder}
+                      input-label={labels.lb_step1_email}
+                      required="true"
+                      value={formEmail}
+                      onchange={handleEmail}
+              >
+              </c-er-portal-input>
+            </div>
+          </div>
+          <div class="slds-form-element__row slds-grid_vertical-align-end slds-p-bottom_medium">
+            <div class="field-form enterprise-nb">
+              <c-er-portal-input
+                      property-name="contractNb"
+                      input-label={labels.lb_contract_nb}
+                      value={formContractNumber}
+                      required="true"
+                      onchange={handleContractNumber}
+              >
+              </c-er-portal-input>
+            </div>
+            <div class="slds-size_5-of-12 slds-m-left_medium search-enterprise">
+              <c-er-portal-button
+                      label={labels.lb_check_contract_nb}
+                      size="small"
+                      alignment="left"
+                      onclick={verifyEmailAndContractNb}
+                      responsive="x-large"
+              >
+              </c-er-portal-button>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+    <!--******************************************************-->
+    <!--              Step 1 Store main infos               -->
+    <!--******************************************************-->
+    <template if:true={isStepOneStoreInfos}>
+        <hgroup class="show-ease">
+          <h2>
+            <lightning-formatted-text value={labels.lb_my_store_information}></lightning-formatted-text>
+          </h2>
+        </hgroup>
+        <div class="form show-ease">
+          <div class="left-ribbon"></div>
+          <fieldset class="slds-form-element slds-form-element_compound">
+
+            <hgroup>
+              <h3>
+                <lightning-formatted-text value={labels.lb_my_store_information_details}></lightning-formatted-text>
+              </h3>
+            </hgroup>
+                          
+            <div class="slds-form-element__control">
+              <!-- <template if:true={hasCheckedEnterpriseNb}> -->
+                <div class="slds-box slds-theme_default form-block-border">
+
+                  <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                    <div class="field-form-large">
+                        <c-er-portal-cbx
+                          input-label={labels.lb_step2b_same_as_enterprise}
+                          data-group="store"
+                          onchange={handleCopyCompanyInfos}
+                          >
+                        </c-er-portal-cbx>
+                    </div>
+                  </div>
+      
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="name"
+                        place-holder-text=""
+                        input-label={labels.lb_store_name}
+                        value={storeInfos.name}
+                        required="true"
+                        onchange={handleStoreInfos}
+                        >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="address"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_street}
+                        value={storeInfos.address}
+                        required="true"
+                        onchange={handleStoreInfos}
+                        >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="postalCode"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_postal_code}
+                        value={storeInfos.postalCode}
+                        required="true"
+                        onchange={handleStoreInfos}
+                        >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="city"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_city}
+                        value={storeInfos.city}
+                        required="true"
+                        onchange={handleStoreInfos}
+                        >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-picklist
+                        property-name="country"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_country}
+                        value={storeInfos.country}
+                        pk-entries={picklistGroup.country}
+                        required="true"
+                        display-cur-value="true"
+                        onchange={handleStoreInfos}
+                        >
+                      </c-er-portal-picklist>
+                    </div>
+                  </div>
+
+                  <hgroup>
+                    <h4>
+                      <lightning-formatted-text value={labels.lb_contact_infos}></lightning-formatted-text>
+                    </h4>
+                  </hgroup>
+  
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form field-form-below-text slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="storeContactFirstName"
+                        place-holder-text={labels.lb_firstname_place_holder}
+                        input-label={labels.lb_step1_firstname}
+                        required="true"
+                        value={storeInfos.storeContactFirstName}
+                        onchange={handleStoreInfos}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form field-form-below-text slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="storeContactLastName"
+                        place-holder-text={labels.lb_lastname_place_holder}
+                        input-label={labels.lb_lastname}
+                        required="true"
+                        value={storeInfos.storeContactLastName}
+                        onchange={handleStoreInfos}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="storeContactEmail"
+                        place-holder-text={labels.lb_email_place_holder}
+                        input-label={labels.lb_step1_email}
+                        required="true"
+                        value={storeInfos.storeContactEmail}
+                        onchange={handleStoreInfos}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="storeContactPhone"
+                          place-holder-text={labels.lb_phone_place_holder}
+                          input-label={labels.lb_phone_nb}
+                          required="true"
+                          value={storeInfos.storeContactPhone}
+                          onchange={handleStoreInfos}
+                        >
+                        </c-er-portal-input>
+                    </div>
+                </div>
+              </div>
+              <!-- </template> -->
+            </div>
+          </fieldset>
+        </div>
+      <!-- </template> -->
+    </template>
+
+    
+    <!--******************************************************-->
+    <!--              Step 2 Store categories                 -->
+    <!--******************************************************-->
+    <template if:true={isStepTwoStoreCats}>
+        <hgroup>
+          <h2>
+            <lightning-formatted-text value={labels.lb_my_store_activity}></lightning-formatted-text>
+          </h2>
+          <h3>
+            <lightning-formatted-text value={labels.lb_select_activity}></lightning-formatted-text>
+          </h3>
+        </hgroup>
+  
+        <div class="form show-ease">
+          <div class="left-ribbon"></div>
+  
+          <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+              <section class="slds-accordion__section slds-is-open">
+                <ul>
+                  <template for:each={categorieItems} for:item="item" for:index="index">
+                    <template if:true={item.showItem}>
+                      <li
+                        id={item.id}
+                        key={item.index}
+                        class="categorie-li"
+                        style={item.levelOffset}
+                        onclick={handleToggleCategorie}
+                      >
+                        <span id={item.id} class={item.className}>
+                          <template if:true={item.selectable}>
+                            <input
+                              id={item.id}
+                              type="checkbox"
+                              class="categorie-checkbox"
+                              checked={item.isChecked}
+                              onchange={handleSelectCategorie}
+                            />
+                          </template>
+                          <template if:false={item.selectable}>
+                            <template if:false={item.showChilds}>
+                              <div class="big-chevron">
+                                <lightning-icon
+                                  id={item.id}
+                                  icon-name="utility:chevronright"
+                                  size="medium"
+                                  class="categorie-checkbox"
+                                  alternative-text="Collapsed"
+                                >
+                                </lightning-icon>
+                              </div>
+                              <div class="small-chevron">
+                                <lightning-icon
+                                  id={item.id}
+                                  icon-name="utility:chevronright"
+                                  size="x-small"
+                                  class="categorie-checkbox"
+                                  alternative-text="Collapsed"
+                                >
+                                </lightning-icon>
+                              </div>
+                            </template>
+                            <template if:true={item.showChilds}>
+                              <div class="big-chevron">
+                                <lightning-icon
+                                  id={item.id}
+                                  icon-name="utility:chevrondown"
+                                  size="medium"
+                                  class="categorie-checkbox"
+                                  alternative-text="Expanded"
+                                ></lightning-icon>
+                              </div>
+                              <div class="small-chevron">
+                                <lightning-icon
+                                  id={item.id}
+                                  icon-name="utility:chevrondown"
+                                  size="x-small"
+                                  class="categorie-checkbox"
+                                  alternative-text="Expanded"
+                                ></lightning-icon>
+                              </div>
+                            </template>
+                          </template>
+                          <p id={item.id} class="categorie-p">{item.name}</p>
+                        </span>
+                      </li>
+                    </template>
+                  </template>
+                </ul>
+              </section>
+            </div>
+          </fieldset>
+        </div>
+    </template>
+
+
+    <!--******************************************************-->
+    <!--           Step 3: Store main categorie               -->
+    <!--******************************************************-->
+    <template if:true={isStepThreeStoreMainCat}>
+        <hgroup>
+          <h2>
+            <lightning-formatted-text value={labels.lb_my_store_activity}></lightning-formatted-text>
+          </h2>
+          <h3>
+            <lightning-formatted-text  class="slds-p-left_medium" value={labels.lb_select_main_activity}></lightning-formatted-text>
+           </h3>
+        </hgroup>
+  
+        <div class="form show-ease">
+          <div class="left-ribbon"></div>
+          <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+              <template for:each={chosenCategories} for:item="item" for:index="index">
+                <li key={item.index}>
+                  <span class="main-categorie-item">
+                    <input
+                      type="radio"
+                      id={item.id}
+                      name="category"
+                      disabled={isReadOnly}
+                      class="main-categorie-radio"
+                      onchange={handleSelectMainCategory}
+                      checked={item.isMain}
+                    />
+                    <p id={item.id} class="main-categorie-p">{item.name}</p>
+                  </span>
+                </li>
+              </template>
+            </div>
+          </fieldset>
+        </div>
+      </template>    
+
+
+    <!--******************************************************-->
+    <!--           Step 4: Store terminal                     -->
+    <!--******************************************************-->
+    <template if:true={isStepFourTerminal}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_my_terminal_information}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_my_terminal_information_details}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-box slds-theme_default form-block-border" data-id="terminalBlock">
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="mid2"
+                    input-label={labels.lb_mid2}
+                    value={storeInfos.mid2}
+                    onchange={handleStoreInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="subMid2"
+                    input-label={labels.lb_sub_mid2}
+                    value={storeInfos.subMid2}
+                    onchange={handleStoreInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </template>    
+
+    <!--******************************************************-->
+    <!--           Step Summary                               -->
+    <!--******************************************************-->
+    <template if:true={isSummary}>
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="row-spacing">
+
+            <hgroup>
+              <h3>
+                <lightning-formatted-text value={labels.lb_my_store_information}></lightning-formatted-text>
+              </h3>
+            </hgroup>
+                          
+            <div class="slds-form-element__control">
+                <div class="slds-box slds-theme_default form-block-border">
+
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="name"
+                        input-label={labels.lb_store_name}
+                        value={storeInfos.name}
+                        disabled="true"
+                        >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="address"
+                        input-label={labels.lb_step1_street}
+                        value={storeInfos.address}
+                        disabled="true"
+                        >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="postalCode"
+                        input-label={labels.lb_step1_postal_code}
+                        value={storeInfos.postalCode}
+                        disabled="true"
+                        >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="city"
+                        input-label={labels.lb_step1_city}
+                        value={storeInfos.city}
+                        disabled="true"
+                        >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-picklist
+                        property-name="country"
+                        input-label={labels.lb_step1_country}
+                        value={storeInfos.country}
+                        pk-entries={picklistGroup.country}
+                        display-cur-value="true"
+                        disabled="true"
+                        >
+                      </c-er-portal-picklist>
+                    </div>
+                  </div>
+
+                  <hgroup>
+                    <h4>
+                      <lightning-formatted-text value={labels.lb_contact_infos}></lightning-formatted-text>
+                    </h4>
+                  </hgroup>
+  
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form field-form-below-text slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="storeContactFirstName"
+                        input-label={labels.lb_step1_firstname}
+                        value={storeInfos.storeContactFirstName}
+                        disabled="true"
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form field-form-below-text slds-m-left_large">
+                      <c-er-portal-input
+                        property-name="storeContactLastName"
+                        input-label={labels.lb_lastname}
+                        value={storeInfos.storeContactLastName}
+                        disabled="true"
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                  
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="storeContactEmail"
+                        input-label={labels.lb_step1_email}
+                        value={storeInfos.storeContactEmail}
+                        disabled="true"
+                      >
+                      </c-er-portal-input>
+                    </div>
+                    <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="storeContactPhone"
+                          input-label={labels.lb_phone_nb}
+                          value={storeInfos.storeContactPhone}
+                          disabled="true"
+                        >
+                        </c-er-portal-input>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row-spacing">
+            <hgroup>
+              <h3>
+                <lightning-formatted-text value={labels.lb_my_terminal_information}></lightning-formatted-text>
+              </h3>
+            </hgroup>
+    
+            <div class="slds-box slds-theme_default form-block-border" data-id="terminalBlock">
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="mid2"
+                    input-label={labels.lb_mid2}
+                    value={storeInfos.mid2}
+                    disabled="true"
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="subMid2"
+                    input-label={labels.lb_sub_mid2}
+                    value={storeInfos.subMid2}
+                    disabled="true"
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--                       End of flow                    -->
+    <!--******************************************************-->
+    <template if:true={isEndPage}>
+      <div class="slds-m-around_medium show-ease">
+        <hgroup>
+          <h4>
+            <lightning-formatted-rich-text value={labels.lb_step_end_msg_greetings4}></lightning-formatted-rich-text>
+          </h4>
+        </hgroup>
+      </div>
+    </template>
+    <!--******************************************************-->
+    <!--                  Navigation buttons                  -->
+    <!--******************************************************-->
+    <!-- <template if:false={isReadOnly}> -->
+    <div class="slds-grid slds-gutters navigation-buttons">
+      <div class="slds-col slds-float_left">
+        <template if:true={isEnablePrev}>
+          <c-er-portal-button label={labels.lb_step2b_previous} size="big" alignment="left" onclick={handlePrev}>
+          </c-er-portal-button>
+        </template>
+      </div>
+      <div class="slds-col">
+        <!-- TODO refactor the 2 buttons: merge into one with dyn label -->
+        <template if:true={isEnableNext}>
+          <c-er-portal-button
+            id="nextButtonDiv"
+            label={labels.lb_step1_next}
+            size="big"
+            alignment="right"
+            onclick={handleNext}
+            >
+          </c-er-portal-button>
+        </template>
+        <template if:true={isEnableFinish}>
+          <c-er-portal-button
+            id="finishButtonDiv"
+            label={labels.lb_step3_validate}
+            size="big"
+            alignment="right"
+            onclick={handleNext}
+            >
+          </c-er-portal-button>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,23 @@
+<template>
+    <div class="inner-container">
+       
+        <div class="header-top slds-text-align_left">
+            <img src={iconUrl} alt="Celebration Icon" style="width: 45px; height: 45px;margin-bottom:30px;" />
+            <h2>{label.header}</h2>
+            <p class="slds-m-bottom_medium">{label.warning}</p>
+            <p>{label.subheader}</p>
+        </div>
+        <div class="red-box-custom slds-m-top_large slds-m-bottom_large">
+            <h4>{label.tableHeader}</h4>
+            <ul class="dot-list">
+                <li>{label.tablePoint1}</li>
+                <li>{label.tablePoint2}</li>
+            </ul>
+        </div>
+        <div class="nav-buttons" style="justify-content:center">
+            <lightning-button class="black-border" variant="neutral" onclick={handleButtonOnClick}
+                title={label.buttonLabel} label={label.buttonLabel}></lightning-button>
+        </div>
+
+    </div>
+</template>

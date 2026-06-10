@@ -1,0 +1,71 @@
+<!--
+ - Created by noorgoolamnabee on 21/12/2022.
+ -->
+
+<!-- Public Register -->
+<template>
+  <lightning-card title={title} icon-name="standard:account">
+    <hr />
+    <template if:false={loaded}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <template if:true={loaded}>
+      <div class="slds-p-horizontal_small">
+        <template if:true={registerData}>
+          <div class="slds-clearfix">
+            <div class="slds-float_right">
+              <lightning-input
+                label="Check all"
+                type="checkbox"
+                name="checkAll"
+                data-field="checkAll"
+                onchange={toggleCheckboxes}
+                class="checkAll"
+              ></lightning-input>
+            </div>
+          </div>
+          <template iterator:it={registerData}>
+            <div class="slds-grid slds-gutters" key={it.value.fieldData}>
+              <div class="slds-col slds-size_2-of-12">
+                <span class="custom-checkbox slds-float_right">
+                  <lightning-input
+                    variant="label-hidden"
+                    key={it.value.fieldData}
+                    type="checkbox"
+                    name={it.value.fieldDataChk}
+                    data-field={it.value.fieldDataChk}
+                  ></lightning-input>
+                </span>
+              </div>
+              <div class="slds-col slds-size_9-of-12">
+                <span>
+                  <lightning-input
+                    variant="label-inline"
+                    key={it.value.fieldData}
+                    label={it.value.fieldLabel}
+                    value={it.value.fieldValue}
+                    data-field={it.value.fieldData}
+                    read-only={it.value.readOnly}
+                  ></lightning-input>
+                </span>
+              </div>
+            </div>
+          </template>
+        </template>
+        <template if:true={error}>
+          <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+        </template>
+      </div>
+    </template>
+    <div slot="footer">
+      <div class="slds-clearfix">
+        <lightning-button-group class="slds-float_right">
+          <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+          <template if:true={registerData}>
+            <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+          </template>
+        </lightning-button-group>
+      </div>
+    </div>
+  </lightning-card>
+</template>

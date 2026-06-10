@@ -1,0 +1,361 @@
+<!--
+~ Author            : Noor
+~ Created Date      : 01/06/2022 (dd/mm/yyyy)
+~ Description       : Visualforce Page to Calculate add estimates
+-->
+<apex:page id="VFER14_Opportunity_Estimate"
+  standardController="Opportunity"
+  extensions="VFCER14_Opportunity_Estimate"
+  docType="html-5.0"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+  showQuickActionVfHeader="false"
+>
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      /*SCROLL BAR*/
+      /* width */
+      ::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #b0c4df;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #54698d;
+      }
+      .hidden {
+        display: none;
+      }
+      .HiddenSelected {
+        display: none;
+      }
+      .collapse {
+        visibility: collapse;
+      }
+      .slds-modal__content {
+        width: 150%;
+        background: red;
+      }
+      .footerContent {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #f3f2f2;
+        box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.16);
+        z-index: 8000;
+        text-align: right;
+        padding: 0.5rem 0;
+      }
+      .checked .slds-warning {
+        border: #ffb75d 1px solid;
+        box-shadow: #ffb75d 0 0 20px 0px inset;
+      }
+      .checked .slds-error {
+        border: #c23934 1px solid;
+        box-shadow: #c23934 0 0 20px 0px inset;
+      }
+      thead th {
+        padding: 0.25rem 0.5rem !important;
+      }
+      tr.error {
+        box-shadow: #c23934 0 0 20px 0px inset !important;
+        animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      }
+      tr.hint {
+        box-shadow: #ffff9a 0 0 20px 0px inset !important;
+        /*animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;*/
+      }
+      .dependentProductOptional {
+        //box-shadow: #e2f705 0 0 5px 0px inset !important;
+        background-color: #ffb75d !important;
+      }
+      .dependentProductMandatory {
+        background-color: #ece449;
+      }
+      .checked .incompatibleProduct {
+        background-color: #c23934 !important;
+      }
+      .mandatoryProduct {
+        background-color: #c23934 !important;
+      }
+      .errorTextLink {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .checked .slds-error {
+        animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      }
+      @keyframes shake {
+        10%,
+        90% {
+          transform: translate3d(-1px, 0, 0);
+        }
+
+        20%,
+        80% {
+          transform: translate3d(2px, 0, 0);
+        }
+
+        30%,
+        50%,
+        70% {
+          transform: translate3d(-4px, 0, 0);
+        }
+
+        40%,
+        60% {
+          transform: translate3d(4px, 0, 0);
+        }
+      }
+      .showSpinner .blockSpinner {
+        display: block !important;
+      }
+      .showSpinner .Phase1,
+      .showSpinner .Phase2 {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+        width: 100%;
+        height: 100%;
+        /*background-color: #ccc;*/
+        pointer-events: none;
+      }
+      @media (max-width: 768px) {
+        .valueUnit {
+          padding-right: 0;
+        }
+      }
+      @media (max-width: 640px) {
+        .Phase1 table,
+        .Phase2 table {
+          table-layout: auto !important;
+        }
+      }
+    </style>
+
+    <apex:form id="formId" onkeypress="return event.keyCode != 13">
+      <div class="header">
+        <div class="slds-page-header">
+          <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+              <div class="slds-media">
+                <div class="slds-media__figure">
+                  <span
+                    class="slds-icon_container slds-icon-standard-product"
+                    title="{!$Label.LABS_SF_Opp_Product_Estimate}"
+                  >
+                    <img
+                      class="slds-icon slds-page-header__icon"
+                      src="/img/icon/t4v35/standard/pricebook_60.png"
+                      alt="{!$Label.LABS_SF_Opp_Product_Estimate}"
+                    />
+                    <span class="slds-assistive-text">{!$Label.LABS_SF_Opp_Product_Estimate}</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <div class="slds-page-header__name">
+                    <div class="slds-page-header__name-title">
+                      <h1>
+                        <span class="slds-page-header__title slds-truncate" title="Calculate Estimate"
+                          >{!$Label.LABS_SF_Opp_Product_Sub_Title_Estimate}</span
+                        >
+                      </h1>
+                    </div>
+                  </div>
+                  <p class="slds-page-header__name-meta">
+                    {!$ObjectType.Opportunity.Label} : {!opportunityRecord.Name}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block" style="padding-bottom: 3rem">
+        <div id="phase1id" class="Phase1">
+          <table
+            class="slds-table slds-no-cell-focus slds-table_bordered slds-table_edit slds-table_fixed-layout slds-table_resizable-cols"
+            role="grid"
+          >
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column2" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$Label.LABS_SF_Opp_Price_SolutionName}"
+                      >{!$Label.LABS_SF_Opp_Price_SolutionName}</span
+                    >
+                  </div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column2" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span class="slds-truncate" title="{!$ObjectType.OpportunityLineItem.fields.ER_Face_Value__c.label}"
+                      >{!$ObjectType.OpportunityLineItem.fields.ER_Face_Value__c.label}</span
+                    >
+                  </div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column2" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span
+                      class="slds-truncate"
+                      title="{!$ObjectType.OpportunityLineItem.fields.ER_Days_Per_Month__c.label}"
+                      >{!$ObjectType.OpportunityLineItem.fields.ER_Days_Per_Month__c.label}</span
+                    >
+                  </div>
+                </th>
+
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column3" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span
+                      class="slds-truncate"
+                      title="{!$ObjectType.OpportunityLineItem.fields.ER_Nb_Beneficiaries__c.label}"
+                      >{!$ObjectType.OpportunityLineItem.fields.ER_Nb_Beneficiaries__c.label}</span
+                    >
+                  </div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column4" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span
+                      class="slds-truncate"
+                      title="{!$ObjectType.OpportunityLineItem.fields.ER_Load_Per_Year__c.label}"
+                      >{!$ObjectType.OpportunityLineItem.fields.ER_Load_Per_Year__c.label}</span
+                    >
+                  </div>
+                </th>
+                <th class="slds-text-title_caps slds-is-resizable slds-is-sortable column4" style="width: auto">
+                  <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                    <span
+                      class="slds-truncate"
+                      title="{!$ObjectType.OpportunityLineItem.fields.ER_Estimated_Value__c.label}"
+                      >{!$ObjectType.OpportunityLineItem.fields.ER_Estimated_Value__c.label}</span
+                    >
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <apex:variable var="index" value="{!0}"></apex:variable>
+              <apex:repeat value="{!lineItems}" var="lineItem">
+                <tr id="{!lineItem.Solution__c}" aria-selected="false" class="slds-hint-parent">
+                  <td>
+                    <span class="slds-grid slds-grid_align-spread">{!lineItem.Solution__r.Name}</span>
+                  </td>
+                  <td>
+                    <apex:inputField id="ER_Face_Value__c"
+                      type="auto"
+                      value="{!lineItem.ER_Face_Value__c}"
+                      onchange="calculateEstimate({!index})"
+                    />
+                  </td>
+                  <td>
+                    <apex:inputField id="ER_Days_Per_Month__c"
+                      type="auto"
+                      value="{!lineItem.ER_Days_Per_Month__c}"
+                      onchange="calculateEstimate({!index})"
+                    />
+                  </td>
+                  <td>
+                    <apex:inputField id="ER_Nb_Beneficiaries__c"
+                      type="auto"
+                      value="{!lineItem.ER_Nb_Beneficiaries__c}"
+                      onchange="calculateEstimate({!index})"
+                    />
+                  </td>
+                  <td>
+                    <apex:inputField id="ER_Load_Per_Year__c"
+                      type="auto"
+                      value="{!lineItem.ER_Load_Per_Year__c}"
+                      onchange="calculateEstimate({!index})"
+                    />
+                  </td>
+                  <td>
+                    <apex:outputText id="ER_Estimated_Value__c"
+                      value="{!lineItem.ER_Estimated_Value__c}"
+                    ></apex:outputText>
+                  </td>
+                </tr>
+                <apex:variable var="index" value="{!index + 1}"></apex:variable>
+              </apex:repeat>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footerContent">
+          <apex:actionStatus id="cancelButtonStatus">
+            <apex:facet name="start">
+              <apex:outputPanel >
+                <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                  height="25"
+                  width="25"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="cancelButtonid"
+                  styleClass="slds-button slds-button_neutral"
+                  value="{!$Label.LABS_SF_Opp_Price_Cancel}"
+                  action="{!cancel}"
+                  status="cancelButtonStatus"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+          <apex:actionStatus id="nextButtonStatus">
+            <apex:facet name="start">
+              <apex:outputPanel >
+                <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                  height="25"
+                  width="25"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="stop">
+              <apex:outputPanel >
+                <apex:commandButton id="nextButtonid"
+                  styleClass="slds-button slds-button_brand"
+                  rerender="nextButtonid"
+                  value="{!$Label.LABS_SF_Opp_Price_Save}"
+                  status="nextButtonStatus"
+                  action="{!saveItems}"
+                />
+              </apex:outputPanel>
+            </apex:facet>
+          </apex:actionStatus>
+        </div>
+      </div>
+    </apex:form>
+
+    <script type="text/javascript">
+      var calculateEstimate = function (varIndex) {
+        var faceVal = $("[id*='" + varIndex + ":ER_Face_Value__c']").val();
+        var beneficiaries = $("[id*='" + varIndex + ":ER_Nb_Beneficiaries__c']").val();
+        var loadYear = $("[id*='" + varIndex + ":ER_Load_Per_Year__c']").val();
+        var dayPerMonth = $("[id*='" + varIndex + ":ER_Days_Per_Month__c']").val();
+        var result = faceVal * beneficiaries * loadYear * dayPerMonth;
+        console.log(result);
+        $("[id*='" + varIndex + ":ER_Estimated_Value__c']").text(result);
+      };
+    </script>
+  </html>
+</apex:page>

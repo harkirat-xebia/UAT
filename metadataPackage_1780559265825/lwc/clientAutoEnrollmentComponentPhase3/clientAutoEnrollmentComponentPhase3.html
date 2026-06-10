@@ -1,0 +1,171 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner></lightning-spinner>
+    </template>
+    <div class="header-top">
+        <h2>{label.header}</h2>
+        <p>{label.subHeader}</p>
+    </div>
+    <template if:false={isWebOffer}>
+        <div class="benef-div">
+            <p class="slds-m-top_large counter-label">
+                {label.beneficiarySubHeader}<span class="text-red">&nbsp;{translatedProductName}</span>
+            </p>
+            <div class="counter-main">
+                <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease" variant="border-filled"
+                    name="noOfBeneficiaries" onclick={decrease} disabled={isWebOffer}>
+                </lightning-button-icon>
+
+                <lightning-input type="number" value={noOfBeneficiaries} onchange={handleInputChange} min="1"
+                    variant="label-hidden" max={smeSizeLimit} name="noOfBeneficiaries" data-form-element
+                    disabled={isWebOffer} style="width:100%;">
+                </lightning-input>
+
+                <lightning-button-icon icon-name="utility:add" alternative-text="Increase" variant="border-filled"
+                    name="noOfBeneficiaries" onclick={increase} disabled={isWebOffer}>
+                </lightning-button-icon>
+            </div>
+        </div>
+        <div class="face-value-div">
+            <p class="counter-label">
+                {label.faceValueLabel}
+            </p>
+            <div class="counter-main">
+                <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease" onclick={decrease}
+                    name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                </lightning-button-icon>
+
+                <lightning-input type="number" name="faceValue" value={faceValue} onchange={handleInputChange} placeholder={faceValuePlaceholder}
+                    min={minFaceValue} variant="label-hidden" max={maxFaceValue} data-form-element disabled={isWebOffer}
+                    required style="width:100%">
+                </lightning-input>
+
+                <lightning-button-icon icon-name="utility:add" alternative-text="Increase" onclick={increase}
+                    name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                </lightning-button-icon>
+            </div>
+        </div>
+    </template>
+    <template if:true={isWebOffer}>
+        <template for:each={multiProductList} for:item="product">
+            <div class="benef-div" key={product.id}>
+                <p class="slds-m-top_large counter-label">
+                    {label.beneficiarySubHeader}<span class="text-red">&nbsp;{product.translatedName}</span>
+                </p>
+                <div class="counter-main">
+                    <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease" variant="border-filled"
+                        name="noOfBeneficiaries" onclick={decrease} disabled={isWebOffer}>
+                    </lightning-button-icon>
+
+                    <lightning-input type="number" value={product.nbOfBeneficiaries} onchange={handleInputChange}
+                        min="1" variant="label-hidden" max={smeSizeLimit} name="noOfBeneficiaries" data-form-element
+                        disabled={isWebOffer} style="width:100%">
+                    </lightning-input>
+
+                    <lightning-button-icon icon-name="utility:add" alternative-text="Increase" variant="border-filled"
+                        name="noOfBeneficiaries" onclick={increase} disabled={isWebOffer}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <div class="face-value-div" key={product.id}>
+                <p class="slds-m-top_large counter-label">
+                    {label.faceValueLabel}
+                </p>
+                <div class="counter-main">
+                    <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease" onclick={decrease}
+                        name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                    </lightning-button-icon>
+
+                    <lightning-input type="number" name="faceValue" value={product.faceValue}
+                        onchange={handleInputChange} min={minFaceValue} variant="label-hidden" max={maxFaceValue} placeholder={faceValuePlaceholder}
+                        data-form-element disabled={isWebOffer} required style="width:100%">
+                    </lightning-input>
+
+                    <lightning-button-icon icon-name="utility:add" alternative-text="Increase" onclick={increase}
+                        name="faceValue" variant="border-filled" disabled={isWebOffer}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <hr key={product.id} style="width: 30%;text-align: center;margin: 30px auto;" />
+        </template>
+    </template>
+    <div class="">
+        <p class="slds-m-top_large counter-label">
+            <span class="text-red">{xxBeneficiaryCount}&nbsp;{label.phase3BenefLabl} &nbsp;</span>{label.phase3Benef}
+        </p>
+        <lightning-input type="toggle" class="toggle-custom" name="isEmployeeSameAsBenef" variant="label-hidden"
+            checked={isEmployeeSameAsBenef} onchange={handleInputChange} data-form-element
+            message-toggle-active={label.yesLabel} message-toggle-inactive={label.noLabel}></lightning-input>
+    </div>
+    <template if:false={isEmployeeSameAsBenef}>
+        <div class="employee-div">
+            <p class="slds-m-top_large counter-label">
+                {label.phase3Employees}
+            </p>
+            <div class="counter-main">
+                <lightning-button-icon icon-name="utility:dash" alternative-text="Decrease" onclick={decrease}
+                    name="noOfEmployees" variant="border-filled">
+                </lightning-button-icon>
+
+                <lightning-input type="number" name="noOfEmployees" value={noOfEmployees} onchange={handleInputChange}
+                    min=1 variant="label-hidden" max={maxBenefCount} data-form-element required
+                    style="width:100%">
+                </lightning-input>
+
+                <lightning-button-icon icon-name="utility:add" alternative-text="Increase" onclick={increase}
+                    name="noOfEmployees" variant="border-filled">
+                </lightning-button-icon>
+            </div>
+        </div>
+    </template>
+    <hr style="width: 30%;text-align: center;margin: 20px auto;margin-bottom: 30px;" />
+    <div class="">
+        <p class="slds-m-top_large counter-label">
+            {label.phase3Address}
+        </p>
+        <lightning-input type="toggle" class="toggle-custom" name="isBillingSameAsShipping" variant="label-hidden"
+            checked={isBillingSameAsShipping} onchange={handleInputChange} data-form-element
+            message-toggle-active={label.yesLabel} message-toggle-inactive={label.noLabel}></lightning-input>
+    </div>
+    <template if:false={isBillingSameAsShipping}>
+        <div class="slds-form">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- Row 1: Name and Street -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="shippingName" label={label.shippingName} value={shippingName}
+                        placeholder={namePlaceholder} onchange={handleInputChange} required data-form-element
+                    >
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="shippingStreet" label={label.shippingStreet}
+                        placeholder={shippingStreetPlaceholder} value={shippingStreet}
+                        onchange={handleInputChange} required data-form-element>
+                    </lightning-input>
+                </div>
+
+                <!-- Row 2: City and Postal Code -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="shippingCity" label={label.shippingCity}
+                        placeholder={shippingCityPlaceholder} value={shippingCity} onchange={handleInputChange}
+                        required data-form-element>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning-input name="shippingPostalCode" label={label.shippingPostalCode}
+                        placeholder={shippingPostalCodePlaceholder} value={shippingPostalCode}
+                        onchange={handleInputChange} required data-form-element>
+                    </lightning-input>
+                </div>
+
+                <!-- Row 3: Country -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning-input name="shippingCountry" label={label.shippingCountry}
+                        placeholder={shippingCountryPlaceholder} value={shippingCountry}
+                        onchange={handleInputChange} required data-form-element>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

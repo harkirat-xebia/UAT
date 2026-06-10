@@ -1,0 +1,370 @@
+<!--
+ - Created by Saad on 03/06/2023.
+ -->
+
+<!-- Er Portal Financial Center -->
+<template>
+
+  <!--c-er-portal-breadcrumbs rec-id={financialCenterId} parent-id="0015r00000omoayAAA" mode={mode}></c-er-portal-breadcrumbs-->
+  <c-er-portal-breadcrumbs rec-id={financialCenterId} mode={mode} parent-id={parentkey} scope={scope}></c-er-portal-breadcrumbs>
+
+  <div class="form show-ease">
+
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </template>
+
+    <div class="left-ribbon"></div>
+
+    <fieldset class="slds-form-element slds-form-element_compound">
+
+      <div class="slds-form-element__control">
+        <template if:true={hasCheckedEnterpriseNb}>
+          <hgroup class="show-ease">
+            <h3>
+              <lightning-formatted-text value={labels.lb_general_info}></lightning-formatted-text>
+              <template if:true={blockEdit}>
+                <div class="slds-m-right_large" style="float:right; margin-right:5%;">
+                  <lightning-button
+                          variant="brand-outline"
+                          label={labels.lb_edit}
+                          title={labels.lb_edit}
+                          onclick={handleEdit}>
+                  </lightning-button>
+                </div>
+              </template>
+            </h3>
+          </hgroup>
+          <div class="slds-box slds-theme_default form-block-border">
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+              <div class="field-form slds-m-right_large">
+                <c-er-portal-input
+                        property-name="legalName"
+                        place-holder-text=""
+                        input-label={labels.lb_name}
+                        value={companyInfos.legalName}
+                        required="true"
+                        disabled={blockEdit}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+            </div>
+
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+              <div class="field-form slds-m-right_large">
+                <c-er-portal-input
+                        property-name="address"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_street}
+                        value={companyInfos.address}
+                        required="true"
+                        disabled={blockEdit}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+              <div class="field-form slds-m-left_large">
+                <c-er-portal-input
+                        property-name="city"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_city}
+                        value={companyInfos.city}
+                        required="true"
+                        disabled={blockEdit}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+            </div>
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+              <div class="field-form slds-m-right_large">
+                <c-er-portal-input
+                        property-name="postalCode"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_postal_code}
+                        value={companyInfos.postalCode}
+                        required="true"
+                        disabled={blockEdit}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+              <div class="field-form slds-m-left_large">
+                <c-er-portal-picklist
+                        property-name="country"
+                        place-holder-text=""
+                        input-label={labels.lb_step1_country}
+                        value={companyInfos.country}
+                        pk-entries={picklistGroup.country}
+                        required="true"
+                        display-cur-value="true"
+                        disabled={blockEdit}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-picklist>
+              </div>
+            </div>
+          </div>
+          <div class="row-spacing">
+            <hgroup class="show-ease">
+              <h3>
+                <lightning-formatted-text value={labels.lb_contact_person}></lightning-formatted-text>
+              </h3>
+            </hgroup>
+            <div class="slds-box slds-theme_default form-block-border">
+              <template if:true={isEdit}>
+                <div class="field-form-large">
+                  <c-er-portal-cbx
+                          input-label={labels.lb_step2b_same_as_enterprise_contact}
+                          data-id="copyCompanyAddress"
+                          disabled={isReadOnlyEditable}
+                          data-group="store"
+                          onchange={handleCopyContactInfos}
+                  >
+                  </c-er-portal-cbx>
+                </div>
+              </template>
+              <template if:true={isNew}>
+                <div class="field-form-large">
+                  <c-er-portal-cbx
+                          input-label={labels.lb_step2b_same_as_enterprise_contact}
+                          data-id="copyCompanyAddress"
+                          disabled={isReadOnlyEditable}
+                          data-group="store"
+                          onchange={handleCopyContactInfos}
+                  >
+                  </c-er-portal-cbx>
+                </div>
+              </template>
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-right_large">
+                  <c-er-portal-input
+                          property-name="firstName"
+                          place-holder-text={labels.lb_firstname_place_holder}
+                          input-label={labels.lb_step1_firstname}
+                          disabled={blockEdit}
+                          value={companyInfos.firstName}
+                          required="true"
+                          onchange={handleContactInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-input
+                          property-name="lastName"
+                          place-holder-text={labels.lb_lastname_place_holder}
+                          input-label={labels.lb_lastname}
+                          disabled={blockEdit}
+                          value={companyInfos.lastName}
+                          required="true"
+                          onchange={handleContactInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-input
+                          property-name="email"
+                          place-holder-text={labels.lb_email_place_holder}
+                          input-label={labels.lb_step1_email}
+                          disabled={blockEdit}
+                          value={companyInfos.email}
+                          required="true"
+                          onchange={handleContactInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form slds-m-left_large">
+                  <c-er-portal-input
+                          property-name="contactPhone"
+                          place-holder-text={labels.lb_phone_place_holder}
+                          disabled={blockEdit}
+                          input-label={labels.lb_phone_nb}
+                          value={companyInfos.contactPhone}
+                          required="true"
+                          onchange={handleContactInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hgroup class="show-ease">
+            <h3>
+              <lightning-formatted-text value={labels.lb_settlement_info}></lightning-formatted-text>
+            </h3>
+          </hgroup>
+          <div class="slds-box slds-theme_default form-block-border">
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+              <div class="field-form field-form-below-text slds-m-left_large">
+                <c-er-portal-picklist
+                        property-name="invoicingMethod"
+                        disabled={bankInfoDisabled}
+                        input-label={labels.lb_invoicing_method}
+                        value={companyInfos.invoicingMethod}
+                        pk-entries={picklistGroup.invoicingMethod}
+                        required={bankInfoRequired}
+                        onchange={handleCompanyInfos}
+                        display-cur-value="true"
+                >
+                </c-er-portal-picklist>
+              </div>
+            </div>
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+              <div class="field-form field-form-below-text slds-m-left_large">
+                <c-er-portal-input
+                        property-name="IBAN"
+                        place-holder-text={labels.lb_iban_place_holder}
+                        input-label={labels.lb_iban}
+                        required={bankInfoRequired}
+                        disabled={bankInfoDisabled}
+                        value={companyInfos.iban}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+              <div class="field-form field-form-below-text slds-m-right_large">
+                <c-er-portal-input
+                        property-name="BIC"
+                        place-holder-text={labels.lb_bic_place_holder}
+                        input-label={labels.lb_bic}
+                        required={bankInfoRequired}
+                        disabled={bankInfoDisabled}
+                        value={companyInfos.bic}
+                        onchange={handleCompanyInfos}
+                >
+                </c-er-portal-input>
+              </div>
+            </div>
+            <template if:true={isERFI}>
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-input
+                          property-name="ovtOperator"
+                          input-label={labels.lb_ovt_operator}
+                          required={isOvtMandatory}
+                          disabled={bankInfoDisabled}
+                          value={companyInfos.ovtOperator}
+                          onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form field-form-below-text slds-m-right_large">
+                  <c-er-portal-input
+                          property-name="ovtCode"
+                          place-holder-text={labels.lb_ovt_code_place_holder}
+                          input-label={labels.lb_ovt_code}
+                          required={isOvtMandatory}
+                          disabled={bankInfoDisabled}
+                          value={companyInfos.ovtCode}
+                          onchange={handleCompanyInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+            </template>
+          </div>
+          <template if:true={isEdit}>
+            <div class="slds-grid slds-gutters navigation-buttons">
+              <div class="slds-col slds-float_left">
+                <c-er-portal-button
+                        label={labels.lb_cancel}
+                        size="big" alignment="left"
+                        onclick={handleCancelEdit}>
+                </c-er-portal-button>
+              </div>
+
+              <div class="slds-col" style="margin-right:4%;">
+                <c-er-portal-button
+                        id="nextButtonDiv"
+                        label={labels.lb_step1_save}
+                        size="big"
+                        alignment="right"
+                        onclick={handleSaveEdit}
+                >
+                </c-er-portal-button>
+              </div>
+            </div>
+          </template>
+          <template if:true={isNew}>
+            <div class="slds-grid slds-gutters navigation-buttons">
+              <div class="slds-col slds-float_left">
+                <c-er-portal-button
+                        label={labels.lb_cancel}
+                        size="big" alignment="left"
+                        onclick={handleCancelNew}>
+                </c-er-portal-button>
+              </div>
+
+              <div class="slds-col" style="margin-right:4%;">
+                <c-er-portal-button
+                        id="nextButtonDivNew"
+                        label={labels.lb_step1_save}
+                        size="big"
+                        alignment="right"
+                        onclick={handleSaveNew}
+                >
+                </c-er-portal-button>
+              </div>
+            </div>
+          </template>
+          <template if:false={isNew}>
+            <template if:true={showStores}>
+              <div class="slds-form-element__row">
+                <hgroup class="slds-m-bottom_xxx-small">
+                  <h3>
+                    <lightning-formatted-text value={labels.lb_my_stores}> </lightning-formatted-text>
+                  </h3>
+                  <h4>
+                    <lightning-formatted-text value={labels.lb_list_stores}> </lightning-formatted-text>
+                  </h4>
+                </hgroup>
+              </div>
+
+              <div class="slds-form-element__row slds-p-bottom_large data-table-responsive">
+                <div class="table-form">
+                  <c-er-portal-data-table
+                          property-name="storesList"
+                          table-datas={storesList}
+                          table-style="vertical"
+                          is-read-only="true"
+                          display-columns={storesListTableColumns}
+                          show-radio-btn="false"
+                  >
+                  </c-er-portal-data-table>
+                  <div class="slds-form-element__row slds-p-bottom_large add-item button__right">
+                    <div class="slds-size_4-of-12 add-item slds-m-left_medium">
+                      <c-er-portal-button
+                              label={labels.lb_add}
+                              size="small"
+                              alignment="right"
+                              onclick={newStoreOnboarding}
+                              responsive="max"
+                              responsive-left="true"
+                      >
+                      </c-er-portal-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </template>
+          <template if:true={isView}>
+            <div class="slds-grid slds-gutters navigation-buttons">
+              <div class="slds-col slds-float_left">
+                <c-er-portal-button
+                        label={labels.lb_step2b_previous}
+                        size="big" alignment="left"
+                        onclick={handleCancelNew}>
+                </c-er-portal-button>
+              </div>
+            </div>
+          </template>
+        </template>
+      </div>
+    </fieldset>
+  </div>
+</template>

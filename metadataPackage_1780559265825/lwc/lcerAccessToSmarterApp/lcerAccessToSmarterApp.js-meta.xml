@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <description>Ability to sync any contact related to Smarter Account with Customer Id not empty</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Lcer Access To Smarter App</masterLabel>
+    <targets>
+        <target>lightning__RecordAction</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordAction">
+            <actionType>Action</actionType>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

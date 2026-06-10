@@ -1,0 +1,53 @@
+<template>
+  <c-er-portal-breadcrumbs rec-id={parentId} parent-id={parentId} mode={mode} scope={scope}></c-er-portal-breadcrumbs>
+  <hgroup>
+    <h2>
+      <lightning-formatted-text value={labels.lb_my_store_activity}></lightning-formatted-text>
+    </h2>
+    <h3>
+      <lightning-formatted-text value={labels.lb_select_main_activity}></lightning-formatted-text>
+    </h3>
+  </hgroup>
+  <div class="form show-ease">
+    <div class="left-ribbon"></div>
+    <fieldset class="slds-form-element slds-form-element_compound">
+      <div class="slds-form-element__control">
+        <template for:each={mainCategoriesItems} for:item="item">
+          <li key={item.label}>
+            <span class="main-categorie-item">
+              <input
+                type="radio"
+                id={item.value}
+                name="category"
+                class="main-categorie-radio"
+                onchange={selectMainCategory}
+              />
+              <p id={item.label} class="main-categorie-p">{item.label}</p>
+            </span>
+          </li>
+        </template>
+      </div>
+    </fieldset>
+  </div>
+  <div class="slds-grid slds-gutters navigation-buttons">
+    <div class="slds-col">
+      <c-er-portal-button
+        id="cancelButtonDiv"
+        label={labels.lb_step2b_previous}
+        size="big"
+        alignment="left"
+        onclick={newStorePrevious}
+      >
+      </c-er-portal-button>
+      <c-er-portal-button
+        id="nextButtonDiv"
+        label={labels.lb_step1_save}
+        size="big"
+        alignment="right"
+        disabled={disableNewStoreMainCategoryNext}
+        onclick={newStoreSave}
+      >
+      </c-er-portal-button>
+    </div>
+  </div>
+</template>

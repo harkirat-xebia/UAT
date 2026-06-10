@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lead</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Leads</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Acceso a lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_access</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Nivel de acceso a leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_access_level</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Alerta de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_alert</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Regla de asignación de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Reglas de asignación de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_assignment_rule</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Captura de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_capture</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Interfaz de captura de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_capture_interface</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Página de captura de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_capture_page</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Creador del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_creator</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Divisa del lead</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_currency</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campo personalizado de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Campos personalizados de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_custom_field</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Datos del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_data</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>División de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_division</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Modificación de lead</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_edit</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campo del lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Campos de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_field</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Información general acerca de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_general</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Historial de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_history</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Informe del historial de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_history_report</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Id. de lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Id. de lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_id</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Importación de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_import</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Asistente para importación de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_import_wizard</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Información de los leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_information</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Tiempo de vida de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_lifetime</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Informe de lista de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_list_report</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Administración de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_management</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Nombre del lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Nombres de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_name</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Proprietário del lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Proprietários del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_owner</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Alias del propietario del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_owner_alias</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Informe del propietario del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_owner_report</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Lista de selección de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Listas de selección de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_picklist</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Cola de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Colas de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_queue</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Valoración del lead</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_rating</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Registro de lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Registros de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_record</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Tipo de registro de lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Tipos de registro de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_record_type</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Informe de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Informes de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_report</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Puntuación de lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Puntuaciones de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_score</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Configuración de leads</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Configuraciones de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_setting</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Configuración de leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_setup</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Orginen del lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Orginen del lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_source</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Id. de etapa de lead</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_stage_id</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Estado de lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_status</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Informe del estado de leads</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_status_report</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Vistas de los leads</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_views</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Clasificación</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>rating_lead</name>
+    </fields>
+</CustomObjectTranslation>

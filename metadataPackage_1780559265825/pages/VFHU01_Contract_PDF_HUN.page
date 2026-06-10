@@ -1,0 +1,360 @@
+<apex:page controller="VFCHU01_Contract_PDF"
+  renderAs="pdf"
+  language="FR"
+  showHeader="false"
+  cache="false"
+  sidebar="false"
+  applyhtmltag="false"
+  standardStylesheets="false"
+>
+  <head>
+    <style type="text/css" media="print">
+      @page {
+        size: A4;
+        margin: 0mm 4mm 0mm 4mm;
+        @top-center {
+          content: element(header);
+        }
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+      label {
+      }
+      strong {
+      }
+      .header {
+        font-family: Dialog !important;
+        margin-left: 46px;
+        margin-top: 30px;
+        position: running(header);
+      }
+      .footer {
+        font-family: Dialog !important;
+        /*color:#AEB2BD;*/
+        font-size: 6pt;
+        /*text-align: center;*/
+        position: running(footer);
+      }
+      .content {
+        font-family: Dialog !important;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      .pagenumber:before {
+        content: counter(page);
+      }
+      .pagecount:before {
+        content: counter(pages);
+      }
+      .container {
+        margin-top: 90px;
+        font-size: 9pt;
+      }
+      .topleft {
+        float: left;
+        width: 48%;
+      }
+      .left {
+        position: absolute;
+        left: 16px;
+        width: 46%;
+      }
+      .right {
+        position: absolute;
+        right: 16px;
+        width: 46%;
+      }
+      .topright {
+        float: right;
+        width: 48%;
+      }
+      ol.alphabetList {
+        list-style-type: lower-alpha;
+      }
+      li {
+        text-align: justify;
+      }
+      table,
+      th,
+      td {
+        /*border: .5px solid black;*/
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        padding: 4px;
+      }
+      th {
+        padding: 8px;
+        text-align: center;
+      }
+      .block {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #11204c;
+      }
+      .row {
+      }
+      .size_1-of-1 {
+        width: 100%;
+        display: inline-block;
+      }
+      .size_1-of-2 {
+        width: 49%;
+        display: inline-block;
+      }
+      .size_1-of-3 {
+        width: 33%;
+        display: inline-block;
+      }
+      .size_1-of-4 {
+        width: 24%;
+        display: inline-block;
+      }
+      .title {
+        color: #0085ca;
+        font-weight: bold;
+      }
+      .outputField {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <div class="header">
+    <apex:image url="{!URLFOR($Resource.EdenredLogoBlack)}"
+      styleClass="blacklogo"
+      style="position: absolute; margin-left: 46px"
+      width="60"
+      height="40"
+    />
+    <div style="text-align: center; margin-top: 5%">Edenred Kártya elfogadóhelyi szerződés</div>
+  </div>
+  <!--div class="footer">
+
+</div-->
+  <apex:form styleClass="content">
+    <!--********PAGE : 1*********-->
+    <div class="container">
+      <div class="block">
+        Amely létrejött egyrészről: <b>Edenred Magyarország Kft.</b> (1134 Budapest, Váci út 45.,Cg.: 01-09-266926,
+        adószám: 10884979-2-41; bankszámlaszám: 12001008-00164130-00800005, (a továbbiakban EDENRED), képviseletében
+        Balázs Krisztián, másrészről
+      </div>
+      <br />
+      <div class="title">Elfogadóhely:</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-2">Cégnév: <span class="outputField">{!accountName}</span></div>
+          <div class="size_1-of-2">Cégforma: <span class="outputField">{!legalForm}</span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Cég székhelye: <span class="outputField">{!legalStreet}</span>
+            <span class="outputField">{!legalZipCode}</span>
+            <span class="outputField">{!legalCity}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Postázási cím (amennyiben eltér):
+            <span class="outputField">{!mailingStreet}</span><span class="outputField">{!mailingZipCode}</span
+            ><span class="outputField">{!mailingCity}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-2">
+            Cégjegyzékszám:
+            <span class="outputField">{!nationalCompanyID}</span>
+          </div>
+          <div class="size_1-of-2">Adószám: <span class="outputField">{!vatNumber}</span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">Kereskedő kód (MID): <span class="outputField"></span></div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Képviseletében:
+            <span class="outputField"
+              >{!headContact.firstName} {!headContact.MiddleName} {!headContact.lastName} {!headContact.Suffix}</span
+            >,<br />
+            hereinafter referred to as "Participating business"
+          </div>
+        </div>
+      </div>
+
+      <div class="title">Kapcsolattartók:</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1">
+            Illetékes Vezető neve:
+            <span class="outputField"
+              >{!financialCenterContact.salutation} {!financialCenterContact.firstName}
+              {!financialCenterContact.MiddleName} {!financialCenterContact.lastName} {!financialCenterContact.Suffix}
+            </span>
+            beosztása:
+            <span class="outputField">{!financialCenterContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">Tel: {!financialCenterContact.phone}</div>
+          <div class="size_1-of-3">Mobilszám: {!financialCenterContact.MobilePhone}</div>
+          <div class="size_1-of-3">E-mail cím: {!financialCenterContact.email}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Kapcsolattartó neve:
+            <span class="outputField"
+              >{!quoteContact.salutation} {!quoteContact.firstName} {!quoteContact.MiddleName}{!quoteContact.lastName}
+              {!quoteContact.Suffix}
+            </span>
+            beosztása:
+            <span class="outputField">{!quoteContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">Tel: {!quoteContact.phone}</div>
+          <div class="size_1-of-3">Mobilszám: {!quoteContact.MobilePhone}</div>
+          <div class="size_1-of-3">E-mail cím: {!quoteContact.email}</div>
+        </div>
+      </div>
+
+      <div class="title">Számlázási adatok:</div>
+      <div class="block">
+        <div class="row">
+          <div class="size_1-of-1">Bankszámlaszám: {!bankAccountNumber}</div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-1">
+            Illetékes Vezető neve
+            <span class="outputField"
+              >{!financialCenterContact.salutation} {!financialCenterContact.firstName}
+              {!financialCenterContact.MiddleName} {!financialCenterContact.lastName} {!financialCenterContact.Suffix}
+            </span>
+            beosztása:
+            <span class="outputField">{!financialCenterContact.ER_Role__c}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="size_1-of-3">
+            Phone:
+            <span class="outputField">{!financialCenterContact.phone}</span>
+          </div>
+          <div class="size_1-of-3">
+            Fax:
+            <span class="outputField">{!financialCenterContact.MobilePhone}</span>
+          </div>
+          <div class="size_1-of-3">
+            E-mail address:
+            <span class="outputField">{!financialCenterContact.email}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="title">A szerződés tárgya:</div>
+      <div class="block">
+        <p>
+          EDENRED által kibocsájtott kártyák elfogadása az Elfogadóhely jelen szerződés mellékletében felsorolt
+          üzleteiben. Elfogadóhely későbbiekben nyíló üzletei automatikusan jelen szerződés hatálya alá kerülnek.
+          Edenred a kártyák elfogadásáért kezelési költséget számít fel:
+        </p>
+
+        <apex:repeat value="{!serviceList}" var="service">
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Gift'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Ajándékkártya</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke *: {!service.value} % + ÁFA
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke 2019. december 31-ig, majd naptári évente * :
+              {!service.value} Ft + ÁFA / Üzlet
+            </apex:outputPanel>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Schooling'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Beiskolázási kártya</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke *: {!service.value} % + ÁFA
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke 2019. december 31-ig, majd naptári évente * :
+              {!service.value} Ft + ÁFA / Üzlet
+            </apex:outputPanel>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!service.solutionCode=='ERHU_Sport'}">
+            <div style="color: #0085ca; font-weight: bold">Edenred Kultúra és Sport kártya</div>
+            <apex:outputPanel rendered="{!service.serviceType=='Participation'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke *: {!service.value} % + ÁFA
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!service.serviceType=='FixedFee'}">
+              <apex:image url="{!URLFOR($Resource.CheckBoxChecked)}" rendered="true" width="10px" height="10px" />
+              Kezelési költség ÁSZF-ben rögzített általános mértéke 2019. december 31-ig, majd naptári évente * :
+              {!service.value} Ft + ÁFA / Üzlet
+            </apex:outputPanel>
+          </apex:outputPanel>
+        </apex:repeat>
+        <div>
+          <apex:outputPanel rendered="{!!hasFixedFee}">
+            <p>*Edenred havonta legalább egy alkalommal küld számlát Elfogadóhely felé.</p>
+          </apex:outputPanel>
+          <apex:outputPanel rendered="{!hasFixedFee}">
+            <p>
+              *Amennyiben az üzletek átlagos éves forgalma a tárgyévben eléri a {!ValueFixedFeeThreshold} Ft-ot, úgy a
+              tárgyévet követő év január 1-től a tranzakció névértékére felszámított kezelési költség mértéke 5% (+ÁFA)
+              értékre változik.
+            </p>
+          </apex:outputPanel>
+        </div>
+      </div>
+
+      <div class="title">Elfogadóhely vállalja, hogy:</div>
+      <div class="block">
+        <ul>
+          <li>
+            Fizetőeszközként elfogadja az Edenred által kibocsájtott szerződésben foglalt kártyákat és az ezzel fizető
+            vásárlókkal szemben szankciókat nem alkalmaz. A fent nem említett Edenred kártyákat az Elfogadóhely nem
+            jogosult elfogadni.
+          </li>
+          <li>
+            Elfogadóhely vállalja, hogy betartja a mindenkori hatályos SZJA törvény vonatkozó rendelkezéseit, és a
+            kártyát a törvényben foglalt vagy a kártyán szereplő termék vagy szolgáltatáskörbe foglalt cikkek
+            ellenértékeként fogadja csak el.
+          </li>
+          <li>
+            Új üzlet megnyitásáról vagy a listán szereplő üzlet bezárásáról (megszüntetéséről) az Elfogadóhely köteles
+            annak időpontjától számított 3 munkanapon belül írásban, ajánlott levél formájában értesíteni az EDENRED-et.
+          </li>
+        </ul>
+        <br />
+        <div>
+          Jelen szerződés határozatlan időre szól, melyet a Felek 60 napos felmondási idő betartása mellett mondhatnak
+          fel tértivevényes ajánlott levélben.<br />
+          <b
+            >Jelen szerződést felek előzetes egyeztetést, elolvasást és értelmezést követően - mint akaratukkal
+            mindenben egyezőt - cégszerűen írták alá. Az Általános Szerződési Feltételeket elolvastam és a benne
+            foglaltakat - mint akaratommal mindenben egyezőt – elfogadom.</b
+          >
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="block">
+        <div>Budapest, 2019</div>
+        <br /><br /><br /><br />
+        <div style="display: inline-block; margin-right: 25px">
+          ____________________________________
+          <p>Edenred Magyarország Kft.</p>
+        </div>
+        <div style="display: inline-block; float: right">
+          ____________________________________
+          <p>Képviseletében:</p>
+        </div>
+      </div>
+    </div>
+  </apex:form>
+</apex:page>

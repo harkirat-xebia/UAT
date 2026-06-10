@@ -1,0 +1,246 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner></lightning-spinner>
+    </template>
+    <div class="header-top">
+        <h2>{label.header}</h2>
+        <p>{label.subHeader}</p>
+    </div>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <!-- Main Contact Field -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="lightning-label-relative">
+                <lightning-input value={primaryContactDisplayName} onclick={handleMainContactClick} name="mainContact"
+                    label={label.main_contact} field-level-help={label.main_contact_description} required
+                    data-form-element>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Billing Contact Field -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="lightning-label-relative">
+                <lightning-input value={billingContactDisplayName} onclick={handleBillingContactClick}
+                    name="billingContact" label={label.invoicing_contact}
+                    field-level-help={label.invoicing_contact_description} required data-form-element>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Order Contact Field -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="lightning-label-relative">
+                <lightning-input value={orderContactDisplayName} onclick={handleOrderContactClick} name="orderContact"
+                    label={label.order_contact} field-level-help={label.order_contact_description} required
+                    data-form-element>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Delivery Contact Field -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="lightning-label-relative">
+                <lightning-input value={deliveryContactDisplayName} onclick={handleDeliveryContactClick}
+                    name="deliveryContact" label={label.delivery_contact} help-text={label.delivery_contact_description}
+                    field-level-help={label.delivery_contact_description} required data-form-element>
+                </lightning-input>
+            </div>
+        </div>
+        <hr style="width: 30%;text-align: center;margin: 20px auto;margin-bottom: 30px;" />
+        <template if:true={isBUBelgium}>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <lightning-combobox name="socialSecretary" value={socialSecretary} options={socialSecretaryOptions}
+                    onchange={handleInputChange} label={label.secretaryLabel} required data-form-element>
+                </lightning-combobox>
+
+            </div>
+            <template if:true={showSecretaryToggle}>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+
+                    <lightning-input type="toggle" name="isSocialSecretaryHandlingOrders" label={label.secretaryChoice}
+                        checked={isSocialSecretaryHandlingOrders} onchange={handleInputChange} data-form-element
+                        message-toggle-active={label.yesLabel} message-toggle-inactive={label.noLabel} class="toggle-custom">
+                    </lightning-input>
+        
+                </div>
+            </template>
+        </template>
+    </div>
+    <template if:true={isModalOpen}>
+        
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container mobile-modal">
+                <header class="slds-modal__header slds-modal__header_empty">
+                   
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse slds-grid" onclick={closeModal} title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" alternative-text="close" class="slds-button__icon slds-button__icon_large"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                        <div class="header-top">
+                            <h2>{getModalHeader}</h2>
+                            <p>{getModalSubHeader}</p>
+                        </div>
+                    <template if:false={showAddContactSection}>
+                        <div class="modal-content">
+                            <label class="label-cnt">{label.existingContact}</label>
+                            <template for:each={contactList} for:item="contact" for:index="index">
+                                <div key={contact.Id} class="btn-grid">
+                                    <lightning-button variant="neutral" label={contact.label} data-id={contact.Id}
+                                        onclick={handleSelect} stretch style="flex:1">
+                                    </lightning-button>
+                                    <div class="btn-icon">
+                                        <lightning-button-icon icon-name="utility:edit" alternative-text="Edit"
+                                            title="Edit" data-id={contact.Id} onclick={handleEdit} class="edit-icon" size="medium">
+                                        </lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:delete" alternative-text="Delete"
+                                            title="Delete" data-id={contact.Id} onclick={handleDelete} class="delete-icon" size="medium">
+                                        </lightning-button-icon>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="modal-button-container slds-text-align_center slds-m-top_large">
+                            <lightning-button variant="destructive" label={label.addContactButton} onclick={addNewContact} class="red-btn">
+                            </lightning-button>
+                        </div>
+                    </template>
+                    <template if:true={showAddContactSection}>
+                        <div class="slds-form">
+                            <div class="slds-grid slds-wrap slds-gutters">
+
+                                <!-- Row 1: Civility & Language -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                            <lightning-combobox name="salutationContact" label={label.salutation}
+                                                value={salutationContact} options={civilityOptions}
+                                                onchange={handleInputChange} required=true data-form-element>
+                                            </lightning-combobox>
+                                </div>
+
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                            <lightning-combobox name="languageContact" label={label.language}
+                                                value={languageContact} options={languageOptions}
+                                                onchange={handleInputChange} required=true data-form-element>
+                                            </lightning-combobox>
+                                </div>
+
+                                <!-- Row 2: First Name & Name -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                            <lightning-input name="firstNameContact" label={label.firstName}
+                                                value={firstNameContact} placeholder={label.firstNamePlaceholder}
+                                                onchange={handleInputChange} required=true data-form-element>
+                                            </lightning-input>
+                                </div>
+
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                            <lightning-input name="lastNameContact" label={label.lastName}
+                                                value={lastNameContact} placeholder={label.lastNamePlaceholder}
+                                                onchange={handleInputChange} required=true data-form-element>
+                                            </lightning-input>
+                                </div>
+
+                                <!-- Row 3: Professional Email -->
+                                <div
+                                    class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <lightning-input name="emailContact" type="email" label={label.email}
+                                                value={emailContact} placeholder={label.emailPlaceholder}
+                                                onchange={handleInputChange} required=true data-form-element>
+                                            </lightning-input>
+                                </div>
+
+                                <!-- Row 4: Phone & GSM -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="slds-form-element phone-number">
+                                        <label class="slds-form-element__label" for={label.phone}>
+                                            {label.phone} <abbr class="slds-required" title="required">*</abbr>
+                                        </label>
+                                        <div class="slds-form-element__control">
+                                            <input 
+                                                type="tel" 
+                                                class="slds-input" 
+                                                data-id="phoneInput" 
+                                                name="phoneContact"  
+                                                onkeyup={handlePhoneChange}
+                                                data-form-element>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- GSM (Country Code + Number) -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="slds-form-element phone-number">
+                                        <label class="slds-form-element__label" for="gsm">
+                                            GSM <abbr class="slds-required" title="required">*</abbr>
+                                        </label>
+                                        <div class="slds-form-element__control">
+                                            <input
+                                                type="tel"
+                                                class="slds-input"
+                                                data-id="gsmInput"
+                                                name="mobileContact"
+                                                onkeyup={handleMobileChange}
+                                                data-form-element>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Row 5: role -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <lightning-input name="jobTitle" label={label.jobTitle} value={jobTitle}
+                                                onchange={handleInputChange} required=true
+                                                data-form-element disabled={isWebOffer}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <lightning-combobox name="department" label={label.department} value={department} options={departmentOptions}
+                                                onchange={handleInputChange} disabled={isWebOffer} required=true data-form-element>
+                                            </lightning-combobox>
+                                </div>
+                                <template if:true={showSubDepartment}>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <lightning-combobox name="subDepartment" label={label.subDepartment} value={subDepartment} options={subDepartmentOptions}
+                                                onchange={handleInputChange} disabled={isWebOffer} required=true data-form-element>
+                                            </lightning-combobox>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="modal-button-container slds-text-align_center">
+                            <lightning-button variant="destructive" label={label.saveLabel}
+                                onclick={createOrEditContact} class="red-btn"></lightning-button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={isDeleteConfirmationModalOpen}>
+        <section class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container mobile-modal">
+                <header class="slds-modal__header slds-modal__header_empty">
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse slds-grid" onclick={cancelDelete} title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" alternative-text="close" class="slds-button__icon slds-button__icon_large"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <div class="header-top">
+                        <h2>{label.deleteContactHeader}</h2>
+                        <p>{label.deleteContactSubHeader}</p>
+                        <p><strong>{label.deleteWarning}</strong></p>
+                    </div>
+                    <div class="lightning-label-relative">
+                    <lightning-input label="Contact Name" value={contactToDeleteName} disabled></lightning-input>
+                    </div>
+                    <div class="slds-m-top_medium slds-text-align_center">
+                        <lightning-button variant="destructive" label={label.deleteButtonLabel} onclick={confirmDelete}
+                            class="slds-m-right_small red-btn"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

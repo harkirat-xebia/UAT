@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Auto Enrollment</label>
+    <pluralLabel>Auto Enrollment</pluralLabel>
+    <visibility>Public</visibility>
+    <fields>
+        <fullName>Country_Code__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Country Code</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BE</fullName>
+                    <default>false</default>
+                    <label>Belgium</label>
+                </value>
+                <value>
+                    <fullName>LU</fullName>
+                    <default>false</default>
+                    <label>Luxembourg</label>
+                </value>
+                <value>
+                    <fullName>ES</fullName>
+                    <default>false</default>
+                    <label>Spain</label>
+                </value>
+                <value>
+                    <fullName>FI</fullName>
+                    <default>false</default>
+                    <label>Finland</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Data_type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Data type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Label</fullName>
+                    <default>true</default>
+                    <label>Label</label>
+                </value>
+                <value>
+                    <fullName>Format</fullName>
+                    <default>false</default>
+                    <label>Format</label>
+                </value>
+                <value>
+                    <fullName>Picklist</fullName>
+                    <default>false</default>
+                    <label>Picklist</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Language_Code__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Language Code</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>FR</fullName>
+                    <default>true</default>
+                    <label>FR</label>
+                </value>
+                <value>
+                    <fullName>NL</fullName>
+                    <default>false</default>
+                    <label>NL</label>
+                </value>
+                <value>
+                    <fullName>EN</fullName>
+                    <default>false</default>
+                    <label>EN</label>
+                </value>
+                <value>
+                    <fullName>ES</fullName>
+                    <default>false</default>
+                    <label>ES</label>
+                </value>
+                <value>
+                    <fullName>FI</fullName>
+                    <default>false</default>
+                    <label>FI</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Long_Value__c</fullName>
+        <description>When Value field is not sufficient to store a long metadata</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Long Value</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Picklist_Labels__c</fullName>
+        <description>Picklist Labels (that are stored in the record) in csv format.
+Please pay attention that the order must match the one in the Picklist values field in order to do the right translation.
+Example:
+if &quot;Picklist values&quot; is &quot;Purchasing Manager,Administrator,Assistant,Other&quot;,
+then &quot;Picklist labels&quot; must be &quot;Acheteur,Administrateur,Assistant,Autre&quot; (in french)</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Picklist Labels</label>
+        <length>1000</length>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Picklist_Values__c</fullName>
+        <description>Picklist values (that are stored in the record) in csv format.
+Please pay attention that the order must match the one in the Picklist labels field in order to do the right translation.
+Example:
+if &quot;Picklist values&quot; is &quot;Purchasing Manager,Administrator,Assistant,Other&quot;,
+then &quot;Picklist labels&quot; must be &quot;Acheteur,Administrateur,Assistant,Autre&quot; (in french)</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Picklist Values</label>
+        <length>1000</length>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Scope__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Scope</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>M</fullName>
+                    <default>true</default>
+                    <label>M</label>
+                </value>
+                <value>
+                    <fullName>C</fullName>
+                    <default>false</default>
+                    <label>C</label>
+                </value>
+                <value>
+                    <fullName>U</fullName>
+                    <default>false</default>
+                    <label>U</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Value__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Value</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

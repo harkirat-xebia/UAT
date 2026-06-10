@@ -1,0 +1,80 @@
+.erportal-datatable {
+  padding: 0;
+  font: inherit;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.erportal-datatable-header {
+  background: var(--parent-main-color) !important;
+  color: #fff;
+}
+
+.erportal-datatable-value {
+  background: #ededed !important;
+}
+
+.erportal-datatable-cell {
+  text-align: center;
+}
+
+.erportal-datatable-cell__horizontal {
+  width: 50%;
+}
+
+.er-tooltip {
+  padding-left: 0.3rem;
+  position: relative;
+  top: -0.5rem;
+}
+
+button.slds-button_icon {
+  color: #00859b;
+}
+
+.erportal-datatable-buttons {
+  padding-right: 0.3rem;
+  text-align: right;
+}
+
+.slds-radio [type='radio'] {
+  position: relative;
+}
+
+.input-radio {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.input-radio:checked:after {
+  background-color: #00859b;
+  visibility: visible;
+  display: inline-block;
+}
+
+table.erportal-datatable tbody tr:first-child td:first-child {
+  border-top-left-radius: 1em;
+}
+
+table.erportal-datatable tbody tr:first-child td:last-child {
+  border-top-right-radius: 1em;
+}
+
+table.erportal-datatable tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 1em;
+}
+
+table.erportal-datatable tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 1em;
+}
+
+.slds-table th,
+.slds-table td {
+  white-space: normal;
+}
+
+@media screen and (max-width: 780px) {
+  .hidden-col-responsive {
+    display: none;
+  }
+}

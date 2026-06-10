@@ -1,0 +1,1201 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 01-03-2023
+  @last modified by  : AAM
+-->
+<template>
+  <div>
+    <!--******************************************************-->
+    <!--**               Main page for onboarding           **-->
+    <!--******************************************************-->
+    <template if:true={isStepMainOnboarding}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step2b_message_store1}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step2b_message_store2}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+              <hgroup class="slds-m-bottom_xxx-small">
+                <h4>
+                  <lightning-formatted-text value={labels.lb_contract_infos}> </lightning-formatted-text>
+                </h4>
+              </hgroup>
+            </div>
+
+            <div class="slds-form-element__row slds-p-bottom_large data-table-responsive">
+              <!-- <div class="slds-m-right_large"> -->
+              <div class="table-form">
+                <c-er-portal-data-table table-datas={companyInfos} table-style="horizontal"> </c-er-portal-data-table>
+              </div>
+            </div>
+
+            <div class="slds-form-element__row">
+              <hgroup class="slds-m-bottom_xxx-small">
+                <h4>
+                  <lightning-formatted-text value={labels.lb_step2b_my_stores}> </lightning-formatted-text>
+                </h4>
+              </hgroup>
+            </div>
+
+            <div class="slds-form-element__row slds-p-bottom_large data-table-responsive">
+              <div class="table-form">
+                <c-er-portal-data-table
+                  property-name="storesList"
+                  table-datas={merchantInfos.storesList}
+                  table-style="vertical"
+                  is-read-only="true"
+                  display-columns={storesListTableColumns}
+                  show-radio-btn="false"
+                >
+                </c-er-portal-data-table>
+                <div class="slds-form-element__row slds-p-bottom_large add-item button__right">
+                  <div class="slds-size_4-of-12 add-item slds-m-left_medium">
+                    <c-er-portal-button
+                      label={labels.lb_step2b_btn_add_store}
+                      size="small"
+                      alignment="right"
+                      onclick={newStoreOnboarding}
+                      responsive="max"
+                      responsive-left="true"
+                    >
+                    </c-er-portal-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--                    Step 3: Stores                   -->
+    <!--******************************************************-->
+    <template if:true={isStepThree}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step2b_message_store1}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step2b_message_store2}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__row slds-p-top_xxx-small">
+              <hgroup class="slds-m-bottom_xxx-small">
+                <h4>
+                  <lightning-formatted-text value={labels.lb_step2b_my_stores}> </lightning-formatted-text>
+                </h4>
+              </hgroup>
+            </div>
+
+            <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_large data-table-responsive">
+              <div class="table-form">
+                <c-er-portal-data-table
+                  property-name="storesList"
+                  table-datas={merchantInfos.storesList}
+                  table-style="vertical"
+                  is-read-only={isReadOnly}
+                  labels={tableLabels}
+                  display-columns={storesListTableColumns}
+                  current-row={storeInfos.rowIndex}
+                  onedit={handleEditStore}
+                  onchange={handleEditStore}
+                  onremove={handleDeleteStore}
+                  show-radio-btn="true"
+                >
+                </c-er-portal-data-table>
+                <template if:true={hasStore}>
+                  <div class="slds-form-element__row slds-p-bottom_large add-item button__right">
+                    <div class="slds-size_4-of-12 add-item slds-m-left_medium">
+                      <c-er-portal-button
+                        label={labels.lb_step2b_btn_add_store}
+                        size="small"
+                        alignment="right"
+                        onclick={newStore}
+                        responsive="max"
+                        responsive-left="true"
+                      >
+                      </c-er-portal-button>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <template if:true={showStoreDetails}>
+              <div class="slds-box slds-theme_default form-block-border" data-id="storeBlock">
+                <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                  <div class="field-form-large">
+                    <c-er-portal-cbx
+                      input-label={labels.lb_step2b_same_as_enterprise}
+                      data-id="copyCompanyAddress"
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      onchange={handleCopyCompanyAddress}
+                    >
+                    </c-er-portal-cbx>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="name"
+                      input-label={labels.lb_step2b_store_name}
+                      disabled={isReadOnlyEditable}
+                      tool-tip-text={labels.lb_step2b_store_name_tooltip}
+                      data-group="store"
+                      required="true"
+                      value={storeInfos.name}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <template if:true={hasMultipleFinCenter}>
+                    <div class="field-form slds-m-left_large">
+                      <c-er-portal-picklist
+                        property-name="finCenterId"
+                        input-label={labels.lb_step2_fin_center}
+                        data-group="store"
+                        data-id="finCenterId"
+                        pk-entries={picklistGroup.finCenterId}
+                        required="true"
+                        disabled={isReadOnlyEditable}
+                        value={storeInfos.finCenterId}
+                        onchange={handleStoreInfos}
+                      >
+                      </c-er-portal-picklist>
+                    </div>
+                  </template>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="address"
+                      input-label={labels.lb_step1_street}
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      required="true"
+                      value={storeInfos.address}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="postalCode"
+                      input-label={labels.lb_step1_postal_code}
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      required="true"
+                      value={storeInfos.postalCode}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="city"
+                      input-label={labels.lb_step2b_town}
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      required="true"
+                      value={storeInfos.city}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-picklist
+                      property-name="country"
+                      place-holder-text=""
+                      disabled={isReadOnlyEditable}
+                      input-label={labels.lb_step1_country}
+                      value={storeInfos.country}
+                      pk-entries={picklistGroup.storeCountry}
+                      required="true"
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="facebook"
+                      input-label={labels.lb_step2b_facebook}
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      value={storeInfos.facebook}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="website"
+                      data-group="store"
+                      disabled={isReadOnlyEditable}
+                      input-label={labels.lb_step2b_website}
+                      value={storeInfos.website}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="storePhone"
+                      input-label={labels.lb_step1_phone}
+                      disabled={isReadOnlyEditable}
+                      data-group="store"
+                      value={storeInfos.storePhone}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="storeEmail"
+                      data-group="store"
+                      disabled={isReadOnlyEditable}
+                      input-label={labels.lb_step1_email}
+                      value={storeInfos.storeEmail}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_large">
+                  <hgroup class="slds-m-bottom_xxx-small">
+                    <h4>
+                      <lightning-formatted-text value={labels.lb_contact_infos_title}> </lightning-formatted-text>
+                    </h4>
+                  </hgroup>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form field-form-below-text slds-m-right_large">
+                    <c-er-portal-picklist
+                      property-name="storeContactSalutation"
+                      input-label={labels.lb_step1_salutation}
+                      data-group="store"
+                      pk-entries={picklistGroup.storeContactSalutation}
+                      required="true"
+                      disabled={isReadOnly}
+                      value={storeInfos.storeContactSalutation}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                  <div class="field-form field-form-below-text slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="storeContactFirstName"
+                      input-label={labels.lb_step1_firstname}
+                      data-group="store"
+                      required="true"
+                      disabled={isReadOnly}
+                      value={storeInfos.storeContactFirstName}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-input
+                      property-name="storeContactLastName"
+                      input-label={labels.lb_step1_lastname}
+                      data-group="store"
+                      required="true"
+                      disabled={isReadOnly}
+                      value={storeInfos.storeContactLastName}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-input
+                      property-name="storeContactEmail"
+                      place-holder-text={labels.lb_email_place_holder}
+                      input-label={labels.lb_step1_email}
+                      data-group="store"
+                      required="true"
+                      disabled={isReadOnly}
+                      value={storeInfos.storeContactEmail}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-input>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-picklist
+                      property-name="storeContactLanguage"
+                      data-group="store"
+                      place-holder-text=""
+                      disabled={isReadOnly}
+                      input-label={labels.lb_step1_language}
+                      pk-entries={picklistGroup.storeContactLang}
+                      required="true"
+                      value={storeInfos.storeContactLanguage}
+                      onchange={handleStoreInfos}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_large">
+                  <hgroup class="slds-m-bottom_xxx-small">
+                    <h4>
+                      <lightning-formatted-text value={labels.lb_step2b_store_type}> </lightning-formatted-text>
+                    </h4>
+                  </hgroup>
+                </div>
+
+                <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                  <div class="field-form slds-m-right_large">
+                    <c-er-portal-picklist
+                      property-name="isFranchisee"
+                      input-label={labels.lb_step2b_is_franchisee}
+                      data-group="store"
+                      data-id="isFranchisee"
+                      pk-entries={picklistGroup.isFranchisee}
+                      required="true"
+                      value={storeInfos.isFranchisee}
+                      disabled={isReadOnlyEditable}
+                      onchange={handleIsFranchisee}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                  <div class="field-form slds-m-left_large">
+                    <c-er-portal-picklist
+                      property-name="sector"
+                      input-label={labels.lb_step2b_sector}
+                      data-id="sector"
+                      data-group="store"
+                      pk-entries={picklistGroup.sector}
+                      required="true"
+                      disabled={isSectorPkListDisabled}
+                      value={storeInfos.sector}
+                      onchange={handleStoreInfos}
+                      onloaded={initStoreFirstRecord}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                </div>
+
+                <template if:true={storeInfos.showFranchiseeField}>
+                  <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                    <div class="field-form slds-m-right_large">
+                      <c-er-portal-input
+                        property-name="franchiseeBrand"
+                        input-label={labels.lb_step2b_franchisee_mark}
+                        disabled={isReadOnlyEditable}
+                        data-group="store"
+                        value={storeInfos.franchiseeBrand}
+                        onchange={handleStoreInfos}
+                      >
+                      </c-er-portal-input>
+                    </div>
+                  </div>
+                </template>
+              </div>
+
+              <div class="slds-form-element__row slds-p-bottom_large save-button button__right">
+                <div class="slds-size_4-of-12 slds-m-left_medium">
+                  <c-er-portal-button
+                    label={labels.lb_step1_save}
+                    size="small"
+                    alignment="right"
+                    disabled={savStoreBtnDisabled}
+                    color="red"
+                    onclick={saveStore}
+                    responsive="max"
+                    responsive-left="true"
+                  >
+                  </c-er-portal-button>
+                </div>
+              </div>
+            </template>
+
+            <div class="slds-form-element__row slds-p-bottom_large save-button button__right">
+              <div class="slds-size_12-of-12 slds-m-left_medium add-item">
+                <c-er-portal-button
+                  label={labels.lb_step2b_create_terminal}
+                  size="small"
+                  alignment="center"
+                  id={index}
+                  onclick={createTerminalsPage}
+                  responsive="x-large"
+                  responsive-left="true"
+                  width="full-width"
+                  disabled={createTerminalsBtnDisabled}
+                >
+                </c-er-portal-button>
+              </div>
+            </div>
+
+            <div class="slds-form-element__row slds-p-bottom_large save-button button__right">
+              <div class="slds-size_12-of-12 slds-m-left_medium add-item">
+                <c-er-portal-button
+                  label={labels.lb_create_categories}
+                  size="small"
+                  alignment="center"
+                  id={index}
+                  onclick={createCategoriesPage}
+                  responsive="x-large"
+                  responsive-left="true"
+                  width="full-width"
+                  disabled={createCategoriesBtnDisabled}
+                >
+                </c-er-portal-button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--************************************************-->
+    <!--**               Add users page               **-->
+    <!--************************************************-->
+    <template if:true={isStepUsers}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step2b_message_user1}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step2b_message_user2}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+              <hgroup class="slds-m-bottom_xxx-small">
+                <h4>
+                  <lightning-formatted-text value={labels.lb_my_users}> </lightning-formatted-text>
+                </h4>
+              </hgroup>
+            </div>
+
+            <div class="slds-form-element__row slds-p-bottom_large data-table-responsive">
+              <div class="table-form">
+                <c-er-portal-data-table
+                  property-name="usersList"
+                  table-datas={merchantInfos.usersList}
+                  table-style="vertical"
+                  is-read-only={isReadOnly}
+                  labels={tableLabels}
+                  display-columns={merchantUsersListTableColumns}
+                  current-row={merchantUserInfos.rowIndex}
+                  onedit={handleEditMerchantUser}
+                  onchange={handleEditMerchantUser}
+                  onremove={handleDeleteMerchantUser}
+                  show-radio-btn="true"
+                >
+                </c-er-portal-data-table>
+                <template if:true={hasMerchantUser}>
+                  <div class="slds-form-element__row slds-p-bottom_large add-item button__right">
+                    <div class="slds-size_4-of-12 add-item slds-m-left_medium">
+                      <c-er-portal-button
+                        label={labels.lb_step2b_btn_add_user}
+                        size="small"
+                        alignment="right"
+                        onclick={newMerchantUser}
+                        responsive="max"
+                        responsive-left="true"
+                      >
+                      </c-er-portal-button>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <div class="slds-box slds-theme_default form-block-border" data-id="userBlock">
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form field-form-below-text slds-m-right_large">
+                  <c-er-portal-picklist
+                    property-name="userSalutation"
+                    input-label={labels.lb_step1_salutation}
+                    data-group="merchantUser"
+                    pk-entries={picklistGroup.userSalutation}
+                    required="true"
+                    disabled={isReadOnly}
+                    value={merchantUserInfos.userSalutation}
+                    onchange={handleMerchantUserInfos}
+                  >
+                  </c-er-portal-picklist>
+                </div>
+                <div class="field-form field-form-below-text slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="userFirstName"
+                    input-label={labels.lb_step1_firstname}
+                    data-group="merchantUser"
+                    required="true"
+                    disabled={isReadOnly}
+                    value={merchantUserInfos.userFirstName}
+                    onchange={handleMerchantUserInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-input
+                    property-name="userLastName"
+                    input-label={labels.lb_step1_lastname}
+                    data-group="merchantUser"
+                    required="true"
+                    disabled={isReadOnly}
+                    value={merchantUserInfos.userLastName}
+                    onchange={handleMerchantUserInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+                <div class="field-form slds-m-left_large">
+                  <c-er-portal-input
+                    property-name="userEmail"
+                    place-holder-text={labels.lb_email_place_holder}
+                    input-label={labels.lb_step1_email}
+                    data-group="merchantUser"
+                    required="true"
+                    disabled={isReadOnly}
+                    value={merchantUserInfos.userEmail}
+                    onchange={handleMerchantUserInfos}
+                  >
+                  </c-er-portal-input>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                <div class="field-form slds-m-right_large">
+                  <c-er-portal-picklist
+                    property-name="userLanguage"
+                    data-group="merchantUser"
+                    place-holder-text=""
+                    disabled={isReadOnly}
+                    input-label={labels.lb_step1_language}
+                    pk-entries={picklistGroup.userLang}
+                    required="true"
+                    value={merchantUserInfos.userLanguage}
+                    onchange={handleMerchantUserInfos}
+                  >
+                  </c-er-portal-picklist>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-bottom_large button__right">
+                <div class="slds-size_4-of-12 slds-m-left_medium">
+                  <c-er-portal-button
+                    label={labels.lb_step1_save}
+                    size="small"
+                    alignment="right"
+                    disabled={saveMerchantUserBtnDisabled}
+                    color="red"
+                    onclick={saveMerchantUser}
+                    responsive="max"
+                    responsive-left="true"
+                  >
+                  </c-er-portal-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--       Step 4: Add terminals to current Store         -->
+    <!--******************************************************-->
+    <template if:true={isStepFour}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step2_my_terminals}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step2_fill_terminals}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <section class="slds-accordion__section slds-is-open">
+              <div class="slds-accordion__summary">
+                <h2 class="slds-accordion__summary-heading">
+                  <span class="slds-accordion__summary-content" id={storeInfos.storeIndex}>
+                    <lightning-formatted-text value={labels.lb_step2b_my_terminals} id={storeInfos.storeIndex}>
+                    </lightning-formatted-text>
+                    <lightning-formatted-text
+                      value={storeInfos.name}
+                      class="name-store_terminals"
+                      id={storeInfos.storeIndex}
+                    >
+                    </lightning-formatted-text>
+                    <div class="name-store_terminals-responsive" id={storeInfos.storeIndex}>{storeInfos.name}</div>
+                  </span>
+                </h2>
+              </div>
+
+              <div class="slds-box slds-theme_default form-block-border">
+                <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                  <c-er-portal-yes-no-question
+                    question-label={labels.lb_web_shop}
+                    yes-label={labels.lb_step2b_yes}
+                    no-label={labels.lb_step2b_no}
+                    value={storeInfos.hasOnlineStore}
+                    is-disabled={storeInfos.readOnlyOnlineMastercard}
+                    onchange={handleHasOnlineStore}
+                  >
+                  </c-er-portal-yes-no-question>
+                </div>
+
+                <template if:true={storeInfos.hasOnlineStore}>
+                  <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                    <c-er-portal-yes-no-question
+                      question-label={labels.lb_web_shop_mastercard}
+                      yes-label={labels.lb_step2b_yes}
+                      no-label={labels.lb_step2b_no}
+                      value={storeInfos.isOnlineStoreMastercard}
+                      is-disabled={storeInfos.readOnlyOnlineMastercard}
+                      onchange={handleIsOnlineStoreMastercard}
+                    >
+                    </c-er-portal-yes-no-question>
+                  </div>
+                  <template if:true={storeInfos.isOnlineStoreMastercard}>
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-input
+                          property-name="mid"
+                          input-label={labels.lb_mid}
+                          id={storeInfos.storeIndex}
+                          disabled={storeInfos.readOnlyOnlineMastercard}
+                          data-group="store"
+                          value={storeInfos.mid}
+                          onchange={handleStoreInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                      <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="subMid"
+                          input-label={labels.lb_sub_mid}
+                          id={storeInfos.storeIndex}
+                          disabled={storeInfos.readOnlyOnlineMastercard}
+                          data-group="store"
+                          value={storeInfos.subMid}
+                          onchange={handleStoreInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                    </div>
+                  </template>
+                </template>
+
+                <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                  <c-er-portal-yes-no-question
+                    question-label={labels.lb_virtual_terminal_platforms}
+                    yes-label={labels.lb_step2b_yes}
+                    no-label={labels.lb_step2b_no}
+                    value={storeInfos.hasAgregator}
+                    is-disabled={storeInfos.readOnlyAgregator}
+                    onchange={handleHasAgregator}
+                  >
+                  </c-er-portal-yes-no-question>
+                </div>
+              </div>
+
+              <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                <c-er-portal-yes-no-question
+                  question-label={labels.lb_physical_terminal_accepted}
+                  yes-label={labels.lb_step2b_yes}
+                  no-label={labels.lb_step2b_no}
+                  value={storeInfos.hasPhysicalAcceptor}
+                  is-disabled={hasReadOnlyPhysicalTerminal}
+                  onchange={handleHasPhysicalAcceptor}
+                >
+                </c-er-portal-yes-no-question>
+              </div>
+
+              <template if:true={storeInfos.hasPhysicalAcceptor}>
+                <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                  <c-er-portal-yes-no-question
+                    question-label={labels.lb_physical_terminal_mastercard}
+                    yes-label={labels.lb_step2b_yes}
+                    no-label={labels.lb_step2b_no}
+                    value={storeInfos.isPhysicalAcceptorMastercard}
+                    is-disabled={storeInfos.readOnlyPhysicalMastercard}
+                    onchange={handleIsPhysicalAcceptorMastercard}
+                  >
+                  </c-er-portal-yes-no-question>
+                </div>
+
+                <template if:true={storeInfos.isPhysicalAcceptorMastercard}>
+                  <div
+                    class="slds-box slds-theme_default form-block-border"
+                    data-id="terminalBlock"
+                    data-store-index={storeInfos.storeIndex}
+                  >
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-input
+                          property-name="mid2"
+                          data-id="mid2"
+                          input-label={labels.lb_mid}
+                          id={storeInfos.storeIndex}
+                          disabled={storeInfos.readOnlyPhysicalMastercard}
+                          data-group="store"
+                          value={storeInfos.mid2}
+                          onchange={handleStoreInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                      <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="subMid2"
+                          input-label={labels.lb_sub_mid}
+                          id={storeInfos.storeIndex}
+                          disabled={storeInfos.readOnlyPhysicalMastercard}
+                          data-group="store"
+                          value={storeInfos.subMid2}
+                          onchange={handleStoreInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+
+                <!-- <template if:false={hideCreateTerminalBlock}> -->
+                <div class="slds-form-element__row slds-p-top_large slds-p-bottom_large data-table-responsive">
+                  <div class="table-form">
+                    <c-er-portal-data-table
+                      id={storeInfos.storeIndex}
+                      property-name="terminalsList"
+                      table-datas={storeInfos.terminalsList}
+                      is-read-only={isReadOnlyTerminals}
+                      data-id={storeInfos.storeIndex}
+                      table-style="vertical"
+                      display-columns={terminalsListTableColumns}
+                      onedit={handleEditTerminal}
+                      current-row={storeInfos.terminalInfos.rowIndex}
+                      labels={tableLabels}
+                      onchange={handleEditTerminal}
+                      onremove={handleDeleteTerminal}
+                      show-radio-btn="true"
+                    >
+                    </c-er-portal-data-table>
+                    <!-- <template if:true={hasTerminal}> -->
+                    <div class="slds-form-element__row slds-p-bottom_large button__right">
+                      <div class="slds-size_4-of-12 slds-m-left_medium add-item">
+                        <c-er-portal-button
+                          label={labels.lb_step2b_create_terminal}
+                          size="small"
+                          alignment="right"
+                          id={storeInfos.storeIndex}
+                          onclick={newTerminal}
+                          responsive="x-large"
+                          responsive-left="true"
+                        >
+                        </c-er-portal-button>
+                      </div>
+                    </div>
+                    <!-- </template> -->
+                  </div>
+                </div>
+
+                <!-- <div class="field-form slds-m-right_large">
+                    <c-er-portal-picklist
+                      property-name="terminalProvider"
+                      id={storeInfos.storeIndex}
+                      input-label={labels.lb_step2b_terminal_provider}
+                      data-group="terminal"
+                      data-id="terminalProvider"
+                      tool-tip-text={labels.lb_step2b_terminal_provider_tooltip}
+                      pk-entries={storeInfos.picklistGroup.terminalProvider}
+                      required="true"
+                      disabled={storeInfos.terminalInfos.isReadOnly}
+                      value={storeInfos.terminalInfos.terminalProvider}
+                      onchange={handleTerminalProvider}
+                    >
+                    </c-er-portal-picklist>
+                  </div>
+                  <template if:true={storeInfos.hasChosenTerminalProvider}>
+                    <div class="slds-form-element__row slds-p-bottom_xxx-small">
+                      <c-er-portal-yes-no-question
+                        question-label={labels.lb_physical_terminal_mastercard}
+                        yes-label={labels.lb_step2b_yes}
+                        no-label={labels.lb_step2b_no}
+                        value={storeInfos.isPhysicalAcceptorMastercard}
+                        onchange={handleIsPhysicalAcceptorMastercard}
+                      >
+                      </c-er-portal-yes-no-question>
+                    </div> -->
+
+                <template if:true={storeInfos.showCreateAcceptor}>
+                  <div
+                    class="slds-box slds-theme_default form-block-border"
+                    data-id="terminalBlock"
+                    data-store-index={storeInfos.storeIndex}
+                  >
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-picklist
+                          property-name="terminalProvider"
+                          id={storeInfos.storeIndex}
+                          input-label={labels.lb_step2b_terminal_provider}
+                          data-group="terminal"
+                          data-id="terminalProvider"
+                          tool-tip-text={labels.lb_step2b_terminal_provider_tooltip}
+                          pk-entries={storeInfos.picklistGroup.terminalProvider}
+                          required="true"
+                          disabled={storeInfos.terminalInfos.isReadOnly}
+                          value={storeInfos.terminalInfos.terminalProvider}
+                          onchange={handleTerminalProvider}
+                        >
+                        </c-er-portal-picklist>
+                      </div>
+                      <div class="field-form slds-m-left_large">
+                        <c-er-portal-picklist
+                          property-name="terminalModel"
+                          id={storeInfos.storeIndex}
+                          input-label={labels.lb_step2b_terminal_model}
+                          data-group="terminal"
+                          data-id="terminalModel"
+                          pk-entries={storeInfos.picklistGroup.terminalModel}
+                          value={storeInfos.terminalInfos.terminalModel}
+                          disabled={storeInfos.terminalInfos.isReadOnly}
+                          onchange={handleTerminalInfos}
+                        >
+                        </c-er-portal-picklist>
+                      </div>
+                    </div>
+
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-input
+                          property-name="tid"
+                          data-group="terminal"
+                          id={storeInfos.storeIndex}
+                          input-label={labels.lb_step2b_tid}
+                          required="false"
+                          value={storeInfos.terminalInfos.tid}
+                          max-length="8"
+                          tool-tip-text={labels.lb_step2b_tid_tooltip}
+                          place-holder-text={storeInfos.terminalInfos.tidformat}
+                          disabled={storeInfos.terminalInfos.isReadOnly}
+                          onchange={handleTerminalInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                      <div class="field-form slds-m-left_large">
+                        <c-er-portal-input
+                          property-name="cashRegisterProvider"
+                          data-group="terminal"
+                          input-label={labels.lb_step2b_cash_register_provider}
+                          id={storeInfos.storeIndex}
+                          disabled={storeInfos.terminalInfos.isReadOnly}
+                          value={storeInfos.terminalInfos.cashRegisterProvider}
+                          onchange={handleTerminalInfos}
+                        >
+                        </c-er-portal-input>
+                      </div>
+                    </div>
+
+                    <div class="slds-form-element__row slds-p-top_xxx-small slds-p-bottom_xxx-small">
+                      <div class="field-form slds-m-right_large">
+                        <c-er-portal-picklist
+                          property-name="isLinkedToCashReg"
+                          id={storeInfos.storeIndex}
+                          input-label={labels.lb_step2b_is_linked_to_cash_register}
+                          data-group="terminal"
+                          data-id="isLinkedToCashReg"
+                          pk-entries={storeInfos.picklistGroup.isLinkedToCashReg}
+                          required="true"
+                          disabled={storeInfos.terminalInfos.isReadOnly}
+                          value={storeInfos.terminalInfos.isLinkedToCashReg}
+                          onchange={handleTerminalInfos}
+                          onloaded={showTerminalFields}
+                        >
+                        </c-er-portal-picklist>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row slds-p-bottom_large button__right save-button">
+                    <div class="slds-size_4-of-12 slds-m-left_medium">
+                      <c-er-portal-button
+                        id={storeInfos.storeIndex}
+                        label={labels.lb_step1_save}
+                        size="small"
+                        alignment="right"
+                        disabled={savTerminalBtnDisabled}
+                        color="red"
+                        onclick={saveTerminal}
+                        responsive="max"
+                        responsive-left="true"
+                      >
+                      </c-er-portal-button>
+                    </div>
+                  </div>
+                </template>
+                <!-- </template> -->
+
+                <!-- <template if:true={storeInfos.showCreateAcceptor}>
+                    <div class="slds-form-element__row slds-p-bottom_large save-button button__right">
+                      <div class="slds-size_12-of-12 slds-m-left_medium add-item">
+                        <c-er-portal-button
+                          label={labels.lb_create_physical_terminal}
+                          size="small"
+                          alignment="center"
+                          id={storeInfos.storeIndex}
+                          data-id="physical"
+                          onclick={showNewTerminalBlock}
+                          responsive="x-large"
+                          responsive-left="true"
+                          width="full-width"
+                        >
+                        </c-er-portal-button>
+                      </div>
+                    </div>
+                  </template> -->
+                <!-- </template> -->
+              </template>
+
+              <!-- <template if:true={showTerminalBlock}>
+              </template> -->
+            </section>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--              Step 5: Stores categories               -->
+    <!--******************************************************-->
+    <template if:true={isStepFive}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step3_msg_activity1}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step3_msg_activity2}></lightning-formatted-text>
+          <br />
+          <lightning-formatted-text value={labels.lb_step3_msg_activity3}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <section class="slds-accordion__section slds-is-open">
+              <ul>
+                <template for:each={categorieItems} for:item="item" for:index="index">
+                  <template if:true={item.showItem}>
+                    <li
+                      id={item.id}
+                      key={item.index}
+                      class="categorie-li"
+                      style={item.levelOffset}
+                      onclick={handleToggleCategorie}
+                    >
+                      <span id={item.id} class={item.className}>
+                        <template if:true={item.selectable}>
+                          <input
+                            id={item.id}
+                            type="checkbox"
+                            class="categorie-checkbox"
+                            checked={item.isChecked}
+                            onchange={handleSelectCategorie}
+                          />
+                        </template>
+                        <template if:false={item.selectable}>
+                          <template if:false={item.showChilds}>
+                            <div class="big-chevron">
+                              <lightning-icon
+                                id={item.id}
+                                icon-name="utility:chevronright"
+                                size="medium"
+                                class="categorie-checkbox"
+                                alternative-text="Collapsed"
+                              >
+                              </lightning-icon>
+                            </div>
+                            <div class="small-chevron">
+                              <lightning-icon
+                                id={item.id}
+                                icon-name="utility:chevronright"
+                                size="x-small"
+                                class="categorie-checkbox"
+                                alternative-text="Collapsed"
+                              >
+                              </lightning-icon>
+                            </div>
+                          </template>
+                          <template if:true={item.showChilds}>
+                            <div class="big-chevron">
+                              <lightning-icon
+                                id={item.id}
+                                icon-name="utility:chevrondown"
+                                size="medium"
+                                class="categorie-checkbox"
+                                alternative-text="Expanded"
+                              ></lightning-icon>
+                            </div>
+                            <div class="small-chevron">
+                              <lightning-icon
+                                id={item.id}
+                                icon-name="utility:chevrondown"
+                                size="x-small"
+                                class="categorie-checkbox"
+                                alternative-text="Expanded"
+                              ></lightning-icon>
+                            </div>
+                          </template>
+                        </template>
+                        <p id={item.id} class="categorie-p">{item.name}</p>
+                      </span>
+                    </li>
+                  </template>
+                </template>
+              </ul>
+            </section>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--           Step 6: Stores main categorie              -->
+    <!--******************************************************-->
+    <template if:true={isStepSix}>
+      <hgroup>
+        <h2>
+          <lightning-formatted-text value={labels.lb_step3b_msg_activity1}></lightning-formatted-text>
+        </h2>
+        <h3>
+          <lightning-formatted-text value={labels.lb_step3b_msg_activity2}></lightning-formatted-text>
+          <br />
+          <lightning-formatted-text value={labels.lb_step3b_msg_activity3}></lightning-formatted-text>
+        </h3>
+      </hgroup>
+
+      <div class="form show-ease">
+        <div class="left-ribbon"></div>
+        <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+            <template for:each={chosenCategories} for:item="item" for:index="index">
+              <li key={item.index}>
+                <span class="main-categorie-item">
+                  <input
+                    type="radio"
+                    id={item.id}
+                    name="category"
+                    disabled={isReadOnly}
+                    class="main-categorie-radio"
+                    onchange={handleSelectMainCategory}
+                    checked={item.isMain}
+                  />
+                  <p id={item.id} class="main-categorie-p">{item.name}</p>
+                </span>
+              </li>
+            </template>
+          </div>
+        </fieldset>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--                       End of flow                    -->
+    <!--******************************************************-->
+    <template if:true={isEndPage}>
+      <div class="form show-ease">
+        <hgroup class="end-message">
+          <h4>
+            <lightning-formatted-rich-text value={labels.lb_end_msg1}></lightning-formatted-rich-text>
+            <br />
+            <lightning-formatted-rich-text value={labels.lb_end_msg2}></lightning-formatted-rich-text>
+            <br />
+            <lightning-formatted-rich-text value={labels.lb_end_msg3}></lightning-formatted-rich-text>
+            <template if:true={onboardingEndMessage}>
+              <br />
+              <lightning-formatted-rich-text value={onboardingEndMessage}></lightning-formatted-rich-text>
+            </template>
+          </h4>
+        </hgroup>
+      </div>
+    </template>
+
+    <!--******************************************************-->
+    <!--                  Navigation buttons                  -->
+    <!--******************************************************-->
+    <div class="slds-grid slds-gutters navigation-buttons">
+      <div class="slds-col slds-float_left">
+        <template if:true={isEnableBack}>
+          <c-er-portal-button label={labels.lb_back} size="big" alignment="left" onclick={handlePrev}>
+          </c-er-portal-button>
+        </template>
+      </div>
+
+      <div class="slds-col">
+        <!-- TODO refactor the 2 buttons: merge into one with dyn label -->
+        <template if:true={isEnableNext}>
+          <c-er-portal-button
+            id="nextButtonDiv"
+            label={labels.lb_step1_next}
+            size="big"
+            alignment="right"
+            onclick={handleNext}
+          >
+          </c-er-portal-button>
+        </template>
+        <template if:true={isEnableFinish}>
+          <c-er-portal-button
+            id="finishButtonDiv"
+            label={labels.lb_step3_validate}
+            size="big"
+            disabled={validateBtnDisabled}
+            alignment="right"
+            onclick={handleNext}
+          >
+          </c-er-portal-button>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

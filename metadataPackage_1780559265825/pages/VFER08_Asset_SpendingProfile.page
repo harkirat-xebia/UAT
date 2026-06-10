@@ -1,0 +1,255 @@
+<apex:page id="VFER08_Asset_SpendingProfile"
+  standardController="Asset"
+  extensions="VFCER08_Asset_SpendingProfile"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+>
+  <apex:includeScript value="/support/console/40.0/integration.js" />
+  <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+  <apex:stylesheet value="{!URLFOR($Resource.DataTables, 'DataTables/css/jquery.dataTables.min.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery.dataTables.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/datetime-moment.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.min.js')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.css')}" />
+
+  <style>
+    /*SCROLL BAR*/
+    /* width */
+    ::-webkit-scrollbar {
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #b0c4df;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #54698d;
+    }
+    body {
+      background-color: white;
+    }
+    html body.sfdcBody {
+      padding: 0;
+    }
+    th {
+      padding-left: 10px !important;
+    }
+    .transactionOptions {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  </style>
+  <apex:outputPanel id="msgErrorId">
+    <apex:outputPanel rendered="{!showError}">
+      <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+        <apex:pageMessages escape="false" />
+      </div>
+    </apex:outputPanel>
+  </apex:outputPanel>
+  <apex:form id="formId">
+    <div class="transactionOptions">
+      <div class="slds-form-element slds-form_compound">
+        <div class="slds-form-element__control">
+          <div class="slds-form-element__group">
+            <div class="slds-form-element__row">
+              <div class="slds-form-element slds-size_1-of-1">
+                <div class="slds-button-group">
+                  <apex:actionStatus id="getSpendingProfileStatus">
+                    <apex:facet name="start">
+                      <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                        height="25"
+                        width="25"
+                      />
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton id="getSpendingProfileButtonId"
+                          styleClass="slds-button slds-button_neutral"
+                          reRender="spendingCategoryRules,timeRules,msgErrorId,transactionRules"
+                          status="getSpendingProfileStatus"
+                          action="{!getSpendingProfileList}"
+                          value="{!$Label.LAB_SF_ASSET_GetSpendingProfile}"
+                          oncomplete="refreshTable();"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </div>
+                <div style="float: right">
+                  <apex:image rendered="{!!isOfflineBU}"
+                    value="{!URLFOR($Resource.SRER01_Images, 'CloudSync.png')}"
+                    height="32"
+                    width="32"
+                    alt="{!$Label.LABS_SF_Synchronized}"
+                    title="{!$Label.LABS_SF_Synchronized}"
+                  />
+                  <apex:image rendered="{!isOfflineBU}"
+                    value="{!URLFOR($Resource.SRER01_Images, 'CloudNotSync.png')}"
+                    height="32"
+                    width="32"
+                    alt="{!$Label.LABS_SF_Unsynchronized}"
+                    title="{!$Label.LABS_SF_Unsynchronized}"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="slds-section__title test-id__section-header-container" style="padding-top: 8px">
+      <div class="slds-section__title-action">
+        <span class="test-id__section-header-title slds-truncate"
+          >{!$Label.LAB_SF_ASSET_SpendingCategoryRulesSection}</span
+        >
+      </div>
+    </h3>
+    <br />
+
+    <apex:outputPanel id="spendingCategoryRules">
+      <table id="spendingCategoryRulesTable" class="display" style="width: 100%">
+        <thead>
+          <tr>
+            <th>{!$Label.LAB_SF_ASSET_Balance}</th>
+            <th>{!$Label.LAB_SF_ASSET_InclusiveExclusive}</th>
+            <th>{!$Label.LAB_SF_ASSET_Category}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <apex:repeat value="{!spendingCategoryRulesList}" var="spendingCategoryRule">
+            <tr>
+              <td>{!spendingCategoryRule.balance}</td>
+              <td>{!spendingCategoryRule.decision}</td>
+              <td>{!spendingCategoryRule.category}</td>
+            </tr>
+          </apex:repeat>
+        </tbody>
+      </table>
+    </apex:outputPanel>
+
+    <br />
+    <h3 class="slds-section__title test-id__section-header-container" style="padding-top: 8px">
+      <div class="slds-section__title-action">
+        <span class="test-id__section-header-title slds-truncate">{!$Label.LAB_SF_ASSET_TimeRulesSection}</span>
+      </div>
+    </h3>
+    <br />
+
+    <apex:outputPanel id="timeRules">
+      <table id="timeRulesTable" class="display" style="width: 100%">
+        <thead>
+          <tr>
+            <th>{!$Label.LAB_SF_ASSET_InclusiveExclusive}</th>
+            <th>{!$Label.LAB_SF_ASSET_Day}</th>
+            <th>{!$Label.LAB_SF_ASSET_Time}</th>
+            <th>{!$Label.LAB_SF_ASSET_AmountLimit}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <apex:repeat value="{!timeRulesList}" var="timeRule">
+            <tr>
+              <td>{!timeRule.decision}</td>
+              <td>{!timeRule.day}</td>
+              <td>{!timeRule.startTime} - {!timeRule.endTime}</td>
+              <td>{!timeRule.slotSpendLimit}</td>
+            </tr>
+          </apex:repeat>
+        </tbody>
+      </table>
+    </apex:outputPanel>
+
+    <br />
+    <h3 class="slds-section__title test-id__section-header-container" style="padding-top: 8px">
+      <div class="slds-section__title-action">
+        <span class="test-id__section-header-title slds-truncate">{!$Label.LAB_SF_ASSET_TransactionRulesSection}</span>
+      </div>
+    </h3>
+    <br />
+
+    <apex:outputPanel id="transactionRules" styleclass="slds-form-element slds-form_compound">
+      <div class="slds-form-element__group">
+        <div class="slds-form-element__row">
+          <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+            <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_TransactionValueLimit}</label>
+            <div class="slds-form-element__control">
+              <apex:outputText id="balanceId" styleClass="slds-form-element__static" value="{!transactionValueLimit}" />
+            </div>
+          </div>
+          <div class="slds-form-element slds-size_1-of-2 slds-form-element_readonly">
+            <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_TransactionCountLimit}</label>
+            <div class="slds-form-element__control">
+              <apex:outputText id="pendingDebitId"
+                styleClass="slds-form-element__static"
+                value="{!transactionCountLimit}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </apex:outputPanel>
+  </apex:form>
+  <script type="text/javascript">
+    var spendingCategoryRulesTable;
+    var timeRulesTable;
+    var length={!$Label.LAB_SF_datatable_Length};
+    $.fn.dataTable.moment( 'YYYY-MM-DD HH:mm:ss' );
+    $(document).ready(function() {
+        displaytable();
+    });
+
+    function displaytable(){
+        spendingCategoryRulesTable = $('#spendingCategoryRulesTable').DataTable({
+            "initComplete": function () {
+                $("div#spendingCategoryRulesTable_filter").remove();
+                $("select[aria-controls='spendingCategoryRulesTable']").remove();
+                $("div#spendingCategoryRulesTable_info").remove();
+                $("div#spendingCategoryRulesTable_paginate").remove();
+                $("div#spendingCategoryRulesTable_length").remove();
+            }
+        });
+        timeRulesTable = $('#timeRulesTable').DataTable({
+            "initComplete": function () {
+                $("div#timeRulesTable_filter").remove();
+                $("select[aria-controls='timeRulesTable']").remove();
+                $("div#timeRulesTable_info").remove();
+                $("div#timeRulesTable_paginate").remove();
+                $("div#timeRulesTable_length").remove();
+            }
+        });
+    }
+
+    function refreshTable(){
+        displaytable();
+    }
+
+    function disableTransactionButton(){
+        disableElement('getTransactionsButtonId');
+    }
+
+    function enableElement(id){
+        $("[id$='"+id+"']").removeAttr('disabled');
+    }
+
+    function disableElement(id){
+        $("[id$='"+id+"']").attr('disabled','disabled');
+    }
+
+    function inLightning() {
+        return sforce.one != undefined;
+    }
+  </script>
+</apex:page>

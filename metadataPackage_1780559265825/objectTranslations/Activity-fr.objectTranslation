@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Date prévue</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>due_date_activity</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+</CustomObjectTranslation>

@@ -1,0 +1,69 @@
+<template>
+    <lightning-quick-action-panel header="Terminate Contract">
+        <lightning-spinner if:true={Spinner} alternative-text="Loading" size="large"></lightning-spinner>
+        <template if:true={errorMessage}>
+            <div class="errorBlock">
+                <h2 style="color: red; padding: 0.5rem 0;">Termination not allowed: Account must retain a minimum of one active contract.
+                    To proceed with contract termination, please first close the contract in Nemo, and then contact the CRM Administrator to finalize the closure in Salesforce</h2>
+            </div>
+        </template>
+        <template if:false={errorMessage}>
+            <template if:true={formError}>
+                <div class="slds-notify slds-notify_alert slds-theme_error slds-m-around_small">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>{formError}</h2>
+                </div>
+            </template>
+            <h2 class="slds-text-heading_small slds-p-vertical_medium">
+                Please fill below details to proceed with the termination of the Contract:
+            </h2>
+
+            <div class="slds-grid slds-wrap slds-gutters slds-var-p-around_xx_small">
+                <!-- Contract End Date -->
+                <div class="slds-col slds-size_1-of-1 slds-p-vertical_xx_small">
+                    <lightning-record-edit-form object-api-name={objectApiName} record-id={recordId}>
+                        <lightning-input-field 
+                            field-name={dateField} 
+                            name="date"
+                            variant="label-stacked" 
+                            value={contractEndDate} 
+                            onchange={handleChange}
+                            required>
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+                </div>
+
+                <!-- Termination Reason -->
+                <div class="slds-col slds-size_1-of-1 slds-p-vertical_small">
+                    <lightning-record-edit-form object-api-name={objectApiName} record-id={recordId}>
+                        <!-- Termination Reason -->
+                        <lightning-input-field 
+                            field-name={nameField} 
+                            name="reason"
+                            variant="label-stacked"
+                            value={terminationReason}
+                            onchange={handleChange}
+                            required>
+                        </lightning-input-field>
+
+                        <!-- Sub Termination Reason -->
+                        <lightning-input-field 
+                            field-name={subNameField} 
+                            name="subReason"
+                            variant="label-stacked"
+                            value={subTerminationReason}
+                            onchange={handleChange}
+                            required>
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </template>
+
+        <div slot="footer">
+            <lightning-button label="Cancel" onclick={closeQuickAction} variant="neutral"></lightning-button>
+            <lightning-button label="Terminate Contract" onclick={handleTerminateContract} variant="brand"
+                disabled={errorMessage} style="padding-left:0.5rem;"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

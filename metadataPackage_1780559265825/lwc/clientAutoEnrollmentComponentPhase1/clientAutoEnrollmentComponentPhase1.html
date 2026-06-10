@@ -1,0 +1,112 @@
+<template>
+    <div class="header-top">
+        <h2>{label.header}</h2>
+        <p>{label.subHeader}</p>
+    </div>
+    <div class="content">
+        <div class="slds-form">
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <!-- Row 1: Civility & Language -->
+                <div class="slds-col slds-size_1-of-1 slds-x-small-size_6-of-12 slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <lightning-combobox name="salutation" label={label.salutation} value={salutation}
+                                options={civilityOptions} onchange={handleInputChange} required=true data-form-element disabled={isWebOffer}>
+                            </lightning-combobox>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-x-small-size_6-of-12 slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <lightning-combobox name="language" label={label.language} value={language}
+                                options={languageOptions} onchange={handleInputChange} required=true data-form-element disabled={isWebOffer}>
+                            </lightning-combobox>
+                </div>
+
+                <!-- Row 2: First Name & Name -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <lightning-input name="firstName" label={label.firstName} value={firstName}
+                                placeholder={label.firstNamePlaceholder} onchange={handleInputChange} required=true
+                                data-form-element disabled={isWebOffer}></lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <lightning-input name="lastName" label={label.lastName} value={lastName}
+                                placeholder={label.lastNamePlaceholder} onchange={handleInputChange} required=true
+                                data-form-element disabled={isWebOffer}></lightning-input>
+                </div>
+
+                <!-- Row 3: Professional Email -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-input name="email" type="email" label={label.email} value={email}
+                                placeholder={label.emailPlaceholder} onchange={handleInputChange} required=true
+                                data-form-element disabled={isWebOffer}></lightning-input>
+                </div>
+
+                <!-- Row 4: Phone & GSM -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <div class="slds-form-element phone-number">
+                        <label class="slds-form-element__label" for={label.phone}>
+                            {label.phone} <!-- <abbr class="slds-required" title="required">*</abbr> -->
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input 
+                                type="tel" 
+                                class="slds-input" 
+                                data-id="phoneInput" 
+                                name="phone"  
+                                onkeyup={handlePhoneChange}
+                                data-form-element disabled={isWebOffer}>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GSM (Country Code + Number) -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <div class="slds-form-element phone-number">
+                        <label class="slds-form-element__label" for="gsm">
+                            {label.mobile} <!-- <abbr class="slds-required" title="required">*</abbr> -->
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input 
+                                type="tel" 
+                                class="slds-input" 
+                                data-id="gsmInput" 
+                                name="mobile"  
+                                onkeyup={handleMobileChange}
+                                data-form-element disabled={isWebOffer}>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 5: role -->
+                <!-- <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-combobox name="role" label={label.role} value={role} options={functionOptions}
+                                onchange={handleInputChange} disabled={isWebOffer}>
+                            </lightning-combobox>
+                </div> -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-input name="jobTitle" label={label.jobTitle} value={jobTitle}
+                                onchange={handleInputChange} required=true
+                                data-form-element disabled={isWebOffer}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-combobox name="department" label={label.department} value={department} options={departmentOptions}
+                                onchange={handleInputChange} disabled={isWebOffer} required=true data-form-element>
+                            </lightning-combobox>
+                </div>
+                <template if:true={showSubDepartment}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-combobox name="subDepartment" label={label.subDepartment} value={subDepartment} options={subDepartmentOptions}
+                                onchange={handleInputChange} disabled={isWebOffer} required=true data-form-element>
+                            </lightning-combobox>
+                    </div>
+                </template>
+
+                <!-- Row 6: OPTIN Personal Data -->
+                <!-- <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning-input type="checkbox" label={label.optin} checked={optin} name="optin"
+                                onchange={handleInputChange} required=true data-form-element disabled={isWebOffer}></lightning-input>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,363 @@
+<apex:page renderAs="pdf" applyBodyTag="false" applyHtmlTag="true" standardController="Quote" extensions="QuotePDFController" >
+    <head>
+        <style>
+            @page {
+            size: A4 portrait;
+            margin: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            }
+            .checkbox {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+            }
+            .list-benefits{list-style:none;padding:0;margin:0;}
+            .list-benefits li{margin-bottom:15px;}
+            .list-benefits li img{width:20px;display:inline-block;margin-right:10px;}
+            .list-benefits li p{margin:0;line-height:1;margin-left:10px;}
+            .list-customer {margin-left:20px;}
+            .list-customer li{margin-bottom:10px}
+            .features-list li img{width:40px;}
+            .left-section{float:left;width:30%}
+            .right-section{float:right;width:68%}
+            .clear{clear:both;}
+            
+            body, table, td, th, p, ul, li, h1, h2, h3, div {
+                font-family: Arial, sans-serif;
+            }
+    </style>
+    </head>
+    <body>
+        <apex:form >
+            <div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <img src="{!$Resource.EdenRedLogoHD}" alt="Logo Edenred" style="height: 50px;" />
+                </div>
+                
+                <h1 style="color: black; text-align: center;">Proposition d'offre</h1>
+                
+                <p>{!toName},</p>
+                
+                <p>Merci pour l’intérêt que vous portez aux solutions Edenred.<br/>
+                    Veuillez trouver ci-dessous les détails de notre proposition de collaboration :</p>
+                
+                <apex:repeat value="{!groupedQLIs}" var="group">
+                    <apex:outputPanel rendered="{!group.groupName != 'Additional Services'}">
+                        <table style="width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 20px;">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" style="background: #f92126; color: white; text-align: center; font-size: 18px; border-bottom: 1px solid #999;">
+                                        {!group.groupName}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!group.items}" var="qli">
+                                    <tr rendered="{!NOT(ISBLANK(qli.Nb_of_Beneficiaries__c))}">
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">Nombre de bénéficiaires</td>
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">{!qli.Nb_of_Beneficiaries__c}</td>
+                                    </tr>
+                                    <tr rendered="{!NOT(ISBLANK(qli.Nb_of_Beneficiaries__c))}">
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">Valeur faciale du titre</td>
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">{!qli.Face_Value__c} €</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">Prestation de service sur volume de commande</td>
+                                        <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px;">{!qli.Percentage__c}%</td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </apex:outputPanel>
+                </apex:repeat> 
+                <apex:outputPanel rendered="{!hasOneOffFees}">
+                    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="background: #5c6572; color: white; text-align: center; font-size: 18px; border-bottom: 1px solid #999;">
+                                    One-off Fees
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <!-- Delivery Cost Rows -->
+                            <apex:repeat value="{!deliveryCostQLIs}" var="qli">
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 8px; width: 70%;">
+                                        <apex:outputText rendered="{!qli.Product2.Name == '1 to 3 cards'}" value="{!$Label.FR_CardRange_1_3}" />
+                                        <apex:outputText rendered="{!qli.Product2.Name == '3 to 15 cards'}" value="{!$Label.FR_CardRange_4_15}" />
+                                        <apex:outputText rendered="{!qli.Product2.Name == '> 15 cards'}" value="{!$Label.FR_CardRangeMorethan_15}" />
+                                        <apex:outputText rendered="{!(qli.Product2.Name != '1 to 3 cards' && qli.Product2.Name != '3 to 15 cards' && qli.Product2.Name != 'Individual Delivery Cost' && qli.Product2.Name != '> 15 cards')}" value="{!qli.Product2.Name}" />
+                                    </td>
+                                    <td style="border: 1px solid #ccc; padding: 8px; width: 30%;">{!IF(qli.Total_Amount__c == 0, '0', TEXT(qli.Total_Amount__c))} €</td>
+                                </tr>
+                            </apex:repeat>
+                            
+                            <!-- Additional Services Rows -->
+                            <apex:repeat value="{!groupedQLIs}" var="group">
+                                <apex:repeat rendered="{!group.groupName == 'Additional Services'}" value="{!group.items}" var="qli">
+                                    <apex:variable var="prodName" value="{!qli.Product2.Name}" />
+                                    <apex:variable var="lineType" value="{!qli.ER_Line_Type__c}" />
+                                    
+                                    <apex:outputText rendered="{!lineType == 'Service' && prodName == 'Card Replacement Cost'}">
+                                        <tr>
+                                            <td style="border: 1px solid #ccc; padding: 8px; width: 70%;">{!$Label.FR_Replacement_Card_Label}</td>
+                                            <td style="border: 1px solid #ccc; padding: 8px; width: 30%;">{!IF(qli.Total_Amount__c == 0, '0', TEXT(qli.Total_Amount__c))} €/carte</td>
+                                        </tr>
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!lineType == 'Service' && prodName == 'Card Cost'}">
+                                        <tr>
+                                            <td style="border: 1px solid #ccc; padding: 8px; width: 70%;">{!$Label.FR_Card_Cost_Label}</td>
+                                            <td style="border: 1px solid #ccc; padding: 8px; width: 30%;">{!IF(qli.Total_Amount__c == 0, '0', TEXT(qli.Total_Amount__c))} €/carte</td>
+                                        </tr>
+                                    </apex:outputText>
+                                </apex:repeat>
+                                
+                                <!-- Static Activation Fee Row -->
+                                <apex:outputText rendered="{!group.groupName == 'Additional Services'}">
+                                    <tr>
+                                        <td style="border: 1px solid #ccc; padding: 8px; width: 70%;">Frais d’activation</td>
+                                        <td style="border: 1px solid #ccc; padding: 8px; width: 30%;">Gratuit</td>
+                                    </tr>
+                                </apex:outputText>
+                            </apex:repeat>
+                            
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+                
+                <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="group-header" style="background: #5c6572; color:white;text-align: center">Coût récurrent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px; vertical-align: middle;">Frais de gestion mensuels</td>
+                            <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px; vertical-align: middle;">Gratuit</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px; vertical-align: middle;">Accès à la newsletter RH et à la bibliothèque de conseils Claeys &amp; Engels</td>
+                            <td style="border: 1px solid #ccc; padding: 10px 12px; height: 40px; vertical-align: middle;">Gratuit</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="page-break-after:always;"></div>
+                
+                <div>
+                    <p>Grâce aux solutions Edenred, <b>vous pouvez véritablement améliorer</b> le pouvoir d'achat de vos collaborateurs tout en maîtrisant vos coûts.</p>           
+                    <p>En faisant confiance au leader belge Edenred pour l’émission des avantages de vos collaborateurs, vous bénéficiez de la <b>qualité de service</b> d’un groupe international présent dans 45 pays, tout en profitant de <b>l’accompagnement personnalisé d’une équipe locale</b>. Une satisfaction assurée pour vos collaborateurs !</p>
+                    
+                    <div style="background-color: #f5f8ff; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h2 style="text-align: center; color: #333;">
+                            Vos <span style="color: #ff3366;">avantages</span> chez Edenred
+                        </h2>
+                        
+                        <ul class="list-benefits">
+                            <li>
+                                <span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                                <p><b>Un espace MyEdenred employeur efficace</b>  
+                                    pour gérer vos commandes, retrouver vos demandes de paiement, regrouper toutes vos entités juridiques, etc.</p>
+                                <div style="clear:both"></div>
+                            </li>
+                            <li>
+                                <span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                                <p><b>Des processus automatisés et sécurisés :</b> certifiés ISO9001-2015 depuis 1995</p>
+                                <div style="clear:both"></div>
+                            </li>
+                            <li>
+                                <span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                                <p>Nous accompagnons vos collaborateurs pour <b>décharger votre département RH</b> et <b>nous gérons les cartes à votre place</b>.</p>
+                                <div style="clear:both"></div>
+                            </li>
+                            <li>
+                                <span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                                <p>Nous privilégions la relation humaine - une question ? Nos <b>conseillers commerciaux et agents du service client</b> sont là pour vous.</p> 
+                                <div style="clear:both"></div>
+                            </li>
+                            <li>
+                                <span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                                <p><b>Expertise sectorielle :</b> actif depuis plus de 40 ans, <b>leader du marché</b> et très bonne santé financière (inscrit au CAC 40 en 2023).</p>
+                                <div style="clear:both"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 style="text-align: center; color: #333;">
+                            La <span style="color: #ff3366;">nouvelle carte Edenred,</span><br/>
+                            une exclusivité sur le marché !
+                        </h2>
+                    </div>
+                    <div class="left-section">
+                        <img src="{!$Resource.cardLogoFR}" alt="Carte Edenred" style="width:100%;" />
+                    </div>
+                    <div class="right-section">
+                        <ul class="features-list list-benefits">
+                            <li style="margin-bottom: 10px; list-style: none;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="vertical-align: middle;">
+                                            <img src="{!$Resource.Picto_1}" class="checkbox-img" />
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            Elle est acceptée chez un maximum de commerçants grâce à la <strong>technologie Mastercard</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                            <li style="margin-bottom: 10px; list-style: none;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="vertical-align: middle;">
+                                            <img src="{!$Resource.Picto_2}" class="checkbox-img" />
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            Elle peut être chargée dans <strong>Google Wallet</strong> ou <strong>Apple Wallet</strong> et partagée avec des proches
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                            <li style="margin-bottom: 10px; list-style: none;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="width:20px;">
+                                            <img src="{!$Resource.Picto_3}" class="checkbox-img" />
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            Elle permet des paiements mobiles via <strong>Payconiq</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                            <li style="margin-bottom: 10px; list-style: none;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="vertical-align: middle;">
+                                            <img src="{!$Resource.Picto_4}" class="checkbox-img" />
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            La carte Edenred vous permet de réaliser des <strong>achats en ligne</strong> sur Uber Eats, Deliveroo, HelloFresh, etc.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            
+                            <li style="margin-bottom: 10px; list-style: none;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="width:20px;">
+                                            <img src="{!$Resource.Picto_5}" class="checkbox-img" />
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            Première carte <strong>fabriquée en PVC recyclé</strong> en Belgique
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div style="page-break-after:always;"></div>
+                <div>
+                    <h2 style="text-align: center; color: #333;">
+                        <span style="color: #ff3366;">Devenir client Edenred,</span><br/>
+                        c’est simple comme bonjour !
+                    </h2>
+                </div>
+                <div class="">
+                    <h3><span style="
+                                     display: inline-block;
+                                     width: 24px;
+                                     height: 24px;
+                                     line-height: 24px;
+                                     border-radius: 50%;
+                                     background-color: #ff3366;
+                                     color: white;
+                                     text-align: center;
+                                     font-weight: bold;
+                                     font-size: 14px;
+                                     ">1</span> Signature du contrat</h3>
+                    <ul class="list-benefits list-customer">
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span>
+                            <p>Vous <strong>signez votre contrat</strong></p>
+                            <div style="clear:both"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
+                    <h3><span style="
+                                     display: inline-block;
+                                     width: 24px;
+                                     height: 24px;
+                                     line-height: 24px;
+                                     border-radius: 50%;
+                                     background-color: #ff3366;
+                                     color: white;
+                                     text-align: center;
+                                     font-weight: bold;
+                                     font-size: 14px;
+                                     ">2</span> Commande</h3>
+                    <ul class="list-benefits list-customer">
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span><p>Vous recevez <strong>un accès à MyEdenred</strong>, votre Espace Employeurs pour gérer vos collaborateurs et passer vos commandes</p>
+                            <div style="clear:both"></div>
+                        </li>
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span><p>Vous <strong>passez vos commandes dans MyEdenred</strong></p>
+                            <div style="clear:both"></div>
+                        </li>
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span><p>Nous <strong>validons votre commande</strong> et <strong>recevons votre paiement</strong></p>
+                            <div style="clear:both"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
+                    <h3><span style="
+                                     display: inline-block;
+                                     width: 24px;
+                                     height: 24px;
+                                     line-height: 24px;
+                                     border-radius: 50%;
+                                     background-color: #ff3366;
+                                     color: white;
+                                     text-align: center;
+                                     font-weight: bold;
+                                     font-size: 14px;
+                                     ">3</span> Activation</h3>
+                    <ul class="list-benefits list-customer">
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span><p>Nous <strong>produisons et livrons les cartes</strong></p>
+                            <div style="clear:both"></div>
+                        </li>
+                        <li><span style="float:left;"><img src="{!$Resource.tickImage}" class="checkbox-img"/></span><p>Vous <strong>activez la carte dans MyEdenred</strong><br/>
+                            <span style="font-size: 0.9em;">(Les collaborateurs peuvent également activer leur carte eux-mêmes)</span></p>
+                            <div style="clear:both"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="color: #ed1651; font-weight: bold;">
+                    Notre mission = vous accompagner dans le bien-être de vos collaborateurs.
+                </p>
+                <p> 
+                    Plus de 60 000 entreprises nous font déjà confiance. Et vous ?
+                </p>
+                
+                <p>
+                    J’ai hâte d’en discuter avec vous,
+                </p>
+                <p>
+                    {!currentQuote.Account.Owner.Name}
+                </p>
+            </div>
+        </apex:form>
+    </body>
+</apex:page>

@@ -1,0 +1,57 @@
+.timeline {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.timeline ul {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.timeline li {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.timeline .step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--parent-font-family);
+  font-weight: bold;
+  text-align: center;
+}
+
+.timeline .number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: var(--parent-font-family);
+  color: white;
+  background: #a5a5a5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.timeline .active .number {
+  background: #d52b1e;
+}
+
+.timeline .inactive .number {
+	background: #A5A5A5;
+}
+
+.timeline .line {
+  content: '';
+  background: #fff;
+  height: 8px;
+  width: 15%;
+  border-radius: 60px;
+}

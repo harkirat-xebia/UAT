@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Activate Maintenance Page</label>
+    <pluralLabel>Activate Maintenance Pages</pluralLabel>
+    <visibility>Public</visibility>
+    <fields>
+        <fullName>BE_Activate_Maintenance_Page__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>enable maintenance page</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Activate Maintenance Page</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BE_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Stakeholder Type</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Merchant</fullName>
+                    <default>true</default>
+                    <label>Merchant</label>
+                </value>
+                <value>
+                    <fullName>Customer</fullName>
+                    <default>false</default>
+                    <label>Customer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

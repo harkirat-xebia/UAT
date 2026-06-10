@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This custom metadata stock the translations of the picklist values. Because it&apos;s not possible to get the translation in the translation workbench through api when we are using the guest user.</description>
+    <label>Picklist Value Translation</label>
+    <pluralLabel>Picklist Value Translations</pluralLabel>
+    <visibility>Public</visibility>
+    <fields>
+        <fullName>BE_Label_Translation__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Label Translation</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BE_Language__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Language</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>en_US</fullName>
+                    <default>true</default>
+                    <label>en_US</label>
+                </value>
+                <value>
+                    <fullName>fr_BE</fullName>
+                    <default>false</default>
+                    <label>fr_BE</label>
+                </value>
+                <value>
+                    <fullName>nl_BE</fullName>
+                    <default>false</default>
+                    <label>nl_BE</label>
+                </value>
+                <value>
+                    <fullName>nl_NL</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>nl_NL</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

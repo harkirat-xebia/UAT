@@ -1,0 +1,80 @@
+<!--
+  @description       : 
+  @author            : AAM
+  @group             : 
+  @last modified on  : 08-07-2022
+  @last modified by  : AAM
+-->
+<template>
+  <table class="slds-table erportal-datatable">
+    <tbody>
+      <template for:each={tableDatasDisplay} for:item="row" for:index="index">
+        <tr class="slds-hint-parent" key={row.index}>
+          <!-- For vertical tables, show radio button in record rows, and nothing in the header -->
+          <template if:true={isVertical}>
+            <td key={row.index} class={row.className}>
+              <template if:false={row.showButtons}>
+                <td class="slds-text-align_right">
+                  <div class="slds-truncate slds-assistive-text"></div>
+                </td>
+              </template>
+              <template if:true={row.showButtons}>
+                <td class={row.classNameRadio} style="padding: 0 0.5rem" role="gridcell">
+                  <input
+                    type="radio"
+                    value={index}
+                    name={propertyName}
+                    class="input-radio"
+                    checked={row.checked}
+                    aria-labelledby="radio-button-label-01 column-group-header"
+                    onchange={handleSelect}
+            />
+          </td>
+        </template>
+        </td>
+    </template>
+    <template for:each={row.cellValues} for:item="cell">
+      <td data-label={cell.content} class={cell.className} key={cell.index} for:index="index" scope="col">
+        <div title={cell.content}>
+          <template if:true={cell.hasLink}>
+            <a href={cell.href} style="text-decoration: none; color: #000000;">{cell.content}</a>
+          </template>
+          <template if:false={cell.hasLink}>
+            {cell.content}
+          </template>
+          <template if:true={cell.tooltip}>
+            <lightning-helptext content={cell.tooltip} class="er-tooltip"></lightning-helptext>
+          </template>
+        </div>
+      </td>
+    </template>
+    <template if:true={isVertical}>
+      <td key={row.index} class={row.className}>
+        <template if:true={row.showEditButtons}>
+          <lightning-button-icon
+                  class="erportal-datatable-buttons"
+                  icon-name="utility:edit"
+                  value={index}
+                  title={labels.lb_edit}
+                  variant="bare"
+                  onclick={editRow}
+                >
+                </lightning-button-icon>
+                <template if:false={row.hideDelete}>
+                  <lightning-button-icon
+                    icon-name="utility:delete"
+                    value={index}
+                    variant="bare"
+                    title={labels.lb_delete}
+                    onclick={removeRow}
+                  >
+                  </lightning-button-icon>
+                </template>
+              </template>
+            </td>
+          </template>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</template>

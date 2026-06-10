@@ -1,0 +1,66 @@
+<template>
+    <lightning-quick-action-panel header="Activate Contract">
+        <lightning-spinner if:true={Spinner} alternative-text="Loading" size="large"></lightning-spinner>
+            <div class="slds-page-header" role="banner">
+                <h1 class="slds-page-header__title slds-m-right_small slds-truncate slds-align-left">
+                    Contract Creation in NEMO
+                </h1>
+                <p class="slds-text-heading_label">Contract: {contractNumber}</p>
+                <div>
+                    <div class="slds-text-heading_label">Account: {accountName}</div>
+                </div>
+            </div>
+    
+            <template if:true={errorMessage}>
+                <div class="errorBlock">
+                    <p><b>{errorMessage}</b></p>
+                    <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <td role="gridcell">Error</td>
+                                <td role="gridcell">Section</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={hasErrors}>
+                                <template for:each={errorList} for:item="row">
+                                    <tr key={row.sLink} class="slds-line-height_reset">
+                                        <td role="gridcell">
+                                            <div class="slds-truncate rowError" title={row.titleText}>
+                                                <a href={row.sLink}>{row.sMessage}</a>
+                                            </div>
+                                        </td>
+                                        <td role="gridcell">
+                                            <div class="slds-truncate">{row.sSection}</div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+            <template if:false={errorMessage}>
+                <h2 style="color: green; padding: 0.5rem 0;">No error(s) found.</h2>
+            </template>
+            <template if:true={AccountCreatedInSysOp}>
+                <div class="okBlock" style="display: none;">
+                    <p><b>Do you really want to save Merchant "{accountName}" in Sys Ops?</b></p>
+                    <lightning-button label="Save" onclick={handleSaveEdg} variant="brand" class="slds-float_right"></lightning-button>
+                </div>
+            </template>
+    
+            <template if:true={ContractCreatedInSysOp}>
+                <div class="okBlock" style="display: none;">
+                    <p><b>Do you really want to save Contract "{contractNumber}" in Sys Ops?</b></p>
+                    <lightning-button label="Save" onclick={handleSaveContractEdg} variant="brand" class="slds-float_right"></lightning-button>
+                </div>
+            </template>
+        
+
+        <div slot="footer">
+            <lightning-button label="Cancel" onclick={closeQuickAction} variant="neutral"></lightning-button>
+            <lightning-button label="Activate Contract" onclick={handleActivateContract} variant="brand" disabled={hasErrors} style="padding-left:0.5rem;"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

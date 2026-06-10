@@ -1,0 +1,37 @@
+<!--
+ - Created by noorgoolamnabee on 18/07/2023.
+ -->
+
+<!-- Er Order Processing Event -->
+<template>
+  <lightning-quick-action-panel header="">
+    <template if:false={loaded}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <template if:true={error}>
+      <c-error-panel errors={error}></c-error-panel>
+    </template>
+    <template if:true={loaded}>
+      <template if:true={loadData}>
+        <lightning-datatable
+          key-field="processingEvent"
+          data={loadData}
+          columns={columnsOrder}
+          onrowaction={handleRetryAction}
+          hide-checkbox-column="true"
+        >
+        </lightning-datatable>
+        <br />
+        <div class="slds-float_right slds-size_1-of-1">
+          <template if:true={totalLoadData}>
+            <c-pagination
+              totalrecords={totalLoadData}
+              page-size={pageSize}
+              onpagination={handlePagination}
+            ></c-pagination>
+          </template>
+        </div>
+      </template>
+    </template>
+  </lightning-quick-action-panel>
+</template>

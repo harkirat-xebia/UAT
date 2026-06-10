@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddPricebookEntry</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntry</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntry</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnPricebook</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnPricebook</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnPricebook</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnProduct</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddPricebookEntryOnProduct</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddStandardPrice</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddStandardPrice</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddStandardPrice</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>createDerivedPriceAttributes</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>createDerivedPriceAttributes</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>createDerivedPriceAttributes</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <searchLayouts>
+        <searchResultsAdditionalFields>PRODUCT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT.DEFAULT_PRICE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.DESCRIPTION</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.FAMILY_ENUM</searchResultsAdditionalFields>
+    </searchLayouts>
+    <fields>
+        <fullName>ER_Approval_Trigger_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Approval Trigger Minimum Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>8</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Approval_Trigger_Value_Max__c</fullName>
+        <externalId>false</externalId>
+        <label>Approval Trigger Maximum Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>8</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_BUPicklist__c</fullName>
+        <defaultValue>$User.ER_BUText__c</defaultValue>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ER_Business_Unit</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Business_Unit__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Pricebook2.ER_Business_Unit__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Unit Formula</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Configuration__c</fullName>
+        <label>Configuration</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Hidden</fullName>
+                    <default>false</default>
+                    <label>Hidden</label>
+                </value>
+                <value>
+                    <fullName>Displayed</fullName>
+                    <default>true</default>
+                    <label>Displayed</label>
+                </value>
+                <value>
+                    <fullName>SelectedOptional</fullName>
+                    <default>false</default>
+                    <label>Selected Optional</label>
+                </value>
+                <value>
+                    <fullName>SelectedMandatory</fullName>
+                    <default>false</default>
+                    <label>Selected Mandatory</label>
+                </value>
+                <value>
+                    <fullName>SelectedHidden</fullName>
+                    <default>false</default>
+                    <label>Selected Hidden</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ER_Duration__c</fullName>
+        <externalId>false</externalId>
+        <label>Duration (No. of days)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Max__c</fullName>
+        <externalId>false</externalId>
+        <label>Max</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Min__c</fullName>
+        <externalId>false</externalId>
+        <label>Min</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Offer_validity_end_date__c</fullName>
+        <label>Validity End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Offer_validity_start_date__c</fullName>
+        <label>Validity Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Percentage__c</fullName>
+        <label>Percentage</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ER_Price_End_Date__c</fullName>
+        <label>Price End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ER_Product_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Product2.ER_Type__c)</formula>
+        <label>Product Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_Promo_Code2__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Promo Code</label>
+        <referenceTo>ER_Promo_Code__c</referenceTo>
+        <relationshipLabel>Price Book Entries</relationshipLabel>
+        <relationshipName>Price_Book_Entries</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ER_SolutionName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product2.ER_Solution__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Solution Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ER_ValueType__c</fullName>
+        <description>-When the service is set as “Percentage”, the symbol displayed is ‘%.
+-When the service is set as “Currency”, the symbol displayed is the user’s currency ISO code.</description>
+        <label>Value Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Percentage</fullName>
+                    <default>false</default>
+                    <label>Percentage</label>
+                </value>
+                <value>
+                    <fullName>Currency</fullName>
+                    <default>false</default>
+                    <label>Currency</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Product2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProductCode</fullName>
+    </fields>
+    <fields>
+        <fullName>StandardPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>Tech_DisableFieldsPromocode__c</fullName>
+        <externalId>false</externalId>
+        <label>Tech_DisableFieldsPromocode</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnitPrice</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>UseStandardPrice</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <validationRules>
+        <fullName>VRER01_Temporary_Value_Type_Check</fullName>
+        <active>false</active>
+        <description>For a product of “Discount” Record type, “Value type” of the “Product” of the price book entry shall be identical to “Value type” field of the “parent product” of the “product” of the price book entry. 
+
+/*TO DO: value type on parent ?*/</description>
+        <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+Product2.RecordType.Name = &apos;Discount&apos;
+)</errorConditionFormula>
+        <errorDisplayField>ER_ValueType__c</errorDisplayField>
+        <errorMessage>VRER01 - Temporary Discount Value Type has to be identical to its parent product</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER02_PromoCode_Filled_Check</fullName>
+        <active>true</active>
+        <description>If Promo code is filled, Duration or Pricing End date is mandatory</description>
+        <errorConditionFormula>AND(
+	NOT($User.ER_BypassVR__c),
+	NOT(ISBLANK(ER_Promo_Code2__c)),
+	AND(ISBLANK(ER_Offer_validity_end_date__c), ISBLANK(ER_Duration__c))
+)</errorConditionFormula>
+        <errorDisplayField>ER_Promo_Code2__c</errorDisplayField>
+        <errorMessage>VRER02 - If Promo code is filled, Duration or Pricing End date is mandatory.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER03_Price_Percentage_Check</fullName>
+        <active>true</active>
+        <description>List price and Percentage fields can’t be both not equal to 0.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ((UnitPrice &gt; 0 &amp;&amp; ER_Percentage__c &gt; 0)
+    || (UnitPrice &gt; 0 &amp;&amp; NOT(ISPICKVAL(ER_ValueType__c, &quot;Currency&quot;)) || (ISBLANK(ER_Percentage__c) &amp;&amp; ISPICKVAL(ER_ValueType__c, &quot;Percentage&quot;)) || (ER_Percentage__c &gt;= 0 &amp;&amp; NOT(ISPICKVAL(ER_ValueType__c, &quot;Percentage&quot;)))) 
+)</errorConditionFormula>
+        <errorMessage>VRER03 - Only list price or percentage can be populated.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER04_Check_ValueType</fullName>
+        <active>true</active>
+        <description>Price format should be consistent with Value Type : either Percentage, or Currency</description>
+        <errorConditionFormula>AND(
+NOT($User.ER_BypassVR__c),
+AND(TEXT(ER_ValueType__c)=&apos;Percentage&apos;, ISBLANK(ER_Percentage__c)),
+AND(TEXT(ER_ValueType__c)=&apos;Currency&apos;, ISBLANK(UnitPrice))
+)</errorConditionFormula>
+        <errorDisplayField>ER_ValueType__c</errorDisplayField>
+        <errorMessage>VRER04 - Price format should be consistent with Value Type : either Percentage, or Currency.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER05_Check_Max_Greater_Than_Min</fullName>
+        <active>true</active>
+        <description>The range max should be greater than the min</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ISPICKVAL(Product2.ER_Type__c, &quot;Range&quot;)
+&amp;&amp; ER_Max__c &lt; ER_Min__c</errorConditionFormula>
+        <errorMessage>VRER05 - The Range Min should be greater than the Min</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VRER06_Either_Duration_End_Price_Date</fullName>
+        <active>false</active>
+        <description>Populate either the end date or the duration but not both.</description>
+        <errorConditionFormula>NOT($User.ER_BypassVR__c)
+&amp;&amp; ER_Product_Type__c = &apos;Discount&apos;
+&amp;&amp; (
+    (ISBLANK(ER_Duration__c) &amp;&amp;  ISBLANK(ER_Price_End_Date__c))
+    || (NOT(ISBLANK(ER_Duration__c)) &amp;&amp; NOT(ISBLANK(ER_Price_End_Date__c)))
+)</errorConditionFormula>
+        <errorMessage>VRER06 - Enter either Duration or Price End Date, not both.</errorMessage>
+    </validationRules>
+</CustomObject>

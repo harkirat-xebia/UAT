@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lead</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lead</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <startsWith>Consonant</startsWith>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Historique du lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_history</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Propriétaire du lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Propriétaire du lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_owner</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Priorité</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>lead_rating</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Origine du lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Origine du lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_source</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Statut du lead</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Statut du lead</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>lead_status</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+</CustomObjectTranslation>

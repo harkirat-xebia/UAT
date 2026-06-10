@@ -1,0 +1,935 @@
+<apex:page id="VFER01_Asset_Transactions_BalanceId"
+  standardController="Asset"
+  extensions="VFCER01_Asset_Transactions_Balance"
+  standardStylesheets="false"
+  sidebar="false"
+  showHeader="false"
+>
+  <apex:includeScript value="/support/console/40.0/integration.js" />
+  <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+  <apex:stylesheet value="{!URLFOR($Resource.DataTables, 'DataTables/css/jquery.dataTables.min.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery.dataTables.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/datetime-moment.js')}" />
+
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'moment.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.min.js')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.css')}" />
+
+  <style>
+    /*SCROLL BAR*/
+
+    /* width */
+
+    ::-webkit-scrollbar {
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+
+    /* Track */
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+
+    ::-webkit-scrollbar-thumb {
+      background: #b0c4df;
+    }
+
+    /* Handle on hover */
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #54698d;
+    }
+
+    body {
+      background-color: white;
+    }
+
+    html body.sfdcBody {
+      padding: 0;
+    }
+
+    th {
+      padding-left: 10px !important;
+    }
+
+    /* .transactionOptions {
+        padding-bottom: .5rem;
+        padding-top: .5rem;
+        }*/
+
+    .customPopup {
+      background-color: white;
+      border-style: solid;
+      border-width: 2px;
+      left: 20%;
+      padding: 10px;
+      position: absolute;
+      z-index: 9999;
+      /* These are the 3 css properties you will need to tweak so the pop 
+        up displays in the center of the screen. First set the width. Then set 
+        margin-left to negative half of what the width is. You can also add 
+        the height property for a fixed size pop up.*/
+      width: 500px;
+      top: 20%;
+    }
+
+    .disabledTextBox {
+      background-color: white;
+      border: 1px solid;
+      color: black;
+      cursor: default;
+      width: 90px;
+      display: table;
+      padding: 2px 1px;
+      text-align: right;
+    }
+
+    .closeButton {
+      float: right;
+    }
+
+    .lookupHoverDetail .labelCol {
+      font-weight: bold;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid #dddbda;
+    }
+
+    .lookupHoverDetail .dataCol {
+      border-bottom: 1px solid #dddbda;
+    }
+
+    .lookupHoverDetail .mainTitle {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .lookupHoverDetail .bPageBlock {
+      margin: 0.5rem;
+    }
+
+    .lookupHoverDetail .pbHeader {
+      margin-bottom: 1rem;
+    }
+
+    .lookupHoverDetail .btn {
+      border: 1px solid #dddbda;
+      color: #0070d2;
+      background: white;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .lookupHoverDetail {
+      border: 1px solid #dddbda;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      background: rgb(243, 242, 242);
+      height: auto;
+      width: auto;
+    }
+
+    .lookupHoverDetailOverridable {
+      width: 320px;
+      height: 270px;
+    }
+
+    .lookupHoverDetail {
+      position: absolute;
+      z-index: 15;
+      top: 0;
+      left: 0;
+      display: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <div id="wrap" class="wrap" rendered="{!canAccess}" style="display: {!If(!canAccess ,'none','') }">
+    <apex:outputPanel id="msgErrorId">
+      <apex:outputPanel rendered="{!showError}">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+          <apex:pageMessages escape="false" />
+        </div>
+      </apex:outputPanel>
+    </apex:outputPanel>
+    <apex:form id="formId">
+      <apex:outputPanel styleclass="slds-form-element slds-form_compound">
+        <div class="slds-form-element__control">
+          <div class="slds-form-element__group">
+            <div class="slds-form-element__row">
+              <div class="slds-form-element slds-size_1-of-1">
+                <div class="slds-button-group" role="group">
+                  <apex:actionStatus id="getBalanceStatus">
+                    <apex:facet name="start">
+                      <apex:outputPanel >
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandButton id="getBalanceButtonId"
+                          styleClass="slds-button slds-button_neutral"
+                          reRender="msgErrorId,balanceInformationsPanelId"
+                          status="getBalanceStatus"
+                          action="{!getBalance}"
+                          value="{!$Label.LAB_SF_ASSET_GetBalance}"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="pinResetStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="pinResetButtonId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="pinResetButtonId"
+                            onclick="pinReset();"
+                            status="pinResetStatus"
+                            value="{!$Label.LAB_SF_ASSET_PIN_PinResetButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="blockCardStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="blockCardButtonId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="blockCardButtonId"
+                            onclick="getBlockCard();"
+                            status="blockCardStatus"
+                            value="{!$Label.LAB_SF_ASSET_BlockCardButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="unBlockCardStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="unblockButtonId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="unblockButtonId"
+                            onclick="unBlockCard();"
+                            status="unBlockCardStatus"
+                            value="{!$Label.LAB_SF_ASSET_UnblockCardButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="getCardStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="getCardButtonId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="msgErrorId,balanceInformationsPanelId"
+                            action="{!getCard}"
+                            oncomplete="checkActionsButtons('{!Asset.Status}')"
+                            status="getCardStatus"
+                            value="{!$Label.LAB_SF_ASSET_GetCardButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="mobileActivationStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandButton id="mobileActivationId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="msgErrorId,mobileActivationId"
+                            onclick="doMobileActivation();"
+                            status="mobileActivationStatus"
+                            value="{!$Label.LAB_SF_ASSET_MobileActivationButton}"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <div id="wrap" class="wrap" rendered="{!isPLAccess}">
+                    <apex:actionStatus id="OpenGetLoadsStatus">
+                      <apex:facet name="start">
+                        <apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}"
+                          height="25"
+                          width="25"
+                        />
+                      </apex:facet>
+                      <apex:facet name="stop">
+                        <apex:outputPanel >
+                          <apex:commandLink id="OpenGetLoadsId"
+                            styleClass="slds-button slds-button_neutral"
+                            reRender="OpenGetLoadsId,msgErrorId"
+                            onclick="openGetLoads()"
+                            status="GetLoadsStatus"
+                            value="{!$Label.LAB_SF_ASSET_GetLoads}"
+                            target="_blank"
+                          />
+                        </apex:outputPanel>
+                      </apex:facet>
+                    </apex:actionStatus>
+                  </div>
+
+                  <apex:actionStatus id="OpenTransactionStatus">
+                    <apex:facet name="stop">
+                      <apex:outputPanel >
+                        <apex:commandLink id="OpenTransactionId"
+                          styleClass="slds-button slds-button_neutral"
+                          reRender="OpenTransactionId,msgErrorId"
+                          onclick="hope()"
+                          status="TransactionStatus"
+                          value="{!$Label.LAB_SF_ASSET_GetTransactions}"
+                          target="_blank"
+                        />
+                      </apex:outputPanel>
+                    </apex:facet>
+                  </apex:actionStatus>
+
+                  <!--<apex:actionStatus id="PINstatus">
+<apex:facet name="start">
+<apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}" height="25" width="25" />
+</apex:facet>
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandButton id="PINid" styleClass="slds-button slds-button_neutral" reRender="msgErrorId,PINid"
+onclick="doPIN();" status="PINstatus" value="PIN"
+/>
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus>-->
+                </div>
+                <div style="float: right">
+                  <apex:image rendered="{!!isOfflineBU}"
+                    value="{!URLFOR($Resource.SRER01_Images, 'CloudSync.png')}"
+                    height="32"
+                    width="32"
+                    alt="{!$Label.LABS_SF_Synchronized}"
+                    title="{!$Label.LABS_SF_Synchronized}"
+                  />
+                  <apex:image rendered="{!isOfflineBU}"
+                    value="{!URLFOR($Resource.SRER01_Images, 'CloudNotSync.png')}"
+                    height="32"
+                    width="32"
+                    alt="{!$Label.LABS_SF_Unsynchronized}"
+                    title="{!$Label.LABS_SF_Unsynchronized}"
+                  />
+                </div>
+              </div>
+            </div>
+            <apex:outputPanel id="balanceInformationsPanelId" layout="block" style="overflow: auto; height: 250px">
+              <!-- apex Repeat?-->
+              <apex:repeat value="{!balanceInstList}" var="balances">
+                <apex:outputPanel >
+                  <h1>
+                    <b style="font-size: 20px">{!balances.name}</b>
+                  </h1>
+                  <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_Balance}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="balanceId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.balance}"
+                        />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_PendingDebit}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="pendingDebitId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.pendingDebit}"
+                        />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_BalanceAvailable}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="balanceAvailableId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.balanceAvailable}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_ExpiringMonths}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="expiringMonthsId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.amountExpiringMonths}"
+                        />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_ExpiringYear}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="expiringYearId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.amountExpiringYear}"
+                        />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_ExpiringYears}</label>
+                      <div class="slds-form-element__control">
+                        <apex:outputText id="expiringYearsId"
+                          styleClass="slds-form-element__static"
+                          value="{!balances.amountExpiringYears}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label">{!$Label.LAB_SF_ASSET_Status}</label>
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="statusId" styleClass="slds-input" value="{!currentAsset.Status}" />
+                      </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-3 slds-form-element_readonly">
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Asset_Status_Last_Modified_Date__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="statusLastModifiedDateId"
+                          value="{!currentAsset.ER_Asset_Status_Last_Modified_Date__c}"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="slds-form-element slds-size_1-of-3 slds-form-element_readonly"
+                      style="{!IF(CONTAINS(balances.name, 'MAIN') && $ObjectType.Asset.fields.ER_Load_Validity_Lunch__c.Accessible && OR(balances.productName=='Edenred Card' && balances.assetType=='ER_Multicard', balances.productName=='Edenred lounas' && balances.assetType=='ER_Mono-Wallet'), 'display:block', 'display:none')}"
+                    >
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Load_Validity_Lunch__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="load_validity_lunch" value="{!currentAsset.ER_Load_Validity_Lunch__c}" />
+                      </div>
+                    </div>
+                    <div
+                      class="slds-form-element slds-size_1-of-3 slds-form-element_readonly"
+                      style="{!IF($ObjectType.Asset.fields.ER_Load_Validity_Recreational__c.Accessible, IF(CONTAINS(balances.name, 'WELLNESS'), IF(balances.productName=='Edenred Card' && balances.assetType=='ER_Multicard', 'display:block', 'display:none'), IF(balances.productName=='Edenred Virike' && balances.assetType=='ER_Mono-Wallet', 'display:block', 'display:none')), 'display:none')}"
+                    >
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Load_Validity_Recreational__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="load_validity_recreational"
+                          value="{!currentAsset.ER_Load_Validity_Recreational__c}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div
+                      class="slds-form-element slds-size_1-of-3 slds-form-element_readonly"
+                      style="{!IF(CONTAINS(balances.name, 'MAIN') && $ObjectType.Asset.fields.ER_Load_Validity_Transport__c.Accessible && balances.productName=='Edenred Työmatka' && balances.assetType=='ER_Mono-Wallet','display:block', 'display:none')}"
+                    >
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Load_Validity_Transport__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="load_validity_transport"
+                          value="{!currentAsset.ER_Load_Validity_Transport__c}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div
+                      class="slds-form-element slds-size_1-of-3 slds-form-element_readonly"
+                      style="{!IF(CONTAINS(balances.name, 'MAIN') && $ObjectType.Asset.fields.ER_Load_Validity_Massage__c.Accessible && balances.productName=='Edenred Massage' && balances.assetType=='ER_Mono-Wallet','display:block', 'display:none')}"
+                    >
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Load_Validity_Massage__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="load_validity_massage"
+                          value="{!currentAsset.ER_Load_Validity_Massage__c}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form-element__row">
+                    <div
+                      class="slds-form-element slds-size_1-of-3 slds-form-element_readonly"
+                      style="{!IF(CONTAINS(balances.name, 'MAIN') && $ObjectType.Asset.fields.ER_Load_Validity_Dental__c.Accessible && balances.productName=='Edenred Dental' && balances.assetType=='ER_Mono-Wallet','display:block', 'display:none')}"
+                    >
+                      <label class="slds-form-element__label"
+                        >{!$ObjectType.Asset.Fields.ER_Load_Validity_Dental__c.Label}</label
+                      >
+                      <div class="slds-form-element__control slds-form-element__static">
+                        <apex:outputField id="load_validity_dental"
+                          value="{!currentAsset.ER_Load_Validity_Dental__c}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </apex:outputPanel>
+              </apex:repeat>
+            </apex:outputPanel>
+          </div>
+        </div>
+      </apex:outputPanel>
+
+      <div id="goBig" class="goBig">
+        <apex:includeScript value="/support/console/40.0/integration.js" />
+        <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+        <apex:stylesheet value="{!URLFOR($Resource.DataTables, 'DataTables/css/jquery.dataTables.min.css')}" />
+        <apex:stylesheet value="{!URLFOR($Resource.SLDS272, 'styles/salesforce-lightning-design-system.min.css')}" />
+        <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery-3.3.1.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/jquery.dataTables.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/moment.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.DataTables, 'DataTables/js/datetime-moment.js')}" />
+
+        <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'moment.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.min.js')}" />
+        <apex:stylesheet value="{!URLFOR($Resource.Daterangepicker, 'daterangepicker.css')}" />
+
+        <!--<h3 class="slds-section__title  test-id__section-header-container" style="padding-top: 8px;">
+<Div class="slds-section__title-action">
+<span class="test-id__section-header-title slds-truncate">{!$Label.LAB_SF_ASSET_TransactionSection}</span>
+</Div>
+</h3> -->
+        <!--<div class="transactionOptions">
+<div class="slds-form-element slds-form_compound">
+<div class="slds-form-element__control">
+<div class="slds-form-element__group">
+<div class="slds-form-element__row">
+<div class="slds-form-element slds-size_1-of-3">
+<div class="slds-form-element__control">
+<input id="hiddenElement" type="hidden" />
+<apex:inputText id="datefilter" styleClass="slds-input slds-form-element__static" html-autocomplete="off" value="{!daterFilters}"
+/>
+</div>
+</div>
+<div class="slds-form-element slds-size_1-of-3">
+<!--<apex:actionStatus id="getTransactionsStatus">
+<apex:facet name="start">
+<apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}" height="25" width="25" />
+</apex:facet>
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandButton id="getTransactionsButtonId" styleClass="slds-button slds-button_neutral" reRender="repeatId,msgErrorId,getMoreButtonId"
+status="getTransactionsStatus" action="{!getTransactionList}" value="{!$Label.LAB_SF_ASSET_GetTransactions}"
+oncomplete="RefreshTable();disableTransactionButton();" />
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus> 
+<apex:actionStatus id="getMoreStatus">
+<apex:facet name="start">
+<apex:image value="{!URLFOR($Resource.SLDS272, 'images/spinners/slds_spinner_brand.gif')}" height="25" width="25" />
+</apex:facet>
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandButton id="getMoreButtonId" styleClass="slds-button slds-button_neutral" reRender="repeatId,msgErrorId,getMoreButtonId"
+status="getMoreStatus" action="{!geMoretTransactionList}" value="{!$Label.LAB_SF_ASSET_GetMore}"
+oncomplete="RefreshTable();" disabled="{!checkMoreButton}" />
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus>
+<apex:actionStatus id="OpenTransactionStatus">
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandLink id="OpenTransactionId" styleClass="slds-button slds-button_neutral" reRender="OpenTransactionId,msgErrorId"
+onclick="hope()" status="TransactionStatus" value="Get Transaction"
+target="_blank" />
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> -->
+
+        <!--
+<apex:outputPanel id="repeatId">
+<table id="transactionsTable" class="display" style="width:100%">
+<thead>
+<tr>
+<th>{!$Label.LAB_SF_ASSET_transactionDate}</th>
+<th>{!$Label.LAB_SF_ASSET_transactionType}</th>
+<th>{!$Label.LAB_SF_ASSET_transactionStatus}</th>
+<th>{!$Label.LAB_SF_ASSET_transactionStatusDetail}</th>
+<th>{!$Label.LAB_SF_ASSET_transactionAcceptorName}</th>
+<th>{!$Label.LAB_SF_ASSET_transactionAmount}</th>
+</tr>
+</thead>
+<tbody>
+<apex:repeat value="{!transactionlist}" var="transaction">
+<tr>
+<td>{!transaction.trDate}</td>
+<td>{!transaction.type}</td>
+<td>{!transaction.status}</td>
+<td>{!transaction.status_details}</td>
+<td>{!transaction.acceptorName}</td>
+<td>{!transaction.amount}</td>
+</tr>
+</apex:repeat>
+</tbody>
+</table>
+</apex:outputPanel>
+-->
+      </div>
+    </apex:form>
+    <script type="text/javascript">
+      /*var transactionTable;
+            var length = {!$Label.LAB_SF_datatable_Length};
+            $.fn.dataTable.moment('YYYY-MM-DD HH:mm:ss');
+            window.onload = setFocus
+            function setFocus() {
+                document.getElementById('hiddenElement').focus();
+            } */
+      $(document).ready(function () {
+        checkWSbuttons();
+        checkActionsButtons("{!Asset.Status}");
+        callGetCardWS("{!Asset.Status}");
+        callGetBalanceWS("{!Asset.Status}");
+        controlSolutionField();
+        /*displaytable();
+
+                var minDate = moment().subtract(6, 'months');
+                var maxDate = moment();
+
+                $('input[id$="datefilter"]').daterangepicker({
+                    autoApply: false,
+                    minDate: minDate,
+                    maxDate: maxDate,
+                    autoUpdateInput: true,
+                    locale: {
+                        cancelLabel: "{!$Label.LABS_SF_Asset_Transaction_Clear}",
+                        format: 'YYYY-MM-DD',
+                        separator: ' - '
+                    }
+                });
+
+                $('input[id$="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
+                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+                });
+
+                $('input[id$="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
+                    $(this).val('');
+                });
+
+                $('input[id$="datefilter"]').val('');
+                $("[id$='datefilter']").on("change", function () {
+
+                    enableElement('getTransactionsButtonId');
+                    disableElement('getMoreButtonId');
+                });
+
+                $('input[id$="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
+                    //do something, like clearing an input
+                    enableElement('getTransactionsButtonId');
+                    disableElement('getMoreButtonId');
+                }); */
+      });
+
+      /*function displaytable() {
+
+                transactionTable = $('#transactionsTable').DataTable({
+                    "initComplete": function () {
+
+                        if (this.api().data().count() > 0) {
+                            $('#transactionsTable thead tr').clone(false).appendTo('#transactionsTable thead');
+                            $('#transactionsTable thead tr:eq(1) th').each(function (i) {
+                                $(this).html('');
+                                $(this).removeClass("sorting sorting_desc sorting_asc");
+                            });
+
+                            this.api().columns([1, 2]).every(function (index) {
+
+                                var column = this;
+                                var select = $('<select onclick="return false;"><option value=""> </option></select>')
+                                    .appendTo($('#transactionsTable thead tr:eq(1) th:eq(' + index + ')'))
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    },
+                    "rowCallback": function (row, data, index) {
+                        switch (data[2]) {
+                            case "{!$Label.LAB_SF_ASSET_transactionFailed}": $(row).css('color', 'Red');
+                                break;
+                        }
+                    },
+                    "pagingType": "full_numbers",
+                    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "{!$Label.LAB_SF_datatable_All}"]],
+                    "pageLength": -1,
+                    //"searching": false,
+                    //"ordering": false,
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "lengthMenu": "Show _MENU_ transactions",
+                        "info": "{!$Label.LAB_SF_datatable_info}",
+                        "infoEmpty": "{!$Label.LAB_SF_datatable_infoEmpty}",
+                        "infoFiltered": "{!$Label.LAB_SF_datatable_infoFiltered}",
+                        "Search": "{!$Label.LAB_SF_datatable_Search}",
+                        "zeroRecords": "{!$Label.LAB_SF_datatable_zeroRecords}",
+                        "paginate": {
+                            "first": "{!$Label.LAB_SF_datatable_First}",
+                            "last": "{!$Label.LAB_SF_datatable_Last}",
+                            "next": "{!$Label.LAB_SF_datatable_Next}",
+                            "previous": "{!$Label.LAB_SF_datatable_Previous}"
+                        }
+                    }
+                });
+            } 
+
+            function RefreshTable() {
+
+                displaytable();
+            } */
+
+      function disableTransactionButton() {
+        disableElement("getTransactionsButtonId");
+      }
+
+      function callGetCardWS(data) {
+        if ("{!Asset.recordtype.Developername}" == "ER_Anonymous_Card" && data == "") {
+          $("[id$='getCardButtonId']").trigger("click");
+        }
+      }
+
+      function callGetBalanceWS(data) {
+        var statusActive = "{!$Label.LAB_SF_ASSET_Status_Active}";
+        if (data == "" || data.toUpperCase() == statusActive.toUpperCase()) {
+          $("[id$='getBalanceButtonId']").trigger("click");
+        }
+      }
+
+      function controlSolutionField() {
+        if ("{!Asset.ER_Asset_Type__c}" == "{!$Label.LAB_SF_ASSET_Type}") {
+          disableElement("solutionId");
+        }
+      }
+
+      function checkActionsButtons(data) {
+        if (data) {
+          var statusActive = "{!$Label.LAB_SF_ASSET_Status_Active}";
+          if (data == "" || data.toUpperCase() == statusActive.toUpperCase()) {
+            enableElement("pinResetButtonId");
+            enableElement("blockCardButtonId");
+            enableElement("getCardButtonId");
+            enableElement("mobileActivationId");
+            disableElement("unblockButtonId");
+            enableElement("OpenGetLoadsId");
+            enableElement("getBalanceButtonId");
+            enableElement("getTransactionsButtonId");
+          } else {
+            var statusBlocked = "{!$Label.LAB_SF_ASSET_Blocked}";
+            var statusIssued = "{!$Label.LAB_SF_ASSET_Issued}";
+            disableElement("unblockButtonId");
+            disableElement("blockCardButtonId");
+            if (data.toUpperCase() == statusBlocked.toUpperCase()) {
+              enableElement("unblockButtonId");
+              enableElement("blockCardButtonId");
+            }
+            if (data.toUpperCase() == statusIssued.toUpperCase()) {
+              enableElement("blockCardButtonId");
+            }
+            disableElement("pinResetButtonId");
+            enableElement("getCardButtonId");
+            enableElement("mobileActivationId");
+            enableElement("OpenGetLoadsId");
+            enableElement("getBalanceButtonId");
+            enableElement("getTransactionsButtonId");
+          }
+        }
+      }
+
+      function checkWSbuttons(data) {
+        disableElement("unblockButtonId");
+        if (data) {
+          if (data.value == "") {
+            disableElement("getBalanceButtonId");
+            disableElement("getTransactionsButtonId");
+            disableElement("pinResetButtonId");
+            disableElement("blockCardButtonId");
+            disableElement("getCardButtonId");
+          } else {
+            enableElement("getBalanceButtonId");
+            enableElement("getTransactionsButtonId");
+            enableElement("pinResetButtonId");
+            enableElement("blockCardButtonId");
+            enableElement("getCardButtonId");
+          }
+        } else {
+          /*var edenredSolution = "{!Asset.ER_Edenred_Solution__c}";
+                    if (!edenredSolution) {
+                        disableElement('getBalanceButtonId');
+                        disableElement('getTransactionsButtonId');
+                        disableElement('pinResetButtonId');
+                        disableElement('blockCardButtonId');
+                        disableElement('getCardButtonId');
+                    }*/
+        }
+
+        var stringvalue = "{!isPLAccess}";
+        if (stringvalue == "false") {
+          //disableElement('getBalanceButtonId');
+          //disableElement('getTransactionsButtonId');
+          disableElement("pinResetButtonId");
+          disableElement("blockCardButtonId");
+          disableElement("getCardButtonId");
+          disableElement("mobileActivationId");
+          disableElement("OpenGetLoadsId");
+        }
+      }
+
+      function enableElement(id) {
+        $("[id$='" + id + "']").removeAttr("disabled");
+      }
+
+      function disableElement(id) {
+        $("[id$='" + id + "']").attr("disabled", "disabled");
+      }
+
+      function getBlockCard() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_Block_Card" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER03_Asset_BlockCard?Id={!Asset.id}";
+        }
+      }
+
+      function unBlockCard() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_Unblock_Card" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER06_Asset_UnblockCard?Id={!Asset.id}";
+        }
+      }
+
+      function pinReset() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_Pin_Reset" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER02_Asset_PinReset?Id={!Asset.id}";
+        }
+      }
+
+      function doMobileActivation() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_Mobile_Activation" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER07_Asset_MobileActivation?Id={!Asset.id}";
+        }
+      }
+
+      function doPIN() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_PIN" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER12_Asset_PIN?Id={!Asset.id}";
+        }
+      }
+
+      function transactionButton() {
+        if (inLightning()) {
+          Sfdc.canvas.publisher.publish({
+            name: "publisher.invokeAction",
+            payload: { actionName: "Asset.ER_Multi_Wallet_Transactions" }
+          });
+        } else {
+          window.parent.location.href = "/apex/VFER02_Asset_PinReset?Id={!Asset.id}";
+        }
+      }
+
+      function hope() {
+        window.open("/apex/VFER10_Multi_Wallet_Transactions?id={!Asset.Id}", "_blank");
+      }
+
+      function openGetLoads() {
+        window.open("/apex/VFER13_Asset_GetLoads?id={!Asset.Id}", "_blank");
+      }
+
+      function inLightning() {
+        return sforce.one != undefined;
+      }
+    </script>
+  </div>
+</apex:page>

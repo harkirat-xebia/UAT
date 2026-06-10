@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Call_Genesys</name>
+        <label>Call Genesys</label>
+        <locationX>308</locationX>
+        <locationY>276</locationY>
+        <actionName>GenesysCloud_API</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Update_Conversation_Id</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>tasks</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>GenesysCloud_API</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Route follow-up task to Genesys at planned date</description>
+    <environments>Default</environments>
+    <interviewLabel>Genesys - Route {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Genesys - Task Follow up Routing</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Conversation_Id</name>
+        <label>Update Conversation Id</label>
+        <locationX>308</locationX>
+        <locationY>384</locationY>
+        <inputAssignments>
+            <field>Gsys_Call_ConversationId__c</field>
+            <value>
+                <elementReference>Call_Genesys.call_ConversationId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <filterLogic>1 AND (2 OR 3) AND 4 AND 5</filterLogic>
+        <filters>
+            <field>Gsys_Activity_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Attempted Call</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>WhoId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>WhatId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Gsys_Planned_Date__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ER_Business_Unit__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>FR</stringValue>
+            </value>
+        </filters>
+        <object>Task</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Route_Task_To_Genesys</name>
+            <connector>
+                <targetReference>Call_Genesys</targetReference>
+            </connector>
+            <label>Route Task To Genesys</label>
+            <offsetNumber>-1</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>Gsys_Planned_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

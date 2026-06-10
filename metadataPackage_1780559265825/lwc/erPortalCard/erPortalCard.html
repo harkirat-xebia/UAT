@@ -1,0 +1,65 @@
+<template>
+	<div class={cardClass} onclick={handleClick}>
+		<article class="slds-tile slds-tile_board">
+			<p class={titleClass}>
+				{labels.cardName}
+			</p>
+            <template for:each={optionsList} for:item="option" for:index="index">
+				<c-er-portal-option-buttons id={option.id} key={option.index} option-name={option.optionName} option-text={option.optionText} choice1-label={option.choice1} choice2-label={option.choice2} value={option.value} onchange={handleOptionChange}>
+				</c-er-portal-option-buttons>
+			</template>
+
+			<template if:false={isMandatory}>
+				<template if:false={isActivated}>
+					<template if:false={isRadioBtn}>
+					<div class="add-remove-medium">
+						<template if:false={isSelected}>
+							<lightning-icon icon-name="utility:add" size="medium" class="add-remove-icon" alternative-text={labels.add}>
+							</lightning-icon>
+							<p>{labels.add}</p>
+						</template>
+					</div>
+					<div class="add-remove-small">
+						<template if:false={isSelected}>
+							<lightning-icon icon-name="utility:add" size="x-small" class="add-remove-icon" alternative-text={labels.add}>
+							</lightning-icon>
+							<p class="add-small">{labels.add}</p>
+						</template>
+					</div>
+					</template>
+					<template if:true={isRadioBtn}>
+						<div class="add-remove-medium">
+							<template if:false={isSelected}>
+								<lightning-icon icon-name="utility:routing_offline" size="medium" class="add-remove-icon" alternative-text={labels.select}>
+								</lightning-icon>
+								<p>{labels.select}</p>
+							</template>
+							<template if:true={isSelected}>
+								<lightning-icon icon-name="utility:choice" size="medium" class="add-remove-icon" alternative-text={labels.selected}>
+								</lightning-icon>
+								<p>{labels.selected}</p>
+							</template>
+						</div>
+						<div class="add-remove-small">
+							<template if:false={isSelected}>
+								<lightning-icon icon-name="utility:routing_offline" size="x-small" class="add-remove-icon" alternative-text={labels.select}>
+								</lightning-icon>
+								<p class="add-small">{labels.select}</p>
+							</template>
+							<template if:true={isSelected}>
+								<lightning-icon icon-name="utility:choice" size="x-small" class="add-remove-icon" alternative-text={labels.selected}>
+								</lightning-icon>
+								<p class="add-small">{labels.selected}</p>
+							</template>
+						</div>
+					</template>
+				</template>
+
+				<template if:true={isActivated}>
+					<p>{labels.active}</p>
+				</template>
+				
+			</template>
+		</article>
+	</div>
+</template>

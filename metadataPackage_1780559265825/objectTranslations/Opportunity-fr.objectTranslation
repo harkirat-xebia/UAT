@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Opportunité</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Opportunité</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <startsWith>Consonant</startsWith>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Date de clôture</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>close_date_opportunity</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Origine du lead</value>
+        </caseValues>
+        <gender>Feminine</gender>
+        <name>opportunity_lead_source</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Type de contrat</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>type_opportunity</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+</CustomObjectTranslation>

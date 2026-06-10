@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Number of Employees</value>
+        </caseValues>
+        <name>no_of_employees_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Lead Rating</value>
+        </caseValues>
+        <name>rating_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+</CustomObjectTranslation>

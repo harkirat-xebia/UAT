@@ -1,0 +1,30 @@
+.pricebook-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    padding: 0.5rem;
+    background-color: #fafaf9;
+}
+
+.slds-alert_success {
+    background-color: #4bca81;
+    color: white;
+}
+
+.slds-alert_error {
+    background-color: #ea001e;
+    color: white;
+}
+
+.slds-box {
+    border-radius: 0.25rem;
+}
+
+dl.slds-list_horizontal dt {
+    width: 40%;
+}
+
+dl.slds-list_horizontal dd {
+    width: 60%;
+}
