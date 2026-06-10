@@ -10,6 +10,7 @@ export default class ApprovalBannerAlert extends LightningElement {
     showBanner = false;
     bannerMessage = '';
 
+    
     connectedCallback(){
         checkApprovalConditions({recordId: this.recordId})
             .then((result) => {
