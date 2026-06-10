@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ERFR - Finance Recouvrement Agent</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ERFR - Finance Recouvrement Agent</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>ERFR_Finance_Recouvrement_Manager</parentRole>
+</Role>
