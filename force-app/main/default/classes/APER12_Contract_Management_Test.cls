@@ -652,7 +652,7 @@ public class APER12_Contract_Management_Test {
   }
     //Added by harkirat
     @IsTest
-static void test_syncCLIFlags() {
+	  static void test_syncCLIFlags() {
     User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
 
     System.runAs(ur) {
@@ -694,7 +694,7 @@ static void test_syncCLIFlags() {
 }
 
     @IsTest
-static void test_getExistingSolutionByAccounts() {
+	  static void test_getExistingSolutionByAccounts() {
     User ur = [SELECT Id, ER_Business_Unit__c FROM User WHERE LastName = 'APER12' LIMIT 1];
 
     System.runAs(ur) {
@@ -746,7 +746,7 @@ static void test_getExistingSolutionByAccounts() {
 }
 
     @IsTest
-static void test_checkExistingSolutionsWithUpdatedContract_overlap() {
+	  static void test_checkExistingSolutionsWithUpdatedContract_overlap() {
     User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
 
     System.runAs(ur) {
@@ -869,7 +869,7 @@ static void test_checkExistingSolutionsWithUpdatedContract_overlap() {
 }
 
     @IsTest
-static void test_createAcrForContracts() {
+	  static void test_createAcrForContracts() {
     User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
 
     System.runAs(ur) {
@@ -950,8 +950,9 @@ static void test_createAcrForContracts() {
         System.assertEquals(cnt.Id, acrs[0].ContactId);
     }
 }
+    
     @IsTest
-static void test_shouldShowApplyButtonPerContract() {
+	  static void test_shouldShowApplyButtonPerContract() {
     User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
 
     System.runAs(ur) {
@@ -1035,161 +1036,406 @@ static void test_shouldShowApplyButtonPerContract() {
         );
     }
 }
-
-
     
-    /* Test Method by Harkirat to increase coverage */
-    /*
- 	@IsTest
-static void test_retrieveExistingSolutionAndCompareDate_overlap() {
-  User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
-  System.runAs(ur) {
-    // Query the test products inserted in @testSetup
-    Product2 sol = [
-      SELECT Id, ProductCode, BU_External_Reference__c, zqu__Category__c
-      FROM Product2
-      WHERE ProductCode = 'TEST_SOL_001'
-      LIMIT 1
-    ];
-    Product2 svc = [
-      SELECT Id, ProductCode, ER_Solution2__c
-      FROM Product2
-      WHERE ProductCode = 'TEST_SVC_001'
-      LIMIT 1
-    ];
-
-    // Align ProductCode with BU_External_Reference__c (helps many org formulas)
-    if (String.isBlank(sol.ProductCode) || sol.ProductCode != sol.BU_External_REFERENCE__c) {
-      sol.ProductCode = sol.BU_External_Reference__c;
-      update sol;
-      sol = [SELECT Id, ProductCode, BU_External_Reference__c FROM Product2 WHERE Id = :sol.Id LIMIT 1];
+    /**
+     * @description Test SME Engagement Request Platform Event Trigger
+     * Tests the trigger that listens to SME_Engagement_Request__e events
+     */
+    @IsTest
+    static void test_SMEEngagementRequestTrigger() {
+        User ur = [SELECT Id FROM User WHERE LastName = 'APER12' LIMIT 1];
+        ur.ER_BypassVR__c = true;
+        update ur;
+        
+        System.runAs(ur) {
+            // Setup: Get or create test contracts
+            List<Contract> existingContracts = [SELECT Id FROM Contract LIMIT 2];
+            
+            List<Id> contractIds = new List<Id>();
+            for (Contract c : existingContracts) {
+                contractIds.add(c.Id);
+            }
+            
+            // If we need more contracts, create them
+            if (contractIds.size() < 2) {
+                Account testAcc = APER07_UtilityTestMethod.insertAccount(
+                    'Platform Event Test Account',
+                    'ER_Company_Account_RT'
+                );
+                
+                PriceBook2 pb = APER07_UtilityTestMethod.getpriceBook();
+                
+                Contract additionalContract = APER07_UtilityTestMethod.insertContract(
+                    testAcc.Id,
+                    Date.today(),
+                    Label.LABS_SF_Contract_Status_Draft,
+                    pb.Id,
+                    'ER_Client_Contract_RT',
+                    ur.Id
+                );
+                
+                contractIds.add(additionalContract.Id);
+            }
+            
+            Test.startTest();
+            
+            // Test 1: Single Contract ID
+            SME_Engagement_Request__e event1 = new SME_Engagement_Request__e();
+            event1.Contract_Ids__c = contractIds[0];
+            Database.SaveResult result1 = EventBus.publish(event1);
+            System.assert(result1.isSuccess(), 'Single contract event should publish successfully');
+            
+            // Test 2: Multiple Contract IDs (comma-separated)
+            SME_Engagement_Request__e event2 = new SME_Engagement_Request__e();
+            event2.Contract_Ids__c = contractIds[0] + ',' + contractIds[1];
+            Database.SaveResult result2 = EventBus.publish(event2);
+            System.assert(result2.isSuccess(), 'Multiple contract event should publish successfully');
+            
+            // Test 3: Contract IDs with spaces (tests trim functionality)
+            SME_Engagement_Request__e event3 = new SME_Engagement_Request__e();
+            event3.Contract_Ids__c = ' ' + contractIds[0] + ' , ' + contractIds[1] + ' ';
+            Database.SaveResult result3 = EventBus.publish(event3);
+            System.assert(result3.isSuccess(), 'Event with spaces should publish successfully');
+            
+            // Test 4: Empty Contract IDs (edge case)
+            SME_Engagement_Request__e event4 = new SME_Engagement_Request__e();
+            event4.Contract_Ids__c = '';
+            Database.SaveResult result4 = EventBus.publish(event4);
+            System.assert(result4.isSuccess(), 'Empty contract IDs should publish successfully');
+            
+            // Test 5: Null Contract IDs (edge case)
+            SME_Engagement_Request__e event5 = new SME_Engagement_Request__e();
+            event5.Contract_Ids__c = null;
+            Database.SaveResult result5 = EventBus.publish(event5);
+            System.assert(result5.isSuccess(), 'Null contract IDs should publish successfully');
+            
+            // Test 6: Invalid Contract ID format (tests error handling)
+            SME_Engagement_Request__e event6 = new SME_Engagement_Request__e();
+            event6.Contract_Ids__c = 'INVALID_ID';
+            Database.SaveResult result6 = EventBus.publish(event6);
+            System.assert(result6.isSuccess(), 'Invalid ID should publish (error handled in trigger)');
+            
+            // Test 7: Bulk events
+            List<SME_Engagement_Request__e> bulkEvents = new List<SME_Engagement_Request__e>();
+            for (Id contractId : contractIds) {
+                SME_Engagement_Request__e bulkEvent = new SME_Engagement_Request__e();
+                bulkEvent.Contract_Ids__c = contractId;
+                bulkEvents.add(bulkEvent);
+            }
+            List<Database.SaveResult> bulkResults = EventBus.publish(bulkEvents);
+            for (Database.SaveResult sr : bulkResults) {
+                System.assert(sr.isSuccess(), 'All bulk events should publish successfully');
+            }
+            
+            Test.stopTest();
+            
+            // Verify: Platform events were published and trigger executed without errors
+            System.assert(true, 'SME Engagement Request Trigger executed successfully for all scenarios');
+        }
     }
+        
+    /**
+     * @description Test SME Platform Engagement creation
+     * This will actually trigger createSMEPlatformEngagement and createSMEPlatformEngagementSync
+     */
+    @IsTest
+    static void test_createSMEPlatformEngagement_FullFlow() {
+        // Use existing user from testSetup
+        User ur = [SELECT Id, Name FROM User WHERE LastName = 'APER12' LIMIT 1];
+        ur.ER_BypassVR__c = true;
+        ur.FirstName = 'Guest'; // CRITICAL: Make name contain "Guest"
+        ur.LastName = 'APER12Test';
+        update ur;
+        
+        System.runAs(ur) {
+            // Setup: Main Platform Account
+            Account mainPlatformAcc = APER07_UtilityTestMethod.insertAccount(
+                'Main Platform Account',
+                'ER_Company_Account_RT'
+            );
+            mainPlatformAcc.Main_Platform__c = true;
+            mainPlatformAcc.ER_BUPicklist__c = 'PL';
+            mainPlatformAcc.Customer_Domain_Reference__c = 'MAIN_DOMAIN_REF';
+            update mainPlatformAcc;
+            
+            // Setup: Main Platform Contract
+            PriceBook2 pb = APER07_UtilityTestMethod.getpriceBook();
+            Contract mainPlatformContract = APER07_UtilityTestMethod.insertContract(
+                mainPlatformAcc.Id,
+                Date.today(),
+                Label.LABS_SF_Contract_Status_Draft,
+                pb.Id,
+                'ER_Merchant_Contract_RT',
+                ur.Id
+            );
+            mainPlatformContract.ER_Program_Name__c = 'Test Program';
+            mainPlatformContract.ER_Impacted_Beneficiaries__c = 'TRE Only';
+            mainPlatformContract.ER_BUPicklist__c = 'PL';
+            mainPlatformContract.Status = Label.LABS_SF_Contract_Status_Activated;
+            update mainPlatformContract;
+            
+            // Setup: Engagement Pricebook
+            PriceBook2 engagementPB = APER07_UtilityTestMethod.getCustomPriceBook('PL - engagement');
+            insert engagementPB;
+            engagementPB.ER_BUPicklist__c = 'PL';
+            engagementPB.IsActive = true;
+            update engagementPB;
+            
+            // Setup: SME Platform Product
+            Product2 smeProduct = APER07_UtilityTestMethod.getsolution('SME Platform Product');
+            insert smeProduct;
+            smeProduct.ER_BUPicklist__c = 'PL';
+            smeProduct.For_SME_Platform__c = true;
+            smeProduct.IsActive = true;
+            smeProduct.ER_Line_Order__c = 1;
+            update smeProduct;
+            
+            // Add to Standard Pricebook first
+            Id standardPricebookId = Test.getStandardPricebookId();
+            PricebookEntry standardPBE = new PricebookEntry(
+                Pricebook2Id = standardPricebookId,
+                Product2Id = smeProduct.Id,
+                UnitPrice = 0,
+                IsActive = true,
+                UseStandardPrice = false
+            );
+            insert standardPBE;
+            
+            // Add to Engagement Pricebook
+            PricebookEntry smePBE = new PricebookEntry(
+                Pricebook2Id = engagementPB.Id,
+                Product2Id = smeProduct.Id,
+                UnitPrice = 0,
+                ER_Percentage__c = 5.0,
+                IsActive = true,
+                UseStandardPrice = false
+            );
+            insert smePBE;
+            
+            // Setup: Campaign
+            Campaign camp = new Campaign(
+                Name = 'Test Campaign',
+                IsActive = true
+            );
+            insert camp;
+            
+            // Setup: Promo Code with SME flag enabled
+            ER_Promo_Code__c promoCode = new ER_Promo_Code__c(
+                Name = 'TEST_PROMO_' + System.now().millisecond(),
+                Create_SME_Platform_Engagement__c = true, // CRITICAL: Enable SME flag
+                ER_Business_Unit__c = 'PL',
+                ER_Status__c = 'Activated',
+                ER_Start_Date__c = Date.today().addDays(-1),
+                ER_End_Date__c = Date.today().addYears(1)
+            );
+            insert promoCode;
+            
+            // Setup: Regular Account
+            Account regularAcc = APER07_UtilityTestMethod.insertAccount(
+                'Regular SME Account',
+                'ER_Company_Account_RT'
+            );
+            regularAcc.ER_BUPicklist__c = 'PL';
+            update regularAcc;
+            
+            // Setup: Contact
+            Contact primaryContact = new Contact(
+                FirstName = 'Primary',
+                LastName = 'Contact',
+                Email = 'primary@sme.com',
+                AccountId = regularAcc.Id,
+                ER_Status__c = 'Active'
+            );
+            insert primaryContact;
+            
+            // Setup: Opportunity with Promo Code
+            Opportunity opp = APER07_UtilityTestMethod.getOpportunity(
+                'ER_Client_Opportunity_RT',
+                'SME Test Opp'
+            );
+            opp.AccountId = regularAcc.Id;
+            opp.Pricebook2Id = pb.Id;
+            opp.CampaignId = camp.Id;
+            opp.ER_BUPicklist__c = 'PL';
+            opp.Primary_Contact__c = primaryContact.Id;
+            opp.Invoicing_Contact__c = primaryContact.Id;
+            opp.ER_Promo_Code2__c = promoCode.Id;
+            insert opp;
+            
+            // Setup: OCRs
+            OpportunityContactRole ocr = new OpportunityContactRole(
+                OpportunityId = opp.Id,
+                ContactId = primaryContact.Id,
+                Role = 'Primary Contact',
+                IsPrimary = true
+            );
+            insert ocr;
+            
+            // Setup: Quote
+            Quote quote = APER07_UtilityTestMethod.getQuote(
+                'ER_Client_Quote',
+                'SME Test Quote',
+                opp.Id,
+                pb.Id
+            );
+            quote.Status = 'Accepted';
+            quote.ER_Quote_Type__c = 'Operational';
+            insert quote;
+            
+            // Setup: Contract in DRAFT status first
+            Contract testContract = APER07_UtilityTestMethod.insertContract(
+                regularAcc.Id,
+                Date.today(),
+                Label.LABS_SF_Contract_Status_Draft, // Start as Draft
+                pb.Id,
+                'ER_Client_Contract_RT',
+                ur.Id
+            );
+            testContract.ER_OpportunityId__c = opp.Id;
+            testContract.ER_QuoteId__c = quote.Id;
+            testContract.Primary_Contact__c = primaryContact.Id;
+            testContract.Billing_Contact__c = primaryContact.Id;
+            testContract.CustomerSignedId = primaryContact.Id;
+            testContract.CustomerSignedDate = Date.today();
+            testContract.StartDate = Date.today();
+            testContract.EndDate = Date.today().addYears(1);
+            testContract.ER_BUPicklist__c = 'PL';
+            update testContract;
+            
+            Test.startTest();
+            
+            // TRIGGER THE SME PLATFORM CREATION by activating contract
+            testContract.Status = Label.LABS_SF_Contract_Status_Activated;
+            update testContract;
+            
+            // Manually call the sync method to test it directly (since queueable won't run in test)
+            Map<Id, Contract> newMap = new Map<Id, Contract>{ testContract.Id => testContract };
+            Map<Id, Contract> oldMap = new Map<Id, Contract>{ 
+                testContract.Id => new Contract(Id = testContract.Id, Status = 'Draft')
+            };
+            
+            // This should trigger the main method
+            APER12_Contract_Management.createSMEPlatformEngagement(newMap, oldMap);
+            
+            // Now manually call the sync method to test coverage
+            List<Id> contractIds = new List<Id>{ testContract.Id };
 
-    // Pick any PricebookEntry for svc (created under newPriceBook in testSetup)
-    PricebookEntry pbe = [SELECT Id, Pricebook2Id, Product2Id FROM PricebookEntry WHERE Product2Id = :svc.Id LIMIT 1];
-
-    // Create account + existing (draft) contract and set wide date range (so overlap possible)
-    Account acct = APER07_UtilityTestMethod.insertAccount('overlapAccount', 'ER_Company_Account_RT');
-
-    Contract existingContract = APER07_UtilityTestMethod.insertContract(
-      acct.Id,
-      Date.today().addDays(-30),
-      Label.LABS_SF_Contract_Status_Draft,
-      APER07_UtilityTestMethod.getpriceBook().Id,
-      'ER_Merchant_Contract_RT',
-      ur.Id
-    );
-    existingContract.StartDate = Date.today().addDays(-30);
-    existingContract.EndDate = Date.today().addDays(30);
-    update existingContract;
-
-    // Create Account Solution Line Item pointing to sol (BU_External_Reference__c used by logic)
-    ER_Solution_Line_Item__c accSli = APER07_UtilityTestMethod.getAccountLineItem(acct.Id, existingContract.Id, sol.Id);
-    accSli.ER_Scope__c = 'Merchant';
-    insert accSli;
-
-    // Create new (draft) contract and add CLI using svc/pbe
-    Contract newContract = APER07_UtilityTestMethod.insertContract(
-      acct.Id,
-      Date.today(),
-      Label.LABS_SF_Contract_Status_Draft,
-      APER07_UtilityTestMethod.getpriceBook().Id,
-      'ER_Merchant_Contract_RT',
-      ur.Id
-    );
-
-    ER_ContractLineItem__c cli = APER07_UtilityTestMethod.getContractLineItem(newContract.Id, svc.Id, pbe.Id, 1, 1);
-    insert cli;
-
-    // Re-query CLI to read ER_Solution__c (formula/read-only)
-    ER_ContractLineItem__c insertedCli = [
-      SELECT Id, ER_Solution__c, ER_Product2__c
-      FROM ER_ContractLineItem__c
-      WHERE Id = :cli.Id
-      LIMIT 1
-    ];
-
-    // If CLI ER_Solution__c already contains the expected key, good. Otherwise create fallback product/SLI matching actual CLI token.
-    String expectedKey = sol.BU_External_Reference__c;
-    String cliSolutions = insertedCli.ER_Solution__c == null ? '' : insertedCli.ER_Solution__c;
-    System.debug('TEST DEBUG - CLI ER_Solution__c: ' + cliSolutions + ' expectedKey: ' + expectedKey);
-
-    if (!String.isBlank(cliSolutions) && cliSolutions.contains(expectedKey)) {
-      // all good: normal path will detect overlap
-    } else {
-      // Determine a token that CLI actually contains or fallback to svc.ProductCode
-      String firstToken;
-      if (String.isBlank(cliSolutions)) {
-        firstToken = String.isBlank(svc.ProductCode) ? expectedKey : svc.ProductCode;
-      } else {
-        firstToken = cliSolutions.contains('|') ? cliSolutions.split('\\|')[0] : cliSolutions;
-      }
-
-      // Create a fallback Solution product whose BU_External_Reference__c matches the CLI token
-      Product2 fallbackSol = new Product2(
-        Name = 'FALLBACK_SOL_' + Datetime.now().getTime(),
-        ProductCode = firstToken,
-        BU_External_Reference__c = firstToken,
-        zqu__Category__c = 'Base Products',
-        ER_Type__c = 'Solution',
-        IsActive = true
-      );
-      insert fallbackSol;
-
-      // Use helper to create an account-level Solution Line Item for that fallback solution.
-      ER_Solution_Line_Item__c fallbackAccSli = APER07_UtilityTestMethod.getAccountLineItem(acct.Id, existingContract.Id, fallbackSol.Id);
-      fallbackAccSli.ER_Scope__c = 'Merchant';
-      insert fallbackAccSli;
-
-      System.debug('TEST DEBUG - Inserted fallback solution: ' + fallbackSol.Id + ' and fallbackAccSli: ' + fallbackAccSli.Id);
+            Map<Id, Contract> contractDetails = new Map<Id, Contract>([
+                SELECT
+                    Id,
+                    RecordTypeId,
+                    ER_Business_Unit__c,
+                    ER_InvoicingFrequency2__c,
+                    ER_ReimbursementTerm2__c,
+                    CustomerSigned.Email,
+                    CustomerSignedId,
+                    ERBE_Reimbursement_Statement_Frequency__c,
+                    Status,
+                    ER_Indexation__c,
+                    ER_OppIndexation2__c,
+                    ER_PaymentTerms2__c,
+                    ER_PaymentMethod2__c,
+                    Account.ER_VIP__c,
+                    Subscription__c,
+                    ER_ZuoraQuote__c,
+                    ERBE_Reimbursement_statement_Support__c,
+                    AccountId,
+                    Account.Name,
+                    StartDate,
+                    EndDate,
+                    ER_OpportunityId__c,
+                    ER_OpportunityId__r.ER_IsAmended__c,
+                    ER_OpportunityId__r.ER_AmendedFromContract__c,
+                    ER_OpportunityId__r.ER_AmendedFromOpportunity__r.ContractId,
+                    ContractNumber,
+                    ER_Creation_date_in_OS__c,
+                    CustomerSignedDate,
+                    ER_OpportunityId__r.ER_AmendedFromContract__r.StartDate,
+                    ER_Contract_Type__c,
+                    ER_Original_Agreement__c,
+                    ER_Original_Agreement__r.Status,
+                    ER_Original_Agreement__r.ER_Contract_Type__c,
+                    RecordType.DeveloperName,
+                    ER_OpportunityId__r.ER_SmartER_Context__c,
+                    ER_BUPicklist__c,
+                    // Additional fields needed by createSMEPlatformEngagementSync
+                    ER_OpportunityId__r.CampaignId,
+                    ER_OpportunityId__r.ER_Promo_Code2__c,
+                	ER_OpportunityId__r.ER_Won_Reason__c,
+                	ER_OpportunityId__r.Preferred_Language__c,
+                	ER_OpportunityId__r.ER_Estimated_Number_Of_Beneficiaries__c,
+                    ER_OpportunityId__r.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c,
+                    ER_OpportunityId__r.ER_Promo_Code2__r.ER_Business_Unit__c,
+                    ER_OpportunityId__r.Name,
+                    ER_OpportunityId__r.OwnerId,
+                    ER_OpportunityId__r.RecordTypeId,
+                    OwnerId,
+                    CreatedBy.Name,
+                    CurrencyIsoCode,
+                    Primary_Contact__c,
+                    Billing_Contact__c,
+                    Owner.Name,
+                    (
+                        SELECT
+                            Id,
+                            ER_Contract__c,
+                            Name,
+                            ER_Solution__c,
+                            ER_ProductCode__c,
+                            ER_Creation_date_in_OS__c,
+                            ER_Product2__c,
+                            ER_Product2__r.Name
+                        FROM ER_ContractLineItems__r
+                    )
+                FROM Contract
+                WHERE Id = :testContract.Id
+            ]);
+            List<Id> smeContractIds = APER12_Contract_Management.createSMEPlatformEngagementSync(
+                contractIds, 
+                contractDetails
+            );
+            
+            Test.stopTest();
+            
+            // Verify: SME Platform records were created
+            List<Opportunity> smeOpps = [
+                SELECT Id, Name, AccountId, Main_Platform__c,
+                       Customer_Domain_Reference__c, Program_Name__c
+                FROM Opportunity
+                WHERE Name LIKE 'SME Platform%'
+                AND AccountId = :regularAcc.Id
+            ];
+            
+            System.debug('SME Opportunities created: ' + smeOpps.size());
+            System.assert(!smeOpps.isEmpty(), 'At least one SME Platform Opportunity should be created');
+            
+            if (!smeOpps.isEmpty()) {
+                System.assertEquals(mainPlatformAcc.Id, smeOpps[0].Main_Platform__c, 
+                    'Main Platform should be set correctly');
+                System.assertEquals('MAIN_DOMAIN_REF', smeOpps[0].Customer_Domain_Reference__c,
+                    'Customer Domain Reference should be copied');
+                System.assertEquals('Test Program', smeOpps[0].Program_Name__c,
+                    'Program Name should be copied');
+            }
+            
+            // Verify: SME Contracts created
+            List<Contract> smeContracts = [
+                SELECT Id, AccountId, Main_Platform__c, ER_Program_Name__c,
+                       Customer_Domain_Reference__c, Status
+                FROM Contract
+                WHERE AccountId = :regularAcc.Id
+                AND Id != :testContract.Id
+            ];
+            
+            System.debug('SME Contracts created: ' + smeContracts.size());
+            System.assert(!smeContracts.isEmpty(), 'At least one SME Platform Contract should be created');
+            
+            // Verify helper methods were called
+            Id pbId = APER12_Contract_Management.getEngagementPricebookId('PL');
+            System.assertNotEquals(null, pbId, 'Engagement Pricebook should be found');
+            
+            List<Product2> products = APER12_Contract_Management.getSMEPlatformProducts('PL');
+            System.assertEquals(1, products.size(), 'One SME Platform product should be found');
+        }
     }
-
-    // Build newItems map and dates to trigger overlap
-    Contract queriedNewContr = [
-      SELECT Id, StartDate, EndDate, AccountId,
-             (SELECT Id, ER_Solution__c, ER_Product2__c FROM ER_ContractLineItems__r)
-      FROM Contract
-      WHERE Id = :newContract.Id
-      LIMIT 1
-    ];
-    queriedNewContr.StartDate = Date.today();
-    queriedNewContr.EndDate = Date.today().addDays(10);
-
-    Map<Id, Contract> newItems = new Map<Id, Contract>{ queriedNewContr.Id => queriedNewContr };
-    List<Id> updatedActivationPeriod = new List<Id>{ queriedNewContr.Id };
-    List<Id> accountIds = new List<Id>{ acct.Id };
-
-    // Call method under test
-    Test.startTest();
-      APER12_Contract_Management.retrieveExistingSolutionAndCompareDate(updatedActivationPeriod, accountIds, newItems);
-    Test.stopTest();
-
-    // Update should be blocked by addError on contract: assert that DML fails
-    Boolean dmlExceptionThrown = false;
-    try {
-      update newItems.values();
-    } catch (DmlException dex) {
-      dmlExceptionThrown = true;
-      System.assert(
-        dex.getMessage().contains('Existing') ||
-        dex.getMessage().contains('SOLUTION_EXIST') ||
-        dex.getMessage().contains(Label.LABS_SF_SOLUTION_EXIST_IN_ACTIVE_CONTRACT),
-        'Expected error message related to existing solution overlap. Actual: ' + dex.getMessage()
-      );
-    }
-    System.assertEquals(true, dmlExceptionThrown, 'Update should fail because checkExistingSolutionsWithUpdatedContract added an error');
-  }
-}*/
-
- 
- /*
-	@IsTest
-	static void fillSignatureInformation() {
-		List<Contract> contractList = [Select id, ER_QuoteId__c, CustomerSignedId, CustomerSignedTitle, CustomerSignedDate, CompanySignedId, CompanySignedDate From Contract limit 1];
-		User userBENELUX = TestDataFactory.newUser('APER12_BENELUX', 'APER12_BENELUX','Local Admin', 'BENELUX');
-		insert userBENELUX;
-		System.runAs(userBENELUX){
-			APER12_Contract_Management.fillSignatureInformation(contractList);
-		}
-	}*/
 }

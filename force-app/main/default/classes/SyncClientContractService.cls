@@ -37,8 +37,9 @@ public without sharing class SyncClientContractService {
         List<CreateClientRequestWrapper.ContactWrapper> contactWrapList = new List<CreateClientRequestWrapper.ContactWrapper>();
         Set<Id> processedContactIds = new Set<Id>();
         
-        //Updated query as per requirement
-        List<Contract> contract = [SELECT Id, Name, AccountId, Creditting__c, Billing_Contact__c,ER_Delivery_Type__c, Primary_Contact__c, Card_Replacement_Payment__c, ER_Impacted_Beneficiaries__c, ER_PaymentTerms2__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Not_subject_to_VAT__c, Account.ER_Language__c, LastModifiedDate, StartDate, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode FROM Contract WHERE Id = :contractId];
+        //Updated query for adding sme parent account id 
+        //List<Contract> contract = [SELECT Id, Name, AccountId, Creditting__c, Billing_Contact__c,ER_Delivery_Type__c, Primary_Contact__c, Card_Replacement_Payment__c, ER_Impacted_Beneficiaries__c, ER_PaymentTerms2__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Not_subject_to_VAT__c, Account.ER_Language__c, LastModifiedDate, StartDate,Contract_Category__c, ER_Start_Date__c, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode FROM Contract WHERE Id = :contractId];
+        List<Contract> contract = [SELECT Id, Name, AccountId, Creditting__c, Billing_Contact__c,ER_Delivery_Type__c, Primary_Contact__c, Card_Replacement_Payment__c, ER_Impacted_Beneficiaries__c, ER_PaymentTerms2__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Not_subject_to_VAT__c, Account.ER_Language__c, LastModifiedDate, StartDate,Contract_Category__c, ER_Start_Date__c, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode, Main_Platform__c FROM Contract WHERE Id = :contractId];
         List<ER_ContractLineItem__c> contractLineItemList = [SELECT Id, Name, ER_Solution__c, ER_Product2__r.ER_Do_Not_Synchronize__c, ER_Product2__r.ER_Type__c, ER_ProductCode__c, ER_Percentage__c, ER_Quantity__c, ER_Minimum_Fee__c, LastModifiedDate, ER_UnitPrice__c, ER_ListPrice__c, Solution_Group__c, ER_Line_Type__c, Parent_Product__c, Fee_Type__c, Product_Type__c FROM ER_ContractLineItem__c WHERE ER_Contract__c = :contractId AND ER_Solution__c != null AND ER_Product2__r.ER_Do_Not_Synchronize__c = false];
 
         // New code for Engagement
@@ -407,6 +408,8 @@ public without sharing class SyncClientContractService {
             wrapObj.vat_number = contract[0].Account.ER_VAT_Number__c;
             wrapObj.vat_type = contract[0].Account.ER_Not_subject_to_VAT__c ? 'not_liable' : 'liable';//exempt
             wrapObj.last_modification_date = contract[0].LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
+            //Adding new field in the json file
+            wrapObj.engagement_platform_id = contract[0].Main_Platform__c;
             
             //Contract
             CreateClientRequestWrapper.ContractWrapper contractWrap = new CreateClientRequestWrapper.ContractWrapper();
@@ -461,7 +464,18 @@ public without sharing class SyncClientContractService {
             }*/
             // Logic ends
             
-            myDateTime = contract[0].StartDate != null ? Datetime.newInstance(contract[0].StartDate, myTime) : null;
+            //myDateTime = contract[0].ER_Start_Date__c != null ? Datetime.newInstance(contract[0].ER_Start_Date__c, myTime) : null;
+            //contractWrap.start_date = myDateTime != null ? myDateTime.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
+            Date startDateToUse;
+            if (contract[0].Contract_Category__c == 'Benefits') {
+                startDateToUse = contract[0].StartDate;
+            } else {
+                startDateToUse = contract[0].ER_Start_Date__c;
+            }
+            myDateTime = startDateToUse != null ? Datetime.newInstance(startDateToUse, myTime) : null;
+            System.debug('startDateToUse' + startDateToUse);
+            System.debug('Contract_Category__c' + contract[0].Contract_Category__c);
+
             contractWrap.start_date = myDateTime != null ? myDateTime.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
             myDateTime = contract[0].CustomerSignedDate != null ? Datetime.newInstance(contract[0].CustomerSignedDate, myTime) : null;
             contractWrap.signed_date = myDateTime != null ? myDateTime.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\''): null;
@@ -475,6 +489,35 @@ public without sharing class SyncClientContractService {
                     : contract[0].CustomerSignedId; // fallback to Contact Id
             }
             contractWrap.contact_counterparty_signed_id = counterpartyCrmId;
+            //New logic
+                if (counterpartyCrmId != null && !processedContactIds.contains(counterpartyCrmId)) {
+                // Query the contact details
+                List<Contact> counterpartyContacts = [
+                    SELECT Id, FirstName, LastName, Email, Phone, ER_Language__c, LastModifiedDate 
+                    FROM Contact 
+                    WHERE Id = :contract[0].CustomerSignedId
+                    LIMIT 1
+                ];
+                
+                if (!counterpartyContacts.isEmpty()) {
+                    Contact conObj = counterpartyContacts[0];
+                    processedContactIds.add(counterpartyCrmId);
+                    
+                    CreateClientRequestWrapper.ContactWrapper contactWrap = new CreateClientRequestWrapper.ContactWrapper();
+                    //CreateClientRequestWrapper.Contact contactWrap = new CreateClientRequestWrapper.Contact();
+                    contactWrap.crm_id = counterpartyCrmId; // ACR ID or Contact ID
+                    contactWrap.first_name = conObj.FirstName;
+                    contactWrap.last_name = conObj.LastName;
+                    contactWrap.language = conObj.ER_Language__c != null 
+                        ? conObj.ER_Language__c.toLowerCase() 
+                        : 'en';
+                    contactWrap.email = conObj.Email;
+                    contactWrap.phone_number = conObj.Phone;
+                    contactWrap.last_modification_date = conObj.LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
+                    contactWrapList.add(contactWrap);
+                }
+            }
+
             //contractWrap.contact_counterparty_signed_id = contract[0].CustomerSignedId;
             contractWrap.last_modification_date = contract[0].LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
             
@@ -1132,6 +1175,9 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
     writeStringOrNull(gen, 'legal_name', w.legal_name);
     writeStringOrNull(gen, 'vat_number', w.vat_number);
     writeStringOrNull(gen, 'vat_type', w.vat_type);
+    if (w.engagement_platform_id != null) {
+        gen.writeStringField('engagement_platform_id', w.engagement_platform_id);
+    }
 
     // contacts (if benefit should still send them)
     gen.writeFieldName('contacts');
@@ -1260,6 +1306,9 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
     writeStringOrNull(gen, 'legal_name', w.legal_name);
     writeStringOrNull(gen, 'vat_number', w.vat_number);
     writeStringOrNull(gen, 'vat_type', w.vat_type);
+    if (w.engagement_platform_id != null) {
+        gen.writeStringField('engagement_platform_id', w.engagement_platform_id);
+    }
 
     // contacts
     gen.writeFieldName('contacts');
@@ -1575,6 +1624,8 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
         List<CreateClientContractRequestWrapper.Contact> contactWrapList = new List<CreateClientContractRequestWrapper.Contact>();
         List<CreateClientContractRequestWrapper.Contract> contractWrapList = new List<CreateClientContractRequestWrapper.Contract>();
         List<CreateClientContractRequestWrapper.ContractProduct> contractProductWrapList = new List<CreateClientContractRequestWrapper.ContractProduct>();
+        //Adding new
+        Set<Id> processedAcrIds = new Set<Id>();
         
         //Commenting below part to send same category contracts
         /*for(Contract contractObj : [SELECT Id from Contract where Status = 'Activated' AND AccountId =:accountId]){
@@ -1606,7 +1657,8 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
         }
         //New code ends
         
-        List<Contract> contract = [SELECT Id, Name, AccountId, Account.LastModifiedDate, Creditting__c, Card_Replacement_Payment__c, ER_PaymentTerms2__c, ER_Impacted_Beneficiaries__c, Billing_Contact__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Delivery_Type__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Card_Client_Operational_System_ID__c, Account.ER_Not_subject_to_VAT__c, LastModifiedDate, StartDate, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode FROM Contract WHERE Id IN :contractIdSet];
+        //List<Contract> contract = [SELECT Id, Name, AccountId, Account.LastModifiedDate, Creditting__c, Card_Replacement_Payment__c, ER_PaymentTerms2__c, ER_Impacted_Beneficiaries__c, Billing_Contact__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Delivery_Type__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Card_Client_Operational_System_ID__c, Account.ER_Not_subject_to_VAT__c, Contract_Category__c, LastModifiedDate, StartDate, ER_Start_Date__c, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode FROM Contract WHERE Id IN :contractIdSet];
+        List<Contract> contract = [SELECT Id, Name, AccountId, Account.LastModifiedDate, Creditting__c, Card_Replacement_Payment__c, ER_PaymentTerms2__c, ER_Impacted_Beneficiaries__c, Billing_Contact__c, ER_PaymentMethod2__c, ER_Program_Name__c, ER_Delivery_Type__c, ER_Customer_Domain__c, ER_Onboarding_Method__c, ER_InvoicingFrequency2__c, ER_OpportunityId__r.Impacted_Beneficiaries__c, Account.Name, Account.BillingCountry, Account.ER_Legal_Name__c, Account.ER_Registration_Number__c, Account.ER_Card_Client_Operational_System_ID__c, Account.ER_Not_subject_to_VAT__c, Contract_Category__c, LastModifiedDate, StartDate, ER_Start_Date__c, CustomerSignedDate, ER_OpportunityId__r.Invoicing_Contact__c, CustomerSignedId, ER_OpportunityId__r.ER_Promo_Code2__r.ER_Promo_Code__c, ER_OpportunityId__r.Primary_Contact__c, Account.ER_VAT_Number__c, Account.BillingStreet, Account.ER_Country_Code__c, Account.BillingCity, Account.BillingPostalCode, Main_Platform__c FROM Contract WHERE Id IN :contractIdSet];
         /*for(ER_ContractLineItem__c contractLineItemObj : [SELECT Id, Name, ER_Solution__c, ER_Contract__c, ER_ProductCode__c, ER_Percentage__c, ER_Quantity__c, ER_Minimum_Fee__c, LastModifiedDate, ER_UnitPrice__c, ER_ListPrice__c, Solution_Group__c, Parent_Product__c, Fee_Type__c, Product_Type__c, ER_Line_Type__c, ER_Price_Start_Date__c, ER_Product2__r.ER_Type__c FROM ER_ContractLineItem__c WHERE ER_Contract__c IN :contractIdSet AND ER_Solution__c != null AND ER_Product2__r.ER_Do_Not_Synchronize__c = false AND ER_IsActive__c = true]) {
             if(!contractLineItemWithSolutionMap.containsKey(contractLineItemObj.ER_Contract__c)){
                 contractLineItemWithSolutionMap.put(contractLineItemObj.ER_Contract__c, new Map<String, List<ER_ContractLineItem__c>>());
@@ -1656,7 +1708,7 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                 }
             }
             if (!ccrList.isEmpty()) {
-            Set<Id> processedAcrIds = new Set<Id>();
+            //Set<Id> processedAcrIds = new Set<Id>();
         
             for (ContractContactRole ccrObj : ccrList) {
         
@@ -1718,6 +1770,7 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
             clientWrap.card_id = contract[0].Account.ER_Card_Client_Operational_System_ID__c;
             clientWrap.company_registration_number = contract[0].Account.ER_Registration_Number__c;
             clientWrap.last_modification_date = contract[0].Account.LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
+            clientWrap.engagement_platform_id = contract[0].Main_Platform__c;
             
             //Adding new code for showing Legal site
             //List<ER_Financial_Center__c> financialCenterList = [SELECT Id, Name, ER_Bank_Account__r.ER_IBAN__c, ER_Bank_Account__r.ER_BIC__c, LastModifiedDate FROM ER_Financial_Center__c WHERE ER_Account_Name__c = :contract[0].AccountId];
@@ -1784,7 +1837,19 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                     contractWrap.crediting_delay = cr.get(contractObj.Creditting__c);
                 }
                 //Logic ends
-                contractWrap.start_date = contractObj.StartDate != null ? ((DateTime)contractObj.StartDate).formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
+                //contractWrap.start_date = contractObj.ER_Start_Date__c != null ? ((DateTime)contractObj.ER_Start_Date__c).formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
+                
+                Date startDateToUse;
+                if (contract[0].Contract_Category__c == 'Benefits') {
+                    startDateToUse = contract[0].StartDate;
+                } else {
+                    startDateToUse = contract[0].ER_Start_Date__c;
+                }
+                contractWrap.start_date = startDateToUse != null ? Datetime.newInstance(startDateToUse, Time.newInstance(0, 0, 0, 0)).formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
+                System.debug('startDateToUse' + startDateToUse);
+
+
+
                 contractWrap.end_date = null;
                 //contractWrap.end_reason = null;
                 contractWrap.signed_date = contractObj.CustomerSignedDate != null ? ((DateTime)contractObj.CustomerSignedDate).formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'') : null;
@@ -1800,6 +1865,35 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                         : contractObj.CustomerSignedId; // fallback to Contact Id
                 }
                 contractWrap.contact_counterparty_signed_id = counterpartyCrmId;
+
+                //New logic
+                if (counterpartyCrmId != null && !processedAcrIds.contains(counterpartyCrmId)) {
+                // Query the contact details
+                List<Contact> counterpartyContacts = [
+                    SELECT Id, FirstName, LastName, Email, Phone, ER_Language__c, LastModifiedDate 
+                    FROM Contact 
+                    WHERE Id = :contractObj.CustomerSignedId 
+                    LIMIT 1
+                ];
+                
+                if (!counterpartyContacts.isEmpty()) {
+                    Contact conObj = counterpartyContacts[0];
+                    processedAcrIds.add(counterpartyCrmId);
+                    
+                    //CreateClientRequestWrapper.ContactWrapper contactWrap = new CreateClientRequestWrapper.ContactWrapper();
+                    CreateClientContractRequestWrapper.Contact contactWrap = new CreateClientContractRequestWrapper.Contact();
+                    contactWrap.crm_id = counterpartyCrmId; // ACR ID or Contact ID
+                    contactWrap.first_name = conObj.FirstName;
+                    contactWrap.last_name = conObj.LastName;
+                    contactWrap.language = conObj.ER_Language__c != null 
+                        ? conObj.ER_Language__c.toLowerCase() 
+                        : 'en';
+                    contactWrap.email = conObj.Email;
+                    contactWrap.phone_number = conObj.Phone;
+                    contactWrap.last_modification_date = conObj.LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
+                    contactWrapList.add(contactWrap);
+                }
+            }
                 //contractWrap.contact_counterparty_signed_id = contractObj.CustomerSignedId;
                 contractWrap.last_modification_date = contractObj.LastModifiedDate.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\'');
                 contractProductWrapList = new List<CreateClientContractRequestWrapper.ContractProduct>();
@@ -2108,14 +2202,14 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
         // client (same as savings)
         gen.writeFieldName('client');
         if (w == null || w.client == null) {
-        gen.writeNull();
-    } else {
-        gen.writeStartObject();
-        writeStringOrNull(gen, 'legal_site', null); // placeholder
-        gen.writeEndObject();
-        // Re-open client object properly
-        gen.writeFieldName('client');
-        gen.writeStartObject();
+            gen.writeNull();
+        } else {
+            gen.writeStartObject();
+            //writeStringOrNull(gen, 'legal_site', null); // placeholder
+            //gen.writeEndObject();
+            // Re-open client object properly
+            //gen.writeFieldName('client');
+            //gen.writeStartObject();
 
         // legal_site
         gen.writeFieldName('legal_site');
@@ -2155,6 +2249,10 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
         writeStringOrNull(gen, 'crm_id', w.client.crm_id);
         writeStringOrNull(gen, 'company_registration_number', w.client.company_registration_number);
         writeStringOrNull(gen, 'card_id', w.client.card_id);
+
+        if (w.client.engagement_platform_id != null) {
+            gen.writeStringField('engagement_platform_id', w.client.engagement_platform_id);
+        }
 
         gen.writeEndObject();
     }
@@ -2280,6 +2378,11 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
         writeStringOrNull(gen, 'card_id', w.client.card_id);
         writeStringOrNull(gen, 'company_registration_number', w.client.company_registration_number);
         writeStringOrNull(gen, 'last_modification_date', w.client.last_modification_date);
+        
+        // NEW LINE - Add engagement_platform_id
+        if (w.client.engagement_platform_id != null) {
+            gen.writeStringField('engagement_platform_id', w.client.engagement_platform_id);
+        }
 
         // legal_site
         gen.writeFieldName('legal_site');

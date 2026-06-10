@@ -85,7 +85,7 @@ public without sharing class OpportunityManagementWithoutSharing {
     * @author      : Mayank Sankhla
     */
     public static void syncACRFromOCR(List<OpportunityContactRole> ocrsToUpsert, List<OpportunityContactRole> ocrsToDelete) {
-        Set<Id> oppIds = new Set<Id>();
+        /*Set<Id> oppIds = new Set<Id>();
         Set<Id> contactIds = new Set<Id>();
         
         for (OpportunityContactRole ocr : ocrsToUpsert) {
@@ -94,7 +94,44 @@ public without sharing class OpportunityManagementWithoutSharing {
                 contactIds.add(ocr.ContactId);
             }
         }
-        if (oppIds.isEmpty()) return;
+        if (oppIds.isEmpty()) return;*/
+
+        // Handle upsert OCRs
+        Set<Id> oppIdsUpsert = new Set<Id>();
+        Set<Id> contactIdsUpsert = new Set<Id>();
+
+        if (ocrsToUpsert != null && !ocrsToUpsert.isEmpty()) {
+            for (OpportunityContactRole ocr : ocrsToUpsert) {
+                if (ocr.OpportunityId != null && ocr.ContactId != null && !String.isBlank(ocr.Role)) {
+                    oppIdsUpsert.add(ocr.OpportunityId);
+                    contactIdsUpsert.add(ocr.ContactId);
+                }
+            }
+        }
+
+        // Handle delete OCRs
+        Set<Id> oppIdsDelete = new Set<Id>();
+        Set<Id> contactIdsDelete = new Set<Id>();
+
+        if (ocrsToDelete != null && !ocrsToDelete.isEmpty()) {
+            for (OpportunityContactRole ocr : ocrsToDelete) {
+                if (ocr.OpportunityId != null && ocr.ContactId != null) {
+                    oppIdsDelete.add(ocr.OpportunityId);
+                    contactIdsDelete.add(ocr.ContactId);
+                }
+            }
+        }
+
+        // Combine all IDs for queries
+        Set<Id> oppIds = new Set<Id>();
+        oppIds.addAll(oppIdsUpsert);
+        oppIds.addAll(oppIdsDelete);
+
+        Set<Id> contactIds = new Set<Id>();
+        contactIds.addAll(contactIdsUpsert);
+        contactIds.addAll(contactIdsDelete);
+
+        if (oppIds.isEmpty() && contactIds.isEmpty()) return;
         
         Map<Id, Opportunity> oppMap = new Map<Id, Opportunity>(
             [SELECT Id, AccountId FROM Opportunity WHERE Id IN :oppIds]
@@ -104,7 +141,7 @@ public without sharing class OpportunityManagementWithoutSharing {
         for (Opportunity o : oppMap.values()) if (o.AccountId != null) accountIds.add(o.AccountId);
         
         List<AccountContactRelation> existingAcrs = [
-            SELECT Id, AccountId, ContactId, Roles
+            SELECT Id, AccountId, ContactId, Roles, IsDirect
             FROM AccountContactRelation
             WHERE AccountId IN :accountIds AND ContactId IN :contactIds
         ];
@@ -120,22 +157,82 @@ public without sharing class OpportunityManagementWithoutSharing {
         
         Map<String, Set<String>> incomingRoleMap = new Map<String, Set<String>>();
         
-        for (OpportunityContactRole ocr : ocrsToUpsert) {
-            Opportunity opp = oppMap.get(ocr.OpportunityId);
-            if (opp == null || opp.AccountId == null || String.isBlank(ocr.Role)) continue;
-            
-            String pair = opp.AccountId + '_' + ocr.ContactId;
-            
-            Set<String> roleSet = incomingRoleMap.containsKey(pair)
-                ? incomingRoleMap.get(pair)
-                : new Set<String>();
-            
-            roleSet.add(ocr.Role);
-            incomingRoleMap.put(pair, roleSet);
+        if (ocrsToUpsert != null && !ocrsToUpsert.isEmpty()) {
+            for (OpportunityContactRole ocr : ocrsToUpsert) {
+                Opportunity opp = oppMap.get(ocr.OpportunityId);
+                if (opp == null || opp.AccountId == null || String.isBlank(ocr.Role)) continue;
+                
+                String pair = opp.AccountId + '_' + ocr.ContactId;
+                
+                Set<String> roleSet = incomingRoleMap.containsKey(pair)
+                    ? incomingRoleMap.get(pair)
+                    : new Set<String>();
+                
+                roleSet.add(ocr.Role);
+                incomingRoleMap.put(pair, roleSet);
+            }
         }
         
         Map<String, AccountContactRelation> toInsertMap = new Map<String, AccountContactRelation>();
         Map<Id,    AccountContactRelation> toUpdateMap = new Map<Id,    AccountContactRelation>();
+
+        //New Logic
+        // ===== NEW: PART 4 - Process Delete (Remove roles or delete ACRs) =====
+Map<String, Set<String>> deletedRoleMap = new Map<String, Set<String>>();
+
+if (ocrsToDelete != null && !ocrsToDelete.isEmpty()) {
+    for (OpportunityContactRole ocr : ocrsToDelete) {
+        Opportunity opp = oppMap.get(ocr.OpportunityId);
+        if (opp == null || opp.AccountId == null) continue;
+        
+        String pair = opp.AccountId + '_' + ocr.ContactId;
+        
+        Set<String> roleSet = deletedRoleMap.containsKey(pair)
+            ? deletedRoleMap.get(pair)
+            : new Set<String>();
+        
+        if (!String.isBlank(ocr.Role)) {
+            roleSet.add(ocr.Role);
+        }
+        deletedRoleMap.put(pair, roleSet);
+    }
+}
+
+List<AccountContactRelation> toDelete = new List<AccountContactRelation>();
+
+for (String pair : deletedRoleMap.keySet()) {
+    AccountContactRelation acr = baseAcrMap.get(pair);
+    if (acr == null) continue;
+    
+    // Skip direct relationships (cannot be deleted)
+    if (acr.IsDirect) {
+        System.debug('Cannot delete direct ACR for pair: ' + pair + '. This is a system-created relationship.');
+        continue;
+    }
+    
+    Set<String> rolesToRemove = deletedRoleMap.get(pair);
+    Set<String> currentRoles = existingRoleMap.get(pair);
+    
+    if (currentRoles == null || currentRoles.isEmpty()) {
+        // No roles - delete ACR
+        toDelete.add(acr);
+    } else {
+        // Remove deleted roles
+        currentRoles.removeAll(rolesToRemove);
+        
+        if (currentRoles.isEmpty()) {
+            // No roles left - delete ACR
+            toDelete.add(acr);
+        } else {
+            // Still has roles - update ACR (only if not already in update map)
+            if (!toUpdateMap.containsKey(acr.Id)) {
+                acr.Roles = joinRoles(currentRoles);
+                toUpdateMap.put(acr.Id, acr);
+            }
+        }
+    }
+}
+//New Logic ends
         
         for (String pair : incomingRoleMap.keySet()) {
             Set<String> incomingRoles  = incomingRoleMap.get(pair);
@@ -158,8 +255,29 @@ public without sharing class OpportunityManagementWithoutSharing {
             }
         }
         
-        if (!toInsertMap.isEmpty()) insert toInsertMap.values();
-        if (!toUpdateMap.isEmpty()) update toUpdateMap.values();
+        /*if (!toInsertMap.isEmpty()) insert toInsertMap.values();
+        if (!toUpdateMap.isEmpty()) update toUpdateMap.values();*/
+        // Perform DML operations with error handling
+        try {
+            if (!toInsertMap.isEmpty()) {
+                Database.SaveResult[] insertResults = Database.insert(toInsertMap.values(), false);
+                logACRResults('Insert', insertResults);
+            }
+            
+            if (!toUpdateMap.isEmpty()) {
+                Database.SaveResult[] updateResults = Database.update(toUpdateMap.values(), false);
+                logACRResults('Update', updateResults);
+            }
+            
+            if (!toDelete.isEmpty()) {
+                Database.DeleteResult[] deleteResults = Database.delete(toDelete, false);
+                logACRDeleteResults(deleteResults);
+            }
+            
+        } catch (DmlException e) {
+            System.debug('ACR Sync Error: ' + e.getMessage());
+            System.debug('Stack Trace: ' + e.getStackTraceString());
+        }
     }
     
     private static List<String> getRoleList(String rolesStr) {
@@ -283,7 +401,7 @@ public without sharing class OpportunityManagementWithoutSharing {
     * @description : to sync opportunity fields (primary contact) From OpportunityContactRole
     * @author Mayank Sankhla
     **/
-    public static void syncOpportunityFieldsFromOCR(List<OpportunityContactRole> ocrList) {
+    /*public static void syncOpportunityFieldsFromOCR(List<OpportunityContactRole> ocrList) {
         Map<Id, Opportunity> oppUpdates = new Map<Id, Opportunity>();
         List<OpportunityContactRole> oppPriFieldUpdates = new List<OpportunityContactRole>();
         Set<Id> oppIds = new Set<Id>();
@@ -322,7 +440,7 @@ public without sharing class OpportunityManagementWithoutSharing {
         if (!oppUpdates.isEmpty()) {
             update oppUpdates.values();
         }
-    }
+    }*/
     
     /**
     * @description : to create ContractContactRole From OpportunityContactRole
@@ -381,7 +499,7 @@ public without sharing class OpportunityManagementWithoutSharing {
         }
     }
     
-    @AuraEnabled
+    /*@AuraEnabled
     public static String syncCCRtoOCR(Id contractId) {
         Contract contractRec = [
             SELECT Id, ER_OpportunityId__c
@@ -428,7 +546,7 @@ public without sharing class OpportunityManagementWithoutSharing {
         List<OpportunityContactRole> ocrsToInsert = new List<OpportunityContactRole>();
         List<OpportunityContactRole> ocrsToUpdate = new List<OpportunityContactRole>();
         List<OpportunityContactRole> ocrsToDelete = new List<OpportunityContactRole>();
-        System.debug('hereee in '+roleToOCRsMap);
+        System.debug('hereee in '+roleToOCRsMap);*/
         /*for (ContractContactRole ccr : ccrs) {
             String role = ccr.Role;
             Id contactId = ccr.ContactId;
@@ -469,68 +587,363 @@ public without sharing class OpportunityManagementWithoutSharing {
         */
         
         // Build map of existing CCR by role
-Map<String, ContractContactRole> existingCCRByRole = new Map<String, ContractContactRole>();
-for (ContractContactRole ccr : ccrs) {
-    existingCCRByRole.put(ccr.Role.trim(), ccr);
-}
-
-List<ContractContactRole> ccrsToInsert = new List<ContractContactRole>();
-List<ContractContactRole> ccrsToUpdate = new List<ContractContactRole>();
-
-// Loop through OCR roles — this is the correct direction
-for (OpportunityContactRole ocr : existingOCRs) {
-    String role = ocr.Role.trim();
-    Id contactId = ocr.ContactId;
-
-    ContractContactRole existing = existingCCRByRole.get(role);
-
-    if (existing == null) {
-        // INSERT new CCR for missing role
-        ccrsToInsert.add(new ContractContactRole(
-            ContractId = contractId,
-            ContactId = contactId,
-            Role = role
-        ));
-    } else {
-        // UPDATE existing CCR if contact changed
-        if (existing.ContactId != contactId) {
-            existing.ContactId = contactId;
-            ccrsToUpdate.add(existing);
-        }
+    /*Map<String, ContractContactRole> existingCCRByRole = new Map<String, ContractContactRole>();
+    for (ContractContactRole ccr : ccrs) {
+        existingCCRByRole.put(ccr.Role.trim(), ccr);
     }
-}
 
-        
-        /*try {
-            System.debug('ocrsToDelete ...'+ocrsToDelete);
-            System.debug('ocrsToUpdate ...'+ocrsToUpdate);
-            System.debug('ocrsToInsert ...'+ocrsToInsert);
-            if (!ocrsToDelete.isEmpty()) delete ocrsToDelete;
-            if (!ocrsToUpdate.isEmpty()) update ocrsToUpdate;
-            if (!ocrsToInsert.isEmpty()) insert ocrsToInsert;
+    List<ContractContactRole> ccrsToInsert = new List<ContractContactRole>();
+    List<ContractContactRole> ccrsToUpdate = new List<ContractContactRole>();
+
+    // Loop through OCR roles — this is the correct direction
+    for (OpportunityContactRole ocr : existingOCRs) {
+        String role = ocr.Role.trim();
+        Id contactId = ocr.ContactId;
+
+        ContractContactRole existing = existingCCRByRole.get(role);
+
+        if (existing == null) {
+            // INSERT new CCR for missing role
+            ccrsToInsert.add(new ContractContactRole(
+                ContractId = contractId,
+                ContactId = contactId,
+                Role = role
+            ));
+        } else {
+            // UPDATE existing CCR if contact changed
+            if (existing.ContactId != contactId) {
+                existing.ContactId = contactId;
+                ccrsToUpdate.add(existing);
+            }
+        }
+    }*/
+
             
-            recOpp.byPassVR__c = false;
-            update recOpp;
-        } catch (DmlException e) {
-            throw new AuraHandledException('Error during OCR sync: ' + e.getMessage());
-        }*/
-        try {
-    if (!ccrsToUpdate.isEmpty()) update ccrsToUpdate;
-    if (!ccrsToInsert.isEmpty()) insert ccrsToInsert;
+            /*try {
+                System.debug('ocrsToDelete ...'+ocrsToDelete);
+                System.debug('ocrsToUpdate ...'+ocrsToUpdate);
+                System.debug('ocrsToInsert ...'+ocrsToInsert);
+                if (!ocrsToDelete.isEmpty()) delete ocrsToDelete;
+                if (!ocrsToUpdate.isEmpty()) update ocrsToUpdate;
+                if (!ocrsToInsert.isEmpty()) insert ocrsToInsert;
+                
+                recOpp.byPassVR__c = false;
+                update recOpp;
+            } catch (DmlException e) {
+                throw new AuraHandledException('Error during OCR sync: ' + e.getMessage());
+            }*/
+            /*try {
+        if (!ccrsToUpdate.isEmpty()) update ccrsToUpdate;
+        if (!ccrsToInsert.isEmpty()) insert ccrsToInsert;
 
-    recOpp.byPassVR__c = false;
-    update recOpp;
+        recOpp.byPassVR__c = false;
+        update recOpp;
 
-} catch (Exception e) {
-    throw new AuraHandledException('Error during CCR sync: ' + e.getMessage());
-}
+    } catch (Exception e) {
+        throw new AuraHandledException('Error during CCR sync: ' + e.getMessage());
+    }
         
         if (ocrsToInsert.isEmpty() && ocrsToUpdate.isEmpty() && ocrsToDelete.isEmpty()) {
             return 'NO_CHANGES';
         }
         
         return 'UPDATED';
+    }*/
+
+    @AuraEnabled
+public static String syncCCRtoOCR(Id contractId) {
+    // Get Contract with Opportunity link and Account
+    Contract contractRec = [
+        SELECT Id, ER_OpportunityId__c, AccountId
+        FROM Contract
+        WHERE Id = :contractId
+        LIMIT 1
+    ];
+    
+    if (contractRec.AccountId == null) {
+        throw new AuraHandledException('Contract must have an associated Account.');
     }
+    
+    Id oppId = contractRec.ER_OpportunityId__c;
+    Id accountId = contractRec.AccountId;
+    Boolean hasOpportunity = (oppId != null);
+    
+    // Bypass validation rules only if opportunity exists
+    if (hasOpportunity) {
+        Opportunity recOpp = new Opportunity(Id = oppId, byPassVR__c = true);
+        update recOpp;
+    }
+    
+    // Get all CCRs with specific roles
+    List<ContractContactRole> ccrs = [
+        SELECT ContactId, Role
+        FROM ContractContactRole
+        WHERE ContractId = :contractId
+        AND Role IN ('Primary Contact', 'Invoicing Contact', 'Delivering Contact', 'Order Contact')
+    ];
+    
+    // Get all OCRs with specific roles (only if opportunity exists)
+    List<OpportunityContactRole> existingOCRs = new List<OpportunityContactRole>();
+    if (hasOpportunity) {
+        existingOCRs = [
+            SELECT Id, ContactId, Role
+            FROM OpportunityContactRole
+            WHERE OpportunityId = :oppId
+            AND Role IN ('Primary Contact', 'Invoicing Contact', 'Delivering Contact', 'Order Contact')
+        ];
+    }
+    
+    // Get all existing ACRs for this account (with IsDirect field)
+    List<AccountContactRelation> existingACRs = [
+        SELECT Id, ContactId, AccountId, Roles, IsDirect
+        FROM AccountContactRelation
+        WHERE AccountId = :accountId
+    ];
+    
+    // Build maps for quick lookup
+    Map<String, ContractContactRole> ccrByRole = new Map<String, ContractContactRole>();
+    Set<Id> ccrContactIds = new Set<Id>();
+    Map<Id, Set<String>> contactToRolesMap = new Map<Id, Set<String>>();
+    
+    for (ContractContactRole ccr : ccrs) {
+        ccrByRole.put(ccr.Role.trim(), ccr);
+        ccrContactIds.add(ccr.ContactId);
+        
+        // Aggregate roles per contact (for ACR creation)
+        if (!contactToRolesMap.containsKey(ccr.ContactId)) {
+            contactToRolesMap.put(ccr.ContactId, new Set<String>());
+        }
+        contactToRolesMap.get(ccr.ContactId).add(ccr.Role.trim());
+    }
+    
+    Map<String, List<OpportunityContactRole>> roleToOCRsMap = new Map<String, List<OpportunityContactRole>>();
+    Set<Id> ocrContactIds = new Set<Id>();
+    for (OpportunityContactRole ocr : existingOCRs) {
+        if (!roleToOCRsMap.containsKey(ocr.Role)) {
+            roleToOCRsMap.put(ocr.Role, new List<OpportunityContactRole>());
+        }
+        roleToOCRsMap.get(ocr.Role).add(ocr);
+        ocrContactIds.add(ocr.ContactId);
+    }
+    
+    Map<Id, AccountContactRelation> contactIdToACRMap = new Map<Id, AccountContactRelation>();
+    for (AccountContactRelation acr : existingACRs) {
+        contactIdToACRMap.put(acr.ContactId, acr);
+    }
+    
+    // Prepare DML lists for OCR
+    List<OpportunityContactRole> ocrsToInsert = new List<OpportunityContactRole>();
+    List<OpportunityContactRole> ocrsToUpdate = new List<OpportunityContactRole>();
+    List<OpportunityContactRole> ocrsToDelete = new List<OpportunityContactRole>();
+    
+    // Prepare DML lists for ACR
+    List<AccountContactRelation> acrsToInsert = new List<AccountContactRelation>();
+    List<AccountContactRelation> acrsToUpdate = new List<AccountContactRelation>();
+    List<AccountContactRelation> acrsToDelete = new List<AccountContactRelation>();
+    
+    // ===== PART 1: CCR → OCR Sync (only if opportunity exists) =====
+    if (hasOpportunity) {
+        for (ContractContactRole ccr : ccrs) {
+            String role = ccr.Role.trim();
+            Id contactId = ccr.ContactId;
+            
+            if (roleToOCRsMap.containsKey(role)) {
+                List<OpportunityContactRole> ocrList = roleToOCRsMap.get(role);
+                
+                if (ocrList.size() == 1) {
+                    // Single OCR exists - update if contact is different
+                    OpportunityContactRole existingOCR = ocrList[0];
+                    if (existingOCR.ContactId != contactId) {
+                        existingOCR.ContactId = contactId;
+                        ocrsToUpdate.add(existingOCR);
+                    }
+                } else {
+                    // Multiple OCRs exist - clean up and create new
+                    ocrsToDelete.addAll(ocrList);
+                    
+                    ocrsToInsert.add(new OpportunityContactRole(
+                        OpportunityId = oppId,
+                        ContactId = contactId,
+                        Role = role,
+                        IsPrimary = false
+                    ));
+                }
+            } else {
+                // No OCR exists - create new
+                ocrsToInsert.add(new OpportunityContactRole(
+                    OpportunityId = oppId,
+                    ContactId = contactId,
+                    Role = role,
+                    IsPrimary = false
+                ));
+            }
+        }
+        
+        // ===== PART 2: Delete OCRs where CCR doesn't exist =====
+        for (OpportunityContactRole ocr : existingOCRs) {
+            String role = ocr.Role.trim();
+            
+            // If no CCR exists for this role, mark OCR for deletion
+            if (!ccrByRole.containsKey(role)) {
+                ocrsToDelete.add(ocr);
+            }
+        }
+    }
+    
+    // ===== PART 3: CCR → ACR Direct Sync (when no opportunity OR as backup) =====
+    if (!hasOpportunity) {
+        // NO OPPORTUNITY: Create/Update ACRs directly from CCRs
+        for (Id contactId : contactToRolesMap.keySet()) {
+            Set<String> roles = contactToRolesMap.get(contactId);
+            String rolesString = String.join(new List<String>(roles), ';');
+            
+            if (contactIdToACRMap.containsKey(contactId)) {
+                // ACR exists - update with all CCR roles
+                AccountContactRelation existingACR = contactIdToACRMap.get(contactId);
+                
+                // Only update if it's NOT a direct relationship
+                if (!existingACR.IsDirect) {
+                    // Get current roles from ACR
+                    Set<String> currentACRRoles = new Set<String>();
+                    if (String.isNotBlank(existingACR.Roles)) {
+                        currentACRRoles.addAll(existingACR.Roles.split(';'));
+                    }
+                    
+                    // Replace with CCR roles only (CCR is source of truth)
+                    String updatedRolesString = String.join(new List<String>(roles), ';');
+                    
+                    if (existingACR.Roles != updatedRolesString) {
+                        existingACR.Roles = updatedRolesString;
+                        acrsToUpdate.add(existingACR);
+                    }
+                } else {
+                    System.debug('Skipping direct ACR update for Contact: ' + contactId);
+                }
+            } else {
+                // ACR doesn't exist - create new (indirect relationship)
+                AccountContactRelation newACR = new AccountContactRelation(
+                    AccountId = accountId,
+                    ContactId = contactId,
+                    Roles = rolesString
+                );
+                acrsToInsert.add(newACR);
+            }
+        }
+        
+        // Delete ACRs where CCR doesn't exist (only indirect relationships)
+        for (AccountContactRelation acr : existingACRs) {
+            if (!ccrContactIds.contains(acr.ContactId)) {
+                // Only delete if it's NOT a direct relationship
+                if (!acr.IsDirect) {
+                    acrsToDelete.add(acr);
+                } else {
+                    System.debug('Cannot delete direct ACR for Contact: ' + acr.ContactId + 
+                               '. Contact.AccountId must be changed or Contact must be deleted.');
+                }
+            }
+        }
+    } else {
+        // HAS OPPORTUNITY: ACR will be created by OCR trigger
+        // But we still need to handle deletion if OCR is deleted
+        Set<Id> contactIdsToDelete = new Set<Id>();
+        
+        for (OpportunityContactRole ocr : ocrsToDelete) {
+            contactIdsToDelete.add(ocr.ContactId);
+        }
+        
+        // Remove contacts that still have CCRs (they should keep their ACRs)
+        contactIdsToDelete.removeAll(ccrContactIds);
+        
+        // Delete ACRs for contacts that no longer have CCRs (only indirect relationships)
+        for (Id contactId : contactIdsToDelete) {
+            if (contactIdToACRMap.containsKey(contactId)) {
+                AccountContactRelation acrToDelete = contactIdToACRMap.get(contactId);
+                
+                // Only delete if it's NOT a direct relationship
+                if (!acrToDelete.IsDirect) {
+                    acrsToDelete.add(acrToDelete);
+                } else {
+                    System.debug('Cannot delete direct ACR for Contact: ' + contactId + 
+                               '. This is a system-created relationship.');
+                }
+            }
+        }
+    }
+    
+    // Perform DML operations
+    try {
+        // OCR operations (only if opportunity exists)
+        if (hasOpportunity) {
+            if (!ocrsToDelete.isEmpty()) delete ocrsToDelete;
+            if (!ocrsToUpdate.isEmpty()) update ocrsToUpdate;
+            if (!ocrsToInsert.isEmpty()) insert ocrsToInsert;
+            // Note: OCR trigger will create ACRs automatically
+        }
+        
+        // ACR operations (direct from CCR when no opportunity, or cleanup when opportunity exists)
+        if (!acrsToInsert.isEmpty()) {
+            Database.SaveResult[] insertResults = Database.insert(acrsToInsert, false);
+            logACRResults('Insert', insertResults);
+        }
+        
+        if (!acrsToUpdate.isEmpty()) {
+            Database.SaveResult[] updateResults = Database.update(acrsToUpdate, false);
+            logACRResults('Update', updateResults);
+        }
+        
+        if (!acrsToDelete.isEmpty()) {
+            Database.DeleteResult[] deleteResults = Database.delete(acrsToDelete, false);
+            logACRDeleteResults(deleteResults);
+        }
+        
+        // Re-enable validation rules (only if opportunity exists)
+        if (hasOpportunity) {
+            Opportunity recOpp = new Opportunity(Id = oppId, byPassVR__c = false);
+            update recOpp;
+        }
+        
+    } catch (DmlException e) {
+        System.debug('DML Error: ' + e.getMessage());
+        System.debug('Stack Trace: ' + e.getStackTraceString());
+        throw new AuraHandledException('Error during sync: ' + e.getMessage());
+    }
+    
+    // Check if any changes were made
+    Boolean hasChanges = !ocrsToInsert.isEmpty() || !ocrsToUpdate.isEmpty() || !ocrsToDelete.isEmpty() ||
+                         !acrsToInsert.isEmpty() || !acrsToUpdate.isEmpty() || !acrsToDelete.isEmpty();
+    
+    return hasChanges ? 'UPDATED' : 'NO_CHANGES';
+}
+
+// Helper method to log ACR insert/update results
+private static void logACRResults(String operation, Database.SaveResult[] results) {
+    if (results == null) return;
+    
+    for (Database.SaveResult result : results) {
+        if (!result.isSuccess()) {
+            for (Database.Error error : result.getErrors()) {
+                System.debug('ACR ' + operation + ' Error: ' + error.getMessage() + 
+                           ' | Fields: ' + error.getFields() + 
+                           ' | Status Code: ' + error.getStatusCode());
+            }
+        }
+    }
+}
+
+// Helper method to log ACR delete results
+private static void logACRDeleteResults(Database.DeleteResult[] results) {
+    if (results == null) return;
+    
+    for (Database.DeleteResult result : results) {
+        if (!result.isSuccess()) {
+            for (Database.Error error : result.getErrors()) {
+                System.debug('ACR Delete Error: ' + error.getMessage() + 
+                           ' | Fields: ' + error.getFields() + 
+                           ' | Status Code: ' + error.getStatusCode());
+            }
+        }
+    }
+}
 
     /**
     * @description : to store role id on Opportunity for visibility of specific sections
@@ -620,10 +1033,10 @@ for (OpportunityContactRole ocr : existingOCRs) {
         
     }
     /*
-* Pranjal Tiwari
-* 30/01/2025
-* createOpportunityFromContract : Automate the execution of the second approval process if required
-*/
+    * Pranjal Tiwari
+    * 30/01/2025
+    * createOpportunityFromContract : Automate the execution of the second approval process if required
+    */
     public static void executeSecondaryApproval(List<Opportunity> opportunities, Map<id, Opportunity> oldItems) {
         
         List<Opportunity> opportunityToUpdate = new List<Opportunity>();
@@ -666,7 +1079,7 @@ for (OpportunityContactRole ocr : existingOCRs) {
                 
                 // Submit on behalf of a specific submitter
                 req1.setSubmitterId(opp.OwnerId);
-                req1.setProcessDefinitionNameOrId('Refined_Benefits_Approval_Process');
+                req1.setProcessDefinitionNameOrId('Benefits_Reduction_fee_Approval');
                 approvalRequestForSubmission.add(req1);
             }
         }
@@ -881,7 +1294,7 @@ for (OpportunityContactRole ocr : existingOCRs) {
         } */
     }
     public static void addErrorOnOpportunity(List<Opportunity> oppList, Map<Id, Opportunity> oldMap) {
-        if (!Test.isRunningTest()) {
+        /*if (!Test.isRunningTest()) {
             Set<Id> oppIdsToCheck = new Set<Id>();
             for (Opportunity opp : oppList) {
                 Opportunity oldOpp = oldMap.get(opp.Id);
@@ -907,7 +1320,7 @@ for (OpportunityContactRole ocr : existingOCRs) {
                     opp.addError('You must assign a Primary contact before proceeding (Quote creation or Approval).');
                 }
             }
-        }
+        }*/
     }
     public static void addStageErrorOnOpportunity(List<Opportunity> oppList, Map<Id, Opportunity> oldMap) {
         if (!Test.isRunningTest()) {

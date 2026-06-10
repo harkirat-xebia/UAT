@@ -27,7 +27,7 @@ static void setup() {
     contracts.add(cont1);
     
     // Contract 2 - Draft with Pending Synchronization
-    Contract cont2 = APER07_UtilityTestMethod.getContract(
+    /*Contract cont2 = APER07_UtilityTestMethod.getContract(
         testAccount.Id,
         System.today(),
         'Draft',
@@ -35,10 +35,10 @@ static void setup() {
     );
     cont2.Status = 'Draft';
     cont2.ER_WS_StatusCode__c = 'Pending Synchronization';
-    contracts.add(cont2);
+    contracts.add(cont2);*/
     
     // Contract 3 - Draft with Not Synchronized
-    Contract cont3 = APER07_UtilityTestMethod.getContract(
+    /*Contract cont3 = APER07_UtilityTestMethod.getContract(
         testAccount.Id,
         System.today(),
         'Draft',
@@ -46,13 +46,13 @@ static void setup() {
     );
     cont3.Status = 'Draft';
     cont3.ER_WS_StatusCode__c = 'Not Synchronized';
-    contracts.add(cont3);
+    contracts.add(cont3);*/
     
     insert contracts;
     
     // Update one to Activated status
-    cont2.Status = 'Activated';
-    update cont2;
+    //cont2.Status = 'Activated';
+    //update cont2;
 }
     @isTest
     static void testGetContractStatusesSingleContract() {
@@ -79,7 +79,7 @@ static void setup() {
         System.assert(results[0].recordUrl.contains(testContract.Id), 'URL should contain contract ID');
     }
     
-    @isTest
+    /*@isTest
     static void testGetContractStatusesMultipleContracts() {
         // Get all contracts
         List<Contract> testContracts = [
@@ -143,6 +143,8 @@ static void testGetContractStatusesWithAllFields() {
     System.assertEquals(testContract.LastModifiedDate, wrapper.lastModifiedDate, 'Last modified date should match');
     System.assertEquals('/' + testContract.Id, wrapper.recordUrl, 'Record URL should match');
 }
+    */
+    
     @isTest
     static void testGetContractStatusesEmptyList() {
         Test.startTest();

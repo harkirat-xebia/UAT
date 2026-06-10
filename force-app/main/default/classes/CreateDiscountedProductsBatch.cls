@@ -67,13 +67,14 @@ public class CreateDiscountedProductsBatch implements Database.Batchable<SObject
 
         List<Product2> parentServiceProducts = [
             SELECT Id, Name, ER_Type__c, IsActive, BE_Maximum_Amount__c, BE_Minimum_Amount__c,
-                   ProductCode, ER_Solution2__r.ProductCode, ER_BUPicklist__c, Solution_Group__c, QuantityUnitOfMeasure
+                   ProductCode, ER_Solution2__r.ProductCode, ER_BUPicklist__c, Solution_Group__c, QuantityUnitOfMeasure, ER_Service_Number_of_Ranges__c
             FROM Product2
             WHERE ER_Type__c = 'Service'
             AND ProductCode != 'CARD_RP_BF'
             AND ProductCode != NULL
             AND ER_Solution2__r.ProductCode IN :serviceCodeToDiscounts.keySet()
             AND IsActive = true
+            AND ER_Service_Number_of_Ranges__c = 0
         ];
 
         if(!parentServiceProducts.isEmpty()){
@@ -84,16 +85,22 @@ public class CreateDiscountedProductsBatch implements Database.Batchable<SObject
         // 2) Fetch all PricebookEntries for those parents
         List<PricebookEntry> parentPBEs = [
             SELECT Id, Product2Id, Pricebook2Id, UnitPrice, ER_Percentage__c, IsActive,
-                   UseStandardPrice, CurrencyIsoCode, ER_BUPicklist__c, ER_Max__c, ER_Min__c, ER_ValueType__c
+                   UseStandardPrice, CurrencyIsoCode, ER_BUPicklist__c, ER_Max__c, ER_Min__c, ER_ValueType__c, Pricebook2.IsActive
             FROM PricebookEntry
-            WHERE Product2Id IN :parentProducts AND Pricebook2.IsStandard = FALSE
+            WHERE Product2Id IN :parentProducts 
+            AND Pricebook2.IsStandard = FALSE
+            AND Pricebook2.IsActive = TRUE
+            AND IsActive = TRUE 
         ];
 
         List<PricebookEntry> parentServicePBEs = [
             SELECT Id, Product2Id, Pricebook2Id, UnitPrice, ER_Percentage__c, IsActive,
-                   UseStandardPrice, CurrencyIsoCode, ER_BUPicklist__c, ER_Max__c, ER_Min__c, ER_ValueType__c
+                   UseStandardPrice, CurrencyIsoCode, ER_BUPicklist__c, ER_Max__c, ER_Min__c, ER_ValueType__c, Pricebook2.IsActive
             FROM PricebookEntry
-            WHERE Product2Id IN :parentServiceProducts AND Pricebook2.IsStandard = FALSE
+            WHERE Product2Id IN :parentServiceProducts 
+            AND Pricebook2.IsStandard = FALSE 
+            AND Pricebook2.IsActive = TRUE 
+            AND IsActive = TRUE
         ];
 
         if(!parentServicePBEs.isEmpty()){
@@ -221,19 +228,19 @@ public class CreateDiscountedProductsBatch implements Database.Batchable<SObject
                     // 2) Custom pricebook (same pricebook as parent) entry for discounted product
                     String customKey = discountedProductId + '_' + parentPBE.Pricebook2Id;
                     if (!existingPBEMap.containsKey(customKey)) {
-                        Decimal customDiscountedPrice;
+                        Decimal customDiscountedPrice = 0;
                         if (parentPBE.UnitPrice != null) {
                             if (parentPBE.ER_ValueType__c == 'Percentage') {
                                 customDiscountedPrice = parentPBE.ER_Percentage__c != null
                                                         ? (parentPBE.ER_Percentage__c * (1 - (discountPercent / 100))).setScale(2, RoundingMode.HALF_UP)
-                                                        : null;
+                                                        : 0;
                             } else if (parentPBE.ER_ValueType__c == 'Currency') {
                                 customDiscountedPrice = parentPBE.UnitPrice != null
                                                         ? (parentPBE.UnitPrice * (1 - (discountPercent / 100))).setScale(2, RoundingMode.HALF_UP)
-                                                        : null;
+                                                        : 0;
                             }
                         } else {
-                            customDiscountedPrice = null;
+                            customDiscountedPrice = 0;
                         }
                         PricebookEntry customEntry = new PricebookEntry(
                             Product2Id = discountedProductId,

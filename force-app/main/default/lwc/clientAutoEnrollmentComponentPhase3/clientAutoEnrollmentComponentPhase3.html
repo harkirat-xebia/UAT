@@ -35,7 +35,7 @@
                     name="faceValue" variant="border-filled" disabled={isWebOffer}>
                 </lightning-button-icon>
 
-                <lightning-input type="number" name="faceValue" value={faceValue} onchange={handleInputChange} placeholder={faceValuePlaceholder}
+                <lightning-input type="number" step="0.01" formatter="decimal" name="faceValue" value={faceValue} onchange={handleInputChange} placeholder={faceValuePlaceholder}
                     min={minFaceValue} variant="label-hidden" max={maxFaceValue} data-form-element disabled={isWebOffer}
                     required style="width:100%">
                 </lightning-input>

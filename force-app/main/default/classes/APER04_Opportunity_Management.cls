@@ -284,6 +284,10 @@ public class APER04_Opportunity_Management {
                 (Schema.SObjectType.Contract.fields.Subscription__c.isAccessible() && contractInst.Subscription__c == null)
             ) {
                 for (ER_ContractLineItem__c cli : contractInst.ER_ContractLineItems__r) {
+                    if (cli.ER_Product2__r.Name != null && 
+                        cli.ER_Product2__r.Name.equalsIgnoreCase('Reduction fee')) {
+                        continue;
+                    }
                     oli = new OpportunityLineItem();
 
                     oli.OpportunityId = newOpp.Id;

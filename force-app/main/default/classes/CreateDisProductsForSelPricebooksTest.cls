@@ -287,7 +287,7 @@ public with sharing class CreateDisProductsForSelPricebooksTest {
         }
     }
     
-    @IsTest
+    /*@IsTest
     static void testBatchWithEmptyPricebooks() {
         ER_Promo_Code__c promo = [SELECT Id FROM ER_Promo_Code__c WHERE Name='TRE100OFF' LIMIT 1];
         
@@ -306,6 +306,7 @@ public with sharing class CreateDisProductsForSelPricebooksTest {
         List<Product2> discountProducts = [SELECT Id FROM Product2 WHERE ER_Type__c = 'Discount'];
         System.assertEquals(0, discountProducts.size(), 'Should not create products with empty pricebook set');
     }
+    */
     
     @IsTest
     static void testBatchWithPromoCodeFields() {

@@ -26,7 +26,6 @@
                             <div class="slds-text-body_small slds-text-color_weak">Total Contracts</div>
                         </div>
                     </div>
-                    
                     <!-- Successful -->
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
                         <div class="slds-box slds-text-align_center" style="background-color: #d9f0d1;">
@@ -34,7 +33,6 @@
                             <div class="slds-text-body_small slds-text-color_weak">Sync completed successfully. You can check the status on the Contract.</div>
                         </div>
                     </div>
-                    
                     <!-- Failed -->
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
                         <div class="slds-box slds-text-align_center" style="background-color: #feded8;">
@@ -44,17 +42,17 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Success Table -->
-            <!-- <template if:true={hasSuccessfulContracts}>
+            <template if:true={hasSuccessfulContracts}>
                 <div class="slds-m-bottom_large">
                     <article class="slds-card">
                         <div class="slds-card__header slds-grid">
                             <header class="slds-media slds-media_center slds-has-flexi-truncate">
                                 <div class="slds-media__figure">
-                                    <lightning-icon 
-                                        icon-name="utility:success" 
-                                        size="small" 
+                                    <lightning-icon
+                                        icon-name="utility:success"
+                                        size="small"
                                         variant="success">
                                     </lightning-icon>
                                 </div>
@@ -64,8 +62,26 @@
                                     </h2>
                                 </div>
                             </header>
+                            <div class="slds-no-flex">
+                                <lightning-button
+                                    label={refreshButtonLabel}
+                                    icon-name="utility:refresh"
+                                    onclick={handleRefreshStatus}
+                                    disabled={isRefreshing}
+                                    variant="brand">
+                                </lightning-button>
+                            </div>
                         </div>
                         <div class="slds-card__body slds-card__body_inner">
+                            <template if:true={isRefreshing}>
+                                <div class="slds-text-align_center slds-p-around_medium">
+                                    <lightning-spinner
+                                        alternative-text="Refreshing contract statuses"
+                                        size="small">
+                                    </lightning-spinner>
+                                    <p class="slds-m-top_small">Refreshing contract statuses...</p>
+                                </div>
+                            </template>
                             <lightning-datatable
                                 key-field="contractId"
                                 data={successTableData}
@@ -76,8 +92,8 @@
                         </div>
                     </article>
                 </div>
-            </template> -->
-
+            </template>
+            
             <!-- Failed Contracts with Detailed Errors -->
             <template if:true={hasFailedContracts}>
                 <div class="slds-m-bottom_medium">
@@ -85,9 +101,9 @@
                         <div class="slds-card__header slds-grid">
                             <header class="slds-media slds-media_center slds-has-flexi-truncate">
                                 <div class="slds-media__figure">
-                                    <lightning-icon 
-                                        icon-name="utility:warning" 
-                                        size="small" 
+                                    <lightning-icon
+                                        icon-name="utility:warning"
+                                        size="small"
                                         variant="warning">
                                     </lightning-icon>
                                 </div>
@@ -112,7 +128,6 @@
                                 <span class="slds-assistive-text">warning</span>
                                 <h2>These contracts failed validation. Please review and fix the issues below.</h2>
                             </div>
-                            
                             <!-- Failed Contracts List with Expandable Errors -->
                             <template for:each={failedTableData} for:item="contract">
                                 <div key={contract.contractId} class="slds-box slds-m-bottom_small">
@@ -120,8 +135,8 @@
                                         <div class="slds-col slds-size_11-of-12">
                                             <div class="slds-media">
                                                 <div class="slds-media__figure">
-                                                    <lightning-icon 
-                                                        icon-name="standard:contract" 
+                                                    <lightning-icon
+                                                        icon-name="standard:contract"
                                                         size="small">
                                                     </lightning-icon>
                                                 </div>
@@ -131,8 +146,8 @@
                                                             {contract.contractNumber}
                                                         </a>
                                                         <template if:true={contract.contractCategory}>
-                                                            <lightning-badge 
-                                                                label={contract.contractCategory} 
+                                                            <lightning-badge
+                                                                label={contract.contractCategory}
                                                                 class="slds-m-left_x-small">
                                                             </lightning-badge>
                                                         </template>
@@ -153,14 +168,13 @@
                                             </lightning-button-icon>
                                         </div>
                                     </div>
-                                    
                                     <!-- Error Details (Expandable) -->
                                     <template if:true={contract.showErrors}>
                                         <div class="slds-m-top_small slds-p-around_small" style="background-color: #fef5f1; border-left: 3px solid #ea001e;">
                                             <h4 class="slds-text-heading_x-small slds-m-bottom_x-small">
-                                                <lightning-icon 
-                                                    icon-name="utility:error" 
-                                                    size="xx-small" 
+                                                <lightning-icon
+                                                    icon-name="utility:error"
+                                                    size="xx-small"
                                                     variant="error"
                                                     class="slds-m-right_xx-small">
                                                 </lightning-icon>
@@ -177,13 +191,13 @@
                     </article>
                 </div>
             </template>
-
+            
             <!-- All Success Message -->
             <template if:true={allSuccessful}>
                 <div class="slds-text-align_center slds-p-around_large">
-                    <lightning-icon 
-                        icon-name="utility:success" 
-                        size="large" 
+                    <lightning-icon
+                        icon-name="utility:success"
+                        size="large"
                         variant="success"
                         class="slds-m-bottom_small">
                     </lightning-icon>
@@ -192,7 +206,6 @@
                     </p>
                 </div>
             </template>
-
         </div>
     </div>
 </template>

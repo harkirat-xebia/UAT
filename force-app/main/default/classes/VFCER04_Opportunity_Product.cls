@@ -165,100 +165,90 @@ global class VFCER04_Opportunity_Product {
     */
     @RemoteAction
     global static Quote saveAsQuote(String opportunityId) {
-
         Boolean opportunityNeedApproval = false;
         Boolean oliIsCardOrPaper = false;
         Boolean oppNeedFinancialApproval = false;
-
         List<opportunityLineItem> oppProductList;
         List<quoteLineItem> qliList = new List<quoteLineItem>();
         Opportunity currentOpportunity = new Opportunity();
         QuoteLineItem qli;
         List<OpportunityContactRole> ocrList;
         Set<Id> excludedOpportunities = new Set<Id>();
-        //set<string> reimbursementTerms = new Set<String>{'3 days', '4 days', '5 days'};
-        //Id merchantRecordTypeId = Schema.SObjectType.Opportunity.getRecordTypeInfosByDeveloperName().get('ER_Merchant_Opportunity').getRecordTypeId();
-
+        
         // Validation added by harkirat on 14/4/26
         Opportunity opp = [
-                SELECT Id, Commercial_Origin__c, ER_Contract_Expected_Start_Date__c, 
-                    ER_NeedApproval__c, ER_BUPicklist__c, ER_NeedFinancialApproval__c,
-                    Finance_Approval_Status__c, ER_Need_Financial_Approval_2__c, Pricebook2Id, Pricebook2.Name
-                FROM Opportunity 
-                WHERE Id = :opportunityId
-            ];
-
+            SELECT Id, Commercial_Origin__c, ER_Contract_Expected_Start_Date__c,
+                ER_NeedApproval__c, ER_BUPicklist__c, ER_NeedFinancialApproval__c,
+                Finance_Approval_Status__c, ER_Need_Financial_Approval_2__c, Pricebook2Id, Pricebook2.Name, StageName
+            FROM Opportunity
+            WHERE Id = :opportunityId
+        ];
+        
         if (String.isBlank(opp.Commercial_Origin__c) || opp.ER_Contract_Expected_Start_Date__c == null) {
         throw new VisualforceException('Please fill in Commercial Origin and Contract Expected Start Date before creating a quote.');
-    }
-    // validation ends
-    
-        
-    // New validation for Engagement opportunities - CSM assignment check
-    //Commenting as business doesn't need this anymore
-    /*if (opp.Pricebook2Id != null && 
-        opp.Pricebook2.Name != null && 
-        opp.Pricebook2.Name.containsIgnoreCase('Engagement')) {
-        
-        // Query for Customer Succes Engagement team member with Edit access
-        List<OpportunityTeamMember> csmTeamMembers = [
-            SELECT Id, UserId, TeamMemberRole, OpportunityAccessLevel
-            FROM OpportunityTeamMember
-            WHERE OpportunityId = :opportunityId
-            AND TeamMemberRole = 'Customer Succes Engagement'
-            AND OpportunityAccessLevel = 'Edit'
-            LIMIT 1
-        ];  
-        
-        // If no CSM with Edit access is found, throw an error
-        if (csmTeamMembers.isEmpty()) {
-            throw new VisualforceException('A Customer Success Engagement team member with Edit access must be assigned to this Engagement opportunity before creating a quote.');
         }
-    }*/
-        //new validation ends
+        
+        // ========== PRIMARY CONTACT VALIDATION - CORRECTED ==========
+        // Primary contact is ALWAYS required when creating a quote
+        // because this method will move the opportunity to Proposal stage
+        // Get current user's bypass setting
+        User currentUser = [SELECT Id, ER_BypassVR__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
 
-        //get the list of the opportunity Product
+        // Only validate if user doesn't have bypass enabled
+    if (!currentUser.ER_BypassVR__c) {
+        List<OpportunityContactRole> primaryContacts = [
+            SELECT Id, OpportunityId
+            FROM OpportunityContactRole
+            WHERE OpportunityId = :opportunityId
+                AND Role = 'Primary contact'
+            LIMIT 1
+        ];
+        
+        if (primaryContacts.isEmpty()) {
+            throw new VisualforceException('You must assign a Primary contact before proceeding (Quote creation or Approval).');
+    }
+}
+    // ========== END PRIMARY CONTACT VALIDATION ==========
+    
+        // Get the list of the opportunity Product
         oppProductList = [
-                SELECT id, Name, UnitPrice, Discount, ER_Percentage__c, Quantity, ER_NeedApproval__c, Has_Auto_Discount__c, Opportunity.Derieved_from_Framework_Opp__c ,
-                        Product2.ER_Solution_Type__c, Product2.ER_Type__c, Opportunity.RecordType.DeveloperName, Opportunity.Finance_Approval_Status__c,
-                        Opportunity.Name, Opportunity.OwnerId, PricebookEntryId, Opportunity.pricebook2Id,
-                        PricebookEntry.Name, Product2.Description, Product2.ER_Solution__r.Name, Opportunity.Type,
-                        Product2.ER_solution__r.ER_Type__c, Product2.ER_solution__r.ER_Solution_Type__c, ListPrice,
-                        CurrencyIsoCode, ER_Card_Operational_System_ID__c, ER_Creation_date_in_OS__c, Opportunity.ER_SEPA_Bank_Account__c,
-                        Opportunity.ER_PaymentTerms__c, Opportunity.ER_InvoicingFrequency__c, Opportunity.ER_PaymentMethod__c,
-                        Opportunity.ER_ReimbursementTerm__c, Opportunity.ER_Business_Unit__c, ER_Minimum_Fee__c, Opportunity.ER_BUPicklist__c,
-                        Opportunity.ER_NeedFinancialApproval__c, Opportunity.Primary_Contact__c, ER_Line_Type__c, ER_Max__c, ER_Min__c, ER_BUPicklist__c,
-                        ER_Price_End_Date__c, ER_Offer_validity_end_date__c, ER_Duration__c, ER_What__c, Opportunity.ER_Original_Agreement__c,
-            			Opportunity.ER_BU_Picklist__c, Product2.Name, Opportunity.ER_VAT__c, Product2.ER_Solution__r.ProductCode, Product2.ProductCode,
-						Opportunity.ERBE_Invoicing_Support__c, Opportunity.ER_Validity_channel__c, Opportunity.ER_Validity_Period__c, Opportunity.Pricebook2.ER_MDMId__c,
-                        ER_Edenred_Margin_TUR__c, ER_User_Margin__c, ER_Free_To_Set_Margin__c, ER_MPV__c, ER_Cumulative_with_Promotions__c, ER_Price_Start_Date__c,Opportunity.ER_Need_Financial_Approval_2__c
-                FROM opportunityLineItem
-                WHERE opportunityId = :opportunityId
-                ORDER BY product2.ER_solution__r.ER_Line_Order__c, product2.ER_Line_Order__c
+            SELECT id, Name, UnitPrice, Discount, ER_Percentage__c, Quantity, ER_NeedApproval__c, Has_Auto_Discount__c, Opportunity.Derieved_from_Framework_Opp__c ,
+                    Product2.ER_Solution_Type__c, Product2.ER_Type__c, Opportunity.RecordType.DeveloperName, Opportunity.Finance_Approval_Status__c,
+                    Opportunity.Name, Opportunity.OwnerId, PricebookEntryId, Opportunity.pricebook2Id,
+                    PricebookEntry.Name, Product2.Description, Product2.ER_Solution__r.Name, Opportunity.Type,
+                    Product2.ER_solution__r.ER_Type__c, Product2.ER_solution__r.ER_Solution_Type__c, ListPrice,
+                    CurrencyIsoCode, ER_Card_Operational_System_ID__c, ER_Creation_date_in_OS__c, Opportunity.ER_SEPA_Bank_Account__c,
+                    Opportunity.ER_PaymentTerms__c, Opportunity.ER_InvoicingFrequency__c, Opportunity.ER_PaymentMethod__c,
+                    Opportunity.ER_ReimbursementTerm__c, Opportunity.ER_Business_Unit__c, ER_Minimum_Fee__c, Opportunity.ER_BUPicklist__c,
+                    Opportunity.ER_NeedFinancialApproval__c, Opportunity.Primary_Contact__c, ER_Line_Type__c, ER_Max__c, ER_Min__c, ER_BUPicklist__c,
+                    ER_Price_End_Date__c, ER_Offer_validity_end_date__c, ER_Duration__c, ER_What__c, Opportunity.ER_Original_Agreement__c,
+                    Opportunity.ER_BU_Picklist__c, Product2.Name, Opportunity.ER_VAT__c, Product2.ER_Solution__r.ProductCode, Product2.ProductCode,
+                    Opportunity.ERBE_Invoicing_Support__c, Opportunity.ER_Validity_channel__c, Opportunity.ER_Validity_Period__c, Opportunity.Pricebook2.ER_MDMId__c,
+                    ER_Edenred_Margin_TUR__c, ER_User_Margin__c, ER_Free_To_Set_Margin__c, ER_MPV__c, ER_Cumulative_with_Promotions__c, ER_Price_Start_Date__c,Opportunity.ER_Need_Financial_Approval_2__c
+            FROM opportunityLineItem
+            WHERE opportunityId = :opportunityId
+            ORDER BY product2.ER_solution__r.ER_Line_Order__c, product2.ER_Line_Order__c
         ];
-
+        
         ocrList = [
-                SELECT OpportunityId, role, contactId,
-                        isprimary, contact.Email, contact.Phone
-                FROM OpportunityContactRole
-                WHERE OpportunityId = :opportunityId AND isprimary = true
+            SELECT OpportunityId, role, contactId,
+                    isprimary, contact.Email, contact.Phone
+            FROM OpportunityContactRole
+            WHERE OpportunityId = :opportunityId AND isprimary = true
         ];
-
+        
         System.debug('>>> SaveAsQuote - oppProductList size ' + oppProductList.size());
         
         if(!oppProductList.isEmpty()) {
-
             //Initialise de Quote
             Savepoint sp = Database.setSavepoint();
-
             Quote newQuote = new Quote();
             if(!ocrList.isEmpty()) {
                 newQuote.ContactId = ocrList[0].ContactId;
                 newQuote.Email = ocrList[0].contact.Email;
                 newQuote.Phone = ocrList[0].contact.Phone;
             }
-            //ALK - 10/03/2021 - This will be replaced by the new naming convention (devops : 10621)
-            //newQuote.Name = Datetime.now().format('yyyy-MM-dd') + '-' + oppProductList[0].Opportunity.name;
+            
             newQuote.OwnerId = oppProductList[0].Opportunity.ownerId;
             newQuote.OpportunityId = opportunityId;
             newQuote.ER_Quote_Type__c = oppProductList[0].Opportunity.Type;
@@ -274,22 +264,19 @@ global class VFCER04_Opportunity_Product {
             
 			/*PBI 13389 VJOY*/
             newQuote.ERBE_Invoicing_Support__c = oppProductList[0].Opportunity.ERBE_Invoicing_Support__c;
-
             /*Added Snehil 26/11/24 */
             newQuote.ContactId = oppProductList[0].Opportunity.Primary_Contact__c;
             newQuote.ER_BUPicklist__c = oppProductList[0].Opportunity.ER_BUPicklist__c;
-
             System.debug('newQuote:: ' + newQuote);
             insert newQuote;
-
+            
             for(opportunityLineItem oli : oppProductList) {
                 if (oli.Has_Auto_Discount__c) {
                     excludedOpportunities.add(oli.OpportunityId);
                 }
             }
-
+            
             for(opportunityLineItem oli : oppProductList) {
-
                 qli = new QuoteLineItem();
                 qli.QuoteId = newQuote.id;
                 qli.Opportunity_Product__c = oli.Id;
@@ -309,34 +296,27 @@ global class VFCER04_Opportunity_Product {
                 /*PBI 7485: VJOY 2021*/
                 qli.ER_Price_End_Date__c = oli.ER_Price_End_Date__c;
                 qli.ER_Price_Start_Date__c = oli.ER_Price_Start_Date__c;
-
                 qli.ER_Offer_validity_end_date__c = oli.ER_Offer_validity_end_date__c;
                 qli.ER_Duration__c = oli.ER_Duration__c;
-
                 /*PBI14186 VJOY JAN 2022*/
-				qli.ER_User_Discount__c = oli.ER_User_Margin__c;
+                qli.ER_User_Discount__c = oli.ER_User_Margin__c;
                 qli.ER_Edenred_Margin_TUR__c = oli.ER_Edenred_Margin_TUR__c;
                 qli.ER_Free_to_setup_the_margin__c = oli.ER_Free_To_Set_Margin__c;
-				qli.ER_MPV__c = oli.ER_MPV__c;
+                qli.ER_MPV__c = oli.ER_MPV__c;
                 qli.ER_Cumulative_with_Promotions__c = oli.ER_Cumulative_with_promotions__c;
-
                 /*Added Snehil 21-11-2024*/
                 qli.OpportunityLineItemId = oli.Id;
-                              
+                
                 qliList.add(qli);
-
                 if(oli.ER_NeedApproval__c && !excludedOpportunities.contains(oli.OpportunityId) && !oli.opportunity.Derieved_from_Framework_Opp__c) {
-
                     opportunityNeedApproval = true;
                     break;
                 }
-
                 if(oli.Opportunity.ER_Business_Unit__c == 'CZ' && oli.Product2.ER_solution__r.ER_Type__c == Label.LABS_SF_Product_Type_Solution && oli.Opportunity.RecordTypeId == Schema.SObjectType.Opportunity.getRecordTypeInfosByDeveloperName().get('ER_Merchant_Opportunity').getRecordTypeId() && (oli.Product2.ER_solution__r.ER_Solution_Type__c == Label.LABS_SF_Product_Card_Solution_Type && (oli.Opportunity.ER_PaymentTerms__c == null || oli.Opportunity.ER_InvoicingFrequency__c == null || oli.Opportunity.ER_PaymentMethod__c == null)) || (oli.Opportunity.ER_Business_Unit__c == 'CZ' && oli.Product2.ER_solution__r.ER_Solution_Type__c == Label.LABS_SF_Product_PaperVoucher_Solution_Type && oli.Opportunity.ER_ReimbursementTerm__c == null)) {
                     oliIsCardOrPaper = true;
                     System.debug('Boolean Part');
                     break;
                 }
-
                 if(oli.Product2.ER_Solution__r.ProductCode == Label.LAB_SF_P2_VOUCHER_CODE && (oli.Opportunity.ER_Validity_channel__c == null || oli.Opportunity.ER_Validity_Period__c == null)) {
                     Database.rollback(sp);
                     throw new VisualforceException(Label.LAB_SF_OPP_EKIVITA_VALIDITY_ERR_MSG);
@@ -346,47 +326,35 @@ global class VFCER04_Opportunity_Product {
                     Database.rollback(sp);
                     throw new VisualforceException(Label.LABS_SF_OPP_OOP_VAR_ERR);    
                 }
-                                
             }
-
+            
             if(oliIsCardOrPaper) {
-
                 Database.rollback(sp);
-                throw new VisualforceException(Label.LABS_SF_Opp_Financial_Conditions_Error_Msg);//this value will be cought in vfp side. no need to use a custom label
-
+                throw new VisualforceException(Label.LABS_SF_Opp_Financial_Conditions_Error_Msg);
             }
+            
             //BUG-10623: launch both financial and commercial approval processes in same place while clicking on "save As Quote"
             Opportunity currentOpp = oppProductList[0].Opportunity;
-             /*
-            if ((currentOpp.ER_PaymentTerms__c != Label.LABS_SF_ER_PaymentTerms || reimbursementTerms.contains(currentOpp.ER_ReimbursementTerm__c))
-                    && currentOpp.RecordTypeId == merchantRecordTypeId && currentOpp.ER_BU_Picklist__c == 'CZ'
-                    &&  currentOpp.ER_ReimbursementTerm__c != null && currentOpp.ER_PaymentTerms__c != null) {
-                oppNeedFinancialApproval = true;
-            } */
+            
             if(currentOpp.ER_NeedFinancialApproval__c && currentOpp.Finance_Approval_Status__c !='Approved'){
-                    oppNeedFinancialApproval = true;
-             }
-                                        
+                oppNeedFinancialApproval = true;
+            }
+            
             if(opportunityNeedApproval) {
                 System.debug('IML: Se necesita aprobación');
                 Database.rollback(sp);
-                throw new VisualforceException('Need Approval');//this value will be cought in vfp side. no need to use a custom label
+                throw new VisualforceException('Need Approval');
             } else if(oppNeedFinancialApproval && !Test.isRunningTest()) {
                 Database.rollback(sp);
                 throw new VisualforceException('Need Financial Approval');
-            }else {
-
+            } else {
                 insert qliList;
-
                 currentOpportunity.id = opportunityId;
                 currentOpportunity.StageName = Label.LABS_SF_Opp_Status_Proposal;
-
                 update currentOpportunity;
-
                 return newQuote;
             }
         }
-
         return null;
     }
 

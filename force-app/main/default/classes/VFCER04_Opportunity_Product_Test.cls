@@ -22,6 +22,8 @@ public class VFCER04_Opportunity_Product_Test {
       'ER_Merchant_Opportunity',
       'VFCER04_Opportunity_Product_Test'
     );
+    newOpportunity.Commercial_Origin__c = 'Greenfield';
+    newOpportunity.ER_Contract_Expected_Start_Date__c = Date.today().addDays(20);
     insert newOpportunity;
 
     PriceBook2 newPriceBook = APER07_UtilityTestMethod.getpriceBook();
@@ -90,21 +92,57 @@ public class VFCER04_Opportunity_Product_Test {
 
   static testMethod void testSaveAsQuote() {
     Opportunity testOpp = [
-      SELECT id, ER_Approved__c, ER_NeedApproval__c, ER_Need_Financial_Approval_2__c
+      SELECT id, ER_Approved__c, ER_NeedApproval__c, ER_Need_Financial_Approval_2__c, AccountId
       FROM Opportunity
       WHERE name = 'VFCER04_Opportunity_Product_Test'
       LIMIT 1
     ];
+      
+      // new - Create Primary Contact
+    Contact testContact = new Contact(
+        FirstName = 'Test',
+        LastName = 'Primary Contact',
+        Email = 'testprimary@test.com',
+        AccountId = testOpp.AccountId
+    );
+    insert testContact;
+    
+    OpportunityContactRole ocr = new OpportunityContactRole(
+        OpportunityId = testOpp.Id,
+        ContactId = testContact.Id,
+        Role = 'Primary contact',
+        IsPrimary = true
+    );
+    insert ocr;
+    // END OF NEW CODE
     VFCER04_Opportunity_Product.saveAsQuote(testOpp.id);
   }
 
   static testMethod void testSaveAsQuoteForCZ() {
     Opportunity testOpp = [
-      SELECT id, ER_Approved__c, ER_NeedApproval__c
+      SELECT id, ER_Approved__c, ER_NeedApproval__c, AccountId
       FROM Opportunity
       WHERE name = 'VFCER04_Opportunity_Product_Test'
       LIMIT 1
     ];
+      
+      // new - Create Primary Contact BEFORE updating opportunity
+    Contact testContact = new Contact(
+        FirstName = 'Test',
+        LastName = 'Primary Contact',
+        Email = 'testprimary@test.com',
+        AccountId = testOpp.AccountId
+    );
+    insert testContact;
+    
+    OpportunityContactRole ocr = new OpportunityContactRole(
+        OpportunityId = testOpp.Id,
+        ContactId = testContact.Id,
+        Role = 'Primary contact',
+        IsPrimary = true
+    );
+    insert ocr;
+    // END OF NEW CODE
     testOpp.ER_BUPicklist__c = 'CZ';
     testOpp.ER_PaymentTerms__c = '7 days after invoice issuance';
     testOpp.ER_ReimbursementTerm__c = '4 days';

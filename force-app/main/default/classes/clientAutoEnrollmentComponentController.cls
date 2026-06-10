@@ -207,35 +207,18 @@ public without sharing class clientAutoEnrollmentComponentController {
 
     @AuraEnabled
     public static Map<String, String> getInfoFromBelfirst(String enterpriseNumber, String language, String businessUnit){
-        Map<String, String> result = new Map<String, String>();
-
-        if (String.isBlank(enterpriseNumber)) {
-            result.put('error', 'Enterprise number is blank');
-            return result;
-        }
-
+        Map<String, String> result;
         try {
             String idType = businessUnit == 'BE' ? 'BVDID' : 'RCSID';
-            String id;
-            if (businessUnit == 'BE') {
-                // Avoid double-prefixing if enterpriseNumber already contains 'BE'
-                id = enterpriseNumber != null && enterpriseNumber.startsWithIgnoreCase('BE') ? enterpriseNumber : 'BE' + enterpriseNumber;
-            } else {
-                id = enterpriseNumber;
-            }
-
+            String id = businessUnit == 'BE' ? 'BE' + enterpriseNumber : enterpriseNumber;
             result = BE_WebForm_Controller_Helper.getInfosFromBelfirstCtrl(id, idType, language);
-
-            if (result == null) {
-                result = new Map<String, String>{ 'error' => 'No data returned from Belfirst' };
-            }
-
+            /* result = new Map<String, String>{
+                'error' => 'An error occurred while fetching data',
+                'details' => 'Disabled for Testing'
+            }; */
             return result;
         } catch (Exception e) {
-            // Return a friendly error map instead of throwing to avoid unhandled fatal errors
-            result.put('error', 'Failed to fetch data from Belfirst');
-            result.put('details', e.getMessage());
-            return result;
+            throw new AuraHandledException(e.getMessage());
         }
     }
 
@@ -256,9 +239,8 @@ public without sharing class clientAutoEnrollmentComponentController {
 
     @AuraEnabled
     public static Map<String, Object> validateAndConvertLead(String vatNumber, Boolean subjectToVat, String phone, String commercialName, String legalForm, Integer numberOfBeneficiaries,
-                                                            String enterpriseNumber, String rcsNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
+                                                            String enterpriseNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
                                                             String billingCity, String billingCountry, String productId, String productName, String leadId, String legalName, String sourceId, String pageLanguage, String jobTitle, String department, String subDepartment){
-
         Map<String, Object> result = new Map<String, Object>();
         Decimal sizeLimit = 0;
         Lead existingLead;
@@ -304,11 +286,7 @@ public without sharing class clientAutoEnrollmentComponentController {
             existingLead.ER_Registration_Number__c = enterpriseNumber;   
             existingLead.ERBE_Initial_Product_Of_Interest__c = productId; 
             existingLead.ER_BUPicklist__c = businessUnit;  
-            existingLead.ER_Not_Subject_to_VAT__c = subjectToVat;
-            // new
-            if (businessUnit == 'LU' && String.isNotBlank(rcsNumber)) {
-                existingLead.RCS_Number__c = rcsNumber;
-            }                                             
+            existingLead.ER_Not_Subject_to_VAT__c = subjectToVat;                                             
             if(billingCountry == 'BELGIUM'){
                 existingLead.ER_Country_Code__c = 'BE';
                 existingLead.ER_Legal_Country_Code__c = 'BE';                                             
@@ -342,10 +320,6 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                 
                 account = new Account(Id = lcr.getAccountId(), RecordTypeId = accountClientRecordTypeId, HU_HQ_Contact__c = lcr.getContactId());
-                // new
-                if (businessUnit == 'LU' && String.isNotBlank(rcsNumber)) {
-                    account.RCS_Number__c = rcsNumber;
-                }
                 update account;
 
                 opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
@@ -419,10 +393,6 @@ public without sharing class clientAutoEnrollmentComponentController {
                 account.BillingCity = billingCity;
                 account.BillingCountry = billingCountry;
                 account.Name = commercialName.toUpperCase();
-                // new
-                if (businessUnit == 'LU' && String.isNotBlank(rcsNumber)) {
-                    account.RCS_Number__c = rcsNumber;
-                }
                 if(billingCountry == 'BELGIUM'){
                     account.ER_Country_Code__c = 'BE';
                 }else if(billingCountry == 'LUXEMBOURG'){
@@ -1813,7 +1783,7 @@ public without sharing class clientAutoEnrollmentComponentController {
     @AuraEnabled
     public static String submitAgreedToGeneralConditions(String contractId, Boolean agreedToGeneralConditions, Boolean prepaymentAccepted, Boolean markettingAccepted, Boolean businessAccepted, Boolean legalAccepted,
                                                          Id opportunityId, Id accountId, String stakeholderType,
-                                                         String productName, String productCode,  String emailAddress, String formLanguage, Decimal estimatedVolume, String rcsNumber){
+                                                         String productName, String productCode,  String emailAddress, String formLanguage, Decimal estimatedVolume){
 
         Account acc;
 
@@ -1826,7 +1796,7 @@ public without sharing class clientAutoEnrollmentComponentController {
             if(o != null){
 
                 updateOppo(opportunityId, agreedToGeneralConditions, prepaymentAccepted); 
-                updateAccount(accountId, stakeholderType, nameProduct, rcsNumber);
+                updateAccount(accountId, stakeholderType, nameProduct);
                 sendContractViaEmail(contractId, accountId, emailAddress, opportunityId, stakeholderType, productName, formLanguage, productCode, estimatedVolume);
 
             }
@@ -1842,7 +1812,7 @@ public without sharing class clientAutoEnrollmentComponentController {
         return 'success';
     }
 
-    private static void updateAccount(String accountId,String stakeholderType , String nameProduct, String rcsNumber){
+    private static void updateAccount(String accountId,String stakeholderType , String nameProduct){
         Account acc = [SELECT Id, ER_WS_result_Text_Long__c, BE_Client_Contract_ECE__c, BE_Client_Contract_TCE__c, BE_Client_Contract_TRE__c
                        FROM Account WHERE Id = :accountId];
 
@@ -1856,10 +1826,6 @@ public without sharing class clientAutoEnrollmentComponentController {
             else if(nameProduct == 'TCE'){
                 acc.BE_Client_Contract_TCE__c = true;
             }
-        }
-        // Update RCS Number for Luxembourg accounts
-        if (String.isNotBlank(rcsNumber) && acc.ER_Business_Unit__c == 'LU') {
-            acc.RCS_Number__c = rcsNumber;
         }
         Database.update(acc, false);
     }
@@ -1979,7 +1945,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                                   BillingCity, BillingCountry, ER_Enterprise_Number__c, Phone,
                                   ER_Not_subject_to_VAT__c, ER_VAT_Number__c, NumberOfEmployees, ER_Registration_Number__c,
                                   ER_Legal_Name__c, BE_Client_Contract_TRE__c, HU_HQ_Contact__c, BE_Social_Secretary_Name__c,
-                                  BE_Client_Contract_TCE__c, BE_Client_Contract_ECE__c, ERBE_Social_secretary_needed_for_Orders__c, RCS_Number__c
+                                  BE_Client_Contract_TCE__c, BE_Client_Contract_ECE__c, ERBE_Social_secretary_needed_for_Orders__c
                            FROM Account
                            WHERE Id = :opportunity.AccountId];
         
@@ -2062,41 +2028,22 @@ public without sharing class clientAutoEnrollmentComponentController {
         String billingAddress,
         String billingPostalCode,
         String billingCity,
-        String billingCountry,
-        String rcsNumber
+        String billingCountry
     ) {
         if (accountId == null) {
             throw new AuraHandledException('Account Id is required.');
         }
-        // QUERY ER_Business_Unit__c
-        Account acc = [SELECT Id, ER_Business_Unit__c FROM Account WHERE Id = :accountId LIMIT 1];
-        
-        acc.ER_VAT_Number__c = vatNumber;
-        acc.ER_Not_subject_to_VAT__c = subjectToVat;
-        acc.Name = commercialName != null ? commercialName.toUpperCase() : null;
-        acc.ER_Legal_Name__c = legalName != null ? legalName.toUpperCase() : null;
-        acc.BillingStreet = billingAddress;
-        acc.BillingPostalCode = billingPostalCode;
-        acc.BillingCity = billingCity;
-        acc.BillingCountry = billingCountry;
-        
-        // ADD THIS BLOCK
-        if (acc.ER_Business_Unit__c == 'LU' && String.isNotBlank(rcsNumber)) {
-            acc.RCS_Number__c = rcsNumber;
-        }
-        
-        update acc;
-    }
 
-        // update new Account(
-        //     Id = accountId,
-        //     ER_VAT_Number__c = vatNumber,
-        //     ER_Not_subject_to_VAT__c = subjectToVat,
-        //     Name = commercialName != null ? commercialName.toUpperCase() : null,
-        //     ER_Legal_Name__c = legalName != null ? legalName.toUpperCase() : null,
-        //     BillingStreet = billingAddress,
-        //     BillingPostalCode = billingPostalCode,
-        //     BillingCity = billingCity,
-        //     BillingCountry = billingCountry
-        // );
+        update new Account(
+            Id = accountId,
+            ER_VAT_Number__c = vatNumber,
+            ER_Not_subject_to_VAT__c = subjectToVat,
+            Name = commercialName != null ? commercialName.toUpperCase() : null,
+            ER_Legal_Name__c = legalName != null ? legalName.toUpperCase() : null,
+            BillingStreet = billingAddress,
+            BillingPostalCode = billingPostalCode,
+            BillingCity = billingCity,
+            BillingCountry = billingCountry
+        );
+    }
 }

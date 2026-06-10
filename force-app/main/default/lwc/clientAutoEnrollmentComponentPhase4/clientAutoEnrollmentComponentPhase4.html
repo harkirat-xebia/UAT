@@ -103,9 +103,34 @@
             <tbody>
                 <template for:each={productMap.Delivery} for:item="delivery">
                     <tr key={delivery.productId}>
-                        <td>
+                        <!-- <td>
                             {delivery.minValue} <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon> {delivery.maxValue} 
+                        </td> -->
+
+                        <td>
+                            <div class="label-with-tooltip">
+                                <span>
+                                    {delivery.minValue} 
+                                    <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon> 
+                                    {delivery.maxValue}
+                                </span>
+                                <!-- Tooltip Icon -->
+                                <template if:true={delivery.helpText}>
+                                    <div class="tooltip-container">
+                                        <lightning-icon 
+                                            icon-name="utility:info" 
+                                            size="x-small" 
+                                            class="info-icon"
+                                            alternative-text="Help">
+                                        </lightning-icon>
+                                        <div class="tooltip-text">
+                                            {delivery.helpText}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
                         </td>
+                        
                         <template if:true={delivery.isDiscountedItem}>
                             <td>
                                 <span class="text-green">{label.freeLabel}&nbsp;</span> 
@@ -147,8 +172,28 @@
             <tbody>
                 <template for:each={productMap.Card} for:item="card">
                     <tr key={card.productId}>
-                        <td>
+                        <!-- <td>
                             {card.productName}
+                        </td> -->
+
+                        <td>
+                            <div class="label-with-tooltip">
+                                <span>{card.productName}</span>
+                                <!-- Tooltip Icon -->
+                                <template if:true={card.helpText}>
+                                    <div class="tooltip-container">
+                                        <lightning-icon 
+                                            icon-name="utility:info" 
+                                            size="x-small" 
+                                            class="info-icon"
+                                            alternative-text="Help">
+                                        </lightning-icon>
+                                        <div class="tooltip-text">
+                                            {card.helpText}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
                         </td>
                         <!-- Discounted -->
                         <template if:true={card.isDiscountedItem}>
@@ -196,13 +241,39 @@
                     <!-- Adding new code ends-->
                     <template for:each={productMap.Service} for:item="service">
                         <tr key={service.productId} data-id={service.productId}>
-                            <td>
+                            <!-- <td>
                                 <template if:true={isWebOffer}>
                                     {label.provisionLabelMulti}&nbsp;{service.solutionName}&nbsp;:
                                 </template>
                                 <template if:false={isWebOffer}>
                                     {label.provisionLabel}&nbsp;:
                                 </template>
+                            </td> -->
+                            <td>
+                                <div class="label-with-tooltip">
+                                    <span>
+                                        <template if:true={isWebOffer}>
+                                            {label.provisionLabelMulti}&nbsp;{service.solutionName}&nbsp;:
+                                        </template>
+                                        <template if:false={isWebOffer}>
+                                            {label.provisionLabel}&nbsp;:
+                                        </template>
+                                    </span>
+                                    <!-- Tooltip Icon -->
+                                    <template if:true={service.helpText}>
+                                        <div class="tooltip-container">
+                                            <lightning-icon 
+                                                icon-name="utility:info" 
+                                                size="x-small" 
+                                                class="info-icon"
+                                                alternative-text="Help">
+                                            </lightning-icon>
+                                            <div class="tooltip-text">
+                                                {service.helpText}
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
                             </td>
 
                             <!-- Discounted -->

@@ -321,6 +321,6 @@ public class APER39_DiscountCode_Mangement {
         for (ER_Promo_Code__c dc : newDiscountCodes) {
             discountCodeIds.add(dc.Id);
         }
-        Database.executeBatch(new CreateDiscountedProductsBatch(discountCodeIds), 1);
+        //Database.executeBatch(new CreateDiscountedProductsBatch(discountCodeIds), 1);
     }
 }

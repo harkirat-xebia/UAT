@@ -8,6 +8,7 @@ public class CreateClientContractRequestWrapper {
         public String card_id { get; set; }
         public String company_registration_number { get; set; }
         public String last_modification_date { get; set; }
+        public String engagement_platform_id { get; set; }// NEW FIELD
         //Addding new
         public LegalSite legal_site { get; set; }
     }

@@ -24,8 +24,8 @@
             oppoId = quoteList[0].OpportunityId;
         }
         Opportunity oppo = [SELECT ID, BE_Crypto_Key__c, BE_Webform_Link__c, BE_Edenred_Solution__c,
-        						   BE_Last_Offer_Date__c, BE_Offer_Counter__c, BE_Email_Status__c, Commercial_Origin__c, ER_Contract_Expected_Start_Date__c,
-                                   ER_Face_Value__c, ER_Estimated_Number_Of_Beneficiaries__c, ER_Promo_Code2__c, ER_Promo_Code2__r.ER_Promo_Code__c,
+                                   BE_Last_Offer_Date__c, BE_Offer_Counter__c, BE_Email_Status__c, Commercial_Origin__c, ER_Contract_Expected_Start_Date__c,
+                                   ER_Face_Value__c, ER_Estimated_Number_Of_Beneficiaries__c, ER_Promo_Code2__c, ER_Promo_Code2__r.ER_Promo_Code__c, ER_Promo_Code2__r.Create_SME_Platform_Engagement__c,
                                    RecordTypeId, AccountId, Product_of_Interest__c, Preferred_Language__c, Primary_Contact__c, Invoicing_Contact__c
                             FROM Opportunity WHERE Id=:oppoId];
         String recordTypeName = Schema.SObjectType.Opportunity.getRecordTypeInfosById().get(oppo.RecordTypeId).getName();
@@ -156,6 +156,9 @@
                                                          WHERE OpportunityId = :oppo.Id];
         List<Quote> recentQuote = [SELECT Id, Status  FROM Quote WHERE Status = 'Draft' AND OpportunityId =: oppo.Id ORDER By CreatedDate DESC];
         
+        // Check if Promo Code has 'Create SME Platform Engagement' checkbox set to true
+        Boolean isSMEPlatformPromoCode = (oppo.ER_Promo_Code2__c != null && oppo.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c == true);
+        
         if(!Test.isRunningTest()){
             if(opportunityProducts.size() == 0){
                 error += '- ' + Label.BE_Error_Zero_OppoProd_Opportunity + '\n';
@@ -165,7 +168,8 @@
                         discountCount++;
                     }
                 }
-                if(hasDiscount && discountCount == 0){
+                // Only validate discount products if the Promo Code does NOT have 'Create SME Platform Engagement' set to true
+                if(hasDiscount && discountCount == 0 && !isSMEPlatformPromoCode){
                     error += '- ' + 'Add discounted products in case Promo Code is applied' + '\n';
                 }
             }
@@ -191,7 +195,7 @@
         System.debug('oppo.BE_Last_Offer_Date__c: ' + oppo.BE_Last_Offer_Date__c);
         if(!Label.BE_Error.equals(oppo.BE_Email_Status__c)){
             oppo.BE_Offer_Counter__c = 0;
-        	oppo.BE_Offer_Counter__c = ++oppo.BE_Offer_Counter__c;
+            oppo.BE_Offer_Counter__c = ++oppo.BE_Offer_Counter__c;
         }
         System.debug('oppo.BE_Offer_Counter__c: ' + oppo.BE_Offer_Counter__c);
         oppo.BE_Email_Status__c = Label.BE_Pending;

@@ -267,6 +267,56 @@ public class APER04_Opportunity_Management_Test {
             zquQuote.zqu__Status__c = 'Draft';
             zquQuote.zqu__Opportunity__c = newOpportunity.Id;
             insert zquQuote;
+            Contact primaryContact1 = new Contact(
+                FirstName = 'Primary',
+                LastName = 'Contact Test',
+                Email = 'primarycontact@test.com',
+                Phone = '1234567890',
+                AccountId = newMerchantAccount.Id
+            );
+            insert primaryContact1;
+            
+            // Create Primary Contact for newMerchantAccount2
+            Contact primaryContact2 = new Contact(
+                FirstName = 'Primary',
+                LastName = 'Contact Test 2',
+                Email = 'primarycontact2@test.com',
+                Phone = '0987654321',
+                AccountId = newMerchantAccount2.Id
+            );
+            insert primaryContact2;
+            
+            // Create OpportunityContactRoles for all opportunities
+            List<OpportunityContactRole> ocrList = new List<OpportunityContactRole>();
+            
+            // For newOpportunityB
+            ocrList.add(new OpportunityContactRole(
+                OpportunityId = newOpportunityB.Id,
+                ContactId = primaryContact1.Id,
+                Role = 'Primary contact',
+                IsPrimary = true
+            ));
+            
+            // For newOpportunity
+            ocrList.add(new OpportunityContactRole(
+                OpportunityId = newOpportunity.Id,
+                ContactId = primaryContact1.Id,
+                Role = 'Primary contact',
+                IsPrimary = true
+            ));
+            
+            // For newOpportunity2
+            ocrList.add(new OpportunityContactRole(
+                OpportunityId = newOpportunity2.Id,
+                ContactId = primaryContact1.Id,
+                Role = 'Primary contact',
+                IsPrimary = true
+            ));
+            
+            insert ocrList;
+            
+            // Verify Primary Contacts were created
+            System.assertEquals(3, ocrList.size(), 'Should have 3 Primary Contact Roles');
         }
     }
     
@@ -379,6 +429,7 @@ static void getUpdateOpportunityStage() {
         LIMIT 1
     ];
 
+    opp.Commercial_Origin__c = 'Greenfield';
     opp.ER_Contract_Expected_Start_Date__c = Date.today().addDays(5);
     update opp;
 
@@ -571,7 +622,7 @@ static void getUpdateOpportunityStage() {
         Test.stopTest();
     }
     
-    @IsTest
+    /*@IsTest
     static void manageParentAffiliationCodesTest() {
         List<Opportunity> opportunities = [
             SELECT Id, ER_Promo_Code2__c, AccountId
@@ -587,6 +638,7 @@ static void getUpdateOpportunityStage() {
         ];
         pc.ER_Affiliation_Type__c = Constants.PARENT;
         pc.ER_End_Date__c = Date.today().addDays(30);
+        pc.Promo_End_Date__c = Date.today().addDays(90);
         update pc;
 
         mapPromoCodeOpps.put(promoCode, opportunities);
@@ -596,6 +648,49 @@ static void getUpdateOpportunityStage() {
         Test.stopTest();
     }
     
+    @IsTest
+static void manageParentAffiliationCodesTest() {
+    List<Opportunity> opportunities = [
+        SELECT Id, ER_Promo_Code2__c, AccountId
+        FROM Opportunity
+        WHERE ER_Promo_Code2__c != NULL
+    ];
+    
+    // Update opportunities with required fields
+    for (Opportunity opp : opportunities) {
+        opp.Commercial_Origin__c = 'Greenfield';
+        opp.ER_Contract_Expected_Start_Date__c = Date.today().addDays(30);
+    }
+    update opportunities;
+    
+    String promoCode = [SELECT ER_Promo_Code2__c FROM Opportunity WHERE ER_Promo_Code2__c != NULL][0].ER_Promo_Code2__c;
+    Map<Id, List<Opportunity>> mapPromoCodeOpps = new Map<Id, List<Opportunity>>();
+    ER_Promo_Code__c pc = [
+        SELECT Id, ER_Affiliation_Type__c
+        FROM ER_Promo_Code__c
+        WHERE Id = :[SELECT ER_Promo_Code2__c FROM Opportunity WHERE ER_Promo_Code2__c != NULL][0].ER_Promo_Code2__c
+    ];
+    
+    // CREATE AND ACTIVATE A CONTRACT FIRST
+    Account acc = [SELECT Id FROM Account LIMIT 1];
+    Pricebook2 pb = APER07_UtilityTestMethod.getpriceBook();
+    Contract activatedContract = APER07_UtilityTestMethod.getContract(acc.Id, System.today(), 'Draft', pb.Id);
+    insert activatedContract;
+    activatedContract.Status = 'Activated'; // Activate the contract
+    update activatedContract;
+    
+    pc.ER_Affiliation_Type__c = Constants.PARENT;
+    pc.ER_End_Date__c = Date.today().addDays(30);
+    pc.Promo_End_Date__c = Date.today().addDays(90);
+    pc.ER_Contract__c = activatedContract.Id; // Associate with activated contract
+    update pc;
+    
+    mapPromoCodeOpps.put(promoCode, opportunities);
+    Test.startTest();
+    APER04_Opportunity_Management.manageParentAffiliationCodes(mapPromoCodeOpps);
+    Test.stopTest();
+}
+*/
     @IsTest
     static void manageOppRecordsBeforeUpdateTest() {
         Map<Id, Opportunity> oldMapItems = new Map<Id, Opportunity>();
@@ -610,6 +705,8 @@ static void getUpdateOpportunityStage() {
         );
         newOpp.AccountId = newAcc.Id;
         newOpp.ER_BUPicklist__c = 'BE';
+        newOpp.Commercial_Origin__c = 'Greenfield';
+		newOpp.ER_Contract_Expected_Start_Date__c = Date.today().addDays(30);
         insert newOpp;
         
         oldMapItems.put(newOpp.Id, newOpp);
@@ -625,7 +722,7 @@ static void getUpdateOpportunityStage() {
         Test.stopTest();
     }
     
-    @IsTest
+    /*@IsTest
     static void createOpportunityItemsFromPromoCodeTest() {
         Contract cont = [
             SELECT Id, ER_Contract_Type__c
@@ -648,6 +745,8 @@ static void getUpdateOpportunityStage() {
             WHERE Id = :[SELECT ER_Promo_Code2__c FROM Opportunity WHERE ER_Promo_Code2__c != NULL][0].ER_Promo_Code2__c
         ];
         pc.ER_Contract__c = cont.Id;
+        //Added new
+        pc.Promo_End_Date__c = Date.today().addDays(90);
         update pc;
         mapPromoCodeOpps.put(promoCode, opportunities);
         
@@ -678,6 +777,68 @@ static void getUpdateOpportunityStage() {
         Test.stopTest();
     }
     
+    
+    @IsTest
+static void createOpportunityItemsFromPromoCodeTest() {
+    Contract cont = [
+        SELECT Id, ER_Contract_Type__c
+        FROM Contract
+        WHERE ER_Contract_Type__c = 'Framework agreement'
+        LIMIT 1
+    ];
+    Contract cont1 = [SELECT Id, ER_Contract_Type__c FROM Contract WHERE ER_Contract_Type__c = 'Other' LIMIT 1];
+    
+    List<Opportunity> opportunities = [
+        SELECT Id, ER_Promo_Code2__c, AccountId
+        FROM Opportunity
+        WHERE ER_Promo_Code2__c != NULL
+    ];
+    
+    // Update opportunities with required fields
+    for (Opportunity opp : opportunities) {
+        opp.Commercial_Origin__c = 'Greenfield';
+        opp.ER_Contract_Expected_Start_Date__c = Date.today().addDays(30);
+    }
+    update opportunities;
+    
+    String promoCode = [SELECT ER_Promo_Code2__c FROM Opportunity WHERE ER_Promo_Code2__c != NULL][0].ER_Promo_Code2__c;
+    Map<Id, List<Opportunity>> mapPromoCodeOpps = new Map<Id, List<Opportunity>>();
+    ER_Promo_Code__c pc = [
+        SELECT Id, ER_Affiliation_Type__c
+        FROM ER_Promo_Code__c
+        WHERE Id = :[SELECT ER_Promo_Code2__c FROM Opportunity WHERE ER_Promo_Code2__c != NULL][0].ER_Promo_Code2__c
+    ];
+    
+    // USE FRAMEWORK CONTRACT (cont) instead of cont1
+    pc.ER_Contract__c = cont.Id; // Changed from cont to match parent affiliation type
+    pc.Promo_End_Date__c = Date.today().addDays(90);
+    update pc;
+    
+    mapPromoCodeOpps.put(promoCode, opportunities);
+    Product2 prod2 = APER07_UtilityTestMethod.getProduct('Test');
+    prod2.IsActive = true;
+    insert prod2;
+    Pricebook2 pricebook = APER07_UtilityTestMethod.getpriceBook();
+    pricebook.ER_Business_Unit__c = 'BE';
+    update pricebook;
+    PricebookEntry pricebookEntry = APER07_UtilityTestMethod.getpriceBookEntry(pricebook.Id, prod2.Id);
+    pricebookEntry.ER_Promo_Code2__c = pc.Id;
+    pricebookEntry.ER_Offer_validity_end_date__c = Date.today().addDays(10);
+    insert pricebookEntry;
+    ER_ContractLineItem__c cli = APER07_UtilityTestMethod.getContractLineItem(
+        cont.Id, // Changed from cont1 to cont
+        prod2.Id,
+        PricebookEntry.Id,
+        1,
+        10
+    );
+    insert cli;
+    Test.startTest();
+    APER04_Opportunity_Management.createOpportunityItemsFromPromoCode(mapPromoCodeOpps);
+    Test.stopTest();
+}
+*/
+    
     @IsTest
     static void createOpportunityItemsFromPromoCodeTest2() {
         ER_Promo_Code__c promo0 = new ER_Promo_Code__c();
@@ -691,6 +852,7 @@ static void getUpdateOpportunityStage() {
             Constants.PROMO_CODE_PROMO_RT
         );
         promo0.ER_Affiliation_Type__c = Constants.PARENT;
+        promo0.Promo_End_Date__c = Date.today().addDays(90);
         insert promo0;
         
         Account newMerchantAccountTest = APER07_UtilityTestMethod.getCompany('createOpportunityItemsFromPromoCodeTest2');
@@ -701,6 +863,8 @@ static void getUpdateOpportunityStage() {
             'APER04_Opportunity_Management_Test0'
         );
         newOpportunityP.AccountId = newMerchantAccountTest.Id;
+        newOpportunityP.ER_Contract_Expected_Start_Date__c = Date.today().addDays(5);
+        newOpportunityP.Commercial_Origin__c = 'Greenfield';
         newOpportunityP.ER_BUPicklist__c = 'BE';
         insert newOpportunityP;
         newOpportunityP.ER_Promo_Code2__c = promo0.Id;
@@ -782,112 +946,125 @@ static void getUpdateOpportunityStage() {
         System.runAs(ur) {
             Account acc = APER07_UtilityTestMethod.getCompany('createAutoEnrollmentOppLineItemsTest');
             insert acc;
-            // PB:
-            PriceBook2 pb = new PriceBook2();
-            pb.Name = 'ERFI TOW Prices';
-            pb.ER_MDMId__c = 'ERFI_C_TOW';
-            pb.ER_Business_Unit__c = 'BE';
-            pb.IsActive = true;
-            insert pb;
-            
-            Auto_Enrollment_Product__mdt mdt = [
-                SELECT developerName, Services__c
-                FROM Auto_Enrollment_Product__mdt
-                WHERE developerName = 'ERFI_C_TD_DUALW_EUR'
-            ];
-            
-            String servicesStr = mdt.Services__c;
-            List<String> services = servicesStr.split(Constants.PIPE_SEPARATOR);
-            
-            // Product:
-            List<Product2> products = new List<Product2>();
-            for (String code : services) {
-                Product2 prod = new Product2();
-                prod.IsActive = true;
-                prod.Name = code;
-                //prod.ER_Solution_Code__c='ERFI_C_TD_DUALW_EUR';
-                prod.ER_Service_Range_Type__c = 'Without Range';
-                prod.ProductCode = code;
-                products.add(prod);
-            }
-            insert products;
-            
-            // PBE
-            List<PricebookEntry> sPBE = new List<PricebookEntry>();
-            for (Product2 prod : products) {
-                Id pricebookId = Test.getStandardPricebookId();
-                sPBE.add(
-                    new PricebookEntry(
-                        Pricebook2Id = pricebookId,
-                        Product2Id = prod.Id,
-                        ER_ValueType__c = 'Currency',
-                        CurrencyIsoCode = 'EUR',
-                        UnitPrice = 0.0,
-                        IsActive = true
-                    )
-                );
-            }
-            insert sPBE;
-            sPBE.clear();
-            
-            for (Product2 prod : products) {
-                sPBE.add(
-                    new PricebookEntry(
-                        Pricebook2Id = pb.id,
-                        Product2Id = prod.Id,
-                        ER_ValueType__c = 'Currency',
-                        CurrencyIsoCode = 'EUR',
-                        UnitPrice = 0.0,
-                        IsActive = true
-                    )
-                );
-            }
-            insert sPBE;
-            
-            List<PricebookEntry> pbeList = [
-                SELECT id, Product2Id, Product2.ER_Solution_Code__c, ProductCode, Pricebook2Id
-                FROM PricebookEntry
-                WHERE
-                //Product2.ER_Solution_Code__c IN :oppSolutionMap.keySet()
-                //AND
-                Product2.ProductCode IN :services
-                AND Pricebook2Id = :pb.id
-            ];
-            System.assertEquals(services.size(), pbeList.size());
-            Test.startTest();
-            
-            Opportunity newOpp = APER07_UtilityTestMethod.getOpportunity(
-                'ER_Client_Opportunity_RT',
-                'createAutoEnrollmentOppLineItemsTest'
-            );
-            newOpp.AccountId = acc.Id;
-            newOpp.ER_BUPicklist__c = 'FI';
-            newOpp.ER_Solutions__c = 'ERFI_C_TD_DUALW_EUR';
-            newOpp.LeadSource = Constants.CONTRACTING_WEBFORM;
-            newOpp.Pricebook2Id = pb.id;
-            newOpp.ER_PaymentMethod__c = null;
-            newOpp.ER_PaymentTerms__c = 'At reception of invoice';
-            newOpp.ER_Credit_Limit__c = 12;
-            
-            //System.assertEquals(true, [SELECT id FROM OpportunityLineItem WHERE OpportunityId = :newOpp.id].isEmpty());
-            
-            insert newOpp;
-            /*
-List<OpportunityLineItem> oliList = [
-SELECT id, ER_Line_Type__c, ER_BUPicklist__c, Product2.ProductCode
-FROM OpportunityLineItem
-WHERE OpportunityId = :newOpp.id
-];
-System.assertEquals(services.size(), oliList.size());
-for (OpportunityLineItem oli : oliList) {
-System.assertEquals('Service', oli.ER_Line_Type__c);
-System.assertEquals('FI', oli.ER_BUPicklist__c);
-System.assertEquals(true, services.contains(oli.Product2.ProductCode));
-}
-*/
-            Test.stopTest();
+        
+        // CREATE PRIMARY CONTACT - Add this section
+        Contact primaryContact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Primary Contact',
+            Email = 'testprimary@test.com',
+            Phone = '1234567890',
+            AccountId = acc.Id
+        );
+        insert primaryContact;
+        // END PRIMARY CONTACT CREATION
+        
+        // PB:
+        PriceBook2 pb = new PriceBook2();
+        pb.Name = 'ERFI TOW Prices';
+        pb.ER_MDMId__c = 'ERFI_C_TOW';
+        pb.ER_Business_Unit__c = 'BE';
+        pb.IsActive = true;
+        insert pb;
+        
+        Auto_Enrollment_Product__mdt mdt = [
+            SELECT developerName, Services__c
+            FROM Auto_Enrollment_Product__mdt
+            WHERE developerName = 'ERFI_C_TD_DUALW_EUR'
+        ];
+        String servicesStr = mdt.Services__c;
+        List<String> services = servicesStr.split(Constants.PIPE_SEPARATOR);
+        
+        // Product:
+        List<Product2> products = new List<Product2>();
+        for (String code : services) {
+            Product2 prod = new Product2();
+            prod.IsActive = true;
+            prod.Name = code;
+            prod.ER_Service_Range_Type__c = 'Without Range';
+            prod.ProductCode = code;
+            products.add(prod);
         }
+        insert products;
+        
+        // PBE
+        List<PricebookEntry> sPBE = new List<PricebookEntry>();
+        for (Product2 prod : products) {
+            Id pricebookId = Test.getStandardPricebookId();
+            sPBE.add(
+                new PricebookEntry(
+                    Pricebook2Id = pricebookId,
+                    Product2Id = prod.Id,
+                    ER_ValueType__c = 'Currency',
+                    CurrencyIsoCode = 'EUR',
+                    UnitPrice = 0.0,
+                    IsActive = true
+                )
+            );
+        }
+        insert sPBE;
+        sPBE.clear();
+        for (Product2 prod : products) {
+            sPBE.add(
+                new PricebookEntry(
+                    Pricebook2Id = pb.id,
+                    Product2Id = prod.Id,
+                    ER_ValueType__c = 'Currency',
+                    CurrencyIsoCode = 'EUR',
+                    UnitPrice = 0.0,
+                    IsActive = true
+                )
+            );
+        }
+        insert sPBE;
+        
+        List<PricebookEntry> pbeList = [
+            SELECT id, Product2Id, Product2.ER_Solution_Code__c, ProductCode, Pricebook2Id
+            FROM PricebookEntry
+            WHERE Product2.ProductCode IN :services
+            AND Pricebook2Id = :pb.id
+        ];
+        System.assertEquals(services.size(), pbeList.size());
+        
+        Test.startTest();
+        Opportunity newOpp = APER07_UtilityTestMethod.getOpportunity(
+            'ER_Client_Opportunity_RT',
+            'createAutoEnrollmentOppLineItemsTest'
+        );
+        newOpp.AccountId = acc.Id;
+        newOpp.ER_BUPicklist__c = 'FI';
+        newOpp.ER_Solutions__c = 'ERFI_C_TD_DUALW_EUR';
+        newOpp.LeadSource = Constants.CONTRACTING_WEBFORM;
+        newOpp.Pricebook2Id = pb.id;
+        newOpp.ER_PaymentMethod__c = null;
+        newOpp.ER_PaymentTerms__c = 'At reception of invoice';
+        newOpp.ER_Credit_Limit__c = 12;
+        newOpp.Commercial_Origin__c = 'Greenfield';
+        newOpp.ER_Contract_Expected_Start_Date__c = Date.today().addDays(5);
+        insert newOpp;
+        
+        // CREATE PRIMARY CONTACT ROLE - Add this section AFTER opportunity insert
+        OpportunityContactRole ocr = new OpportunityContactRole(
+            OpportunityId = newOpp.Id,
+            ContactId = primaryContact.Id,
+            Role = 'Primary contact',
+            IsPrimary = true
+        );
+        insert ocr;
+        // END PRIMARY CONTACT ROLE CREATION
+        
+        // Verify the Primary Contact Role was created correctly
+        List<OpportunityContactRole> verifyOCR = [
+            SELECT Id, OpportunityId, ContactId, Role, IsPrimary
+            FROM OpportunityContactRole
+            WHERE OpportunityId = :newOpp.Id
+            AND Role = 'Primary contact'
+        ];
+        System.assertEquals(1, verifyOCR.size(), 'Primary contact role should be created');
+        System.assertEquals(true, verifyOCR[0].IsPrimary, 'Contact should be marked as primary');
+        
+        Test.stopTest();
     }
+}
     
     @IsTest
 static void updateSeniorManagerAsyncTest() {

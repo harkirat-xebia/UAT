@@ -42,3 +42,85 @@
     display: inline-block;
     margin-top: 0px;
 }
+
+/* Tooltip Styles */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Below 2 are responsible for the ? icon on the cursor */
+.tooltip-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.info-icon {
+    color: #706e6b;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    background-color: #16325c;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    width: 250px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+/* Arrow for tooltip */
+.tooltip-text::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: #16325c;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Responsive tooltip positioning */
+@media (max-width: 768px) {
+    .tooltip-text {
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    .tooltip-text::before {
+        right: auto;
+        left: 100%;
+        border-right-color: transparent;
+        border-left-color: #16325c;
+    }
+}
+
+/* Ensure tooltip doesn't overflow table */
+.delivery-tbl {
+    position: relative;
+    overflow: visible;
+}
+
+.slds-table td {
+    position: relative;
+}

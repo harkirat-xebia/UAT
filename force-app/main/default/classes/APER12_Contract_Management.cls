@@ -1304,7 +1304,7 @@ public without sharing class APER12_Contract_Management {
     }
     
     if (contractsToCheck.isEmpty()) {
-        System.debug('=== ALL CONTRACTS ALREADY PROCESSED - SKIPPING ===');
+        //System.debug('=== ALL CONTRACTS ALREADY PROCESSED - SKIPPING ===');
         return;
     }
     
@@ -1313,17 +1313,25 @@ public without sharing class APER12_Contract_Management {
         SELECT Id, Status, AccountId, Account.Name,
                ER_OpportunityId__c,
                ER_OpportunityId__r.CampaignId,
+               ER_OpportunityId__r.Preferred_Language__c,
                ER_OpportunityId__r.ER_Promo_Code2__c,
                ER_OpportunityId__r.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c,
                ER_OpportunityId__r.ER_Promo_Code2__r.ER_Business_Unit__c,
                ER_OpportunityId__r.Name,
+               ER_OpportunityId__r.ER_Solutions__c,
+               ER_OpportunityId__r.ER_Estimated_Number_Of_Beneficiaries__c,
                ER_OpportunityId__r.OwnerId,
+               ER_OpportunityId__r.ER_Won_Reason__c,
                ER_OpportunityId__r.RecordTypeId,
                OwnerId, CreatedBy.Name, StartDate, EndDate, CurrencyIsoCode,
-               Primary_Contact__c, Billing_Contact__c, Owner.Name
+               Primary_Contact__c, Billing_Contact__c, Owner.Name,
+               CustomerSignedDate, CustomerSignedId
         FROM Contract
         WHERE Id IN :contractsToCheck
     ]);
+
+    for (Contract c : contractsWithDetails.values()) {
+    }
 
     //3: Check for existing SME contracts (prevents duplicates across transactions)
     Set<Id> contractsWithExistingSME = new Set<Id>();
@@ -1338,9 +1346,6 @@ public without sharing class APER12_Contract_Management {
     for (Contract smeContract : existingSMEContracts) {
         contractsWithExistingSME.add(smeContract.ER_Original_Agreement__c);
     }
-    
-    System.debug('Contracts with existing SME in database: ' + contractsWithExistingSME.size());
-    
 
     //4: Get all unique AccountIds to check for existing Engagement contracts
     Set<Id> accountIds = new Set<Id>();
@@ -1376,7 +1381,6 @@ public without sharing class APER12_Contract_Management {
         if (contractWithDetails == null) continue;
 
         if (contractsWithExistingSME.contains(contractId)) {
-            System.debug('Skipping SME engagement already exists for contract - ' + contractId);
             continue;
         }
 
@@ -1384,10 +1388,6 @@ public without sharing class APER12_Contract_Management {
         Boolean isNewlyActivated = (contractWithDetails.Status == 'Activated' && 
                                    oldContract != null && 
                                    oldContract.Status != 'Activated');
-        
-        System.debug('Status Check - Old: ' + (oldContract != null ? oldContract.Status : 'null') + 
-                   ', New: ' + contractWithDetails.Status + 
-                   ', Newly Activated: ' + isNewlyActivated);
         
         //Boolean isActivated = false;
         /*if (oldMap == null || oldMap.isEmpty()) {
@@ -1422,17 +1422,14 @@ public without sharing class APER12_Contract_Management {
         
         Boolean hasOpportunity = contractWithDetails.ER_OpportunityId__c != null;
         if (!hasOpportunity) {
-            System.debug('SKIPPED: No opportunity linked - ' + contractId);
             continue;
         }
         Boolean hasPromoCode = contractWithDetails.ER_OpportunityId__r.ER_Promo_Code2__c != null;
         if (!hasPromoCode) {
-            System.debug('SKIPPED: No promo code linked - ' + contractId);
             continue;
         }
         Boolean shouldCreateEngagement = contractWithDetails.ER_OpportunityId__r.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c == true;
         if (!shouldCreateEngagement) {
-            System.debug('SKIPPED: Promo code does not have SME flag enabled - ' + contractId);
             continue;
         }
 
@@ -1442,16 +1439,12 @@ public without sharing class APER12_Contract_Management {
             createdByGuest = contractWithDetails.CreatedBy.Name.containsIgnoreCase('Guest');
         }
         if (!createdByGuest) {
-            System.debug('SKIPPED: Creator name does not contain "Guest" (Creator: ' + 
-                       (contractWithDetails.CreatedBy != null ? contractWithDetails.CreatedBy.Name : 'null') + 
-                       ') - ' + contractId);
             continue;
         }
 
         // Check if account already has an Engagement contract
         Boolean accountAlreadyHasEngagement = accountHasEngagement.get(contractWithDetails.AccountId) == true;
         if (accountAlreadyHasEngagement) {
-            System.debug('SKIPPED: Account already has an Engagement contract - ' + contractId);
             continue;
         }
 
@@ -1462,10 +1455,8 @@ public without sharing class APER12_Contract_Management {
             processedContractIds.add(contractId);
         } else {
             if (!createdByGuest) {
-                System.debug('SKIPPED: Owner name does not contain "Guest"');
             }
             if (accountAlreadyHasEngagement) {
-                System.debug('SKIPPED: Account already has an Engagement contract');
             }
         }
     }
@@ -1482,7 +1473,6 @@ public without sharing class APER12_Contract_Management {
         return;
     }*/
     if (!qualifyingContractIds.isEmpty()) {
-        System.debug('Publishing Platform Event for ' + qualifyingContractIds.size() + ' contracts');
         
         try {
             // Create platform event
@@ -1493,18 +1483,13 @@ public without sharing class APER12_Contract_Management {
             Database.SaveResult result = EventBus.publish(event);
             
             if (result.isSuccess()) {
-                System.debug('✓ Platform Event published successfully');
             } else {
-                System.debug('✗ Platform Event publish failed');
                 for (Database.Error error : result.getErrors()) {
-                    System.debug('Error: ' + error.getMessage());
                 }
             }
         } catch (Exception e) {
-            System.debug('ERROR publishing Platform Event: ' + e.getMessage());
         }
     } else {
-        System.debug('No qualifying contracts found');
     }
 
     
@@ -1535,50 +1520,48 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         }
         
         if (contracts.isEmpty()) {
-            System.debug('No contracts to process');
             return new List<Id>();
         }
         
         // Get Business Unit (assuming all contracts have same BU for this batch)
         String businessUnit = contracts[0].ER_OpportunityId__r.ER_Promo_Code2__r.ER_Business_Unit__c;
-        System.debug('Processing ' + contracts.size() + ' contracts for BU: ' + businessUnit);
         
         // ========== QUERY ALL REQUIRED DATA UPFRONT ==========
 
         //Additional query
         Account mainPlatformAccount = getMainPlatformAccount(businessUnit);
         if (mainPlatformAccount == null) {
-            System.debug('ERROR: No Main Platform Account found for business unit: ' + businessUnit);
             return new List<Id>();
         }
-        System.debug('Main Platform Account ID: ' + mainPlatformAccount.Id);
-        System.debug('Customer Domain Reference: ' + mainPlatformAccount.Customer_Domain_Reference__c);
 
         // Get the Main Platform Contract details
         Contract mainPlatformContract = null;
         if (mainPlatformAccount.Contracts != null && !mainPlatformAccount.Contracts.isEmpty()) {
             mainPlatformContract = mainPlatformAccount.Contracts[0];
-            System.debug('Main Platform Contract ID: ' + mainPlatformContract.Id);
         } else {
-            System.debug('ERROR: No Contract found on Main Platform Account');
             return new List<Id>();
         }
         
         // QUERY 1: Get Engagement Pricebook
         Id engagementPricebookId = getEngagementPricebookId(businessUnit);
         if (engagementPricebookId == null) {
-            System.debug('ERROR: No engagement pricebook found for business unit: ' + businessUnit);
             return new List<Id>();
         }
-        System.debug('Engagement Pricebook ID: ' + engagementPricebookId);
         
         // QUERY 2: Get SME Platform Products
         List<Product2> smePlatformProducts = getSMEPlatformProducts(businessUnit);
         if (smePlatformProducts.isEmpty()) {
-            System.debug('ERROR: No SME Platform products found for BU: ' + businessUnit);
             return new List<Id>();
         }
-        System.debug('Found ' + smePlatformProducts.size() + ' SME Platform products');
+
+        //Build Solutions string from ProductCodes
+        Set<String> solutionSet = new Set<String>();
+        for (Product2 product : smePlatformProducts) {
+            if (product.ER_Solution2__r != null && String.isNotBlank(product.ER_Solution2__r.ProductCode)) {
+                solutionSet.add(product.ER_Solution2__r.ProductCode);
+            }
+        }
+        String solutionsValue = String.join(new List<String>(solutionSet), '/');
         
         // QUERY 3: Get PricebookEntries for all products (BULKIFIED)
         Map<Id, PricebookEntry> productToPbeMap = new Map<Id, PricebookEntry>();
@@ -1591,7 +1574,6 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         ]) {
             productToPbeMap.put(pbe.Product2Id, pbe);
         }
-        System.debug('Found ' + productToPbeMap.size() + ' PricebookEntries');
 
         // QUERY 4: Get ONLY Primary Contact and Invoicing Contact OCRs (OPTIMIZED)
         Set<Id> primaryOppIds = new Set<Id>();
@@ -1615,7 +1597,6 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
                 primaryOppToOCRs.get(ocr.OpportunityId).add(ocr);
             }
         }
-        System.debug('Found OCRs for ' + primaryOppToOCRs.size() + ' opportunities');
         
         // Get RecordType IDs once (no SOQL - uses describe)
         Id oppRecordTypeId = Schema.SObjectType.Opportunity.getRecordTypeInfosByDeveloperName()
@@ -1625,8 +1606,7 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         Id contractRecordTypeId = Schema.SObjectType.Contract.getRecordTypeInfosByDeveloperName()
             .get('ER_Client_Contract_RT')?.getRecordTypeId();
         
-        // ========== STEP 1: CREATE OPPORTUNITIES ==========
-        System.debug('=== STEP 1: Creating Opportunities ===');
+        // STEP 1 CREATE OPPORTUNITIES 
         List<Opportunity> newOpportunities = new List<Opportunity>();
         
         for (Contract primaryContract : contracts) {
@@ -1635,6 +1615,7 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             //adding sme account instead of the 
             smeOpp.AccountId = primaryContract.AccountId;
             smeOpp.StageName = 'Qualification';
+            smeOpp.ER_Won_Reason__c = primaryContract.ER_OpportunityId__r.ER_Won_Reason__c;
             smeOpp.CloseDate = Date.today().addDays(30);
             smeOpp.RecordTypeId = primaryContract.ER_OpportunityId__r.RecordTypeId;
             smeOpp.OwnerId = primaryContract.OwnerId;
@@ -1642,11 +1623,15 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             smeOpp.CampaignId = primaryContract.ER_OpportunityId__r.CampaignId;
             smeOpp.ER_Promo_Code2__c = primaryContract.ER_OpportunityId__r.ER_Promo_Code2__c;
             smeOpp.LeadSource = 'Websales';
+            smeOpp.ER_Lead_sub_source__c = 'Econtratonline';
+            smeOpp.ER_Solutions__c = solutionsValue;
+            smeOpp.Preferred_Language__c = primaryContract.ER_OpportunityId__r.Preferred_Language__c;
+            smeOpp.ER_Estimated_Number_Of_Beneficiaries__c = primaryContract.ER_OpportunityId__r.ER_Estimated_Number_Of_Beneficiaries__c;
             smeOpp.ER_Contract_Expected_Start_Date__c = primaryContract.StartDate;
             smeOpp.Contract_End_Date__c = primaryContract.EndDate;
             smeOpp.Type = 'Operational';
             smeOpp.Commercial_Origin__c = 'Greenfield';
-            smeOpp.ER_Reason__c = 'New';
+            smeOpp.ER_Reason__c = 'New';      
             smeOpp.Onboarding_Method__c = 'OSS';
             //smeOpp.Impacted_Beneficiaries__c = 'TRE Only';
             smeOpp.ER_InvoicingFrequency__c = 'Yearly';  
@@ -1671,10 +1656,9 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         }
         
         insert newOpportunities;
-        System.debug(' Created ' + newOpportunities.size() + ' opportunities');
+        //System.debug(' Created ' + newOpportunities.size() + ' opportunities');
         
-        // ========== STEP 2: CREATE OPPORTUNITY CONTACT ROLES ==========
-        System.debug('=== STEP 2: Creating Opportunity Contact Roles ===');
+        // STEP 2 CREATE OPPORTUNITY CONTACT ROLES 
         List<OpportunityContactRole> ocrList = new List<OpportunityContactRole>();
         
         for (Integer i = 0; i < contracts.size(); i++) {
@@ -1685,7 +1669,6 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             
             if (primaryOCRs != null && !primaryOCRs.isEmpty()) {
                 // Copy OCRs from primary opportunity
-                System.debug('Copying ' + primaryOCRs.size() + ' OCRs from primary opportunity');
                 for (OpportunityContactRole primaryOCR : primaryOCRs) {
                     OpportunityContactRole newOCR = new OpportunityContactRole();
                     newOCR.OpportunityId = smeOpp.Id;
@@ -1696,7 +1679,6 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
                 }
             } else {
                 // Fallback: Create from contract fields
-                System.debug('No OCRs on primary opp, creating from contract contacts');
                 if (primaryContract.Primary_Contact__c != null) {
                     ocrList.add(new OpportunityContactRole(
                         OpportunityId = smeOpp.Id,
@@ -1720,43 +1702,52 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         
         if (!ocrList.isEmpty()) {
             insert ocrList;
-            System.debug('Created ' + ocrList.size() + ' Opportunity Contact Roles');
         }
         
-        // ========== STEP 3: CREATE OPPORTUNITY LINE ITEMS ==========
-        System.debug('=== STEP 3: Creating Opportunity Line Items ===');
+        // STEP 3 CREATE OPPORTUNITY LINE ITEMS 
         List<OpportunityLineItem> oliList = new List<OpportunityLineItem>();
         
         for (Opportunity smeOpp : newOpportunities) {
-            for (Product2 product : smePlatformProducts) {
-                PricebookEntry pbe = productToPbeMap.get(product.Id);
-                
-                if (pbe != null) {
-                    OpportunityLineItem oli = new OpportunityLineItem();
-                    oli.OpportunityId = smeOpp.Id;
-                    oli.Product2Id = product.Id;
-                    oli.PricebookEntryId = pbe.Id;
-                    oli.Quantity = 1;
-                    oli.UnitPrice = 0;
-                    oli.ER_Percentage__c = pbe.ER_Percentage__c;
-                    oli.ER_BUPicklist__c = businessUnit;
-                    
-                    oliList.add(oli);
-                } else {
-                    System.debug('No PricebookEntry found for product: ' + product.Name);
-                }
-            }
-        }
-        
+          for (Product2 product : smePlatformProducts) {
+              PricebookEntry pbe = productToPbeMap.get(product.Id);
+              
+              if (pbe != null) {
+                  OpportunityLineItem oli = new OpportunityLineItem();
+                  oli.OpportunityId = smeOpp.Id;
+                  oli.Product2Id = product.Id;      
+                  oli.PricebookEntryId = pbe.Id;
+                  
+                  // Check if it's ONLY "License Fees" (not Implementation License Fees)
+                  Boolean isLicenseFees = product.ER_Solution__r != null && 
+                                        product.ER_Solution__r.Name != null && 
+                                        product.ER_Solution__r.Name.containsIgnoreCase('License Fees') &&
+                                        !product.ER_Solution__r.Name.containsIgnoreCase('Freemium');   
+                  if (isLicenseFees) {
+                      oli.Quantity = smeOpp.ER_Estimated_Number_Of_Beneficiaries__c != null ? 
+                                    smeOpp.ER_Estimated_Number_Of_Beneficiaries__c : 1;
+                      oli.ER_Nb_Beneficiaries__c = smeOpp.ER_Estimated_Number_Of_Beneficiaries__c;
+                  } else {
+                      oli.Quantity = 1;
+                  }
+                  
+                  oli.UnitPrice = 0;
+                  oli.ER_Percentage__c = pbe.ER_Percentage__c;
+                  oli.ER_BUPicklist__c = businessUnit;
+                  
+                  oliList.add(oli);
+              } else {
+                  //System.debug('No PricebookEntry found for product: ' + product.Name);
+              }
+          }
+      }  
         if (!oliList.isEmpty()) {
             insert oliList;
-            System.debug('Created ' + oliList.size() + ' Opportunity Line Items');
+            //System.debug('Created ' + oliList.size() + ' Opportunity Line Items');
         } else {
-            System.debug('No Opportunity Line Items to create');
+            //System.debug('No Opportunity Line Items to create');
         }
         
         // ========== STEP 4: CREATE QUOTES ==========
-        System.debug('=== STEP 4: Creating Quotes ===');
         List<Quote> quotes = new List<Quote>();
         
         for (Integer i = 0; i < newOpportunities.size(); i++) {
@@ -1778,10 +1769,9 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         }
         
         insert quotes;
-        System.debug('Created ' + quotes.size() + ' quotes');
+        //System.debug('Created ' + quotes.size() + ' quotes');
         
-        // ========== STEP 5: CREATE QUOTE LINE ITEMS (BULKIFIED) ==========
-        System.debug('=== STEP 5: Creating Quote Line Items ===');
+        // STEP 5 CREATE QUOTE LINE ITEMS (BULKIFIED) 
         
         // QUERY 5: Get all OLIs for the new opportunities (BULKIFIED)
         Set<Id> oppIds = new Set<Id>();
@@ -1800,8 +1790,8 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             }
             oppToOLIs.get(oli.OpportunityId).add(oli);
         }
-        System.debug('Queried OLIs for ' + oppToOLIs.size() + ' opportunities');
         
+        //Create Quote line items
         List<QuoteLineItem> qliList = new List<QuoteLineItem>();
         
         for (Quote quote : quotes) {
@@ -1811,6 +1801,8 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
                 for (OpportunityLineItem oli : relatedOlis) {
                     QuoteLineItem qli = new QuoteLineItem();
                     qli.QuoteId = quote.Id;
+                    qli.Opportunity_Product__c = oli.Id;
+                    //qli.Parent_Product__c = oli.Parent_Product__c;
                     qli.Product2Id = oli.Product2Id;
                     qli.PricebookEntryId = oli.PricebookEntryId;
                     qli.Quantity = oli.Quantity;
@@ -1825,19 +1817,16 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         
         if (!qliList.isEmpty()) {
             insert qliList;
-            System.debug('Created ' + qliList.size() + ' Quote Line Items');
         }
         
-        // ========== STEP 6: UPDATE OPPORTUNITIES TO PROPOSAL STAGE ==========
-        System.debug('=== STEP 6: Updating Opportunities to Proposal stage ===');
+        // STEP 6: UPDATE OPPORTUNITIES TO PROPOSAL STAGE 
         for (Opportunity opp : newOpportunities) {
             opp.StageName = 'Proposal';
         }
         update newOpportunities;
-        System.debug('Updated ' + newOpportunities.size() + ' opportunities to Proposal stage');
+        //System.debug('Updated ' + newOpportunities.size() + ' opportunities to Proposal stage');
         
-        // ========== STEP 7: CREATE CONTRACTS ==========
-        System.debug('=== STEP 7: Creating Contracts ===');
+        // STEP 7: CREATE CONTRACTS 
         List<Contract> smeContracts = new List<Contract>();
         
         for (Integer i = 0; i < quotes.size(); i++) {
@@ -1852,6 +1841,8 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             smeContract.StartDate = primaryContract.StartDate;
             smeContract.EndDate = primaryContract.EndDate;
             smeContract.Status = 'Draft';
+            smeContract.ER_Solutions__c = solutionsValue;
+            //smeContract.ER_Solutions__c = 'Draft';
             smeContract.ER_Contract_Type__c = 'Operational';
             smeContract.Primary_Contact__c = primaryContract.Primary_Contact__c;
             smeContract.Billing_Contact__c = primaryContract.Billing_Contact__c;
@@ -1876,7 +1867,6 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         }
         
         insert smeContracts;
-        System.debug('Created ' + smeContracts.size() + ' contracts');
         
         // QUERY 6: Get all QLIs for the quotes (BULKIFIED)
         Set<Id> quoteIds = new Set<Id>();
@@ -1887,7 +1877,7 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         Map<Id, List<QuoteLineItem>> quoteToQLIs = new Map<Id, List<QuoteLineItem>>();
         for (QuoteLineItem qli : [
             SELECT Id, QuoteId, Product2Id, Product2.Name, PricebookEntryId, Quantity, 
-                   UnitPrice, ER_Percentage__c, ListPrice, CurrencyIsoCode
+                   UnitPrice, ER_Percentage__c, ListPrice, CurrencyIsoCode, Opportunity_Product__c
             FROM QuoteLineItem
             WHERE QuoteId IN :quoteIds
         ]) {
@@ -1896,8 +1886,8 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
             }
             quoteToQLIs.get(qli.QuoteId).add(qli);
         }
-        System.debug('Queried QLIs for ' + quoteToQLIs.size() + ' quotes');
-        
+
+        //Create Contract Line Items
         List<ER_ContractLineItem__c> cliList = new List<ER_ContractLineItem__c>();
         
         for (Integer i = 0; i < smeContracts.size(); i++) {
@@ -1911,6 +1901,8 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
                     ER_ContractLineItem__c cli = new ER_ContractLineItem__c();
                     cli.ER_Contract__c = smeContract.Id;
                     cli.ER_Product2__c = qli.Product2Id;
+                    cli.Opportunity_Product__c = qli.Opportunity_Product__c;
+                    //cli.Parent_Product__c = qli.Parent_Product__c;
                     cli.Name = qli.Product2.Name;
                     cli.ER_PricebookEntryId__c = qli.PricebookEntryId;
                     cli.ER_Quantity__c = qli.Quantity;
@@ -1928,11 +1920,10 @@ public static List<Id> createSMEPlatformEngagementSync(List<Id> contractIds, Map
         
         if (!cliList.isEmpty()) {
             insert cliList;
-            System.debug('Created ' + cliList.size() + ' Contract Line Items');
+            //System.debug('Created ' + cliList.size() + ' Contract Line Items');
         }
 
-        // ========== STEP 9: QUEUE OPPORTUNITY & QUOTE UPDATES ==========
-            System.debug('=== STEP 9: Queueing Opportunity & Quote Updates ===');
+        //  STEP 9: QUEUE OPPORTUNITY & QUOTE UPDATES
             List<Id> smeContractIds = new List<Id>();
             for (Contract c : smeContracts) {
                 smeContractIds.add(c.Id);
@@ -1996,7 +1987,7 @@ public static Id getEngagementPricebookId(String businessUnit) {
 @TestVisible
 public static List<Product2> getSMEPlatformProducts(String businessUnit) {
     return [
-        SELECT Id, Name, ProductCode, ER_Type__c, ER_BUPicklist__c, ER_Line_Order__c
+        SELECT Id, Name, ProductCode, ER_Type__c, ER_BUPicklist__c, ER_Line_Order__c, ER_Solution2__c, ER_Solution2__r.ProductCode, ER_Solution2__r.Name, ER_Solution__r.Name
         FROM Product2
         WHERE IsActive = true
         AND ER_BUPicklist__c = :businessUnit
@@ -2069,7 +2060,7 @@ public static void syncContractToNemo(
     Map<Id, Contract> newContracts,
     Map<Id, Contract> oldContracts
 ) {
-    System.debug('### syncContractToNemo CALLED');
+    System.debug('### syncContractToNemo CALLED');  
     if (newContracts == null || oldContracts == null) {
         return;
     }
@@ -2489,7 +2480,7 @@ public static void syncContractToNemo(
       Set<String> trackedFamilies = new Set<String>{ 'Engagement', 'Benefits' };
       Set<String> usedFamilies = new Set<String>();
 
-      // CHANGED: Only check for ACTIVATED contracts, not just Closed Won opportunities
+      //Only check for ACTIVATED contracts, not just Closed Won opportunities
     List<Contract> activatedContracts = [
         SELECT Id,
                Contract_Category__c,

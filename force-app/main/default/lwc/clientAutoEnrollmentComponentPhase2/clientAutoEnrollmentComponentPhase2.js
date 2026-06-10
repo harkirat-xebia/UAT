@@ -9,10 +9,6 @@ import ENTERPRISE_HELP from '@salesforce/label/c.Enterprise_Number_Helptext';
 import ENTERPRISE_HELP_LU from '@salesforce/label/c.Enterprise_Number_HelptextLU';
 import COMPANY_NAME from '@salesforce/label/c.Company_Name';
 import COMPANY_PLACEHOLDER from '@salesforce/label/c.Company_Name_Placeholder';
-//New
-import RCS_NUMBER from '@salesforce/label/c.RCS_Number';
-import RCS_PLACEHOLDER from '@salesforce/label/c.RCS_Number_Placeholder';
-import RCS_HELP from '@salesforce/label/c.RCS_Number_Helptext';
 import COMMERCIAL_NAME from '@salesforce/label/c.Commercial_Name';
 import COMMERCIAL_PLACEHOLDER from '@salesforce/label/c.Commercial_Name_Placeholder';
 import SHIPPING_CITY from '@salesforce/label/c.Shipping_City';
@@ -50,9 +46,6 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
     @api pays;
     @api businessUnit;
     @api vatCheckbox;
-    //New
-    @api rcsNumber;
-    @api registrationNumber;
     _hasCheckedActiveContract = false; // Added by harkirat
     isCompanyLocked = false;
 
@@ -86,16 +79,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         codeTVAShouldBeEmpty: VAT_EXEMPT,
         codeTVARequired: VAT_REQUIRED,
         postalCodeError: POSTAL_ERROR,
-        rcsError: RCS_ERROR,
-        // New RCS Labels
-        rcsNumber: RCS_NUMBER,
-        rcsPlaceholder: RCS_PLACEHOLDER,
-        rcsHelp: RCS_HELP
-        ,
-        // Registration Number labels (fallback literals)
-        registrationNumber: 'Registration Number',
-        registrationPlaceholder: 'Registration Number',
-        registrationHelp: 'Registration number'
+        rcsError: RCS_ERROR
     };
     
 
@@ -108,7 +92,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
 
     @api
     getData() {
-        const data = {
+        return {
           enterpriseNum: this.enterpriseNumber,
           businessName: this.businessName,
           commercialName: this.commercialName,
@@ -119,15 +103,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
           pays: this.pays,
           vatCheckbox: this.vatCheckbox
         };
-        
-        // Add LU specific field
-        if (this.businessUnit === 'LU') {
-            data.rcsNumber = this.rcsNumber;
-            data.registrationNumber = this.registrationNumber;
-        }
-        
-        return data;
-    }
+      } 
       
     get enterpriseNum() {
         return this.businessUnit === 'LU' ? this.label.enterpriseNumLU : this.label.enterpriseNum;
@@ -143,11 +119,6 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
     get enterpriseFormatError() {
       return this.businessUnit === 'LU' ? this.label.rcsError : this.label.vatError;
     }
-
-        // Show LU specific fields in template
-        get isLuxembourg() {
-            return this.businessUnit === 'LU';
-        }
 
     connectedCallback(){
       console.log('Phase2 connectedCallback, hasEnterpriseNumber =', this.hasEnterpriseNumber, 'enterpriseNumber =', this.enterpriseNumber);//Remove this later
@@ -233,77 +204,30 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
       const vatRegex = /^([A-Z][0-9]{1,6}|BE[0-9]{10})$/;
       const codeTVARegex = /^(BE[0-2]{1}\d{9}|LU\d{8})$/i;
       const postalCodeRegex = /^\d+$/;
-      //NEw
-      const rcsRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,9}$/;
-    const registrationRegex = rcsRegex;
 
       const inputs = this.template.querySelectorAll('[data-form-element]');
       inputs.forEach(input => {
-        const name = input.name;  
+        const name = input.name;
         var value = input.value;
         if(this.businessUnit == 'BE'){
           value = this.businessUnit + input.value;
         }
         const rawValue = input.value ? input.value.trim() : '';
         console.log('Value to Test: ', value);
-        //New 
-
-        // For Luxembourg, validate RCS
-        if (this.businessUnit === 'LU' && !this.hasEnterpriseNumber) {
-            // Validate RCS
-            if (name === 'rcsNumber') {
-                if (!rawValue) {
-                    input.setCustomValidity('RCS Number is required');
-                    input.reportValidity();
-                    isValid = false;
-                } else if (!rcsRegex.test(rawValue)) {
-                    input.setCustomValidity('Invalid RCS format. Must be 1-9 alphanumeric characters (both letters and digits required)');
-                    input.reportValidity();
-                    isValid = false;
-                } else {
-                    input.setCustomValidity('');
-                }
-            }
-            // Validate Registration Number
-            if (name === 'registrationNumber') {
-                if (!rawValue) {
-                    input.setCustomValidity(this.label.registrationHelp || 'Registration number is required');
-                    input.reportValidity();
-                    isValid = false;
-                } else if (!registrationRegex.test(rawValue)) {
-                    input.setCustomValidity(this.label.rcsError || 'Invalid registration number format');
-                    input.reportValidity();
-                    isValid = false;
-                } else {
-                    input.setCustomValidity('');
-                }
-            }
-            
-            // Validate Enterprise Number for LU (acts as NIF)
-            if (name === 'enterpriseNumber') {
-                if (!rawValue) {
-                    input.setCustomValidity(this.label.enterpriseError);
-                    input.reportValidity();
-                    isValid = false;
-                } else {
-                    input.setCustomValidity('');
-                }
-            }
-        } else if (name === 'enterpriseNumber' && !this.hasEnterpriseNumber && this.businessUnit !== 'LU') {
-            // Original validation for non-LU business units
+        // Custom validation for VAT field
+        if (name === 'enterpriseNumber' && !this.hasEnterpriseNumber) {
             if(!rawValue){
                 input.setCustomValidity(this.label.enterpriseError);
                 input.reportValidity();
                 isValid = false;
-            } else if (!vatRegex.test(value)) {
+            }else if (!vatRegex.test(value)) {
                 input.setCustomValidity(this.enterpriseFormatError);
                 input.reportValidity();
                 isValid = false;
             } else {
                 input.setCustomValidity('');
             }
-        } 
-        //Vat Validation
+        }
         if (name === 'codeTVA') {
             if (this.vatCheckbox && rawValue) {
               input.setCustomValidity(this.label.codeTVAShouldBeEmpty);

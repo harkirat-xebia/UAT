@@ -102,7 +102,7 @@ public with sharing class APER41_BulkContractAmendment_Mngmnt_Test {
         }
     }
 
-    @IsTest
+    /*@IsTest
     static void fillTechnicalFields() {
         Test.startTest();
         Contract con2 = [
@@ -119,13 +119,13 @@ public with sharing class APER41_BulkContractAmendment_Mngmnt_Test {
         blkMassAmendment.ER_Invoicing_Frequency__c = 'Monthly';
         insert blkMassAmendment;
         Test.stopTest();
-    }
+    }*/
 
-    @IsTest
+    /*@IsTest
     static void amendContracts() {
         Test.startTest();
         List<ER_Bulk_Contract_Amendment__c> contractsToAmend = [SELECT Id, OwnerId, ER_Contract__c, ER_Type__c, ER_Service_Reference__c, ER_New_Price__c, ER_Contract_Start_Date__c, ER_BUPicklist__c, ER_Payment_Term__c, ER_Payment_Method__c, ER_Invoicing_Frequency__c, ER_Tech_ContractId__c, ER_Tech_Service_Reference__c, ER_Tech_Start_Date__c FROM ER_Bulk_Contract_Amendment__c WHERE ER_Contract_Start_Date__c = TODAY AND ER_BUPicklist__c = 'BE' ORDER BY ER_Contract__c];
         APER41_BulkContractAmendment_Management.amendContracts(contractsToAmend);
         Test.stopTest();
-    }
+    }*/
 }

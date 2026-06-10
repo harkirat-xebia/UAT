@@ -47,7 +47,6 @@ import updateMarketingPreference from '@salesforce/apex/clientAutoEnrollmentComp
 
 export default class ClientAutoEnrollmentComponent extends NavigationMixin(LightningElement) {
 
-    @api rcsNumber; // New RCS Number field
 
     //Primitive Variables
     sourceId = '';
@@ -448,17 +447,14 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 console.log('Required Fields not filled');
                 
             }
-            }else if(this.phase == 2){
-                this.fetchEnterpriseDetailsFromChild();
-                if(this.subPhase != 'contact'){ 
-                    // For Luxembourg: Check Enterprise Number (NIF) and RCS
-                    if (this.businessUnit === 'LU') {
-                    // Only check Enterprise Number to show full form
-                    if ((this.enterpriseNumber != null && this.enterpriseNumber != undefined) && 
-                        !this.hasEnterpriseNumber) {
-                        
-                        if(this.validateCurrentPhaseFields()){
-                            // For LU, set hasEnterpriseNumber to true to show company details form
+        }else if(this.phase == 2){
+            this.fetchEnterpriseDetailsFromChild();
+            if(this.subPhase != 'contact'){
+                if((this.enterpriseNumber != null && this.enterpriseNumber != undefined) && !this.hasEnterpriseNumber){
+                    if(this.validateCurrentPhaseFields()){
+                        if(!this.isWebOffer){
+                            this.getCompanyInfo();
+                        }else{
                             this.hasEnterpriseNumber = true;
                             window.dataLayer = window.dataLayer || [];
                             window.dataLayer.push({
@@ -470,74 +466,121 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                                 numberofBeneficiaries: this.noOfBeneficiaries,
                                 error_status: []
                             });
-                        } else {
-                            console.log('Required Fields not filled');
                         }
-                    } else if(this.hasEnterpriseNumber && this.companyValuesAreNull){
-                        this.showError('Please fill in all required company information');
-                    } else {
-                        if(this.validateCurrentPhaseFields()){
-                            if(!this.isWebOffer){
-                                this.validateCompanyDetailsLU();
-                            } else {
-                                this.updateCompany();
-                            }
-                        } else {
-                            console.log('Required Fields not filled');
-                        }
+                    }else{
+                        console.log('Required Fields not filled');
                     }
-                }
-                    // For non-Luxembourg (existing logic - UNCHANGED)
-                    else {
-                        if((this.enterpriseNumber != null && this.enterpriseNumber != undefined) && !this.hasEnterpriseNumber){
-                            if(this.validateCurrentPhaseFields()){
-                                if(!this.isWebOffer){
-                                    this.getCompanyInfo();
-                                } else {
-                                    this.hasEnterpriseNumber = true;
-                                    window.dataLayer = window.dataLayer || [];
-                                    window.dataLayer.push({
-                                        event: 'funnel',
-                                        funnel_step: 'Step2enterpriseaftercompanynumber',
-                                        promoCode: this.promoCode || '',
-                                        light_offer: this.isWebOffer,
-                                        funnel_product: this.productCode,
-                                        numberofBeneficiaries: this.noOfBeneficiaries,
-                                        error_status: []
-                                    });
-                                }
-                            } else {
-                                console.log('Required Fields not filled');
-                            }
-                        } else if(this.hasEnterpriseNumber && this.companyValuesAreNull){
-                            this.showError();
-                        } else {
-                            console.log('Came HERE');
-                            if(this.validateCurrentPhaseFields()){
-                                if(!this.isWebOffer){
-                                    this.validateCompanyDetails();
-                                } else {
-                                    this.updateCompany();
-                                }
-                            } else {
-                                console.log('Required Fields not filled');
-                            }
-                        } 
-                    }
-                } else {
-                    this.fetchContactDetailsFromChild();
+                }else if(this.hasEnterpriseNumber && this.companyValuesAreNull){
+                    this.showError();
+                }else{
+                    console.log('Came HERE');
                     if(this.validateCurrentPhaseFields()){
-                        this.upsertContactAndRoles();
+                        if(!this.isWebOffer){
+                            this.validateCompanyDetails();
+                        }else{
+                            this.updateCompany();
+                        }
+                    }else{
+                        console.log('Required Fields not filled');
                     }
-                }  
-            } else if (this.phase == 3) {
-                this.fetchAddressDetailsFromChild();
-                if (this.validateCurrentPhaseFields()) {
-                    this.phase++;
-                } else {
-                    console.log('Required Fields not filled');
+                } 
+            }else{
+                this.fetchContactDetailsFromChild();
+                if(this.validateCurrentPhaseFields()){
+                    this.upsertContactAndRoles();
                 }
-            } else if (this.phase == 4) {
+            }  
+        }else if(this.phase == 3){
+            this.fetchAddressDetailsFromChild()
+            if(this.validateCurrentPhaseFields()){
+                if(!this.isWebOffer){
+                    this.updateAccountStructureAndData();
+                }else{
+                    this.updateAccountStructureAndData();
+                }
+            }
+        }else if(this.phase == 4){
+            this.fetchProductDetailsFromChild();
+
+            if(this.validateCurrentPhaseFields()){
+
+                //Mandatory checkbox validation (Phase 4) Added by harkirat
+                const phase4Cmp = this.template.querySelector(
+                    'c-client-auto-enrollment-component-phase-4'
+                );
+
+                if (phase4Cmp && !phase4Cmp.validateMandatoryCheckboxes()) {
+                    this.showError('Please accept all mandatory terms and conditions before confirming.');
+                    return; // Stop execution
+                }
+
+                // Marketing preference update
+                updateMarketingPreference({
+                    contactId: this.primaryContactId,
+                    marketingOptIn: this.marketingOptIn
+                })
+                .then(() => {
+                    console.log('Marketing preference updated');
+                })
+                .catch(error => {
+                    console.error('Error updating marketing preference', error);
+                });
+
+                //  Final submission
+                this.createServicesAndContract();
+
+                // Analytics
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'funnel',
+                    funnel_step: 'Step5confirmation',
+                    promoCode: this.promoCode || '',
+                    light_offer: this.isWebOffer,
+                    funnel_product: this.productCode,
+                    numberofBeneficiaries: this.noOfBeneficiaries,
+                    numberofEmployees: this.noOfEmployees,
+                    face_value: this.faceValue,
+                    error_status: []
+                });
+            }
+        }else if(this.phase == -1){
+            this.showBeneficiaryComp = false;
+            this.hasEnterpriseNumber = true;
+            this.phase = 2;
+        }
+    }   
+    
+    handleBack(){
+        if(this.phase == 1 ){
+            this.fetchLeadDetailsFromChild();
+            if(this.isWebOffer){
+                this.phase = -1;
+            }else{
+                this.phase--;
+            }
+            
+        }else if(this.phase == 2 ){
+            if(this.isWebOffer){
+                this.phase = -1;
+            }else{
+                if(this.subPhase === 'contact'){
+                    this.subPhase = '';
+                }else{
+                    this.fetchEnterpriseDetailsFromChild()
+                    if(this.hasEnterpriseNumber){
+                        this.hasEnterpriseNumber = false;
+                    }else{
+                        this.phase--;
+                    }
+                }
+            }
+        }else if(this.phase == 3){
+            this.fetchAddressDetailsFromChild();
+            if(this.subPhase != 'contact'){
+                this.subPhase = 'contact';
+            }
+            this.phase--;
+        }else if(this.phase == 4){
             this.fetchProductDetailsFromChild();
             this.phase--;
         }
@@ -598,7 +641,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
         }, 300);
 
         validateAndConvertLead({vatNumber: this.codeTVA, subjectToVat: this.vatCheckbox, phone: this.dialCodePhone + this.phone, commercialName: this.commercialName, legalForm: this.legalForm,
-            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: this.enterpriseNumber, rcsNumber: this.rcsNumber, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
+            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: this.enterpriseNumber, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
             productCode: this.productCode, billingCity: this.city, billingCountry: this.pays, productId: this.productId, productName: this.productName, leadId: this.createdLeadId,
             legalName: this.businessName, sourceId: this.sourceId, pageLanguage: this.language, jobTitle: this.jobTitle, department: this.department,
             subDepartment: this.subDepartment
@@ -607,9 +650,6 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
             console.log(JSON.stringify(result));
             this.isLoading = false;
             this.mapOfObj = result;
-            this.enterpriseNumber = this.mapOfObj.account && this.mapOfObj.account.ER_Enterprise_Number__c
-                ? this.mapOfObj.account.ER_Enterprise_Number__c
-                : (this.mapOfObj.account && this.mapOfObj.account.ER_Registration_Number__c ? this.mapOfObj.account.ER_Registration_Number__c : this.enterpriseNumber);
             this.primaryContactId = this.mapOfObj.contact ? this.mapOfObj.contact.Id : this.mapOfObj.account.HU_HQ_Contact__c;
             this.accountId = this.mapOfObj.account.Id;
             
@@ -878,11 +918,10 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 city,
                 postalCode,
                 pays,
-                vatCheckbox,
-                rcsNumber // New
+                vatCheckbox
             } = child.getData();
         
-            console.log('Got from child:', enterpriseNum, businessName, commercialName, codeTVA, streetNumber, city, postalCode, pays, vatCheckbox, rcsNumber);
+            console.log('Got from child:', enterpriseNum, businessName, commercialName, codeTVA, streetNumber, city, postalCode, pays, vatCheckbox);
         
             this.enterpriseNumber = enterpriseNum;
             this.businessName = businessName;
@@ -893,10 +932,6 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
             this.postalCode = postalCode;
             this.pays = pays;
             this.vatCheckbox = vatCheckbox;
-            // Add LU specific field
-            if (this.businessUnit === 'LU') {
-                this.rcsNumber = rcsNumber;
-            }
             const allValuesNullOrEmpty = [
                 enterpriseNum,
                 businessName,
@@ -1100,7 +1135,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
 
         submitAgreedToGeneralConditions({contractId: contractId, agreedToGeneralConditions: this.generalCondition, prepaymentAccepted: this.financeCondition, markettingAccepted: this.marketingOptIn, businessAccepted: this.businessCondition, legalAccepted: this.legalCondition,
             opportunityId: this.opportunityId, accountId: this.accountId, stakeholderType: 'Customer', productName: this.productName, productCode: this.productCode, emailAddress: this.email, formLanguage: this.selectedLanguage, 
-            estimatedVolume: isNaN(this.estimatedVolume) ? 0 : this.estimatedVolume, rcsNumber: this.rcsNumber
+            estimatedVolume: isNaN(this.estimatedVolume) ? 0 : this.estimatedVolume
         })
         .then(result=>{
             console.log(result);
@@ -1126,7 +1161,6 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 this.phone  = result.primaryContact.Phone;
                 this.mobile  = result.primaryContact.MobilePhone;
                 this.optin = true;
-                this.rcsNumber = result.account.RCS_Number__c;
                 
                 this.enterpriseNumber = result.account.ER_Enterprise_Number__c 
                 ? result.account.ER_Enterprise_Number__c 
@@ -1192,55 +1226,25 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
         });
     }
 
-    // updateCompany(){
-    //     this.isLoading = true;
-    //     updateEnterpriseDetails({
-    //         accountId:        this.accountId,
-    //         vatNumber:        this.codeTVA,
-    //         subjectToVat:     this.vatCheckbox,
-    //         commercialName:   this.commercialName,
-    //         legalName:        this.businessName,
-    //         billingAddress:   this.streetNumber,
-    //         billingPostalCode:this.postalCode,
-    //         billingCity:      this.city,
-    //         billingCountry:   this.pays
-    //     })
-    //     .then(result=>{
-    //         this.isLoading = false;
-    //         this.subPhase = 'contact';
-    //     })
-    //     .catch(error=>{
-    //         console.error(error);
-    //     })
-    // }
     updateCompany(){
-    this.isLoading = true;
-    
-    const updateParams = {
-        accountId: this.accountId,
-        vatNumber: this.codeTVA,
-        subjectToVat: this.vatCheckbox,
-        commercialName: this.commercialName,
-        legalName: this.businessName,
-        billingAddress: this.streetNumber,
-        billingPostalCode: this.postalCode,
-        billingCity: this.city,
-        billingCountry: this.pays
-    };
-    
-    if (this.businessUnit === 'LU') {
-        updateParams.rcsNumber = this.rcsNumber;
+        this.isLoading = true;
+        updateEnterpriseDetails({
+            accountId:        this.accountId,
+            vatNumber:        this.codeTVA,
+            subjectToVat:     this.vatCheckbox,
+            commercialName:   this.commercialName,
+            legalName:        this.businessName,
+            billingAddress:   this.streetNumber,
+            billingPostalCode:this.postalCode,
+            billingCity:      this.city,
+            billingCountry:   this.pays
+        })
+        .then(result=>{
+            this.isLoading = false;
+            this.subPhase = 'contact';
+        })
+        .catch(error=>{
+            console.error(error);
+        })
     }
-    
-    updateEnterpriseDetails(updateParams)
-    .then(result => {
-        this.isLoading = false;
-        this.subPhase = 'contact';
-    })
-    .catch(error => {
-        console.error(error);
-        this.isLoading = false;
-        this.showError('Error updating company information');
-    })
-}
 }

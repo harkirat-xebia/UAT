@@ -380,8 +380,13 @@ global class VFCER05_Opportunity_EditPrice {
         Map<Id, String> pbeIdMap = new Map<Id, String>();
         Set<Id> pbeSet = new Set<Id>();
         Set<Id> pbeProductIdSet = new Set<Id>();
-    
-        Opportunity oppRec = [SELECT Id, ER_BUPicklist__c, Max_Discount__c FROM Opportunity WHERE Id = :opportunityId LIMIT 1];
+        // UPDATED: Added Reduction_Fee_is_applied__c to the query
+        Opportunity oppRec = [
+            SELECT Id, ER_BUPicklist__c, Max_Discount__c, Reduction_Fee_is_applied__c 
+            FROM Opportunity 
+            WHERE Id = :opportunityId 
+            LIMIT 1
+        ];
         
         for (OpportunityLineItem oli : lineItemsToSave) {
             pbeSet.add(oli.PricebookEntryId);
@@ -536,10 +541,12 @@ global class VFCER05_Opportunity_EditPrice {
 
         
         /** End */
-    
+        // UPDATED: Conditional logic for ER_NeedApproval__c Added new logic if the opp contains reduction fee then dont make it as false 
         Opportunity currentOpportunity = new Opportunity();
         currentOpportunity.Id = opportunityId;
-        currentOpportunity.ER_NeedApproval__c = false;
+        if (oppRec.Reduction_Fee_is_applied__c == null || oppRec.Reduction_Fee_is_applied__c == 0) {
+        currentOpportunity.ER_NeedApproval__c = true;
+        }
         currentOpportunity.ER_Approved__c = false;
     
         update currentOpportunity;

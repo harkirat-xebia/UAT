@@ -5,7 +5,6 @@ public with sharing class DiscountPricebookController {
      */
     @AuraEnabled
     public static List<PricebookWrapper> getPricebooksForDiscount(Id discountCodeId) {
-        System.debug('=== getPricebooksForDiscount START ===');
         System.debug('discountCodeId: ' + discountCodeId);
         
         try {
@@ -17,10 +16,6 @@ public with sharing class DiscountPricebookController {
                 LIMIT 1
             ];
             
-            System.debug('Discount Solution: ' + discount.Solution__c);
-            System.debug('Discount Type: ' + discount.Discount_Type__c);
-            System.debug('Business Unit: ' + discount.ER_Business_Unit__c);
-            
             // Build solution codes to check
             Set<String> solutionCodes = new Set<String>{ discount.Solution__c };
             
@@ -31,8 +26,6 @@ public with sharing class DiscountPricebookController {
                     solutionCodes.add(Constants.ADDITIONAL_SERVICE_CODE_LU);
                 }
             }
-            
-            System.debug('Solution codes to check: ' + solutionCodes);
             
             // Get all active pricebooks that have products for these solutions
             Set<Id> relevantPricebookIds = new Set<Id>();
@@ -48,10 +41,8 @@ public with sharing class DiscountPricebookController {
                 relevantPricebookIds.add(pbe.Pricebook2Id);
             }
             
-            System.debug('Relevant pricebook IDs: ' + relevantPricebookIds);
             
             if (relevantPricebookIds.isEmpty()) {
-                System.debug('No pricebooks found');
                 return new List<PricebookWrapper>();
             }
             
@@ -64,7 +55,6 @@ public with sharing class DiscountPricebookController {
                 ORDER BY Name
             ];
             
-            System.debug('Pricebooks found: ' + pricebooks.size());
             
             // Convert to wrapper
             List<PricebookWrapper> result = new List<PricebookWrapper>();
@@ -72,12 +62,9 @@ public with sharing class DiscountPricebookController {
                 result.add(new PricebookWrapper(pb));
             }
             
-            System.debug('=== getPricebooksForDiscount END ===');
             return result;
             
         } catch (Exception e) {
-            System.debug('ERROR: ' + e.getMessage());
-            System.debug('Stack trace: ' + e.getStackTraceString());
             throw new AuraHandledException('Error loading pricebooks: ' + e.getMessage());
         }
     }
@@ -87,9 +74,6 @@ public with sharing class DiscountPricebookController {
      */
     @AuraEnabled
     public static String createDiscountedProductsForPricebooks(Id discountCodeId, List<Id> pricebookIds) {
-        System.debug('=== createDiscountedProductsForPricebooks START ===');
-        System.debug('discountCodeId: ' + discountCodeId);
-        System.debug('pricebookIds: ' + pricebookIds);
         
         try {
             if (pricebookIds == null || pricebookIds.isEmpty()) {
@@ -105,14 +89,10 @@ public with sharing class DiscountPricebookController {
             
             Id batchJobId = Database.executeBatch(batch, 200);
             
-            System.debug('Batch job ID: ' + batchJobId);
-            System.debug('=== createDiscountedProductsForPricebooks END ===');
             
             return batchJobId;
             
         } catch (Exception e) {
-            System.debug('ERROR: ' + e.getMessage());
-            System.debug('Stack trace: ' + e.getStackTraceString());
             throw new AuraHandledException('Error starting batch: ' + e.getMessage());
         }
     }

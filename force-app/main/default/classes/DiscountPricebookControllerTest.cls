@@ -1,7 +1,7 @@
 /**
 * ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 * Class Name      : DiscountPricebookControllerTest
-* Author          : <YourName>
+* Author          : Harkirat Singh
 * Created Date    : May 11, 2026
 * Description     : Test class for DiscountPricebookController
 * ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――

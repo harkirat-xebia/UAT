@@ -107,7 +107,7 @@ export default class ClientAutoEnrollmentComponentPhase4 extends LightningElemen
     // generalCondition = false;
     // financeCondition = false;
     // markettingCondition = false;
-    // legalCondition = false;
+    legalCondition = false;
     // businessCondition = false;
     paymentAck = false;
     marketingOptIn = false;
@@ -448,7 +448,7 @@ get salesConditionPart2Final() {
             // generalCondition: this.generalCondition,
             // financeCondition: this.financeCondition,
             // markettingCondition: this.markettingCondition,
-            // legalCondition: this.legalCondition,
+            legalCondition: this.legalCondition,
             // businessCondition: this.businessCondition,
             paymentAck: this.paymentAck,
             marketingOptIn: this.marketingOptIn,

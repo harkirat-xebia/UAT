@@ -6,6 +6,7 @@ public class CreateClientRequestWrapper {
     public String vat_number { get; set; }
     public String vat_type { get; set; }
     public String last_modification_date { get; set; }
+    public String engagement_platform_id { get; set; }
     //public List<ContractWrapper> contracts { get; set; }
     public List<Object> contracts { get; set; }
     public LegalSiteWrapper legal_site { get; set; }

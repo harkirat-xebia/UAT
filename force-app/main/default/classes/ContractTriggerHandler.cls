@@ -82,7 +82,7 @@ public with sharing class ContractTriggerHandler implements ITriggerHandler {
 
     //NEW: SME Platform Engagement Logic
     APER12_Contract_Management.createSMEPlatformEngagement((Map<Id, Contract>) newItems, (Map<Id, Contract>) oldItems);
-    System.debug('Sme Trigger called update');
+    //System.debug('Sme Trigger called update');
   }
 
   public void beforeDelete(Map<Id, SObject> oldItems) {
@@ -94,4 +94,5 @@ public with sharing class ContractTriggerHandler implements ITriggerHandler {
 
   public void afterUndelete(Map<Id, SObject> oldItems) {
   }
+  
 }
