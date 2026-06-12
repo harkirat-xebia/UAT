@@ -4,44 +4,109 @@
         <p>{label.subHeader}</p>
     </div>
     <div class="content">
+        <!-- Before company lookup: enter identifier(s) -->
         <template if:false={hasEnterpriseNumber}>
             <div class="slds-grid slds-wrap slds-gutters">
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
-                    <lightning-input name="enterpriseNumber" field-level-help={enterpriseHelp} label={enterpriseNum} value={enterpriseNumber}
-                        placeholder={enterpriseNumPlaceholder} onchange={handleInputChange} required=true
-                        data-form-element disabled={isWebOffer}></lightning-input>
-                </div>
+                <!-- LU: RCS Number field -->
+                <template if:true={isLU}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input name="enterpriseNumber"
+                            label={label.rcsNum}
+                            field-level-help={label.rcsHelp}
+                            value={enterpriseNumber}
+                            placeholder={label.rcsNumPlaceholder}
+                            onchange={handleInputChange}
+                            required=true data-form-element disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input name="registrationNumber"
+                            label={label.registrationNum}
+                            field-level-help={label.registrationHelp}
+                            value={registrationNumber}
+                            placeholder={label.registrationNumPlaceholder}
+                            onchange={handleInputChange}
+                            required=true data-form-element disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                </template>
+                <!-- BE: Enterprise Number field -->
+                <template if:false={isLU}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning-input name="enterpriseNumber"
+                            label={label.enterpriseNum}
+                            field-level-help={label.enterpriseHelp}
+                            value={enterpriseNumber}
+                            placeholder={label.enterpriseNumPlaceholder}
+                            onchange={handleInputChange}
+                            required=true data-form-element disabled={isWebOffer}>
+                        </lightning-input>
+                    </div>
+                </template>
             </div>
         </template>
+
+        <!-- After company lookup: full company details form -->
         <template if:true={hasEnterpriseNumber}>
             <div class="slds-grid slds-wrap slds-gutters">
-                <!-- Row 1: Business Number & Business Name -->
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+
+                <!-- Identifier field: always full-width at the top -->
+                <div class="slds-col slds-size_1-of-1">
                     <lightning-input name="enterpriseNumber" label={enterpriseNum} value={enterpriseNumber}
                         onchange={handleInputChange} read-only=true disabled data-form-element>
                     </lightning-input>
                 </div>
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
-                    <lightning-input name="businessName" label={label.companyName}
-                        placeholder={label.companyNamePlaceholder} value={businessName} onchange={handleInputChange}
-                        required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
-                    </lightning-input>
-                </div>
 
-                <!-- Row 2: Commercial Name & Code TVA -->
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
-                    <lightning-input name="commercialName" label={label.commercialName}
-                        placeholder={label.commercialNamePlaceholder} value={commercialName}
-                        onchange={handleInputChange} required data-form-element>
-                    </lightning-input>
-                </div>
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
-                    <lightning-input name="codeTVA" label={label.codeTVA} value={codeTVA} onchange={handleInputChange}
-                        data-form-element>
-                    </lightning-input>
-                </div>
+                <!-- LU: NIF | Business Name, then Commercial Name | Code TVA -->
+                <template if:true={isLU}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="registrationNumber" label={label.registrationNum}
+                            field-level-help={label.registrationHelp}
+                            placeholder={label.registrationNumPlaceholder} value={registrationNumber}
+                            onchange={handleInputChange} required data-form-element>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="businessName" label={label.companyName}
+                            placeholder={label.companyNamePlaceholder} value={businessName} onchange={handleInputChange}
+                            required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="commercialName" label={label.commercialName}
+                            placeholder={label.commercialNamePlaceholder} value={commercialName}
+                            onchange={handleInputChange} required data-form-element>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="codeTVA" label={label.codeTVA} value={codeTVA} onchange={handleInputChange}
+                            data-form-element>
+                        </lightning-input>
+                    </div>
+                </template>
 
-                <!-- Row 3: Street Number & City -->
+                <!-- BE: Business Name | Commercial Name, then Code TVA -->
+                <template if:false={isLU}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="businessName" label={label.companyName}
+                            placeholder={label.companyNamePlaceholder} value={businessName} onchange={handleInputChange}
+                            required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="commercialName" label={label.commercialName}
+                            placeholder={label.commercialNamePlaceholder} value={commercialName}
+                            onchange={handleInputChange} required data-form-element>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="codeTVA" label={label.codeTVA} value={codeTVA} onchange={handleInputChange}
+                            data-form-element>
+                        </lightning-input>
+                    </div>
+                </template>
+
+                <!-- Street | City -->
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
                     <lightning-input name="streetNumber" label={label.shippingStreet}
                         placeholder={label.shippingStreetPlaceholder} value={streetNumber} onchange={handleInputChange}
@@ -50,12 +115,12 @@
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
                     <lightning-input name="city" label={label.shippingCity} placeholder={label.shippingCityPlaceholder}
-                        value={city} onchange={handleInputChange} required data-form-element 
+                        value={city} onchange={handleInputChange} required data-form-element
                         disabled={lockCompanyFields} read-only={lockCompanyFields}>
                     </lightning-input>
                 </div>
 
-                <!-- Row 4: Postal Code & Pays -->
+                <!-- Postal Code | Country -->
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
                     <lightning-input name="postalCode" label={label.shippingPostalCode}
                         placeholder={label.shippingPostalCodePlaceholder} value={postalCode}
@@ -69,8 +134,9 @@
                         required data-form-element disabled={lockCompanyFields} read-only={lockCompanyFields}>
                     </lightning-input>
                 </div>
-                <!--Row 5: Is Subject to VAT-->
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+
+                <!-- Subject to VAT checkbox -->
+                <div class="slds-col slds-size_1-of-1">
                     <lightning-input type="checkbox" label={label.subjectToVat} checked={vatCheckbox} name="vatCheckbox"
                         onchange={handleInputChange} data-form-element></lightning-input>
                 </div>

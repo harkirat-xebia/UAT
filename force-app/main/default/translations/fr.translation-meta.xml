@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Translations xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>
+            <name>RCS_Number</name>
+            <value>Registre du Commerce et des Sociétés (RCS)</value>
+        </label>
+        <label>
+            <name>RCS_Number_Helptext</name>
+            <value>Votre Registre du Commerce et des Sociétés (RCS) est un code composé de chiffres et de lettres, que vous pouvez consulter sur Luxembourg Business Registers – Official Trade and Company Register (www.lbr.lu)</value>
+        </label>
+        <label>
+            <name>RCS_Number_Placeholder</name>
+            <value>ex. B42434</value>
+        </label>
+        <label>
+            <name>Registration_Number</name>
+            <value>Numéro d&apos;identification fiscale (NIF)</value>
+        </label>
+        <label>
+            <name>Registration_Number_Helptext</name>
+            <value>Votre Numéro d&apos;identification fiscale (NIF) est un code consultable sur les documents officiels de l&apos;administration fiscale</value>
+        </label>
+        <label>
+            <name>Registration_Number_Placeholder</name>
+            <value>ex. 19952205123</value>
+        </label>
+    </customLabels>
+</Translations>

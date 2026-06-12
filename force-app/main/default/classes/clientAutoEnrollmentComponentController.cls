@@ -239,7 +239,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
     @AuraEnabled
     public static Map<String, Object> validateAndConvertLead(String vatNumber, Boolean subjectToVat, String phone, String commercialName, String legalForm, Integer numberOfBeneficiaries,
-                                                            String enterpriseNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
+                                                            String enterpriseNumber, String registrationNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
                                                             String billingCity, String billingCountry, String productId, String productName, String leadId, String legalName, String sourceId, String pageLanguage, String jobTitle, String department, String subDepartment){
         Map<String, Object> result = new Map<String, Object>();
         Decimal sizeLimit = 0;
@@ -266,6 +266,7 @@ public without sharing class clientAutoEnrollmentComponentController {
         
         existingLead = [SELECT Id, Company, ER_VAT_Number__c, ER_Not_Subject_to_VAT__c, ER_Legal_Form__c, Phone, Street, PostalCode, Salutation,
                             City, Country, ER_Legal_Name__c, NumberOfEmployees, ER_Registration_Number__c,
+                            RCS_Number__c,
                             ERBE_Initial_Product_Of_Interest__c, ER_BUPicklist__c, LeadSource, ER_Lead_sub_source__c,
                             ER_Country_Code__c, ER_Legal_Country_Code__c, FirstName, LastName, Email, Business_Role__c, ER_Language__c, MobilePhone
                         FROM Lead
@@ -283,8 +284,11 @@ public without sharing class clientAutoEnrollmentComponentController {
             existingLead.Country = billingCountry;
             existingLead.ER_Legal_Name__c = legalName;
             existingLead.NumberOfEmployees = Integer.valueOf(numberOfBeneficiaries); 
-            existingLead.ER_Registration_Number__c = enterpriseNumber;   
-            existingLead.ERBE_Initial_Product_Of_Interest__c = productId; 
+            existingLead.ER_Registration_Number__c = enterpriseNumber;
+            if (businessUnit == 'LU') {
+                existingLead.RCS_Number__c = registrationNumber;
+            }
+            existingLead.ERBE_Initial_Product_Of_Interest__c = productId;
             existingLead.ER_BUPicklist__c = businessUnit;  
             existingLead.ER_Not_Subject_to_VAT__c = subjectToVat;                                             
             if(billingCountry == 'BELGIUM'){
@@ -385,6 +389,9 @@ public without sharing class clientAutoEnrollmentComponentController {
                 account.ER_Legal_Form__c = legalForm;
                 account.ER_Enterprise_Number__c = enterpriseNumber;
                 account.ER_Registration_Number__c = enterpriseNumber;
+                if (businessUnit == 'LU') {
+                    account.RCS_Number__c = registrationNumber;
+                }
                 account.ER_VAT_Number__c = vatNumber;
                 account.ER_Not_subject_to_VAT__c = subjectToVat;
                 account.Phone = phone;
@@ -1944,6 +1951,7 @@ public without sharing class clientAutoEnrollmentComponentController {
         Account account = [SELECT Id, Name, ER_Legal_Form__c, BillingStreet, BillingPostalCode,
                                   BillingCity, BillingCountry, ER_Enterprise_Number__c, Phone,
                                   ER_Not_subject_to_VAT__c, ER_VAT_Number__c, NumberOfEmployees, ER_Registration_Number__c,
+                                  RCS_Number__c,
                                   ER_Legal_Name__c, BE_Client_Contract_TRE__c, HU_HQ_Contact__c, BE_Social_Secretary_Name__c,
                                   BE_Client_Contract_TCE__c, BE_Client_Contract_ECE__c, ERBE_Social_secretary_needed_for_Orders__c
                            FROM Account
@@ -2028,13 +2036,14 @@ public without sharing class clientAutoEnrollmentComponentController {
         String billingAddress,
         String billingPostalCode,
         String billingCity,
-        String billingCountry
+        String billingCountry,
+        String registrationNumber
     ) {
         if (accountId == null) {
             throw new AuraHandledException('Account Id is required.');
         }
 
-        update new Account(
+        Account acc = new Account(
             Id = accountId,
             ER_VAT_Number__c = vatNumber,
             ER_Not_subject_to_VAT__c = subjectToVat,
@@ -2045,5 +2054,9 @@ public without sharing class clientAutoEnrollmentComponentController {
             BillingCity = billingCity,
             BillingCountry = billingCountry
         );
+        if (String.isNotBlank(registrationNumber)) {
+            acc.RCS_Number__c = registrationNumber;
+        }
+        update acc;
     }
 }

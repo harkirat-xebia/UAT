@@ -30,6 +30,12 @@ import VAT_REQUIRED from '@salesforce/label/c.codeTVARequired';
 import { loadStyle } from 'lightning/platformResourceLoader';
 import ER_CUSTOM_CSS from '@salesforce/resourceUrl/EdenredCustomCSS'; 
 import POSTAL_ERROR from '@salesforce/label/c.postalCodeError';
+import RCS_NUM from '@salesforce/label/c.RCS_Number';
+import RCS_NUM_PLACEHOLDER from '@salesforce/label/c.RCS_Number_Placeholder';
+import RCS_NUM_HELP from '@salesforce/label/c.RCS_Number_Helptext';
+import REGISTRATION_NUM from '@salesforce/label/c.Registration_Number';
+import REGISTRATION_NUM_PLACEHOLDER from '@salesforce/label/c.Registration_Number_Placeholder';
+import REGISTRATION_NUM_HELP from '@salesforce/label/c.Registration_Number_Helptext';
 import hasActiveContract from '@salesforce/apex/clientAutoEnrollmentComponentController.hasActiveContract';
 
 export default class ClientAutoEnrollmentComponentPhase2 extends LightningElement {
@@ -37,6 +43,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
 
     //Primitive Variables
     @api enterpriseNumber;
+    @api registrationNumber;
     @api businessName;
     @api commercialName;
     @api codeTVA;
@@ -79,7 +86,13 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         codeTVAShouldBeEmpty: VAT_EXEMPT,
         codeTVARequired: VAT_REQUIRED,
         postalCodeError: POSTAL_ERROR,
-        rcsError: RCS_ERROR
+        rcsError: RCS_ERROR,
+        rcsNum: RCS_NUM,
+        rcsNumPlaceholder: RCS_NUM_PLACEHOLDER,
+        rcsHelp: RCS_NUM_HELP,
+        registrationNum: REGISTRATION_NUM,
+        registrationNumPlaceholder: REGISTRATION_NUM_PLACEHOLDER,
+        registrationHelp: REGISTRATION_NUM_HELP
     };
     
 
@@ -94,6 +107,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
     getData() {
         return {
           enterpriseNum: this.enterpriseNumber,
+          registrationNumber: this.registrationNumber,
           businessName: this.businessName,
           commercialName: this.commercialName,
           codeTVA: this.codeTVA,
@@ -103,21 +117,26 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
           pays: this.pays,
           vatCheckbox: this.vatCheckbox
         };
-      } 
+      }
       
-    get enterpriseNum() {
-        return this.businessUnit === 'LU' ? this.label.enterpriseNumLU : this.label.enterpriseNum;
+    get isLU() {
+        return this.businessUnit === 'LU';
     }
-    
+
+    get enterpriseNum() {
+        return this.isLU ? this.label.rcsNum : this.label.enterpriseNum;
+    }
+
     get enterpriseNumPlaceholder() {
-        return this.businessUnit === 'LU' ? this.label.enterpriseNumPlaceholderLU : this.label.enterpriseNumPlaceholder;
+        return this.isLU ? this.label.rcsNumPlaceholder : this.label.enterpriseNumPlaceholder;
     }
 
     get enterpriseHelp() {
-      return this.businessUnit === 'LU' ? this.label.enterpriseHelpLU : this.label.enterpriseHelp;
+        return this.isLU ? this.label.rcsHelp : this.label.enterpriseHelp;
     }
+
     get enterpriseFormatError() {
-      return this.businessUnit === 'LU' ? this.label.rcsError : this.label.vatError;
+        return this.isLU ? this.label.rcsError : this.label.vatError;
     }
 
     connectedCallback(){
@@ -222,6 +241,15 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
                 isValid = false;
             }else if (!vatRegex.test(value)) {
                 input.setCustomValidity(this.enterpriseFormatError);
+                input.reportValidity();
+                isValid = false;
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+        if (name === 'registrationNumber' && !this.hasEnterpriseNumber && this.isLU) {
+            if (!rawValue) {
+                input.setCustomValidity(this.label.enterpriseError);
                 input.reportValidity();
                 isValid = false;
             } else {

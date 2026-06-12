@@ -6846,14 +6846,14 @@ Uh stories science.</value>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RCS Number Helptext</shortDescription>
-        <value>Your Trade and Companies Register (RCS) number is a code composed of letters and digits, which you can look up at &lt;a href=&quot;https://www.lbr.lu&quot; target=&quot;_blank&quot;&gt;Luxembourg Business Registers – Official Trade and Company Register&lt;/a&gt;</value>
+        <value>Your Trade and Companies Register (RCS) number is a code composed of letters and digits, which you can look up at Luxembourg Business Registers – Official Trade and Company Register (www.lbr.lu)</value>
     </labels>
     <labels>
         <fullName>RCS_Number_Placeholder</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RCS Number Placeholder</shortDescription>
-        <value>Enter RCS number</value>
+        <value>e.g. B42434</value>
     </labels>
     <labels>
         <fullName>Red_Wildstar_Between_Parenthesis</fullName>
@@ -6875,14 +6875,14 @@ Uh stories science.</value>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Registration Number Helptext</shortDescription>
-        <value>Your Tax Identification Number (NIF) assigned by the Luxembourg tax authorities</value>
+        <value>Your Tax Identification Number (TIN) is a code which can be found on official tax administration documents</value>
     </labels>
     <labels>
         <fullName>Registration_Number_Placeholder</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Registration Number Placeholder</shortDescription>
-        <value>Enter Tax Identification Number</value>
+        <value>e.g. 19952205123</value>
     </labels>
     <labels>
         <fullName>SF_BCE_KBO_Number_EN</fullName>

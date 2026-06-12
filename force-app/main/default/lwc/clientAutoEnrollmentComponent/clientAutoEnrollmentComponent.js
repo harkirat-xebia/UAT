@@ -79,6 +79,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
     countryCodePhone = 'BE';
     dialCodePhone = '+32';
     enterpriseNumber;
+    registrationNumber;
     businessName;
     commercialName;
     codeTVA;
@@ -641,7 +642,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
         }, 300);
 
         validateAndConvertLead({vatNumber: this.codeTVA, subjectToVat: this.vatCheckbox, phone: this.dialCodePhone + this.phone, commercialName: this.commercialName, legalForm: this.legalForm,
-            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: this.enterpriseNumber, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
+            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: this.enterpriseNumber, registrationNumber: this.registrationNumber, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
             productCode: this.productCode, billingCity: this.city, billingCountry: this.pays, productId: this.productId, productName: this.productName, leadId: this.createdLeadId,
             legalName: this.businessName, sourceId: this.sourceId, pageLanguage: this.language, jobTitle: this.jobTitle, department: this.department,
             subDepartment: this.subDepartment
@@ -911,6 +912,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
         if (child) {
             const {
                 enterpriseNum,
+                registrationNumber,
                 businessName,
                 commercialName,
                 codeTVA,
@@ -920,10 +922,12 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 pays,
                 vatCheckbox
             } = child.getData();
-        
-            console.log('Got from child:', enterpriseNum, businessName, commercialName, codeTVA, streetNumber, city, postalCode, pays, vatCheckbox);
-        
+
+            console.log('Got from child:', enterpriseNum, registrationNumber, businessName, commercialName, codeTVA, streetNumber, city, postalCode, pays, vatCheckbox);
+
+            // For LU the RCS Number is held in enterpriseNum; keep enterpriseNumber as the Belfirst/account-lookup key
             this.enterpriseNumber = enterpriseNum;
+            this.registrationNumber = registrationNumber;
             this.businessName = businessName;
             this.commercialName = commercialName;
             this.codeTVA = codeTVA;
@@ -942,9 +946,9 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 postalCode,
                 pays
             ].every(value => !value);
-        
+
             this.companyValuesAreNull = allValuesNullOrEmpty;
-        }        
+        }
     }
     fetchLeadDetailsFromChild(){
         const child = this.template.querySelector('c-client-auto-enrollment-component-phase-1');
@@ -1162,9 +1166,10 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 this.mobile  = result.primaryContact.MobilePhone;
                 this.optin = true;
                 
-                this.enterpriseNumber = result.account.ER_Enterprise_Number__c 
-                ? result.account.ER_Enterprise_Number__c 
-                : result.account.ER_Registration_Number__c;
+                this.enterpriseNumber = result.account.ER_Enterprise_Number__c
+                    ? result.account.ER_Enterprise_Number__c
+                    : result.account.ER_Registration_Number__c;
+                this.registrationNumber = result.account.RCS_Number__c;
                 this.businessName = result.account.ER_Legal_Name__c;
                 this.commercialName = result.account.Name;
                 this.codeTVA = result.account.ER_VAT_Number__c;
@@ -1229,15 +1234,16 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
     updateCompany(){
         this.isLoading = true;
         updateEnterpriseDetails({
-            accountId:        this.accountId,
-            vatNumber:        this.codeTVA,
-            subjectToVat:     this.vatCheckbox,
-            commercialName:   this.commercialName,
-            legalName:        this.businessName,
-            billingAddress:   this.streetNumber,
-            billingPostalCode:this.postalCode,
-            billingCity:      this.city,
-            billingCountry:   this.pays
+            accountId:          this.accountId,
+            vatNumber:          this.codeTVA,
+            subjectToVat:       this.vatCheckbox,
+            commercialName:     this.commercialName,
+            legalName:          this.businessName,
+            billingAddress:     this.streetNumber,
+            billingPostalCode:  this.postalCode,
+            billingCity:        this.city,
+            billingCountry:     this.pays,
+            registrationNumber: this.registrationNumber
         })
         .then(result=>{
             this.isLoading = false;

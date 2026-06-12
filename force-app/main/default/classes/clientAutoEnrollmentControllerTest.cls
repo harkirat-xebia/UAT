@@ -117,7 +117,7 @@ public with sharing class clientAutoEnrollmentControllerTest {
             Product2 prod = [SELECT Id, ProductCode, Name FROM Product2 WHERE ProductCode = :productCode LIMIT 1];
             clientAutoEnrollmentComponentController.validateAndConvertLead(
                 'BE0123456789', false, '0123456789', 'Comm Name', 'BV', 12, acct.ER_Registration_Number__c,
-                'Main Str.', '1000', businessUnit, productCode, 'Brussels',
+                null, 'Main Str.', '1000', businessUnit, productCode, 'Brussels',
                 'BELGIUM', solution.Id, solution.Name, newLeadId, 'Legal Name', null, language, 'Test', 'Sales', null
             );
         } catch (Exception ignore) {}
@@ -148,7 +148,7 @@ public with sharing class clientAutoEnrollmentControllerTest {
             false, false, acct.ER_Registration_Number__c, 30, null, opp.Id
         );
         clientAutoEnrollmentComponentController.updateAccount(
-            acct.Id, 'BE1234567890', true, 'TEST', 'TEST', 'TEST', '1000', 'TEST', 'BELGIUM'
+            acct.Id, 'BE1234567890', true, 'TEST', 'TEST', 'TEST', '1000', 'TEST', 'BELGIUM', null
         );
         Test.stopTest();
     }
