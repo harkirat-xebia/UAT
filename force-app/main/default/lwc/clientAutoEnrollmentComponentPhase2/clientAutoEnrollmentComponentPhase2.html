@@ -10,9 +10,17 @@
                 <!-- LU: RCS Number field -->
                 <template if:true={isLU}>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="field-label-row">
+                            <span class="field-label-text">{label.rcsNum}</span>
+                            <c-rich-helptext
+                                content={label.rcsHelp}
+                                link-url={lbrUrl}
+                                link-label={label.rcsLinkLabel}>
+                            </c-rich-helptext>
+                        </div>
                         <lightning-input name="enterpriseNumber"
                             label={label.rcsNum}
-                            field-level-help={label.rcsHelp}
+                            variant="label-hidden"
                             value={enterpriseNumber}
                             placeholder={label.rcsNumPlaceholder}
                             onchange={handleInputChange}
@@ -20,9 +28,15 @@
                         </lightning-input>
                     </div>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="field-label-row">
+                            <span class="field-label-text">{label.registrationNum}</span>
+                            <c-rich-helptext
+                                content={label.registrationHelp}>
+                            </c-rich-helptext>
+                        </div>
                         <lightning-input name="registrationNumber"
                             label={label.registrationNum}
-                            field-level-help={label.registrationHelp}
+                            variant="label-hidden"
                             value={registrationNumber}
                             placeholder={label.registrationNumPlaceholder}
                             onchange={handleInputChange}
@@ -60,8 +74,14 @@
                 <!-- LU: NIF | Business Name, then Commercial Name | Code TVA -->
                 <template if:true={isLU}>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <div class="field-label-row">
+                            <span class="field-label-text">{label.registrationNum}</span>
+                            <c-rich-helptext
+                                content={label.registrationHelp}>
+                            </c-rich-helptext>
+                        </div>
                         <lightning-input name="registrationNumber" label={label.registrationNum}
-                            field-level-help={label.registrationHelp}
+                            variant="label-hidden"
                             placeholder={label.registrationNumPlaceholder} value={registrationNumber}
                             onchange={handleInputChange} required data-form-element>
                         </lightning-input>

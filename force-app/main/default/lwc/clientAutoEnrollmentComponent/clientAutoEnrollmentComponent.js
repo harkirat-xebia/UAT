@@ -641,8 +641,10 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
             }
         }, 300);
 
+        const apexEnterpriseNum = this.businessUnit === 'LU' ? this.registrationNumber : this.enterpriseNumber;
+        const apexRegistrationNum = this.businessUnit === 'LU' ? this.enterpriseNumber : this.registrationNumber;
         validateAndConvertLead({vatNumber: this.codeTVA, subjectToVat: this.vatCheckbox, phone: this.dialCodePhone + this.phone, commercialName: this.commercialName, legalForm: this.legalForm,
-            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: this.enterpriseNumber, registrationNumber: this.registrationNumber, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
+            numberOfBeneficiaries: this.noOfBeneficiaries, enterpriseNumber: apexEnterpriseNum, registrationNumber: apexRegistrationNum, billingAddress: this.streetNumber, billingPostalCode: this.postalCode, businessUnit: this.businessUnit,
             productCode: this.productCode, billingCity: this.city, billingCountry: this.pays, productId: this.productId, productName: this.productName, leadId: this.createdLeadId,
             legalName: this.businessName, sourceId: this.sourceId, pageLanguage: this.language, jobTitle: this.jobTitle, department: this.department,
             subDepartment: this.subDepartment
@@ -986,7 +988,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 shippingCountry: this.shippingCountry,
                 isEmployeeSameAsBenef: this.isEmployeeSameAsBenef,
                 isBillingSameAsShipping: this.isBillingSameAsShipping,
-                enterpriseNumber: this.enterpriseNumber,
+                enterpriseNumber: this.businessUnit === 'LU' ? this.registrationNumber : this.enterpriseNumber,
                 noOfBeneficiaries: this.noOfBeneficiaries,
                 opportunityContactRolesMap: this.opportunityContactRolesMap,
                 opportunityId: this.opportunityId
@@ -1166,10 +1168,16 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 this.mobile  = result.primaryContact.MobilePhone;
                 this.optin = true;
                 
-                this.enterpriseNumber = result.account.ER_Enterprise_Number__c
+                const nifValue = result.account.ER_Enterprise_Number__c
                     ? result.account.ER_Enterprise_Number__c
                     : result.account.ER_Registration_Number__c;
-                this.registrationNumber = result.account.RCS_Number__c;
+                if (this.businessUnit === 'LU') {
+                    this.enterpriseNumber = result.account.RCS_Number__c;
+                    this.registrationNumber = nifValue;
+                } else {
+                    this.enterpriseNumber = nifValue;
+                    this.registrationNumber = result.account.RCS_Number__c;
+                }
                 this.businessName = result.account.ER_Legal_Name__c;
                 this.commercialName = result.account.Name;
                 this.codeTVA = result.account.ER_VAT_Number__c;
@@ -1243,7 +1251,7 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
             billingPostalCode:  this.postalCode,
             billingCity:        this.city,
             billingCountry:     this.pays,
-            registrationNumber: this.registrationNumber
+            registrationNumber: this.businessUnit === 'LU' ? this.enterpriseNumber : this.registrationNumber
         })
         .then(result=>{
             this.isLoading = false;

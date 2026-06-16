@@ -24,6 +24,7 @@ import VAT_ERROR from '@salesforce/label/c.Error_Message_Invalid_Enterprise_Numb
 import RCS_ERROR from '@salesforce/label/c.Error_Message_Invalid_Enterprise_Number_LU';
 import SUBJECT_TO_VAT from '@salesforce/label/c.Subject_to_VAT';
 import ENTERPRISE_ERROR from '@salesforce/label/c.Enterprise_Required_Label';
+import RCS_REQUIRED_ERROR from '@salesforce/label/c.Rcs_Number_Required_Label';
 import VAT_FORMAT_ERROR from '@salesforce/label/c.codeTVAInvalid';
 import VAT_EXEMPT from '@salesforce/label/c.codeTVAShouldBeEmpty';
 import VAT_REQUIRED from '@salesforce/label/c.codeTVARequired';
@@ -33,6 +34,7 @@ import POSTAL_ERROR from '@salesforce/label/c.postalCodeError';
 import RCS_NUM from '@salesforce/label/c.RCS_Number';
 import RCS_NUM_PLACEHOLDER from '@salesforce/label/c.RCS_Number_Placeholder';
 import RCS_NUM_HELP from '@salesforce/label/c.RCS_Number_Helptext';
+import RCS_NUM_LINK_LABEL from '@salesforce/label/c.RCS_Number_Link_Label';
 import REGISTRATION_NUM from '@salesforce/label/c.Registration_Number';
 import REGISTRATION_NUM_PLACEHOLDER from '@salesforce/label/c.Registration_Number_Placeholder';
 import REGISTRATION_NUM_HELP from '@salesforce/label/c.Registration_Number_Helptext';
@@ -80,6 +82,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         vatError: VAT_ERROR,
         subjectToVat: SUBJECT_TO_VAT,
         enterpriseError: ENTERPRISE_ERROR,
+        rcsRequiredError: RCS_REQUIRED_ERROR,
         enterpriseHelp: ENTERPRISE_HELP,
         enterpriseHelpLU: ENTERPRISE_HELP_LU,
         codeTVAInvalid: VAT_FORMAT_ERROR,
@@ -90,11 +93,14 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         rcsNum: RCS_NUM,
         rcsNumPlaceholder: RCS_NUM_PLACEHOLDER,
         rcsHelp: RCS_NUM_HELP,
+        rcsLinkLabel: RCS_NUM_LINK_LABEL,
         registrationNum: REGISTRATION_NUM,
         registrationNumPlaceholder: REGISTRATION_NUM_PLACEHOLDER,
         registrationHelp: REGISTRATION_NUM_HELP
     };
     
+
+    lbrUrl = 'https://www.lbr.lu';
 
     //Boolean Variables
     @api hasEnterpriseNumber;
@@ -184,7 +190,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
     
     checkActiveContract() {
         console.log('checkActiveContract called with enterpriseNumber =', this.enterpriseNumber);
-        hasActiveContract({ enterpriseNumber: this.enterpriseNumber })
+        hasActiveContract({ enterpriseNumber: this.isLU ? this.registrationNumber : this.enterpriseNumber })
             .then(result => {
                 console.log('hasActiveContract result =', result);
                 this.isCompanyLocked = result;   // true => lock fields
@@ -221,6 +227,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
     validateFields() {
       let isValid = true;
       const vatRegex = /^([A-Z][0-9]{1,6}|BE[0-9]{10})$/;
+      const rcsRegex = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{1,9}$/;
       const codeTVARegex = /^(BE[0-2]{1}\d{9}|LU\d{8})$/i;
       const postalCodeRegex = /^\d+$/;
 
@@ -236,10 +243,14 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         // Custom validation for VAT field
         if (name === 'enterpriseNumber' && !this.hasEnterpriseNumber) {
             if(!rawValue){
-                input.setCustomValidity(this.label.enterpriseError);
+                input.setCustomValidity(this.isLU ? this.label.rcsRequiredError : this.label.enterpriseError);
                 input.reportValidity();
                 isValid = false;
-            }else if (!vatRegex.test(value)) {
+            } else if (this.isLU && !rcsRegex.test(rawValue)) {
+                input.setCustomValidity(this.enterpriseFormatError);
+                input.reportValidity();
+                isValid = false;
+            } else if (!this.isLU && !vatRegex.test(value)) {
                 input.setCustomValidity(this.enterpriseFormatError);
                 input.reportValidity();
                 isValid = false;
@@ -249,7 +260,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         }
         if (name === 'registrationNumber' && !this.hasEnterpriseNumber && this.isLU) {
             if (!rawValue) {
-                input.setCustomValidity(this.label.enterpriseError);
+                input.setCustomValidity(this.label.rcsRequiredError);
                 input.reportValidity();
                 isValid = false;
             } else {

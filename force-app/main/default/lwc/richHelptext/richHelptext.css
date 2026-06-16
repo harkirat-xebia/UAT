@@ -1,0 +1,40 @@
+.rich-helptext-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.info-icon {
+    --lwc-colorTextIconDefault: #706e6b;
+}
+
+.popover {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 0;
+    min-width: 15rem;
+    max-width: 22rem;
+    z-index: 9001;
+    white-space: normal;
+    pointer-events: auto;
+    background-color: #032d60;
+    border-color: #032d60;
+    color: #ffffff;
+    --slds-c-popover-color-background: #032d60;
+    --slds-c-popover-color-border: #032d60;
+}
+
+.popover::after,
+.popover::before {
+    border-top-color: #032d60;
+}
+
+.popover a {
+    color: #7ec8e3;
+    text-decoration: underline;
+}
+
+.popover a:hover {
+    color: #b0e0f5;
+}

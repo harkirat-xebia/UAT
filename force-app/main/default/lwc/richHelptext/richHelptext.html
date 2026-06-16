@@ -1,0 +1,23 @@
+<template>
+    <div class="rich-helptext-wrapper" onmouseleave={hide}>
+        <button
+            class="slds-button slds-button_icon slds-button_icon-x-small"
+            type="button"
+            title="Help"
+            onmouseenter={show}>
+            <lightning-icon
+                icon-name="utility:info"
+                size="x-small"
+                alternative-text="Help"
+                class="info-icon">
+            </lightning-icon>
+        </button>
+        <template if:true={isOpen}>
+            <div role="tooltip" class="popover slds-popover slds-nubbin_bottom-left" onmouseenter={show} onmouseleave={hide}>
+                <div class="slds-popover__body">
+                    {content}<template if:true={hasLink}>&nbsp;<a href={linkUrl} target="_blank" rel="noopener noreferrer">{linkLabel}</a></template>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

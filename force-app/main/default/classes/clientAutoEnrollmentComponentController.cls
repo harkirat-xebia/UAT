@@ -387,10 +387,11 @@ public without sharing class clientAutoEnrollmentComponentController {
 
 
                 account.ER_Legal_Form__c = legalForm;
-                account.ER_Enterprise_Number__c = enterpriseNumber;
                 account.ER_Registration_Number__c = enterpriseNumber;
                 if (businessUnit == 'LU') {
                     account.RCS_Number__c = registrationNumber;
+                } else {
+                    account.ER_Enterprise_Number__c = enterpriseNumber;
                 }
                 account.ER_VAT_Number__c = vatNumber;
                 account.ER_Not_subject_to_VAT__c = subjectToVat;

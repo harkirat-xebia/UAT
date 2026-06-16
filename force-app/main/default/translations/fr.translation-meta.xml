@@ -6,8 +6,16 @@
             <value>Registre du Commerce et des Sociétés (RCS)</value>
         </label>
         <label>
+            <name>Rcs_Number_Required_Label</name>
+            <value>Le numéro RCS est obligatoire.</value>
+        </label>
+        <label>
             <name>RCS_Number_Helptext</name>
-            <value>Votre Registre du Commerce et des Sociétés (RCS) est un code composé de chiffres et de lettres, que vous pouvez consulter sur Luxembourg Business Registers – Official Trade and Company Register (www.lbr.lu)</value>
+            <value>Votre Registre du Commerce et des Sociétés (RCS) est un code composé de chiffres et de lettres, que vous pouvez consulter sur</value>
+        </label>
+        <label>
+            <name>RCS_Number_Link_Label</name>
+            <value>Luxembourg Business Registers – Official Trade and Company Register</value>
         </label>
         <label>
             <name>RCS_Number_Placeholder</name>
@@ -19,7 +27,7 @@
         </label>
         <label>
             <name>Registration_Number_Helptext</name>
-            <value>Votre Numéro d&apos;identification fiscale (NIF) est un code consultable sur les documents officiels de l&apos;administration fiscale</value>
+            <value>Votre Numéro d&apos;identification fiscale (NIF) est un code à XX chiffres, consultable sur les documents officiels de l&apos;administration fiscale</value>
         </label>
         <label>
             <name>Registration_Number_Placeholder</name>

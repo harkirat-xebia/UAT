@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VRER15_Rcs_Number_Format</fullName>
+    <active>true</active>
+    <description>Validates RCS Number format: 1-9 alphanumeric characters with at least one letter and one digit. Field may be left empty.</description>
+    <errorConditionFormula>AND(
+  NOT($User.ER_BypassVR__c),
+  NOT(ISBLANK(Rcs_Number__c)),
+  NOT(REGEX(Rcs_Number__c, &quot;^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{1,9}$&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Rcs_Number__c</errorDisplayField>
+    <errorMessage>RCS Number must be 1 to 9 alphanumeric characters and contain at least one letter and one digit.</errorMessage>
+</ValidationRule>
