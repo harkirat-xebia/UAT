@@ -1127,6 +1127,22 @@
         <value>Enterprise number is required.</value>
     </labels>
     <labels>
+        <fullName>Rcs_Number_Required_Label</fullName>
+        <categories>NewAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rcs_Number_Required_Label</shortDescription>
+        <value>RCS Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>Tin_Number_Required_Label</fullName>
+        <categories>NewAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tin_Number_Required_Label</shortDescription>
+        <value>TIN Number is required.</value>
+    </labels>
+    <labels>
         <fullName>Error_Message_Bad_ZipCode</fullName>
         <categories>BELU WebForm</categories>
         <language>en_US</language>
@@ -1172,7 +1188,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Error_Message_Invalid_Enterprise_Number_LU</shortDescription>
-        <value>Please enter the RCS number using the following format: B0123456</value>
+        <value>RCS Number must be 1 to 9 alphanumeric characters and contain at least one letter and one digit.</value>
     </labels>
     <labels>
         <fullName>Error_Message_Missing_Value</fullName>
@@ -2436,6 +2452,14 @@
         <shortDescription>LABS_SF_Quote_Status_Accepted</shortDescription>
         <value>Accepted</value>
     </labels>
+    <!-- Coomenting for now -->
+    <!-- <labels>
+        <fullName>LABS_SF_Quote_Status_Approved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Quote_Status_Approved</shortDescription>
+        <value>Approved</value>
+    </labels> -->
     <labels>
         <fullName>LABS_SF_Quote_Status_Denied</fullName>
         <language>en_US</language>
@@ -6846,7 +6870,14 @@ Uh stories science.</value>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RCS Number Helptext</shortDescription>
-        <value>Your Trade and Companies Register (RCS) number is a code composed of letters and digits, which you can look up at Luxembourg Business Registers – Official Trade and Company Register (www.lbr.lu)</value>
+        <value>Your Trade and Companies Register (RCS) number is a code composed of letters and digits, which you can look up at</value>
+    </labels>
+    <labels>
+        <fullName>RCS_Number_Link_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RCS Number Link Label</shortDescription>
+        <value>Luxembourg Business Registers – Official Trade and Company Register</value>
     </labels>
     <labels>
         <fullName>RCS_Number_Placeholder</fullName>
@@ -6875,7 +6906,7 @@ Uh stories science.</value>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Registration Number Helptext</shortDescription>
-        <value>Your Tax Identification Number (TIN) is a code which can be found on official tax administration documents</value>
+        <value>Your Tax Identification Number (TIN) is a XX-digit code, which can be found on official tax administration documents</value>
     </labels>
     <labels>
         <fullName>Registration_Number_Placeholder</fullName>

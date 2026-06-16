@@ -10,6 +10,14 @@
             <value>Le numéro RCS est obligatoire.</value>
         </label>
         <label>
+            <name>Tin_Number_Required_Label</name>
+            <value>Le numéro TIN est obligatoire.</value>
+        </label>
+        <label>
+            <name>Error_Message_Invalid_Enterprise_Number_LU</name>
+            <value>Le numéro RCS doit comporter entre 1 et 9 caractères alphanumériques et contenir au moins une lettre et un chiffre.</value>
+        </label>
+        <label>
             <name>RCS_Number_Helptext</name>
             <value>Votre Registre du Commerce et des Sociétés (RCS) est un code composé de chiffres et de lettres, que vous pouvez consulter sur</value>
         </label>

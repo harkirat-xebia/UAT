@@ -25,6 +25,7 @@ import RCS_ERROR from '@salesforce/label/c.Error_Message_Invalid_Enterprise_Numb
 import SUBJECT_TO_VAT from '@salesforce/label/c.Subject_to_VAT';
 import ENTERPRISE_ERROR from '@salesforce/label/c.Enterprise_Required_Label';
 import RCS_REQUIRED_ERROR from '@salesforce/label/c.Rcs_Number_Required_Label';
+import TIN_REQUIRED_ERROR from '@salesforce/label/c.Tin_Number_Required_Label';
 import VAT_FORMAT_ERROR from '@salesforce/label/c.codeTVAInvalid';
 import VAT_EXEMPT from '@salesforce/label/c.codeTVAShouldBeEmpty';
 import VAT_REQUIRED from '@salesforce/label/c.codeTVARequired';
@@ -83,6 +84,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         subjectToVat: SUBJECT_TO_VAT,
         enterpriseError: ENTERPRISE_ERROR,
         rcsRequiredError: RCS_REQUIRED_ERROR,
+        tinRequiredError: TIN_REQUIRED_ERROR,
         enterpriseHelp: ENTERPRISE_HELP,
         enterpriseHelpLU: ENTERPRISE_HELP_LU,
         codeTVAInvalid: VAT_FORMAT_ERROR,
@@ -260,7 +262,7 @@ export default class ClientAutoEnrollmentComponentPhase2 extends LightningElemen
         }
         if (name === 'registrationNumber' && !this.hasEnterpriseNumber && this.isLU) {
             if (!rawValue) {
-                input.setCustomValidity(this.label.rcsRequiredError);
+                input.setCustomValidity(this.label.tinRequiredError);
                 input.reportValidity();
                 isValid = false;
             } else {

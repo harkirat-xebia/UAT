@@ -324,6 +324,9 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                 
                 account = new Account(Id = lcr.getAccountId(), RecordTypeId = accountClientRecordTypeId, HU_HQ_Contact__c = lcr.getContactId());
+                if (businessUnit == 'LU') {
+                    account.RCS_Number__c = registrationNumber;
+                }
                 update account;
 
                 opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
@@ -408,8 +411,8 @@ public without sharing class clientAutoEnrollmentComponentController {
                 }
                 account.ER_Legal_Name__c = legalName.toUpperCase();
                 account.Account_Type__c = Integer.valueOf(numberOfBeneficiaries) > sizeLimit ? 'MM':'SME';    
-                account.NumberOfEmployees = Integer.valueOf(numberOfBeneficiaries);  
-                if(activeSolutionList.isEmpty()){
+                account.NumberOfEmployees = Integer.valueOf(numberOfBeneficiaries);
+                if(activeSolutionList.isEmpty() || businessUnit == 'LU'){
                     update account;
                 }
 
