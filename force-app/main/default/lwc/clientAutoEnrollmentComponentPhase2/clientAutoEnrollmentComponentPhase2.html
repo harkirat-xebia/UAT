@@ -64,15 +64,13 @@
         <template if:true={hasEnterpriseNumber}>
             <div class="slds-grid slds-wrap slds-gutters">
 
-                <!-- Identifier field: always full-width at the top -->
-                <div class="slds-col slds-size_1-of-1">
-                    <lightning-input name="enterpriseNumber" label={enterpriseNum} value={enterpriseNumber}
-                        onchange={handleInputChange} read-only=true disabled data-form-element>
-                    </lightning-input>
-                </div>
-
-                <!-- LU: NIF | Business Name, then Commercial Name | Code TVA -->
+                <!-- LU: RCS Number full-width, then NIF | Business Name, Commercial Name | Code TVA -->
                 <template if:true={isLU}>
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-input name="enterpriseNumber" label={enterpriseNum} value={enterpriseNumber}
+                            onchange={handleInputChange} read-only=true disabled data-form-element>
+                        </lightning-input>
+                    </div>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
                         <div class="field-label-row">
                             <span class="field-label-text">{label.registrationNum}</span>
@@ -105,8 +103,13 @@
                     </div>
                 </template>
 
-                <!-- BE: Business Name | Commercial Name, then Code TVA -->
+                <!-- BE: Enterprise Number | Business Name, Commercial Name | Code TVA (full 2-column) -->
                 <template if:false={isLU}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <lightning-input name="enterpriseNumber" label={enterpriseNum} value={enterpriseNumber}
+                            onchange={handleInputChange} read-only=true disabled data-form-element>
+                        </lightning-input>
+                    </div>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
                         <lightning-input name="businessName" label={label.companyName}
                             placeholder={label.companyNamePlaceholder} value={businessName} onchange={handleInputChange}

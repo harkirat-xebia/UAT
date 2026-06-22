@@ -238,6 +238,17 @@ public without sharing class clientAutoEnrollmentComponentController {
 
 
     @AuraEnabled
+    public static void updateLeadRegistrationFields(String leadId, String enterpriseNumber, String registrationNumber, String businessUnit) {
+        if (String.isBlank(leadId)) return;
+        Lead ld = new Lead(Id = leadId);
+        ld.ER_Registration_Number__c = enterpriseNumber;
+        if (businessUnit == 'LU' && String.isNotBlank(registrationNumber)) {
+            ld.RCS_Number__c = registrationNumber;
+        }
+        update ld;
+    }
+
+    @AuraEnabled
     public static Map<String, Object> validateAndConvertLead(String vatNumber, Boolean subjectToVat, String phone, String commercialName, String legalForm, Integer numberOfBeneficiaries,
                                                             String enterpriseNumber, String registrationNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
                                                             String billingCity, String billingCountry, String productId, String productName, String leadId, String legalName, String sourceId, String pageLanguage, String jobTitle, String department, String subDepartment){
@@ -325,7 +336,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                 
                 account = new Account(Id = lcr.getAccountId(), RecordTypeId = accountClientRecordTypeId, HU_HQ_Contact__c = lcr.getContactId());
                 if (businessUnit == 'LU') {
-                    account.RCS_Number__c = registrationNumber;
+                    account.RCS_Number__c = existingLead.RCS_Number__c;
                 }
                 update account;
 
@@ -392,7 +403,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                 account.ER_Legal_Form__c = legalForm;
                 account.ER_Registration_Number__c = enterpriseNumber;
                 if (businessUnit == 'LU') {
-                    account.RCS_Number__c = registrationNumber;
+                    account.RCS_Number__c = existingLead.RCS_Number__c;
                 } else {
                     account.ER_Enterprise_Number__c = enterpriseNumber;
                 }

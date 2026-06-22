@@ -5,6 +5,7 @@ import fetchPromoCodeDetails from '@salesforce/apex/clientAutoEnrollmentComponen
 import createLead from '@salesforce/apex/clientAutoEnrollmentComponentController.createLead';
 import validateAndConvertLead from '@salesforce/apex/clientAutoEnrollmentComponentController.validateAndConvertLead';
 import getInfoFromBelfirst from '@salesforce/apex/clientAutoEnrollmentComponentController.getInfoFromBelfirst';
+import updateLeadRegistrationFields from '@salesforce/apex/clientAutoEnrollmentComponentController.updateLeadRegistrationFields';
 import getMaxBeneficiaryCount from '@salesforce/apex/clientAutoEnrollmentComponentController.getMaxBeneficiaryCount';
 import getSMESizeLimit from '@salesforce/apex/clientAutoEnrollmentComponentController.getSMESizeLimit';
 import PREVIOUS from '@salesforce/label/c.Previous_Button';
@@ -701,6 +702,14 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
     }
     getCompanyInfo(){
         this.isLoading = true;
+        const apexEnterpriseNum = this.businessUnit === 'LU' ? this.registrationNumber : this.enterpriseNumber;
+        const apexRegistrationNum = this.businessUnit === 'LU' ? this.enterpriseNumber : this.registrationNumber;
+        updateLeadRegistrationFields({
+            leadId: this.createdLeadId,
+            enterpriseNumber: apexEnterpriseNum,
+            registrationNumber: apexRegistrationNum,
+            businessUnit: this.businessUnit
+        }).catch(error => console.error('updateLeadRegistrationFields failed:', error));
         getInfoFromBelfirst({enterpriseNumber: this.enterpriseNumber, language: this.language, businessUnit: this.businessUnit})
         .then(result=>{
             this.hasEnterpriseNumber = true;
