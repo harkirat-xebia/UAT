@@ -1520,9 +1520,10 @@
    * @param oppId
    */
   public static void setOpportunityToCloseWon(Id oppId) {
-    List<Opportunity> oppList = [SELECT Id, StageName, isClosed FROM Opportunity WHERE Id = :oppId];
+    List<Opportunity> oppList = [SELECT Id, StageName, isClosed, ER_Won_Reason__c FROM Opportunity WHERE Id = :oppId];
     if (!oppList.isEmpty() && !oppList[0].isClosed) {
-      update new Opportunity(Id = oppId, StageName = Label.LABS_SF_Opp_Status_ClosedWon, ER_Won_Reason__c = 'Other');
+      String wonReason = String.isBlank(oppList[0].ER_Won_Reason__c) ? 'Auto-Enrollment' : oppList[0].ER_Won_Reason__c;
+      update new Opportunity(Id = oppId, StageName = Label.LABS_SF_Opp_Status_ClosedWon, ER_Won_Reason__c = wonReason);
     }
   }
 

@@ -757,7 +757,6 @@ public with sharing class APER30_AutoEnrollment_Management {
       defaultPriceBookId
     );
 
-    curOpp.ER_Reason__c = 'New';
     if (!String.isBlank(promoCode) && promoMap != null && promoMap.containsKey(promoCode))
       curOpp.ER_Promo_Code2__c = promoMap.get(promoCode).Id;
 
@@ -2183,12 +2182,10 @@ public with sharing class APER30_AutoEnrollment_Management {
 
         update curCtr;
 
-        // Opportunity opp = new Opportunity(Id=curCtr.ER_OpportunityId__c);
-        Opportunity opp = new Opportunity(Id = curOpp.Id);
-        opp.ER_Won_Reason__c = (String.isBlank(uniqueKeyId) || uniqueKeyId == 'null')
-          ? 'Auto-Enrollment'
-          : 'Webform Offer';
-        update opp;
+        // For web offer flow, pre-set Won Reason so setOpportunityToCloseWon preserves it
+        if (!String.isBlank(uniqueKeyId) && uniqueKeyId != 'null') {
+          update new Opportunity(Id = curOpp.Id, ER_Won_Reason__c = 'Webform Offer');
+        }
 
         // Do the structure synchronisation, if it's succeeded then launch contract activation
         String params =

@@ -341,7 +341,8 @@ public without sharing class clientAutoEnrollmentComponentController {
                 update account;
 
                 opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
-                                              RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true);
+                                              RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
+                                              ER_Reason__c = 'New');
                 update opportunity;
 
                 contact = new contact(Id = lcr.getContactId(), RecordTypeId = contactClientRecordTypeId,Title = jobTitle, ER_Department_Family__c = department, ER_SubDepartment_Family__c = subDepartment);
@@ -563,7 +564,8 @@ public without sharing class clientAutoEnrollmentComponentController {
                     Database.LeadConvertResult lcr = Database.convertLead(lc);
 
                     opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
-                                              RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true);
+                                              RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
+                                              ER_Reason__c = 'New');
                     update opportunity;
 
                     result.put('opportunity', opportunity);

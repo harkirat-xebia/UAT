@@ -563,7 +563,7 @@ public without sharing class SyncClientContractService {
                                 : 0; 
 
 
-                            serviceWrapObj.amount = contract[0].Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_UnitPrice__c != null ? cliObj.ER_UnitPrice__c.setScale(2) : 0;
+                            serviceWrapObj.amount = contract[0].Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_UnitPrice__c != null && cliObj.ER_UnitPrice__c != 0 ? cliObj.ER_UnitPrice__c.setScale(8) : 0;
                             serviceWrapObj.minimum_fee = contract[0].Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_Minimum_Fee__c != null ? cliObj.ER_Minimum_Fee__c.setScale(2) : 0;
                             serviceWrapObj.discount = 0;
                             serviceWrapObj.sales_price = 0;
@@ -633,7 +633,7 @@ public without sharing class SyncClientContractService {
                             ? (cliObj.ER_Quantity__c != null ? cliObj.ER_Quantity__c : 0)
                             : 0;
 
-                            serviceWrapObj.amount = cliObj.ER_UnitPrice__c != null ? cliObj.ER_UnitPrice__c.setScale(2) : 0;
+                            serviceWrapObj.amount = cliObj.ER_UnitPrice__c != null && cliObj.ER_UnitPrice__c != 0 ? cliObj.ER_UnitPrice__c.setScale(8) : 0;
                             serviceWrapObj.minimum_fee = cliObj.ER_Minimum_Fee__c != null ? cliObj.ER_Minimum_Fee__c.setScale(2) : 0;
                             serviceWrapObj.discount = 0;
                             serviceWrapObj.sales_price = 0;
@@ -1935,7 +1935,7 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                                 (cliObj.Solution_Group__c == 'Savings' || cliObj.Solution_Group__c == 'Engagement')
                                 ? (cliObj.ER_Quantity__c != null ? cliObj.ER_Quantity__c : 0)
                                 : 0; 
-                                serviceWrapObj.amount = contractObj.Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_UnitPrice__c != null ? cliObj.ER_UnitPrice__c.setScale(2) : 0;
+                                serviceWrapObj.amount = contractObj.Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_UnitPrice__c != null && cliObj.ER_UnitPrice__c != 0 ? cliObj.ER_UnitPrice__c.setScale(8) : 0;
                                 serviceWrapObj.minimum_fee = contractObj.Card_Replacement_Payment__c == 'Paid by beneficiary' ? 0 : cliObj.ER_Minimum_Fee__c != null ? cliObj.ER_Minimum_Fee__c.setScale(2) : 0;
                                 serviceWrapObj.discount = 0;
                                 serviceWrapObj.sales_price = 0;
@@ -2004,7 +2004,7 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                                     (cliObj.Solution_Group__c == 'Savings' || cliObj.Solution_Group__c == 'Engagement')
                                     ? (cliObj.ER_Quantity__c != null ? cliObj.ER_Quantity__c : 0)
                                     : 0; 
-                                serviceWrapObj.amount = cliObj.ER_UnitPrice__c != null ? cliObj.ER_UnitPrice__c.setScale(2) : 0;
+                                serviceWrapObj.amount = cliObj.ER_UnitPrice__c != null && cliObj.ER_UnitPrice__c != 0 ? cliObj.ER_UnitPrice__c.setScale(8) : 0;
                                 serviceWrapObj.minimum_fee = cliObj.ER_Minimum_Fee__c != null ? cliObj.ER_Minimum_Fee__c.setScale(2) : 0;
                                 serviceWrapObj.discount = 0;
                                 serviceWrapObj.sales_price = 0;
