@@ -12,7 +12,8 @@ if accepted ==&gt; cannot change to Presented pr Draft</description>
    ISPICKVAL(PRIORVALUE( Status ) , &quot;Accepted&quot;),
    OR(
     ISPICKVAL( Status , &quot;Presented&quot;),
-    ISPICKVAL( Status , &quot;Draft&quot;)
+    ISPICKVAL( Status , &quot;Draft&quot;),
+    ISPICKVAL( Status , &quot;Approved&quot;)
    )
   ),
   AND(
