@@ -77,8 +77,97 @@ public class GenericWithoutSharingTest {
 		String json = '{"countryCode": "BE","accountId": "' + acc.Id + '","leadId": "' + leadObj.Id + '","contactId": null,"salutation": "Mr","firstName": "Test","lastName": "Test","mobile": "9696969696","email": "test@test.com","contactPhone": "","fax": "","lang": "FR","role":"","company":"Test","phone":"9696969696","legalName":"Test","address":"test","postalCode":"123456","fiscalId":"","country":"BE","city":"Test"}';
         Test.startTest();
         	GenericWithoutSharing.updateAccount(json);
-       
+
         Test.stopTest();
+    }
+
+    @IsTest
+    static void setOpportunityToCloseWon_preservesAutoEnrollmentWonReason() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+
+        Opportunity opp = APER07_UtilityTestMethod.getOpportunity('ER_Merchant_Opportunity', 'Test AutoEnroll Opp');
+        opp.AccountId = acc.Id;
+        opp.ER_Won_Reason__c = 'Auto-Enrollment';
+        insert opp;
+
+        Test.startTest();
+        GenericWithoutSharing.setOpportunityToCloseWon(opp.Id);
+        Test.stopTest();
+
+        Opportunity result = [SELECT StageName, ER_Won_Reason__c FROM Opportunity WHERE Id = :opp.Id];
+        System.assertEquals(Label.LABS_SF_Opp_Status_ClosedWon, result.StageName, 'Stage should be Closed Won');
+        System.assertEquals('Auto-Enrollment', result.ER_Won_Reason__c, 'Won Reason should be preserved, not overwritten with Other');
+    }
+
+    @IsTest
+    static void setOpportunityToCloseWon_defaultsToOtherWhenWonReasonIsBlank() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+
+        Opportunity opp = APER07_UtilityTestMethod.getOpportunity('ER_Merchant_Opportunity', 'Test Blank Won Reason Opp');
+        opp.AccountId = acc.Id;
+        insert opp;
+
+        Test.startTest();
+        GenericWithoutSharing.setOpportunityToCloseWon(opp.Id);
+        Test.stopTest();
+
+        Opportunity result = [SELECT StageName, ER_Won_Reason__c FROM Opportunity WHERE Id = :opp.Id];
+        System.assertEquals(Label.LABS_SF_Opp_Status_ClosedWon, result.StageName, 'Stage should be Closed Won');
+        System.assertEquals('Other', result.ER_Won_Reason__c, 'Won Reason should default to Other when blank');
+    }
+
+    /*@IsTest
+    static void manageStatusOnContractActivation_setsAccountActive() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+
+        Test.startTest();
+        GenericWithoutSharing.manageStatusOnContractActivation(acc.Id);
+        Test.stopTest();
+
+        Account result = [SELECT ER_Status__c, ER_Inactive_Reason__c, ER_Inactive_date__c FROM Account WHERE Id = :acc.Id];
+        System.assertEquals(Label.LABS_SF_Account_Status_Active, result.ER_Status__c, 'Account status should be Active');
+        System.assertEquals('', result.ER_Inactive_Reason__c, 'Inactive reason should be cleared');
+        System.assertEquals(null, result.ER_Inactive_date__c, 'Inactive date should be cleared');
+    }*/
+
+    @IsTest
+    static void getFinCentersInfosByAccountId_returnsResults() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+
+        Test.startTest();
+        List<Map<String, String>> result = GenericWithoutSharing.getFinCentersInfos(acc.Id);
+        Test.stopTest();
+
+        System.assertNotEquals(null, result, 'Result should not be null');
+        System.assertEquals(1, result.size(), 'Should return one financial center');
+        System.assertEquals('test', result[0].get('name'), 'Financial center name should match');
+    }
+
+    @IsTest
+    static void getCompanyInfos_returnsNullForBlankCRN() {
+        Test.startTest();
+        Map<String, String> result = GenericWithoutSharing.getCompanyInfos('');
+        Test.stopTest();
+
+        System.assertEquals(null, result, 'Blank CRN should return null');
+    }
+
+    @IsTest
+    static void getFinCentersInfosByCRN_returnsNullForBlankCRN() {
+        Test.startTest();
+        List<Map<String, String>> result = GenericWithoutSharing.getFinCentersInfosByCRN('');
+        Test.stopTest();
+
+        System.assertEquals(null, result, 'Blank CRN should return null');
+    }
+
+    @IsTest
+    static void checkExistingAcceptor_tidLookup() {
+        Test.startTest();
+        Boolean result = GenericWithoutSharing.checkExistingAcceptor('tid', '99999999');
+        Test.stopTest();
+
+        System.assertEquals(true, result, 'Non-existent TID should return true (no duplicate)');
     }
 
 }

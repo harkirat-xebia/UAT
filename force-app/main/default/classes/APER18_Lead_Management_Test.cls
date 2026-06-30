@@ -172,6 +172,13 @@ public class APER18_Lead_Management_Test {
     );
     ld.City = 'Paris';
     ld.NumberOfEmployees = 65;
+    ld.ER_Registration_Number__c = '32773318400516';
+    ld.LeadSource = 'Websales';
+    ld.ER_Lead_sub_source__c = 'Econtratonline';
+    ld.ER_Legal_Name__c = 'Legal Name';
+    ld.ER_Legal_Street__c = 'Legal Street';
+    ld.ER_Legal_Zip_Code__c = '75017';
+    ld.ER_Legal_City__c = 'Paris';
     insert ld;
     Database.LeadConvert lc = new database.LeadConvert();
     lc.setLeadId(ld.Id);

@@ -1145,6 +1145,7 @@ private static void logACRDeleteResults(Database.DeleteResult[] results) {
                     'total_amount__c',
                     'er_min__c',
                     'er_max__c',
+                    'ER_What__c',
                     'er_needapproval__c',
                     'er_minimum_fee__c',
                     'er_offer_validity_end_date__c',

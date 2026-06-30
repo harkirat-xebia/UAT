@@ -51,7 +51,7 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
     for (Lead lead : (List<Lead>) newItems.values()) {
       if (APBE01_LeadBelfirst.isEligible(lead)) belfirstLeadIds.add(lead.Id);
     }
-    System.debug('APBE01 afterInsert: eligible lead IDs = ' + belfirstLeadIds);
+    //System.debug('APBE01 afterInsert: eligible lead IDs = ' + belfirstLeadIds);
     if (!belfirstLeadIds.isEmpty()) APBE01_LeadBelfirst.autoPopulateIfEmpty(belfirstLeadIds);
   }
 
@@ -77,13 +77,11 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
     Set<Id> belfirstLeadIds = new Set<Id>();
     for (Lead newLead : (List<Lead>) newItems.values()) {
       Lead oldLead = (Lead) oldItems.get(newLead.Id);
-      Boolean regNumJustSet = (String.isBlank(oldLead.ER_Registration_Number__c)
-        && String.isNotBlank(newLead.ER_Registration_Number__c))
-        || (String.isBlank(oldLead.RCS_Number__c)
-        && String.isNotBlank(newLead.RCS_Number__c));
+      Boolean regNumJustSet = String.isBlank(oldLead.ER_Registration_Number__c)
+        && String.isNotBlank(newLead.ER_Registration_Number__c);
       if (regNumJustSet && APBE01_LeadBelfirst.isEligible(newLead)) belfirstLeadIds.add(newLead.Id);
     }
-    System.debug('APBE01 afterUpdate: eligible lead IDs = ' + belfirstLeadIds);
+    //System.debug('APBE01 afterUpdate: eligible lead IDs = ' + belfirstLeadIds);
     if (!belfirstLeadIds.isEmpty()) APBE01_LeadBelfirst.autoPopulateIfEmpty(belfirstLeadIds);
 
     APER18_Lead_Management.updateCompetitors(Trigger.new);
