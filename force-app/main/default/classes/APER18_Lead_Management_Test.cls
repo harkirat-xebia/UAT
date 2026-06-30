@@ -165,6 +165,7 @@ public class APER18_Lead_Management_Test {
 
   @IsTest
   static void testConvertedClientLead() {
+    Test.setMock(HttpCalloutMock.class, new SmarterAPIMock());
     Test.startTest();
     Lead ld = APER07_UtilityTestMethod.getLead(
       Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Client_Lead_RT')
@@ -207,6 +208,10 @@ public class APER18_Lead_Management_Test {
       l.ER_BUPicklist__c = 'BE';
       l.ER_VAT_Number__c = 'FR95327733184';
       l.NumberOfEmployees = 32;
+      l.ER_Legal_Name__c = 'Legal Name';
+      l.ER_Legal_Street__c = 'rue de smart';
+      l.ER_Legal_Zip_Code__c = '75017';
+      l.ER_Legal_City__c = 'Paris';
       Test.startTest();
       SmarterAPIMock smarterMock = new SmarterAPIMock();
       Test.setMock(HttpCalloutMock.class, smarterMock);
@@ -239,6 +244,10 @@ public class APER18_Lead_Management_Test {
       l.ER_Language__c = 'FR';
       l.ER_BUPicklist__c = 'BE';
       l.ER_VAT_Number__c = 'FR95327733184';
+      l.ER_Legal_Name__c = 'Legal Name';
+      l.ER_Legal_Street__c = 'rue de smart';
+      l.ER_Legal_Zip_Code__c = '75017';
+      l.ER_Legal_City__c = 'Paris';
       //leads.add(l);
       insert l;
 
@@ -257,6 +266,10 @@ public class APER18_Lead_Management_Test {
       l1.ER_Language__c = 'FR';
       l1.ER_BUPicklist__c = 'BE';
       l1.ER_Registration_Number__c = crn;
+      l1.ER_Legal_Name__c = 'Legal Name';
+      l1.ER_Legal_Street__c = 'Rue de street';
+      l1.ER_Legal_Zip_Code__c = '75009';
+      l1.ER_Legal_City__c = 'Paris';
       leads.add(l1);
       insert leads;
 
@@ -276,6 +289,10 @@ public class APER18_Lead_Management_Test {
       l2.ER_Language__c = 'FR';
       l2.ER_BUPicklist__c = 'BE';
       l2.ER_VAT_Number__c = 'FR95327733184';
+      l2.ER_Legal_Name__c = 'Legal Name';
+      l2.ER_Legal_Street__c = 'Rue de Paris';
+      l2.ER_Legal_Zip_Code__c = '75002';
+      l2.ER_Legal_City__c = 'Paris';
       insert l2;
     }
   }
@@ -325,6 +342,10 @@ public class APER18_Lead_Management_Test {
       l.ER_Language__c = 'FR';
       l.ER_BUPicklist__c = 'BE';
       l.ER_VAT_Number__c = vat;
+      l.ER_Legal_Name__c = 'Legal Name';
+      l.ER_Legal_Street__c = 'rue de smart';
+      l.ER_Legal_Zip_Code__c = '75017';
+      l.ER_Legal_City__c = 'Paris';
       leads.add(l);
       //Coverage Increase
       Lead ld2 = new Lead();
@@ -342,8 +363,13 @@ public class APER18_Lead_Management_Test {
       ld2.ER_Language__c = 'FR';
       ld2.ER_BUPicklist__c = 'BE';
       ld2.ER_VAT_Number__c = vat;
+      ld2.ER_Legal_Name__c = 'Legal Name';
+      ld2.ER_Legal_Street__c = 'rue de smart';
+      ld2.ER_Legal_Zip_Code__c = '75017';
+      ld2.ER_Legal_City__c = 'Paris';
       leads.add(ld2);
       //Coverage Increase
+      Test.setMock(HttpCalloutMock.class, new SmarterAPIMock());
       insert leads;
 
       Test.startTest();
@@ -405,6 +431,10 @@ public class APER18_Lead_Management_Test {
             l.ER_BUPicklist__c = 'BE';
             l.ER_VAT_Number__c = 'FR95327733184';
             l.NumberOfEmployees = 35;
+            l.ER_Legal_Name__c = 'Legal Name';
+            l.ER_Legal_Street__c = 'rue de smart';
+            l.ER_Legal_Zip_Code__c = '75017';
+            l.ER_Legal_City__c = 'Paris';
             Test.startTest();
             SmarterAPIMock smarterMock = new SmarterAPIMock();
             Test.setMock(HttpCalloutMock.class, smarterMock);

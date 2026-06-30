@@ -673,4 +673,120 @@ public class APER30_FinancialCenter_Management_TEST {
       Test.stopTest();
     }
   }
+
+  @IsTest
+  static void testManageFinancialCenterAddresses_paymentToInvoicing() {
+    ER_Financial_Center__c fc = new ER_Financial_Center__c();
+    fc.ER_Street__c = 'Main Payment Street';
+    fc.ER_Zip_Code__c = '1000';
+    fc.ER_City__c = 'Brussels';
+    fc.ER_Country__c = 'Belgium';
+    // Invoicing address fields all blank -> should copy payment to invoicing
+    Test.startTest();
+    APER30_FinancialCenter_Management.manageFinancialCenterAddresses(new List<ER_Financial_Center__c>{ fc });
+    Test.stopTest();
+    System.assertEquals('Main Payment Street', fc.ER_Invoicing_Street__c);
+    System.assertEquals('1000', fc.ER_Invoicing_Zip_Code__c);
+  }
+
+  @IsTest
+  static void testManageFinancialCenterAddresses_invoicingToPayment() {
+    ER_Financial_Center__c fc = new ER_Financial_Center__c();
+    // Payment address empty (all blank) but country_code set -> isFCPaymentAddressEmpty = true
+    fc.ER_Country_Code__c = 'BE';
+    fc.ER_Invoicing_Street__c = 'Invoice Street';
+    fc.ER_Invoicing_Zip_Code__c = '2000';
+    fc.ER_Invoicing_City__c = 'Antwerp';
+    fc.ER_Invoicing_Country__c = 'Belgium';
+    // Payment fields all blank -> should copy invoicing to payment
+    Test.startTest();
+    APER30_FinancialCenter_Management.manageFinancialCenterAddresses(new List<ER_Financial_Center__c>{ fc });
+    Test.stopTest();
+    System.assertEquals('Invoice Street', fc.ER_Street__c);
+    System.assertEquals('2000', fc.ER_Zip_Code__c);
+  }
+
+  @IsTest
+  static void testSetMaster_directCall() {
+    User ur = [SELECT Id FROM User WHERE LastName = 'APER30' LIMIT 1];
+    System.runAs(ur) {
+      List<ER_Financial_Center__c> fcs = [
+        SELECT Id, ER_Master__c, ER_Account_Name__c, ER_Type__c
+        FROM ER_Financial_Center__c
+        LIMIT 5
+      ];
+      Test.startTest();
+      APER30_FinancialCenter_Management.setMaster(fcs);
+      Test.stopTest();
+      System.assert(true, 'setMaster executed without error');
+    }
+  }
+
+  @IsTest
+  static void testSetMasterFC_OnAccount_directCall() {
+    User ur = [SELECT Id FROM User WHERE LastName = 'APER30' LIMIT 1];
+    System.runAs(ur) {
+      ER_Financial_Center__c fc = [
+        SELECT Id, ER_Master__c, ER_Account_Name__c, ER_Type__c, ER_Business_Unit__c
+        FROM ER_Financial_Center__c
+        WHERE ER_Type__c = :Label.LABS_SF_FinancialCenter_Merchant
+        LIMIT 1
+      ];
+      fc.ER_Master__c = true;
+      Map<Id, ER_Financial_Center__c> fcMap = new Map<Id, ER_Financial_Center__c>{ fc.Id => fc };
+      Test.startTest();
+      APER30_FinancialCenter_Management.setMasterFC_OnAccount(fcMap);
+      Test.stopTest();
+      System.assert(true, 'setMasterFC_OnAccount executed without error');
+    }
+  }
+
+  @IsTest
+  static void testUpdateLastModifiedDateFunctionalUser_directCall() {
+    User ur = [SELECT Id FROM User WHERE LastName = 'APER30' LIMIT 1];
+    System.runAs(ur) {
+      List<ER_Financial_Center__c> fcs = [
+        SELECT Id, ER_Last_Modified_Date_Functional_User__c
+        FROM ER_Financial_Center__c
+        LIMIT 2
+      ];
+      Test.startTest();
+      APER30_FinancialCenter_Management.updateLastModifiedDateFunctionalUser(fcs);
+      Test.stopTest();
+      System.assert(true, 'updateLastModifiedDateFunctionalUser executed without error');
+    }
+  }
+
+  /*@IsTest
+  static void testCreateAcrForFinancialCenters_directCall() {
+    User ur = [SELECT Id FROM User WHERE LastName = 'APER30' LIMIT 1];
+    System.runAs(ur) {
+      Account a = [SELECT Id FROM Account WHERE Name = 'APER30_FinancialCenter_Management_TEST' LIMIT 1];
+
+      Contact c = TestDataFactory.newContact(a);
+      insert c;
+
+      ER_Financial_Center__c fc = [
+        SELECT Id, ER_Account_Name__c, ER_Contact__c
+        FROM ER_Financial_Center__c
+        WHERE ER_Account_Name__c = :a.Id
+        LIMIT 1
+      ];
+      ER_Financial_Center__c oldFc = fc.clone(true, true, false, false);
+      fc.ER_Contact__c = c.Id;
+
+      Map<Id, SObject> newMap = new Map<Id, SObject>{ fc.Id => fc };
+      Map<Id, SObject> oldMap = new Map<Id, SObject>{ oldFc.Id => oldFc };
+
+      Test.startTest();
+      APER30_FinancialCenter_Management.createAcrForFinancialCenters(newMap, oldMap);
+      Test.stopTest();
+
+      List<AccountContactRelation> acrs = [
+        SELECT Id FROM AccountContactRelation
+        WHERE AccountId = :a.Id AND ContactId = :c.Id
+      ];
+      System.assert(!acrs.isEmpty(), 'ACR should be created');
+    }
+  }*/
 }

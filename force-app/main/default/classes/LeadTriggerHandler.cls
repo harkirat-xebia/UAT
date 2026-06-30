@@ -45,6 +45,14 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
 
     //Noor - each time a Lead is created route Lead to Genesys and create a task
     APER18_Lead_Management.routeLeadToGenesys((Map<Id, Lead>) newItems, (Map<Id, Lead>) oldItems);
+
+    // Auto-populate legal fields from Belfirst when enterprise number is set but fields are empty
+    Set<Id> belfirstLeadIds = new Set<Id>();
+    for (Lead lead : (List<Lead>) newItems.values()) {
+      if (APBE01_LeadBelfirst.isEligible(lead)) belfirstLeadIds.add(lead.Id);
+    }
+    System.debug('APBE01 afterInsert: eligible lead IDs = ' + belfirstLeadIds);
+    if (!belfirstLeadIds.isEmpty()) APBE01_LeadBelfirst.autoPopulateIfEmpty(belfirstLeadIds);
   }
 
   public void beforeUpdate(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
@@ -65,6 +73,19 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
   }
 
   public void afterUpdate(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
+    // Auto-populate from Belfirst when enterprise number is newly set on an existing lead
+    Set<Id> belfirstLeadIds = new Set<Id>();
+    for (Lead newLead : (List<Lead>) newItems.values()) {
+      Lead oldLead = (Lead) oldItems.get(newLead.Id);
+      Boolean regNumJustSet = (String.isBlank(oldLead.ER_Registration_Number__c)
+        && String.isNotBlank(newLead.ER_Registration_Number__c))
+        || (String.isBlank(oldLead.RCS_Number__c)
+        && String.isNotBlank(newLead.RCS_Number__c));
+      if (regNumJustSet && APBE01_LeadBelfirst.isEligible(newLead)) belfirstLeadIds.add(newLead.Id);
+    }
+    System.debug('APBE01 afterUpdate: eligible lead IDs = ' + belfirstLeadIds);
+    if (!belfirstLeadIds.isEmpty()) APBE01_LeadBelfirst.autoPopulateIfEmpty(belfirstLeadIds);
+
     APER18_Lead_Management.updateCompetitors(Trigger.new);
 
     APER03_Lead_CreateFinancialCenter.createFinancialCenter(Trigger.new);

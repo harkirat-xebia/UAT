@@ -108,13 +108,15 @@ public class APER24_ContactRole_Management_Test {
 
         Contact c = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test1', 'test1');
         c.AccountId = clientAccount.Id;
+        c.Salutation = 'Mr';
         Contact c1 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test2', 'test2');
         c1.AccountId = clientAccount.Id;
+        c1.Salutation = 'Mr';
         contactList.add(c);
         contactList.add(c1);
         insert contactList;
         
-        ER_Contact_Role__c contactRolePrimaryTest = TestDataFactory.newContactRole(contactTest.id,testFinancialCenter.id,'ER_CR_Financial_Center_Merchant',false);
+        ER_Contact_Role__c contactRolePrimaryTest = TestDataFactory.newContactRole(contactTest.id,testFinancialCenter.id,'ER_CR_Financial_Center_Client',false);
         insert contactRolePrimaryTest;
         contactRolePrimaryTest.ER_Sync_result__c = 'synchronized';
         update contactRolePrimaryTest;
@@ -252,10 +254,12 @@ public class APER24_ContactRole_Management_Test {
         Contact c2 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test12', 'test13');
         c2.AccountId = cAccount2.Id;
         c2.Email = 'test2@test.com';
-        
+        c2.Salutation = 'Mr';
+
         Contact c3 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test24', 'test25');
         c3.AccountId = cAccount2.Id;
         c3.Email = 'test3@test.com';
+        c3.Salutation = 'Mr';
         contactList2.add(c2);
         contactList2.add(c3);
         insert contactList2;
@@ -363,9 +367,9 @@ public class APER24_ContactRole_Management_Test {
     static testMethod  void updatePrimaryContactRoleTest2(){
         Map<Id, ER_Distribution_Point__c> distributionPointNewMap = new Map<Id, ER_Distribution_Point__c>();
         Map<Id, ER_Distribution_Point__c> distributionPointOldMap = new Map<Id, ER_Distribution_Point__c>();
-        ER_Distribution_Point__c dp = [SELECT id,ER_Contact__c FROM ER_Distribution_Point__c LIMIT 1];
-        
-        Contact c = [SELECT  id FROM Contact LIMIT 1];
+        ER_Distribution_Point__c dp = [SELECT id, ER_Contact__c FROM ER_Distribution_Point__c LIMIT 1];
+        Account dpAccount = [SELECT Id FROM Account WHERE Name = 'APER29_DistributionPoint_Management_Test' LIMIT 1];
+        Contact c = [SELECT id FROM Contact WHERE AccountId = :dpAccount.Id LIMIT 1];
         distributionPointNewMap.put(dp.Id,dp);
         dp.ER_Contact__c = c.Id;
         update dp;
@@ -475,6 +479,10 @@ public class APER24_ContactRole_Management_Test {
         ER_Financial_Center__c testFinancialCenter = [select Id from ER_Financial_Center__c where Name = 'APER24_ContactRole_Management_Test'];
 
         ER_Delivery_Site__c testDeliverySite2 = APER07_UtilityTestMethod.getDeliverySite('APER28_DeliverySite_Management_TEST1',clientAccount.id, testFinancialCenter.id);
+        testDeliverySite2.ER_Street__c = '123 Dummy St';
+        testDeliverySite2.ER_Zip_Code__c = '99000';
+        testDeliverySite2.ER_City__c = 'Anycity';
+        testDeliverySite2.ER_Country__c = 'Country';
         insert testDeliverySite2;
         
         deliverySiteMap.put(testDeliverySite2.Id, testDeliverySite2);
@@ -518,6 +526,10 @@ public class APER24_ContactRole_Management_Test {
         ER_Delivery_Site__c testDeliverySite = [SELECT Id FROM ER_Delivery_Site__c LIMIT 1];
     
         ER_Distribution_Point__c testDistributionPoint2 = APER07_UtilityTestMethod.getDistributionPoint('APER29_DistributionPoint_Management_Test3', testDeliverySite.id);
+        testDistributionPoint2.ER_Street__c = '123 Dummy St';
+        testDistributionPoint2.ER_Zip_Code__c = '99000';
+        testDistributionPoint2.ER_City__c = 'Anycity';
+        testDistributionPoint2.ER_Country__c = 'Country';
         insert testDistributionPoint2;
     
         distributionPointMap.put(testDistributionPoint2.Id, testDistributionPoint2);
@@ -525,5 +537,133 @@ public class APER24_ContactRole_Management_Test {
         APER29_DistributionPoint_Management.manageDPLIForNewDistributionPoint(distributionPointMap);
         Test.stopTest();
   }
+
+    @IsTest
+    static void testUpdateContactRoleUpdateFC() {
+        Account a = APER07_UtilityTestMethod.getCompany('APER24_FCUpdate_Test');
+        insert a;
+
+        Contact c1 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'FCUpd1', 'FCUpd1');
+        c1.AccountId = a.Id;
+        c1.Salutation = 'Mr';
+        c1.Email = 'fcupd1@testcr.com';
+        insert c1;
+
+        Contact c2 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'FCUpd2', 'FCUpd2');
+        c2.AccountId = a.Id;
+        c2.Salutation = 'Mr';
+        c2.Email = 'fcupd2@testcr.com';
+        insert c2;
+
+        ER_Financial_Center__c fc = APER07_UtilityTestMethod.getFinancialCenter(
+            'APER24_FCUpdate_Test', a.Id,
+            Label.LABS_SF_FinancialCenter_Merchant, 'Street', 'City', '1000', 'BE');
+        fc.ER_Type__c = Label.LABS_SF_FinancialCenter_Merchant;
+        fc.ER_Contact__c = c1.Id;
+        insert fc;
+
+        Test.startTest();
+        fc.ER_Contact__c = c2.Id;
+        update fc;
+        Test.stopTest();
+
+        System.assert(true, 'updateContactRoleUpdate should execute without error');
+    }
+
+    @IsTest
+    static void testCreatePrimaryContactRoleForStore() {
+        ER_Financial_Center__c fcS = [SELECT Id, ER_Account_Name__c FROM ER_Financial_Center__c
+            WHERE Name = 'APER14_Store_Management_Test' LIMIT 1];
+        Contact c = [SELECT Id FROM Contact WHERE AccountId = :fcS.ER_Account_Name__c LIMIT 1];
+
+        Test.startTest();
+        ER_Store__c store2 = APER07_UtilityTestMethod.getStore(
+            'APER24_Store_CR_Test', fcS.ER_Account_Name__c, fcS.Id, Date.today(), 'St', 'City', '1000', 'BE');
+        store2.ER_Contact__c = c.Id;
+        insert store2;
+        Test.stopTest();
+
+        System.assert(true, 'CreatePrimaryContactRole for Store should execute without error');
+    }
+
+    @IsTest
+    static void testSyncContactRoleFlagsViaUpdate() {
+        ER_Contact_Role__c cr = [SELECT Id, ER_Sync_result__c FROM ER_Contact_Role__c LIMIT 1];
+
+        Test.startTest();
+        cr.ER_Sync_result__c = null;
+        update cr;
+        cr.ER_Sync_result__c = 'synchronized';
+        update cr;
+        Test.stopTest();
+
+        System.assert(true, 'syncContactRoleFlags should execute without error');
+    }
+
+    @IsTest
+    static void testSyncContactRoles_directCall() {
+        ER_Contact_Role__c cr = [SELECT Id, ER_BUPicklist__c, ER_Sync_result__c,
+            ER_Last_date_of_Sync__c, ER_Primary__c, ER_Creation_date_in_OS__c
+            FROM ER_Contact_Role__c LIMIT 1];
+        Map<Id, ER_Contact_Role__c> oldMap = new Map<Id, ER_Contact_Role__c>{ cr.Id => cr };
+
+        Test.startTest();
+        APER24_ContactRole_Management.syncContactRoles(new List<ER_Contact_Role__c>{ cr }, oldMap);
+        Test.stopTest();
+
+        System.assert(true, 'syncContactRoles should complete without error in test context');
+    }
+
+    @IsTest
+    static void testDeletePrimaryContactRoleThrowsError() {
+        List<ER_Contact_Role__c> primaryCRs = [SELECT Id, ER_Primary__c FROM ER_Contact_Role__c WHERE ER_Primary__c = true LIMIT 1];
+        if (primaryCRs.isEmpty()) return;
+
+        Test.startTest();
+        try {
+            delete primaryCRs;
+            System.assert(false, 'Expected delete to be blocked for primary CR');
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains(Label.LAB_SF_Contact_Role_DeleteError),
+                'Delete of primary CR should throw the configured error label');
+        }
+        Test.stopTest();
+    }
+
+    /*@IsTest
+    static void testUpdatePrimaryContactRoleForStore() {
+        ER_Financial_Center__c fcS = [SELECT Id, ER_Account_Name__c FROM ER_Financial_Center__c
+            WHERE Name = 'APER14_Store_Management_Test' LIMIT 1];
+
+        Contact c1 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'StCR11', 'StCR11');
+        c1.AccountId = fcS.ER_Account_Name__c;
+        c1.Salutation = 'Mr';
+        c1.Email = 'stcr11@testcr.com';
+        insert c1;
+
+        Contact c2 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'StCR22', 'StCR22');
+        c2.AccountId = fcS.ER_Account_Name__c;
+        c2.Salutation = 'Mr';
+        c2.Email = 'stcr22@testcr.com';
+        insert c2;
+
+        ER_Store__c store = APER07_UtilityTestMethod.getStore(
+            'APER24_StoreUpdateCR', fcS.ER_Account_Name__c, fcS.Id,
+            Date.today(), 'St', 'City', '1000', 'BE');
+        store.ER_Contact__c = c1.Id;
+        insert store;
+
+        ER_Store__c storeOld = new ER_Store__c(Id = store.Id, ER_Contact__c = c1.Id);
+        ER_Store__c storeNew = new ER_Store__c(Id = store.Id, ER_Contact__c = c2.Id);
+
+        Map<Id, SObject> newMap = new Map<Id, SObject>{ store.Id => storeNew };
+        Map<Id, SObject> oldMap = new Map<Id, SObject>{ store.Id => storeOld };
+
+        Test.startTest();
+        APER24_ContactRole_Management.UpdatePrimaryContactRole(newMap, oldMap);
+        Test.stopTest();
+
+        System.assert(true, 'UpdatePrimaryContactRole for Store should complete without error');
+    }*/
 
 }

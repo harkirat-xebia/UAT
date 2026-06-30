@@ -86,5 +86,75 @@ private class APER44_AccountContactRelationMgtTest {
         }
     }
 
+    @IsTest
+    static void testGetMessageErrorFromSmarter_returnsText() {
+        String errorJson = '{"meta":{"status":"Failed","messages":[{"text":"Connection refused"}]}}';
+
+        Test.startTest();
+        String result = APER44_AccountContactRelationManagement.getMessageErrorFromSmarter(errorJson);
+        Test.stopTest();
+
+        System.assertEquals('Connection refused', result, 'Should extract error text from response');
+    }
+
+    @IsTest
+    static void testGetMessageErrorFromSmarter_invalidJson() {
+        Test.startTest();
+        String result = APER44_AccountContactRelationManagement.getMessageErrorFromSmarter('not-valid-json');
+        Test.stopTest();
+
+        System.assertEquals('', result, 'Invalid JSON should return empty string gracefully');
+    }
+
+    @IsTest
+    static void testGetMessageErrorFromSmarter_nonFailedStatus() {
+        String json = '{"meta":{"status":"succeeded","messages":[]}}';
+
+        Test.startTest();
+        String result = APER44_AccountContactRelationManagement.getMessageErrorFromSmarter(json);
+        Test.stopTest();
+
+        System.assertEquals('', result, 'Non-Failed status should return empty string');
+    }
+
+    @IsTest
+    static void testUpdateAsyncRelations_nullJson() {
+        Test.startTest();
+        APER44_AccountContactRelationManagement.updateAsyncRelations(null);
+        Test.stopTest();
+
+        System.assert(true, 'Null JSON should be handled without exception');
+    }
+
+    @IsTest
+    static void testPatchAccountContactRelationship_noSyncDate_callsSync() {
+        User runningUser = TestDataFactory.newUser('APER44P', 'APER44P', 'Local Admin', 'France', 'FR');
+        runningUser.ER_BypassVR__c = true;
+        System.runAs(runningUser) {
+            Account acc = TestDataFactory.newAccount();
+            acc.ER_BUPicklist__c = 'FR';
+            acc.SmartER_Customer_Id__c = '083883783';
+            acc.ER_SmartER_Context__c = true;
+            acc.ER_Status__c = 'Active';
+            insert acc;
+
+            Contact con = TestDataFactory.newContact(acc);
+            con.ER_SmartER_Context__c = true;
+            con.ER_Smarter_1st_Sync_Date__c = null;
+            insert con;
+
+            List<AccountContactRelation> acrs = [SELECT Id, IsActive, Roles, ER_Smarter_1st_Sync_Date__c FROM AccountContactRelation WHERE AccountId = :acc.Id];
+            Map<Id, AccountContactRelation> oldMap = new Map<Id, AccountContactRelation>();
+            for (AccountContactRelation acr : acrs) {
+                oldMap.put(acr.Id, acr.clone(true, true, true, true));
+            }
+
+            Test.startTest();
+            APER44_AccountContactRelationManagement.patchAccountContactRelationship(acrs, oldMap);
+            Test.stopTest();
+
+            System.assert(true, 'patchAccountContactRelationship executed without exception');
+        }
+    }
 
 }

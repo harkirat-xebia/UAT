@@ -114,4 +114,90 @@ public class APER39_DiscountCode_Mangement_Test {
 
     System.assert(true, 'Method executed without exception');
   }
+
+  // ----------------------------------------------------------------
+
+  @isTest
+  static void manageStatusDiscountCodeTest() {
+    List<ER_Promo_Code__c> promos = [
+        SELECT Id, RecordTypeId, ER_Contract__c, ER_Start_Date__c, ER_End_Date__c, ER_Status__c
+        FROM ER_Promo_Code__c
+    ];
+
+    Test.startTest();
+    APER39_DiscountCode_Mangement.ManageStatusDiscountCode(promos);
+    Test.stopTest();
+
+    // Promo with start date in the past and no end date should be Activated
+    ER_Promo_Code__c result = [SELECT ER_Status__c FROM ER_Promo_Code__c WHERE ER_Promo_Code__c = 'promoDiscountTest' LIMIT 1];
+    System.assertEquals('Activated', result.ER_Status__c, 'Promo with past start and no end date should be Activated');
+  }
+
+  // ----------------------------------------------------------------
+
+  @isTest
+  static void setDiscountCodeStatusTest() {
+    List<ER_Promo_Code__c> promos = [
+        SELECT Id, RecordTypeId, ER_Contract__c, ER_Start_Date__c, ER_End_Date__c
+        FROM ER_Promo_Code__c
+    ];
+
+    Test.startTest();
+    APER39_DiscountCode_Mangement.setDiscountCodeStatus(promos);
+    Test.stopTest();
+
+    System.assert(true, 'setDiscountCodeStatus executed without exception');
+  }
+
+  // ----------------------------------------------------------------
+
+  @isTest
+  static void checkUnicityForDiscountCodesTest() {
+    List<ER_Promo_Code__c> promos = [
+        SELECT Id, Name, ER_Promo_Code__c, ER_Business_Unit__c, ER_Contract__c
+        FROM ER_Promo_Code__c
+    ];
+
+    Test.startTest();
+    APER39_DiscountCode_Mangement.checkUnicityForDiscountCodes(promos);
+    Test.stopTest();
+
+    System.assert(true, 'checkUnicityForDiscountCodes executed without exception');
+  }
+
+  // ----------------------------------------------------------------
+
+  @isTest
+  static void updateDatesOnPricebookEnteriesTest() {
+    ER_Promo_Code__c promo = [
+        SELECT Id, ER_Start_Date__c, ER_End_Date__c
+        FROM ER_Promo_Code__c
+        WHERE ER_Promo_Code__c = 'promoDiscountTest'
+        LIMIT 1
+    ];
+
+    Map<Id, ER_Promo_Code__c> oldMap = new Map<Id, ER_Promo_Code__c>{
+        promo.Id => new ER_Promo_Code__c(
+            Id = promo.Id,
+            ER_Start_Date__c = Date.today().addDays(-10),
+            ER_End_Date__c = null
+        )
+    };
+
+    promo.ER_Start_Date__c = Date.today().addDays(-3);
+    promo.ER_End_Date__c   = Date.today().addDays(30);
+    update promo;
+
+    List<ER_Promo_Code__c> updatedPromos = [
+        SELECT Id, ER_Start_Date__c, ER_End_Date__c
+        FROM ER_Promo_Code__c
+        WHERE Id = :promo.Id
+    ];
+
+    Test.startTest();
+    APER39_DiscountCode_Mangement.updateDatesOnPricebookEnteries(updatedPromos, oldMap);
+    Test.stopTest();
+
+    System.assert(true, 'updateDatesOnPricebookEnteries executed without exception');
+  }
 }

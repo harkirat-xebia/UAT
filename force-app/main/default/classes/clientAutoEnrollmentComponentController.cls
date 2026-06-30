@@ -342,7 +342,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                 opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
                                               RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
-                                              ER_Reason__c = 'New');
+                                              ER_Reason__c = 'New', LeadSource = Constants.AUTO_ENROLLMENT, ER_Won_Reason__c = 'Auto-Enrollment');
                 update opportunity;
 
                 contact = new contact(Id = lcr.getContactId(), RecordTypeId = contactClientRecordTypeId,Title = jobTitle, ER_Department_Family__c = department, ER_SubDepartment_Family__c = subDepartment);
@@ -354,7 +354,15 @@ public without sharing class clientAutoEnrollmentComponentController {
             }else{
                 account = accounts[0];
                 //Need logic to fetch existing primary account ID from OCR
-                List<ER_Solution_Line_Item__c> activeSolutionList = [Select Id, ER_Solution__c, ER_Solution__r.ProductCode, ER_Status__c FROM ER_Solution_Line_Item__c WHERE ER_Status__c = 'Active' AND ER_Solution__c=: productId AND ER_Account__c=:accounts[0].Id];
+                List<ER_Solution_Line_Item__c> activeSolutionList = [Select Id, ER_Solution__c, ER_Solution__r.ProductCode, ER_Status__c FROM ER_Solution_Line_Item__c WHERE ER_Status__c = 'Active' AND ER_Account__c=:accounts[0].Id];
+
+                List<Contract> activeContracts = [
+                    SELECT Id FROM Contract
+                    WHERE AccountId = :accounts[0].Id
+                    AND Status = 'Activated'
+                    LIMIT 1
+                ];
+                Boolean shouldRedirect = !activeSolutionList.isEmpty() || !activeContracts.isEmpty();
 
                 Database.LeadConvert lc = new Database.LeadConvert();
                 lc.setLeadId(existingLead.Id);
@@ -378,7 +386,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                     financialCenter.ER_Invoicing_Zip_Code__c = billingPostalCode;
                     financialCenter.ER_Invoicing_City__c = billingCity;
                     financialCenter.ER_Invoicing_Country__c = billingCountry;
-                    if(activeSolutionList.isEmpty()){
+                    if(!shouldRedirect){
                         insert financialCenter;
                     }
                 } else {
@@ -395,7 +403,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                         financialCenterList[0].ER_Invoicing_Country_Code__c = 'LU';
                         financialCenterList[0].ER_Country_Code__c = 'LU';
                     }
-                    if(activeSolutionList.isEmpty()){
+                    if(!shouldRedirect){
                         update financialCenterList[0];
                     }
                 }
@@ -424,7 +432,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                 account.ER_Legal_Name__c = legalName.toUpperCase();
                 account.Account_Type__c = Integer.valueOf(numberOfBeneficiaries) > sizeLimit ? 'MM':'SME';    
                 account.NumberOfEmployees = Integer.valueOf(numberOfBeneficiaries);
-                if(activeSolutionList.isEmpty() || businessUnit == 'LU'){
+                if(!shouldRedirect){
                     update account;
                 }
 
@@ -448,7 +456,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                     contact.Title = jobTitle;
                     contact.ER_Department_Family__c = department;
                     contact.ER_SubDepartment_Family__c = subDepartment;
-                    if(activeSolutionList.isEmpty()){
+                    if(!shouldRedirect){
                         update contact;
                     }
                     result.put('contact', contact);
@@ -469,7 +477,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                         ER_Department_Family__c = department,
                         ER_SubDepartment_Family__c = subDepartment
                     );
-                    if(activeSolutionList.isEmpty()){
+                    if(!shouldRedirect){
                         insert contact;
                     }
                     result.put('contact', contact);
@@ -477,7 +485,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                 if (account.HU_HQ_Contact__c == null) {
                     account.HU_HQ_Contact__c = contact.Id;
-                    if(activeSolutionList.isEmpty()){
+                    if(!shouldRedirect){
                         update account;
                     }
                 }
@@ -495,7 +503,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                     deliverySite = deliverySites[0];
                 
                     if (deliverySite.ER_Financial_Center__c == null) {
-                        if(activeSolutionList.isEmpty()){
+                        if(!shouldRedirect){
                             deliverySite.ER_Financial_Center__c = financialCenter.Id;
                             update deliverySite;
                         }
@@ -528,7 +536,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                 dmo.AssignmentRuleHeader.useDefaultRule = TRUE;
                 Database.update(new List<Lead>{existingLead},dmo);
 
-                if(!activeSolutionList.isEmpty()){
+                if(shouldRedirect){
 
                     /* lc.setAccountId(account.Id);
                     lc.setContactId(contact.Id);
@@ -565,7 +573,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                     opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
                                               RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
-                                              ER_Reason__c = 'New');
+                                              ER_Reason__c = 'New', LeadSource = Constants.AUTO_ENROLLMENT, ER_Won_Reason__c = 'Auto-Enrollment');
                     update opportunity;
 
                     result.put('opportunity', opportunity);

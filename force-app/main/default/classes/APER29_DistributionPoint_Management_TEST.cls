@@ -146,8 +146,10 @@ public class APER29_DistributionPoint_Management_TEST {
 
     Contact c = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test1', 'test1');
     c.AccountId = clientAccount.Id;
+    c.Salutation = 'Mr';
     Contact c1 = APER07_UtilityTestMethod.getContact('ER_Contact_RT', 'test2', 'test2');
     c1.AccountId = clientAccount.Id;
+    c1.Salutation = 'Mr';
     contactList.add(c);
     contactList.add(c1);
     insert contactList;
@@ -157,6 +159,10 @@ public class APER29_DistributionPoint_Management_TEST {
       clientAccount.id,
       testFinancialCenter.id
     );
+    testDeliverySite.ER_Street__c = 'Test Street';
+    testDeliverySite.ER_Zip_Code__c = '75001';
+    testDeliverySite.ER_City__c = 'Paris';
+    testDeliverySite.ER_Country__c = 'BE';
     dsListToInsert.add(testDeliverySite);
 
     ER_Delivery_Site__c testDeliverySite2 = APER07_UtilityTestMethod.getDeliverySite(
@@ -164,6 +170,10 @@ public class APER29_DistributionPoint_Management_TEST {
       clientAccount.id,
       testFinancialCenter.id
     );
+    testDeliverySite2.ER_Street__c = 'Test Street 2';
+    testDeliverySite2.ER_Zip_Code__c = '75002';
+    testDeliverySite2.ER_City__c = 'Paris';
+    testDeliverySite2.ER_Country__c = 'BE';
     dsListToInsert.add(testDeliverySite2);
 
     insert dsListToInsert;
@@ -199,6 +209,10 @@ public class APER29_DistributionPoint_Management_TEST {
       testDeliverySite.id
     );
     testDistributionPoint.ER_Contact__c = c.Id;
+    testDistributionPoint.ER_Street__c = 'Test Street';
+    testDistributionPoint.ER_Zip_Code__c = '75001';
+    testDistributionPoint.ER_City__c = 'Paris';
+    testDistributionPoint.ER_Country__c = 'BE';
     insert testDistributionPoint;
 
     ER_Solution_Line_Item__c testDistributionPointLineItem = APER07_UtilityTestMethod.getDistributionPointLineItem(
@@ -243,6 +257,10 @@ public class APER29_DistributionPoint_Management_TEST {
       'APER29_DistributionPoint_Management_Test3',
       testDeliverySite.id
     );
+    testDistributionPoint2.ER_Street__c = 'Test Street 3';
+    testDistributionPoint2.ER_Zip_Code__c = '75003';
+    testDistributionPoint2.ER_City__c = 'Paris';
+    testDistributionPoint2.ER_Country__c = 'BE';
     insert testDistributionPoint2;
 
     distributionPointMap.put(testDistributionPoint2.Id, testDistributionPoint2);
