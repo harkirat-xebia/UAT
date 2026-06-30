@@ -5,7 +5,7 @@
     <assignments>
         <name>Assign_Customer</name>
         <label>Assign Customer Domain</label>
-        <locationX>710</locationX>
+        <locationX>776</locationX>
         <locationY>1103</locationY>
         <assignmentItems>
             <assignToReference>CustomerDomain1</assignToReference>
@@ -42,7 +42,7 @@
     <assignments>
         <name>Assign_Number_Of_Employees</name>
         <label>Assign Number Of Employees</label>
-        <locationX>1007</locationX>
+        <locationX>1023</locationX>
         <locationY>395</locationY>
         <assignmentItems>
             <assignToReference>$Record.ER_Nb_of_Employees__c</assignToReference>
@@ -58,7 +58,7 @@
     <assignments>
         <name>Assign_Program_Name0</name>
         <label>Assign Program Name</label>
-        <locationX>512</locationX>
+        <locationX>479</locationX>
         <locationY>803</locationY>
         <assignmentItems>
             <assignToReference>ProgramName1</assignToReference>
@@ -95,7 +95,7 @@
     <assignments>
         <name>Copy_1_of_Assign_Customer_Domain</name>
         <label>Assign Customer Domain</label>
-        <locationX>578</locationX>
+        <locationX>644</locationX>
         <locationY>1427</locationY>
         <assignmentItems>
             <assignToReference>$Record.Customer_Domain__c</assignToReference>
@@ -108,17 +108,46 @@
     <customErrors>
         <name>Duplicate_Custom_Domain_was_found</name>
         <label>Duplicate Custom Domain was found</label>
-        <locationX>50</locationX>
-        <locationY>1319</locationY>
+        <locationX>116</locationX>
+        <locationY>1427</locationY>
         <customErrorMessages>
             <errorMessage>Duplicate &quot;Custom Domain&quot; was found in an active contract Please enter a new value. contract id {!Get_customer_Domain_from_Active_Contract.Id}</errorMessage>
             <isFieldError>false</isFieldError>
         </customErrorMessages>
     </customErrors>
     <decisions>
+        <name>Bypass_Customer_Domain</name>
+        <label>Bypass Customer Domain</label>
+        <locationX>50</locationX>
+        <locationY>1103</locationY>
+        <defaultConnector>
+            <targetReference>Get_customer_Domain_from_Active_Contract</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Engagement</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Copy_1_of_Duplicate_Found</name>
         <label>Duplicate Found</label>
-        <locationX>710</locationX>
+        <locationX>776</locationX>
         <locationY>1319</locationY>
         <defaultConnectorLabel>Default</defaultConnectorLabel>
         <rules>
@@ -140,8 +169,8 @@
     <decisions>
         <name>Duplicate_Found</name>
         <label>Duplicate Found</label>
-        <locationX>182</locationX>
-        <locationY>1211</locationY>
+        <locationX>248</locationX>
+        <locationY>1319</locationY>
         <defaultConnectorLabel>Default</defaultConnectorLabel>
         <rules>
             <name>Yes_00</name>
@@ -162,7 +191,7 @@
     <decisions>
         <name>Insert_or_Update</name>
         <label>Insert or Update</label>
-        <locationX>1139</locationX>
+        <locationX>1155</locationX>
         <locationY>287</locationY>
         <defaultConnector>
             <targetReference>Is_Engagement_Pricebook</targetReference>
@@ -187,7 +216,7 @@
     <decisions>
         <name>Is_Customer_Domain_Empty</name>
         <label>Is Customer Domain  Null</label>
-        <locationX>644</locationX>
+        <locationX>611</locationX>
         <locationY>995</locationY>
         <defaultConnectorLabel>Defalut</defaultConnectorLabel>
         <rules>
@@ -201,7 +230,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_customer_Domain_from_Active_Contract</targetReference>
+                <targetReference>Bypass_Customer_Domain</targetReference>
             </connector>
             <label>No</label>
         </rules>
@@ -231,7 +260,7 @@
     <decisions>
         <name>Is_Engagement_Pricebook</name>
         <label>Is  Pricebook</label>
-        <locationX>1139</locationX>
+        <locationX>1155</locationX>
         <locationY>587</locationY>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -242,6 +271,13 @@
                 <operator>Contains</operator>
                 <rightValue>
                     <stringValue>Engagement</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2Id</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -259,6 +295,13 @@
                     <stringValue>Benefits</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Pricebook2Id</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Remove_value_in_Engagement_Field</targetReference>
             </connector>
@@ -268,7 +311,7 @@
     <decisions>
         <name>Is_Program_Name_Empty</name>
         <label>Is Program Name Empty</label>
-        <locationX>644</locationX>
+        <locationX>611</locationX>
         <locationY>695</locationY>
         <defaultConnector>
             <targetReference>Is_Customer_Domain_Empty</targetReference>
@@ -475,7 +518,7 @@
     <recordLookups>
         <name>Copy_1_of_Get_customer_Domain_from_Active_Contract</name>
         <label>New Get customer Domain from Active Contract</label>
-        <locationX>710</locationX>
+        <locationX>776</locationX>
         <locationY>1211</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -503,8 +546,8 @@
     <recordLookups>
         <name>Get_customer_Domain_from_Active_Contract</name>
         <label>Get customer Domain from Active Contract</label>
-        <locationX>182</locationX>
-        <locationY>1103</locationY>
+        <locationX>248</locationX>
+        <locationY>1211</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Duplicate_Found</targetReference>
@@ -531,7 +574,7 @@
     <recordUpdates>
         <name>Remove_value_in_Engagement_Field</name>
         <label>Remove value in Engagement Field</label>
-        <locationX>1370</locationX>
+        <locationX>1436</locationX>
         <locationY>695</locationY>
         <inputAssignments>
             <field>Customer_Domain__c</field>
@@ -551,7 +594,7 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
-        <locationX>1013</locationX>
+        <locationX>1029</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Insert_or_Update</targetReference>
@@ -568,7 +611,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>CustomerDomain1</name>
         <dataType>String</dataType>

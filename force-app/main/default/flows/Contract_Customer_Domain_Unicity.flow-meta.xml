@@ -13,6 +13,28 @@
         </customErrorMessages>
     </customErrors>
     <decisions>
+        <name>Bypass_Customer_Domain</name>
+        <label>Bypass Customer Domain</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Custom_Domain</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Bypass</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ER_OpportunityId__r.ER_Promo_Code2__r.Create_SME_Platform_Engagement__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Duplicate</name>
         <label>Duplicate</label>
         <locationX>0</locationX>
@@ -57,8 +79,15 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.ER_Customer_Domain__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
-                <targetReference>Get_Custom_Domain</targetReference>
+                <targetReference>Bypass_Customer_Domain</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -100,6 +129,13 @@
             <operator>EqualTo</operator>
             <value>
                 <elementReference>$Record.ER_Customer_Domain__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Activated</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>

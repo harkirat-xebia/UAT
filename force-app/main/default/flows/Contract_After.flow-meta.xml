@@ -3,10 +3,39 @@
     <apiVersion>61.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
+        <name>Account_Active</name>
+        <label>Account Active</label>
+        <locationX>160</locationX>
+        <locationY>1439</locationY>
+        <defaultConnector>
+            <targetReference>Update_Account_to_SME</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Active</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Copy_1_of_Get_Account.ER_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Copy_1_of_Get_Account.Client_Type_formula__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SME</stringValue>
+                </rightValue>
+            </conditions>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Autoenrolement_Contract</name>
         <label>Is Autoenrolement Contract</label>
-        <locationX>534</locationX>
-        <locationY>1031</locationY>
+        <locationX>358</locationX>
+        <locationY>1331</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Yes</name>
@@ -61,7 +90,57 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Records_3</targetReference>
+                <targetReference>Account_Active</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Copy_1_of_Account_Active</name>
+        <label>Account Active</label>
+        <locationX>50</locationX>
+        <locationY>863</locationY>
+        <defaultConnector>
+            <targetReference>Update_Account_to_Active</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Active2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Copy_1_of_Get_Account.ER_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Autoenrolement_Contract</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Copy_2_of_Account_Active</name>
+        <label>Account Active</label>
+        <locationX>534</locationX>
+        <locationY>863</locationY>
+        <defaultConnector>
+            <targetReference>Autoenrolement_Contract</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Active3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Copy_1_of_Get_Account.ER_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Account_to_Inactive</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -70,7 +149,7 @@
         <description>Check if the record is created or updated</description>
         <name>Is_Created_or_updated</name>
         <label>Is Created or Updated</label>
-        <locationX>534</locationX>
+        <locationX>358</locationX>
         <locationY>323</locationY>
         <defaultConnector>
             <targetReference>Autoenrolement_Contract</targetReference>
@@ -86,9 +165,6 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
-            <connector>
-                <targetReference>Get_Contract_Account</targetReference>
-            </connector>
             <label>Is Created</label>
         </rules>
         <rules>
@@ -110,8 +186,8 @@
     <decisions>
         <name>Size_of_non_terminated_contract</name>
         <label>Size of non terminated contract</label>
-        <locationX>578</locationX>
-        <locationY>647</locationY>
+        <locationX>446</locationX>
+        <locationY>755</locationY>
         <defaultConnector>
             <targetReference>Autoenrolement_Contract</targetReference>
         </defaultConnector>
@@ -127,7 +203,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Account_to_Active</targetReference>
+                <targetReference>Copy_1_of_Account_Active</targetReference>
             </connector>
             <label>Open Contract Exists</label>
         </rules>
@@ -149,7 +225,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Account_to_Inactive</targetReference>
+                <targetReference>Copy_2_of_Account_Active</targetReference>
             </connector>
             <label>Only Terminated Contracts Exist</label>
         </rules>
@@ -183,18 +259,20 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <description>Get Account details of the Contract</description>
-        <name>Get_Contract_Account</name>
-        <label>Get Contract Account</label>
-        <locationX>50</locationX>
-        <locationY>431</locationY>
+        <name>Copy_1_of_Get_Account</name>
+        <label>Get Account</label>
+        <locationX>446</locationX>
+        <locationY>647</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Size_of_non_terminated_contract</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.Account.Id</elementReference>
+                <elementReference>$Record.AccountId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -204,7 +282,7 @@
     <recordLookups>
         <name>Get_Non_terminated_Contracts</name>
         <label>Get Non Terminated Contracts</label>
-        <locationX>578</locationX>
+        <locationX>446</locationX>
         <locationY>431</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -232,11 +310,11 @@
     <recordLookups>
         <name>Get_Terminated_Contracts</name>
         <label>Get Terminated Contracts</label>
-        <locationX>578</locationX>
+        <locationX>446</locationX>
         <locationY>539</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Size_of_non_terminated_contract</targetReference>
+            <targetReference>Copy_1_of_Get_Account</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -260,8 +338,8 @@
     <recordUpdates>
         <name>Update_Account_to_Active</name>
         <label>Update Account to Active</label>
-        <locationX>314</locationX>
-        <locationY>755</locationY>
+        <locationX>138</locationX>
+        <locationY>971</locationY>
         <connector>
             <targetReference>Autoenrolement_Contract</targetReference>
         </connector>
@@ -284,8 +362,8 @@
     <recordUpdates>
         <name>Update_Account_to_Inactive</name>
         <label>Update Account to Inactive</label>
-        <locationX>578</locationX>
-        <locationY>755</locationY>
+        <locationX>402</locationX>
+        <locationY>971</locationY>
         <connector>
             <targetReference>Autoenrolement_Contract</targetReference>
         </connector>
@@ -306,10 +384,10 @@
         <object>Account</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Records_3</name>
-        <label>Update Records 3</label>
-        <locationX>402</locationX>
-        <locationY>1139</locationY>
+        <name>Update_Account_to_SME</name>
+        <label>Update Account to SME</label>
+        <locationX>292</locationX>
+        <locationY>1547</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -327,7 +405,7 @@
         <object>Account</object>
     </recordUpdates>
     <start>
-        <locationX>408</locationX>
+        <locationX>232</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_Created_or_updated</targetReference>

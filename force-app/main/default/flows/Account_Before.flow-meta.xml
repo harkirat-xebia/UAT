@@ -3,10 +3,42 @@
     <apiVersion>61.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Account_Owner_name</name>
+        <label>Account Owner name</label>
+        <locationX>182</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Account_Owner_Text__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OwnerFullName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Legal_Name_Is_Null</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Account_Owner_Name_update</name>
+        <label>Account Owner Name update</label>
+        <locationX>578</locationX>
+        <locationY>503</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Account_Owner_Text__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OwnerFullName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>If_Legal_Name_is_updated_to_blank</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_legal_name</name>
         <label>Assign legal name</label>
         <locationX>578</locationX>
-        <locationY>503</locationY>
+        <locationY>803</locationY>
         <assignmentItems>
             <assignToReference>$Record.ER_Legal_Name__c</assignToReference>
             <operator>Assign</operator>
@@ -19,7 +51,7 @@
         <name>Legal_Name_Assignment</name>
         <label>Legal Name Assignment</label>
         <locationX>50</locationX>
-        <locationY>503</locationY>
+        <locationY>611</locationY>
         <assignmentItems>
             <assignToReference>$Record.ER_Legal_Name__c</assignToReference>
             <operator>Assign</operator>
@@ -29,9 +61,34 @@
         </assignmentItems>
     </assignments>
     <decisions>
+        <name>Account_Owner_is_changed</name>
+        <label>Account Owner is changed?</label>
+        <locationX>710</locationX>
+        <locationY>395</locationY>
+        <defaultConnector>
+            <targetReference>If_Legal_Name_is_updated_to_blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Account_Owner_Name_update</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Create_OR_Update</name>
         <label>Create OR Update</label>
-        <locationX>600</locationX>
+        <locationX>644</locationX>
         <locationY>287</locationY>
         <defaultConnectorLabel>Default</defaultConnectorLabel>
         <rules>
@@ -45,7 +102,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Legal_Name_Is_Null</targetReference>
+                <targetReference>Account_Owner_name</targetReference>
             </connector>
             <label>Create</label>
         </rules>
@@ -60,7 +117,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>If_Legal_Name_is_updated_to_blank</targetReference>
+                <targetReference>Account_Owner_is_changed</targetReference>
             </connector>
             <label>Update</label>
         </rules>
@@ -69,7 +126,7 @@
         <name>If_Legal_Name_is_updated_to_blank</name>
         <label>If Legal Name is updated to blank?</label>
         <locationX>710</locationX>
-        <locationY>395</locationY>
+        <locationY>695</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Blank</name>
@@ -91,7 +148,7 @@
         <name>Legal_Name_Is_Null</name>
         <label>Legal Name Is Null</label>
         <locationX>182</locationX>
-        <locationY>395</locationY>
+        <locationY>503</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Is_Null</name>
@@ -115,6 +172,15 @@
         <dataType>Boolean</dataType>
         <expression>ISNEW()</expression>
     </formulas>
+    <formulas>
+        <name>OwnerFullName</name>
+        <dataType>String</dataType>
+        <expression>IF(
+  ISBLANK({!$Record.Owner.FirstName}),
+  {!$Record.Owner.LastName},
+  {!$Record.Owner.FirstName} &amp; &quot; &quot; &amp; {!$Record.Owner.LastName}
+)</expression>
+    </formulas>
     <interviewLabel>Account:Before {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Account:Before</label>
     <processMetadataValues>
@@ -137,7 +203,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>474</locationX>
+        <locationX>518</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Create_OR_Update</targetReference>

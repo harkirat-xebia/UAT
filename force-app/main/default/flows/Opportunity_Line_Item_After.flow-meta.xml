@@ -90,7 +90,7 @@
                 <leftValueReference>$Record.Product2.Name</leftValueReference>
                 <operator>Contains</operator>
                 <rightValue>
-                    <stringValue>Reduction Fee</stringValue>
+                    <stringValue>Reduction fee</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
