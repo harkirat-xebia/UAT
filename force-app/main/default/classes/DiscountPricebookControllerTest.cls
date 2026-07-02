@@ -379,21 +379,79 @@ private class DiscountPricebookControllerTest {
     static void testGetPricebooksReturnsOrderedResults() {
         // Given
         ER_Promo_Code__c promo = [SELECT Id FROM ER_Promo_Code__c WHERE Name = 'TRE10OFF' LIMIT 1];
-        
+
         // When
         Test.startTest();
-        List<DiscountPricebookController.PricebookWrapper> result = 
+        List<DiscountPricebookController.PricebookWrapper> result =
             DiscountPricebookController.getPricebooksForDiscount(promo.Id);
         Test.stopTest();
-        
+
         // Then
         if (result.size() > 1) {
             for (Integer i = 0; i < result.size() - 1; i++) {
                 System.assert(
-                    result[i].Name <= result[i + 1].Name, 
+                    result[i].Name <= result[i + 1].Name,
                     'Results should be ordered by Name'
                 );
             }
+        }
+    }
+
+    // Verifies hasExistingPBE = true when a discount PBE already exists for the promo code in that pricebook
+    @isTest
+    static void testGetPricebooksForDiscount_hasExistingPBE_True() {
+        RecordType rtDiscount = [SELECT Id FROM RecordType WHERE SObjectType = 'Product2' AND DeveloperName = 'Discount' LIMIT 1];
+
+        ER_Promo_Code__c promo    = [SELECT Id FROM ER_Promo_Code__c WHERE Name = 'TRE10OFF' LIMIT 1];
+        Pricebook2      customPb  = [SELECT Id FROM Pricebook2 WHERE Name = 'Test Pricebook 1' LIMIT 1];
+        Product2        rangeProduct = [SELECT Id FROM Product2 WHERE ProductCode = 'TRE-RANGE' LIMIT 1];
+
+        // Simulate a previously-run batch: create discount product + PBE linked to this promo
+        Product2 discountProd = new Product2(
+            Name = 'Discounted 100 to 200', ER_Type__c = 'Discount', IsActive = true,
+            ProductCode = 'TRE-RANGE', RecordTypeId = rtDiscount.Id,
+            ER_Solution__c = rangeProduct.Id, QuantityUnitOfMeasure = 'Per Unit'
+        );
+        insert discountProd;
+
+        insert new PricebookEntry(Pricebook2Id = Test.getStandardPricebookId(), Product2Id = discountProd.Id,
+            UnitPrice = 90, IsActive = true, UseStandardPrice = false,
+            ER_ValueType__c = 'Currency', ER_Promo_Code2__c = promo.Id);
+        insert new PricebookEntry(Pricebook2Id = customPb.Id, Product2Id = discountProd.Id,
+            UnitPrice = 90, IsActive = true, UseStandardPrice = false,
+            ER_ValueType__c = 'Currency', ER_Promo_Code2__c = promo.Id);
+
+        Test.startTest();
+        List<DiscountPricebookController.PricebookWrapper> result =
+            DiscountPricebookController.getPricebooksForDiscount(promo.Id);
+        Test.stopTest();
+
+        Boolean foundExisting = false;
+        for (DiscountPricebookController.PricebookWrapper w : result) {
+            if (w.Id == customPb.Id) { foundExisting = w.hasExistingPBE; }
+        }
+        System.assertEquals(true, foundExisting,
+            'Custom pricebook should be flagged hasExistingPBE=true since a discount PBE already exists');
+    }
+
+    // Verifies hasExistingPBE = false for a brand-new promo code with no existing discount PBEs
+    @isTest
+    static void testGetPricebooksForDiscount_hasExistingPBE_False() {
+        ER_Promo_Code__c newPromo = new ER_Promo_Code__c(
+            Name = 'BRAND_NEW_PROMO', Solution__c = 'TRE', Discount_Percentage__c = 5,
+            Discount_Type__c = 'Solution Only', ER_Business_Unit__c = 'BE',
+            ER_Start_Date__c = Date.today(), ER_End_Date__c = Date.today().addDays(30)
+        );
+        insert newPromo;
+
+        Test.startTest();
+        List<DiscountPricebookController.PricebookWrapper> result =
+            DiscountPricebookController.getPricebooksForDiscount(newPromo.Id);
+        Test.stopTest();
+
+        for (DiscountPricebookController.PricebookWrapper w : result) {
+            System.assertEquals(false, w.hasExistingPBE,
+                'No pricebook should have hasExistingPBE=true for a brand-new promo code');
         }
     }
 }

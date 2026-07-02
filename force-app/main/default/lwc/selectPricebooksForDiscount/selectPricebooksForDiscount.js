@@ -15,11 +15,11 @@ const FIELDS = [
 
 export default class SelectPricebooksForDiscount extends LightningElement {
     @api recordId;
-    
+
     @track pricebooks = [];
     @track selectedPricebookIds = new Set();
     discountCodeInfo;
-    
+
     isLoadingPricebooks = false;
     isProcessing = false;
     showPricebooks = false;
@@ -31,9 +31,7 @@ export default class SelectPricebooksForDiscount extends LightningElement {
     wiredRecord({ error, data }) {
         console.log('=== Wire getRecord ===');
         console.log('recordId:', this.recordId);
-        console.log('data:', data);
-        console.log('error:', error);
-        
+
         if (data) {
             this.discountCodeInfo = {
                 Id: data.id,
@@ -43,15 +41,11 @@ export default class SelectPricebooksForDiscount extends LightningElement {
                 Solution__c: data.fields.Solution__c.value,
                 ER_Status__c: data.fields.ER_Status__c.value
             };
-            
-            console.log('Discount Code Info:', this.discountCodeInfo);
-            
-            // Check if status is Activated
+
             if (this.discountCodeInfo.ER_Status__c === 'Activated') {
                 this.loadPricebooks();
             } else {
                 this.errorMessage = 'This discount code is not activated. Status: ' + this.discountCodeInfo.ER_Status__c;
-                console.log(this.errorMessage);
             }
         } else if (error) {
             console.error('Error loading discount code:', error);
@@ -59,29 +53,30 @@ export default class SelectPricebooksForDiscount extends LightningElement {
         }
     }
 
-    // Load pricebooks
+    // Load pricebooks. The controller stamps hasExistingPBE on each pricebook so we
+    // know which ones were already processed (by the auto-trigger batch or a previous
+    // manual run) without a separate server call.
     loadPricebooks() {
         console.log('=== loadPricebooks START ===');
-        console.log('recordId:', this.recordId);
-        
+
         this.isLoadingPricebooks = true;
         this.errorMessage = '';
         this.successMessage = '';
-        
+
         getPricebooksForDiscount({ discountCodeId: this.recordId })
             .then(result => {
                 console.log('Pricebooks loaded:', result);
-                
+
                 if (result && result.length > 0) {
                     this.pricebooks = result.map(pb => ({
                         Id: pb.Id,
                         Name: pb.Name,
                         Description: pb.Description,
                         IsActive: pb.IsActive,
+                        hasExistingPBE: pb.hasExistingPBE === true,
                         isSelected: false
                     }));
                     this.showPricebooks = true;
-                    console.log('Processed pricebooks:', this.pricebooks);
                 } else {
                     this.pricebooks = [];
                     this.showPricebooks = true;
@@ -102,8 +97,6 @@ export default class SelectPricebooksForDiscount extends LightningElement {
     handlePricebookSelection(event) {
         const pricebookId = event.target.dataset.id;
         const isChecked = event.target.checked;
-        
-        console.log('Pricebook selection:', pricebookId, isChecked);
 
         this.pricebooks = this.pricebooks.map(pb => {
             if (pb.Id === pricebookId) {
@@ -117,11 +110,10 @@ export default class SelectPricebooksForDiscount extends LightningElement {
         } else {
             this.selectedPricebookIds.delete(pricebookId);
         }
-        
-        console.log('Selected count:', this.selectedPricebookIds.size);
     }
 
     handleSelectAll() {
+        if (this.anyPricebookAlreadyCreated) return;
         this.pricebooks = this.pricebooks.map(pb => ({ ...pb, isSelected: true }));
         this.selectedPricebookIds = new Set(this.pricebooks.map(pb => pb.Id));
     }
@@ -138,8 +130,7 @@ export default class SelectPricebooksForDiscount extends LightningElement {
 
     handleCreateDiscounts() {
         console.log('=== handleCreateDiscounts START ===');
-        console.log('Selected pricebooks:', Array.from(this.selectedPricebookIds));
-        
+
         if (this.selectedPricebookIds.size === 0) {
             this.showToast('Warning', 'Please select at least one pricebook', 'warning');
             return;
@@ -150,6 +141,7 @@ export default class SelectPricebooksForDiscount extends LightningElement {
         this.errorMessage = '';
 
         const pricebookIdsArray = Array.from(this.selectedPricebookIds);
+        const submittedPricebookIds = new Set(this.selectedPricebookIds);
 
         createDiscountedProductsForPricebooks({
             discountCodeId: this.recordId,
@@ -157,12 +149,19 @@ export default class SelectPricebooksForDiscount extends LightningElement {
         })
             .then(result => {
                 console.log('Batch job ID:', result);
-                this.successMessage = `Batch job started! Job ID: ${result}`;
+                this.successMessage = `Batch job started successfully. Refresh the page to see the updated status.`;
                 this.showToast('Success', 'Discounted products are being created', 'success');
-                
-                setTimeout(() => {
-                    this.handleDeselectAll();
-                }, 3000);
+
+                // Optimistically mark submitted pricebooks as already having PBEs so the
+                // warning banners appear immediately and the user cannot trigger a duplicate run
+                // before refreshing the page (the batch runs async so server won't reflect
+                // this yet, but we know we just submitted it).
+                this.pricebooks = this.pricebooks.map(pb => ({
+                    ...pb,
+                    isSelected: false,
+                    hasExistingPBE: pb.hasExistingPBE || submittedPricebookIds.has(pb.Id)
+                }));
+                this.selectedPricebookIds = new Set();
             })
             .catch(error => {
                 console.error('Error creating discounts:', error);
@@ -171,7 +170,6 @@ export default class SelectPricebooksForDiscount extends LightningElement {
             })
             .finally(() => {
                 this.isProcessing = false;
-                console.log('=== handleCreateDiscounts END ===');
             });
     }
 
@@ -185,7 +183,12 @@ export default class SelectPricebooksForDiscount extends LightningElement {
     }
 
     get isCreateDisabled() {
-        return this.isProcessing || this.selectedPricebookIds.size === 0;
+        return this.isProcessing || this.selectedPricebookIds.size === 0 || this.anyPricebookAlreadyCreated;
+    }
+
+    // True when ANY pricebook already has PBEs — blocks all further creation for this discount code
+    get anyPricebookAlreadyCreated() {
+        return this.pricebooks.length > 0 && this.pricebooks.some(pb => pb.hasExistingPBE);
     }
 
     // Utility methods
