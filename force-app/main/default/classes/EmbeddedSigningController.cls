@@ -1,79 +1,48 @@
-public class EmbeddedSigningController {
-	
+public without sharing class EmbeddedSigningController {
+
     @AuraEnabled
-	public static String sendEnvelope(String template, String description, Id recordId) {
-        Id mySourceId = recordId; // The ID of the initiating Salesforce object
-        // Create an empty envelope and add a Salesforce Document and embedded signer  recipient
-        // The embedded signer will be the current user with sequence and routing order 1 and role "Signer 1" by default
-
-		// Create signer
-            // dfsle.Recipient signer = dfsle.Recipient.newEmbeddedSigner();
-    		// signer.RoleName = ('Signer 1'); // Must match the template role
-    		// //.withRoutingOrder(1);
-
-
-
-        dfsle.Envelope dsEnvelope = dfsle.EnvelopeService.getEmptyEnvelope(
-            new dfsle.Entity(mySourceId)) // The initiating Salesforce entity--current SF user (salesperson)
-            .withDocuments(new List<dfsle.Document> {
-            dfsle.Document.fromTemplate(dfsle.UUID.parse(template), description)
-            })
-            .withRecipients(new List<dfsle.Recipient> {
-            dfsle.Recipient.newEmbeddedSigner()
-            .withRole('Dev') // An embedded signer
+    public static String sendEnvelope(String template, String description, Id recordId) {
+        // Block DocuSign send for Framework Agreement quotes where scope has not been defined
+        String recordPrefix = String.valueOf(recordId).left(3);
+        if (recordPrefix == '0Q0') {
+            Quote q = [SELECT Is_Framework_Agreement__c, Framework_Scope_Defined__c
+                       FROM Quote WHERE Id = :recordId LIMIT 1];
+            if (q.Is_Framework_Agreement__c && !q.Framework_Scope_Defined__c) {
+                throw new AuraHandledException(
+                    'FRAMEWORK_SCOPE_UNDEFINED:Please define the framework scope before sending for signature.'
+                );
             }
-        );
+        }
 
-		
-        
-        
-    	// Send the envelope.
-        dsEnvelope = dfsle.EnvelopeService.sendEnvelope(
-            dsEnvelope, // The envelope to send
-            true // Send now?
-        );
-        // Return string value of DocuSign envelope ID
-        return String.valueOf(dsEnvelope.docuSignId);
-	}
+        try {
+            dfsle.Envelope dsEnvelope = dfsle.EnvelopeService.getEmptyEnvelope(new dfsle.Entity(recordId))
+                .withDocuments(new List<dfsle.Document>{
+                    dfsle.Document.fromTemplate(dfsle.UUID.parse(template), description)
+                })
+                .withRecipients(new List<dfsle.Recipient>{
+                    dfsle.Recipient.newEmbeddedSigner().withRole('Dev')
+                });
+
+            dsEnvelope = dfsle.EnvelopeService.sendEnvelope(dsEnvelope, true);
+            return String.valueOf(dsEnvelope.docuSignId);
+
+        } catch (AuraHandledException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new AuraHandledException('Failed to send envelope: ' + e.getMessage());
+        }
+    }
 
     @AuraEnabled
     public static String getEmbeddedSigningUrl(String envId, String url) {
-      Url mySigningUrl = dfsle.SigningService.getEmbeddedSigningUrl(
-        dfsle.UUID.parse(envId), // envId value as a UUID
-        new URL(url) // url value as a URL
-      );
-    
-      // Return string value of Url to controlle
-      return mySigningUrl.toExternalForm();
-
-	}
-
-	 @AuraEnabled
-    public static List<dfsle.Document> fetchSignedDocuments(String envelopeIdStr, Id recordId) {
-		System.debug('envelopeIdStr--->'+envelopeIdStr);
-
-		dfsle__Envelope__c env = [SELECT Id, dfsle__DocuSignId__c FROM dfsle__Envelope__c where dfsle__DocuSignId__c='5cad3c74-04f5-4bc3-aa21-b2b7956ff067'];
-
-        
-        
-
-            List<dfsle.Document> docs =  dfsle.DocumentService.getEnvelopeDocuments(env.Id);
-			System.debug('vinayak-->'+docs);
-            Integer count = 0;
-
-            for (dfsle.Document doc : docs) {
-                Attachment att = new Attachment();
-                att.Name = doc.name;
-                // att.Body = doc.sourceId;
-                // att.ParentId = recordId;
-                // insert att;
-                count++;
-            }
-		return docs;
-
-        
+        try {
+            Url signingUrl = dfsle.SigningService.getEmbeddedSigningUrl(
+                dfsle.UUID.parse(envId),
+                new URL(url)
+            );
+            return signingUrl.toExternalForm();
+        } catch (Exception e) {
+            throw new AuraHandledException('Failed to retrieve signing URL: ' + e.getMessage());
+        }
     }
-
- 
-
 }

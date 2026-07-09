@@ -1,10 +1,37 @@
 <template>
-    <div>
-        <lightning-button label="Embedded Signing" title="Start embedded signing session" onclick={handleClick}></lightning-button>
-    </div>
+    <!-- Framework scope not defined error -->
+    <template if:true={showFrameworkScopeError}>
+        <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_small" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <p class="slds-m-bottom_x-small">
+                Please define the framework scope before sending for signature.
+            </p>
+            <lightning-button
+                label="Define Framework Scope"
+                variant="brand"
+                onclick={openScopeFlow}>
+            </lightning-button>
+        </div>
+    </template>
 
-    <div>
-        <lightning-button label="Fetch Doc" title="Start embedded signing session" onclick={handleFetchClick}></lightning-button>
+    <!-- Generic error -->
+    <template if:true={errorMessage}>
+        <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_small" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <p>{errorMessage}</p>
+        </div>
+    </template>
+
+    <div class="slds-m-top_small">
+        <template if:true={isProcessing}>
+            <lightning-spinner alternative-text="Sending for signature..." size="small"></lightning-spinner>
+        </template>
+        <lightning-button
+            label="Send for Signature"
+            variant="brand"
+            icon-name="utility:signature"
+            onclick={handleClick}
+            disabled={isButtonDisabled}>
+        </lightning-button>
     </div>
-    <!-- <iframe src='https://outlook.office.com/owa/calendar/CedarsSinaisVirtualSecondOpinionEnrollment@CedarsSinai.onmicrosoft.com/bookings/s/YR75zgnfI02Lc5fuczpxfQ2?ismsaljsauthenabled' width='1200' height='1200' scrolling='yes' style='border:0'></iframe> -->
 </template>

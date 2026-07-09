@@ -13,15 +13,21 @@
   }
 
   public void beforeInsert(List<SObject> newItems) {
-    APER11_Quote_Management.setQuoteName(Trigger.new);        
-    
+    APER11_Quote_Management.setQuoteName(Trigger.new);
+
     //SNICA - Translate Payment Terms, Payment Method and Indexation Index
 		APER11_Quote_Management.getLabelsTranslationsFromScheme(Trigger.new);
+
+    // Auto-flag Framework Agreement quotes based on Opportunity Type
+    APER11_FrameworkAgreement_Management.setFrameworkFlag(Trigger.new);
   }
 
   public void afterInsert(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
     //AAZ - Create Docugen records to be used for the contract template
     APER11_Quote_Management.createDocugenQuoteStoreAcceptor(Trigger.new);
+
+    // Create one Framework_Scope__c record per child account for framework agreement quotes
+    APER11_FrameworkAgreement_Management.createFrameworkScopeRecords(Trigger.new);
     APER11_Quote_Management.createSendQuoteTask(Trigger.new);
     APER11_Quote_Management.createAnonymizedId(Trigger.new);
     APER11_Quote_Management.updateOppStageFromQuotes(Trigger.new, null);

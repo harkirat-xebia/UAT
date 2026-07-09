@@ -26,7 +26,8 @@ public with sharing class APBE01_LeadBelfirst {
             FROM Lead
             WHERE Id IN :leadIds
               AND ER_BUPicklist__c IN ('BE', 'LU')
-              AND (ER_Registration_Number__c != null OR RCS_Number__c != null)
+              AND (ER_Registration_Number__c != null OR RCS_Number__c != null
+                   OR (ER_BUPicklist__c = 'BE' AND ER_VAT_Number__c LIKE 'BE%'))
               AND ER_Lead_sub_source__c != 'Econtratonline'
               AND (ER_Legal_Name__c = null
                 OR Street = null
@@ -44,7 +45,16 @@ public with sharing class APBE01_LeadBelfirst {
             for (Lead lead : leads) {
                 try {
                     Boolean isLU = lead.ER_BUPicklist__c == 'LU';
-                    String regNum = isLU ? lead.RCS_Number__c : lead.ER_Registration_Number__c;
+                    String regNum;
+                    if (isLU) {
+                        regNum = lead.RCS_Number__c;
+                    } else if (String.isNotBlank(lead.ER_Registration_Number__c)) {
+                        regNum = lead.ER_Registration_Number__c;
+                    } else if (String.isNotBlank(lead.ER_VAT_Number__c)
+                               && lead.ER_VAT_Number__c.toUpperCase().startsWith('BE')) {
+                        // Strip "BE" prefix — the Belfirst call will re-add it as the BVDID
+                        regNum = lead.ER_VAT_Number__c.replaceFirst('(?i)^BE', '');
+                    }
                     if (String.isBlank(regNum)) continue;
                     String belFirstId = isLU ? regNum.replaceFirst('(?i)^LU', '') : 'BE' + regNum;
                     String idType     = isLU ? 'RCSID' : 'BVDID';
@@ -77,11 +87,21 @@ public with sharing class APBE01_LeadBelfirst {
     // Returns true when a lead should trigger a Belfirst call.
     // Kept public so the trigger handler can pre-filter before scheduling the future.
     public static Boolean isEligible(Lead lead) {
-        Boolean hasId = lead.ER_BUPicklist__c == 'LU'
+        Boolean isBE = lead.ER_BUPicklist__c == 'BE';
+        Boolean isLU = lead.ER_BUPicklist__c == 'LU';
+
+        Boolean hasRegistrationId = isLU
             ? String.isNotBlank(lead.RCS_Number__c)
             : String.isNotBlank(lead.ER_Registration_Number__c);
-        return (lead.ER_BUPicklist__c == 'BE' || lead.ER_BUPicklist__c == 'LU')
-            && hasId
+
+        // BE-only fallback: VAT number starting with "BE" can substitute for a missing registration number
+        Boolean hasVatFallback = isBE
+            && String.isBlank(lead.ER_Registration_Number__c)
+            && String.isNotBlank(lead.ER_VAT_Number__c)
+            && lead.ER_VAT_Number__c.toUpperCase().startsWith('BE');
+
+        return (isBE || isLU)
+            && (hasRegistrationId || hasVatFallback)
             && lead.ER_Lead_sub_source__c != 'Econtratonline'
             && (String.isBlank(lead.ER_Legal_Name__c)
                 || String.isBlank(lead.Street)
@@ -169,6 +189,15 @@ public with sharing class APBE01_LeadBelfirst {
             String vat = (bvdId != null && bvdId.startsWith('BE')) ? bvdId : lvat;
             if (vat != null) { updated.ER_VAT_Number__c = vat; dirty = true; res.filledFields.add('ER_VAT_Number__c'); }
             else               res.missingFields.add('ER_VAT_Number__c');
+        }
+        // When enrichment was triggered via VAT fallback (registration number was empty,
+        // VAT has BE prefix), backfill the registration number by stripping the BE prefix
+        if (String.isBlank(lead.ER_Registration_Number__c)
+            && String.isNotBlank(lead.ER_VAT_Number__c)
+            && lead.ER_VAT_Number__c.toUpperCase().startsWith('BE')) {
+            updated.ER_Registration_Number__c = lead.ER_VAT_Number__c.replaceFirst('(?i)^BE', '');
+            dirty = true;
+            res.filledFields.add('ER_Registration_Number__c');
         }
 
         // Stamp missing fields onto the Lead so it's visible on the record.

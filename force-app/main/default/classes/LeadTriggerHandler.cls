@@ -79,7 +79,12 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
       Lead oldLead = (Lead) oldItems.get(newLead.Id);
       Boolean regNumJustSet = String.isBlank(oldLead.ER_Registration_Number__c)
         && String.isNotBlank(newLead.ER_Registration_Number__c);
-      if (regNumJustSet && APBE01_LeadBelfirst.isEligible(newLead)) belfirstLeadIds.add(newLead.Id);
+      Boolean vatBeJustSet = newLead.ER_BUPicklist__c == 'BE'
+        && String.isBlank(newLead.ER_Registration_Number__c)
+        && String.isBlank(oldLead.ER_VAT_Number__c)
+        && String.isNotBlank(newLead.ER_VAT_Number__c)
+        && newLead.ER_VAT_Number__c.toUpperCase().startsWith('BE');
+      if ((regNumJustSet || vatBeJustSet) && APBE01_LeadBelfirst.isEligible(newLead)) belfirstLeadIds.add(newLead.Id);
     }
     //System.debug('APBE01 afterUpdate: eligible lead IDs = ' + belfirstLeadIds);
     if (!belfirstLeadIds.isEmpty()) APBE01_LeadBelfirst.autoPopulateIfEmpty(belfirstLeadIds);
