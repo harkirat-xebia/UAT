@@ -32,6 +32,26 @@ public with sharing class APER11_FrameworkAgreement_Management {
         }
         if (frameworkQuotes.isEmpty()) return;
 
+        // Duplicate prevention — skip quotes that already have Framework_Scope__c records
+        Set<Id> frameworkQuoteIds = new Set<Id>();
+        for (Quote q : frameworkQuotes) frameworkQuoteIds.add(q.Id);
+
+        Set<Id> quotesWithExistingScope = new Set<Id>();
+        for (AggregateResult ar : [
+            SELECT Quote__c q FROM Framework_Scope__c
+            WHERE Quote__c IN :frameworkQuoteIds
+            GROUP BY Quote__c
+        ]) {
+            quotesWithExistingScope.add((Id) ar.get('q'));
+        }
+
+        List<Quote> quotesToProcess = new List<Quote>();
+        for (Quote q : frameworkQuotes) {
+            if (!quotesWithExistingScope.contains(q.Id)) quotesToProcess.add(q);
+        }
+        frameworkQuotes = quotesToProcess;
+        if (frameworkQuotes.isEmpty()) return;
+
         Map<Id, Opportunity> oppMap = new Map<Id, Opportunity>(
             [SELECT Id, AccountId FROM Opportunity WHERE Id IN :oppIds]
         );
