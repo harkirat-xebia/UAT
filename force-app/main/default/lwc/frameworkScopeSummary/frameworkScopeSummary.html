@@ -1,0 +1,51 @@
+<template>
+    <template if:true={isFramework}>
+        <lightning-card title="Framework Scope Status" icon-name="standard:record_lookup">
+            <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+                </template>
+
+                <template if:false={isLoading}>
+                    <div class="slds-grid slds-wrap slds-gutters_small slds-m-top_x-small">
+
+                        <!-- Status -->
+                        <div class="slds-col slds-size_1-of-3">
+                            <p class="slds-text-title slds-text-color_weak slds-m-bottom_xx-small">Scope Status</p>
+                            <div class="slds-grid slds-grid_vertical-align-center">
+                                <template if:true={scopeDefined}>
+                                    <lightning-icon icon-name="utility:check" size="x-small" variant="success" class="slds-m-right_xx-small"></lightning-icon>
+                                    <span class="slds-text-color_success slds-text-body_regular">Defined</span>
+                                </template>
+                                <template if:false={scopeDefined}>
+                                    <lightning-icon icon-name="utility:warning" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                    <span class="slds-text-body_regular">Not Defined</span>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Entities Included -->
+                        <div class="slds-col slds-size_1-of-3">
+                            <p class="slds-text-title slds-text-color_weak slds-m-bottom_xx-small">Entities Included</p>
+                            <p class="slds-text-heading_medium">{includedCount}</p>
+                        </div>
+
+                        <!-- Last Modified -->
+                        <div class="slds-col slds-size_1-of-3">
+                            <p class="slds-text-title slds-text-color_weak slds-m-bottom_xx-small">Last Modified</p>
+                            <template if:true={lastModified}>
+                                <span class="slds-text-body_regular">{lastModified}</span>
+                            </template>
+                            <template if:false={lastModified}>
+                                <span class="slds-text-color_weak">—</span>
+                            </template>
+                        </div>
+
+                    </div>
+                </template>
+
+            </div>
+        </lightning-card>
+    </template>
+</template>

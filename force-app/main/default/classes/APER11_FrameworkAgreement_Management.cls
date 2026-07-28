@@ -30,6 +30,7 @@ public with sharing class APER11_FrameworkAgreement_Management {
                 oppIds.add(q.OpportunityId);
             }
         }
+
         if (frameworkQuotes.isEmpty()) return;
 
         // Duplicate prevention — skip quotes that already have Framework_Scope__c records
@@ -47,7 +48,9 @@ public with sharing class APER11_FrameworkAgreement_Management {
 
         List<Quote> quotesToProcess = new List<Quote>();
         for (Quote q : frameworkQuotes) {
-            if (!quotesWithExistingScope.contains(q.Id)) quotesToProcess.add(q);
+            if (!quotesWithExistingScope.contains(q.Id)) {
+                quotesToProcess.add(q);
+            }
         }
         frameworkQuotes = quotesToProcess;
         if (frameworkQuotes.isEmpty()) return;
@@ -65,6 +68,7 @@ public with sharing class APER11_FrameworkAgreement_Management {
                 rootAccountIds.add(opp.AccountId);
             }
         }
+
         if (rootAccountIds.isEmpty()) return;
 
         Map<Id, Map<Id, Account>> rootToDescendants = buildDescendantMap(rootAccountIds);
@@ -92,13 +96,12 @@ public with sharing class APER11_FrameworkAgreement_Management {
 
     // Single shared BFS across ALL root accounts — at most 5 SOQL queries total regardless of root count
     @TestVisible
-    private static Map<Id, Map<Id, Account>> buildDescendantMap(Set<Id> rootAccountIds) {
+    public static Map<Id, Map<Id, Account>> buildDescendantMap(Set<Id> rootAccountIds) {
         Map<Id, Map<Id, Account>> result = new Map<Id, Map<Id, Account>>();
         for (Id rootId : rootAccountIds) {
             result.put(rootId, new Map<Id, Account>());
         }
 
-        // Track which root ancestor each visited account belongs to
         Map<Id, Id> accountToRoot = new Map<Id, Id>();
         for (Id rootId : rootAccountIds) {
             accountToRoot.put(rootId, rootId);
