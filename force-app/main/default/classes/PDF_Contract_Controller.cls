@@ -209,7 +209,7 @@ public without sharing class PDF_Contract_Controller {
             FROM Account WHERE Id =: accountId];
             enterpriseNumber = mainAccount.ER_Registration_Number__c == null ? mainAccount.ER_Enterprise_Number__c : mainAccount.ER_Registration_Number__c;
             businessUnit = mainAccount.ER_BUPicklist__c;
-            String pdfLang = ApexPages.currentPage().getParameters().get('language');
+            String pdfLang = normalizeLang(ApexPages.currentPage().getParameters().get('language'));
             if (businessUnit != 'BE') {
                 if(pdfLang == 'FR'){
                     appendixHtml = getResourceHtml('Appendix1_Lux_HTML_FR');
@@ -506,7 +506,7 @@ public without sharing class PDF_Contract_Controller {
                 contractStartDate = day + '/' + month + '/' + year;
             }
     
-            String langParam = ApexPages.currentPage().getParameters().get('language');
+            String langParam = normalizeLang(ApexPages.currentPage().getParameters().get('language'));
             System.debug('Language parameter from page: ' + langParam);
     
             if (langParam == 'FR') {
@@ -668,6 +668,11 @@ public without sharing class PDF_Contract_Controller {
             }
             return null;
         }
+    }
+
+    private static String normalizeLang(String raw) {
+        if (raw == null) return raw;
+        return raw.startsWith('LU_') ? raw.substring(3) : raw;
     }
 
     private String getResourceHtml(String name) {

@@ -233,9 +233,6 @@ public without sharing class APER11_Quote_Management {
     for (Quote q : eligibleQuotes.values()) {
         Set<String> existingSubjects = existingTasksByQuoteId.get(q.Id);
 
-        if (existingSubjects == null || !existingSubjects.contains('Send Quote')) {
-            tasksToInsert.add(createTask('Send Quote', q));
-        }
         if (existingSubjects == null || !existingSubjects.contains('Send Structure Form')) {
             tasksToInsert.add(createTask('Send Structure Form', q));
         }

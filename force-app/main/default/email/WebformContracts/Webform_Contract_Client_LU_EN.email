@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<title></title>
+<!--[if mso]>
+<style>
+            * {
+                font-family: sans-serif !important;
+            }
+</style>
+<![endif]-->
+<style>
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+       .center{
+          text-align:center;
+      }
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto;
+        }
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+        *[x-apple-data-detectors],
+        .x-gmail-data-detectors,
+        .x-gmail-data-detectors *,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+        img.g-img + div {
+            display: none !important;
+        }
+        .button-link {
+            text-decoration: none !important;
+        }
+        @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+            .email-container {
+                min-width: 320px !important;
+            }
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            .email-container {
+                min-width: 375px !important;
+            }
+        @media only screen and (min-device-width: 414px) {
+            .email-container {
+                min-width: 414px !important;
+            }
+</style>
+<style>
+    .button-td,
+    .button-a {
+        transition: all 100ms ease-in;
+    }
+    .button-td:hover,
+    .button-a:hover {
+        background: #323232 !important;
+        border-color: #323232 !important;
+    }
+    @media screen and (max-width: 480px) {
+        img[class=header] {
+            content: url(images/header-mobile.jpg)!important;
+        }
+        .fluid {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        .stack-column,
+        .stack-column-center {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            direction: ltr !important;
+        }
+        .stack-column-center {
+            text-align: center !important;
+        }
+        .center-on-narrow {
+            text-align: center !important;
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            float: none !important;
+        }
+        table.center-on-narrow {
+            display: inline-block !important;
+        }
+        .email-container p {
+            font-size: 14px !important;
+        }
+    }
+</style>
+<!--[if gte mso 9]>
+<xml>
+<o:OfficeDocumentSettings>
+<o:AllowPNG/>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+</head>
+<body width="100%" bgcolor="#e6e6e6" style="margin: 0; mso-line-height-rule: exactly;">
+<center style="width: 100%; background: #e6e6e6; text-align: left;">
+<!--[if mso | IE]>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#e6e6e6">
+<tr>
+<td>
+<![endif]-->
+<div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Dear Customer, Thank you for choosing us to allocate <strong> {Product} </strong> vouchers to your employees. Please find <strong>attached  your contract</strong> in PDF format</div>
+<div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+</div>
+<div style="max-width: 680px; margin: auto;" class="email-container">
+<!--[if mso]>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="680" align="center">
+<tr>
+<td>
+<![endif]-->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
+<tr>
+<td style="padding: 20px 0; text-align: center">
+<a href="https://www.edenred.lu/" target="_blank"><img src="https://doc.edenred.be/notifs/Edenred_Color_Digital-use.png" width="300" height="50" alt="Edenred" border="0" style="height: auto; font-family: sans-serif; font-size: 14px; line-height: 140%; color: #323232;"></a>
+</td>
+</tr>
+</table>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;" class="email-container">
+<tr>
+<td bgcolor="#ffffff">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="padding:20px 40px; font-family: sans-serif; font-size: 14px; line-height: 140%; color: #323232; text-align: left;">
+<p style="margin: 0;">Dear customer,<br><br>
+								  Thank you for choosing us to allocate <strong> {Product}</strong> vouchers to your employees. Please find <strong>attached your contract</strong> in PDF format.</p><br/>
+<p style="margin: 0;"><span style="color: #ff0d84; font-family: sans-serif; font-size: 14px; line-height: 140%; text-align: center;"> Now you've registered,
+ <strong>it's time to place your first Edenred Meal Order !</strong></span>
+ <br> </br>
+</p>
+<p style="margin: 0;"><span style="color: #162056; font-weight: bold; font-size: 18px;">Place your order now</span><br></p>
+
+<p> Go to <strong>your MyEdenred.lu employer area</strong> to place your order</p>
+
+<p><strong style="color:#0085CA; font-size: 15px;">If you have a trustee, an accountant or a payroll service provider</strong><br/>
+			Be sure to contact them to make sure they have all the necessary information about your employees and to place your order</p>
+
+</td>
+</tr>
+<tr>
+<td style="text-align:center;padding:0px 0 20px 0px; font-family:Arial, sans-serif; font-size: 15px; line-height: 140%; color: #323232; background-color: #ffffff; text-align: center;" class="center">
+<center>
+<div><!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.myedenred.lu/" style="height:40px;v-text-anchor:middle;width:250px;" arcsize="63%" stroke="f" fillcolor="#0085CA">
+<w:anchorlock/>
+<center>
+<![endif]-->
+<a href="https://www.myedenred.lu/"
+							style="background-color:#F72717 ;border-radius:25px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:16px; line-height:40px;text-align:center;text-decoration:none;width:250px;-webkit-text-size-adjust:none; font-weight: bold; padding: 0px 20px">Go to MyEdenred.lu</a>
+<!--[if mso]>
+</center>
+</v:roundrect>
+<![endif]--></div>
+</center>
+</td>
+</tr>
+<tr>
+<td style="padding:20px 40px; font-family: sans-serif; font-size: 14px; line-height: 140%; color: #323232; text-align: left;">
+<p style="margin: 0;"><span style="color: #162056; font-weight: bold; font-size: 18px;">Need help?</span><br></p>
+<p>You can find answers to all your questions in our Help Center:</p>
+<ul style="padding:0 0 10px 20px;">
+<li>
+<a href="https://digitalcustomer.edenred.lu/hc/en-us/articles/6009856947089-My-first-order" title="First Order">First Order</a>
+</li>
+<li><a href="https://digitalcustomer.edenred.lu/hc/en-us/articles/6009767476753-How-to-order-through-my-customer-web-space" title="How to place an order on MyEdenred"> How to place an order on MyEdenred</a>
+</li>
+<li><a href="https://digitalcustomer.edenred.lu/hc/en-us/articles/6010268397457-Which-possibilities-does-my-customer-webspace-offer-me" title="Features of the employer area on MyEdenred">Features of the employer area on MyEdenred</a>
+</li>
+<li><a href="https://digitalcustomer.edenred.lu/hc/en-us" title="digitalcustomer.edenred.lu">… and many more on digitalcustomer.edenred.lu</a>
+</li>
+</ul>
+<p>See you soon,</p>
+<p style="margin: 0; padding:0 0 20px 0;">
+										The Edenred Team</p><br/>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td aria-hidden="true" height="40" style="font-size: 0; line-height: 0;">&nbsp;
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, sans-serif; font-size:12px; line-height:15px; color:#162056;" align="center">Any more questions? <a style="color:#162056; font-weight: bold; text-decoration:underline;" target="_blank" href="https://digitalcustomer.edenred.lu/hc/en-us/requests/new">Contact us</a></td>
+</tr>
+<tr>
+<td aria-hidden="true" height="40" style="font-size: 0; line-height: 0;">&nbsp;
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr>
+</table>
+<![endif]-->
+</div>
+<table role="presentation" bgcolor="#ffffff" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+<tr>
+<td valign="top" align="center">
+<div style="max-width: 680px; margin: auto;" class="email-container">
+<!--[if mso]>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="680" align="center">
+<tr>
+<td>
+<![endif]-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" class="wrapper">
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td align="left" class="pad_bottom">
+<a href="https://www.edenred.lu/" target="_blank"><img src="https://doc.edenred.be/notifs/Edenred_Color_Digital-use.png" width="48" height="32" alt="EDENRED" title="Edenred" style="display:block;" border="0" /></a>
+</td>
+<td>
+<table width="126" border="0" cellspacing="0" cellpadding="0" align="right">
+<tr>
+<td width="24"><a href="https://www.facebook.com/EdenredBelux" target="_blank"><img src="https://doc.edenred.be/notifs/social-facebook_02.png" width="24" height="24" alt="FACEBOOK" title="Facebook" style="display:block;" border="0" /></a></td>
+<td width="24"><a href="https://www.instagram.com/edenred_belgium/" target="_blank"><img src="https://doc.edenred.be/notifs/social-instagram_02.png" width="24" height="24" alt="INSTAGRAM" title="Instagram" style="display:block;" border="0" /></a></td>
+<td width="24"><a href="https://www.linkedin.com/company/edenred-belgium" target="_blank"><img src="https://doc.edenred.be/notifs/social-linkedin_02.png" width="24" height="24" alt="LINKEDIN" title="Linkedin" style="display:block;" border="0" /></a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr>
+</table>
+<![endif]-->
+</div>
+</td>
+</tr>
+</table>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table>
+<![endif]-->
+</center>
+</body>
+</html>

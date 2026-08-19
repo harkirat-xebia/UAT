@@ -515,6 +515,6 @@ public inherited sharing class BE_General_Conditions_Controller {
         }
 
         pdf.getParameters().put('local',pageLanguage);
-        BE_ContractEmailGenerator.sendEmailWithECPDFAttachement(contractId, emailAddress, accountId, opportunityId, pdf,stakeholderType,product_fullname, pageLanguage.toLowerCase());
+        BE_ContractEmailGenerator.sendEmailWithECPDFAttachement(contractId, emailAddress, accountId, opportunityId, pdf,stakeholderType,product_fullname, pageLanguage.toLowerCase(), 'BE');
     }
 }

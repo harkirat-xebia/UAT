@@ -261,6 +261,12 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
     @track selectedLanguage = 'en_US';
 
     get languageOptions() {
+        if (this.businessUnit === 'LU') {
+            return [
+                { label: 'EN', value: 'lu_en' },
+                { label: 'FR', value: 'lu_fr' }
+            ];
+        }
         return [
             { label: 'FR', value: 'fr_BE' },
             { label: 'NL', value: 'nl_BE' },
@@ -367,6 +373,8 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 this.dialCode = '+352';
                 this.countryCodePhone = 'LU';
                 this.dialCodePhone = '+352';
+                // Remap language to LUX-specific values so the correct email template is used
+                this.selectedLanguage = (this.selectedLanguage === 'fr_BE') ? 'lu_fr' : 'lu_en';
             }
             this.translatedProductName = ' ' + result.translatedName + ' *';
             this.productTranslation = result.translatedName;

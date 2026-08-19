@@ -480,13 +480,21 @@ public without sharing class SyncClientContractService {
             myDateTime = contract[0].CustomerSignedDate != null ? Datetime.newInstance(contract[0].CustomerSignedDate, myTime) : null;
             contractWrap.signed_date = myDateTime != null ? myDateTime.formatGMT('yyyy-MM-dd\'T\'00:00:00\'Z\''): null;
             contractWrap.invoicing_contact_id = operationalRoleContactIdMap.containsKey('Invoicing Contact') ? operationalRoleContactIdMap.get('Invoicing Contact') : null;
-            //New 
             Id counterpartyCrmId;
             if (contract[0].CustomerSignedId != null) {
                 Id acrIdForCounterparty = contactToAcrIdMap.get(contract[0].CustomerSignedId);
-                counterpartyCrmId = (acrIdForCounterparty != null)
-                    ? acrIdForCounterparty
-                    : contract[0].CustomerSignedId; // fallback to Contact Id
+                if (acrIdForCounterparty != null) {
+                    counterpartyCrmId = acrIdForCounterparty;
+                } else {
+                    // acrList already fetched ALL ACRs for this account — not in map means it doesn't exist
+                    AccountContactRelation newAcr = new AccountContactRelation(
+                        AccountId = contract[0].AccountId,
+                        ContactId = contract[0].CustomerSignedId
+                    );
+                    insert newAcr;
+                    counterpartyCrmId = newAcr.Id;
+                    contactToAcrIdMap.put(contract[0].CustomerSignedId, counterpartyCrmId);
+                }
             }
             contractWrap.contact_counterparty_signed_id = counterpartyCrmId;
             //New logic
@@ -505,7 +513,7 @@ public without sharing class SyncClientContractService {
                     
                     CreateClientRequestWrapper.ContactWrapper contactWrap = new CreateClientRequestWrapper.ContactWrapper();
                     //CreateClientRequestWrapper.Contact contactWrap = new CreateClientRequestWrapper.Contact();
-                    contactWrap.crm_id = counterpartyCrmId; // ACR ID or Contact ID
+                    contactWrap.crm_id = counterpartyCrmId;
                     contactWrap.first_name = conObj.FirstName;
                     contactWrap.last_name = conObj.LastName;
                     contactWrap.language = conObj.ER_Language__c != null 
@@ -1882,7 +1890,7 @@ private static String buildBenefitJson(CreateClientRequestWrapper w) {
                     
                     //CreateClientRequestWrapper.ContactWrapper contactWrap = new CreateClientRequestWrapper.ContactWrapper();
                     CreateClientContractRequestWrapper.Contact contactWrap = new CreateClientContractRequestWrapper.Contact();
-                    contactWrap.crm_id = counterpartyCrmId; // ACR ID or Contact ID
+                    contactWrap.crm_id = counterpartyCrmId;
                     contactWrap.first_name = conObj.FirstName;
                     contactWrap.last_name = conObj.LastName;
                     contactWrap.language = conObj.ER_Language__c != null 

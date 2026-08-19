@@ -295,7 +295,6 @@ public class APER20_Account_Management_TEST {
     
     @IsTest
     static void testManageStatus() {
-        Account newMerchantAccount = APER07_UtilityTestMethod.insertAccount('acctWithContract', 'ER_Company_Account_RT');
         List<Account> accountList = [
             SELECT id, Name, ER_Status__c, ER_Inactive_date__c, ER_Inactive_Reason__c
             FROM Account

@@ -8,7 +8,8 @@
 public with sharing class WSBE01_Belfirst {
   private String endPoint = 'https://webservices.bvdinfo.com/v1.3/belfirst/remoteaccess.asmx';
   private String username = 'Edenred-WS';
-  private String password = 'Belfirst-WS';
+  //private String password = 'Belfirst-WS';
+  private String password = 'hG_s71#M5g7r^';
 
   String sessionHandle = null;
 

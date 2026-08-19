@@ -16,7 +16,7 @@ public without sharing class BE_ContractEmailGenerator {
     public static final String PRODUCT_TCE_DETAIL = 'Electronic Ticket Compliment';
     public static final String PRODUCT_TRE_DETAIL = 'Electronic Ticket Restaurant';
 
-    public static void sendEmailWithECPDFAttachement(String contractId, String emailAddress, Id accountId, Id opportunityId, PageReference pdf,String stakeholderType,String product_fullname, String language) {
+    public static void sendEmailWithECPDFAttachement(String contractId, String emailAddress, Id accountId, Id opportunityId, PageReference pdf,String stakeholderType,String product_fullname, String language, String businessUnit) {
         try {
             // Define the email
             Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
@@ -25,17 +25,34 @@ public without sharing class BE_ContractEmailGenerator {
 
             //Prepare email body content using the email template
             EmailTemplate et;
-            if(stakeholderType.equals(BE_ContractEmailGenerator.CUSTOMER_STAKEHOLDER)) {
-                if(language.equals('nl_BE')) {
-                    et = [SELECT id,body,Subject,HtmlValue FROM EmailTemplate WHERE developerName = 'Webform_Contract_Client_NL'];
+            String normalizedLang = language != null ? language.toUpperCase() : '';
+            if (normalizedLang.startsWith('LU_')) {
+                normalizedLang = normalizedLang.substring(3);
+            }
+            Boolean isLU = businessUnit == 'LU';
+            if (stakeholderType.equals(BE_ContractEmailGenerator.CUSTOMER_STAKEHOLDER)) {
+                if (isLU) {
+                    et = (normalizedLang == 'EN')
+                        ? [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Client_LU_EN']
+                        : [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Client_LU_FR'];
+                } else if (normalizedLang == 'NL' || normalizedLang == 'NL_BE') {
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Client_NL'];
+                } else if (normalizedLang == 'EN') {
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Client_EN'];
                 } else {
-                    et = [SELECT id,body,Subject,HtmlValue FROM EmailTemplate WHERE developerName = 'Webform_Contract_Client_FR'];
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Client_FR'];
                 }
-            }else if(stakeholderType.equals(BE_ContractEmailGenerator.MERCHANT_STAKEHOLDER)) {
-                if(language.equals('nl_BE')) {
-                    et = [SELECT id,body,Subject,HtmlValue FROM EmailTemplate WHERE developerName = 'Webform_Contract_Merchant_NL'];
+            } else if (stakeholderType.equals(BE_ContractEmailGenerator.MERCHANT_STAKEHOLDER)) {
+                if (isLU) {
+                    et = (normalizedLang == 'EN')
+                        ? [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Merchant_LU_EN']
+                        : [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Merchant_LU_FR'];
+                } else if (normalizedLang == 'NL' || normalizedLang == 'NL_BE') {
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Merchant_NL'];
+                } else if (normalizedLang == 'EN') {
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Merchant_EN'];
                 } else {
-                    et = [SELECT id,body,Subject,HtmlValue FROM EmailTemplate WHERE developerName = 'Webform_Contract_Merchant_FR'];
+                    et = [SELECT Id, Body, Subject, HtmlValue FROM EmailTemplate WHERE DeveloperName = 'Webform_Contract_Merchant_FR'];
                 }
             }
 
@@ -43,6 +60,7 @@ public without sharing class BE_ContractEmailGenerator {
                 String subject = et.Subject;
                 String htmlBody = (et.HtmlValue!=null) ? et.HtmlValue : '';
                 String plainBody = (et.Body !=null) ? et.Body : '' ;
+                subject = subject.replace('{Product}', product_fullname);
                 htmlBody = htmlBody.replace('{Product}', product_fullname);
                 plainBody = plainBody.replace('{Product}', product_fullname);
 

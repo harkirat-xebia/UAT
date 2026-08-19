@@ -1906,6 +1906,8 @@ public without sharing class clientAutoEnrollmentComponentController {
             (lang == 'fr_be') ? 'FR' :
             (lang == 'de_be' || lang == 'de') ? 'DE' :
             (lang == 'en_us') ? 'EN' :
+            (lang == 'lu_en') ? 'LU_EN' :
+            (lang == 'lu_fr') ? 'LU_FR' :
             'FR';
  
         String local =
@@ -1913,6 +1915,14 @@ public without sharing class clientAutoEnrollmentComponentController {
             (pgLang == 'FR') ? 'fr_BE' :
             (pgLang == 'DE') ? 'de_BE' :
             'en_US';
+
+        String businessUnit = 'BE';
+        if (String.isNotBlank(productCode)) {
+            List<Product2> prods = [SELECT ER_BUPicklist__c FROM Product2 WHERE ProductCode = :productCode LIMIT 1];
+            if (!prods.isEmpty() && String.isNotBlank(prods[0].ER_BUPicklist__c)) {
+                businessUnit = prods[0].ER_BUPicklist__c;
+            }
+        }
         String pdfPageName;
 
         if (pgLang == 'NL') {
@@ -1923,6 +1933,10 @@ public without sharing class clientAutoEnrollmentComponentController {
             pdfPageName = 'PDF_Client_EN_AutoEnrollment';
         } else if (pgLang == 'DE') {
             pdfPageName = 'PDF_Client_DE_AutoEnrollment';
+        } else if (pgLang == 'LU_EN') {
+            pdfPageName = 'PDF_Client_EN_AutoEnrollment';
+        } else if (pgLang == 'LU_FR') {
+            pdfPageName = 'PDF_Client_FR_AutoEnrollment';
         } else {
             pdfPageName = 'PDF_Client_FR_AutoEnrollment';
         }
@@ -1940,7 +1954,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 		
 		BE_ContractEmailGenerator.sendEmailWithECPDFAttachement(
             contractId, emailAddress, accountId, opportunityId, pdf,
-            stakeholderType, productName, local
+            stakeholderType, productName, pgLang, businessUnit
         );
     }
 

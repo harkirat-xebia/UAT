@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body style="font-family: Arial, sans-serif; color: #333333; margin: 0; padding: 20px;">
+    <p>Cher(e) Partenaire,</p>
+    <p>Merci de faire confiance à Edenred Luxembourg. Nous avons le plaisir de vous confirmer que votre contrat pour <strong>{Product}</strong> a bien été enregistré.</p>
+    <p>Veuillez trouver votre contrat en pièce jointe de cet e-mail.</p>
+    <p>Pour toute question, n'hésitez pas à contacter notre équipe de support partenaires.</p>
+    <br/>
+    <p>Cordialement,</p>
+    <p><strong>Edenred Luxembourg</strong></p>
+</body>
+</html>

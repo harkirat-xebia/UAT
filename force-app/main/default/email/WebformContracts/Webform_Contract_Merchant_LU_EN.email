@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body style="font-family: Arial, sans-serif; color: #333333; margin: 0; padding: 20px;">
+    <p>Dear Merchant,</p>
+    <p>Thank you for partnering with Edenred Luxembourg. We are pleased to confirm that your contract for <strong>{Product}</strong> has been successfully registered.</p>
+    <p>Please find your contract attached to this email.</p>
+    <p>If you have any questions, please do not hesitate to contact our merchant support team.</p>
+    <br/>
+    <p>Kind regards,</p>
+    <p><strong>Edenred Luxembourg</strong></p>
+</body>
+</html>
