@@ -205,30 +205,92 @@ public without sharing class clientAutoEnrollmentComponentController {
         }
     }
 
+    /*  Canonicalises a Belgian enterprise number to bare digits so the stored value and every
+        lookup key match regardless of how the applicant typed it (0417.497.106 / BE0417497106).
+        Anything that is not a pure BE-style number - notably a Luxembourg RCS number such as
+        B12345 - is returned untouched, so letters are never stripped. */
+    private static String normalizeEnterpriseNumber(String value) {
+        if (String.isBlank(value)) {
+            return value;
+        }
+        String stripped = value.trim().replaceAll('[\\s.]', '');
+        if (stripped.length() > 2 && stripped.substring(0, 2).equalsIgnoreCase('BE') && stripped.substring(2).isNumeric()) {
+            stripped = stripped.substring(2);
+        }
+        return stripped.isNumeric() ? stripped : value;
+    }
+
+    /*  BE resolves through the CBE/BCE/KBO register (WSBE03_CbeApi); LU has no coverage in that
+        register so it stays on Belfirst. Method name kept so the LWC import is unchanged.
+
+        This never throws. A miss, an outage or a malformed response all return a fully populated
+        map of blanks plus ERROR_MESSAGE, so the form stays usable and the applicant can type the
+        company details by hand. Every failure is still written to ER_Error_Log__c. */
     @AuraEnabled
     public static Map<String, String> getInfoFromBelfirst(String enterpriseNumber, String language, String businessUnit){
-        Map<String, String> result;
-        try {
-            String idType = businessUnit == 'BE' ? 'BVDID' : 'RCSID';
-            String id = businessUnit == 'BE' ? 'BE' + enterpriseNumber : enterpriseNumber;
-            result = BE_WebForm_Controller_Helper.getInfosFromBelfirstCtrl(id, idType, language);
-            /* result = new Map<String, String>{
-                'error' => 'An error occurred while fetching data',
-                'details' => 'Disabled for Testing'
-            }; */
-            return result;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        if (businessUnit != 'BE') {
+            return getInfoFromBelfirstForLU(enterpriseNumber, language, businessUnit);
         }
+
+        try {
+            WSBE03_CbeApi.CompanyInfo info = WSBE03_CbeApi.fetchByEnterpriseNumber(enterpriseNumber, language);
+
+            if (info.found) {
+                return info.toLegacyMap();
+            }
+
+            //harkirat - a mistyped number is normal user behaviour, warn rather than error
+            logLookupIssue(
+                APER45_ErrorLog_Management.LogLevel.Warning,
+                'No company found in the CBE register for enterprise number ' + normalizeEnterpriseNumber(enterpriseNumber),
+                null, enterpriseNumber, language, businessUnit
+            );
+            return WSBE03_CbeApi.blankResult(Label.BE_Company_Info_Not_Found).toLegacyMap();
+
+        } catch (Exception e) {
+            logLookupIssue(APER45_ErrorLog_Management.LogLevel.Error, null, e, enterpriseNumber, language, businessUnit);
+            return WSBE03_CbeApi.blankResult(Label.BE_Company_Info_Error).toLegacyMap();
+        }
+    }
+
+    //harkirat - luxembourg is not in the belgian register, keep the existing belfirst path
+    private static Map<String, String> getInfoFromBelfirstForLU(String enterpriseNumber, String language, String businessUnit){
+        try {
+            return BE_WebForm_Controller_Helper.getInfosFromBelfirstCtrl(enterpriseNumber, 'RCSID', language);
+        } catch (Exception e) {
+            logLookupIssue(APER45_ErrorLog_Management.LogLevel.Error, null, e, enterpriseNumber, language, businessUnit);
+            return WSBE03_CbeApi.blankResult(Label.BE_Company_Info_Error).toLegacyMap();
+        }
+    }
+
+    //harkirat - logDurable publishes a platform event so the row survives any rollback
+    private static void logLookupIssue(APER45_ErrorLog_Management.LogLevel level, String message,
+                                       Exception e, String enterpriseNumber, String language, String businessUnit){
+        APER45_ErrorLog_Management.ErrorLogEntry entry = new APER45_ErrorLog_Management.ErrorLogEntry()
+            .withLogLevel(level)
+            .withSourceClass('clientAutoEnrollmentComponentController')
+            .withSourceMethod('getInfoFromBelfirst')
+            .withBusinessUnit(businessUnit)
+            .withPayload('enterpriseNumber=' + enterpriseNumber + '; businessUnit=' + businessUnit + '; language=' + language);
+
+        if (e != null) {
+            entry.withException(e);
+        }
+        if (String.isNotBlank(message)) {
+            entry.withMessage(message);
+        }
+        APER45_ErrorLog_Management.logDurable(entry);
     }
 
     //New method added by harkirat to fetch the contract status to hide the products
     @AuraEnabled(cacheable=true)
         public static String getActiveContractStatus(String enterpriseNumber) {
+        //harkirat - match the canonical stored format, not whatever the user typed
+        String registrationKey = normalizeEnterpriseNumber(enterpriseNumber);
         Contract c = [
-            SELECT Status 
-            FROM Contract 
-            WHERE Account.ER_Registration_Number__c = :enterpriseNumber
+            SELECT Status
+            FROM Contract
+            WHERE Account.ER_Registration_Number__c = :registrationKey
             AND Status = 'Activated'
             LIMIT 1
         ];
@@ -252,6 +314,10 @@ public without sharing class clientAutoEnrollmentComponentController {
     public static Map<String, Object> validateAndConvertLead(String vatNumber, Boolean subjectToVat, String phone, String commercialName, String legalForm, Integer numberOfBeneficiaries,
                                                             String enterpriseNumber, String registrationNumber, String billingAddress, String billingPostalCode, String businessUnit, String productCode,
                                                             String billingCity, String billingCountry, String productId, String productName, String leadId, String legalName, String sourceId, String pageLanguage, String jobTitle, String department, String subDepartment){
+        /*  harkirat - normalize once, it is both stored on the lead/account and used as the
+            account lookup key below. The LU RCS number in registrationNumber is left untouched. */
+        enterpriseNumber = normalizeEnterpriseNumber(enterpriseNumber);
+
         Map<String, Object> result = new Map<String, Object>();
         Decimal sizeLimit = 0;
         Lead existingLead;
@@ -592,10 +658,12 @@ public without sharing class clientAutoEnrollmentComponentController {
         if (String.isBlank(enterpriseNumber)) {
             return false;
         }
+        //harkirat - match the canonical stored format, not whatever the user typed
+        String registrationKey = normalizeEnterpriseNumber(enterpriseNumber);
         List<Account> accounts = [
             SELECT Id
             FROM Account
-            WHERE ER_Registration_Number__c = :enterpriseNumber
+            WHERE ER_Registration_Number__c = :registrationKey
             LIMIT 1
         ];
         if (accounts.isEmpty()) {
@@ -658,7 +726,9 @@ public without sharing class clientAutoEnrollmentComponentController {
             }
             List<ProductWrapper> results = new List<ProductWrapper>();
             Set<Id> activeSolutionSet = new Set<Id>();
-            List<ER_Solution_Line_Item__c> activeSolutionList = [Select Id, ER_Solution__c, ER_Solution__r.ProductCode, ER_Status__c FROM ER_Solution_Line_Item__c WHERE ER_Status__c = 'Active' AND ER_Account__r.ER_Registration_Number__c=:enterpriseNumber];
+            //harkirat - match the canonical stored format, not whatever the user typed
+            String registrationKey = normalizeEnterpriseNumber(enterpriseNumber);
+            List<ER_Solution_Line_Item__c> activeSolutionList = [Select Id, ER_Solution__c, ER_Solution__r.ProductCode, ER_Status__c FROM ER_Solution_Line_Item__c WHERE ER_Status__c = 'Active' AND ER_Account__r.ER_Registration_Number__c=:registrationKey];
             List<Product2> solutionListForBU = [Select Id, Name, productCode FROM Product2 WHERE ER_Type__c = 'Solution' AND ER_BUPicklist__c =: businessUnit AND IsActive = true AND Solution_Group__c ='Benefits' AND (ProductCode !=: Constants.ADDITIONAL_SERVICE_CODE_BE AND ProductCode !=: Constants.ADDITIONAL_SERVICE_CODE_LU) ORDER BY ER_Line_Order__c ASC];
 
             if(!activeSolutionList.isEmpty()){
@@ -994,10 +1064,12 @@ public without sharing class clientAutoEnrollmentComponentController {
             throw new AuraHandledException('Invalid parameters.');
         }
 
+        //harkirat - match the canonical stored format, not whatever the user typed
+        String registrationKey = normalizeEnterpriseNumber(enterpriseNumber);
         List<Account> accounts = [
             SELECT Id, Name, NumberOfEmployees, HU_HQ_Contact__c, ER_Registration_Number__c
             FROM Account
-            WHERE ER_Registration_Number__c = :enterpriseNumber
+            WHERE ER_Registration_Number__c = :registrationKey
             LIMIT 1
         ];
 

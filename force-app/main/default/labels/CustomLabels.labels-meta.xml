@@ -136,6 +136,22 @@
         <value>Standard-PL-00016100</value>
     </labels>
     <labels>
+        <fullName>BE_Company_Info_Error</fullName>
+        <categories>BELU WebForm</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BE Company Info Lookup Failed</shortDescription>
+        <value>We are having a problem retrieving the company information. Please try again later.</value>
+    </labels>
+    <labels>
+        <fullName>BE_Company_Info_Not_Found</fullName>
+        <categories>BELU WebForm</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BE Company Info Not Found In Register</shortDescription>
+        <value>We could not find a company with this enterprise number. Please check the number and try again.</value>
+    </labels>
+    <labels>
         <fullName>BE_Error</fullName>
         <categories>Offer Light</categories>
         <language>en_US</language>
@@ -1539,6 +1555,118 @@
         <protected>false</protected>
         <shortDescription>LABS_SF_Asset_Transaction_Clear</shortDescription>
         <value>Clear</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Client_Only</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Client_Only</shortDescription>
+        <value>Amending a contract from a lead is only available for client leads and client contracts.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_No_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_No_Opportunity</shortDescription>
+        <value>This contract has no source opportunity to amend from.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_Not_Active</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_Not_Active</shortDescription>
+        <value>Only an activated contract can be amended.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_Other_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_Other_Account</shortDescription>
+        <value>This contract belongs to a company with a different registration number.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_Other_BU</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_Other_BU</shortDescription>
+        <value>This contract belongs to another business unit.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_Subscription</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_Subscription</shortDescription>
+        <value>A subscription contract cannot be amended from a lead.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Contract_Terminated_Agreement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Contract_Terminated_Agreement</shortDescription>
+        <value>Not possible to amend a contract linked to a terminated framework or referral agreement.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Different_Solution</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Different_Solution</shortDescription>
+        <value>The product on this lead belongs to a different solution than this contract.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Lines_Not_Copied</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Lines_Not_Copied</shortDescription>
+        <value>The contract line items could not all be copied to the amendment. Nothing has been changed.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Success</shortDescription>
+        <value>Contract amended and lead converted.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Lead_Converted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Lead_Converted</shortDescription>
+        <value>This lead has already been converted.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Lead_No_CRN</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Lead_No_CRN</shortDescription>
+        <value>Fill in the registration number before amending a contract.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Lead_No_Product</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Lead_No_Product</shortDescription>
+        <value>Set the product of interest on this lead before amending a contract.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Lead_Not_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Lead_Not_Found</shortDescription>
+        <value>This lead could not be read.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_No_Price</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_No_Price</shortDescription>
+        <value>No active price is set up for this product in the contract price book.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Product_Already_On_Contract</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Product_Already_On_Contract</shortDescription>
+        <value>This contract already includes the product on the lead.</value>
     </labels>
     <labels>
         <fullName>LABS_SF_AvoidAmendement</fullName>

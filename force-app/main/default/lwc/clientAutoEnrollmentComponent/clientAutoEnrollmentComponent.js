@@ -740,8 +740,13 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 else{
                     this.vatCheckbox = false;
                 }
-            } 
-            this.legalForm = this.enterpriseDetails.TYPE;       
+            }
+            this.legalForm = this.enterpriseDetails.TYPE;
+            // the lookup returns blanks plus a message instead of failing, so the applicant
+            // can still fill the company details in by hand
+            if(this.enterpriseDetails.ERROR_MESSAGE){
+                this.showError(this.enterpriseDetails.ERROR_MESSAGE);
+            }
         })
         .catch(error=>{
             console.log(error);
@@ -941,9 +946,9 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 pays,
                 vatCheckbox
             } = child.getData();
-
+        
             console.log('Got from child:', enterpriseNum, registrationNumber, businessName, commercialName, codeTVA, streetNumber, city, postalCode, pays, vatCheckbox);
-
+        
             // For LU the RCS Number is held in enterpriseNum; keep enterpriseNumber as the Belfirst/account-lookup key
             this.enterpriseNumber = enterpriseNum;
             this.registrationNumber = registrationNumber;
@@ -965,9 +970,9 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 postalCode,
                 pays
             ].every(value => !value);
-
+        
             this.companyValuesAreNull = allValuesNullOrEmpty;
-        }
+        }        
     }
     fetchLeadDetailsFromChild(){
         const child = this.template.querySelector('c-client-auto-enrollment-component-phase-1');
@@ -1186,8 +1191,8 @@ export default class ClientAutoEnrollmentComponent extends NavigationMixin(Light
                 this.optin = true;
                 
                 const nifValue = result.account.ER_Enterprise_Number__c
-                    ? result.account.ER_Enterprise_Number__c
-                    : result.account.ER_Registration_Number__c;
+                ? result.account.ER_Enterprise_Number__c 
+                : result.account.ER_Registration_Number__c;
                 if (this.businessUnit === 'LU') {
                     this.enterpriseNumber = result.account.RCS_Number__c;
                     this.registrationNumber = nifValue;
