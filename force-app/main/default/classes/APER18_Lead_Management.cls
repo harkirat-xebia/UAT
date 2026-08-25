@@ -1045,4 +1045,43 @@ public class APER18_Lead_Management {
       }
     }
   }
+
+  /**
+   * @author harkirat
+   * @date 21/08/2026
+   * @description Stamp the qualification end date when a lead is converted or rejected.
+   *              Record-triggered flows do not run during Database.convertLead, so the
+   *              Lead_Qualification_Timestamps flow never fires on automatic conversions.
+   *              Leads owned by a guest user (webform / auto-enrollment) are excluded.
+   * @param leadsFromTrigger
+   */
+  public static void stampQualificationEnd(List<Lead> leadsFromTrigger) {
+    List<Lead> leadsToStamp = new List<Lead>();
+    Set<Id> ownerIds = new Set<Id>();
+
+    for (Lead eachLead : leadsFromTrigger) {
+      if (
+        eachLead.Qualification_End__c == null &&
+        (eachLead.IsConverted || eachLead.Status == Constants.REJECTED)
+      ) {
+        leadsToStamp.add(eachLead);
+        ownerIds.add(eachLead.OwnerId);
+      }
+    }
+
+    if (leadsToStamp.isEmpty())
+      return;
+
+    // Trigger.new cannot traverse Owner.Name, so the owner names are resolved in one query.
+    // A queue-owned lead returns no User row and is treated as non-guest.
+    Map<Id, User> ownersById = new Map<Id, User>([SELECT Id, Name FROM User WHERE Id IN :ownerIds]);
+
+    for (Lead eachLead : leadsToStamp) {
+      User owner = ownersById.get(eachLead.OwnerId);
+      if (owner != null && owner.Name.containsIgnoreCase('Guest')) {
+        continue;
+      }
+      eachLead.Qualification_End__c = Datetime.now();
+    }
+  }
 }

@@ -1,0 +1,30 @@
+/*
+ * Created by harkirat 
+ */
+.insight-row {
+    border-radius: 0.125rem;
+}
+
+.insight-text_recommended {
+    color: #8c4b02;
+}
+
+/* Others */
+.insight-row_content {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.insight-row_content .slds-truncate {
+    min-width: 0;
+}
+
+.insight-row_content lightning-icon {
+    flex-shrink: 0;
+}
+
+/* Scrobally after 10 */
+.insight-list {
+    max-height: 26rem;
+    overflow-y: auto;
+}

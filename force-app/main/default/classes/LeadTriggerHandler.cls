@@ -70,6 +70,9 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
 
     // Dinesh - COUL-4301 - Update autoenrollment Ext Ref to avoid having duplicates for incoming ones
     APER18_Lead_Management.updateAutoenrollmentExtId(Trigger.new);
+
+    //harkirat - Stamp qualification end when the lead is converted or rejected
+    APER18_Lead_Management.stampQualificationEnd(Trigger.new);
   }
 
   public void afterUpdate(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {

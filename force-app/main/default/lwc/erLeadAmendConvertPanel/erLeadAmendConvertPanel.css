@@ -1,0 +1,124 @@
+/*
+ * Deliberately monochrome. The only colour in this panel is the warning icon on the
+ * multiple-contracts message and the brand confirm button - everything here separates
+ * content with rules, weight and spacing instead. A pricing table that tints rows reads
+ * as though the tints mean something.
+ *
+ * Values are literal greys rather than SLDS styling hooks: the --lwc-* tokens are INTERNAL
+ * access and the platform rejects them from the c namespace at deploy time, the same
+ * constraint already documented in erRecordInsights.css.
+ */
+
+.amend-section-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    color: #514f4d;
+    margin-bottom: 0.25rem;
+}
+
+/*=================================================================
+  LINE TABLE
+=================================================================*/
+
+.amend-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.amend-table th,
+.amend-table td {
+    padding: 0.25rem 0.5rem;
+    vertical-align: top;
+}
+
+/* Header sits above everything, so it earns the only heavier rule in the table. */
+.amend-table thead th {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #514f4d;
+    border-bottom: 1px solid #c9c7c5;
+    white-space: nowrap;
+}
+
+/* Hairlines between rows rather than a full grid - eight bordered cells per row turns a
+   short list into a spreadsheet. */
+.amend-table tbody td {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Group header: fill and small caps carry the grouping without a second border weight. */
+.amend-group th {
+    background: #f3f3f3;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    color: #514f4d;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Qty and price only ever hold a few characters. Fixing their width keeps the numbers in a
+   true column - otherwise long band names like "6000 to 24999.99" push them out of line. */
+.amend-col_narrow {
+    width: 4rem;
+}
+
+.amend-col_price {
+    width: 7.5rem;
+}
+
+.amend-num {
+    text-align: right;
+    white-space: nowrap;
+}
+
+/*=================================================================
+  ADDED ITEM CARD
+=================================================================*/
+
+.amend-card {
+    border: 1px solid #c9c7c5;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+}
+
+.amend-card__head {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.amend-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.amend-card__parent {
+    font-size: 0.8125rem;
+    color: #514f4d;
+}
+
+.amend-card__picker {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Two-column label/value grid. Labels are sized to line up with the table's own left
+   column so the card reads as a continuation of it rather than a separate widget. */
+.amend-facts {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    row-gap: 0.125rem;
+    font-size: 0.8125rem;
+    margin: 0;
+}
+
+.amend-facts dt {
+    color: #514f4d;
+}
+
+.amend-facts dd {
+    margin: 0;
+}

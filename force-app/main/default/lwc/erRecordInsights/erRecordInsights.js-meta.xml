@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <description>Metadata-driven panel showing field completeness, duplicate matches on other objects, and warning or information messages. Configured through Record Insight Config custom metadata. Renders nothing on objects with no configuration.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Record Insights</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+</LightningComponentBundle>

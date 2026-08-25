@@ -1,0 +1,145 @@
+<template>
+    <div class="slds-p-around_medium">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+
+        <template if:true={error}>
+            <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+        </template>
+
+        <template if:true={showBlocked}>
+            <div class="slds-text-color_error slds-m-bottom_small">{preview.blockedReason}</div>
+        </template>
+
+        <template if:true={showDetails}>
+            <dl class="slds-dl_horizontal slds-m-bottom_medium">
+                <dt class="slds-dl_horizontal__label slds-text-color_weak">Contract</dt>
+                <dd class="slds-dl_horizontal__detail">{preview.contractNumber}</dd>
+                <dt class="slds-dl_horizontal__label slds-text-color_weak">Account</dt>
+                <dd class="slds-dl_horizontal__detail">{preview.accountName}</dd>
+            </dl>
+
+            <!-- harkirat - grouped by service, a band named "3 to 15 cards" is meaningless alone -->
+            <template if:true={hasExistingLines}>
+                <p class="amend-section-title">Already on the contract</p>
+                <table class="amend-table slds-m-bottom_medium">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col" class="amend-col_narrow amend-num">Qty</th>
+                            <th scope="col" class="amend-col_price amend-num">Unit price</th>
+                        </tr>
+                    </thead>
+                    <template for:each={groupedLines} for:item="group">
+                        <tbody key={group.name}>
+                            <tr class="amend-group">
+                                <th colspan="3" scope="colgroup">{group.name}</th>
+                            </tr>
+                            <template for:each={group.lines} for:item="line">
+                                <tr key={line.productId}>
+                                    <td>
+                                        <div class="slds-truncate" title={line.productName}>{line.productName}</div>
+                                    </td>
+                                    <td class="amend-num">{line.quantity}</td>
+                                    <td class="amend-num">
+                                        <lightning-formatted-number
+                                            value={line.unitPrice}
+                                            format-style="currency"
+                                            currency-code={preview.currencyIsoCode}
+                                        ></lightning-formatted-number>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </template>
+                </table>
+            </template>
+
+            <p class="amend-section-title">Being added from this lead</p>
+
+            <template if:true={selectedBand}>
+                <div class="amend-card slds-m-bottom_small">
+                    <div class="amend-card__head">
+                        <span class="amend-card__name">{selectedBand.productName}</span>
+                        <template if:true={selectedBand.parentName}>
+                            <span class="amend-card__parent">{selectedBand.parentName}</span>
+                        </template>
+                    </div>
+
+                    <!-- harkirat - the picker sits with the summary so choosing and seeing are one step -->
+                    <template if:true={showBandPicker}>
+                        <div class="amend-card__picker">
+                            <lightning-radio-group
+                                label="Which range applies?"
+                                options={bandOptions}
+                                value={selectedBandId}
+                                onchange={handleBandChange}
+                                type="radio"
+                            ></lightning-radio-group>
+                        </div>
+                    </template>
+
+                    <dl class="amend-facts">
+                        <dt>Unit price</dt>
+                        <dd>
+                            <lightning-formatted-number
+                                value={selectedBand.unitPrice}
+                                format-style="currency"
+                                currency-code={preview.currencyIsoCode}
+                            ></lightning-formatted-number>
+                        </dd>
+
+                        <dt>Quantity</dt>
+                        <dd>{selectedBand.quantity}</dd>
+
+                        <template if:true={selectedBand.hasRange}>
+                            <dt>Range</dt>
+                            <dd>{selectedBand.rangeText}</dd>
+                        </template>
+                        <template if:true={selectedBand.percentage}>
+                            <dt>Percentage</dt>
+                            <dd>{selectedBand.percentage}</dd>
+                        </template>
+                        <template if:true={selectedBand.valueType}>
+                            <dt>Value type</dt>
+                            <dd>{selectedBand.valueType}</dd>
+                        </template>
+                    </dl>
+                </div>
+            </template>
+
+            <p class="slds-text-body_small slds-text-color_weak">
+                The contract will be amended into a new opportunity with {resultingLineCount} line items, and this lead
+                will be converted onto it. The current contract is terminated only when the amendment is activated.
+            </p>
+        </template>
+
+        <!-- harkirat - steers sales to terminate the extra contracts, shown below the action -->
+        <template if:true={showMultipleContractsWarning}>
+            <div class="slds-grid slds-m-top_small">
+                <lightning-icon
+                    icon-name="utility:warning"
+                    size="x-small"
+                    variant="warning"
+                    class="slds-m-right_x-small"
+                ></lightning-icon>
+                <span class="slds-text-body_small">{multipleContractsMessage}</span>
+            </div>
+        </template>
+
+        <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+            <lightning-button label="Cancel" onclick={handleCancel} class="slds-m-right_x-small"></lightning-button>
+            <lightning-button
+                variant="brand"
+                label="Amend &amp; Convert"
+                onclick={handleConfirm}
+                disabled={canConfirmDisabled}
+            ></lightning-button>
+        </div>
+
+        <template if:true={isWorking}>
+            <lightning-spinner alternative-text="Working" size="small"></lightning-spinner>
+        </template>
+    </div>
+</template>

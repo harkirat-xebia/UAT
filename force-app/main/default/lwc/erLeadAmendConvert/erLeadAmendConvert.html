@@ -1,0 +1,10 @@
+<template>
+    <lightning-modal-header label="Amend Contract & Convert Lead"></lightning-modal-header>
+    <lightning-modal-body>
+        <c-er-lead-amend-convert-panel
+            lead-id={leadId}
+            contract-id={contractId}
+            onpanelclose={handlePanelClose}
+        ></c-er-lead-amend-convert-panel>
+    </lightning-modal-body>
+</template>

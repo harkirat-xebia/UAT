@@ -1606,11 +1606,25 @@
         <value>Not possible to amend a contract linked to a terminated framework or referral agreement.</value>
     </labels>
     <labels>
-        <fullName>LABS_SF_Amend_Different_Solution</fullName>
+        <fullName>LABS_SF_Amend_Different_Family</fullName>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>LABS_SF_Amend_Different_Solution</shortDescription>
-        <value>The product on this lead belongs to a different solution than this contract.</value>
+        <shortDescription>LABS_SF_Amend_Different_Family</shortDescription>
+        <value>The product on this lead belongs to a different product family than this contract.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Family_Not_Supported</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Family_Not_Supported</shortDescription>
+        <value>Amending a contract is not available for this product family.</value>
+    </labels>
+    <labels>
+        <fullName>LABS_SF_Amend_Multiple_Contracts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LABS_SF_Amend_Multiple_Contracts</shortDescription>
+        <value>This customer has more than one active contract in this product family. Terminate the others so only one remains.</value>
     </labels>
     <labels>
         <fullName>LABS_SF_Amend_Lines_Not_Copied</fullName>

@@ -1,0 +1,33 @@
+<template>
+    <div class="slds-p-around_small">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+
+        <template if:true={error}>
+            <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+        </template>
+
+        <template if:true={showNothingToAmend}>
+            <p class="slds-text-body_regular slds-m-bottom_small">
+                No activated contract on this account can be amended with the product on this lead.
+            </p>
+            <template for:each={blockedCandidates} for:item="candidate">
+                <div key={candidate.contractId} class="slds-text-body_small slds-text-color_weak">
+                    {candidate.contractNumber} &mdash; {candidate.blockedReason}
+                </div>
+            </template>
+            <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+                <lightning-button label="Close" onclick={handleClose}></lightning-button>
+            </div>
+        </template>
+
+        <template if:true={showPanel}>
+            <c-er-lead-amend-convert-panel
+                lead-id={recordId}
+                contract-id={selectedContractId}
+                onpanelclose={handleClose}
+            ></c-er-lead-amend-convert-panel>
+        </template>
+    </div>
+</template>

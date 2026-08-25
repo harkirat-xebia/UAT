@@ -135,7 +135,7 @@ public without sharing class clientAutoEnrollmentComponentController {
                 promoWrap.promoId = promo.Id;
                 promoWrap.name = promo.Name;
                 promoWrap.promoCode = promo.ER_Promo_Code__c;
-                if(language == 'fr_BE'){
+                if(language == 'fr_BE' || language == 'lu_fr'){
                     promoWrap.markettingDescription = promo.Description_Marketting_FR__c;
                     promoWrap.description = promo.ER_Description__c;
                 }else if(language == 'nl_BE'){

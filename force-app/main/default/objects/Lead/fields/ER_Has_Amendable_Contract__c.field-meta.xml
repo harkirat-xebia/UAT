@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Has_Amendable_Contract__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Set by APER47_LeadAmendment_Management on before insert and before update. True when an activated contract on the same registration number can be amended with this lead's product of interest. Drives the visibility rules that hide the standard Convert button in favour of Amend Contract and Convert.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Checked when this lead should amend an existing activated contract instead of being converted into a new opportunity.</inlineHelpText>
+    <label>Has Amendable Contract</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
