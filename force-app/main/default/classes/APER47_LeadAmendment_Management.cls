@@ -289,6 +289,9 @@ public without sharing class APER47_LeadAmendment_Management {
       if (leadReason != null) {
         throw new LeadAmendmentException(leadReason);
       }
+      if (String.isBlank(lead.LeadSource) || String.isBlank(lead.ER_Lead_sub_source__c)) {
+        throw new LeadAmendmentException('Lead Source and Lead Sub Source must be filled before converting the lead.');
+      }
 
       List<Contract> contracts = queryContracts(new List<Id>{ contractId });
       if (contracts.isEmpty()) {
@@ -318,6 +321,16 @@ public without sharing class APER47_LeadAmendment_Management {
 
       // harkirat - stamped before the convert, a converted lead is read only
       update new Lead(Id = lead.Id, Contract__c = contractId);
+
+      /*  The amendment opportunity is cloned from the contract's original opportunity, so it
+          inherits that deal's LeadSource. Conversion then maps this lead's sub-source onto it,
+          and ER_Lead_sub_source__c is a restricted picklist dependent on LeadSource, so the
+          inherited controller rejects the incoming value. Align the pair before converting. */
+      update new Opportunity(
+        Id = amendmentOpp.Id,
+        LeadSource = lead.LeadSource,
+        ER_Lead_sub_source__c = lead.ER_Lead_sub_source__c
+      );
 
       Id primaryContactId = convertLeadOntoOpportunity(lead, contractInst, amendmentOpp.Id);
       stampLeadValuesOnOpportunity(amendmentOpp.Id, lead, primaryContactId);
@@ -517,42 +530,37 @@ public without sharing class APER47_LeadAmendment_Management {
     return left != null && right != null && left.trim().equalsIgnoreCase(right.trim());
   }
 
-  /*  createContractFromQuote keys its role map on Role, NOT IsPrimary, so leaving a demoted row
-      on 'Primary Contact' would collide and CustomerSignedId could name the wrong person. The
-      inherited row therefore has its Role cleared, keeping the contact on the opportunity. */
-  // harkirat - nothing to do when the lead's contact is already the primary
+  /*  createOpportunityFromContract already clones a valid 'Primary Contact' row across, and that
+      is what createContractFromQuote reads for CustomerSignedId. The inherited row is left exactly
+      as the plain amend path leaves it. Conversion can add a role-less row for the lead's own
+      contact, which survives into ContractContactRole and breaks activation, so only that is
+      cleaned up here. */
   private static void applyPrimaryContactRole(Id opportunityId, Id contactId) {
     if (contactId == null) {
       return;
     }
 
-    OpportunityContactRole leadRole;
-    List<OpportunityContactRole> toUpdate = new List<OpportunityContactRole>();
+    Boolean hasPrimary = false;
+    List<OpportunityContactRole> toDelete = new List<OpportunityContactRole>();
 
     for (OpportunityContactRole ocr : [
       SELECT Id, ContactId, Role, IsPrimary
       FROM OpportunityContactRole
       WHERE OpportunityId = :opportunityId
     ]) {
-      if (ocr.ContactId == contactId) {
-        leadRole = ocr;
-      } else if (ROLE_PRIMARY_CONTACT.equalsIgnoreCase(ocr.Role) || ocr.IsPrimary) {
-        ocr.Role = null;
-        ocr.IsPrimary = false;
-        toUpdate.add(ocr);
+      if (ROLE_PRIMARY_CONTACT.equalsIgnoreCase(ocr.Role)) {
+        hasPrimary = true;
+      } else if (String.isBlank(ocr.Role)) {
+        toDelete.add(ocr);
       }
     }
 
-    if (leadRole != null && (!ROLE_PRIMARY_CONTACT.equals(leadRole.Role) || !leadRole.IsPrimary)) {
-      leadRole.Role = ROLE_PRIMARY_CONTACT;
-      leadRole.IsPrimary = true;
-      toUpdate.add(leadRole);
-    }
-    if (!toUpdate.isEmpty()) {
-      update toUpdate;
+    if (!toDelete.isEmpty()) {
+      delete toDelete;
     }
 
-    if (leadRole == null) {
+    // Only when the clone carried no primary across, e.g. the original opportunity had none.
+    if (!hasPrimary) {
       insert new OpportunityContactRole(
         OpportunityId = opportunityId,
         ContactId = contactId,
@@ -605,6 +613,8 @@ public without sharing class APER47_LeadAmendment_Management {
     opp.Leads2Win_Id__c = converted.L2W_ID__c;
     if (primaryContactId != null) {
       opp.Primary_Contact__c = primaryContactId;
+      //opp.contactId = primaryContactId;
+
     }
     // harkirat - promo code is left to APER18_Lead_Management.assignPromoCodeToOpp on convert
     update opp;
@@ -1173,6 +1183,8 @@ public without sharing class APER47_LeadAmendment_Management {
         Email,
         FirstName,
         LastName,
+        LeadSource,
+        ER_Lead_sub_source__c,
         RecordType.DeveloperName,
         ER_Registration_Number__c,
         ER_Number_Of_Beneficiaries__c,

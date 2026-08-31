@@ -1,11 +1,7 @@
 <template>
-    <div class="slds-p-around_medium">
+    <div class="slds-p-around_medium" onclick={handlePanelClick}>
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
-        </template>
-
-        <template if:true={error}>
-            <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
         </template>
 
         <template if:true={showBlocked}>
@@ -81,25 +77,12 @@
                     </template>
 
                     <dl class="amend-facts">
-                        <dt>Unit price</dt>
-                        <dd>
-                            <lightning-formatted-number
-                                value={selectedBand.unitPrice}
-                                format-style="currency"
-                                currency-code={preview.currencyIsoCode}
-                            ></lightning-formatted-number>
-                        </dd>
-
                         <dt>Quantity</dt>
                         <dd>{selectedBand.quantity}</dd>
 
                         <template if:true={selectedBand.hasRange}>
                             <dt>Range</dt>
                             <dd>{selectedBand.rangeText}</dd>
-                        </template>
-                        <template if:true={selectedBand.percentage}>
-                            <dt>Percentage</dt>
-                            <dd>{selectedBand.percentage}</dd>
                         </template>
                         <template if:true={selectedBand.valueType}>
                             <dt>Value type</dt>
@@ -128,7 +111,33 @@
             </div>
         </template>
 
-        <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+        <div class="slds-grid slds-grid_align-end slds-grid_vertical-align-center slds-m-top_medium">
+            <div class="amend-error-anchor">
+                <template if:true={error}>
+                    <button
+                        class="slds-button slds-button_icon amend-error-trigger"
+                        title={errorIconTitle}
+                        onclick={handleErrorIconClick}
+                    >
+                        <lightning-icon icon-name="utility:error" variant="error" size="small"></lightning-icon>
+                    </button>
+
+                    <template if:true={showErrorPopover}>
+                        <section
+                            class="slds-popover slds-nubbin_bottom-right amend-error-popover"
+                            role="alert"
+                            aria-live="assertive"
+                        >
+                            <div class="slds-popover__body">
+                                <template for:each={errorMessages} for:item="message">
+                                    <p key={message} class="slds-text-color_error">{message}</p>
+                                </template>
+                            </div>
+                        </section>
+                    </template>
+                </template>
+            </div>
+
             <lightning-button label="Cancel" onclick={handleCancel} class="slds-m-right_x-small"></lightning-button>
             <lightning-button
                 variant="brand"

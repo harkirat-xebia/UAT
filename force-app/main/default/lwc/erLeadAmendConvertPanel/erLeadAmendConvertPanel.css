@@ -122,3 +122,50 @@
 .amend-facts dd {
     margin: 0;
 }
+
+/*=================================================================
+  ERROR POPOVER
+=================================================================*/
+
+/* Anchor, so the popover is positioned against the icon instead of the page flow. */
+.amend-error-anchor {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Margin lives on the button, not the anchor, so no gap is reserved when there is no error. */
+.amend-error-trigger {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+/* Opens upward and leftward: the icon sits beside the buttons at the bottom right of the
+   panel, so anchoring left or downward would push the box outside the visible area. */
+.amend-error-popover {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
+    left: auto;
+    width: 20rem;
+    background: #ffffff;
+    border: 1px solid #c9c7c5;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);
+    z-index: 10;
+}
+
+.amend-error-popover p {
+    font-size: 0.8125rem;
+    margin: 0;
+    word-break: break-word;
+}
+
+.amend-error-popover p + p {
+    margin-top: 0.25rem;
+}

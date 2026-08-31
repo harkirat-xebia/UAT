@@ -17,6 +17,7 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
     isLoading = true;
     isWorking = false;
     selectedBandId;
+    showErrorPopover = false;
 
     multipleContractsMessage = MULTIPLE_CONTRACTS;
 
@@ -31,6 +32,7 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
         } else if (error) {
             this.error = error;
             this.preview = undefined;
+            this.showErrorPopover = true;
             /*  getPreview is cacheable, so Apex cannot write its own error log - a cacheable
                 method may not perform DML. Logging from here is the only way this failure
                 reaches ER_Error_Log__c. amendAndConvert logs server side, so it is not
@@ -127,8 +129,7 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
 
     describeBand(band) {
         const range = this.describeRange(band);
-        const price = band.unitPrice === null || band.unitPrice === undefined ? '' : ` — ${band.unitPrice}`;
-        return range ? `${band.productName} (${range})${price}` : `${band.productName}${price}`;
+        return range ? `${band.productName} (${range})` : band.productName;
     }
 
     describeRange(band) {
@@ -154,8 +155,29 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
         this.dispatchEvent(new CustomEvent('panelclose'));
     }
 
+    get errorMessages() {
+        return this.error ? reduceErrors(this.error) : [];
+    }
+
+    get errorIconTitle() {
+        return this.errorMessages.join(' | ');
+    }
+
+    /*  Without this the click bubbles to the panel handler below, which would close the popover
+        in the same tick it was opened. */
+    handleErrorIconClick(event) {
+        event.stopPropagation();
+        this.showErrorPopover = !this.showErrorPopover;
+    }
+
+    handlePanelClick() {
+        this.showErrorPopover = false;
+    }
+
     handleConfirm() {
         this.isWorking = true;
+        this.error = undefined;
+        this.showErrorPopover = false;
         amendAndConvert({
             leadId: this.leadId,
             contractId: this.contractId,
@@ -163,7 +185,9 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
         })
             .then((opportunityId) => {
                 this.dispatchEvent(new ShowToastEvent({ title: AMEND_SUCCESS, variant: 'success' }));
-                this.dispatchEvent(new CustomEvent('panelclose', { detail: { opportunityId } }));
+                /*  No panelclose here: both hosts tear this component down on that event
+                    (CloseActionScreenEvent / modal close), which cancels the in-flight
+                    navigation. Landing on the record page unmounts the host anyway. */
                 this[NavigationMixin.Navigate]({
                     type: 'standard__recordPage',
                     attributes: { recordId: opportunityId, actionName: 'view' }
@@ -171,8 +195,7 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
             })
             .catch((error) => {
                 this.error = error;
-            })
-            .finally(() => {
+                this.showErrorPopover = true;
                 this.isWorking = false;
             });
     }

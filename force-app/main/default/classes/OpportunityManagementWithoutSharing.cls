@@ -968,6 +968,11 @@ private static void logACRDeleteResults(Database.DeleteResult[] results) {
             }
         }
         
+        // The update below re-fires this trigger, and owner is unchanged on that pass, so bail before querying.
+        if (ownerIdSet.isEmpty()) {
+            return;
+        }
+        
         Map<Id, User> usersByOwnerId = new Map<Id, User>([SELECT Id, UserRoleId FROM User WHERE Id IN :ownerIdSet]);
         
         Map<Id, UserRole> allUserRoles = new Map<Id, UserRole>([SELECT Id, ParentRoleId, Name FROM UserRole]);
@@ -977,7 +982,7 @@ private static void logACRDeleteResults(Database.DeleteResult[] results) {
             List<Id> parentRoleIds = new List<Id>();
             
             if(currentRoleId != null && (allUserRoles.get(currentRoleId).Name == 'SME L2W/Partners channel Sales Rep' || allUserRoles.get(currentRoleId).Name == 'SME Telesales Hunting Sales Rep' || allUserRoles.get(currentRoleId).Name == 'SME Telesales Farming Sales Rep' || allUserRoles.get(currentRoleId).Name == 'Engagement Manager')){
-                parentRoleIds.add(currentRoleId);
+                    parentRoleIds.add(currentRoleId);
             }
             
             while (currentRoleId != null) {
