@@ -1,10 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { CloseActionScreenEvent } from 'lightning/actions';
 import { reduceErrors } from 'c/utils';
 import getAmendableContracts from '@salesforce/apex/APER47_LeadAmendment_Management.getAmendableContracts';
 import logFromClient from '@salesforce/apex/APER45_ErrorLog_Management.logFromClient';
 
-export default class ErLeadAmendConvertAction extends LightningElement {
+export default class ErLeadAmendConvertAction extends NavigationMixin(LightningElement) {
     @api recordId;
 
     candidates = [];
@@ -54,7 +55,14 @@ export default class ErLeadAmendConvertAction extends LightningElement {
         return this.candidates.filter((candidate) => !candidate.isEligible && !!candidate.blockedReason);
     }
 
-    handleClose() {
+    handleClose(event) {
+        const opportunityId = event && event.detail ? event.detail.opportunityId : null;
+        if (opportunityId) {
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: { recordId: opportunityId, actionName: 'view' }
+            });
+        }
         this.dispatchEvent(new CloseActionScreenEvent());
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ER_Dynamic_Filter_Match_Mode__c</fullName>
+    <description>How the dynamic filter compares its mapped value. Equals is exact. Contains matches composite values such as Contract_Category__c returning "Benefits and Engagement". Blank behaves as Equals.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Dynamic Filter Match Mode</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Equals</fullName>
+                <default>true</default>
+                <label>Equals</label>
+            </value>
+            <value>
+                <fullName>Contains</fullName>
+                <default>false</default>
+                <label>Contains</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

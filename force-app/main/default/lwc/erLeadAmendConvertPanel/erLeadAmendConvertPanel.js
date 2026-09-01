@@ -1,5 +1,4 @@
 import { LightningElement, api, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { reduceErrors } from 'c/utils';
 import getPreview from '@salesforce/apex/APER47_LeadAmendment_Management.getPreview';
@@ -8,7 +7,7 @@ import logFromClient from '@salesforce/apex/APER45_ErrorLog_Management.logFromCl
 import AMEND_SUCCESS from '@salesforce/label/c.LABS_SF_Amend_Success';
 import MULTIPLE_CONTRACTS from '@salesforce/label/c.LABS_SF_Amend_Multiple_Contracts';
 
-export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningElement) {
+export default class ErLeadAmendConvertPanel extends LightningElement {
     @api leadId;
     @api contractId;
 
@@ -51,7 +50,7 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
 
     // harkirat - templates cannot negate, so the disabled state is exposed directly
     get canConfirmDisabled() {
-        return !this.preview || !this.preview.isEligible || !this.selectedBandId || this.isWorking;
+        return !this.preview || !this.preview.isEligible || this.isWorking;
     }
 
     get showBlocked() {
@@ -180,18 +179,13 @@ export default class ErLeadAmendConvertPanel extends NavigationMixin(LightningEl
         this.showErrorPopover = false;
         amendAndConvert({
             leadId: this.leadId,
-            contractId: this.contractId,
-            pricebookEntryId: this.selectedBandId
+            contractId: this.contractId
         })
             .then((opportunityId) => {
                 this.dispatchEvent(new ShowToastEvent({ title: AMEND_SUCCESS, variant: 'success' }));
-                /*  No panelclose here: both hosts tear this component down on that event
-                    (CloseActionScreenEvent / modal close), which cancels the in-flight
-                    navigation. Landing on the record page unmounts the host anyway. */
-                this[NavigationMixin.Navigate]({
-                    type: 'standard__recordPage',
-                    attributes: { recordId: opportunityId, actionName: 'view' }
-                });
+                /*  The host navigates, not this component: NavigationMixin is unreliable from
+                    inside a modal or quick action child, and closing here would cancel it. */
+                this.dispatchEvent(new CustomEvent('panelclose', { detail: { opportunityId } }));
             })
             .catch((error) => {
                 this.error = error;

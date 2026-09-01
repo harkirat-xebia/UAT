@@ -263,9 +263,16 @@ export default class ErRecordInsights extends NavigationMixin(LightningElement) 
             leadId: this.recordId,
             contractId: event.currentTarget.dataset.id
         }).then((opportunityId) => {
-            if (opportunityId && this.wiredInsights) {
+            if (!opportunityId) {
+                return;
+            }
+            if (this.wiredInsights) {
                 refreshApex(this.wiredInsights);
             }
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: { recordId: opportunityId, actionName: 'view' }
+            });
         });
     }
 
