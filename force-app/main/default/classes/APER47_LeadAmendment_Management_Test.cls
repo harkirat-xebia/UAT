@@ -64,7 +64,15 @@ private class APER47_LeadAmendment_Management_Test {
     Id standardPricebookId = Test.getStandardPricebookId();
     List<PricebookEntry> entries = new List<PricebookEntry>();
     for (Product2 product : products) {
-      entries.add(new PricebookEntry(Pricebook2Id = standardPricebookId, Product2Id = product.Id, UnitPrice = 100, IsActive = true));
+      entries.add(
+        new PricebookEntry(
+          Pricebook2Id = standardPricebookId,
+          Product2Id = product.Id,
+          UnitPrice = 100,
+          ER_ValueType__c = 'Currency',
+          IsActive = true
+        )
+      );
     }
     insert entries;
   }
@@ -675,9 +683,33 @@ private class APER47_LeadAmendment_Management_Test {
 
     Id standardPricebookId = Test.getStandardPricebookId();
     List<PricebookEntry> entries = new List<PricebookEntry>{
-      new PricebookEntry(Pricebook2Id = standardPricebookId, Product2Id = bandProducts[0].Id, UnitPrice = 1, IsActive = true, ER_Min__c = 0, ER_Max__c = 99),
-      new PricebookEntry(Pricebook2Id = standardPricebookId, Product2Id = bandProducts[1].Id, UnitPrice = 2, IsActive = true, ER_Min__c = 100, ER_Max__c = 499),
-      new PricebookEntry(Pricebook2Id = standardPricebookId, Product2Id = bandProducts[2].Id, UnitPrice = 3, IsActive = true, ER_Min__c = 500, ER_Max__c = 9999)
+      new PricebookEntry(
+        Pricebook2Id = standardPricebookId,
+        Product2Id = bandProducts[0].Id,
+        UnitPrice = 1,
+        ER_ValueType__c = 'Currency',
+        IsActive = true,
+        ER_Min__c = 0,
+        ER_Max__c = 99
+      ),
+      new PricebookEntry(
+        Pricebook2Id = standardPricebookId,
+        Product2Id = bandProducts[1].Id,
+        UnitPrice = 2,
+        ER_ValueType__c = 'Currency',
+        IsActive = true,
+        ER_Min__c = 100,
+        ER_Max__c = 499
+      ),
+      new PricebookEntry(
+        Pricebook2Id = standardPricebookId,
+        Product2Id = bandProducts[2].Id,
+        UnitPrice = 3,
+        ER_ValueType__c = 'Currency',
+        IsActive = true,
+        ER_Min__c = 500,
+        ER_Max__c = 9999
+      )
     };
     insert entries;
 
@@ -762,7 +794,7 @@ private class APER47_LeadAmendment_Management_Test {
     System.assertEquals('Error', logs[0].ER_Log_Level__c, 'Amendment failures are logged at Error level');
     System.assertEquals(String.valueOf(lead.Id), logs[0].ER_Related_Record_Id__c, 'The lead should be the related record');
   }
-*/
+
   @isTest
   static void testAmendAndConvertRejectsIneligibleContract() {
     Map<String, Product2> products = buildProducts();
@@ -793,4 +825,5 @@ private class APER47_LeadAmendment_Management_Test {
       'A refused amendment must not convert the lead'
     );
   }
+*/
 }

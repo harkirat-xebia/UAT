@@ -376,7 +376,7 @@ private class APER46_RecordInsight_Management_Test {
     Opportunity opp = buildOpportunity();
     insert opp;
 
-    Contact contact = new Contact(FirstName = 'Insight', LastName = 'Role Test');
+    Contact contact = new Contact(FirstName = 'Insight', LastName = 'Role Test', Email = 'insight.role@example.com');
     insert contact;
     insert new OpportunityContactRole(OpportunityId = opp.Id, ContactId = contact.Id, Role = 'Primary Contact');
 
@@ -400,7 +400,7 @@ private class APER46_RecordInsight_Management_Test {
     Opportunity opp = buildOpportunity();
     insert opp;
 
-    Contact contact = new Contact(FirstName = 'Wrong', LastName = 'Role Test');
+    Contact contact = new Contact(FirstName = 'Wrong', LastName = 'Role Test', Email = 'wrong.role@example.com');
     insert contact;
     insert new OpportunityContactRole(OpportunityId = opp.Id, ContactId = contact.Id, Role = 'Delivering Contact');
 
@@ -421,7 +421,7 @@ private class APER46_RecordInsight_Management_Test {
     Opportunity opp = buildOpportunity();
     insert opp;
 
-    Contact contact = new Contact(FirstName = 'Any', LastName = 'Role Test');
+    Contact contact = new Contact(FirstName = 'Any', LastName = 'Role Test', Email = 'any.role@example.com');
     insert contact;
     insert new OpportunityContactRole(OpportunityId = opp.Id, ContactId = contact.Id, Role = 'Delivering Contact');
 
