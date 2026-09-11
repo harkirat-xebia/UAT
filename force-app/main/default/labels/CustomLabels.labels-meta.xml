@@ -192,6 +192,14 @@
         <value>Incomplete Information on Contact. Check Email, Phone or Mobile details.</value>
     </labels>
     <labels>
+        <fullName>BE_Error_Message_Contact_Salutation_Missing</fullName>
+        <categories>BE Offer Light</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BE Error Message Contact Salutation Missing</shortDescription>
+        <value>Salutation is missing on the Contact.</value>
+    </labels>
+    <labels>
         <fullName>BE_Error_Message_No_Financial_Center</fullName>
         <categories>BE Offer Light</categories>
         <language>en_US</language>

@@ -4,7 +4,7 @@
     <protected>false</protected>
     <values>
         <field>ER_Action_Button_Label__c</field>
-        <value xsi:type="xsd:string">Amend &amp; Convert</value>
+        <value xsi:type="xsd:string">Convert into Amendment</value>
     </values>
     <values>
         <field>ER_Action_Label__c</field>

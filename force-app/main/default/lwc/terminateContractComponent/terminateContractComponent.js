@@ -3,7 +3,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { CurrentPageReference } from 'lightning/navigation';
 import { CloseActionScreenEvent } from 'lightning/actions';
 import terminateContract from '@salesforce/apex/TerminateContractComponentController.terminateContract';
-import setStatusPendingTermination from '@salesforce/apex/TerminateContractComponentController.setStatusPendingTermination';
 import checkErrors from '@salesforce/apex/TerminateContractComponentController.checkErrors';
 import NAME_FIELD from '@salesforce/schema/Contract.ER_TerminationReason__c';
 import SUB_NAME_FIELD from '@salesforce/schema/Contract.Termination_Sub_Reason__c';
@@ -61,13 +60,6 @@ export default class TerminateContractComponent extends LightningElement {
             return;
         }
         this.Spinner = true;
-        await setStatusPendingTermination({contractId: this.recordId})
-            .then((result) => {
-                console.log('Success');
-            }).catch((error)=>{
-                console.error(error);
-            })
-
         terminateContract({contractId: this.recordId, terminationReason: this.terminationReason, subTerminationReason: this.subTerminationReason, contractEndDate: this.contractEndDate})
             .then((result) => {
                 console.log(result);

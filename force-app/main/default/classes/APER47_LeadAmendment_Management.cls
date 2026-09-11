@@ -411,7 +411,7 @@ public without sharing class APER47_LeadAmendment_Management {
     leadConvert.setOpportunityId(opportunityId);
  
     // harkirat - matched contact is reused, otherwise the conversion creates one
-    Id existingContactId = resolveContactId(lead, contractInst.AccountId);
+    Id existingContactId = resolveContactId(lead, opportunityId);
     if (existingContactId != null) {
       leadConvert.setContactId(existingContactId);
     }
@@ -429,30 +429,33 @@ public without sharing class APER47_LeadAmendment_Management {
     return result.getContactId();
   }
  
-  /*  Email plus first and last name, scoped to the contract's account so a contact belonging
-      to a different company is never attached. Names are compared in Apex rather than SOQL
-      because FirstName is frequently blank and null handling in a bind is awkward. */
+    /*  Only the opportunity's existing Primary_Contact__c may be reused. Its email plus first and
+      last name must all match; otherwise conversion creates a new contact. Names are compared
+      in Apex because FirstName is frequently blank and null handling in a bind is awkward. */
   // harkirat - returns null to let the conversion create the contact itself
   @TestVisible
-  private static Id resolveContactId(Lead lead, Id accountId) {
-    if (String.isBlank(lead.Email) || accountId == null) {
+  private static Id resolveContactId(Lead lead, Id opportunityId) {
+    if (String.isBlank(lead.Email) || opportunityId == null) {
       return null;
     }
-    String email = lead.Email;
-    // harkirat - newest first, so a genuine duplicate resolves to the most recent contact.
-    // Id DESC breaks ties when two contacts share the same CreatedDate millisecond
-    // (routine when both are inserted in the same transaction).
-    for (Contact existing : [
-      SELECT Id, FirstName, LastName
-      FROM Contact
-      WHERE AccountId = :accountId AND Email = :email
-      ORDER BY CreatedDate DESC, Id DESC
-    ]) {
-      if (sameName(existing.FirstName, lead.FirstName) && sameName(existing.LastName, lead.LastName)) {
-        return existing.Id;
-      }
+
+    List<Opportunity> opportunities = [
+      SELECT Primary_Contact__r.Id, Primary_Contact__r.Email, Primary_Contact__r.FirstName, Primary_Contact__r.LastName
+      FROM Opportunity
+      WHERE Id = :opportunityId
+      LIMIT 1
+    ];
+    if (opportunities.isEmpty() || opportunities[0].Primary_Contact__c == null) {
+      return null;
     }
-    return null;
+
+    Contact primaryContact = opportunities[0].Primary_Contact__r;
+    return primaryContact.Email != null &&
+      primaryContact.Email.equalsIgnoreCase(lead.Email) &&
+      sameName(primaryContact.FirstName, lead.FirstName) &&
+      sameName(primaryContact.LastName, lead.LastName)
+      ? primaryContact.Id
+      : null;
   }
  
   private static Boolean sameName(String left, String right) {
@@ -481,7 +484,7 @@ public without sharing class APER47_LeadAmendment_Management {
     ]) {
       if (ocr.ContactId == contactId) {
         leadRole = ocr;
-      } else if (ROLE_PRIMARY_CONTACT.equalsIgnoreCase(ocr.Role) || String.isBlank(ocr.Role)) {
+      } else if (ocr.IsPrimary || ROLE_PRIMARY_CONTACT.equalsIgnoreCase(ocr.Role) || String.isBlank(ocr.Role)) {
         toDelete.add(ocr);
       }
     }
@@ -529,6 +532,7 @@ public without sharing class APER47_LeadAmendment_Management {
         ER_Face_Value__c,
         ER_Number_Of_Beneficiaries__c,
         ER_EShop__c,
+        Lead_motion__c,
         ER_Lead_Type__c,
         ER_UTM_tag__c,
         L2W_ID__c
@@ -546,6 +550,9 @@ public without sharing class APER47_LeadAmendment_Management {
     opp.ER_Lead_Source_Type__c = converted.ER_Lead_Type__c;
     opp.ER_UTM_tag__c = converted.ER_UTM_tag__c;
     opp.Leads2Win_Id__c = converted.L2W_ID__c;
+    opp.ER_Reason__c = converted.Lead_motion__c == 'Cross Selling'
+      ? 'Cross selling'
+      : converted.Lead_motion__c;
     if (primaryContactId != null) {
       opp.Primary_Contact__c = primaryContactId;
       //opp.contactId = primaryContactId;
@@ -796,7 +803,9 @@ public without sharing class APER47_LeadAmendment_Management {
     }
  
     for (Contract contractInst : contracts) {
-      List<PricebookEntry> candidates = entriesByKey.get(priceKey(contractInst.Pricebook2Id, contractInst.CurrencyIsoCode));
+      List<PricebookEntry> candidates = entriesByKey.get(
+        priceKey(contractInst.Pricebook2Id, contractInst.CurrencyIsoCode)
+      );
       PricebookEntry chosen = pickBand(candidates, lead.ER_Number_Of_Beneficiaries__c);
       if (chosen != null) {
         priceByContract.put(contractInst.Id, chosen);
@@ -931,7 +940,7 @@ public without sharing class APER47_LeadAmendment_Management {
  
     Map<String, List<Contract>> contractsByCrn = new Map<String, List<Contract>>();
     Map<String, List<Contract>> contractsByRcs = new Map<String, List<Contract>>();
-    Set<Id> pricebookIds = new Set<Id>();
+    List<Contract> allContracts = new List<Contract>();
     String activated = Label.LABS_SF_Contract_Status_Activated;
  
     for (Contract contractInst : [
@@ -966,12 +975,17 @@ public without sharing class APER47_LeadAmendment_Management {
         }
         contractsByRcs.get(contractInst.ER_Account_RCS__c).add(contractInst);
       }
-      if (contractInst.Pricebook2Id != null) {
-        pricebookIds.add(contractInst.Pricebook2Id);
-      }
+      allContracts.add(contractInst);
     }
     if (contractsByCrn.isEmpty() && contractsByRcs.isEmpty()) {
       return;
+    }
+ 
+    Set<Id> pricebookIds = new Set<Id>();
+    for (Contract contractInst : allContracts) {
+      if (contractInst.Pricebook2Id != null) {
+        pricebookIds.add(contractInst.Pricebook2Id);
+      }
     }
  
     /*  A service prices through its child Range products, not through its own entry, so the
@@ -1017,7 +1031,9 @@ public without sharing class APER47_LeadAmendment_Management {
       Set<Id> priceable = priceableByLeadProduct.get(product.Id);
  
       for (Contract contractInst : candidates) {
-        List<PricebookEntry> forContract = entriesByKey.get(priceKey(contractInst.Pricebook2Id, contractInst.CurrencyIsoCode));
+        List<PricebookEntry> forContract = entriesByKey.get(
+          priceKey(contractInst.Pricebook2Id, contractInst.CurrencyIsoCode)
+        );
         List<PricebookEntry> forProduct = new List<PricebookEntry>();
         if (forContract != null) {
           for (PricebookEntry pbe : forContract) {
@@ -1099,12 +1115,13 @@ public without sharing class APER47_LeadAmendment_Management {
     /*  Every band the user may choose between: the lead's product plus its Range children, priced
         in this contract's pricebook and currency. One entry means a flat product and the picker
         stays hidden. */
-    Set<Id> pricebookIds = new Set<Id>{ contractInst.Pricebook2Id };
+    Id pricebookId = contractInst.Pricebook2Id;
+    Set<Id> pricebookIds = new Set<Id>{ pricebookId };
     List<PricebookEntry> bands = bandEntries(pricebookIds, priceableProductIds(lead));
  
     List<PricebookEntry> forCurrency = new List<PricebookEntry>();
     for (PricebookEntry pbe : bands) {
-      if (priceKey(contractInst.Pricebook2Id, contractInst.CurrencyIsoCode) == priceKey(pbe.Pricebook2Id, pbe.CurrencyIsoCode)) {
+      if (priceKey(pricebookId, contractInst.CurrencyIsoCode) == priceKey(pbe.Pricebook2Id, pbe.CurrencyIsoCode)) {
         forCurrency.add(pbe);
       }
     }
@@ -1154,6 +1171,7 @@ public without sharing class APER47_LeadAmendment_Management {
         LastName,
         LeadSource,
         ER_Lead_sub_source__c,
+        Lead_motion__c,
         ER_BUPicklist__c,
         RCS_Number__c,
         RecordType.DeveloperName,
@@ -1207,6 +1225,7 @@ public without sharing class APER47_LeadAmendment_Management {
             ER_Product2__r.ER_Solution2__r.Name
           FROM ER_ContractLineItems__r
           WHERE ER_Product2__r.ER_Type__c != :PRODUCT_TYPE_DISCOUNT
+          ORDER BY CreatedDate DESC
         )
       FROM Contract
       WHERE Id IN :contractIds

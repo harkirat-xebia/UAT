@@ -303,6 +303,18 @@
             </value>
         </filters>
         <inputAssignments>
+            <field>ER_TerminationReason__c</field>
+            <value>
+                <stringValue>Amendment</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EndDate</field>
+            <value>
+                <elementReference>CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Status</field>
             <value>
                 <stringValue>Pending Termination</stringValue>

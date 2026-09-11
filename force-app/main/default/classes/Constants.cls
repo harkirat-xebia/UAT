@@ -349,6 +349,8 @@
   public static final String BENELUX = 'BENELUX';
   public static final String AGORIA_PRICE_INDEX = 'Agoria price index';
   public static final String CONSUMER_PRICE_INDEX = 'Consumer price index';
+  public static final String BE = 'BE';
+  public static final String LU = 'LU';
   public static final String ES = 'ES';
   public static final String FI = 'FI';
   public static final String CZ = 'CZ';
@@ -398,6 +400,11 @@
   public static final String ZQUOTE_IN_PROGRESS = 'In Progress';
   public static final String PENDING_APPROVAL = 'Pending Approval';
   public static final String CROSS_SELLING_REASON = 'Cross selling';
+
+  //LEAD QUALIFICATION - must match the restricted picklist values on Lead
+  public static final String LEAD_CUSTOMER_STATUS_PROSPECT = 'Prospect';
+  public static final String LEAD_CUSTOMER_STATUS_EXISTING = 'Existing Customer';
+  public static final String LEAD_MOTION_CROSS_SELLING = 'Cross Selling';
 
   //SCOPES
   public static final String MERCHANT = 'Merchant';

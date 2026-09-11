@@ -512,20 +512,22 @@ private class APER47_LeadAmendment_Management_Test {
   }
 
   @isTest
-  static void testContactMatchTakesMostRecentDuplicate() {
+  static void testContactMatchUsesOpportunityPrimaryContact() {
     Account account = buildAccount();
+    Opportunity opportunity = buildOpportunity(account.Id);
     Contact older = new Contact(AccountId = account.Id, FirstName = 'Amend', LastName = 'Test', Email = 'amend.test@example.com');
     insert older;
-    // harkirat - same email and same full name, a genuine duplicate
+    // harkirat - a matching duplicate must not override the opportunity's explicit primary contact
     Contact newer = new Contact(AccountId = account.Id, FirstName = 'Amend', LastName = 'Test', Email = 'amend.test@example.com');
     insert newer;
+    update new Opportunity(Id = opportunity.Id, Primary_Contact__c = newer.Id);
     Lead lead = buildLead(null);
 
     Test.startTest();
-    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, account.Id);
+    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, opportunity.Id);
     Test.stopTest();
 
-    System.assertEquals(newer.Id, matched, 'The most recently created duplicate should win');
+    System.assertEquals(newer.Id, matched, 'The opportunity primary contact should be reused');
   }
 
   /*@isTest
@@ -632,6 +634,7 @@ private class APER47_LeadAmendment_Management_Test {
   @isTest
   static void testContactMatchedOnEmailAndFullName() {
     Account account = buildAccount();
+    Opportunity opportunity = buildOpportunity(account.Id);
     Contact existing = new Contact(
       AccountId = account.Id,
       FirstName = 'Amend',
@@ -639,27 +642,57 @@ private class APER47_LeadAmendment_Management_Test {
       Email = 'amend.test@example.com'
     );
     insert existing;
+    update new Opportunity(Id = opportunity.Id, Primary_Contact__c = existing.Id);
     Lead lead = buildLead(null);
 
     Test.startTest();
-    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, account.Id);
+    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, opportunity.Id);
     Test.stopTest();
 
-    System.assertEquals(existing.Id, matched, 'Same email and same full name should match the existing contact');
+    System.assertEquals(existing.Id, matched, 'The matching primary contact should be reused');
   }
 
   @isTest
   static void testContactNotMatchedWhenNameDiffers() {
     Account account = buildAccount();
+    Opportunity opportunity = buildOpportunity(account.Id);
     // harkirat - same email, different person
-    insert new Contact(AccountId = account.Id, FirstName = 'Someone', LastName = 'Else', Email = 'amend.test@example.com');
+    Contact existing = new Contact(AccountId = account.Id, FirstName = 'Someone', LastName = 'Else', Email = 'amend.test@example.com');
+    insert existing;
+    update new Opportunity(Id = opportunity.Id, Primary_Contact__c = existing.Id);
     Lead lead = buildLead(null);
 
     Test.startTest();
-    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, account.Id);
+    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, opportunity.Id);
     Test.stopTest();
 
     System.assertEquals(null, matched, 'A different name must not reuse the contact');
+  }
+
+  @isTest
+  static void testContactNotMatchedWhenOnlyNonPrimaryContactMatches() {
+    Account account = buildAccount();
+    Opportunity opportunity = buildOpportunity(account.Id);
+    Contact existing = new Contact(
+      AccountId = account.Id,
+      FirstName = 'Amend',
+      LastName = 'Test',
+      Email = 'amend.test@example.com'
+    );
+    insert existing;
+    insert new OpportunityContactRole(
+      OpportunityId = opportunity.Id,
+      ContactId = existing.Id,
+      Role = 'Decision Maker',
+      IsPrimary = false
+    );
+    Lead lead = buildLead(null);
+
+    Test.startTest();
+    Id matched = APER47_LeadAmendment_Management.resolveContactId(lead, opportunity.Id);
+    Test.stopTest();
+
+    System.assertEquals(null, matched, 'A matching non-primary contact must not be reused');
   }
 
   /*=================================================================

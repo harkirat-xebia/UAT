@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_motion__c</fullName>
+    <inlineHelpText>Commercial motion for this lead. Mapped to Opportunity Reason on lead conversion.</inlineHelpText>
+    <label>Lead Motion</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Cross Selling</fullName>
+                <default>false</default>
+                <label>Cross Selling</label>
+            </value>
+            <value>
+                <fullName>Upselling</fullName>
+                <default>false</default>
+                <label>Upselling</label>
+            </value>
+            <value>
+                <fullName>Renegotiation</fullName>
+                <default>false</default>
+                <label>Renegotiation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

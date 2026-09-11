@@ -14,6 +14,8 @@ public class TerminateContractComponentController {
             if(contractEndDate <= Date.Today()){
                 con.Status = 'Terminated';
                 con.ER_Terminated_Date__c = Date.today();
+            } else {
+                con.Status = 'Pending Termination';
             }
             contractsToUpdate.add(con);
 

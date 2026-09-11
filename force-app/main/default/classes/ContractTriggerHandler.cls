@@ -40,6 +40,10 @@ public with sharing class ContractTriggerHandler implements ITriggerHandler {
   }
 
   public void beforeUpdate(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
+    APER12_Contract_Management.handleStatusTransitions(
+      (Map<Id, Contract>) newItems,
+      (Map<Id, Contract>) oldItems
+    );
     APER12_Contract_Management.validateIfContractDateOverlap(
       (Map<Id, Contract>) newItems,
       (Map<Id, Contract>) oldItems

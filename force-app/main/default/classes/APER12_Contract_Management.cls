@@ -18,6 +18,36 @@ public without sharing class APER12_Contract_Management {
   //Adding new method
   private static Boolean smeEngagementProcessed = false;
   private static Set<Id> processedContractIds;
+
+  /**
+   * Applies validation and cleanup required when Contract status changes.
+   *
+   * @param newContracts Updated Contract records.
+   * @param oldContracts Previous Contract records.
+   */
+  public static void handleStatusTransitions(
+    Map<Id, Contract> newContracts,
+    Map<Id, Contract> oldContracts
+  ) {
+    for (Id contractId : newContracts.keySet()) {
+      Contract newContract = newContracts.get(contractId);
+      Contract oldContract = oldContracts.get(contractId);
+
+      if (oldContract.Status == Constants.PENDING_TERMINATION && newContract.Status == 'Activated') {
+        newContract.ER_TerminationReason__c = null;
+        newContract.Termination_Sub_Reason__c = null;
+        newContract.ER_Terminated_Date__c = null;
+        newContract.EndDate = null;
+      }
+
+      if (oldContract.Status == 'Activated' && newContract.Status == Constants.PENDING_TERMINATION) {
+        if (String.isBlank(newContract.ER_TerminationReason__c) || newContract.EndDate == null) {
+          newContract.addError('Termination Reason and Contract End Date are required when changing a contract to Pending Termination.');
+        }
+      }
+    }
+  }
+
   public static List<Contract> createContractFromQuote(Map<id, Quote> acceptedQuoteMap) {
     List<Contract> contractToInsert = new List<Contract>();
     Contract newContract;

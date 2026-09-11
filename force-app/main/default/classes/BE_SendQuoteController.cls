@@ -53,12 +53,13 @@
             }
             Contact c = ocr.Contact;
             if (c != null) {
-                if (String.isBlank(c.Salutation) || String.isBlank(c.FirstName) ||
+                String lastName = String.isBlank(c.LastName) ? 'Contact' : c.LastName;
+                String firstName = String.isBlank(c.FirstName) ? 'Contact' : c.FirstName;
+                if (String.isBlank(c.Salutation)) {
+                    error += '- ' + firstName + ' ' + lastName + ' : ' + Label.BE_Error_Message_Contact_Salutation_Missing + '\n';
+                } else if (String.isBlank(c.FirstName) ||
                     (String.isBlank(c.Phone) && String.isBlank(c.MobilePhone)) ||
                     String.isBlank(c.Email)) {
-
-                    String lastName = String.isBlank(c.LastName) ? 'Unknown Contact' : c.LastName;
-                    String firstName = String.isBlank(c.FirstName) ? 'Unknown Contact' : c.FirstName;
                     error += '- ' + firstName + ' ' + lastName + ' : ' + Label.BE_Error_Message_Contact_Incomplete + '\n';
                 }
             }

@@ -131,7 +131,7 @@
                             </div>
                         </td>
                         
-                        <template if:true={delivery.isDiscountedItem}>
+                        <!-- <template if:true={delivery.isDiscountedItem}>
                             <td>
                                 <span class="text-green">{label.freeLabel}&nbsp;</span> 
                                 <s>
@@ -139,6 +139,33 @@
                                     <template if:false={isCurrencyBefore}>{delivery.unitPrice}&nbsp;{euro}</template>
                                     &nbsp;/&nbsp;{delivery.deliveryUnit}
                                 </s>
+                            </td>
+                        </template> -->
+                        <!-- updated DELIVERY Section -->
+                        <template if:true={delivery.isDiscountedItem}>
+                            <td>
+                                <!-- Now Shows Actual discounted price -->
+                                <span class="text-green">
+                                    <template if:true={delivery.discountedUnitPrice}>
+                                        <template if:true={isCurrencyBefore}>{euro}&nbsp;{delivery.discountedUnitPrice}</template>
+                                        <template if:false={isCurrencyBefore}>{delivery.discountedUnitPrice}&nbsp;{euro}</template>
+                                    </template>
+                                    <template if:false={delivery.discountedUnitPrice}>
+                                        {label.freeLabel}
+                                    </template>
+                                </span>
+                                &nbsp;
+                                <!-- Original price strikethrough -->
+                                <s>
+                                    <template if:true={isCurrencyBefore}>{euro}&nbsp;{delivery.unitPrice}</template>
+                                    <template if:false={isCurrencyBefore}>{delivery.unitPrice}&nbsp;{euro}</template>
+                                </s>
+                                &nbsp;/&nbsp;{delivery.deliveryUnit}
+                                
+                                <!-- Optional: Show discount percentage -->
+                                <template if:true={delivery.discountedPercentage}>
+                                    <span class="discount-badge">-{delivery.discountedPercentage}%</span>
+                                </template>
                             </td>
                         </template>
                         <template if:false={delivery.isDiscountedItem}>
@@ -196,13 +223,49 @@
                             </div>
                         </td>
                         <!-- Discounted -->
-                        <template if:true={card.isDiscountedItem}>
+                        <!-- <template if:true={card.isDiscountedItem}>
                             <td>
                                 <template if:true={card.percentage}>
                                     <span class="text-green">{label.freeLabel}&nbsp;</span> <s>{card.percentage}&nbsp;%</s>
                                 </template>
                                 <template if:false={card.percentage}>
                                     <span class="text-green">{label.freeLabel}&nbsp;</span> 
+                                    <s>
+                                        <template if:true={isCurrencyBefore}>{euro}&nbsp;{card.unitPrice}</template>
+                                        <template if:false={isCurrencyBefore}>{card.unitPrice}&nbsp;{euro}</template>
+                                    </s>
+                                </template>
+                            </td>
+                        </template> -->
+
+                        <!-- Updated CARD Section -->
+                        <template if:true={card.isDiscountedItem}>
+                            <td>
+                                <template if:true={card.percentage}>
+                                    <!-- now Shows discounted percentage -->
+                                    <span class="text-green">
+                                        <template if:true={card.discountedPercentage}>
+                                            {card.discountedPercentage}&nbsp;%
+                                        </template>
+                                        <template if:false={card.discountedPercentage}>
+                                            {label.freeLabel}
+                                        </template>
+                                    </span>
+                                    &nbsp;
+                                    <s>{card.percentage}&nbsp;%</s>
+                                </template>
+                                <template if:false={card.percentage}>
+                                    <!-- now Shows discounted price -->
+                                    <span class="text-green">
+                                        <template if:true={card.discountedUnitPrice}>
+                                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{card.discountedUnitPrice}</template>
+                                            <template if:false={isCurrencyBefore}>{card.discountedUnitPrice}&nbsp;{euro}</template>
+                                        </template>
+                                        <template if:false={card.discountedUnitPrice}>
+                                            {label.freeLabel}
+                                        </template>
+                                    </span>
+                                    &nbsp;
                                     <s>
                                         <template if:true={isCurrencyBefore}>{euro}&nbsp;{card.unitPrice}</template>
                                         <template if:false={isCurrencyBefore}>{card.unitPrice}&nbsp;{euro}</template>
@@ -277,10 +340,9 @@
                             </td>
 
                             <!-- Discounted -->
-                            <template if:true={service.isDiscountedItem}>
+                            <!-- <template if:true={service.isDiscountedItem}>
                                 <td>
                                     <template if:true={service.percentage}>
-                                        <!-- Removing discountPrice from the class -->
                                         <span class="text-green" data-id={service.productId}>
                                             {service.discountedPercentage}%
                                         </span>
@@ -294,10 +356,34 @@
                                             <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
                                         </s>
                                         &nbsp;
-                                        <!-- Removing discountPrice from the class -->
                                         <span class="text-green" data-id={service.productId}>
                                             <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.discountedunitPrice}</template>
                                             <template if:false={isCurrencyBefore}>{service.discountedunitPrice}&nbsp;{euro}</template>
+                                        </span>
+                                    </template>
+                                </td>
+                            </template> -->
+
+                            <!-- SERVICE Section - Already looks correct, but verify discountedunitPrice typo -->
+                            <template if:true={service.isDiscountedItem}>
+                                <td>
+                                    <template if:true={service.percentage}>
+                                        <span class="text-green" data-id={service.productId}>
+                                            {service.discountedPercentage}%
+                                        </span>
+                                        &nbsp;
+                                        <s data-id={service.productId}>{service.percentage}%</s>
+                                    </template>
+                                    <template if:false={service.percentage}>
+                                        <s data-id={service.productId}>
+                                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.unitPrice}</template>
+                                            <template if:false={isCurrencyBefore}>{service.unitPrice}&nbsp;{euro}</template>
+                                        </s>
+                                        &nbsp;
+                                        <span class="text-green" data-id={service.productId}>
+                                            <!-- FIX THIS TYPO: discountedunitPrice → discountedUnitPrice -->
+                                            <template if:true={isCurrencyBefore}>{euro}&nbsp;{service.discountedUnitPrice}</template>
+                                            <template if:false={isCurrencyBefore}>{service.discountedUnitPrice}&nbsp;{euro}</template>
                                         </span>
                                     </template>
                                 </td>
@@ -438,11 +524,12 @@
         <lightning-input 
             type="checkbox" 
             name="paymentAck" 
-            label={label.paymentAck} 
+            variant="label-hidden"
             checked={paymentAck} 
             onchange={handleInputChange} 
             required>
         </lightning-input>
+        <span class="uniform-text">{label.paymentAck}</span>
     </div>   
     
 
@@ -467,7 +554,7 @@
     </div>
 
    
-        <div class="conditions-check slds-m-top_large">
+        <div class="conditions-check">
             <lightning-input 
                 type="checkbox"
                 name="salesConditionAck"
@@ -476,22 +563,23 @@
                 onchange={handleInputChange}
                 required>
             </lightning-input>
-            <span class="general">
+            <span class="uniform-text">
                 {salesConditionText}&nbsp;
                 <a href={termsLink} target="_blank" class="condition-hyperlink">{label.generalTermsText}</a>&nbsp;
                 {salesConditionPart2Final}
             </span>
         </div>
    
-<div class="conditions-check slds-m-top_large">
+<div class="conditions-check">
     <lightning-input 
         type="checkbox" 
         name="identityConfirm" 
-        label={label.identityConfirm} 
+        variant="label-hidden"
         checked={identityConfirm} 
         onchange={handleInputChange} 
         required>
     </lightning-input>
+    <span class="uniform-text">{label.identityConfirm}</span>
 </div>
 </div>
 

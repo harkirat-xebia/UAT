@@ -342,7 +342,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                 opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
                                               RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
-                                              ER_Reason__c = 'New', LeadSource = Constants.AUTO_ENROLLMENT, ER_Won_Reason__c = 'Auto-Enrollment');
+                                              ER_Reason__c = 'New', LeadSource = 'Websales', ER_Won_Reason__c = 'Auto-Enrollment');
                 update opportunity;
 
                 contact = new contact(Id = lcr.getContactId(), RecordTypeId = contactClientRecordTypeId,Title = jobTitle, ER_Department_Family__c = department, ER_SubDepartment_Family__c = subDepartment);
@@ -573,7 +573,7 @@ public without sharing class clientAutoEnrollmentComponentController {
 
                     opportunity = new Opportunity(Id = lcr.getOpportunityId(), Name = productCode + ' - ' + commercialName,
                                               RecordTypeId = opportunityClientRecordTypeId, ER_Contract_Expected_Start_Date__c = Date.today(), Commercial_Origin__c = 'Greenfield', Auto_Enrolment_Opportunity__c = true,
-                                              ER_Reason__c = 'New', LeadSource = Constants.AUTO_ENROLLMENT, ER_Won_Reason__c = 'Auto-Enrollment');
+                                              ER_Reason__c = 'New', LeadSource = 'Websales', ER_Won_Reason__c = 'Auto-Enrollment');
                     update opportunity;
 
                     result.put('opportunity', opportunity);
