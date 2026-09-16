@@ -6,6 +6,8 @@ public class APER19_Lead_CustomerStatus_Test {
   private static final String CRN_EXISTING = 'CRN0000000001';
   private static final String CRN_DRAFT_ONLY = 'CRN0000000002';
   private static final String CRN_UNKNOWN = 'CRN0000000009';
+  private static final String RCS_EXISTING = 'RCS0000000001';
+  private static final String RCS_UNKNOWN = 'RCS0000000009';
 
   @TestSetup
   static void testSetup() {
@@ -20,7 +22,10 @@ public class APER19_Lead_CustomerStatus_Test {
       Account withDraftContract = APER07_UtilityTestMethod.getCompany('APER19 Draft Only');
       withDraftContract.ER_Registration_Number__c = CRN_DRAFT_ONLY;
 
-      insert new List<Account>{ withActiveContract, withDraftContract };
+      Account luxembourgWithActiveContract = APER07_UtilityTestMethod.getCompany('APER19 Luxembourg Customer');
+      luxembourgWithActiveContract.RCS_Number__c = RCS_EXISTING;
+
+      insert new List<Account>{ withActiveContract, withDraftContract, luxembourgWithActiveContract };
 
       Contract activated = APER07_UtilityTestMethod.getContract(
         withActiveContract.Id,
@@ -29,11 +34,18 @@ public class APER19_Lead_CustomerStatus_Test {
         null
       );
       Contract draft = APER07_UtilityTestMethod.getContract(withDraftContract.Id, System.today(), Constants.DRAFT, null);
-      insert new List<Contract>{ activated, draft };
+      Contract luxembourgActivated = APER07_UtilityTestMethod.getContract(
+        luxembourgWithActiveContract.Id,
+        System.today(),
+        Constants.DRAFT,
+        null
+      );
+      insert new List<Contract>{ activated, draft, luxembourgActivated };
 
       // Contract.Status cannot be set to Activated on insert.
       activated.Status = Constants.ACTIVATED;
-      update activated;
+      luxembourgActivated.Status = Constants.ACTIVATED;
+      update new List<Contract>{ activated, luxembourgActivated };
     }
   }
 
@@ -217,6 +229,33 @@ public class APER19_Lead_CustomerStatus_Test {
         Constants.LEAD_MOTION_CROSS_SELLING,
         updated.Lead_motion__c,
         'Motion must be pre-filled once the lead resolves to an existing customer'
+      );
+    }
+  }
+
+  @IsTest
+  static void testStatusIsRecalculatedWhenLuxembourgRcsNumberChanges() {
+    System.runAs(getRunningUser()) {
+      Lead l = buildLead(CRN_UNKNOWN);
+      l.ER_BUPicklist__c = Constants.LU;
+      l.RCS_Number__c = RCS_UNKNOWN;
+      insert l;
+
+      Test.startTest();
+      l.RCS_Number__c = RCS_EXISTING;
+      update l;
+      Test.stopTest();
+
+      Lead updated = [SELECT customer_status__c, Lead_motion__c FROM Lead WHERE Id = :l.Id];
+      Assert.areEqual(
+        Constants.LEAD_CUSTOMER_STATUS_EXISTING,
+        updated.customer_status__c,
+        'Changing a Luxembourg RCS number must re-evaluate the customer status'
+      );
+      Assert.areEqual(
+        Constants.LEAD_MOTION_CROSS_SELLING,
+        updated.Lead_motion__c,
+        'Motion must be pre-filled once the Luxembourg lead resolves to an existing customer'
       );
     }
   }

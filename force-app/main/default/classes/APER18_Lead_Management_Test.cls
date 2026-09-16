@@ -469,4 +469,146 @@ public class APER18_Lead_Management_Test {
         Test.stopTest();
       }
     }
+
+    //harkirat - stampQualificationEnd : qualification end is stamped when the lead is converted
+    @IsTest
+    static void stampQualificationEndOnConvert() {
+      User u = [SELECT Id FROM User WHERE LastName = 'APER18'];
+      System.runAs(u) {
+        Lead ld = APER07_UtilityTestMethod.getLead(
+          Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Merchant_Lead_RT')
+        );
+        insert ld;
+
+        Test.startTest();
+        Database.LeadConvert lc = new Database.LeadConvert();
+        lc.setLeadId(ld.Id);
+        lc.setConvertedStatus([SELECT MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1].MasterLabel);
+        Database.LeadConvertResult lcr = Database.convertLead(lc);
+        Test.stopTest();
+
+        System.assert(lcr.isSuccess(), 'the lead had been successfully converted');
+        Lead converted = [SELECT Id, Qualification_End__c FROM Lead WHERE Id = :ld.Id];
+        System.assertNotEquals(
+          null,
+          converted.Qualification_End__c,
+          'the qualification end date had been stamped on conversion'
+        );
+      }
+    }
+
+    //harkirat - stampQualificationEnd : qualification end is stamped when the lead is rejected
+    @IsTest
+    static void stampQualificationEndOnRejected() {
+      User u = [SELECT Id FROM User WHERE LastName = 'APER18'];
+      System.runAs(u) {
+        Lead ld = APER07_UtilityTestMethod.getLead(
+          Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Merchant_Lead_RT')
+        );
+        insert ld;
+
+        Test.startTest();
+        ld.Status = Constants.REJECTED;
+        update ld;
+        Test.stopTest();
+
+        Lead rejected = [SELECT Id, Qualification_End__c FROM Lead WHERE Id = :ld.Id];
+        System.assertNotEquals(
+          null,
+          rejected.Qualification_End__c,
+          'the qualification end date had been stamped on rejection'
+        );
+      }
+    }
+
+    //harkirat - stampQualificationEnd : leads owned by a guest user (webform) are excluded
+    @IsTest
+    static void stampQualificationEndSkippedForGuestOwner() {
+      User guestUser = TestDataFactory.newUser('Site', 'Guest User', 'Local Admin', 'ES');
+      guestUser.ER_BypassVR__c = true;
+      insert guestUser;
+
+      System.runAs(guestUser) {
+        Lead ld = APER07_UtilityTestMethod.getLead(
+          Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Merchant_Lead_RT')
+        );
+        insert ld;
+
+        Test.startTest();
+        Database.LeadConvert lc = new Database.LeadConvert();
+        lc.setLeadId(ld.Id);
+        lc.setConvertedStatus([SELECT MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1].MasterLabel);
+        Database.convertLead(lc);
+        Test.stopTest();
+
+        Lead converted = [SELECT Id, Qualification_End__c FROM Lead WHERE Id = :ld.Id];
+        System.assertEquals(
+          null,
+          converted.Qualification_End__c,
+          'the qualification end date stays empty for a guest owned lead'
+        );
+      }
+    }
+
+    //harkirat - stampQualificationEnd : an existing qualification end date is never overwritten
+    @IsTest
+    static void stampQualificationEndKeepsExistingValue() {
+      User u = [SELECT Id FROM User WHERE LastName = 'APER18'];
+      System.runAs(u) {
+        Datetime existingEnd = Datetime.now().addDays(-10);
+        Lead ld = APER07_UtilityTestMethod.getLead(
+          Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Merchant_Lead_RT')
+        );
+        ld.Qualification_End__c = existingEnd;
+        insert ld;
+
+        Test.startTest();
+        Database.LeadConvert lc = new Database.LeadConvert();
+        lc.setLeadId(ld.Id);
+        lc.setConvertedStatus([SELECT MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1].MasterLabel);
+        Database.convertLead(lc);
+        Test.stopTest();
+
+        Lead converted = [SELECT Id, Qualification_End__c FROM Lead WHERE Id = :ld.Id];
+        System.assertEquals(
+          existingEnd,
+          converted.Qualification_End__c,
+          'the qualification end date had been left untouched'
+        );
+      }
+    }
+
+    //harkirat - stampQualificationEnd : the owner names are resolved in one query, not one per lead
+    @IsTest
+    static void stampQualificationEndInBulk() {
+      User u = [SELECT Id FROM User WHERE LastName = 'APER18'];
+      System.runAs(u) {
+        List<Lead> leads = new List<Lead>();
+        for (Integer i = 0; i < 200; i++) {
+          Lead ld = APER07_UtilityTestMethod.getLead(
+            Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Merchant_Lead_RT')
+          );
+          ld.ER_Store_Name__c = 'Bulk' + i;
+          ld.LastName = 'Bulk' + i;
+          ld.Company = 'Bulk' + i;
+          ld.Email = 'bulk' + i + '@salesforce.com';
+          ld.ER_VAT_Number__c = 'BULK' + i;
+          ld.ER_MID_Clearing__c = 'BULK' + i;
+          ld.ER_Sub_MID_Clearing__c = 'BULK' + i;
+          leads.add(ld);
+        }
+        insert leads;
+
+        Test.startTest();
+        for (Lead ld : leads) {
+          ld.Status = Constants.REJECTED;
+        }
+        update leads;
+        Test.stopTest();
+
+        // A per record query would breach the SOQL limit long before the 200th lead.
+        Integer stamped = [SELECT COUNT() FROM Lead WHERE Id IN :leads AND Qualification_End__c != NULL];
+        System.assertEquals(200, stamped, 'every lead in the batch had been stamped');
+      }
+    }
 }

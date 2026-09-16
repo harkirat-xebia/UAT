@@ -266,13 +266,16 @@ export default class ErRecordInsights extends NavigationMixin(LightningElement) 
             if (!opportunityId) {
                 return;
             }
-            if (this.wiredInsights) {
-                refreshApex(this.wiredInsights);
-            }
+            // harkirat - navigate first, a slow/failed insight refresh must never block the redirect
             this[NavigationMixin.Navigate]({
                 type: 'standard__recordPage',
                 attributes: { recordId: opportunityId, actionName: 'view' }
             });
+            if (this.wiredInsights) {
+                refreshApex(this.wiredInsights).catch((refreshError) => {
+                    //console.error('erRecordInsights refreshApex failed', refreshError);
+                });
+            }
         });
     }
 

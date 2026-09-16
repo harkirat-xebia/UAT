@@ -94,6 +94,65 @@ public with sharing class clientAutoEnrollmentControllerTest {
         Test.stopTest();
     }
 
+    @isTest static void testPromoCodeWordingsForLuxembourg() {
+
+        Id promoCodeRecordTypeId = Schema.SObjectType.ER_Promo_Code__c.getRecordTypeInfosByDeveloperName()
+                                   .get('ER_Promo_Code').getRecordTypeId();
+
+        ER_Promo_Code__c promo = new ER_Promo_Code__c(
+            Name                          = 'LU Discount',
+            RecordTypeId                  = promoCodeRecordTypeId,
+            ER_Promo_Code__c              = 'PROMOLU',
+            ER_Business_Unit__c           = 'LU',
+            ER_Status__c                  = 'Draft',
+            Promo_Duration_in_Days__c     = 180,
+            Description_Marketting_FR__c  = '6 mois offerts a 100%',
+            ER_Description__c             = 'Offre non cumulable, valable pour tout contrat Edenred Repas.',
+            Description_Marketting_EN__c  = '6 months with 100% gratis',
+            Description_EN__c             = 'This offer is non-cumulative and is valid for any Edenred Meal contract.'
+        );
+        insert promo;
+
+        // The discount code is only returned when it has a price book entry on the
+        // requested solution, so build that link: solution -> discount product -> entry.
+        Product2 solution = new Product2(Name = 'TRL Solution', ProductCode = 'TRL', IsActive = true,
+                                         ER_Type__c = 'Solution', ER_BUPicklist__c = 'LU');
+        insert solution;
+
+        Product2 discountProduct = new Product2(Name = 'LU Discount Item', IsActive = true,
+                                                ER_Type__c = 'Discount', ER_BUPicklist__c = 'LU',
+                                                ER_Solution2__c = solution.Id);
+        insert discountProduct;
+
+        insert new PricebookEntry(
+            Pricebook2Id      = Test.getStandardPricebookId(),
+            Product2Id        = discountProduct.Id,
+            IsActive          = true,
+            UseStandardPrice  = false,
+            UnitPrice         = 0,
+            ER_ValueType__c   = 'Currency',
+            ER_Duration__c    = 180,
+            ER_Promo_Code2__c = promo.Id
+        );
+
+        Test.startTest();
+        // 'lu_fr' / 'lu_en' are the tokens the LWC sends once the business unit resolves to LU.
+        clientAutoEnrollmentComponentController.PromoCodeDetailsWrapper luFr =
+            clientAutoEnrollmentComponentController.fetchPromoCodeDetails('PROMOLU', 'LU', 'lu_fr', solution.Id);
+        clientAutoEnrollmentComponentController.PromoCodeDetailsWrapper luEn =
+            clientAutoEnrollmentComponentController.fetchPromoCodeDetails('PROMOLU', 'LU', 'lu_en', solution.Id);
+        Test.stopTest();
+
+        System.assertEquals(promo.Description_Marketting_FR__c, luFr.markettingDescription,
+            'Luxembourg French must use the FR marketting description, not the EN one.');
+        System.assertEquals(promo.ER_Description__c, luFr.description,
+            'Luxembourg French must use ER_Description__c (the field labelled "Description FR").');
+        System.assertEquals(promo.Description_Marketting_EN__c, luEn.markettingDescription,
+            'Luxembourg English must keep the EN marketting description.');
+        System.assertEquals(promo.Description_EN__c, luEn.description,
+            'Luxembourg English must keep the EN description.');
+    }
+
     @isTest static void testLeadCreationAndValidation() {
         Test.setMock(HttpCalloutMock.class, new GenericMock());
 

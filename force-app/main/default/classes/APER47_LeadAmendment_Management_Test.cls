@@ -494,6 +494,29 @@ private class APER47_LeadAmendment_Management_Test {
   }
 
   @isTest
+  static void testFlagIsRecalculatedWhenRegistrationNumberChanges() {
+    Map<String, Product2> products = buildProducts();
+    buildPricebookEntries(new List<Product2>{ products.get('A'), products.get('C') });
+    Account account = buildAccount();
+    benefitsContract(account, products);
+
+    Lead lead = newLead(products.get('C').Id, clientLeadRtId());
+    lead.ER_Registration_Number__c = 'AMEND-CRN-UNKNOWN';
+    insertLeadBypassingTrigger(lead);
+
+    Test.startTest();
+    lead.ER_Registration_Number__c = CRN;
+    update lead;
+    Test.stopTest();
+
+    System.assertEquals(
+      true,
+      [SELECT ER_Has_Amendable_Contract__c FROM Lead WHERE Id = :lead.Id].ER_Has_Amendable_Contract__c,
+      'Changing the registration number must recalculate the amendable-contract flag'
+    );
+  }
+
+  @isTest
   static void testPreviewCountsMultipleContractsForTheWarning() {
     Map<String, Product2> products = buildProducts();
     buildPricebookEntries(new List<Product2>{ products.get('A'), products.get('D') });
