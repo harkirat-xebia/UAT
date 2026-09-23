@@ -440,8 +440,105 @@ update accsToUpdate;
         }
     }
 }
-
     //Code for insert ends
+
+    /**
+     * @author Harkirat
+     * @description EBECRM-2821: Automatically populate Client_Type_formula__c based on account hierarchy, Public checkbox, Federation picklist, and Number of Employees
+     * @param accounts List of Account records
+     */
+    public static void populateClientType(List<Account> accounts) {
+        if (accounts == null || accounts.isEmpty()) {
+            return;
+        }
+
+        Set<Id> parentIds = new Set<Id>();
+        for (Account a : accounts) {
+            if (a.ParentId != null) {
+                parentIds.add(a.ParentId);
+            }
+        }
+
+        Map<Id, Account> parentMap = new Map<Id, Account>();
+        if (!parentIds.isEmpty()) {
+            parentMap = new Map<Id, Account>([
+                SELECT Id, Client_Type_formula__c
+                FROM Account
+                WHERE Id IN :parentIds
+            ]);
+        }
+
+        for (Account a : accounts) {
+            // Priority 1: Parent Account is filled -> Inherit Client Type from Parent Account
+            if (a.ParentId != null) {
+                Account parentAcc = parentMap.get(a.ParentId);
+                a.Client_Type_formula__c = (parentAcc != null) ? parentAcc.Client_Type_formula__c : null;
+            }
+            // Priority 2: Public checkbox = true -> Public
+            else if (a.Public__c == true) {
+                a.Client_Type_formula__c = 'Public';
+            }
+            // Priority 3: Federation picklist = 'Federgon' -> Federgon
+            else if (a.Federation__c == 'Federgon') {
+                a.Client_Type_formula__c = 'Federgon';
+            }
+            // Priority 4: Number of Employees
+            else if (a.NumberOfEmployees != null) {
+                if (a.NumberOfEmployees < 30) {
+                    a.Client_Type_formula__c = 'SME';
+                } else if (a.NumberOfEmployees >= 30 && a.NumberOfEmployees <= 999) {
+                    a.Client_Type_formula__c = 'MM';
+                } else if (a.NumberOfEmployees >= 1000) {
+                    a.Client_Type_formula__c = 'LNA';
+                }
+            } else {
+                a.Client_Type_formula__c = null;
+            }
+        }
+    }
+
+    /**
+     * @author Harkirat
+     * @description EBECRM-2821: Propagate Client_Type_formula__c to child accounts when parent's Client Type changes
+     * @param newMap Map of new Account records
+     * @param oldMap Map of old Account records
+     */
+    public static void propagateClientTypeToChildren(Map<Id, Account> newMap, Map<Id, Account> oldMap) {
+        if (newMap == null || newMap.isEmpty() || oldMap == null || oldMap.isEmpty()) {
+            return;
+        }
+
+        Map<Id, String> parentClientTypeMap = new Map<Id, String>();
+        for (Account a : newMap.values()) {
+            Account oldA = oldMap.get(a.Id);
+            if (oldA != null && a.Client_Type_formula__c != oldA.Client_Type_formula__c) {
+                parentClientTypeMap.put(a.Id, a.Client_Type_formula__c);
+            }
+        }
+
+        if (parentClientTypeMap.isEmpty()) {
+            return;
+        }
+
+        List<Account> childrenToUpdate = [
+            SELECT Id, ParentId, Client_Type_formula__c
+            FROM Account
+            WHERE ParentId IN :parentClientTypeMap.keySet()
+        ];
+
+        List<Account> updates = new List<Account>();
+        for (Account child : childrenToUpdate) {
+            String newClientType = parentClientTypeMap.get(child.ParentId);
+            if (child.Client_Type_formula__c != newClientType) {
+                child.Client_Type_formula__c = newClientType;
+                updates.add(child);
+            }
+        }
+
+        if (!updates.isEmpty()) {
+            update updates;
+        }
+    }
     /**
 * @param accountIds
 * @description Method to replace WF WFER01_Account_RT_Merchant

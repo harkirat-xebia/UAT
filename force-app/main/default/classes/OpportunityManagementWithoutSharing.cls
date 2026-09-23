@@ -290,10 +290,14 @@ for (String pair : deletedRoleMap.keySet()) {
     /**
     * @description : to not allow user to create duplicate OpportunityContactRole
     * @author Mayank Sankhla
+    * @param newOCRs New opportunity contact roles from the trigger context.
     **/
     public static void preventDuplicateRoles(List<OpportunityContactRole> newOCRs) {
         Set<Id> opportunityIds = new Set<Id>();
         for (OpportunityContactRole ocr : newOCRs) {
+            if (ocr.IsPrimary && String.isBlank(ocr.Role)) {
+                ocr.Role = 'Primary Contact';
+            }
             if (ocr.OpportunityId != null && roleToFieldMap.containsKey(ocr.Role)) {
                 opportunityIds.add(ocr.OpportunityId);
             }
@@ -344,6 +348,99 @@ for (String pair : deletedRoleMap.keySet()) {
                 ocr.addError('Only one contact role with this role is allowed per Opportunity.');
             } else {
                 rolesSeen.add(ocr.Role);
+            }
+        }
+    }
+
+    public static void syncPrimaryContactFromOCR(List<OpportunityContactRole> newOCRs, List<OpportunityContactRole> oldOCRs) {
+        Set<Id> opportunityIds = new Set<Id>();
+        collectOpportunityIds(newOCRs, opportunityIds);
+        collectOpportunityIds(oldOCRs, opportunityIds);
+        if (opportunityIds.isEmpty()) return;
+
+        Map<Id, Opportunity> opportunities = new Map<Id, Opportunity>([
+            SELECT Id, IsClosed, Primary_Contact__c
+            FROM Opportunity
+            WHERE Id IN :opportunityIds
+        ]);
+        Map<Id, Id> primaryContactByOpportunity = new Map<Id, Id>();
+        for (OpportunityContactRole ocr : [
+            SELECT OpportunityId, ContactId
+            FROM OpportunityContactRole
+            WHERE OpportunityId IN :opportunityIds
+            AND Role = 'Primary Contact'
+            ORDER BY CreatedDate DESC, Id DESC
+        ]) {
+            if (!primaryContactByOpportunity.containsKey(ocr.OpportunityId)) {
+                primaryContactByOpportunity.put(ocr.OpportunityId, ocr.ContactId);
+            }
+        }
+
+        List<Opportunity> updates = new List<Opportunity>();
+        for (Opportunity opportunity : opportunities.values()) {
+            if (opportunity.IsClosed) continue;
+            Id primaryContactId = primaryContactByOpportunity.get(opportunity.Id);
+            if (opportunity.Primary_Contact__c != primaryContactId) {
+                updates.add(new Opportunity(
+                    Id = opportunity.Id,
+                    Primary_Contact__c = primaryContactId
+                ));
+            }
+        }
+        if (!updates.isEmpty()) update updates;
+        syncPrimaryContactOnRelatedContracts(opportunities, primaryContactByOpportunity);
+    }
+
+    private static void syncPrimaryContactOnRelatedContracts(
+        Map<Id, Opportunity> opportunities,
+        Map<Id, Id> primaryContactByOpportunity
+    ) {
+        Set<Id> opportunityIds = new Set<Id>();
+        for (Opportunity opportunity : opportunities.values()) {
+            if (!opportunity.IsClosed) opportunityIds.add(opportunity.Id);
+        }
+        if (opportunityIds.isEmpty()) return;
+
+        List<Contract> contractsToUpdate = new List<Contract>();
+        for (Contract contractRecord : [
+            SELECT Id, ER_OpportunityId__c, Primary_Contact__c
+            FROM Contract
+            WHERE ER_OpportunityId__c IN :opportunityIds
+        ]) {
+            Id primaryContactId = primaryContactByOpportunity.get(contractRecord.ER_OpportunityId__c);
+            if (contractRecord.Primary_Contact__c != primaryContactId) {
+                contractRecord.Primary_Contact__c = primaryContactId;
+                contractsToUpdate.add(contractRecord);
+            }
+        }
+        if (!contractsToUpdate.isEmpty()) update contractsToUpdate;
+    }
+
+    private static void collectOpportunityIds(List<OpportunityContactRole> roles, Set<Id> opportunityIds) {
+        if (roles == null) return;
+        for (OpportunityContactRole role : roles) {
+            if (role.OpportunityId != null) opportunityIds.add(role.OpportunityId);
+        }
+    }
+
+    public static void copyPrimaryContactFromOpportunity(List<Contract> contracts) {
+        Set<Id> opportunityIds = new Set<Id>();
+        for (Contract contractRecord : contracts) {
+            if (contractRecord.ER_OpportunityId__c != null) {
+                opportunityIds.add(contractRecord.ER_OpportunityId__c);
+            }
+        }
+        if (opportunityIds.isEmpty()) return;
+
+        Map<Id, Opportunity> opportunities = new Map<Id, Opportunity>([
+            SELECT Id, Primary_Contact__c
+            FROM Opportunity
+            WHERE Id IN :opportunityIds
+        ]);
+        for (Contract contractRecord : contracts) {
+            Opportunity opportunity = opportunities.get(contractRecord.ER_OpportunityId__c);
+            if (opportunity != null) {
+                contractRecord.Primary_Contact__c = opportunity.Primary_Contact__c;
             }
         }
     }
@@ -908,11 +1005,113 @@ public static String syncCCRtoOCR(Id contractId) {
         throw new AuraHandledException('Error during sync: ' + e.getMessage());
     }
     
+    // Keep Contract.Primary_Contact__c aligned with the CCR marked as Primary Contact
+    syncPrimaryContactOnContractFromCCR(contractId);
+    
+    // Keep Opportunity.Primary_Contact__c aligned with the OCR just synced from CCR
+    if (hasOpportunity) {
+        syncPrimaryContactOnOpportunityFromOCR(oppId);
+    }
+    
     // Check if any changes were made
     Boolean hasChanges = !ocrsToInsert.isEmpty() || !ocrsToUpdate.isEmpty() || !ocrsToDelete.isEmpty() ||
                          !acrsToInsert.isEmpty() || !acrsToUpdate.isEmpty() || !acrsToDelete.isEmpty();
     
     return hasChanges ? 'UPDATED' : 'NO_CHANGES';
+}
+
+/**
+* @description : called from the "Sync Roles" quick action flow (syncCCRtoOCR) to keep
+*                Contract.Primary_Contact__c in sync when the Primary Contact CCR is
+*                changed manually on the Contract.
+* @author Harkirat Singh
+**/
+public static void syncPrimaryContactOnContractFromCCR(Id contractId) {
+    if (contractId == null) {
+        return;
+    }
+    
+    List<Contract> contracts = [SELECT Id, Primary_Contact__c FROM Contract WHERE Id = :contractId LIMIT 1];
+    if (contracts.isEmpty()) {
+        //System.debug('syncPrimaryContactOnContractFromCCR - Contract ' + contractId + ' not found, skipping sync');
+        return;
+    }
+    Contract contractRec = contracts[0];
+    
+    List<ContractContactRole> primaryCCRs = [
+        SELECT ContactId
+        FROM ContractContactRole
+        WHERE ContractId = :contractId
+        AND Role = 'Primary Contact'
+        ORDER BY CreatedDate DESC
+        LIMIT 1
+    ];
+    
+    Id primaryContactId = primaryCCRs.isEmpty() ? null : primaryCCRs[0].ContactId;
+    
+    if (contractRec.Primary_Contact__c != primaryContactId) {
+        try {
+            update new Contract(Id = contractId, Primary_Contact__c = primaryContactId);
+        } catch (DmlException e) {
+            //System.debug('syncPrimaryContactOnContractFromCCR - Error updating Contract ' +
+            //             contractId + ': ' + e.getMessage());
+        }
+    }
+}
+
+/**
+* @description : called from the "Sync Roles" quick action flow (syncCCRtoOCR) to keep
+*                Opportunity.Primary_Contact__c in sync once its OCRs are updated from CCR.
+* @author Harkirat Singh
+**/
+public static void syncPrimaryContactOnOpportunityFromOCR(Id opportunityId) {
+    if (opportunityId == null) {
+        return;
+    }
+    
+    // Sync Roles is a manual action, so keep Opportunity in sync even when closed
+    List<Opportunity> opportunities = [SELECT Id, Primary_Contact__c FROM Opportunity WHERE Id = :opportunityId LIMIT 1];
+    if (opportunities.isEmpty()) {
+        //System.debug('syncPrimaryContactOnOpportunityFromOCR - Opportunity ' + opportunityId + ' not found, skipping sync');
+        return;
+    }
+    Opportunity opp = opportunities[0];
+    
+    List<OpportunityContactRole> primaryOCRs = [
+        SELECT ContactId
+        FROM OpportunityContactRole
+        WHERE OpportunityId = :opportunityId
+        AND Role = 'Primary Contact'
+        ORDER BY CreatedDate DESC
+        LIMIT 1
+    ];
+    
+    Id primaryContactId = primaryOCRs.isEmpty() ? null : primaryOCRs[0].ContactId;
+    //System.debug('syncPrimaryContactOnOpportunityFromOCR - opportunityId: ' + opportunityId +
+                 //', current Primary_Contact__c: ' + opp.Primary_Contact__c +
+                 //', primary OCR ContactId: ' + primaryContactId);
+    
+    if (opp.Primary_Contact__c != primaryContactId) {
+        // Bypass VR so a closed Opportunity's Primary_Contact__c can still be synced here
+        try {
+            update new Opportunity(Id = opportunityId, byPassVR__c = true, Primary_Contact__c = primaryContactId);
+            //System.debug('syncPrimaryContactOnOpportunityFromOCR - Opportunity ' + opportunityId +
+                         //' Primary_Contact__c updated to ' + primaryContactId);
+        } catch (DmlException e) {
+            //System.debug('syncPrimaryContactOnOpportunityFromOCR - Error updating Opportunity ' +
+                         //opportunityId + ': ' + e.getMessage());
+        } finally {
+            try {
+                update new Opportunity(Id = opportunityId, byPassVR__c = false);
+            } catch (DmlException e) {
+                //System.debug('syncPrimaryContactOnOpportunityFromOCR - Error resetting byPassVR__c on Opportunity ' +
+                             //opportunityId + ': ' + e.getMessage());
+            }
+        }
+    } else {
+        //System.debug('syncPrimaryContactOnOpportunityFromOCR - Opportunity ' + opportunityId +
+                     //' already in sync, no update needed');
+    }
 }
 
 // Helper method to log ACR insert/update results

@@ -1048,16 +1048,59 @@ public class APER18_Lead_Management {
 
   /**
    * @author harkirat
+   * @date 17/09/2026
+   * @description Stamp the qualification start date the first time a lead reaches the
+   *              Qualification or Qualified stage. Leads created by a guest user
+   *              (webform / auto-enrollment) are excluded.
+   * @param leadsFromTrigger
+   * @param oldItemsById
+   */
+  public static void stampQualificationStart(List<Lead> leadsFromTrigger, Map<Id, SObject> oldItemsById) {
+    List<Lead> leadsToStamp = new List<Lead>();
+    Set<Id> createdByIds = new Set<Id>();
+
+    for (Lead eachLead : leadsFromTrigger) {
+      Lead oldLead = (Lead) oldItemsById.get(eachLead.Id);
+      Boolean reachedQualifyingStage =
+        eachLead.Status == Constants.QUALIFIED || eachLead.Status == Constants.QUALIFICATION;
+      Boolean wasAlreadyQualifying =
+        oldLead.Status == Constants.QUALIFIED || oldLead.Status == Constants.QUALIFICATION;
+
+      if (eachLead.Qualification_Start__c == null && reachedQualifyingStage && !wasAlreadyQualifying) {
+        leadsToStamp.add(eachLead);
+        createdByIds.add(eachLead.CreatedById);
+      }
+    }
+
+    if (leadsToStamp.isEmpty())
+      return;
+
+    // Ownership can move off the guest user, so CreatedById is what still identifies
+    // a guest-submitted lead.
+    Map<Id, User> creatorsById = new Map<Id, User>([SELECT Id, Name FROM User WHERE Id IN :createdByIds]);
+
+    for (Lead eachLead : leadsToStamp) {
+      User creator = creatorsById.get(eachLead.CreatedById);
+      if (creator != null && creator.Name.containsIgnoreCase('Guest')) {
+        continue;
+      }
+      eachLead.Qualification_Start__c = Datetime.now();
+    }
+  }
+
+  /**
+   * @author harkirat
    * @date 21/08/2026
    * @description Stamp the qualification end date when a lead is converted or rejected.
    *              Record-triggered flows do not run during Database.convertLead, so the
    *              Lead_Qualification_Timestamps flow never fires on automatic conversions.
-   *              Leads owned by a guest user (webform / auto-enrollment) are excluded.
+   *              Leads created by a guest user (webform / auto-enrollment) are excluded,
+   *              since ownership is reassigned away from the guest before this runs.
    * @param leadsFromTrigger
    */
   public static void stampQualificationEnd(List<Lead> leadsFromTrigger) {
     List<Lead> leadsToStamp = new List<Lead>();
-    Set<Id> ownerIds = new Set<Id>();
+    Set<Id> createdByIds = new Set<Id>();
 
     for (Lead eachLead : leadsFromTrigger) {
       if (
@@ -1065,20 +1108,20 @@ public class APER18_Lead_Management {
         (eachLead.IsConverted || eachLead.Status == Constants.REJECTED)
       ) {
         leadsToStamp.add(eachLead);
-        ownerIds.add(eachLead.OwnerId);
+        createdByIds.add(eachLead.CreatedById);
       }
     }
 
     if (leadsToStamp.isEmpty())
       return;
 
-    // Trigger.new cannot traverse Owner.Name, so the owner names are resolved in one query.
-    // A queue-owned lead returns no User row and is treated as non-guest.
-    Map<Id, User> ownersById = new Map<Id, User>([SELECT Id, Name FROM User WHERE Id IN :ownerIds]);
+    // Ownership moves off the guest user before conversion/rejection, so CreatedById
+    // (not OwnerId) is the one field that still identifies a guest-submitted lead.
+    Map<Id, User> creatorsById = new Map<Id, User>([SELECT Id, Name FROM User WHERE Id IN :createdByIds]);
 
     for (Lead eachLead : leadsToStamp) {
-      User owner = ownersById.get(eachLead.OwnerId);
-      if (owner != null && owner.Name.containsIgnoreCase('Guest')) {
+      User creator = creatorsById.get(eachLead.CreatedById);
+      if (creator != null && creator.Name.containsIgnoreCase('Guest')) {
         continue;
       }
       eachLead.Qualification_End__c = Datetime.now();

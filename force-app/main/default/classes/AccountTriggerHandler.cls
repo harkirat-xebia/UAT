@@ -5,7 +5,7 @@
  * @see AccountTriggerHandler
  */
 
- public with sharing class AccountTriggerHandler implements ITriggerHandler {
+public with sharing class AccountTriggerHandler implements ITriggerHandler {
   public static Boolean triggerDisabled = false;
 
   public Boolean isDisabled() {
@@ -39,9 +39,12 @@
 
     //Noor - update Client Priority
     APER20_Account_Management.updateClientPriority(Trigger.new, null);
-    
+
     //Ticket 2326 added by harkirat
     APER20_Account_Management.validateHierarchyOwnerOnInsert((List<Account>) newItems);
+
+    //EBECRM-2821 - Client Type automatic fill
+    APER20_Account_Management.populateClientType((List<Account>) newItems);
   }
 
   public void afterInsert(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
@@ -75,10 +78,12 @@
 
     //ALK - [Smarter] Override the account Source and Subsource by the ones coming from the lead conversion
     APER20_Account_Management.updateAccountSource(Trigger.new, (Map<Id, Account>) oldItems);
-      
+
     //Ticket 2326 added by harkirat
     APER20_Account_Management.validateHierarchyAndOwnerGovernance( (Map<Id, Account>) newItems, (Map<Id, Account>) oldItems);
- 
+
+    //EBECRM-2821 - Client Type automatic fill
+    APER20_Account_Management.populateClientType((List<Account>) newItems.values());
   }
 
   public void afterUpdate(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {
@@ -106,6 +111,9 @@
     APER20_Account_Management.syncOfflineTCs(Trigger.new, (Map<Id, Account>) oldItems);
       
     BE_General_Cond_Without_Sharing_Ctrl.handleEmployeeCountRollup( (Map<Id, Account>) Trigger.oldMap, (Map<Id, Account>) Trigger.newMap, (List<Account>) Trigger.new, (List<Account>) Trigger.old, false, true, false, false );
+
+    //EBECRM-2821 - Propagate Client Type to child accounts
+    APER20_Account_Management.propagateClientTypeToChildren((Map<Id, Account>) newItems, (Map<Id, Account>) oldItems);
       
     //Snehil - Sync Client in NEMO
     //APER20_Account_Management.syncAccountUpdateInNEMO(Trigger.new, (Map<Id, Account>) oldItems);

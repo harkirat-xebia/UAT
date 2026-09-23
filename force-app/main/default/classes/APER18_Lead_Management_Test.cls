@@ -92,6 +92,14 @@ public class APER18_Lead_Management_Test {
         WHERE ER_Merchant__c = :convertedLead.ConvertedAccountId
       ];
       System.assertEquals(1, result1.size(), 'the related store had been successfully created');
+
+      List<OpportunityContactRole> primaryContactRoles = [
+        SELECT Id, Role, IsPrimary
+        FROM OpportunityContactRole
+        WHERE OpportunityId = :lcr.getOpportunityId() AND IsPrimary = TRUE
+      ];
+      System.assertEquals(1, primaryContactRoles.size(), 'one primary contact role should be created');
+      System.assertEquals('Primary Contact', primaryContactRoles[0].Role, 'primary contact role should be selected');
     }
   }
 
@@ -165,29 +173,36 @@ public class APER18_Lead_Management_Test {
 
   @IsTest
   static void testConvertedClientLead() {
-    Test.setMock(HttpCalloutMock.class, new SmarterAPIMock());
-    Test.startTest();
-    Lead ld = APER07_UtilityTestMethod.getLead(
-      Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Client_Lead_RT')
-    );
-    ld.City = 'Paris';
-    ld.NumberOfEmployees = 65;
-    ld.ER_Registration_Number__c = '32773318400516';
-    ld.LeadSource = 'Websales';
-    ld.ER_Lead_sub_source__c = 'Econtratonline';
-    ld.ER_Legal_Name__c = 'Legal Name';
-    ld.ER_Legal_Street__c = 'Legal Street';
-    ld.ER_Legal_Zip_Code__c = '75017';
-    ld.ER_Legal_City__c = 'Paris';
-    insert ld;
-    Database.LeadConvert lc = new database.LeadConvert();
-    lc.setLeadId(ld.Id);
+    // Run as the dedicated test user so the owner is guaranteed to be a full-license user,
+    // regardless of which user the calling context (e.g. a CI/change-set deploy) runs tests as.
+    User u = [SELECT Id FROM User WHERE LastName = 'APER18'];
+    System.runAs(u) {
+      Test.setMock(HttpCalloutMock.class, new SmarterAPIMock());
+      Test.startTest();
+      Lead ld = APER07_UtilityTestMethod.getLead(
+        Utils.getRecordTypeIdByDeveloperName(Lead.SObjectType, 'ER_Client_Lead_RT')
+      );
+      ld.City = 'Paris';
+      ld.NumberOfEmployees = 65;
+      ld.ER_Registration_Number__c = '32773318400516';
+      ld.LeadSource = 'Websales';
+      ld.ER_Lead_sub_source__c = 'Econtratonline';
+      ld.ER_Legal_Name__c = 'Legal Name';
+      ld.ER_Legal_Street__c = 'Legal Street';
+      ld.ER_Legal_Zip_Code__c = '75017';
+      ld.ER_Legal_City__c = 'Paris';
+      insert ld;
+      Database.LeadConvert lc = new database.LeadConvert();
+      lc.setLeadId(ld.Id);
+      // Converted objects can only be owned by a user, not a queue, so pin the owner explicitly
+      lc.setOwnerId(u.Id);
 
-    LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1];
-    lc.setConvertedStatus(convertStatus.MasterLabel);
+      LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1];
+      lc.setConvertedStatus(convertStatus.MasterLabel);
 
-    Database.LeadConvertResult lcr = Database.convertLead(lc);
-    Test.stopTest();
+      Database.LeadConvertResult lcr = Database.convertLead(lc);
+      Test.stopTest();
+    }
   }
 
   @IsTest

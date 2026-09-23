@@ -14,6 +14,9 @@ public with sharing class ContractTriggerHandler implements ITriggerHandler {
 
   public void beforeInsert(List<SObject> newItems) {
     APER12_Contract_Management.setContractName(Trigger.new);
+    OpportunityManagementWithoutSharing.copyPrimaryContactFromOpportunity(
+      (List<Contract>) newItems
+    );
   }
 
   public void afterInsert(Map<Id, SObject> newItems, Map<Id, SObject> oldItems) {

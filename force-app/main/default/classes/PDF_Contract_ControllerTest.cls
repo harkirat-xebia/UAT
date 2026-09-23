@@ -102,83 +102,48 @@ public with sharing class PDF_Contract_ControllerTest {
         }
     }
 
-    @isTest
-    static void TEST_PDF_Contract_Controller(){
-        oppo = [SELECT ID,AccountId,Name FROM Opportunity LIMIT 1];
-		acc = [SELECT Id from Account where Name='Test account' limit 1];
-        Test.setCurrentPageReference(Page.PDF_Client_Contract_FR);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'FR');
-        System.currentPageReference().getParameters().put('local', 'fr_BE');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'FR');
-        PDF_Contract_Controller eceContract = new PDF_Contract_Controller();
+        @isTest
+        static void TEST_PDF_Contract_Controller(){
+                exerciseController(Page.PDF_Client_Contract_FR, 'FR', 'fr_BE', 'FR');
+        }
 
+        @isTest
+        static void TEST_PDF_Contract_Controller_NL(){
+                exerciseController(Page.PDF_Client_Contract_NL, 'FR', 'fr_BE', 'FR');
+        }
 
-        Test.setCurrentPageReference(Page.PDF_Client_Contract_NL);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'FR');
-        System.currentPageReference().getParameters().put('local', 'fr_BE');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'FR');
-        PDF_Contract_Controller eceContract2 = new PDF_Contract_Controller();
-        
-        oppo = [SELECT ID,AccountId,Name FROM Opportunity LIMIT 1];
-		acc = [SELECT Id from Account where Name='Test account' limit 1];
-        Test.setCurrentPageReference(Page.PDF_Client_FR_AutoEnrollment);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'FR');
-        System.currentPageReference().getParameters().put('local', 'fr_BE');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'FR');
-        PDF_Contract_Controller treContract = new PDF_Contract_Controller();
+        @isTest
+        static void TEST_PDF_Contract_Controller_AutoEnrollment_FR(){
+                exerciseController(Page.PDF_Client_FR_AutoEnrollment, 'FR', 'fr_BE', 'FR');
+        }
 
+        @isTest
+        static void TEST_PDF_Contract_Controller_AutoEnrollment_NL(){
+                exerciseController(Page.PDF_Client_NL_AutoEnrollment, 'NL', 'nl_BE', 'NL');
+        }
 
-        Test.setCurrentPageReference(Page.PDF_Client_NL_AutoEnrollment);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'NL');
-        System.currentPageReference().getParameters().put('local', 'nl_BE');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'NL');
-        PDF_Contract_Controller treContract2 = new PDF_Contract_Controller();
-        
-        oppo = [SELECT ID,AccountId,Name FROM Opportunity LIMIT 1];
-		acc = [SELECT Id from Account where Name='Test account' limit 1];
-        Test.setCurrentPageReference(Page.PDF_Client_EN_AutoEnrollment);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'EN');
-        System.currentPageReference().getParameters().put('local', 'en_US');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'EN');
-        PDF_Contract_Controller treContract3 = new PDF_Contract_Controller();
+        @isTest
+        static void TEST_PDF_Contract_Controller_AutoEnrollment_EN(){
+                exerciseController(Page.PDF_Client_EN_AutoEnrollment, 'EN', 'en_US', 'EN');
+        }
 
+        @isTest
+        static void TEST_PDF_Contract_Controller_AutoEnrollment_DE(){
+                exerciseController(Page.PDF_Client_DE_AutoEnrollment, 'DE', 'de_BE', 'DE');
+        }
 
-        Test.setCurrentPageReference(Page.PDF_Client_DE_AutoEnrollment);
-        System.currentPageReference().getParameters().put('aid', acc.Id);
-        System.currentPageReference().getParameters().put('oid', oppo.Id);
-        System.currentPageReference().getParameters().put('language', 'DE');
-        System.currentPageReference().getParameters().put('local', 'de_BE');
-        System.currentPageReference().getParameters().put('productCode', 'TRE');
-        System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
-        System.currentPageReference().getParameters().put('estimatedVolume', '1000');
-        System.currentPageReference().getParameters().put('plang', 'DE');
-        PDF_Contract_Controller treContract4 = new PDF_Contract_Controller();
-
-
-    }
+        private static void exerciseController(PageReference pageReference, String language, String local, String pageLanguage){
+                oppo = [SELECT Id, AccountId, Name FROM Opportunity LIMIT 1];
+                acc = [SELECT Id FROM Account WHERE Name = 'Test account' LIMIT 1];
+                Test.setCurrentPageReference(pageReference);
+                System.currentPageReference().getParameters().put('aid', acc.Id);
+                System.currentPageReference().getParameters().put('oid', oppo.Id);
+                System.currentPageReference().getParameters().put('language', language);
+                System.currentPageReference().getParameters().put('local', local);
+                System.currentPageReference().getParameters().put('productCode', 'TRE');
+                System.currentPageReference().getParameters().put('productName', 'Edenred Meal');
+                System.currentPageReference().getParameters().put('estimatedVolume', '1000');
+                System.currentPageReference().getParameters().put('plang', pageLanguage);
+                PDF_Contract_Controller contractController = new PDF_Contract_Controller();
+        }
 }

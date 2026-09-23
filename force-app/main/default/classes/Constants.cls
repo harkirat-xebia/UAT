@@ -391,6 +391,7 @@
   public static final String REJECTED = 'Rejected';
   public static final String DUPLICATE_LEAD = 'Duplicates (< 2 weeks)';
   public static final String QUALIFIED = 'Qualified';
+  public static final String QUALIFICATION = 'Qualification';
   public static final String SPAM = 'Spam';
   public static final String OPEN = 'Open';
   public static final String WAITING_FOR_CUSTOMER = 'Waiting for Customer';

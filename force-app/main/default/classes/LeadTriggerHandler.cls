@@ -36,7 +36,7 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
     APER18_Lead_Management.manageNumberOfEmployees((List<Lead>) newItems);
  
     //Harkirat - Flag leads that should amend an activated contract instead of converting
-    APER18_Lead_Management.setAmendableContractFlag((List<Lead>) newItems, null);
+    //APER18_Lead_Management.setAmendableContractFlag((List<Lead>) newItems, null);
     APER47_LeadAmendment_Management.flagAmendableContracts((List<Lead>) newItems);
     //Set Customer Status and pre-fill Lead Motion from the account contract history
     APER19_Lead_CustomerStatus.evaluateCustomerStatusAndMotion((List<Lead>) newItems, null);
@@ -78,9 +78,12 @@ public with sharing class LeadTriggerHandler implements ITriggerHandler {
     APER18_Lead_Management.updateAutoenrollmentExtId(Trigger.new);
  
     //Harkirat - Flag leads that should amend an activated contract instead of converting
-    APER18_Lead_Management.setAmendableContractFlag((List<Lead>) newItems.values(), oldItems);
+    //APER18_Lead_Management.setAmendableContractFlag((List<Lead>) newItems.values(), oldItems);
     APER47_LeadAmendment_Management.flagAmendableContracts((List<Lead>) newItems.values());
 
+
+    //harkirat - Stamp qualification start when the lead reaches the Qualification/Qualified stage
+    APER18_Lead_Management.stampQualificationStart(Trigger.new, oldItems);
 
     //harkirat - Stamp qualification end when the lead is converted or rejected
     APER18_Lead_Management.stampQualificationEnd(Trigger.new);
