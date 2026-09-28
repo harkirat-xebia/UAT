@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Require_LU_BU_When_VAT_Starts_LU</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT($User.ER_BypassVR__c),
+    BEGINS(ER_VAT_Number__c, &quot;LU&quot;),
+    NOT(ISPICKVAL(ER_BUPicklist__c, &quot;LU&quot;))
+)</errorConditionFormula>
+    <errorMessage>When the VAT Number starts with LU, the BU Picklist must be Luxemburg.</errorMessage>
+</ValidationRule>

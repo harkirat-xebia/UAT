@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>customer_status__c</fullName>
-    <inlineHelpText>Set automatically: Existing Customer when the company registration number matches an account with an activated contract, otherwise Prospect.</inlineHelpText>
+    <fullName>Customer_Status__c</fullName>
     <label>Customer Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>

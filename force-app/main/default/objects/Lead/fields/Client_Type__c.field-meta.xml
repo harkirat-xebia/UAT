@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Lead_motion__c</fullName>
-    <label>Lead Motion</label>
+    <fullName>Client_Type__c</fullName>
+    <label>Client Type</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
@@ -11,24 +11,29 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>New</fullName>
+                <fullName>SME</fullName>
                 <default>false</default>
-                <label>New</label>
+                <label>SME</label>
             </value>
             <value>
-                <fullName>Cross Selling</fullName>
+                <fullName>MM</fullName>
                 <default>false</default>
-                <label>Cross Selling</label>
+                <label>MM</label>
             </value>
             <value>
-                <fullName>Upselling</fullName>
+                <fullName>LNA</fullName>
                 <default>false</default>
-                <label>Upselling</label>
+                <label>LNA</label>
             </value>
             <value>
-                <fullName>Renegotiation</fullName>
+                <fullName>Public</fullName>
                 <default>false</default>
-                <label>Renegotiation</label>
+                <label>Public</label>
+            </value>
+            <value>
+                <fullName>Federgon</fullName>
+                <default>false</default>
+                <label>Federgon</label>
             </value>
         </valueSetDefinition>
     </valueSet>

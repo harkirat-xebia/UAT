@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Local_Assignment_Date__c</fullName>
+    <formula>Assignment_Date__c + 
+IF(
+  OR(
+    AND(MONTH(DATEVALUE(Assignment_Date__c)) &gt; 3, MONTH(DATEVALUE(Assignment_Date__c)) &lt; 10),
+    AND(MONTH(DATEVALUE(Assignment_Date__c)) = 3, DAY(DATEVALUE(Assignment_Date__c)) &gt;= 25),
+    AND(MONTH(DATEVALUE(Assignment_Date__c)) = 10, DAY(DATEVALUE(Assignment_Date__c)) &lt; 25)
+  ),
+  2/24,
+  1/24
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Local Assignment Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>DateTime</type>
+</CustomField>
