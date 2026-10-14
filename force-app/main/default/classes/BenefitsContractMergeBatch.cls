@@ -24,7 +24,7 @@
  */
 public without sharing class BenefitsContractMergeBatch implements Database.Batchable<SObject>, Database.Stateful {
   private static final String TRC_SOLUTION_CODE = 'TRC';
-  private static final String ENGAGEMENT_CONTRACT_TYPE = 'Engagement';
+  private static final String BENEFITS_CONTRACT_CATEGORY = 'Benefits';
   private static final String STATUS_ACTIVATED = 'Activated';
   private static final String SOLUTIONS_SEPARATOR = ' / ';
   private static final Set<String> SOURCE_STATUSES = new Set<String>{ STATUS_ACTIVATED, 'In Approval Process' };
@@ -46,6 +46,10 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
   private Integer lineErrors = 0;
   private Boolean summaryTruncated = false;
   private final List<String> summary = new List<String>();
+  private final List<String> successfulMergedAccountIds = new List<String>();
+  private String currentJobId;
+  private final List<APER45_ErrorLog_Management.ErrorLogEntry> dmlErrorEntries =
+    new List<APER45_ErrorLog_Management.ErrorLogEntry>();
 
   /** Transient so the per-chunk line item cache is never carried in Stateful serialization. */
   private transient Map<Id, List<ER_ContractLineItem__c>> linesByContractId;
@@ -77,15 +81,52 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
    */
   public Database.QueryLocator start(Database.BatchableContext context) {
     if (accountIds == null || accountIds.isEmpty()) {
+      Set<Id> excludedPricebookIds = getExcludedPricebookIds();
+      if (excludedPricebookIds.isEmpty()) {
+        return Database.getQueryLocator(
+          [
+            SELECT Id, Name
+            FROM Account
+            WHERE Id IN (
+              SELECT AccountId
+              FROM Contract
+              WHERE Status IN :SOURCE_STATUSES
+                AND Contract_Category__c = :BENEFITS_CONTRACT_CATEGORY
+                AND (ER_BUPicklist__c = NULL OR ER_BUPicklist__c != :EXCLUDED_BUSINESS_UNIT)
+            )
+          ]
+        );
+      }
       return Database.getQueryLocator(
         [
           SELECT Id, Name
           FROM Account
-          WHERE Id IN (SELECT AccountId FROM Contract WHERE Status IN :SOURCE_STATUSES)
+          WHERE Id IN (
+            SELECT AccountId
+            FROM Contract
+            WHERE Status IN :SOURCE_STATUSES
+              AND Contract_Category__c = :BENEFITS_CONTRACT_CATEGORY
+              AND (ER_BUPicklist__c = NULL OR ER_BUPicklist__c != :EXCLUDED_BUSINESS_UNIT)
+              AND (Pricebook2Id = NULL OR Pricebook2Id NOT IN :excludedPricebookIds)
+          )
         ]
       );
     }
     return Database.getQueryLocator([SELECT Id, Name FROM Account WHERE Id IN :accountIds]);
+  }
+
+  private Set<Id> getExcludedPricebookIds() {
+    Set<Id> excludedIds = new Set<Id>();
+    for (Pricebook2 pricebook : [
+      SELECT Id
+      FROM Pricebook2
+      WHERE Name LIKE '%Luxembourg%'
+        OR Name LIKE '%Reduction%'
+        OR Name LIKE '%Mobility%'
+    ]) {
+      excludedIds.add(pricebook.Id);
+    }
+    return excludedIds;
   }
 
   /**
@@ -94,12 +135,15 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
    * @param scope   Accounts to merge.
    */
   public void execute(Database.BatchableContext context, List<Account> scope) {
+    currentJobId = context == null ? null : context.getJobId();
     UtilsBypass.setBypassedTriggersByApex(BYPASSED_TRIGGERS);
     try {
       mergeAccounts(new Map<Id, Account>(scope));
     } catch (Exception e) {
       addSummary('FATAL: ' + e.getTypeName() + ' - ' + e.getMessage() + ' | ' + e.getStackTraceString());
+      APER45_ErrorLog_Management.logException(e, 'BenefitsContractMergeBatch', 'execute');
     } finally {
+      flushDmlErrors();
       UtilsBypass.reset();
     }
   }
@@ -109,6 +153,7 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
    * @param context Batch context.
    */
   public void finish(Database.BatchableContext context) {
+    writeSuccessfulAccountLogs();
     System.debug(LoggingLevel.INFO, '=== BenefitsContractMergeBatch ' + (dryRun ? '[DRY RUN]' : '[LIVE]') + ' ===');
     System.debug(LoggingLevel.INFO, 'Accounts evaluated     : ' + accountsEvaluated);
     System.debug(LoggingLevel.INFO, 'Accounts merged        : ' + accountsMerged);
@@ -158,8 +203,22 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
       return;
     }
 
-    insertClones(plan.clones);
-    updateMasters(plan.masters);
+    Map<Id, Integer> successfulCloneCounts = insertClones(plan.clones);
+    markSuccessfulMasters(plan, successfulCloneCounts.keySet());
+    Set<Id> updatedMasterIds = updateMasters(plan.masters);
+    trackSuccessfulAccounts(plan, successfulCloneCounts, updatedMasterIds);
+  }
+
+  private void markSuccessfulMasters(MergePlan plan, Set<Id> masterIds) {
+    Map<Id, Contract> updatesById = new Map<Id, Contract>(plan.masters);
+    for (Id masterId : masterIds) {
+      if (!updatesById.containsKey(masterId)) {
+        updatesById.put(masterId, new Contract(Id = masterId));
+      }
+      updatesById.get(masterId).Is_Master_Contract__c = true;
+    }
+    plan.masters.clear();
+    plan.masters.addAll(updatesById.values());
   }
 
   private void planAccount(Account account, List<Contract> contracts, MergePlan plan) {
@@ -176,7 +235,7 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
 
     Contract master = selectMaster(contracts);
     if (master == null) {
-      skip(account, 'no Activated Benefits contract available to act as master');
+      skip(account, 'no Activated Benefits contract with TRC available to act as master');
       return;
     }
 
@@ -203,6 +262,10 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
     );
 
     plan.clones.addAll(collected.clones);
+    MergeAuditData auditData = new MergeAuditData();
+    auditData.accountId = account.Id;
+    auditData.expectedCloneCount = collected.clones.size();
+    plan.auditByMaster.put(master.Id, auditData);
     if (refreshed != null) {
       plan.masters.add(refreshed);
     }
@@ -277,6 +340,12 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
   private class MergePlan {
     private final List<ER_ContractLineItem__c> clones = new List<ER_ContractLineItem__c>();
     private final List<Contract> masters = new List<Contract>();
+    private final Map<Id, MergeAuditData> auditByMaster = new Map<Id, MergeAuditData>();
+  }
+
+  private class MergeAuditData {
+    private Id accountId;
+    private Integer expectedCloneCount;
   }
 
   private class CloneSet {
@@ -292,11 +361,9 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
         ER_Solutions__c, ER_BUPicklist__c, Pricebook2Id, Pricebook2.Name, Offer_Validity_End_Date__c
       FROM Contract
       WHERE AccountId IN :accountIdsInScope AND Status IN :SOURCE_STATUSES
+        AND Contract_Category__c = :BENEFITS_CONTRACT_CATEGORY
       ORDER BY StartDate ASC NULLS LAST, CreatedDate ASC, ContractNumber ASC
     ]) {
-      if (ENGAGEMENT_CONTRACT_TYPE.equalsIgnoreCase(contractRecord.Contract_Category__c)) {
-        continue;
-      }
       if (isExcludedContract(contractRecord)) {
         continue;
       }
@@ -346,19 +413,15 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
    * @return The Activated contract carrying a TRC line, else the oldest Activated contract, else null.
    */
   private Contract selectMaster(List<Contract> contracts) {
-    Contract activatedFallback = null;
     for (Contract candidate : contracts) {
       if (candidate.Status != STATUS_ACTIVATED) {
         continue;
-      }
-      if (activatedFallback == null) {
-        activatedFallback = candidate;
       }
       if (hasTrcSolution(candidate)) {
         return candidate;
       }
     }
-    return activatedFallback;
+    return null;
   }
   /**
    * @description Contracts in the Luxembourg business unit, or whose pricebook name contains
@@ -484,45 +547,168 @@ public without sharing class BenefitsContractMergeBatch implements Database.Batc
     }
   }
 
-  private void insertClones(List<ER_ContractLineItem__c> clones) {
+  private Map<Id, Integer> insertClones(List<ER_ContractLineItem__c> clones) {
+    Map<Id, Integer> successfulCloneCounts = new Map<Id, Integer>();
     if (clones.isEmpty()) {
-      return;
+      return successfulCloneCounts;
     }
     if (!hasDmlBudget(clones.size())) {
-      addSummary('ERROR: DML row limit would be exceeded by ' + clones.size() + ' line item(s). Lower the batch scope size and re-run.');
+      String message = 'DML row limit would be exceeded by ' + clones.size() +
+        ' line item(s). Lower the batch scope size and re-run.';
+      dmlErrorEntries.add(
+        new APER45_ErrorLog_Management.ErrorLogEntry()
+          .withLogLevel(APER45_ErrorLog_Management.LogLevel.Error)
+          .withSourceClass('BenefitsContractMergeBatch')
+          .withSourceMethod('insertClones')
+          .withRelatedObject('ER_ContractLineItem__c')
+          .withMessage(message)
+      );
+      addSummary('ERROR: ' + message);
       lineErrors += clones.size();
-      return;
+      return successfulCloneCounts;
     }
     List<Database.SaveResult> results = Database.insert(clones, false);
     for (Integer i = 0; i < results.size(); i++) {
       if (results[i].isSuccess()) {
         linesCloned++;
+        Id masterId = clones[i].ER_Contract__c;
+        successfulCloneCounts.put(
+          masterId,
+          successfulCloneCounts.containsKey(masterId) ? successfulCloneCounts.get(masterId) + 1 : 1
+        );
       } else {
         lineErrors++;
+        String errorDetails = describeDmlErrors(results[i].getErrors());
+        dmlErrorEntries.add(
+          new APER45_ErrorLog_Management.ErrorLogEntry()
+            .withLogLevel(APER45_ErrorLog_Management.LogLevel.Error)
+            .withSourceClass('BenefitsContractMergeBatch')
+            .withSourceMethod('insertClones')
+            .withRelatedRecordId(clones[i].Contract_Line_Item__c)
+            .withRelatedObject('ER_ContractLineItem__c')
+            .withMessage('Failed to clone contract line item. ' + errorDetails)
+            .withPayload(
+              'Source CLI Id=' + clones[i].Contract_Line_Item__c +
+              '; Target Contract Id=' + clones[i].ER_Contract__c
+            )
+        );
         addSummary(
           'ERROR cloning line ' + clones[i].Contract_Line_Item__c + ' -> contract ' +
-          clones[i].ER_Contract__c + ': ' + results[i].getErrors()[0].getMessage()
+          clones[i].ER_Contract__c + ': ' + errorDetails
         );
       }
     }
+    return successfulCloneCounts;
   }
 
-  private void updateMasters(List<Contract> masters) {
+  private Set<Id> updateMasters(List<Contract> masters) {
+    Set<Id> updatedMasterIds = new Set<Id>();
     if (masters.isEmpty()) {
-      return;
+      return updatedMasterIds;
     }
     if (!hasDmlBudget(masters.size())) {
-      addSummary('ERROR: DML row limit would be exceeded updating ' + masters.size() + ' master contract(s).');
-      return;
+      String message = 'DML row limit would be exceeded updating ' + masters.size() + ' master contract(s).';
+      dmlErrorEntries.add(
+        new APER45_ErrorLog_Management.ErrorLogEntry()
+          .withLogLevel(APER45_ErrorLog_Management.LogLevel.Error)
+          .withSourceClass('BenefitsContractMergeBatch')
+          .withSourceMethod('updateMasters')
+          .withRelatedObject('Contract')
+          .withMessage(message)
+      );
+      addSummary('ERROR: ' + message);
+      return updatedMasterIds;
     }
     List<Database.SaveResult> results = Database.update(masters, false);
     for (Integer i = 0; i < results.size(); i++) {
-      if (!results[i].isSuccess()) {
+      if (results[i].isSuccess()) {
+        updatedMasterIds.add(masters[i].Id);
+      } else {
+        String errorDetails = describeDmlErrors(results[i].getErrors());
+        dmlErrorEntries.add(
+          new APER45_ErrorLog_Management.ErrorLogEntry()
+            .withLogLevel(APER45_ErrorLog_Management.LogLevel.Error)
+            .withSourceClass('BenefitsContractMergeBatch')
+            .withSourceMethod('updateMasters')
+            .withRelatedRecordId(masters[i].Id)
+            .withRelatedObject('Contract')
+            .withMessage('Failed to update master contract fields. ' + errorDetails)
+            .withPayload(
+              'Master Contract Id=' + masters[i].Id +
+              '; Fields=' + String.join(new List<String>(masters[i].getPopulatedFieldsAsMap().keySet()), ', ')
+            )
+        );
         addSummary(
-          'ERROR updating ER_Solutions__c on contract ' + masters[i].Id + ': ' + results[i].getErrors()[0].getMessage()
+          'ERROR updating master contract ' + masters[i].Id + ': ' + errorDetails
         );
       }
     }
+    return updatedMasterIds;
+  }
+
+  private void trackSuccessfulAccounts(
+    MergePlan plan,
+    Map<Id, Integer> successfulCloneCounts,
+    Set<Id> updatedMasterIds
+  ) {
+    for (Id masterId : plan.auditByMaster.keySet()) {
+      MergeAuditData auditData = plan.auditByMaster.get(masterId);
+      Integer successfulCount = successfulCloneCounts.get(masterId);
+      if (successfulCount != auditData.expectedCloneCount || !updatedMasterIds.contains(masterId)) {
+        continue;
+      }
+      successfulMergedAccountIds.add(String.valueOf(auditData.accountId));
+    }
+  }
+
+  private void writeSuccessfulAccountLogs() {
+    if (successfulMergedAccountIds.isEmpty()) {
+      return;
+    }
+
+    successfulMergedAccountIds.sort();
+    List<APER45_ErrorLog_Management.ErrorLogEntry> entries =
+      new List<APER45_ErrorLog_Management.ErrorLogEntry>();
+    Integer idsPerLog = 2500;
+    for (Integer startIndex = 0; startIndex < successfulMergedAccountIds.size(); startIndex += idsPerLog) {
+      Integer endIndex = Math.min(startIndex + idsPerLog, successfulMergedAccountIds.size());
+      List<String> idGroup = new List<String>();
+      for (Integer index = startIndex; index < endIndex; index++) {
+        idGroup.add(successfulMergedAccountIds[index]);
+      }
+      entries.add(
+        new APER45_ErrorLog_Management.ErrorLogEntry()
+          .withLogLevel(APER45_ErrorLog_Management.LogLevel.Info)
+          .withSourceClass('BenefitsContractMergeBatch')
+          .withSourceMethod('finish')
+          .withRelatedObject('Account')
+          .withMessage(
+            'Successfully merged Account IDs ' + (startIndex + 1) + '-' + endIndex +
+            ' of ' + successfulMergedAccountIds.size() + '. Batch job: ' + currentJobId
+          )
+          .withPayload(String.join(idGroup, ', '))
+      );
+    }
+    APER45_ErrorLog_Management.log(entries);
+  }
+
+  private String describeDmlErrors(List<Database.Error> errors) {
+    List<String> details = new List<String>();
+    for (Database.Error dmlError : errors) {
+      String fields = dmlError.getFields().isEmpty()
+        ? ''
+        : ' [Fields: ' + String.join(dmlError.getFields(), ', ') + ']';
+      details.add(String.valueOf(dmlError.getStatusCode()) + ': ' + dmlError.getMessage() + fields);
+    }
+    return String.join(details, ' | ');
+  }
+
+  private void flushDmlErrors() {
+    if (dmlErrorEntries.isEmpty()) {
+      return;
+    }
+    APER45_ErrorLog_Management.log(dmlErrorEntries);
+    dmlErrorEntries.clear();
   }
 
   private Boolean hasDmlBudget(Integer rows) {
