@@ -85,8 +85,9 @@ public without sharing class APER03_Lead_CreateFinancialCenter {
         }
     }
 
-    if(!accountsToUpdate.isEmpty()) update accountsToUpdate;
-    if(!opportunitiesToUpdate.isEmpty()) update opportunitiesToUpdate;
+    // Use partial-success DML so one bad lookup doesn't abort the whole lead conversion transaction
+    if(!accountsToUpdate.isEmpty()) Database.update(accountsToUpdate, false);
+    if(!opportunitiesToUpdate.isEmpty()) Database.update(opportunitiesToUpdate, false);
     if(!fcToBeUpdated.isEmpty()) Database.update(fcToBeUpdated, false);
   }
 

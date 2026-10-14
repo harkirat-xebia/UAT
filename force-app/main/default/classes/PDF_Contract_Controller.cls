@@ -183,10 +183,11 @@ public without sharing class PDF_Contract_Controller {
             Id accountId = Id.valueOf(accountIdString);
             Id opportunityId = Id.valueOf(opportunityIdString);
             mainAccount = getAccountFields(accountId);
-            contact1 = getMainContactFields(opportunityId);
-            contact3 = getInvoiceContactFields(opportunityId);
-            contact4 = getOrderContactFields(opportunityId);
-            contact5 = getDeliveryContactFields(opportunityId);
+            Map<String, Contact> contactsByRole = getOpportunityContactsByRole(opportunityId);
+            contact1 = getMainContactFields(contactsByRole.get('Primary Contact'));
+            contact3 = getInvoiceContactFields(contactsByRole.get('Invoicing Contact'));
+            contact4 = getOrderContactFields(contactsByRole.get('Order Contact'));
+            contact5 = getDeliveryContactFields(contactsByRole.get('Delivering Contact'));
 
             financialCenter = getFinancialCenter(accountId);
             getDeliveySiteFields(financialCenter.Id);
@@ -249,21 +250,30 @@ public without sharing class PDF_Contract_Controller {
         return new Account();
     }
 
-    //Get main contact fields
-    private Contact getMainContactFields(Id opportunityId) {
+    private Map<String, Contact> getOpportunityContactsByRole(Id opportunityId) {
+        Map<String, Contact> contactsByRole = new Map<String, Contact>();
         try {
-            List<OpportunityContactRole> ocrList = [
+            for (OpportunityContactRole ocr : [
                 SELECT ContactId, Role, Contact.Salutation, Contact.LastName, Contact.FirstName,
                        Contact.Phone, Contact.MobilePhone, Contact.Fax, Contact.ER_Language__c, Contact.Email, Contact.Business_Role__c, Contact.Title
                 FROM OpportunityContactRole
                 WHERE OpportunityId = :opportunityId
-                AND Role = 'Primary Contact'
-                LIMIT 1
-            ];
-    
-            if (!ocrList.isEmpty() && ocrList[0].Contact != null) {
-                Contact mainContact = ocrList[0].Contact;
-    
+                AND Role IN ('Primary Contact', 'Invoicing Contact', 'Order Contact', 'Delivering Contact')
+            ]) {
+                if (ocr.Contact != null && !contactsByRole.containsKey(ocr.Role)) {
+                    contactsByRole.put(ocr.Role, ocr.Contact);
+                }
+            }
+        } catch(Exception ex) {
+            System.debug('Error while retrieving opportunity contacts: ' + ex.getMessage());
+        }
+        return contactsByRole;
+    }
+
+    //Get main contact fields
+    private Contact getMainContactFields(Contact mainContact) {
+        try {
+            if (mainContact != null) {
                 main_salutation = (mapSalutationLanguage != null && mapSalutationLanguage.containsKey(mainContact.Salutation)) 
                     ? mapSalutationLanguage.get(mainContact.Salutation) 
                     : mainContact.Salutation;
@@ -286,19 +296,9 @@ public without sharing class PDF_Contract_Controller {
         return new Contact();
     }
     
-    private Contact getInvoiceContactFields(Id opportunityId) {
+    private Contact getInvoiceContactFields(Contact invoiceContact) {
         try {
-            OpportunityContactRole ocr = [
-                SELECT ContactId, Role, Contact.Salutation, Contact.LastName, Contact.FirstName,
-                       Contact.Phone, Contact.MobilePhone, Contact.Fax, Contact.ER_Language__c, Contact.Email
-                FROM OpportunityContactRole
-                WHERE OpportunityId = :opportunityId
-                AND Role = 'Invoicing Contact'
-                LIMIT 1
-            ];
-    
-            if (ocr.Contact != null) {
-                Contact invoiceContact = ocr.Contact;
+            if (invoiceContact != null) {
                 invoice_salutation = (mapSalutationLanguage != null && mapSalutationLanguage.containsKey(invoiceContact.Salutation)) 
                     ? mapSalutationLanguage.get(invoiceContact.Salutation) 
                     : invoiceContact.Salutation;
@@ -317,19 +317,9 @@ public without sharing class PDF_Contract_Controller {
         return new Contact();
     }
 
-    private Contact getOrderContactFields(Id opportunityId) {
+    private Contact getOrderContactFields(Contact orderContact) {
         try {
-            OpportunityContactRole ocr = [
-                SELECT ContactId, Role, Contact.Salutation, Contact.LastName, Contact.FirstName,
-                       Contact.Phone, Contact.MobilePhone, Contact.Fax, Contact.ER_Language__c, Contact.Email
-                FROM OpportunityContactRole
-                WHERE OpportunityId = :opportunityId
-                AND Role = 'Order Contact'
-                LIMIT 1
-            ];
-    
-            if (ocr.Contact != null) {
-                Contact orderContact = ocr.Contact;
+            if (orderContact != null) {
                 order_salutation = (mapSalutationLanguage != null && mapSalutationLanguage.containsKey(orderContact.Salutation)) 
                     ? mapSalutationLanguage.get(orderContact.Salutation) 
                     : orderContact.Salutation;
@@ -348,19 +338,9 @@ public without sharing class PDF_Contract_Controller {
         return new Contact();
     }
 
-    private Contact getDeliveryContactFields(Id opportunityId) {
+    private Contact getDeliveryContactFields(Contact deliveryContact) {
         try {
-            OpportunityContactRole ocr = [
-                SELECT ContactId, Role, Contact.Salutation, Contact.LastName, Contact.FirstName,
-                       Contact.Phone, Contact.MobilePhone, Contact.Fax, Contact.ER_Language__c, Contact.Email
-                FROM OpportunityContactRole
-                WHERE OpportunityId = :opportunityId
-                AND Role = 'Delivering Contact'
-                LIMIT 1
-            ];
-    
-            if (ocr.Contact != null) {
-                Contact deliveryContact = ocr.Contact;
+            if (deliveryContact != null) {
                 delivery_salutation = (mapSalutationLanguage != null && mapSalutationLanguage.containsKey(deliveryContact.Salutation)) 
                     ? mapSalutationLanguage.get(deliveryContact.Salutation) 
                     : deliveryContact.Salutation;

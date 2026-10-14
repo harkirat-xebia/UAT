@@ -288,7 +288,8 @@ public class APER18_Lead_Management {
       }
 
       if (!opportunitiesToBeUpdated.isEmpty())
-        update opportunitiesToBeUpdated;
+        // Use partial-success DML so one bad lookup doesn't abort the whole lead conversion transaction
+        Database.update(opportunitiesToBeUpdated, false);
     }
   }
 

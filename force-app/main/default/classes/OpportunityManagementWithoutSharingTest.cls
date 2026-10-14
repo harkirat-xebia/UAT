@@ -479,7 +479,54 @@ static void testCreateCCRForContractFromOCR() {
         }
         Test.stopTest();
     }
-    
+
+    @isTest
+    static void testPrimaryContactSyncFromOCR() {
+        Opportunity opportunity = [SELECT Id FROM Opportunity WHERE Name = 'TestMerchantOpp' LIMIT 1];
+        List<Contact> contacts = [SELECT Id FROM Contact ORDER BY CreatedDate LIMIT 2];
+
+        OpportunityContactRole ocr = new OpportunityContactRole(
+            OpportunityId = opportunity.Id,
+            ContactId = contacts[0].Id,
+            Role = 'Primary Contact'
+        );
+        Test.startTest();
+        insert ocr;
+        Test.stopTest();
+
+        Opportunity result = [SELECT Primary_Contact__c FROM Opportunity WHERE Id = :opportunity.Id];
+        System.assertEquals(contacts[0].Id, result.Primary_Contact__c);
+
+        Test.startTest();
+        ocr.ContactId = contacts[1].Id;
+        update ocr;
+        Test.stopTest();
+
+        result = [SELECT Primary_Contact__c FROM Opportunity WHERE Id = :opportunity.Id];
+        System.assertEquals(contacts[1].Id, result.Primary_Contact__c);
+    }
+
+    @isTest
+    static void testPrimaryContactSyncSkipsClosedOpportunity() {
+        Opportunity opportunity = [SELECT Id, StageName FROM Opportunity WHERE Name = 'TestMerchantOpp' LIMIT 1];
+        Contact contact = [SELECT Id FROM Contact ORDER BY CreatedDate LIMIT 1];
+        opportunity.StageName = 'Closed Lost';
+        opportunity.ER_Lost_Reason__c = 'Other';
+        update opportunity;
+
+        OpportunityContactRole ocr = new OpportunityContactRole(
+            OpportunityId = opportunity.Id,
+            ContactId = contact.Id,
+            Role = 'Primary Contact'
+        );
+        Test.startTest();
+        insert ocr;
+        Test.stopTest();
+
+        Opportunity result = [SELECT Primary_Contact__c FROM Opportunity WHERE Id = :opportunity.Id];
+        System.assertEquals(null, result.Primary_Contact__c);
+    }
+
     /*@isTest
     static void testStoreRoleIdOnOpportunityForVisibility() {
         Opportunity opp = [SELECT Id, OwnerId FROM Opportunity WHERE Name = 'TestOpp1' LIMIT 1];
